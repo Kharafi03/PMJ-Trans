@@ -17,9 +17,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'nama',
         'email',
         'password',
+        'is_deleted',
     ];
 
     /**
@@ -43,5 +44,17 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // Definisikan nilai enum sebagai konstanta
+    const STATUS_OPTIONS = [
+        'aktif' => 'Aktif',
+        'tidak_aktif' => 'Tidak Aktif',
+    ];
+
+    // Metode untuk mengambil nilai enum
+    public static function getStatusOptions()
+    {
+        return self::STATUS_OPTIONS;
     }
 }
