@@ -6,17 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class MsPaymentBooking extends Model
+class Mail extends Model
 {
     use HasFactory;
+
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
 
-    protected $table = 'ms_payment_bookings';
+    protected $table = 'mails';
 
     protected $fillable = [
         'name',
+        'no/email',
+        'message',
     ];
 
     protected $guarded = ['id'];
