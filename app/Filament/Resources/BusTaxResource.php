@@ -17,11 +17,13 @@ class BusTaxResource extends Resource
 {
     protected static ?string $model = BusTax::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $pluralModelLabel = "Pajak";
+
+    protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
     protected static ?string $navigationGroup = 'Bus';
 
-    protected static ?string $navigationLabel = 'Pajak Bus';
+    protected static ?string $navigationLabel = 'Pajak';
 
     public static function form(Form $form): Form
     {

@@ -17,46 +17,48 @@ class BusKirResource extends Resource
 {
     protected static ?string $model = BusKir::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $pluralModelLabel = "KIR";
+
+    protected static ?string $navigationIcon = 'heroicon-o-document-check';
 
     protected static ?string $navigationGroup = 'Bus';
 
-    protected static ?string $navigationLabel = 'KIR Bus';
+    protected static ?string $navigationLabel = 'KIR';
 
     public static function form(Form $form): Form
     {
         return $form
-        ->schema([
-            Forms\Components\Select::make('id_bus')
-                ->label('Bus')
-                ->relationship('buses', 'name')
-                ->required(),
-            Forms\Components\Select::make('id_user')
-                ->label('User')
-                ->relationship('users', 'name') // Asumsikan ada relasi dengan User model
-                ->required(),
-            Forms\Components\TextInput::make('description')
-                ->label('Deskripsi')
-                ->maxLength(255),
-            Forms\Components\DateTimePicker::make('date_test')
-                ->label('Tanggal')
-                ->required(),
-            Forms\Components\DateTimePicker::make('expiration')
-                ->label('Kadaluarsa')
-                ->required(),
-            Forms\Components\TextInput::make('cost')
-                ->label('Biaya')
-                ->numeric()
-                ->prefix('Rp. '),
-            Forms\Components\FileUpload::make('image')
-                ->label('Gambar')
-                ->disk('public')
-                ->directory('stnk')
-                ->visibility('public')
-                ->maxSize(2048) // Maksimal ukuran gambar dalam KB
-                ->required()
-                ->image(),
-        ]);
+            ->schema([
+                Forms\Components\Select::make('id_bus')
+                    ->label('Bus')
+                    ->relationship('buses', 'name')
+                    ->required(),
+                Forms\Components\Select::make('id_user')
+                    ->label('User')
+                    ->relationship('users', 'name') // Asumsikan ada relasi dengan User model
+                    ->required(),
+                Forms\Components\TextInput::make('description')
+                    ->label('Deskripsi')
+                    ->maxLength(255),
+                Forms\Components\DateTimePicker::make('date_test')
+                    ->label('Tanggal')
+                    ->required(),
+                Forms\Components\DateTimePicker::make('expiration')
+                    ->label('Kadaluarsa')
+                    ->required(),
+                Forms\Components\TextInput::make('cost')
+                    ->label('Biaya')
+                    ->numeric()
+                    ->prefix('Rp. '),
+                Forms\Components\FileUpload::make('image')
+                    ->label('Gambar')
+                    ->disk('public')
+                    ->directory('stnk')
+                    ->visibility('public')
+                    ->maxSize(2048) // Maksimal ukuran gambar dalam KB
+                    ->required()
+                    ->image(),
+            ]);
     }
 
     public static function table(Table $table): Table

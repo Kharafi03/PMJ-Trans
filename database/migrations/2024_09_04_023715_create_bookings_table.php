@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('date_start')->nullable();
             $table->date('date_end')->nullable();
             $table->string('pickup_point', 50)->nullable();
-            $table->dateTime('pickup_time')->nullable();
+            $table->time('pickup_time')->nullable();
             $table->string('fleet_type')->nullable();
             $table->integer('fleet_amount')->nullable();
             $table->decimal('trip_nominal', 10, 2)->nullable();

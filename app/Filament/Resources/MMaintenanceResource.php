@@ -18,11 +18,13 @@ class MMaintenanceResource extends Resource
 {
     protected static ?string $model = MMaintenance::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $pluralModelLabel = "Tipe Perawatan";
+
+    protected static ?string $navigationIcon = 'heroicon-o-wrench';
 
     protected static ?string $navigationGroup = 'Bus';
 
-    protected static ?string $navigationLabel = 'Tipe Perawatan Bus';
+    protected static ?string $navigationLabel = 'Tipe Perawatan';
 
     public static function form(Form $form): Form
     {
@@ -69,18 +71,18 @@ class MMaintenanceResource extends Resource
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()
-                ->label('Hapus') // Ganti label jika diperlukan
-                ->action(function (Model $record) {
-                    $record->delete(); // Menggunakan soft delete
-                }),
+                    ->label('Hapus')
+                    ->action(function (Model $record) {
+                        $record->delete();
+                    }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make()
-                    ->label('Hapus') // Ganti label jika diperlukan
-                    ->action(function (Model $record) {
-                        $record->delete(); // Menggunakan soft delete
-                    }),
+                        ->label('Hapus')
+                        ->action(function (Model $record) {
+                            $record->delete();
+                        }),
                 ]),
             ]);
     }

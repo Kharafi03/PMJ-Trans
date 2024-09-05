@@ -13,7 +13,7 @@ class ListBusMaintenances extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()->label('Tambah Perawatan'),
         ];
     }
 }

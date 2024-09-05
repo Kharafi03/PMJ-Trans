@@ -17,7 +17,9 @@ class MSpendResource extends Resource
 {
     protected static ?string $model = MSpend::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $pluralModelLabel = "Tipe Pengeluaran";
+
+    protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
 
     public static function form(Form $form): Form
     {

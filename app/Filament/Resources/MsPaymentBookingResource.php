@@ -17,7 +17,9 @@ class MsPaymentBookingResource extends Resource
 {
     protected static ?string $model = MsPaymentBooking::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $pluralModelLabel = "Status Booking";
+
+    protected static ?string $navigationIcon = 'heroicon-o-credit-card';
 
     protected static ?string $navigationGroup = 'Booking';
 

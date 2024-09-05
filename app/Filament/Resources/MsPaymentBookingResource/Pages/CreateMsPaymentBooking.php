@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateMsPaymentBooking extends CreateRecord
 {
     protected static string $resource = MsPaymentBookingResource::class;
+
+    public function getTitle(): string
+    {
+        return 'Tambah Status';
+    }
 }

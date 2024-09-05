@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateMMaintenance extends CreateRecord
 {
     protected static string $resource = MMaintenanceResource::class;
+
+    public function getTitle(): string
+    {
+        return 'Tambah Tipe';
+    }
 }

@@ -32,14 +32,17 @@ class Booking extends Model
         'id_ms_payment',
         'payment_received',
         'payment_remaining',
+
     ];
 
-    public function users():BelongsTo
+    // Relasi ke Customer (User)
+    public function customer(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'id_user');
+        return $this->belongsTo(User::class, 'id_cus');
     }
 
-    public function ms_payment_bookings():BelongsTo
+    // Relasi ke MsPayment
+    public function ms_payment(): BelongsTo
     {
         return $this->belongsTo(MsPaymentBooking::class, 'id_ms_payment');
     }

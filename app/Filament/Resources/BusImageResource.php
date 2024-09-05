@@ -17,7 +17,9 @@ class BusImageResource extends Resource
 {
     protected static ?string $model = BusImage::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $pluralModelLabel = "Gambar Bus";
+
+    protected static ?string $navigationIcon = 'heroicon-o-photo';
 
     public static function form(Form $form): Form
     {
