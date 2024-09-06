@@ -6,14 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class MsPaymentBooking extends Model
+class MMethodPayment extends Model
 {
     use HasFactory;
+
     use SoftDeletes;
 
-    protected $dates = ['deleted_at'];
+    protected $table = 'm_method_payments';
 
-    protected $table = 'ms_payment_bookings';
+    protected $dates = ['deleted_at'];
 
     protected $fillable = [
         'name',

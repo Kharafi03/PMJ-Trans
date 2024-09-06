@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('trip_bus_spends', function (Blueprint $table) {
+        Schema::create('m_method_payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_user')->constrained('users')->cascadeOnDelete();
-            $table->softDeletes(); // Kolom deleted_at
+            $table->string('name');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('trip_bus_spends');
+        Schema::dropIfExists('m_method_payments');
     }
 };

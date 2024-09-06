@@ -45,4 +45,19 @@ class Bus extends Model
     {
         return $this->hasMany(BusMaintenance::class, 'id_bus');
     }
+
+    public function buskir()
+    {
+        return $this->hasMany(BusKir::class, 'id_bus');
+    }
+
+    public function bustax()
+    {
+        return $this->hasMany(BusTax::class, 'id_bus');
+    }
+
+    public function tripbus()
+    {
+        return $this->hasMany(TripBus::class, 'id_bus');
+    }
 }
