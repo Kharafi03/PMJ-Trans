@@ -31,62 +31,69 @@ class BusResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->label('Nama Bus')
-                    ->maxLength(24)
-                    ->required(),
-                Forms\Components\TextInput::make('license_plate')
-                    ->label('Plat Nomor')
-                    ->maxLength(10)
-                    ->required(),
-                Forms\Components\TextInput::make('production_year')
-                    ->numeric()
-                    ->label('Tahun Produksi')
-                    ->maxLength(11)
-                    ->required(),
-                Forms\Components\TextInput::make('color')
-                    ->label('Warna')
-                    ->maxLength(10)
-                    ->required(),
-                Forms\Components\TextInput::make('machine_number')
-                    ->label('Nomor Mesin')
-                    ->maxLength(255)
-                    ->required(),
-                Forms\Components\TextInput::make('chassis_number')
-                    ->label('Nomor Chasis')
-                    ->maxLength(255)
-                    ->required(),
-                Forms\Components\TextInput::make('capacity')
-                    ->label('Kapasitas')
-                    ->numeric()
-                    ->maxLength(11)
-                    ->required(),
-                Forms\Components\TextInput::make('baggage')
-                    ->label('Bagasi')
-                    ->numeric()
-                    ->maxLength(11)
-                    ->required(),
-                Forms\Components\Select::make('ms_buses_id')
-                    ->label('Status Bus')
-                    ->relationship('ms_buses', 'name')
-                    ->required(),
-
-                // Menambahkan repeater untuk gambar bus
-                Forms\Components\Repeater::make('images')
-                    ->label('Gambar Bus')
-                    ->relationship('images') // Relasi ke BusImage
+                Forms\Components\Card::make()
                     ->schema([
-                        Forms\Components\FileUpload::make('image')
-                            ->label('Bus Image')
-                            ->disk('public') // Tentukan disk penyimpanan
-                            ->directory('bus_images') // Direktori penyimpanan gambar
-                            ->image()
-                            ->visibility('public')
-                            ->maxSize(2048) // Maksimal ukuran gambar dalam KB
+                        Forms\Components\TextInput::make('name')
+                            ->label('Nama Bus')
+                            ->maxLength(24)
+                            ->required(),
+                        Forms\Components\TextInput::make('license_plate')
+                            ->label('Plat Nomor')
+                            ->maxLength(10)
+                            ->required(),
+                        Forms\Components\TextInput::make('production_year')
+                            ->numeric()
+                            ->label('Tahun Produksi')
+                            ->maxLength(11)
+                            ->required(),
+                        Forms\Components\TextInput::make('color')
+                            ->label('Warna')
+                            ->maxLength(10)
+                            ->required(),
+                        Forms\Components\TextInput::make('machine_number')
+                            ->label('Nomor Mesin')
+                            ->maxLength(255)
+                            ->required(),
+                        Forms\Components\TextInput::make('chassis_number')
+                            ->label('Nomor Chasis')
+                            ->maxLength(255)
+                            ->required(),
+                        Forms\Components\TextInput::make('capacity')
+                            ->label('Kapasitas')
+                            ->numeric()
+                            ->maxLength(11)
+                            ->required(),
+                        Forms\Components\TextInput::make('baggage')
+                            ->label('Bagasi')
+                            ->numeric()
+                            ->maxLength(11)
+                            ->required(),
+                        Forms\Components\Select::make('ms_buses_id')
+                            ->label('Status Bus')
+                            ->relationship('ms_buses', 'name')
                             ->required(),
                     ])
-                    ->minItems(1)
-                    ->maxItems(4), // Maksimal 4 gambar per bus
+                    ->columns(2), // Mengatur jumlah kolom dalam card
+
+                Forms\Components\Card::make()
+                    ->schema([
+                        Forms\Components\Repeater::make('images')
+                            ->label('Gambar Bus')
+                            ->relationship('images') // Relasi ke BusImage
+                            ->schema([
+                                Forms\Components\FileUpload::make('image')
+                                    ->label('Bus Image')
+                                    ->disk('public') // Tentukan disk penyimpanan
+                                    ->directory('bus_images') // Direktori penyimpanan gambar
+                                    ->image()
+                                    ->visibility('public')
+                                    ->maxSize(2048) // Maksimal ukuran gambar dalam KB
+                                    ->required(),
+                            ])
+                            ->minItems(1)
+                            ->maxItems(4), // Maksimal 4 gambar per bus
+                    ])
+                    ->columnSpanFull(), // Mengatur card agar se layar
             ]);
     }
 

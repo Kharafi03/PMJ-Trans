@@ -3,15 +3,17 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\BusKirResource\Pages;
-use App\Filament\Resources\BusKirResource\RelationManagers;
 use App\Models\BusKir;
 use Filament\Forms;
-use Filament\Forms\Form;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class BusKirResource extends Resource
 {
@@ -25,72 +27,90 @@ class BusKirResource extends Resource
 
     protected static ?string $navigationLabel = 'KIR';
 
-    public static function form(Form $form): Form
+    public static function form(Forms\Form $form): Forms\Form
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('id_bus')
-                    ->label('Bus')
-                    ->relationship('buses', 'name')
-                    ->required(),
-                Forms\Components\Select::make('id_user')
-                    ->label('User')
-                    ->relationship('users', 'name') // Asumsikan ada relasi dengan User model
-                    ->required(),
-                Forms\Components\TextInput::make('description')
-                    ->label('Deskripsi')
-                    ->maxLength(255),
-                Forms\Components\DateTimePicker::make('date_test')
-                    ->label('Tanggal')
-                    ->required(),
-                Forms\Components\DateTimePicker::make('expiration')
-                    ->label('Kadaluarsa')
-                    ->required(),
-                Forms\Components\TextInput::make('cost')
-                    ->label('Biaya')
-                    ->numeric()
-                    ->prefix('Rp. '),
-                Forms\Components\FileUpload::make('image')
-                    ->label('Gambar')
-                    ->disk('public')
-                    ->directory('stnk')
-                    ->visibility('public')
-                    ->maxSize(2048) // Maksimal ukuran gambar dalam KB
-                    ->required()
-                    ->image(),
+                Card::make()
+                    ->schema([
+                        Select::make('id_bus')
+                            ->label('Bus')
+                            ->relationship('buses', 'name')
+                            ->required(),
+
+                        Select::make('id_user')
+                            ->label('User')
+                            ->relationship('users', 'name') // Asumsikan ada relasi dengan User model
+                            ->required(),
+
+                        TextInput::make('description')
+                            ->label('Deskripsi')
+                            ->maxLength(255),
+
+                        DateTimePicker::make('date_test')
+                            ->label('Tanggal Uji KIR')
+                            ->required(),
+
+                        DateTimePicker::make('expiration')
+                            ->label('Kadaluarsa KIR')
+                            ->required(),
+
+                        TextInput::make('cost')
+                            ->label('Biaya')
+                            ->numeric()
+                            ->prefix('Rp. '),
+
+                        FileUpload::make('image')
+                            ->label('Gambar KIR')
+                            ->disk('public')
+                            ->directory('kir')
+                            ->visibility('public')
+                            ->maxSize(2048) // Maksimal ukuran gambar dalam KB
+                            ->required()
+                            ->image(),
+                    ]),
             ]);
     }
 
-    public static function table(Table $table): Table
+    public static function table(Tables\Table $table): Tables\Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id_bus')
-                    ->numeric()
+                TextColumn::make('id_bus')
+                    ->label('Bus')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('id_user')
-                    ->numeric()
+
+                TextColumn::make('id_user')
+                    ->label('User')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('description')
+
+                TextColumn::make('description')
+                    ->label('Deskripsi')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('date_test')
+
+                TextColumn::make('date_test')
+                    ->label('Tanggal Uji KIR')
                     ->dateTime()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('expiration')
+
+                TextColumn::make('expiration')
+                    ->label('Kadaluarsa KIR')
                     ->dateTime()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('cost')
-                    ->money()
+
+                TextColumn::make('cost')
+                    ->label('Biaya')
+                    ->money('idr')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('deleted_at')
+
+                TextColumn::make('created_at')
+                    ->label('Dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+
+                TextColumn::make('updated_at')
+                    ->label('Diperbarui')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -102,9 +122,7 @@ class BusKirResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 

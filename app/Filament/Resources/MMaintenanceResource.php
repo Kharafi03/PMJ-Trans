@@ -30,17 +30,20 @@ class MMaintenanceResource extends Resource
     {
         return $form
             ->schema([
-                //
-                Forms\Components\TextInput::make('name')
-                    ->label('Perawatan Bus')
-                    ->maxLength(255)
-                    ->required(),
-                Forms\Components\TextInput::make('description')
-                    ->label('Deskripsi')
-                    ->maxLength(255)
-                    ->required(),
+                Forms\Components\Card::make() // Membungkus komponen input di dalam card
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->label('Perawatan Bus')
+                            ->maxLength(255)
+                            ->required(),
+                        Forms\Components\TextInput::make('description')
+                            ->label('Deskripsi')
+                            ->maxLength(255)
+                            ->required(),
+                    ]),
             ]);
     }
+
 
     public static function table(Table $table): Table
     {

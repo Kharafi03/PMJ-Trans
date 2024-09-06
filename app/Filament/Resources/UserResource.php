@@ -3,15 +3,11 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class UserResource extends Resource
 {
@@ -21,63 +17,77 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-user-group';
 
-    public static function form(Form $form): Form
+    public static function form(Forms\Form $form): Forms\Form
     {
         return $form
             ->schema([
-                //
-                Forms\Components\TextInput::make('name')
-                    ->label('Name')
-                    ->maxLength(255)
-                    ->required(),
-                Forms\Components\TextInput::make('email')
-                    ->label('Email')
-                    ->email()
-                    ->maxLength(255)
-                    ->required(),
-                Forms\Components\TextInput::make('number_phone')
-                    ->label('Nomor Telepon')
-                    ->numeric()
-                    ->maxLength(14)
-                    ->required(),
-                Forms\Components\TextInput::make('password')
-                    ->label('Password')
-                    ->password()
-                    ->maxLength(255)
-                    ->required(),
-                Forms\Components\TextInput::make('nik')
-                    ->label('NIK')
-                    ->numeric()
-                    ->maxLength(16)
-                    ->required(),
+                // Card pertama dengan Grid 2 kolom
+                Forms\Components\Card::make()
+                    ->schema([
+                        Forms\Components\Grid::make(2) // Membuat Grid dengan 2 kolom
+                            ->schema([
+                                Forms\Components\TextInput::make('name')
+                                    ->label('Name')
+                                    ->maxLength(255)
+                                    ->required(),
+                                Forms\Components\TextInput::make('email')
+                                    ->label('Email')
+                                    ->email()
+                                    ->maxLength(255)
+                                    ->required(),
+                                Forms\Components\TextInput::make('number_phone')
+                                    ->label('Nomor Telepon')
+                                    ->numeric()
+                                    ->maxLength(14)
+                                    ->required(),
+                                Forms\Components\TextInput::make('password')
+                                    ->label('Password')
+                                    ->password()
+                                    ->maxLength(255)
+                                    ->required(),
+                                Forms\Components\TextInput::make('nik')
+                                    ->label('NIK')
+                                    ->numeric()
+                                    ->maxLength(16)
+                                    ->required(),
+                            ]),
+                    ]),
 
-                // input image sim
-                Forms\Components\FileUpload::make('sim')
-                    ->label('SIM')
-                    ->disk('public') // Tentukan disk penyimpanan
-                    ->directory('sim') // Direktori penyimpanan gambar
-                    ->image()
-                    ->visibility('public')
-                    ->maxSize(2048) // Maksimal ukuran gambar dalam KB
-                    ->required(),
+                // Card untuk upload file SIM
+                Forms\Components\Card::make()
+                    ->schema([
+                        Forms\Components\FileUpload::make('sim')
+                            ->label('SIM')
+                            ->disk('public')
+                            ->directory('sim')
+                            ->image()
+                            ->visibility('public')
+                            ->maxSize(2048)
+                            ->required(),
+                    ]),
 
-                Forms\Components\Select::make('id_ms')
-                    ->label('Status User')
-                    ->relationship('msUsers', 'name')
-                    ->required(),
-                Forms\Components\Select::make('id_role')
-                    ->label('Role')
-                    ->relationship('permissions', 'role')
-                    ->required(),
-
+                // Card dengan pilihan select, juga dengan Grid 2 kolom
+                Forms\Components\Card::make()
+                    ->schema([
+                        Forms\Components\Grid::make(2) // Membuat Grid dengan 2 kolom
+                            ->schema([
+                                Forms\Components\Select::make('id_ms')
+                                    ->label('Status User')
+                                    ->relationship('msUsers', 'name')
+                                    ->required(),
+                                Forms\Components\Select::make('id_role')
+                                    ->label('Role')
+                                    ->relationship('permissions', 'role')
+                                    ->required(),
+                            ]),
+                    ]),
             ]);
     }
 
-    public static function table(Table $table): Table
+    public static function table(Tables\Table $table): Tables\Table
     {
         return $table
             ->columns([
-                //
                 Tables\Columns\TextColumn::make('name')
                     ->label('Name')
                     ->searchable()
@@ -86,7 +96,6 @@ class UserResource extends Resource
                     ->label('Role')
                     ->searchable()
                     ->sortable(),
-
             ])
             ->filters([
                 //
