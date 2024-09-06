@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateBusKir extends CreateRecord
 {
     protected static string $resource = BusKirResource::class;
+
+    public function getTitle(): string
+    {
+        return 'Tambah KIR';
+    }
 }

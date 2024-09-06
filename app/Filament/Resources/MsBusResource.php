@@ -18,7 +18,9 @@ class MsBusResource extends Resource
 {
     protected static ?string $model = MsBus::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $pluralModelLabel = "Status Bus";
+
+    protected static ?string $navigationIcon = 'heroicon-o-truck';
 
     protected static ?string $navigationGroup = 'Bus';
 
@@ -61,10 +63,10 @@ class MsBusResource extends Resource
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()
-                ->label('Hapus') // Ganti label jika diperlukan
-                ->action(function (Model $record) {
-                    $record->delete(); // Menggunakan soft delete
-                }),
+                    ->label('Hapus') // Ganti label jika diperlukan
+                    ->action(function (Model $record) {
+                        $record->delete(); // Menggunakan soft delete
+                    }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateBusTax extends CreateRecord
 {
     protected static string $resource = BusTaxResource::class;
+
+    public function getTitle(): string
+    {
+        return 'Tambah Pajak';
+    }
 }

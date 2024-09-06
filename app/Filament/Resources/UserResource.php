@@ -17,7 +17,9 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $pluralModelLabel = "User";
+
+    protected static ?string $navigationIcon = 'heroicon-s-user-group';
 
     public static function form(Form $form): Form
     {
@@ -58,7 +60,7 @@ class UserResource extends Resource
                     ->visibility('public')
                     ->maxSize(2048) // Maksimal ukuran gambar dalam KB
                     ->required(),
-                
+
                 Forms\Components\Select::make('id_ms')
                     ->label('Status User')
                     ->relationship('msUsers', 'name')
@@ -84,7 +86,7 @@ class UserResource extends Resource
                     ->label('Role')
                     ->searchable()
                     ->sortable(),
-                
+
             ])
             ->filters([
                 //

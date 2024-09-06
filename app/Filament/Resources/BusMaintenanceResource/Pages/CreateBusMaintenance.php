@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateBusMaintenance extends CreateRecord
 {
     protected static string $resource = BusMaintenanceResource::class;
+
+    public function getTitle(): string
+    {
+        return 'Tambah Perawatan';
+    }
 }
