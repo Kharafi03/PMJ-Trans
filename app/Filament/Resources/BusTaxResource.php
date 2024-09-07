@@ -29,22 +29,53 @@ class BusTaxResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('id_bus')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('id_user')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('description')
-                    ->maxLength(255),
-                Forms\Components\DateTimePicker::make('date'),
-                Forms\Components\DateTimePicker::make('expiration'),
-                Forms\Components\DateTimePicker::make('expiration_number_bus'),
-                Forms\Components\TextInput::make('cost')
-                    ->numeric()
-                    ->prefix('$'),
-                Forms\Components\Textarea::make('image')
-                    ->columnSpanFull(),
+                Forms\Components\Card::make()
+                    ->schema([
+                        Forms\Components\TextInput::make('id_bus')
+                            ->label('ID Bus')
+                            ->required()
+                            ->numeric()
+                            ->placeholder('Masukkan ID Bus'),
+                        Forms\Components\TextInput::make('id_user')
+                            ->label('ID User')
+                            ->required()
+                            ->numeric()
+                            ->placeholder('Masukkan ID User'),
+                        Forms\Components\TextInput::make('description')
+                            ->label('Deskripsi')
+                            ->maxLength(255)
+                            ->placeholder('Deskripsi singkat pajak'),
+                        Forms\Components\DateTimePicker::make('date')
+                            ->label('Tanggal Pajak')
+                            ->required(),
+                        Forms\Components\DateTimePicker::make('expiration')
+                            ->label('Tanggal Expirasi')
+                            ->required(),
+                        Forms\Components\DateTimePicker::make('expiration_number_bus')
+                            ->label('Tanggal Expirasi Nomor Bus')
+                            ->required(),
+                        Forms\Components\TextInput::make('cost')
+                            ->label('Biaya')
+                            ->numeric()
+                            ->prefix('Rp')
+                            ->placeholder('Masukkan biaya pajak'),
+                    ])
+                    ->columns(2), // Mengatur tampilan card menjadi dua kolom untuk lebih rapi
+
+                Forms\Components\Card::make()
+                    ->schema([
+                        Forms\Components\FileUpload::make('image')
+                            ->label('Gambar Pajak')
+                            ->disk('public')
+                            ->directory('bus_taxes') // Direktori penyimpanan gambar
+                            ->image()
+                            ->visibility('public')
+                            ->maxSize(2048) // Maksimal ukuran gambar dalam KB
+                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg']) // Format gambar yang diperbolehkan
+                            ->required()
+                            ->helperText('Unggah gambar dalam format JPG atau PNG, maksimal ukuran 2MB.')
+                    ])
+                    ->columnSpanFull(), // Mengatur card ini untuk menempati lebar penuh
             ]);
     }
 

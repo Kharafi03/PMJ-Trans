@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\BookingResource\Pages;
 use App\Models\Booking;
-use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
@@ -13,9 +12,9 @@ use Filament\Forms\Components\TimePicker;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Forms\Components\Card;
 
 class BookingResource extends Resource
 {
@@ -27,66 +26,87 @@ class BookingResource extends Resource
 
     protected static ?string $navigationGroup = 'Booking';
 
-    protected static string $title = 'Buat Pemesanan';
-
     // Form configuration
     public static function form(Forms\Form $form): Forms\Form
     {
         return $form->schema([
-            TextInput::make('booking_code')
-                ->required()
-                ->label('Kode Booking'),
+            Forms\Components\Card::make() // Menggunakan Card untuk mengelompokkan field
+                ->schema([
+                    Forms\Components\Group::make() // Mengelompokkan field pertama
+                        ->schema([
+                            TextInput::make('booking_code')
+                                ->required()
+                                ->label('Kode Booking'),
 
-            Select::make('id_cus')
-                ->relationship('customer', 'name')
-                ->label('Customer')
-                ->required(),
+                            Select::make('id_cus')
+                                ->relationship('customer', 'name')
+                                ->label('Customer')
+                                ->required(),
+                        ])
+                        ->columns(2), // Jumlah kolom dalam grup ini
 
-            TextInput::make('destination')
-                ->required()
-                ->label('Tujuan'),
+                    Forms\Components\Group::make() // Mengelompokkan field kedua
+                        ->schema([
+                            TextInput::make('destination')
+                                ->required()
+                                ->label('Tujuan'),
 
-            TextInput::make('bus_capacity')
-                ->required()
-                ->numeric()
-                ->label('Kapasitas Bus'),
+                            TextInput::make('bus_capacity')
+                                ->required()
+                                ->numeric()
+                                ->label('Kapasitas Bus'),
+                        ])
+                        ->columns(2), // Menggunakan dua kolom
 
-            DatePicker::make('start_date')
-                ->required()
-                ->minDate(now())
-                ->label('Tanggal Mulai'),
+                    Forms\Components\Group::make() // Mengelompokkan tanggal
+                        ->schema([
+                            DatePicker::make('start_date')
+                                ->required()
+                                ->minDate(now())
+                                ->label('Tanggal Mulai'),
 
-            DatePicker::make('end_date')
-                ->required()
-                ->label('Tanggal Selesai'),
+                            DatePicker::make('end_date')
+                                ->required()
+                                ->label('Tanggal Selesai'),
+                        ])
+                        ->columns(2),
 
-            TextInput::make('pickup_point')
-                ->required()
-                ->label('Titik Jemput'),
+                    Forms\Components\Group::make() // Mengelompokkan informasi jemputan
+                        ->schema([
+                            TextInput::make('pickup_point')
+                                ->required()
+                                ->label('Titik Jemput'),
 
-            TimePicker::make('pickup_time')
-                ->required()
-                ->label('Waktu Jemput'),
+                            TimePicker::make('pickup_time')
+                                ->required()
+                                ->label('Waktu Jemput'),
+                        ])
+                        ->columns(2),
 
-            TextInput::make('bus_count')
-                ->required()
-                ->numeric()
-                ->label('Jumlah Bus'),
+                    Forms\Components\Group::make() // Mengelompokkan detail bus dan pembayaran
+                        ->schema([
+                            TextInput::make('bus_count')
+                                ->required()
+                                ->numeric()
+                                ->label('Jumlah Bus'),
 
-            TextInput::make('total')
-                ->required()
-                ->numeric()
-                ->label('Nominal Perjalanan'),
+                            TextInput::make('total')
+                                ->required()
+                                ->numeric()
+                                ->label('Nominal Perjalanan'),
 
-            TextInput::make('down_payment')
-                ->required()
-                ->numeric()
-                ->label('Minimum DP'),
+                            TextInput::make('down_payment')
+                                ->required()
+                                ->numeric()
+                                ->label('Minimum DP'),
 
-            Select::make('id_ms_payment')
-                ->label('Status Pembayaran')
-                ->relationship('ms_payment', 'id')
-                ->required(),
+                            Select::make('id_ms_payment')
+                                ->label('Status Pembayaran')
+                                ->relationship('ms_payment', 'id')
+                                ->required(),
+                        ])
+                        ->columns(4), // 4 kolom dalam grup ini
+                ]),
         ]);
     }
 
