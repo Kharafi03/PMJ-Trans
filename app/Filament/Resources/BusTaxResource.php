@@ -23,13 +23,15 @@ class BusTaxResource extends Resource
 
     protected static ?string $navigationGroup = 'Bus';
 
-    protected static ?string $navigationLabel = 'Pajak';
+    protected static ?int $navigationSort = 17;
 
     public static function form(Form $form): Form
     {
         return $form
+            // Menambahkan judul di card
             ->schema([
                 Forms\Components\Card::make()
+                    ->heading('Data Utama')
                     ->schema([
                         Forms\Components\TextInput::make('id_bus')
                             ->label('ID Bus')
@@ -63,9 +65,10 @@ class BusTaxResource extends Resource
                     ->columns(2), // Mengatur tampilan card menjadi dua kolom untuk lebih rapi
 
                 Forms\Components\Card::make()
+                    ->heading('Unggah Gambar Pajak')
                     ->schema([
                         Forms\Components\FileUpload::make('image')
-                            ->label('Gambar Pajak')
+                            ->label('Silahkan unggah gambar dibawah ini')
                             ->disk('public')
                             ->directory('bus_taxes') // Direktori penyimpanan gambar
                             ->image()
@@ -85,23 +88,30 @@ class BusTaxResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id_bus')
                     ->numeric()
+                    ->label('ID Bus')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('id_user')
                     ->numeric()
+                    ->label('ID User')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('description')
+                    ->label('Deskripsi')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('date')
                     ->dateTime()
+                    ->label('Tanggal Pajak')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('expiration')
                     ->dateTime()
+                    ->label('Tanggal Expirasi')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('expiration_number_bus')
                     ->dateTime()
+                    ->label('Tanggal Expirasi Nomor Bus')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('cost')
                     ->money()
+                    ->label('Biaya')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()
@@ -120,8 +130,19 @@ class BusTaxResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->label('Lihat')
+                    ->modalHeading('Lihat Pajak')
+                    ->modalWidth('lg'),
+                Tables\Actions\EditAction::make()
+                    ->label('Edit')
+                    ->modalHeading('Edit Pajak')
+                    ->modalButton('Simpan Perubahan')
+                    ->modalWidth('lg'),
+                Tables\Actions\DeleteAction::make()
+                    ->label('Hapus')
             ])
+
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
@@ -141,7 +162,7 @@ class BusTaxResource extends Resource
         return [
             'index' => Pages\ListBusTaxes::route('/'),
             'create' => Pages\CreateBusTax::route('/create'),
-            'edit' => Pages\EditBusTax::route('/{record}/edit'),
+            //'edit' => Pages\EditBusTax::route('/{record}/edit'),
         ];
     }
 }

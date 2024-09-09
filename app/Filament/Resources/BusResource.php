@@ -25,13 +25,14 @@ class BusResource extends Resource
 
     protected static ?string $navigationGroup = 'Bus';
 
-    protected static ?string $navigationLabel = 'BUS';
+    protected static ?int $navigationSort = 16;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Card::make()
+                    ->heading('Data Utama')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->label('Nama Bus')
@@ -76,27 +77,22 @@ class BusResource extends Resource
                     ->columns(2), // Mengatur jumlah kolom dalam card
 
                 Forms\Components\Card::make()
+                    ->heading('Unggah Gambar Bus')
                     ->schema([
-                        Forms\Components\Repeater::make('images')
-                            ->label('Gambar Bus')
-                            ->relationship('images') // Relasi ke BusImage
-                            ->schema([
-                                Forms\Components\FileUpload::make('image')
-                                    ->label('Bus Image')
-                                    ->disk('public') // Tentukan disk penyimpanan
-                                    ->directory('bus_images') // Direktori penyimpanan gambar
-                                    ->image()
-                                    ->visibility('public')
-                                    ->maxSize(2048) // Maksimal ukuran gambar dalam KB
-                                    ->required(),
-                            ])
-                            ->minItems(1)
-                            ->maxItems(4), // Maksimal 4 gambar per bus
+                        Forms\Components\FileUpload::make('images')
+                            ->label('Silahkan unggah gambar dibawah ini')
+                            ->disk('public') // Tentukan disk penyimpanan
+                            ->directory('bus_images') // Direktori penyimpanan gambar
+                            ->image()
+                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg']) // Format gambar yang diperbolehkan
+                            ->helperText('Unggah gambar dalam format JPG atau PNG, maksimal ukuran 2MB.')
+                            ->visibility('public')
+                            ->maxSize(2048) // Maksimal ukuran gambar dalam KB
+                            ->required(),
                     ])
                     ->columnSpanFull(), // Mengatur card agar se layar
             ]);
     }
-
     public static function table(Table $table): Table
     {
         return $table
@@ -133,14 +129,17 @@ class BusResource extends Resource
                     ->relationship('ms_buses', 'name'),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->label('Lihat')
+                    ->modalHeading('Lihat Bus'),
+                Tables\Actions\EditAction::make()
+                    ->label('Edit')
+                    ->modalHeading('Edit Bus')
+                    ->modalButton('Simpan Perubahan'),
                 Tables\Actions\DeleteAction::make()
-                    ->label('Hapus') // Ganti label jika diperlukan
-                    ->action(function (Model $record) {
-                        $record->delete(); // Menggunakan soft delete
-                    }),
+                    ->label('Hapus')
             ])
+
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make()
@@ -166,7 +165,7 @@ class BusResource extends Resource
         return [
             'index' => Pages\ListBuses::route('/'),
             'create' => Pages\CreateBus::route('/create'),
-            'edit' => Pages\EditBus::route('/{record}/edit'),
+            // 'edit' => Pages\EditBus::route('/{record}/edit'),
         ];
     }
 }

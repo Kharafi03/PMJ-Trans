@@ -24,7 +24,7 @@ class MMaintenanceResource extends Resource
 
     protected static ?string $navigationGroup = 'Bus';
 
-    protected static ?string $navigationLabel = 'Tipe Perawatan';
+    protected static ?int $navigationSort = 18;
 
     public static function form(Form $form): Form
     {
@@ -71,14 +71,22 @@ class MMaintenanceResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->label('Lihat')
+                    ->modalHeading('Tipe Perawatan')
+                    ->modalWidth('lg'),
+                Tables\Actions\EditAction::make()
+                    ->label('Edit')
+                    ->modalHeading('Edit Tipe Perawatan')
+                    ->modalButton('Simpan Perubahan')
+                    ->modalWidth('lg'),
                 Tables\Actions\DeleteAction::make()
                     ->label('Hapus')
                     ->action(function (Model $record) {
                         $record->delete();
                     }),
             ])
+
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make()
@@ -102,7 +110,7 @@ class MMaintenanceResource extends Resource
         return [
             'index' => Pages\ListMMaintenances::route('/'),
             'create' => Pages\CreateMMaintenance::route('/create'),
-            'edit' => Pages\EditMMaintenance::route('/{record}/edit'),
+            //'edit' => Pages\EditMMaintenance::route('/{record}/edit'),
         ];
     }
 }

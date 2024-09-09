@@ -24,7 +24,8 @@ class MsBusResource extends Resource
 
     protected static ?string $navigationGroup = 'Bus';
 
-    protected static ?string $navigationLabel = 'Status Bus';
+
+    protected static ?int $navigationSort = 19;
 
     public static function form(Form $form): Form
     {
@@ -60,8 +61,16 @@ class MsBusResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->label('Lihat')
+                    ->modalHeading('Lihat Status Bus')
+                    ->modalButton('Simpan Perubahan')
+                    ->modalWidth('lg'),
+                Tables\Actions\EditAction::make()
+                    ->label('Edit')
+                    ->modalHeading('Edit Status Bus')
+                    ->modalButton('Simpan Perubahan')
+                    ->modalWidth('lg'),
                 Tables\Actions\DeleteAction::make()
                     ->label('Hapus') // Ganti label jika diperlukan
                     ->action(function (Model $record) {
@@ -87,7 +96,7 @@ class MsBusResource extends Resource
         return [
             'index' => Pages\ListMsBuses::route('/'),
             'create' => Pages\CreateMsBus::route('/create'),
-            'edit' => Pages\EditMsBus::route('/{record}/edit'),
+            // 'edit' => Pages\EditMsBus::route('/{record}/edit'),
         ];
     }
 }

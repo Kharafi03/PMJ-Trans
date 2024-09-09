@@ -1,0 +1,8 @@
+/* Custom CSS untuk menonjolkan item yang aktif */
+.filament-sidebar-item-active {
+    background-color: #1be836 !important; /* Warna latar untuk item aktif */
+    color: #333 !important; /* Warna teks item aktif */
+    font-weight: bold; /* Font lebih tebal */
+    border-left: 4px solid #00aaff; /* Border kiri untuk penekanan */
+    transition: all 0.3s ease; /* Transisi halus */
+}

@@ -17,6 +17,7 @@ class Booking extends Model
     protected $table = 'bookings';
 
     protected $fillable = [
+        'booking_code',
         'id_cus',
         'destination_point',
         'destination_time',
@@ -45,6 +46,12 @@ class Booking extends Model
     public function ms_payment(): BelongsTo
     {
         return $this->belongsTo(MsPaymentBooking::class, 'id_ms_payment');
+    }
+
+    // Relasi ke Review
+    public function review(): BelongsTo
+    {
+        return $this->belongsTo(Review::class, 'id_booking');
     }
 
     public function tripbus()

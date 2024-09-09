@@ -14,7 +14,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Forms\Components\Card;
+use Illuminate\Support\Str;
 
 class BookingResource extends Resource
 {
@@ -22,118 +22,182 @@ class BookingResource extends Resource
 
     protected static ?string $pluralModelLabel = "Booking";
 
-    protected static ?string $navigationIcon = 'heroicon-c-clipboard-document-list';
+    protected static ?string $navigationIcon = 'heroicon-c-shopping-bag';
 
-    protected static ?string $navigationGroup = 'Booking';
+    protected static ?string $navigationGroup = 'Pemesanan';
 
-    // Form configuration
+    protected static ?int $navigationSort = 1;
+
+
     public static function form(Forms\Form $form): Forms\Form
     {
         return $form->schema([
-            Forms\Components\Card::make() // Menggunakan Card untuk mengelompokkan field
+            Forms\Components\Grid::make()
                 ->schema([
-                    Forms\Components\Group::make() // Mengelompokkan field pertama
+                    // Bagian kiri form
+                    Forms\Components\Card::make()
+                        ->heading('Data Utama')
                         ->schema([
-                            TextInput::make('booking_code')
-                                ->required()
-                                ->label('Kode Booking'),
+                            Forms\Components\Group::make()
+                                ->schema([
+                                    TextInput::make('booking_code')
+                                        ->default(function () {
+                                            return 'PMJ' . strtoupper(Str::random(4)) . rand(1000, 9999);
+                                        })
+                                        ->required()
+                                        ->readOnly()
+                                        ->label('Kode Booking'),
 
-                            Select::make('id_cus')
-                                ->relationship('customer', 'name')
-                                ->label('Customer')
-                                ->required(),
+                                    Select::make('id_cus')
+                                        ->relationship('customer', 'name')
+                                        ->label('Customer')
+                                        ->required(),
+                                ])
+                                ->columns(2),
+
+                            Forms\Components\Group::make()
+                                ->schema([
+
+                                    TextInput::make('pickup_point')
+                                        ->required()
+                                        ->label('Titik Jemput'),
+
+                                    TextInput::make('destination_point')
+                                        ->required()
+                                        ->label('Tujuan'),
+                                ])
+                                ->columns(2),
+
+                            Forms\Components\Group::make()
+                                ->schema([
+                                    TextInput::make('fleet_amount')
+                                        ->required()
+                                        ->numeric()
+                                        ->label('Jumlah Bus'),
+
+                                    TextInput::make('capacity')
+                                        ->required()
+                                        ->numeric()
+                                        ->label('Kapasitas Bus'),
+                                ])
+                                ->columns(2),
+
+                            Forms\Components\Group::make()
+                                ->schema([
+                                    DatePicker::make('date_start')
+                                        ->required()
+                                        ->minDate(now())
+                                        ->label('Tanggal Mulai'),
+
+                                    DatePicker::make('date_end')
+                                        ->required()
+                                        ->label('Tanggal Selesai'),
+                                ])
+                                ->columns(2),
+
+                            Forms\Components\Group::make()
+                                ->schema([
+                                    TimePicker::make('pickup_time')
+                                        ->required()
+                                        ->label('Waktu Jemput'),
+
+                                    TimePicker::make('destination_time')
+                                        ->required()
+                                        ->label('Waktu Sampai'),
+                                ])
+                                ->columns(2),
+
+                            Forms\Components\Group::make()
+                                ->schema([
+                                    TextInput::make('trip_nominal')
+                                        ->required()
+                                        ->numeric()
+                                        ->label('Nominal Perjalanan'),
+
+                                    TextInput::make('minimum_dp')
+                                        ->required()
+                                        ->numeric()
+                                        ->label('Minimum DP'),
+                                ])
+                                ->columns(2),
                         ])
-                        ->columns(2), // Jumlah kolom dalam grup ini
+                        ->columnSpan(2),  // Mengatur agar form ini berada di sebelah kiri, mencakup dua kolom
 
-                    Forms\Components\Group::make() // Mengelompokkan field kedua
+                    // Card untuk status pembayaran di kanan
+                    Forms\Components\Card::make()
+                        ->heading('Status')
                         ->schema([
-                            TextInput::make('destination')
-                                ->required()
-                                ->label('Tujuan'),
-
-                            TextInput::make('bus_capacity')
-                                ->required()
-                                ->numeric()
-                                ->label('Kapasitas Bus'),
-                        ])
-                        ->columns(2), // Menggunakan dua kolom
-
-                    Forms\Components\Group::make() // Mengelompokkan tanggal
-                        ->schema([
-                            DatePicker::make('start_date')
-                                ->required()
-                                ->minDate(now())
-                                ->label('Tanggal Mulai'),
-
-                            DatePicker::make('end_date')
-                                ->required()
-                                ->label('Tanggal Selesai'),
-                        ])
-                        ->columns(2),
-
-                    Forms\Components\Group::make() // Mengelompokkan informasi jemputan
-                        ->schema([
-                            TextInput::make('pickup_point')
-                                ->required()
-                                ->label('Titik Jemput'),
-
-                            TimePicker::make('pickup_time')
-                                ->required()
-                                ->label('Waktu Jemput'),
-                        ])
-                        ->columns(2),
-
-                    Forms\Components\Group::make() // Mengelompokkan detail bus dan pembayaran
-                        ->schema([
-                            TextInput::make('bus_count')
-                                ->required()
-                                ->numeric()
-                                ->label('Jumlah Bus'),
-
-                            TextInput::make('total')
-                                ->required()
-                                ->numeric()
-                                ->label('Nominal Perjalanan'),
-
-                            TextInput::make('down_payment')
-                                ->required()
-                                ->numeric()
-                                ->label('Minimum DP'),
-
                             Select::make('id_ms_payment')
                                 ->label('Status Pembayaran')
-                                ->relationship('ms_payment', 'id')
+                                ->relationship('ms_payment', 'name')
                                 ->required(),
                         ])
-                        ->columns(4), // 4 kolom dalam grup ini
-                ]),
+                        ->columnSpan(1),  // Mengatur agar card ini berada di kolom kanan
+                ])
+                ->columns(3),  // Menggunakan tiga kolom: dua untuk form kiri, satu untuk status pembayaran di kanan
         ]);
     }
 
-    // Table configuration
+
     public static function table(Tables\Table $table): Tables\Table
     {
         return $table->columns([
-            TextColumn::make('booking_code')->label('Kode Booking'),
-            TextColumn::make('customer.name')->label('Nama Customer'),
-            TextColumn::make('destination')->label('Tujuan'),
-            TextColumn::make('bus_capacity')->label('Kapasitas Bus'),
-            TextColumn::make('start_date')->label('Tanggal Mulai'),
-            TextColumn::make('end_date')->label('Tanggal Selesai'),
-            TextColumn::make('pickup_point')->label('Titik Jemput'),
-            TextColumn::make('pickup_time')->label('Waktu Jemput'),
-            TextColumn::make('bus_count')->label('Jumlah Bus'),
-            TextColumn::make('total')->label('Nominal Perjalanan'),
-            TextColumn::make('down_payment')->label('Minimum DP'),
-            TextColumn::make('driver.name')->label('Driver'),
-            TextColumn::make('coDriver.name')->label('Co Driver'),
+            TextColumn::make('booking_code')
+                ->label('Kode Booking')
+                ->searchable()
+                ->sortable(),
+            TextColumn::make('customer.name')
+                ->label('Nama Customer')
+                ->searchable()
+                ->sortable(),
+            TextColumn::make('pickup_point')
+                ->label('Titik Jemput')
+                ->searchable()
+                ->sortable(),
+            TextColumn::make('destination_point')
+                ->label('Tujuan')
+                ->searchable()
+                ->sortable(),
+            TextColumn::make('ms_payment.name')
+                ->label('Status Pembayaran')
+                ->searchable()
+                ->sortable(),
+            TextColumn::make('deleted_at')
+                ->searchable()
+                ->dateTime()
+                ->sortable()
+                ->toggleable(isToggledHiddenByDefault: true),
+            TextColumn::make('created_at')
+                ->dateTime()
+                ->sortable()
+                ->toggleable(isToggledHiddenByDefault: true),
+            TextColumn::make('updated_at')
+                ->dateTime()
+                ->sortable()
+                ->toggleable(isToggledHiddenByDefault: true),
         ])
-            ->filters([])
-            ->actions([
-                EditAction::make(),
+            ->filters([
+                //
+                Tables\Filters\SelectFilter::make('id_ms_payment')
+                    ->label('Status Pembayaran')
+                    ->relationship('ms_payment', 'name'),
             ])
+            ->actions([
+                Tables\Actions\ViewAction::make()
+                    ->label('Lihat')
+                    ->modalHeading('Lihat Booking'),
+                Tables\Actions\EditAction::make()
+                    ->label('Edit')
+                    ->modalHeading('Edit Booking')
+                    ->modalButton('Simpan Perubahan'),
+                Tables\Actions\DeleteAction::make()
+                    ->label('Hapus')
+            ])
+
             ->bulkActions([
-                DeleteBulkAction::make(),
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ]);
     }
 
@@ -145,9 +209,9 @@ class BookingResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListBookings::route('/'), // List existing bookings
-            'create' => Pages\CreateBooking::route('/create'), // Create new booking (form page)
-            'edit' => Pages\EditBooking::route('/{record}/edit'), // Edit existing booking
+            'index' => Pages\ListBookings::route('/'),
+            'create' => Pages\CreateBooking::route('/create'),
+            // 'edit' => Pages\EditBooking::route('/{record}/edit'),
         ];
     }
 }
