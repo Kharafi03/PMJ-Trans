@@ -21,13 +21,16 @@ class MsPaymentBookingResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
 
-    protected static ?string $navigationGroup = 'Booking';
+    protected static ?string $navigationGroup = 'Pemesanan';
+
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label("Nama")
                     ->required()
                     ->maxLength(255),
             ]);
@@ -38,6 +41,7 @@ class MsPaymentBookingResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label("Nama")
                     ->searchable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()
@@ -56,8 +60,19 @@ class MsPaymentBookingResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->label('Lihat')
+                    ->modalHeading('Lihat Status')
+                    ->modalWidth('lg'),
+                Tables\Actions\EditAction::make()
+                    ->label('Edit')
+                    ->modalHeading('Edit Status')
+                    ->modalButton('Simpan Perubahan')
+                    ->modalWidth('lg'),
+                Tables\Actions\DeleteAction::make()
+                    ->label('Hapus')
             ])
+
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
@@ -77,7 +92,7 @@ class MsPaymentBookingResource extends Resource
         return [
             'index' => Pages\ListMsPaymentBookings::route('/'),
             'create' => Pages\CreateMsPaymentBooking::route('/create'),
-            'edit' => Pages\EditMsPaymentBooking::route('/{record}/edit'),
+            //'edit' => Pages\EditMsPaymentBooking::route('/{record}/edit'),
         ];
     }
 }

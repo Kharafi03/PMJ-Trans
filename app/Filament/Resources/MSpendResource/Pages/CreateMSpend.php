@@ -12,6 +12,6 @@ class CreateMSpend extends CreateRecord
 
     public function getTitle(): string
     {
-        return 'Tambah Tipe';
+        return 'Tambah Jenis';
     }
 }

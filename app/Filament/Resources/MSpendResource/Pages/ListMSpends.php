@@ -13,7 +13,7 @@ class ListMSpends extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Tambah Tipe'),
+            Actions\CreateAction::make()->label('Tambah Jenis'),
         ];
     }
 }

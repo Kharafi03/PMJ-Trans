@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
+            $table->string('booking_code', 255)->nullable();
             $table->foreignId('id_cus')->constrained('users')->cascadeOnDelete();
             $table->string('destination_point', 50)->nullable();
-            $table->dateTime('destination_time')->nullable();
+            $table->time('destination_time')->nullable();
             $table->integer('capacity')->nullable();
             $table->date('date_start')->nullable();
             $table->date('date_end')->nullable();
             $table->string('pickup_point', 50)->nullable();
             $table->time('pickup_time')->nullable();
-            $table->string('fleet_type')->nullable();
             $table->integer('fleet_amount')->nullable();
             $table->decimal('trip_nominal', 10, 2)->nullable();
             $table->decimal('minimum_dp', 10, 2)->nullable();

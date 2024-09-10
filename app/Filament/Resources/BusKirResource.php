@@ -8,6 +8,7 @@ use Filament\Forms;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Resources\Resource;
@@ -25,13 +26,15 @@ class BusKirResource extends Resource
 
     protected static ?string $navigationGroup = 'Bus';
 
-    protected static ?string $navigationLabel = 'KIR';
+    protected static ?int $navigationSort = 14;
+
 
     public static function form(Forms\Form $form): Forms\Form
     {
         return $form
             ->schema([
                 Card::make()
+                    ->heading('Data KIR')
                     ->schema([
                         Select::make('id_bus')
                             ->label('Bus')
@@ -43,7 +46,7 @@ class BusKirResource extends Resource
                             ->relationship('users', 'name') // Asumsikan ada relasi dengan User model
                             ->required(),
 
-                        TextInput::make('description')
+                        Textarea::make('description')
                             ->label('Deskripsi')
                             ->maxLength(255),
 
@@ -65,8 +68,10 @@ class BusKirResource extends Resource
                             ->disk('public')
                             ->directory('kir')
                             ->visibility('public')
-                            ->maxSize(2048) // Maksimal ukuran gambar dalam KB
+                            ->maxSize(2048)
+                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg']) // Format gambar yang diperbolehkan
                             ->required()
+                            ->helperText('Unggah gambar dalam format JPG atau PNG, maksimal ukuran 2MB.')
                             ->image(),
                     ]),
             ]);
@@ -100,7 +105,7 @@ class BusKirResource extends Resource
 
                 TextColumn::make('cost')
                     ->label('Biaya')
-                    ->money('idr')
+                    ->prefix('Rp. ')
                     ->sortable(),
 
                 TextColumn::make('created_at')
@@ -119,8 +124,17 @@ class BusKirResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->label('Lihat')
+                    ->modalHeading('Lihat KIR'),
+                Tables\Actions\EditAction::make()
+                    ->label('Edit')
+                    ->modalHeading('Edit KIR')
+                    ->modalButton('Simpan Perubahan'),
+                Tables\Actions\DeleteAction::make()
+                    ->label('Hapus')
             ])
+
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
@@ -138,7 +152,7 @@ class BusKirResource extends Resource
         return [
             'index' => Pages\ListBusKirs::route('/'),
             'create' => Pages\CreateBusKir::route('/create'),
-            'edit' => Pages\EditBusKir::route('/{record}/edit'),
+            // 'edit' => Pages\EditBusKir::route('/{record}/edit'),
         ];
     }
 }

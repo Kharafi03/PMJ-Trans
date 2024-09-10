@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\BusImageResource\Pages;
+namespace App\Filament\Resources\MOutcomeResource\Pages;
 
-use App\Filament\Resources\BusImageResource;
+use App\Filament\Resources\MOutcomeResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditBusImage extends EditRecord
+class EditMOutcome extends EditRecord
 {
-    protected static string $resource = BusImageResource::class;
+    protected static string $resource = MOutcomeResource::class;
 
     protected function getHeaderActions(): array
     {

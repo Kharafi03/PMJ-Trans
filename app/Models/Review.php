@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Review extends Model
 {
@@ -22,5 +23,11 @@ class Review extends Model
         'rating',
     ];
 
+
     protected $guarded = ['id'];
+    // Relasi ke Booking
+    public function booking(): BelongsTo
+    {
+        return $this->belongsTo(Booking::class, 'id_booking');
+    }
 }

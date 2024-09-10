@@ -17,24 +17,29 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-user-group';
 
+    protected static ?string $navigationGroup = 'Pengguna';
+
+    protected static ?int $navigationSort = -1;
+
     public static function form(Forms\Form $form): Forms\Form
     {
         return $form
             ->schema([
                 // Card pertama dengan Grid 2 kolom
                 Forms\Components\Card::make()
+                    ->heading('Data Utama')
                     ->schema([
                         Forms\Components\Grid::make(2) // Membuat Grid dengan 2 kolom
                             ->schema([
                                 Forms\Components\TextInput::make('name')
-                                    ->label('Name')
+                                    ->label('Nama')
                                     ->maxLength(255)
                                     ->required(),
                                 Forms\Components\TextInput::make('email')
                                     ->label('Email')
                                     ->email()
                                     ->maxLength(255)
-                                    ->required(),
+                                    ->required(), //Nanti jika cust tidak wajib ini hanya sementara
                                 Forms\Components\TextInput::make('number_phone')
                                     ->label('Nomor Telepon')
                                     ->numeric()
@@ -55,12 +60,15 @@ class UserResource extends Resource
 
                 // Card untuk upload file SIM
                 Forms\Components\Card::make()
+                    ->heading('Unggah File')
                     ->schema([
                         Forms\Components\FileUpload::make('sim')
-                            ->label('SIM')
+                            ->label('Silahkan unggah file dibawah ini')
                             ->disk('public')
                             ->directory('sim')
                             ->image()
+                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'])
+                            ->helperText('Unggah SIM dalam format JPG, PNG atau PDF, maksimal ukuran 2MB.')
                             ->visibility('public')
                             ->maxSize(2048)
                             ->required(),
@@ -68,6 +76,7 @@ class UserResource extends Resource
 
                 // Card dengan pilihan select, juga dengan Grid 2 kolom
                 Forms\Components\Card::make()
+                    ->heading('Informasi User')
                     ->schema([
                         Forms\Components\Grid::make(2) // Membuat Grid dengan 2 kolom
                             ->schema([
@@ -76,7 +85,7 @@ class UserResource extends Resource
                                     ->relationship('msUsers', 'name')
                                     ->required(),
                                 Forms\Components\Select::make('id_role')
-                                    ->label('Role')
+                                    ->label('Peran')
                                     ->relationship('permissions', 'role')
                                     ->required(),
                             ]),
@@ -89,21 +98,39 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label('Name')
+                    ->label('Nama')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('permissions.role')
-                    ->label('Role')
+                    ->label('Peran')
                     ->searchable()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('deleted_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->label('Lihat')
+                    ->modalHeading('Lihat User'),
+                Tables\Actions\EditAction::make()
+                    ->label('Edit')
+                    ->modalHeading('Edit User')
+                    ->modalButton('Simpan Perubahan'),
+                Tables\Actions\DeleteAction::make()
+                    ->label('Hapus')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -124,7 +151,7 @@ class UserResource extends Resource
         return [
             'index' => Pages\ListUsers::route('/'),
             'create' => Pages\CreateUser::route('/create'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+            // 'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
 }

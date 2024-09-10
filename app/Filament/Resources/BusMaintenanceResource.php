@@ -24,86 +24,95 @@ class BusMaintenanceResource extends Resource
 
     protected static ?string $navigationGroup = 'Bus';
 
-    protected static ?string $navigationLabel = 'Perawatan';
+    protected static ?int $navigationSort = 15;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Card::make([
-                    Forms\Components\Select::make('id_bus')
-                        ->label('Bus')
-                        ->relationship('buses', 'name')
-                        ->required(),
+                // Card untuk Data Utama
+                Forms\Components\Card::make()
+                    ->heading('Data Utama')
+                    ->schema([
+                        Forms\Components\Select::make('id_bus')
+                            ->label('Bus')
+                            ->relationship('buses', 'name')
+                            ->required(),
 
-                    Forms\Components\Select::make('id_user')
-                        ->label('User')
-                        ->relationship('users', 'name') // Asumsikan ada relasi dengan User model
-                        ->required(),
+                        Forms\Components\Select::make('id_user')
+                            ->label('User')
+                            ->relationship('users', 'name')
+                            ->required(),
 
-                    Forms\Components\Select::make('id_m_maintenance')
-                        ->label('Jenis Perawatan')
-                        ->relationship('m_maintenances', 'name')
-                        ->required(),
+                        Forms\Components\Select::make('id_m_maintenance')
+                            ->label('Jenis Perawatan')
+                            ->relationship('m_maintenances', 'name')
+                            ->required(),
 
-                    Forms\Components\Textarea::make('description')
-                        ->label('Deskripsi')
-                        ->maxLength(255)
-                        ->nullable(),
-                ])
-                    ->extraAttributes(['class' => 'bg-white shadow-lg rounded-lg p-4'])
+                        Forms\Components\Textarea::make('description')
+                            ->label('Deskripsi')
+                            ->maxLength(255)
+                            ->nullable(),
+                    ])
                     ->columns(1),
 
-                Forms\Components\Card::make([
-                    Forms\Components\FileUpload::make('image')
-                        ->label('Gambar Perawatan')
-                        ->disk('public') // Tentukan disk penyimpanan
-                        ->directory('maintenance_images') // Direktori penyimpanan gambar
-                        ->image()
-                        ->visibility('public')
-                        ->maxSize(2048) // Maksimal ukuran gambar dalam KB
-                        ->nullable(),
+                // Card untuk Data Perawatan
+                Forms\Components\Card::make()
+                    ->heading('Data Perawatan')
+                    ->schema([
+                        Forms\Components\FileUpload::make('image')
+                            ->label('Gambar Bukti Perawatan')
+                            ->disk('public')
+                            ->directory('maintenance_images')
+                            ->image()
+                            ->visibility('public')
+                            ->maxSize(2048)
+                            ->helperText('Unggah gambar dalam format JPG atau PNG, maksimal ukuran 2MB.')
+                            ->nullable(),
 
-                    Forms\Components\DateTimePicker::make('date')
-                        ->label('Tanggal')
-                        ->required(),
+                        Forms\Components\DateTimePicker::make('date')
+                            ->label('Tanggal')
+                            ->required(),
 
-                    Forms\Components\TextInput::make('location')
-                        ->label('Lokasi')
-                        ->nullable(),
+                        Forms\Components\TextInput::make('location')
+                            ->label('Lokasi')
+                            ->nullable(),
 
-                    Forms\Components\TextInput::make('cost')
-                        ->label('Biaya')
-                        ->numeric()
-                        ->nullable(),
-                ])
-                    ->extraAttributes(['class' => 'bg-white shadow-lg rounded-lg p-4'])
+                        Forms\Components\TextInput::make('cost')
+                            ->label('Biaya')
+                            ->numeric()
+                            ->nullable(),
+                    ])
                     ->columns(1),
 
-                Forms\Components\Card::make([
-                    Forms\Components\FileUpload::make('image_receipt')
-                        ->label('Gambar Bukti Pembayaran')
-                        ->disk('public')
-                        ->directory('maintenance_receipts')
-                        ->image()
-                        ->visibility('public')
-                        ->maxSize(2048)
-                        ->nullable(),
+                // Card untuk Data Pembayaran
+                Forms\Components\Card::make()
+                    ->heading('Data Pembayaran')
+                    ->schema([
+                        Forms\Components\FileUpload::make('image_receipt')
+                            ->label('Unggah Bukti Pembayaran')
+                            ->disk('public')
+                            ->directory('maintenance_receipts')
+                            ->image()
+                            ->helperText('Unggah gambar dalam format JPG atau PNG, maksimal ukuran 2MB.')
+                            ->visibility('public')
+                            ->maxSize(2048)
+                            ->nullable(),
 
-                    Forms\Components\TextInput::make('latitude')
-                        ->label('Latitude')
-                        ->numeric()
-                        ->nullable(),
+                        Forms\Components\TextInput::make('latitude')
+                            ->label('Latitude')
+                            ->numeric()
+                            ->nullable(),
 
-                    Forms\Components\TextInput::make('longitude')
-                        ->label('Longitude')
-                        ->numeric()
-                        ->nullable(),
-                ])
-                    ->extraAttributes(['class' => 'bg-white shadow-lg rounded-lg p-4'])
+                        Forms\Components\TextInput::make('longitude')
+                            ->label('Longitude')
+                            ->numeric()
+                            ->nullable(),
+                    ])
                     ->columns(1),
             ]);
     }
+
 
     public static function table(Table $table): Table
     {
@@ -141,16 +150,22 @@ class BusMaintenanceResource extends Resource
             ])
             ->filters([
                 //
+                Tables\Filters\SelectFilter::make('id_m_maintenance')
+                    ->label('Jenis Perawatan')
+                    ->relationship('m_maintenances', 'name'),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->label('Lihat')
+                    ->modalHeading('Lihat Perawatan'),
+                Tables\Actions\EditAction::make()
+                    ->label('Edit')
+                    ->modalHeading('Edit Perawatan')
+                    ->modalButton('Simpan Perubahan'),
                 Tables\Actions\DeleteAction::make()
-                    ->label('Hapus') // Ganti label jika diperlukan
-                    ->action(function (Model $record) {
-                        $record->delete(); // Menggunakan soft delete
-                    }),
+                    ->label('Hapus')
             ])
+
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
@@ -170,7 +185,7 @@ class BusMaintenanceResource extends Resource
         return [
             'index' => Pages\ListBusMaintenances::route('/'),
             'create' => Pages\CreateBusMaintenance::route('/create'),
-            'edit' => Pages\EditBusMaintenance::route('/{record}/edit'),
+            // 'edit' => Pages\EditBusMaintenance::route('/{record}/edit'),
         ];
     }
 }

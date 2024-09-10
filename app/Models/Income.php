@@ -17,7 +17,7 @@ class Income extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'id_booking',
+        'booking_code',
         'id_m_income',
         'id_m_method_payment',
         'description',

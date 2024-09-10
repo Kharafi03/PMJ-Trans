@@ -15,11 +15,11 @@ class MIncomeSeeder extends Seeder
     {
         //
         MIncome::create([
-            'name' => 'DownPayment',
+            'name' => 'DP',
         ]);
 
         MIncome::create([
-            'name' => 'FullPayment',
+            'name' => 'Pembayaran Penuh',
         ]);
 
         MIncome::create([
