@@ -36,6 +36,16 @@ class Booking extends Model
 
     ];
 
+    // Casting untuk kolom tanggal
+    protected $casts = [
+        'date_start' => 'datetime',
+        'date_end' => 'datetime',
+        'destination_time' => 'datetime:H:i',
+        'pickup_time' => 'datetime:H:i',
+    ];
+
+
+
     // Relasi ke Customer (User)
     public function customer(): BelongsTo
     {
