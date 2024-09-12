@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('id_trip_bus')->constrained('trip_buses')->cascadeOnDelete();
             $table->foreignId('id_m_spend')->constrained('m_spends')->cascadeOnDelete();
             $table->string('description')->nullable();
-            $table->decimal('nominal')->nullable();
+            $table->decimal('nominal', 12, 2)->nullable();
             $table->integer('kilometer')->nullable();
             $table->longText('image_receipt')->nullable();
             $table->dateTime('datetime')->nullable();

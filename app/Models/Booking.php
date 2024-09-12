@@ -31,6 +31,7 @@ class Booking extends Model
         'trip_nominal',
         'minimum_dp',
         'id_ms_payment',
+        'id_ms_booking',
         'payment_received',
         'payment_remaining',
 
@@ -48,6 +49,11 @@ class Booking extends Model
         return $this->belongsTo(MsPaymentBooking::class, 'id_ms_payment');
     }
 
+    public function ms_booking(): BelongsTo
+    {
+        return $this->belongsTo(MsBooking::class, 'id_ms_booking');
+    }
+
     // Relasi ke Review
     public function review(): BelongsTo
     {
@@ -57,5 +63,15 @@ class Booking extends Model
     public function tripbus()
     {
         return $this->hasMany(TripBus::class, 'id_booking');
+    }
+
+    public function incomes()
+    {
+        return $this->hasMany(Income::class, 'id_booking');
+    }
+
+    public function outcomes()
+    {
+        return $this->hasMany(Outcome::class, 'id_booking');
     }
 }

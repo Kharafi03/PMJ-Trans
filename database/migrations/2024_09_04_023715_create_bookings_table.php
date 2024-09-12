@@ -23,11 +23,12 @@ return new class extends Migration
             $table->string('pickup_point', 50)->nullable();
             $table->time('pickup_time')->nullable();
             $table->integer('fleet_amount')->nullable();
-            $table->decimal('trip_nominal', 10, 2)->nullable();
-            $table->decimal('minimum_dp', 10, 2)->nullable();
+            $table->decimal('trip_nominal', 12, 2)->nullable();
+            $table->decimal('minimum_dp', 12, 2)->nullable();
+            $table->foreignId('id_ms_booking')->constrained('ms_bookings')->cascadeOnDelete();
             $table->foreignId('id_ms_payment')->constrained('ms_payment_bookings')->cascadeOnDelete();
-            $table->decimal('payment_received', 10, 2)->nullable();
-            $table->decimal('payment_remaining', 10, 2)->nullable();
+            $table->decimal('payment_received', 12, 2)->nullable();
+            $table->decimal('payment_remaining', 12, 2)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

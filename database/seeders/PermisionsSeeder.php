@@ -27,7 +27,7 @@ class PermisionsSeeder extends Seeder
         ]);
 
         Permission::create([
-            'role' => 'User'
+            'role' => 'Customer'
         ]);
 
     }

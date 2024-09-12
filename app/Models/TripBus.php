@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TripBus extends Model
@@ -29,4 +30,34 @@ class TripBus extends Model
         'total_spend',
         'total_spend_bbm',
     ];
+
+    public function booking(): BelongsTo
+    {
+        return $this->belongsTo(Booking::class, 'id_booking');
+    }
+
+    public function bus(): BelongsTo
+    {
+        return $this->belongsTo(Bus::class, 'id_bus');
+    }
+
+    public function cus(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'id_customer');
+    }
+
+    public function driver(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'id_driver');
+    }
+
+    public function codriver(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'id_codriver');
+    }
+
+    // public function ()
+    // {
+    //     return $this->hasMany(Outcome::class, 'id_booking');
+    // }
 }

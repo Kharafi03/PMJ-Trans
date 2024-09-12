@@ -65,4 +65,34 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Permission::class, 'id_role');
     }
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class, 'id_cus');
+    }
+
+    public function busTaxes()
+    {
+        return $this->hasMany(BusTax::class, 'id_user');
+    }
+
+    public function busKirs()
+    {
+        return $this->hasMany(BusKir::class, 'id_user');
+    }
+
+    public function tripBusCus()
+    {
+        return $this->hasMany(TripBus::class, 'id_customer');
+    }
+
+    public function tripBusDri()
+    {
+        return $this->hasMany(TripBus::class, 'id_driver');
+    }
+
+    public function tripBusCodri()
+    {
+        return $this->hasMany(TripBus::class, 'id_codriver');
+    }
 }

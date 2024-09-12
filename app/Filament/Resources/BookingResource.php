@@ -24,9 +24,7 @@ class BookingResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-c-shopping-bag';
 
-    protected static ?string $navigationGroup = 'Pemesanan';
-
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = -2;
 
 
     public static function form(Forms\Form $form): Forms\Form
@@ -120,6 +118,17 @@ class BookingResource extends Resource
                                         ->label('Minimum DP'),
                                 ])
                                 ->columns(2),
+                                Forms\Components\Group::make()
+                                ->schema([
+                                    TextInput::make('payment_received')
+                                        ->numeric()
+                                        ->label('Pembayaran Diterima'),
+
+                                    TextInput::make('payment_remaining')
+                                        ->numeric()
+                                        ->label('Sisa Pembayaran'),
+                                ])
+                                ->columns(2),
                         ])
                         ->columnSpan(2),  // Mengatur agar form ini berada di sebelah kiri, mencakup dua kolom
 
@@ -130,6 +139,10 @@ class BookingResource extends Resource
                             Select::make('id_ms_payment')
                                 ->label('Status Pembayaran')
                                 ->relationship('ms_payment', 'name')
+                                ->required(),
+                            Select::make('id_ms_booking')
+                                ->label('Status Pemesanan')
+                                ->relationship('ms_booking', 'name')
                                 ->required(),
                         ])
                         ->columnSpan(1),  // Mengatur agar card ini berada di kolom kanan
@@ -158,8 +171,16 @@ class BookingResource extends Resource
                 ->label('Tujuan')
                 ->searchable()
                 ->sortable(),
+            TextColumn::make('date_start')
+                ->label('Tanggal Mulai')
+                ->searchable()
+                ->sortable(),
             TextColumn::make('ms_payment.name')
                 ->label('Status Pembayaran')
+                ->searchable()
+                ->sortable(),
+            TextColumn::make('ms_booking.name')
+                ->label('Status')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('deleted_at')

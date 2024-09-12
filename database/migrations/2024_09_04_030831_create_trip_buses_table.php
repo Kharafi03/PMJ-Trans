@@ -18,11 +18,11 @@ return new class extends Migration
             $table->foreignId('id_customer')->constrained('users')->cascadeOnDelete();
             $table->foreignId('id_driver')->constrained('users')->cascadeOnDelete();
             $table->foreignId('id_codriver')->constrained('users')->cascadeOnDelete();
-            $table->decimal('balanced')->nullable();
+            $table->decimal('balanced', 12, 2)->nullable();
             $table->integer('km_start')->nullable();
             $table->integer('km_end')->nullable();
-            $table->decimal('total_spend')->nullable();
-            $table->decimal('total_spend_bbm')->nullable();
+            $table->decimal('total_spend', 12, 2)->nullable();
+            $table->decimal('total_spend_bbm', 12, 2)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
