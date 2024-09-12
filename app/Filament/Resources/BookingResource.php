@@ -15,6 +15,9 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Illuminate\Support\Str;
+use Filament\Tables\Actions\Action;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class BookingResource extends Resource
 {
@@ -184,6 +187,7 @@ class BookingResource extends Resource
                 ->searchable()
                 ->sortable(),
             TextColumn::make('deleted_at')
+                ->label('Data di hapus')
                 ->searchable()
                 ->dateTime()
                 ->sortable()
@@ -196,6 +200,7 @@ class BookingResource extends Resource
                 ->dateTime()
                 ->sortable()
                 ->toggleable(isToggledHiddenByDefault: true),
+
         ])
             ->filters([
                 //
@@ -212,16 +217,15 @@ class BookingResource extends Resource
                     ->modalHeading('Edit Booking')
                     ->modalButton('Simpan Perubahan'),
                 Tables\Actions\DeleteAction::make()
-                    ->label('Hapus')
-            ])
+                    ->label('Hapus'),
 
+            ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
-
     public static function getRelations(): array
     {
         return [];
