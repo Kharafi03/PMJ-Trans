@@ -15,8 +15,11 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Illuminate\Support\Str;
-use Filament\Tables\Actions\Action;
+//use Filament\Tables\Actions\Action;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Filament\Forms\Components\Actions\Action;
+use Livewire\Livewire;
+
 
 
 class BookingResource extends Resource
@@ -54,13 +57,20 @@ class BookingResource extends Resource
                                     Select::make('id_cus')
                                         ->relationship('customer', 'name')
                                         ->label('Customer')
-                                        ->required(),
+                                        ->required()
+                                        ->suffixAction(
+                                            Action::make('tambahCustomer')
+                                                ->label('Tambah Customer')
+                                                ->icon('heroicon-c-shopping-bag')
+                                                ->action(function () {
+                                                    \Livewire\Livewire::emit('openModal', 'add-customer-modal');
+                                                })
+                                        ),
                                 ])
                                 ->columns(2),
 
                             Forms\Components\Group::make()
                                 ->schema([
-
                                     TextInput::make('pickup_point')
                                         ->required()
                                         ->label('Titik Jemput'),
@@ -140,6 +150,7 @@ class BookingResource extends Resource
                 ->columns(3),  // Menggunakan tiga kolom: dua untuk form kiri, satu untuk status pembayaran di kanan
         ]);
     }
+
 
 
     public static function table(Tables\Table $table): Tables\Table
