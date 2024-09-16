@@ -47,6 +47,7 @@ class UserResource extends Resource
                                 Forms\Components\TextInput::make('password')
                                     ->label('Password')
                                     ->password()
+                                    ->revealable()
                                     ->maxLength(255)
                                     ->dehydrated(fn ($state) => filled($state)) // Password hanya dikirim jika ada isi
                                     ->nullable(), // Mengizinkan nilai kosong
