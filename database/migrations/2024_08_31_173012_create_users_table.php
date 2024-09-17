@@ -18,10 +18,9 @@ return new class extends Migration
             $table->string('number_phone');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('nik');
-            $table->string('sim');
+            $table->string('nik')->nullable();
+            $table->string('sim')->nullable();
             $table->foreignId('id_ms')->constrained('ms_users')->cascadeOnDelete();
-            $table->foreignId('id_role')->constrained('permissions')->cascadeOnDelete();
             $table->rememberToken();
             $table->timestamps();
         });

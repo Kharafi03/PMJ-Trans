@@ -15,6 +15,15 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         //
+        User::create([
+            'name' => 'Super Admin', // Nama pengguna
+            'email' => 'superadmin@admin.com', // Email pengguna
+            'number_phone' => '081234567890',
+            'password' => Hash::make('12345678'), // Password pengguna yang dienkripsi
+            'nik' => '1234567890123456',
+            'sim' => '1234567890123456',
+            'id_ms' => 1,
+        ]);
 
         User::create([
             'name' => 'Admin', // Nama pengguna
@@ -23,8 +32,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('12345678'), // Password pengguna yang dienkripsi
             'nik' => '1234567890123456',
             'sim' => '1234567890123456',
-            'id_ms' => 2,
-            'id_role' => 2
+            'id_ms' => 1,
         ]);
     }
 }

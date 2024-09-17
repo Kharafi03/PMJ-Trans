@@ -84,10 +84,12 @@ class UserResource extends Resource
                                     ->label('Status User')
                                     ->relationship('msUsers', 'name')
                                     ->required(),
-                                Forms\Components\Select::make('id_role')
+                                Forms\Components\Select::make('roles')
                                     ->label('Peran')
-                                    ->relationship('permissions', 'role')
-                                    ->required(),
+                                    ->relationship('roles', 'name')
+                                    ->multiple()
+                                    ->preload()
+                                    ->searchable()
                             ]),
                     ]),
             ]);
@@ -101,7 +103,7 @@ class UserResource extends Resource
                     ->label('Nama')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('permissions.role')
+                Tables\Columns\TextColumn::make('roles.name')
                     ->label('Peran')
                     ->searchable()
                     ->sortable(),
