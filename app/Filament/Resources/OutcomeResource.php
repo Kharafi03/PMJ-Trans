@@ -18,7 +18,7 @@ class OutcomeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-c-arrow-trending-down';
 
-    protected static ?string $navigationGroup = 'Pengeluaran';
+    // protected static ?string $navigationGroup = 'Pengeluaran';
 
     protected static ?int $navigationSort = -1;
 

@@ -21,7 +21,7 @@ class IncomeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-m-currency-dollar';
 
-    protected static ?string $navigationGroup = 'Pendapatan';
+    //protected static ?string $navigationGroup = 'Pendapatan';
 
     protected static ?int $navigationSort = 3;
 
