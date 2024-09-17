@@ -21,7 +21,7 @@ class BusTaxResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
-    protected static ?string $navigationGroup = 'Bus';
+    // protected static ?string $navigationGroup = 'Bus';
 
     protected static ?int $navigationSort = 17;
 
