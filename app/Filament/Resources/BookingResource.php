@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\BookingResource\Pages;
 use App\Models\Booking;
-use App\Models\Outcome;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
@@ -16,7 +15,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Illuminate\Support\Str;
-//use Filament\Tables\Actions\Action;
+use Filament\Forms\Components\Actions\Action;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Filament\Forms\Components\DateTimePicker;
 
@@ -40,7 +39,7 @@ class BookingResource extends Resource
                     ->schema([
                         Forms\Components\Group::make()->schema([
                             TextInput::make('booking_code')
-                                ->default(fn() => 'PMJ' . strtoupper(Str::random(4)) . rand(1000, 9999))
+                                ->default(fn() => 'PMJ-' . strtoupper(Str::random(4)) . rand(1000, 9999))
                                 ->required()
                                 ->readOnly()
                                 ->label('Kode Booking'),
@@ -96,7 +95,7 @@ class BookingResource extends Resource
                         ])->columns(2),
 
                         Forms\Components\Group::make()->schema([
-                            DatePicker::make('date_start')
+                            DateTimePicker::make('date_start')
                                 ->required()
                                 ->minDate(now())
                                 ->label('Tanggal Mulai'),
@@ -104,16 +103,6 @@ class BookingResource extends Resource
                             DatePicker::make('date_end')
                                 ->required()
                                 ->label('Tanggal Selesai'),
-                        ])->columns(2),
-
-                        Forms\Components\Group::make()->schema([
-                            TimePicker::make('pickup_time')
-                                ->required()
-                                ->label('Waktu Jemput'),
-
-                            TimePicker::make('destination_time')
-                                ->required()
-                                ->label('Waktu Sampai'),
                         ])->columns(2),
 
                         Forms\Components\Group::make()->schema([
@@ -127,7 +116,60 @@ class BookingResource extends Resource
                                 ->numeric()
                                 ->label('Minimum DP'),
                         ])->columns(2),
-                    ])->columnSpan(2),  // Mengatur agar form ini berada di sebelah kiri, mencakup dua kolom
+                        Forms\Components\Repeater::make('payment')
+                            ->label('Pembayaran')
+                            ->relationship('incomes')
+                            ->schema([
+                                Forms\Components\Group::make()
+                                    ->schema([
+                                        Select::make('id_m_income')
+                                            ->relationship('m_income', 'name')
+                                            ->required()
+                                            ->label('Tipe'),
+                                        Select::make('id_m_method_payment')
+                                            ->relationship('m_method_payment', 'name')
+                                            ->required()
+                                            ->label('Metode'),
+                                        Select::make('id_ms_income')
+                                            ->relationship('ms_income', 'name')
+                                            ->required()
+                                            ->label('Status'),
+                                    ])
+                                    ->columns(3),
+                                Forms\Components\Group::make()
+                                    ->schema([
+                                        TextInput::make('nominal')
+                                            ->numeric()
+                                            ->required()
+                                            ->label('Nominal'),
+                                        DateTimePicker::make('datetime')
+                                            ->readOnly()
+                                            ->default(now()),
+                                    ])
+                                    ->columns(2),
+                                Forms\Components\Group::make()
+                                    ->schema([
+                                        TextInput::make('payment_received')
+                                            ->numeric()
+                                            ->label('Pembayaran Diterima'),
+
+                                        TextInput::make('payment_remaining')
+                                            ->numeric()
+                                            ->label('Sisa Pembayaran'),
+                                    ])
+                                    ->columns(2),
+                                Forms\Components\FileUpload::make('image_receipt')
+                                    ->label('Silahkan unggah bukti pembayaran dibawah ini')
+                                    ->disk('public') //
+                                    ->directory('image_receipt') 
+                                    ->image()
+                                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg'])
+                                    ->helperText('Unggah gambar dalam format JPG atau PNG, maksimal ukuran 2MB.')
+                                    ->visibility('public')
+                                    ->maxSize(2048)
+                            ])
+                            ->columnSpanFull(),
+                    ])->columnSpan(2),  
 
                 // Card untuk status pembayaran di kanan
                 Forms\Components\Card::make()
@@ -136,6 +178,10 @@ class BookingResource extends Resource
                         Select::make('id_ms_payment')
                             ->label('Status Pembayaran')
                             ->relationship('ms_payment', 'name')
+                            ->required(),
+                        Select::make('id_ms_booking')
+                            ->label('Status Pemesanan')
+                            ->relationship('ms_booking', 'name')
                             ->required(),
                     ])->columnSpan(1),  // Mengatur agar card ini berada di kolom kanan
             ])->columns(3),  // Menggunakan tiga kolom: dua untuk form kiri, satu untuk status pembayaran di kanan
@@ -161,16 +207,8 @@ class BookingResource extends Resource
                 ->label('Tujuan')
                 ->searchable()
                 ->sortable(),
-            TextColumn::make('date_start')
-                ->label('Tanggal Mulai')
-                ->searchable()
-                ->sortable(),
             TextColumn::make('ms_payment.name')
                 ->label('Status Pembayaran')
-                ->searchable()
-                ->sortable(),
-            TextColumn::make('ms_booking.name')
-                ->label('Status')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('deleted_at')
@@ -192,9 +230,6 @@ class BookingResource extends Resource
                 Tables\Filters\SelectFilter::make('id_ms_payment')
                     ->label('Status Pembayaran')
                     ->relationship('ms_payment', 'name'),
-                Tables\Filters\SelectFilter::make('id_ms_booking')
-                    ->label('Status Pemesanan')
-                    ->relationship('ms_booking', 'name'),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()
