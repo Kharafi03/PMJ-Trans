@@ -20,7 +20,7 @@ class OutcomeResource extends Resource
 
     protected static ?string $navigationGroup = 'Pengeluaran';
 
-    protected static ?int $navigationSort = 9;
+    protected static ?int $navigationSort = -1;
 
     public static function form(Form $form): Form
     {
@@ -31,15 +31,20 @@ class OutcomeResource extends Resource
                     ->columns(2) // 2 kolom untuk data utama
                     ->heading('Data Utama')
                     ->schema([
-                        Forms\Components\TextInput::make('id_m_outcome')
-                            ->label('ID Outcome')
+                        Forms\Components\Select::make('id_m_outcome')
+                            ->label('Tipe Pengeluaran')
                             ->required()
-                            ->numeric(),
+                            ->relationship('m_outcome','name'),
+                        
+                        Forms\Components\Select::make('id_booking')
+                            ->label('Kode Booking')
+                            ->required()
+                            ->relationship('booking','booking_code'),
 
-                        Forms\Components\TextInput::make('id_m_method_payment')
-                            ->label('ID Metode Pembayaran')
+                        Forms\Components\Select::make('id_m_method_payment')
+                            ->label('Metode Pembayaran')
                             ->required()
-                            ->numeric(),
+                            ->relationship('m_method_payment', 'name'),
 
                         Forms\Components\TextInput::make('description')
                             ->label('Deskripsi')
@@ -47,7 +52,8 @@ class OutcomeResource extends Resource
 
                         Forms\Components\TextInput::make('nominal')
                             ->label('Nominal')
-                            ->numeric(),
+                            ->integer(),
+
                         Forms\Components\DateTimePicker::make('datetime')
                             ->label('Tanggal dan Waktu'),
                     ]),
@@ -71,14 +77,15 @@ class OutcomeResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id_m_outcome')
+                Tables\Columns\TextColumn::make('m_outcome.name')
+                    ->label('Tipe')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('booking.booking_code')
+                    ->label('Kode Booking')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('m_method_payment.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('id_m_method_payment')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('description')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('nominal')
                     ->numeric()
                     ->sortable(),

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('description', 255) ->nullable();
             $table->datetime('date_test') ->nullable();
             $table->datetime('expiration') ->nullable();
-            $table->decimal('cost', 10,2) ->nullable();
+            $table->decimal('cost', 12,2) ->nullable();
             $table->longText('image') ->nullable();
             $table->softDeletes();
             $table->timestamps();

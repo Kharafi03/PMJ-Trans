@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('trip_finisheds', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_booking')->constrained('bookings')->cascadeOnDelete();
-            $table->decimal('trip_value')->nullable();
-            $table->decimal('total_spend')->nullable();
-            $table->decimal('profit')->nullable();
+            $table->decimal('trip_value', 12, 2)->nullable();
+            $table->decimal('total_spend', 12, 2)->nullable();
+            $table->decimal('profit', 12, 2)->nullable();
             $table->foreignId('id_ms_trip_finished')->constrained('ms_trip_finisheds')->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();

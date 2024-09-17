@@ -34,7 +34,7 @@ class ReviewResource extends Resource
                     ->heading('Data Ulasan')
                     ->schema([
                         Forms\Components\Select::make('id_booking')
-                            ->label('ID Booking')
+                            ->label('Kode Booking')
                             ->relationship('booking', 'booking_code')
                             ->required(),
                         Forms\Components\TextInput::make('feedback')
@@ -59,9 +59,8 @@ class ReviewResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\SelectColumn::make('id_booking')
+                Tables\Columns\TextColumn::make('booking.booking_code')
                     ->label('ID Booking')
-                    ->relationship('booking', 'booking_code')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('feedback')
                     ->label('Ulasan')

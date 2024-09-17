@@ -29,7 +29,7 @@ class UserResource extends Resource
                 Forms\Components\Card::make()
                     ->heading('Data Utama')
                     ->schema([
-                        Forms\Components\Grid::make(2) // Membuat Grid dengan 2 kolom
+                        Forms\Components\Grid::make(2)
                             ->schema([
                                 Forms\Components\TextInput::make('name')
                                     ->label('Nama')
@@ -38,8 +38,7 @@ class UserResource extends Resource
                                 Forms\Components\TextInput::make('email')
                                     ->label('Email')
                                     ->email()
-                                    ->maxLength(255)
-                                    ->required(), //Nanti jika cust tidak wajib ini hanya sementara
+                                    ->maxLength(255),
                                 Forms\Components\TextInput::make('number_phone')
                                     ->label('Nomor Telepon')
                                     ->numeric()
@@ -48,19 +47,20 @@ class UserResource extends Resource
                                 Forms\Components\TextInput::make('password')
                                     ->label('Password')
                                     ->password()
+                                    ->revealable()
                                     ->maxLength(255)
-                                    ->required(),
+                                    ->dehydrated(fn ($state) => filled($state)) // Password hanya dikirim jika ada isi
+                                    ->nullable(), // Mengizinkan nilai kosong
                                 Forms\Components\TextInput::make('nik')
                                     ->label('NIK')
                                     ->numeric()
-                                    ->maxLength(16)
-                                    ->required(),
+                                    ->maxLength(16),
                             ]),
                     ]),
 
                 // Card untuk upload file SIM
                 Forms\Components\Card::make()
-                    ->heading('Unggah File')
+                    ->heading('Unggah File SIM')
                     ->schema([
                         Forms\Components\FileUpload::make('sim')
                             ->label('Silahkan unggah file dibawah ini')
@@ -70,15 +70,14 @@ class UserResource extends Resource
                             ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'])
                             ->helperText('Unggah SIM dalam format JPG, PNG atau PDF, maksimal ukuran 2MB.')
                             ->visibility('public')
-                            ->maxSize(2048)
-                            ->required(),
+                            ->maxSize(2048),
                     ]),
 
                 // Card dengan pilihan select, juga dengan Grid 2 kolom
                 Forms\Components\Card::make()
                     ->heading('Informasi User')
                     ->schema([
-                        Forms\Components\Grid::make(2) // Membuat Grid dengan 2 kolom
+                        Forms\Components\Grid::make(2)
                             ->schema([
                                 Forms\Components\Select::make('id_ms')
                                     ->label('Status User')
@@ -103,8 +102,20 @@ class UserResource extends Resource
                     ->label('Nama')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('roles.name')
+                Tables\Columns\TextColumn::make('number_phone')
+                    ->label('No. Hp')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->label('Email')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('permissions.role')
                     ->label('Peran')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('msUsers.name')
+                    ->label('Status')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('deleted_at')
@@ -122,6 +133,12 @@ class UserResource extends Resource
             ])
             ->filters([
                 //
+                Tables\Filters\SelectFilter::make('id_role')
+                    ->label('Peran')
+                    ->relationship('permissions', 'role'),
+                Tables\Filters\SelectFilter::make('id_ms')
+                    ->label('Peran')
+                    ->relationship('msUsers', 'name'),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()
@@ -153,7 +170,7 @@ class UserResource extends Resource
         return [
             'index' => Pages\ListUsers::route('/'),
             'create' => Pages\CreateUser::route('/create'),
-            // 'edit' => Pages\EditUser::route('/{record}/edit'),
+            //'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
 }

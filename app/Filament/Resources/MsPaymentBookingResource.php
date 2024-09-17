@@ -17,7 +17,7 @@ class MsPaymentBookingResource extends Resource
 {
     protected static ?string $model = MsPaymentBooking::class;
 
-    protected static ?string $pluralModelLabel = "Status Booking";
+    protected static ?string $pluralModelLabel = "Status Pembayaran Booking";
 
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
 
@@ -30,7 +30,7 @@ class MsPaymentBookingResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->label("Nama")
+                    ->label("Status Pembayaran")
                     ->required()
                     ->maxLength(255),
             ]);
@@ -41,7 +41,7 @@ class MsPaymentBookingResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label("Nama")
+                    ->label("Status Pembayaran")
                     ->searchable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()
