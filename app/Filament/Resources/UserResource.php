@@ -110,7 +110,7 @@ class UserResource extends Resource
                     ->label('Email')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('permissions.role')
+                Tables\Columns\TextColumn::make('roles.name')
                     ->label('Peran')
                     ->searchable()
                     ->sortable(),
@@ -135,7 +135,7 @@ class UserResource extends Resource
                 //
                 Tables\Filters\SelectFilter::make('id_role')
                     ->label('Peran')
-                    ->relationship('permissions', 'role'),
+                    ->relationship('roles', 'name'),
                 Tables\Filters\SelectFilter::make('id_ms')
                     ->label('Peran')
                     ->relationship('msUsers', 'name'),

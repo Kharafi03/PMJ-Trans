@@ -69,19 +69,6 @@ class BookingResource extends Resource
                                         ->label('Tanggal Selesai'),
                                 ])
                                 ->columns(2),
-                            Forms\Components\Group::make()
-                                ->schema([
-                                    DateTimePicker::make('date_start')
-                                        ->required()
-                                        ->minDate(now())
-                                        ->label('Tanggal Mulai'),
-
-                                    DatePicker::make('date_end')
-                                        ->required()
-                                        ->minDate(now())
-                                        ->label('Tanggal Selesai'),
-                                ])
-                                ->columns(2),
 
                             Forms\Components\Group::make()
                                 ->schema([
@@ -108,7 +95,7 @@ class BookingResource extends Resource
                                 ])
                                 ->columns(2),
 
-                            
+
 
                             // Forms\Components\Group::make()
                             //     ->schema([
@@ -135,59 +122,59 @@ class BookingResource extends Resource
                                         ->label('Minimum DP'),
                                 ])
                                 ->columns(2),
-                                Forms\Components\Group::make()
+                            Forms\Components\Repeater::make('payment')
+                                ->label('Pembayaran')
+                                ->relationship('incomes')
                                 ->schema([
-                                    TextInput::make('payment_received')
-                                        ->numeric()
-                                        ->label('Pembayaran Diterima'),
+                                    Forms\Components\Group::make()
+                                        ->schema([
+                                            Select::make('id_m_income')
+                                                ->relationship('m_income', 'name')
+                                                ->required()
+                                                ->label('Tipe'),
+                                            Select::make('id_m_method_payment')
+                                                ->relationship('m_method_payment', 'name')
+                                                ->required()
+                                                ->label('Metode'),
+                                            Select::make('id_ms_income')
+                                                ->relationship('ms_income', 'name')
+                                                ->required()
+                                                ->label('Status'),
+                                        ])
+                                        ->columns(3),
+                                    Forms\Components\Group::make()
+                                        ->schema([
+                                            TextInput::make('nominal')
+                                                ->numeric()
+                                                ->required()
+                                                ->label('Nominal'),
+                                            DateTimePicker::make('datetime')
+                                                ->readOnly()
+                                                ->default(now()),
+                                        ])
+                                        ->columns(2),
+                                    Forms\Components\Group::make()
+                                        ->schema([
+                                            TextInput::make('payment_received')
+                                                ->numeric()
+                                                ->label('Pembayaran Diterima'),
 
-                                    TextInput::make('payment_remaining')
-                                        ->numeric()
-                                        ->label('Sisa Pembayaran'),
+                                            TextInput::make('payment_remaining')
+                                                ->numeric()
+                                                ->label('Sisa Pembayaran'),
+                                        ])
+                                        ->columns(2),
+                                    Forms\Components\FileUpload::make('image_receipt')
+                                        ->label('Silahkan unggah bukti pembayaran dibawah ini')
+                                        ->disk('public') // Tentukan disk penyimpanan
+                                        ->directory('image_receipt') // Direktori penyimpanan gambar
+                                        ->image()
+                                        ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg']) // Format gambar yang diperbolehkan
+                                        ->helperText('Unggah gambar dalam format JPG atau PNG, maksimal ukuran 2MB.')
+                                        ->visibility('public')
+                                        ->maxSize(2048) // Maksimal ukuran gambar dalam KB,
                                 ])
-                                ->columns(2),
-                                Forms\Components\Repeater::make('payment')
-                                    ->label('Pembayaran')
-                                    ->relationship('incomes')
-                                    ->schema([
-                                        Forms\Components\Group::make()
-                                            ->schema([
-                                                Select::make('id_m_income')
-                                                    ->relationship('m_income', 'name')
-                                                    ->required()
-                                                    ->label('Tipe'),
-                                                Select::make('id_m_method_payment')
-                                                    ->relationship('m_method_payment', 'name')
-                                                    ->required()
-                                                    ->label('Metode'),
-                                                Select::make('id_ms_income')
-                                                    ->relationship('ms_income', 'name')
-                                                    ->required()
-                                                    ->label('Status'),
-                                            ])
-                                            ->columns(3),
-                                            Forms\Components\Group::make()
-                                            ->schema([
-                                                TextInput::make('nominal')
-                                                    ->numeric()
-                                                    ->required()
-                                                    ->label('Nominal'),
-                                                DateTimePicker::make('datetime')
-                                                    ->readOnly()
-                                                    ->default(now()),
-                                            ])
-                                            ->columns(2),
-                                        Forms\Components\FileUpload::make('image_receipt')
-                                            ->label('Silahkan unggah bukti pembayaran dibawah ini')
-                                            ->disk('public') // Tentukan disk penyimpanan
-                                            ->directory('image_receipt') // Direktori penyimpanan gambar
-                                            ->image()
-                                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg']) // Format gambar yang diperbolehkan
-                                            ->helperText('Unggah gambar dalam format JPG atau PNG, maksimal ukuran 2MB.')
-                                            ->visibility('public')
-                                            ->maxSize(2048) // Maksimal ukuran gambar dalam KB,
-                                    ])
-                                    ->columnSpanFull(), // Mengatur card agar se layar
+                                ->columnSpanFull(), // Mengatur card agar se layar
 
                         ])
                         ->columnSpan(2),  // Mengatur agar form ini berada di sebelah kiri, mencakup dua kolom
