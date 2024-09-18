@@ -1,0 +1,85 @@
+/* CONTAINER LAYOUT*/
+.dashboard-container{
+    max-width: 375px;
+    position: relative;
+    background-color: #FCFCFC;
+}
+.content{
+    padding-bottom: 50px;
+}
+
+/* TEXT HEADER */
+.header{
+    padding-top: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #292D32;
+}
+
+/* CAMERA */
+#camera-frame {
+    position: relative;
+    width: 80%;
+    height: 372px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Frame corner styling */
+.corner-frame {
+    position: absolute;
+    border: 3px solid red;
+    width: 50px;
+    height: 50px;
+}
+
+/* Top left corner */
+.top-left {
+    top: 0;
+    left: 0;
+    border-right: none;
+    border-bottom: none;
+}
+
+/* Top right corner */
+.top-right {
+    top: 0;
+    right: 0;
+    border-left: none;
+    border-bottom: none;
+}
+
+/* Bottom left corner */
+.bottom-left {
+    bottom: 0;
+    left: 0;
+    border-right: none;
+    border-top: none;
+}
+
+/* Bottom right corner */
+.bottom-right {
+    bottom: 0;
+    right: 0;
+    border-left: none;
+    border-top: none;
+}
+
+/* TEXT */
+.title{
+    font-size: 24px;
+    font-weight: 700;
+}
+.caption{
+    font-size: 14px;
+    font-weight: 400;
+    color: #19182580;
+}
+

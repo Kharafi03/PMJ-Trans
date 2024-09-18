@@ -1,0 +1,62 @@
+/* CONTENT */
+h5{
+    font-size: 30px;
+}
+
+/* FORM */
+form{
+    padding: 20px;
+    border: 10px solid #EFF0F6;
+    border-radius: 30px;
+}
+input[type="text"], input[type="date"], input[type="number"], input[type="email"],input[type="datetime-local"]{
+    border-right: none;
+    background-color: white;
+    border-radius: 5px;
+}
+.form-select{
+    border-right: none;
+}
+#icon{
+    border-radius: 0px 5px 5px 0px;
+    background-color: white;
+    border-left: none;
+}
+textarea{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.input-group{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 5px;
+    height: 50px;
+}
+i{
+    font-size: 21px;
+}
+
+/* Untuk Chrome */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+
+/* Untuk Mozila */
+input[type="date"] {  
+    -moz-placeholder: none;
+}
+
+/* BUTTON */
+button{
+    padding: 10px 20px;
+    color: white;
+    border: 1px solid #4A3AFF;
+    background-color: #4A3AFF;
+    margin: 50px 0px;
+    border-radius: 50px;
+    &:hover{
+        color: #4A3AFF;
+        background-color: white;
+
+    }
+}

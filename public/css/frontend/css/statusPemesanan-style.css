@@ -1,0 +1,75 @@
+/* FORM */
+.card-form{
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border: none;
+}
+form{
+    padding: 30px;
+}
+.card-form img{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+/* INPUT */
+.input-group{
+    height: 50px;
+    width: 310px;
+}
+#icon{
+    background-color: white;
+    border-radius: 4px 0px 0px 4px;
+}
+#kodeBooking, #noTelp{
+    border-left: none;
+    border-radius: 0px 4px 4px 0px;
+}
+
+
+/* BUTTON */
+.header-btn{
+    margin-top: 20px;
+}
+.btn-cek{
+    height: 50px;
+    width: 310px;
+    padding: 10px;
+    border: 1px solid #4FB472;
+    border-radius: 4px;
+    background-color: #4FB472;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    &:hover{
+        color: #4FB472;
+        background-color: white;
+    }
+}
+
+/* FONT */
+h3{
+    font-size: 24px;
+    font-weight: bold;
+}
+.form-header p, .form-footer p{
+    color: #535353;
+    font-size: 15px;
+}
+label{
+    color: #535353;
+}
+i{
+    font-size: 24px;
+    color: #535353;
+}
+
+/* RESPONSIF */
+/* RESPONSIF GAMBAR */
+@media (max-width: 767.98px) {
+    .card-form img{
+       border-top-right-radius: 10px;
+       border-bottom-left-radius: 0px;
+    }
+}

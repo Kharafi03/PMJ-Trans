@@ -1,0 +1,16 @@
+/* CONTAINER LAYOUT*/
+.dashboard-container{
+    max-width: 375px;
+    position: relative;
+}
+.content{
+    padding-bottom: 50px;
+}
+/* NAVBAR BOTTOM */
+.navbar-bottom{
+    background-color: #1E9781;
+    border-radius: 50px;
+}
+li{
+    margin: 0px 30px;
+}
