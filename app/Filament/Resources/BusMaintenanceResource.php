@@ -22,9 +22,7 @@ class BusMaintenanceResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-m-calendar-days';
 
-    // protected static ?string $navigationGroup = 'Bus';
-
-    protected static ?int $navigationSort = 15;
+    protected static ?int $navigationSort = 6;
 
     public static function form(Form $form): Form
     {

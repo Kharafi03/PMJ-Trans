@@ -18,9 +18,7 @@ class OutcomeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-c-arrow-trending-down';
 
-    // protected static ?string $navigationGroup = 'Pengeluaran';
-
-    protected static ?int $navigationSort = -1;
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
@@ -34,12 +32,12 @@ class OutcomeResource extends Resource
                         Forms\Components\Select::make('id_m_outcome')
                             ->label('Tipe Pengeluaran')
                             ->required()
-                            ->relationship('m_outcome','name'),
-                        
+                            ->relationship('m_outcome', 'name'),
+
                         Forms\Components\Select::make('id_booking')
                             ->label('Kode Booking')
                             ->required()
-                            ->relationship('booking','booking_code'),
+                            ->relationship('booking', 'booking_code'),
 
                         Forms\Components\Select::make('id_m_method_payment')
                             ->label('Metode Pembayaran')

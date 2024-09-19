@@ -21,9 +21,9 @@ class MsTripFinishedResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-m-clipboard';
 
-    protected static ?string $navigationGroup = 'Perjalanan Bus';
+    protected static ?string $navigationGroup = 'Manajemen Trip Bus';
 
-    protected static ?int $navigationSort = 10;
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
