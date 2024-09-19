@@ -79,16 +79,16 @@ class IncomeResource extends Resource
                             ->required(),
                         Forms\Components\DateTimePicker::make('datetime')
                             ->label('Tanggal dan Waktu'),
-                            
-                        Forms\Components\TextInput::make('payment_received')
-                            ->numeric()
-                            ->prefix('Rp.')
-                            ->label('Pembayaran Diterima'),
 
-                        Forms\Components\TextInput::make('payment_remaining')
-                            ->numeric()
-                            ->prefix('Rp.')
-                            ->label('Sisa Pembayaran'),
+                        // Forms\Components\TextInput::make('payment_received')
+                        //     ->numeric()
+                        //     ->prefix('Rp.')
+                        //     ->label('Pembayaran Diterima'),
+
+                        // Forms\Components\TextInput::make('payment_remaining')
+                        //     ->numeric()
+                        //     ->prefix('Rp.')
+                        //     ->label('Sisa Pembayaran'),
                     ]),
 
                 // Group untuk Upload Bukti Pembayaran

@@ -24,7 +24,7 @@ class MMaintenanceResource extends Resource
 
     protected static ?string $navigationGroup = 'Jenis';
 
-    protected static ?int $navigationSort = 18;
+    protected static ?int $navigationSort = 10;
 
     public static function form(Form $form): Form
     {

@@ -27,8 +27,8 @@ return new class extends Migration
             $table->decimal('minimum_dp', 12, 2)->nullable();
             $table->foreignId('id_ms_booking')->constrained('ms_bookings')->cascadeOnDelete();
             $table->foreignId('id_ms_payment')->constrained('ms_payment_bookings')->cascadeOnDelete();
-            // $table->decimal('payment_received', 12, 2)->nullable();
-            // $table->decimal('payment_remaining', 12, 2)->nullable();
+            $table->decimal('payment_received', 12, 2)->nullable();
+            $table->decimal('payment_remaining', 12, 2)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

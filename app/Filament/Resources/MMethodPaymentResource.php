@@ -23,14 +23,14 @@ class MMethodPaymentResource extends Resource
 
     protected static ?string $navigationGroup = 'Jenis';
 
-    protected static ?int $navigationSort = 5;
+    protected static ?int $navigationSort = 10;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->label("Nama")
+                    ->label("Metode")
                     ->required()
                     ->maxLength(255),
             ]);
@@ -41,7 +41,7 @@ class MMethodPaymentResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label("Nama")
+                    ->label("Metode")
                     ->searchable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()

@@ -20,6 +20,9 @@ use Filament\Forms\Components\Actions\Action;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Livewire;
+use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 
 class BookingResource extends Resource
 {
@@ -31,7 +34,7 @@ class BookingResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
-    public static function form(Forms\Form $form): Forms\Form
+    public static function form(Form $form): Form
     {
         return $form->schema([
             Forms\Components\Grid::make()->schema([
@@ -124,6 +127,7 @@ class BookingResource extends Resource
                         Forms\Components\Repeater::make('payment')
                             ->label('Pembayaran')
                             ->relationship('incomes')
+                            ->live()
                             ->schema([
                                 Forms\Components\Group::make()
                                     ->schema([
@@ -138,6 +142,7 @@ class BookingResource extends Resource
                                         Select::make('id_ms_income')
                                             ->relationship('ms_income', 'name')
                                             ->required()
+                                            ->default(2)
                                             ->label('Status'),
                                     ])
                                     ->columns(3),
@@ -146,26 +151,14 @@ class BookingResource extends Resource
                                         TextInput::make('nominal')
                                             ->numeric()
                                             ->required()
-                                            ->prefix('Rp')
+                                            ->prefix('Rp.')
                                             ->label('Nominal'),
                                         DateTimePicker::make('datetime')
                                             ->readOnly()
                                             ->default(now()),
                                     ])
                                     ->columns(2),
-                                Forms\Components\Group::make()
-                                    ->schema([
-                                        TextInput::make('payment_received')
-                                            ->numeric()
-                                            ->prefix('Rp')
-                                            ->label('Pembayaran Diterima'),
 
-                                        TextInput::make('payment_remaining')
-                                            ->numeric()
-                                            ->prefix('Rp')
-                                            ->label('Sisa Pembayaran'),
-                                    ])
-                                    ->columns(2),
                                 Forms\Components\FileUpload::make('image_receipt')
                                     ->label('Silahkan unggah bukti pembayaran dibawah ini')
                                     ->disk('public') //
@@ -174,9 +167,28 @@ class BookingResource extends Resource
                                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg'])
                                     ->helperText('Unggah gambar dalam format JPG atau PNG, maksimal ukuran 2MB.')
                                     ->visibility('public')
-                                    ->maxSize(2048)
+                                    ->maxSize(2048),
                             ])
+                            ->afterStateUpdated(function (Get $get, Set $set) {
+                                self::updateReceivedRemaining($get, $set);
+                            })
                             ->columnSpanFull(),
+
+                        Forms\Components\Group::make()
+                            ->schema([
+                                TextInput::make('payment_received')
+                                    ->numeric()
+                                    ->readOnly()
+                                    ->prefix('Rp.')
+                                    ->label('Pembayaran Diterima'),
+
+                                TextInput::make('payment_remaining')
+                                    ->numeric()
+                                    ->readOnly()
+                                    ->prefix('Rp')
+                                    ->label('Sisa Pembayaran'),
+                            ])
+                            ->columns(2),
                     ])->columnSpan(2),
 
                 // Card untuk status pembayaran di kanan
@@ -186,10 +198,12 @@ class BookingResource extends Resource
                         Select::make('id_ms_payment')
                             ->label('Status Pembayaran')
                             ->relationship('ms_payment', 'name')
+                            ->default(1)
                             ->required(),
                         Select::make('id_ms_booking')
                             ->label('Status Pemesanan')
                             ->relationship('ms_booking', 'name')
+                            ->default(2)
                             ->required(),
                     ])->columnSpan(1),  // Mengatur agar card ini berada di kolom kanan
             ])->columns(3),  // Menggunakan tiga kolom: dua untuk form kiri, satu untuk status pembayaran di kanan
@@ -296,5 +310,21 @@ class BookingResource extends Resource
             'index' => Pages\ListBookings::route('/'),
             'create' => Pages\CreateBooking::route('/create'),
         ];
+    }
+
+    public static function updateReceivedRemaining(Get $get, Set $set): void
+    {
+        $paymentReceived = collect($get('payment'))
+            ->pluck('nominal')
+            ->filter()
+            ->sum();
+
+        $tripNominal = $get('trip_nominal');
+
+        $set('payment_received', number_format($paymentReceived, 2, '.', ''));
+
+        $paymentRemaining = $tripNominal - $paymentReceived;
+
+        $set('payment_remaining', number_format($paymentRemaining, 2, '.', ''));
     }
 }

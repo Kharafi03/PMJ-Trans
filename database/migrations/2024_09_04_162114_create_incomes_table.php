@@ -21,8 +21,8 @@ return new class extends Migration
             $table->foreignId('id_ms_income')->constrained('ms_incomes')->cascadeOnDelete();
             $table->dateTime('datetime')->nullable();
             $table->longText('image_receipt')->nullable();
-            $table->decimal('payment_received', 12, 2)->nullable();
-            $table->decimal('payment_remaining', 12, 2)->nullable();
+            // $table->decimal('payment_received', 12, 2)->nullable();
+            // $table->decimal('payment_remaining', 12, 2)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

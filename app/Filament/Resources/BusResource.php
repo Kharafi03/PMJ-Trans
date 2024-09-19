@@ -21,7 +21,7 @@ class BusResource extends Resource
 
     protected static ?string $pluralModelLabel = "BUS";
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-truck';
 
     // protected static ?string $navigationGroup = 'Bus';
 

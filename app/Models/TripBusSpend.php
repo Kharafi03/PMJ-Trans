@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TripBusSpend extends Model
@@ -29,4 +30,9 @@ class TripBusSpend extends Model
         'latitude',
         'longitude',
     ];
+
+    public function mspend(): BelongsTo
+    {
+        return $this->belongsTo(MSpend::class, 'id_m_spend');
+    }
 }

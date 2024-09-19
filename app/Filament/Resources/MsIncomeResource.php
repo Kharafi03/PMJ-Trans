@@ -22,14 +22,14 @@ class MsIncomeResource extends Resource
 
     protected static ?string $navigationGroup = 'Status';
 
-    protected static ?int $navigationSort = 6;
+    protected static ?int $navigationSort = 20;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->label("Nama")
+                    ->label("Status")
                     ->required()
                     ->maxLength(255),
             ]);
@@ -40,7 +40,7 @@ class MsIncomeResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label("Nama")
+                    ->label("Status")
                     ->searchable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()

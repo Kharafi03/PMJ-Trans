@@ -56,6 +56,11 @@ class TripBus extends Model
         return $this->belongsTo(User::class, 'id_codriver');
     }
 
+    public function tripbusspend()
+    {
+        return $this->hasMany(TripBusSpend::class, 'id_trip_bus');
+    }
+
     // public function ()
     // {
     //     return $this->hasMany(Outcome::class, 'id_booking');
