@@ -20,7 +20,7 @@ class MsIncomeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-chart-bar';
 
-    protected static ?string $navigationGroup = 'Pendapatan';
+    protected static ?string $navigationGroup = 'Status';
 
     protected static ?int $navigationSort = 6;
 

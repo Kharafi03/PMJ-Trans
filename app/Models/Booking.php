@@ -20,7 +20,7 @@ class Booking extends Model
         'booking_code',
         'id_cus',
         'destination_point',
-        'destination_time',
+        //'destination_time',
         'capacity',
         'date_start',
         'date_end',

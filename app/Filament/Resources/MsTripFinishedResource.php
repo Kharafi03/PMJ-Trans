@@ -21,7 +21,7 @@ class MsTripFinishedResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-m-clipboard';
 
-    protected static ?string $navigationGroup = 'Perjalanan Bus';
+    protected static ?string $navigationGroup = 'Status';
 
     protected static ?int $navigationSort = 10;
 

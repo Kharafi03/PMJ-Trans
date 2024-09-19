@@ -23,7 +23,7 @@ class MsBookingResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Pemesanan';
+    protected static ?string $navigationGroup = 'Status';
 
     public static function form(Form $form): Form
     {

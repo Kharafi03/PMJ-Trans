@@ -22,7 +22,7 @@ class MsBusResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-truck';
 
-    protected static ?string $navigationGroup = 'Bus';
+    protected static ?string $navigationGroup = 'Status';
 
 
     protected static ?int $navigationSort = 19;

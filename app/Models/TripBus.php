@@ -24,7 +24,7 @@ class TripBus extends Model
         'id_customer',
         'id_driver',
         'id_codriver',
-        'balanced',
+        'nominal',
         'km_start',
         'km_end',
         'total_spend',

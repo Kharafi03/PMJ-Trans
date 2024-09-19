@@ -21,7 +21,7 @@ class MOutcomeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-document-magnifying-glass';
 
-    protected static ?string $navigationGroup = 'Pengeluaran';
+    protected static ?string $navigationGroup = 'Jenis';
 
     protected static ?int $navigationSort = 7;
 

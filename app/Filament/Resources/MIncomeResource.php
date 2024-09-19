@@ -21,7 +21,7 @@ class MIncomeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-document-currency-dollar';
 
-    protected static ?string $navigationGroup = 'Pendapatan';
+    protected static ?string $navigationGroup = 'Jenis';
 
     protected static ?int $navigationSort = 4;
 

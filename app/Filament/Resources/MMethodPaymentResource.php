@@ -21,7 +21,7 @@ class MMethodPaymentResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-c-building-library';
 
-    protected static ?string $navigationGroup = 'Pendapatan';
+    protected static ?string $navigationGroup = 'Jenis';
 
     protected static ?int $navigationSort = 5;
 

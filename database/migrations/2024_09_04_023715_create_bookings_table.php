@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('booking_code', 255)->nullable();
             $table->foreignId('id_cus')->constrained('users')->cascadeOnDelete();
             $table->string('destination_point', 50)->nullable();
-            $table->time('destination_time')->nullable();
+            //$table->time('destination_time')->nullable();
             $table->integer('capacity')->nullable();
             $table->dateTime('date_start')->nullable();
             $table->date('date_end')->nullable();

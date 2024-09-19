@@ -20,7 +20,7 @@ class MSpendResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
 
-    protected static ?string $navigationGroup = 'Pengeluaran';
+    protected static ?string $navigationGroup = 'Jenis';
 
     protected static ?int $navigationSort = 8;
 
