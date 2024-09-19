@@ -1,0 +1,58 @@
+/* CONTAINER PROFIL & FORM */
+.profil-image{
+    padding: 30px;
+    border: 1px solid #E0E2E7;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.profil-image h5{
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.profil-image p{
+    font-size: 14px;
+    color: #4D5464;
+    margin-top: 40px;
+}
+.avatar{
+    padding: 20px;
+    border: 1px solid #E0E2E7;
+    border-radius: 8px;
+    background-color: #F9F9FC;
+}
+i{
+    font-size: 200px;
+    color: #4D5464;
+}
+.note{
+    margin-top: 30px;
+}
+
+/* CONTAINER FORM */
+.profil-form{
+    padding: 30px;
+    border: 1px solid #E0E2E7;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+
+/* BUTTON */
+.container-btn{
+    margin-top: 30px;
+}
+.btn-profil{
+    padding: 10px 50px;
+    text-align: center;
+    color: white;
+    background-color: #5C59E8;
+    border: 1px solid #5C59E8;
+    border-radius: 8px;
+    &:hover{
+        background-color: white;
+        color: #5C59E8;
+    }
+}

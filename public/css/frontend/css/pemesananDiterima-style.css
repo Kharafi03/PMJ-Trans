@@ -1,0 +1,112 @@
+/* FORM */
+.card-form{
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border: none;
+}
+.card-form img{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+form{
+    padding: 20px;
+}
+
+/* INPUT */
+#icon{
+    background-color: white;
+    border-radius: 4px 0px 0px 4px;
+    background-color: #E4E4E4;
+}
+input[type='text'], input[type="email"]{
+    border-left: none;
+    border-radius: 4px;
+    background-color: #E4E4E4;
+    height: 50px;
+}
+#alamat{
+    background-color: #E4E4E4;
+    height: 100px;
+    border-radius: 4px;
+}
+.status-alert {
+    background-color: #0FA958;
+    color: white;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+.rekening {
+    background-color: black;
+    color: white;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+.warning{
+    background-color: #EF1818;
+    border-radius: 4px;
+    padding: 10px 50px 10px 30px;
+    color: white;
+}
+.custom-file{
+    border: 1px solid #E4E4E4;
+    border-radius: 4px;
+    height: 50px;
+    padding: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+.file-name {
+    color: #333;
+}
+
+
+/* STATUS PEMESANAN */
+small{
+    font-size: 12px;
+}
+
+/* BUTTON */
+.header-btn{
+    margin-top: 20px;
+}
+.btn-kirimdp{
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #4FB472;
+    border-radius: 4px;
+    background-color: #4FB472;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    &:hover{
+        color: #4FB472;
+        background-color: white;
+    }
+}
+
+/* FONT */
+h3{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+label{
+    color: #535353;
+}
+i{
+    font-size: 24px;
+    color: #535353;
+}
+/* RESPONSIF */
+/* RESPONSIF GAMBAR */
+@media (max-width: 767.98px) {
+    .card-form img{
+       border-top-right-radius: 10px;
+       border-bottom-left-radius: 0px;
+    }
+}

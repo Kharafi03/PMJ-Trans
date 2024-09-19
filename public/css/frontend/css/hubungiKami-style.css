@@ -1,0 +1,106 @@
+/* Title */
+.contact-title{
+    text-align: center;
+}
+.contact-title h3{
+    font-size: 44px;
+    font-weight: bold;
+}
+.contact-title p{
+    font-size: 24px;
+    color: #A8A8A8;
+}
+
+/* Card Content */
+.contact-card{
+    padding: 10px;
+    border-radius: 30px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.contact-card i{
+    font-size: 50px;
+}
+.card-title{
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: auto;
+}
+.card-text{
+    font-size: 16px;
+    color: #A8A8A8;
+}
+.icon{
+    padding: 30px;
+}
+
+/* Form */
+.form-header{
+    padding: 10px;
+    width: 350px;
+    height: 80px;
+    border-radius: 20px;
+    background-color: #1E9781;
+    color: white;
+    font-weight: bold;
+    font-size: 40px;
+    text-align: center;
+    position: relative;
+    top: -60px; /* Posisikan agar memotong bagian atas container */
+    left: 50%;
+    transform: translateX(-50%);
+}
+form{
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 20px;
+}
+#contact-form{
+    margin-top: 100px;
+}
+
+/* Button */
+.btn-kirim{
+    width: 160px;
+    height: 40px;
+    padding: 5px;
+    margin-top: 20px;
+    text-align: center;
+    color: white;
+    border: 1px solid #1E9781;
+    background-color: #1E9781;
+    border-radius: 50px;
+    &:hover{
+        background-color: white;
+        color: #1E9781;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 991px) {
+    .form-header{
+        padding: 8px;
+        width: 280px;
+        height: 70px;
+        font-size: 35px;
+            
+    }
+}
+
+/* ANIMASI */
+.contact-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.contact-card:hover {
+    transform: translateY(-10px) scale(1.05); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+}
+.contact-card .icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+    transition: color 0.3s ease;
+}
+.contact-card:hover .icon {
+    color: #1E9781; 
+}

@@ -1,0 +1,79 @@
+/* CONTAINER LAYOUT*/
+.dashboard-container{
+    max-width: 375px;
+    position: relative;
+    background-color: #FCFCFC;
+}
+.content{
+    padding-bottom: 50px;
+}
+
+/* TEXT HEADER */
+.header{
+    padding-top: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #292D32;
+}
+
+/* CARD IMAGE */
+.card{
+    width: 202px;
+    padding: 8px;
+    border-radius: 15px;
+}
+.card img{
+    border-radius: 15px;
+    height: 160px;
+}
+.card-body{
+    padding: 5px;
+}
+.text-title{
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 5px;
+    padding-top: 20px;
+
+}
+.text-icon{
+    font-size: 12px;
+    color: #00000080;
+}
+
+/* FORM */
+.input-group i{
+    color: #595c5f;
+    font-size: 20px;
+}
+#icon{
+    border-right: none;
+    background-color: white;
+    height: 48px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+input[type="text"]{
+    border-left: none;
+    height: 48px;
+    border-radius: 15px;
+}
+
+/* BUTTON KIRIN */
+.btn-inputkm{
+    height: 48px;
+    width: 100%;
+    background-color: #FFB800;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #FFB800;
+    border-radius: 15px;
+    &:hover{
+        background-color: white;
+        color: #FFB800;
+    }
+}
+
