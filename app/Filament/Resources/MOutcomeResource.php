@@ -21,16 +21,16 @@ class MOutcomeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-document-magnifying-glass';
 
-    protected static ?string $navigationGroup = 'Pengeluaran';
+    protected static ?string $navigationGroup = 'Jenis';
 
-    protected static ?int $navigationSort = 7;
+    protected static ?int $navigationSort = 10;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->label("Nama")
+                    ->label("Tipe")
                     ->required()
                     ->maxLength(255),
             ]);
@@ -41,7 +41,7 @@ class MOutcomeResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label("Nama")
+                    ->label("Tipe")
                     ->searchable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()

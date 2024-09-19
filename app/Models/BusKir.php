@@ -24,7 +24,7 @@ class BusKir extends Model
         'description',
         'date_test',
         'expiration',
-        'cost',
+        'nominal',
         'image',
     ];
 

@@ -24,7 +24,7 @@ class BusKirResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-check';
 
-    protected static ?string $navigationGroup = 'Bus';
+    //protected static ?string $navigationGroup = 'Bus';
 
     protected static ?int $navigationSort = 14;
 

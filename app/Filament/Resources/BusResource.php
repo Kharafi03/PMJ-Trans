@@ -21,7 +21,7 @@ class BusResource extends Resource
 
     protected static ?string $pluralModelLabel = "BUS";
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-truck';
 
     // protected static ?string $navigationGroup = 'Bus';
 
@@ -80,7 +80,7 @@ class BusResource extends Resource
                     ->label('Gambar Bus')
                     ->relationship('images')
                     ->schema([
-                        Forms\Components\FileUpload::make('images')
+                        Forms\Components\FileUpload::make('image')
                             ->label('Silahkan unggah gambar dibawah ini')
                             ->disk('public') // Tentukan disk penyimpanan
                             ->directory('bus_images') // Direktori penyimpanan gambar

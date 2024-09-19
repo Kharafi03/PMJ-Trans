@@ -27,7 +27,7 @@ class BusMaintenance extends Model
         'image',
         'date',
         'location',
-        'cost',
+        'nominal',
         'image_receipt',
         'latitude',
         'longitude',

@@ -20,7 +20,7 @@ class Booking extends Model
         'booking_code',
         'id_cus',
         'destination_point',
-        'destination_time',
+        //'destination_time',
         'capacity',
         'date_start',
         'date_end',
@@ -32,8 +32,8 @@ class Booking extends Model
         'minimum_dp',
         'id_ms_payment',
         'id_ms_booking',
-        // 'payment_received',
-        // 'payment_remaining',
+        'payment_received',
+        'payment_remaining',
     ];
 
     // Casting untuk kolom tanggal

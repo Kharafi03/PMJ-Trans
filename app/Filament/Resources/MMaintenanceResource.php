@@ -22,9 +22,9 @@ class MMaintenanceResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-wrench';
 
-    protected static ?string $navigationGroup = 'Bus';
+    protected static ?string $navigationGroup = 'Jenis';
 
-    protected static ?int $navigationSort = 18;
+    protected static ?int $navigationSort = 10;
 
     public static function form(Form $form): Form
     {

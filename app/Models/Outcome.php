@@ -25,6 +25,7 @@ class Outcome extends Model
         'nominal',
         'datetime',
         'image_receipt',
+        'check',
     ];
 
     protected $guarded = ['id'];
