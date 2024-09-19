@@ -19,7 +19,7 @@ return new class extends Migration
             $table->datetime('date') ->nullable();
             $table->datetime('expiration') ->nullable();
             $table->datetime('expiration_number_bus') ->nullable();
-            $table->decimal('cost', 10,2) ->nullable();
+            $table->decimal('cost', 12,2) ->nullable();
             $table->longText('image') ->nullable();
             $table->softDeletes();
             $table->timestamps();

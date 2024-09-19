@@ -3,14 +3,18 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable // implements FilamentUser
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles, HasPanelShield;
 
     /**
      * The attributes that are mass assignable.
@@ -25,7 +29,6 @@ class User extends Authenticatable
         'nik',
         'sim',
         'id_ms',
-        'id_role',
     ];
 
     /**
@@ -56,13 +59,13 @@ class User extends Authenticatable
         return $this->hasMany(BusMaintenance::class, 'id_user');
     }
 
-    public function msUsers():BelongsTo
+    public function msUsers(): BelongsTo
     {
         return $this->belongsTo(MsUser::class, 'id_ms');
     }
 
-    public function permissions():BelongsTo
-    {
-        return $this->belongsTo(Permission::class, 'id_role');
-    }
+    // public function permissions(): BelongsTo
+    // {
+    //     return $this->belongsTo(Permission::class, 'id_role');
+    // }
 }

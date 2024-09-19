@@ -34,26 +34,26 @@ class TripBusResource extends Resource
                     ->columns(3) // Mengatur menjadi 3 kolom agar lebih ringkas
                     ->heading('Data Utama')
                     ->schema([
-                        Forms\Components\TextInput::make('id_booking')
-                            ->label('ID Booking')
+                        Forms\Components\Select::make('id_booking')
+                            ->label('Kode Booking')
+                            ->relationship('booking', 'booking_code')
+                            ->required(),
+                        Forms\Components\Select::make('id_bus')
+                            ->label('Bus')
                             ->required()
-                            ->numeric(),
-                        Forms\Components\TextInput::make('id_bus')
-                            ->label('ID Bus')
+                            ->relationship('bus', 'name'),
+                        Forms\Components\Select::make('id_customer')
+                            ->label('Customer')
                             ->required()
-                            ->numeric(),
-                        Forms\Components\TextInput::make('id_customer')
-                            ->label('ID Pelanggan')
+                            ->relationship('cus', 'name'),
+                        Forms\Components\Select::make('id_driver')
+                            ->label('Driver')
                             ->required()
-                            ->numeric(),
-                        Forms\Components\TextInput::make('id_driver')
-                            ->label('ID Driver')
+                            ->relationship('driver', 'name'),
+                        Forms\Components\Select::make('id_codriver')
+                            ->label('Co-Driver')
                             ->required()
-                            ->numeric(),
-                        Forms\Components\TextInput::make('id_codriver')
-                            ->label('ID Co-driver')
-                            ->required()
-                            ->numeric(),
+                            ->relationship('codriver', 'name'),
                     ]),
 
                 // Group untuk Data Perjalanan
@@ -91,45 +91,33 @@ class TripBusResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id_booking')
+                Tables\Columns\TextColumn::make('booking.booking_code')
                     ->numeric()
-                    ->label('ID Booking')
+                    ->label('Kode Booking')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('id_bus')
+                Tables\Columns\TextColumn::make('bus.name')
                     ->numeric()
-                    ->label('ID Bus')
+                    ->label('Bus')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('id_customer')
+                Tables\Columns\TextColumn::make('cus.name')
                     ->numeric()
-                    ->label('ID Pelanggan')
+                    ->label('Pelanggan')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('id_driver')
+                Tables\Columns\TextColumn::make('driver.name')
                     ->numeric()
-                    ->label('ID Driver')
+                    ->label('Driver')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('id_codriver')
+                Tables\Columns\TextColumn::make('codriver.name')
                     ->numeric()
-                    ->label('ID Co Driver')
+                    ->label('Co-Driver')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('balanced')
                     ->numeric()
                     ->label('Saldo')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('km_start')
-                    ->numeric()
-                    ->label('KM Awal')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('km_end')
-                    ->numeric()
-                    ->label('KM Akhir')
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('total_spend')
                     ->numeric()
                     ->label('Total Pengeluaran')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('total_spend_bbm')
-                    ->numeric()
-                    ->label('Total Pengeluaran BBM')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()

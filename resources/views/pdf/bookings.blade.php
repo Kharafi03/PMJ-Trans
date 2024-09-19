@@ -62,6 +62,7 @@
                 <th>Titik Jemput</th>
                 <th>Tujuan</th>
                 <th>Status Pembayaran</th>
+                <th>Status Pemesanan</th>
             </tr>
         </thead>
         <tbody>
@@ -72,6 +73,7 @@
                     <td>{{ $booking->pickup_point }}</td>
                     <td>{{ $booking->destination_point }}</td>
                     <td>{{ $booking->ms_payment->name }}</td>
+                    <td>{{ $booking->ms_booking->name }}</td>
                 </tr>
             @endforeach
         </tbody>

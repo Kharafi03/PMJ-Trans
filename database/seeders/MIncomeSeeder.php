@@ -19,7 +19,7 @@ class MIncomeSeeder extends Seeder
         ]);
 
         MIncome::create([
-            'name' => 'Pembayaran Penuh',
+            'name' => 'Pelunasan',
         ]);
 
         MIncome::create([

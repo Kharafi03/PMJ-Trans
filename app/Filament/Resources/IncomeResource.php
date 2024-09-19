@@ -21,7 +21,7 @@ class IncomeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-m-currency-dollar';
 
-    protected static ?string $navigationGroup = 'Pendapatan';
+    //protected static ?string $navigationGroup = 'Pendapatan';
 
     protected static ?int $navigationSort = 3;
 
@@ -33,30 +33,31 @@ class IncomeResource extends Resource
                     ->columns(3)
                     ->heading('Data Utama')
                     ->schema([
-                        Forms\Components\TextInput::make('booking_code')
+                        Forms\Components\Select::make('booking_code')
                             ->label('Kode Booking') //aslinya ID Booking
-                            ->required()
-                            ->afterStateUpdated(function ($state, callable $set) {
-                                $booking = \App\Models\Booking::where('code', $state)->first();
-                                if ($booking) {
-                                    $set('booking_code', $booking->id);
-                                } else {
-                                    $set('booking_code', null);
-                                }
-                            }),
+                            ->relationship('booking', 'booking_code')
+                            ->required(),
+                            // ->afterStateUpdated(function ($state, callable $set) {
+                            //     $booking = \App\Models\Booking::where('code', $state)->first();
+                            //     if ($booking) {
+                            //         $set('booking_code', $booking->id);
+                            //     } else {
+                            //         $set('booking_code', null);
+                            //     }
+                            // }),
 
-                        Forms\Components\Hidden::make('booking_code')
+                        // Forms\Components\Hidden::make('booking_code')
+                        //     ->required(),
+
+                        Forms\Components\Select::make('id_m_income')
+                            ->label('Tipe Pendapatan')
+                            ->relationship('m_income','name')
                             ->required(),
 
-                        Forms\Components\TextInput::make('id_m_income')
-                            ->label('Tipe Pendapatan')
-                            ->required()
-                            ->numeric(),
-
-                        Forms\Components\TextInput::make('id_m_method_payment')
-                            ->label('ID Metode Pembayaran')
-                            ->required()
-                            ->numeric(),
+                        Forms\Components\Select::make('id_m_method_payment')
+                            ->label('Metode Pembayaran')
+                            ->relationship('m_method_payment','name')
+                            ->required(),
                     ]),
 
                 // Group untuk Informasi Tambahan dengan Kolom
@@ -70,10 +71,10 @@ class IncomeResource extends Resource
                         Forms\Components\TextInput::make('nominal')
                             ->label('Nominal')
                             ->numeric(),
-                        Forms\Components\TextInput::make('id_ms_income')
-                            ->label('ID Sub Income')
-                            ->required()
-                            ->numeric(),
+                        Forms\Components\Select::make('id_ms_income')
+                            ->label('Status')
+                            ->relationship('ms_income','name')
+                            ->required(),
                         Forms\Components\DateTimePicker::make('datetime')
                             ->label('Tanggal dan Waktu'),
                     ]),
@@ -97,28 +98,31 @@ class IncomeResource extends Resource
         return $table
             ->columns([
                 // Kolom yang sudah ada
-                Tables\Columns\TextColumn::make('id_booking')
+                Tables\Columns\TextColumn::make('booking.booking_code')
+                    ->label('Kode Booking')
+                    ->searchable()
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('id_m_income')
+                Tables\Columns\TextColumn::make('m_income.name')
+                    ->label('Tipe')
                     ->numeric()
+                    ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('id_m_method_payment')
+                Tables\Columns\TextColumn::make('m_method_payment.name')
+                    ->label('Metode')
                     ->numeric()
+                    ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('description')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('nominal')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('id_ms_income')
+                Tables\Columns\TextColumn::make('ms_income.name')
+                    ->label('Status')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('datetime')
+                    ->label('Tanggal & Waktu')
                     ->dateTime()
-                    ->sortable(),
-                Tables\Columns\ImageColumn::make('image_receipt')
-                    ->label('Bukti Pembayaran')
                     ->sortable(),
 
                 // Kolom yang disembunyikan secara default
@@ -137,6 +141,12 @@ class IncomeResource extends Resource
             ])
             ->filters([
                 // Tambahkan filter jika perlu
+                Tables\Filters\SelectFilter::make('id_m_income')
+                    ->label('Tipe')
+                    ->relationship('m_income', 'name'),
+                Tables\Filters\SelectFilter::make('id_ms_income')
+                    ->label('Status')
+                    ->relationship('ms_income', 'name'),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()

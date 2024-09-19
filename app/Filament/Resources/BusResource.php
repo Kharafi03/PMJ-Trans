@@ -23,7 +23,7 @@ class BusResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Bus';
+    // protected static ?string $navigationGroup = 'Bus';
 
     protected static ?int $navigationSort = 16;
 
@@ -76,8 +76,9 @@ class BusResource extends Resource
                     ])
                     ->columns(2), // Mengatur jumlah kolom dalam card
 
-                Forms\Components\Card::make()
-                    ->heading('Unggah Gambar Bus')
+                Forms\Components\Repeater::make('images')
+                    ->label('Gambar Bus')
+                    ->relationship('images')
                     ->schema([
                         Forms\Components\FileUpload::make('images')
                             ->label('Silahkan unggah gambar dibawah ini')
@@ -90,6 +91,8 @@ class BusResource extends Resource
                             ->maxSize(2048) // Maksimal ukuran gambar dalam KB
                             ->required(),
                     ])
+                    ->minItems(1)
+                    ->maxItems(4)
                     ->columnSpanFull(), // Mengatur card agar se layar
             ]);
     }

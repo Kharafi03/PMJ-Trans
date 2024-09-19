@@ -25,15 +25,15 @@ class Booking extends Model
         'date_start',
         'date_end',
         'pickup_point',
-        'pickup_time',
+        //'pickup_time',
         'fleet_type',
         'fleet_amount',
         'trip_nominal',
         'minimum_dp',
         'id_ms_payment',
-        'payment_received',
-        'payment_remaining',
-
+        'id_ms_booking',
+        // 'payment_received',
+        // 'payment_remaining',
     ];
 
     // Casting untuk kolom tanggal
@@ -58,6 +58,11 @@ class Booking extends Model
         return $this->belongsTo(MsPaymentBooking::class, 'id_ms_payment');
     }
 
+    public function ms_booking(): BelongsTo
+    {
+        return $this->belongsTo(MsBooking::class, 'id_ms_booking');
+    }
+
     // Relasi ke Review
     public function review(): BelongsTo
     {
@@ -67,5 +72,20 @@ class Booking extends Model
     public function tripbus()
     {
         return $this->hasMany(TripBus::class, 'id_booking');
+    }
+
+    public function incomes()
+    {
+        return $this->hasMany(Income::class, 'booking_code');
+    }
+
+    public function outcomes()
+    {
+        return $this->hasMany(Outcome::class, 'id_booking');
+    }
+
+    public function ms_income(): BelongsTo
+    {
+        return $this->belongsTo(MsIncome::class, 'id_ms_income');
     }
 }
