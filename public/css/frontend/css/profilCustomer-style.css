@@ -1,4 +1,7 @@
 /* CONTAINER PROFIL & FORM */
+#profil{
+    margin-top: 100px;
+}
 .profil-image{
     padding: 30px;
     border: 1px solid #E0E2E7;

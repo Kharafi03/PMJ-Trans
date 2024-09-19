@@ -5,6 +5,9 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @endpush
 @section('content')
+    <!-- NAVBAR -->
+    <x-navbar-customer />
+    
     <!-- CUSTOMER PROFIL -->
     <section id="profil">
         <div class="container mt-5">
@@ -64,6 +67,9 @@
             </div>
         </div>
     </section>
+
+    <!-- FOOTER -->
+    <x-footer-customer />
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 @endsection

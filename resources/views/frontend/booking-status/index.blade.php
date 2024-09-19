@@ -6,6 +6,8 @@
 @endpush
 @section('content')
     <!-- NAVBAR -->
+    <x-navbar-customer />
+    
     <!-- CONTENT -->
     <section id="statusPemesanan">
         <div class="container mt-5">
@@ -69,7 +71,8 @@
         </div>
     </section>
 
-    <!-- NAVBAR -->
+    <!-- FOOTER -->
+    <x-footer-customer />
 
     <!-- SCRIPT -->
     <script>

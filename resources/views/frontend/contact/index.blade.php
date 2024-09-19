@@ -6,6 +6,7 @@
 @endpush
 @section('content')
     <!-- NAVBAR -->
+    <x-navbar-customer />
 
     <!-- CONTENT -->
     <!-- CONTACT -->
@@ -137,6 +138,7 @@
     </section>
 
     <!-- FOOTER -->
+    <x-footer-customer />
 
     <!-- SCRIPT -->
     <script>

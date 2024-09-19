@@ -6,10 +6,11 @@
 @endpush
 @section('content')
     <!-- NAVBAR -->
+    <x-navbar-customer />
 
     <!-- CONTENT -->
     <!-- TITLE -->
-    <section id="title">
+    <section id="pemesanan">
         <div class="container mt-5">
             <h5><b>PEMESANAN</b></h5>
             <p class="caption">Pilih jadwal, destinasi, serta tipe kendaraan yang sesuai dengan kebutuhan Anda. Rasakan
@@ -165,7 +166,8 @@
         </div>
     </section>
 
-    <!-- BUTTON -->
+    <!-- FOOTER -->
+    <x-footer-customer />
 
 
     <!-- SCRIPT -->
