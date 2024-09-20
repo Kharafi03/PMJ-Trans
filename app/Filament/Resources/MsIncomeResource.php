@@ -20,9 +20,9 @@ class MsIncomeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-chart-bar';
 
-    protected static ?string $navigationGroup = 'Status';
+    protected static ?string $navigationGroup = 'Pemesanan';
 
-    protected static ?int $navigationSort = 20;
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {

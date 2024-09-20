@@ -21,9 +21,9 @@ class TripBusSpendResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-arrow-uturn-right';
 
-    protected static ?string $navigationGroup = 'Perjalanan Bus';
+    protected static ?string $navigationGroup = 'Manajemen Trip Bus';
 
-    protected static ?int $navigationSort = 12;
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {

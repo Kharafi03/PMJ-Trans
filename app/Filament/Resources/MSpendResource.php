@@ -20,9 +20,9 @@ class MSpendResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
 
-    protected static ?string $navigationGroup = 'Jenis';
+    protected static ?string $navigationGroup = 'Manajemen Trip Bus';
 
-    protected static ?int $navigationSort = 10;
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {

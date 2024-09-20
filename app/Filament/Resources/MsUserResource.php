@@ -21,9 +21,9 @@ class MsUserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Status';
+    protected static ?string $navigationGroup = 'Pemesanan';
 
-    protected static ?int $navigationSort = 20;
+    protected static ?int $navigationSort = 3;
 
 
 

@@ -21,9 +21,9 @@ class MIncomeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-document-currency-dollar';
 
-    protected static ?string $navigationGroup = 'Jenis';
+    protected static ?string $navigationGroup = 'Keuangan';
 
-    protected static ?int $navigationSort = 10;
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
