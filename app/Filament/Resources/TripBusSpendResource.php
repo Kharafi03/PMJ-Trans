@@ -26,9 +26,6 @@ class TripBusSpendResource extends Resource
     protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
-
-
-
     {
         return $form
             ->schema([
@@ -41,10 +38,10 @@ class TripBusSpendResource extends Resource
                             ->label('ID Trip Bus')
                             ->required()
                             ->numeric(),
-                        Forms\Components\TextInput::make('id_m_spend')
-                            ->label('ID Pengeluaran')
-                            ->required()
-                            ->numeric(),
+                        Forms\Components\Select::make('id_m_spend')
+                            ->label('Jenis Pengeluaran')
+                            ->relationship('mspend', 'name')
+                            ->required(),
                         Forms\Components\TextInput::make('description')
                             ->label('Deskripsi')
                             ->maxLength(255),
@@ -87,35 +84,33 @@ class TripBusSpendResource extends Resource
                     ->label('ID Trip Bus')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('id_m_spend')
-                    ->label('ID Pengeluaran')
+                Tables\Columns\TextColumn::make('mspend.name')
+                    ->label('Jenis')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('description')
-                    ->label('Deskripsi')
-                    ->searchable(),
+                // Tables\Columns\TextColumn::make('description')
+                //     ->label('Deskripsi')
+                //     ->searchable(),
                 Tables\Columns\TextColumn::make('nominal')
                     ->numeric()
                     ->label('Nominal')
                     ->sortable(),
-                /*
-                Tables\Columns\TextColumn::make('kilometer')
-                    ->numeric()
-                    ->label('Kilometer')
-                    ->sortable(),
+                // Tables\Columns\TextColumn::make('kilometer')
+                //     ->numeric()
+                //     ->label('Kilometer')
+                //     ->sortable(),
                 Tables\Columns\TextColumn::make('datetime')
                     ->dateTime()
                     ->label('Tanggal dan Waktu')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('latitude')
-                    ->numeric()
-                    ->label('Latitude')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('longitude')
-                    ->numeric()
-                    ->label('Longitude')
-                    ->sortable(),
-            */
+                // Tables\Columns\TextColumn::make('latitude')
+                //     ->numeric()
+                //     ->label('Latitude')
+                //     ->sortable(),
+                // Tables\Columns\TextColumn::make('longitude')
+                //     ->numeric()
+                //     ->label('Longitude')
+                //     ->sortable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()
                     ->sortable()

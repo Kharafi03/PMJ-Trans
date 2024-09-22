@@ -24,7 +24,7 @@ class TripBus extends Model
         'id_customer',
         'id_driver',
         'id_codriver',
-        'balanced',
+        'nominal',
         'km_start',
         'km_end',
         'total_spend',
@@ -54,6 +54,11 @@ class TripBus extends Model
     public function codriver(): BelongsTo
     {
         return $this->belongsTo(User::class, 'id_codriver');
+    }
+
+    public function tripbusspend()
+    {
+        return $this->hasMany(TripBusSpend::class, 'id_trip_bus');
     }
 
     // public function ()

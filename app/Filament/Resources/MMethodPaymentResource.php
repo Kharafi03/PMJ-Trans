@@ -30,7 +30,7 @@ class MMethodPaymentResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->label("Nama")
+                    ->label("Metode")
                     ->required()
                     ->maxLength(255),
             ]);
@@ -41,7 +41,7 @@ class MMethodPaymentResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label("Nama")
+                    ->label("Metode")
                     ->searchable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()

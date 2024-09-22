@@ -34,12 +34,12 @@ class BusTaxResource extends Resource
                     ->heading('Data Utama')
                     ->schema([
                         Forms\Components\TextInput::make('id_bus')
-                            ->label('ID Bus')
+                            ->label('Bus')
                             ->required()
                             ->numeric()
                             ->placeholder('Masukkan ID Bus'),
                         Forms\Components\TextInput::make('id_user')
-                            ->label('ID User')
+                            ->label('User')
                             ->required()
                             ->numeric()
                             ->placeholder('Masukkan ID User'),
@@ -47,16 +47,16 @@ class BusTaxResource extends Resource
                             ->label('Deskripsi')
                             ->maxLength(255)
                             ->placeholder('Deskripsi singkat pajak'),
-                        Forms\Components\DateTimePicker::make('date')
+                        Forms\Components\DatePicker::make('date')
                             ->label('Tanggal Pajak')
                             ->required(),
-                        Forms\Components\DateTimePicker::make('expiration')
+                        Forms\Components\DatePicker::make('expiration')
                             ->label('Tanggal Expirasi')
                             ->required(),
-                        Forms\Components\DateTimePicker::make('expiration_number_bus')
+                        Forms\Components\DatePicker::make('expiration_number_bus')
                             ->label('Tanggal Expirasi Nomor Bus')
                             ->required(),
-                        Forms\Components\TextInput::make('cost')
+                        Forms\Components\TextInput::make('nominal')
                             ->label('Biaya')
                             ->numeric()
                             ->prefix('Rp')
@@ -98,19 +98,19 @@ class BusTaxResource extends Resource
                     ->label('Deskripsi')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('date')
-                    ->dateTime()
+                    ->date()
                     ->label('Tanggal Pajak')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('expiration')
-                    ->dateTime()
+                    ->date()
                     ->label('Tanggal Expirasi')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('expiration_number_bus')
-                    ->dateTime()
+                    ->date()
                     ->label('Tanggal Expirasi Nomor Bus')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('cost')
-                    ->money()
+                Tables\Columns\TextColumn::make('nominal')
+                    ->prefix('Rp. ')
                     ->label('Biaya')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('deleted_at')

@@ -16,10 +16,10 @@ return new class extends Migration
             $table->foreignId('id_bus')->constrained('buses')->cascadeOnDelete();
             $table->foreignId('id_user')->constrained('users')->cascadeOnDelete();
             $table->string('description', 255) ->nullable();
-            $table->datetime('date') ->nullable();
-            $table->datetime('expiration') ->nullable();
-            $table->datetime('expiration_number_bus') ->nullable();
-            $table->decimal('cost', 12,2) ->nullable();
+            $table->date('date') ->nullable();
+            $table->date('expiration') ->nullable();
+            $table->date('expiration_number_bus') ->nullable();
+            $table->decimal('nominal', 12,2) ->nullable();
             $table->longText('image') ->nullable();
             $table->softDeletes();
             $table->timestamps();

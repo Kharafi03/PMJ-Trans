@@ -26,8 +26,8 @@ class Income extends Model
         'id_ms_income',
         'datetime',
         'image_receipt',
-        'payment_received',
-        'payment_remaining',
+        // 'payment_received',
+        // 'payment_remaining',
     ];
 
     protected $guarded = ['id'];

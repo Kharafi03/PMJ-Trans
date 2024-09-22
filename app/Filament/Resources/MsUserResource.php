@@ -32,7 +32,7 @@ class MsUserResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->label("Peran")
+                    ->label("Status")
                     ->required()
                     ->maxLength(255),
             ]);
@@ -43,7 +43,7 @@ class MsUserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label("Peran")
+                    ->label("Status")
                     ->searchable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()

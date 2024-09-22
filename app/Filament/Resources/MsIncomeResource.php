@@ -29,7 +29,7 @@ class MsIncomeResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->label("Nama")
+                    ->label("Status")
                     ->required()
                     ->maxLength(255),
             ]);
@@ -40,7 +40,7 @@ class MsIncomeResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label("Nama")
+                    ->label("Status")
                     ->searchable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()

@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\BookingResource\Pages;
 use App\Models\Booking;
+use App\Models\Outcome;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
@@ -18,6 +19,10 @@ use Illuminate\Support\Str;
 use Filament\Forms\Components\Actions\Action;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Livewire;
+use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 
 class BookingResource extends Resource
 {
@@ -29,7 +34,7 @@ class BookingResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
-    public static function form(Forms\Form $form): Forms\Form
+    public static function form(Form $form): Form
     {
         return $form->schema([
             Forms\Components\Grid::make()->schema([
@@ -72,7 +77,20 @@ class BookingResource extends Resource
                                             return $data;
                                         });
                                 }),
+                        ])->columns(2),
+                        Forms\Components\Group::make()->schema([
+                            DateTimePicker::make('date_start')
+                                ->required()
+                                ->minDate(now())
+                                ->label('Tanggal Mulai'),
 
+                            DatePicker::make('date_end')
+                                ->required()
+                                ->minDate(now())
+                                ->label('Tanggal Selesai'),
+                        ])->columns(2),
+
+                        Forms\Components\Group::make()->schema([
                             TextInput::make('pickup_point')
                                 ->required()
                                 ->label('Titik Jemput'),
@@ -83,42 +101,33 @@ class BookingResource extends Resource
                         ])->columns(2),
 
                         Forms\Components\Group::make()->schema([
+                            TextInput::make('capacity')
+                                ->required()
+                                ->numeric()
+                                ->label('Jumlah Penumpang'),
                             TextInput::make('fleet_amount')
                                 ->required()
                                 ->numeric()
                                 ->label('Jumlah Bus'),
-
-                            TextInput::make('capacity')
-                                ->required()
-                                ->numeric()
-                                ->label('Kapasitas Bus'),
-                        ])->columns(2),
-
-                        Forms\Components\Group::make()->schema([
-                            DateTimePicker::make('date_start')
-                                ->required()
-                                ->minDate(now())
-                                ->label('Tanggal Mulai'),
-
-                            DatePicker::make('date_end')
-                                ->required()
-                                ->label('Tanggal Selesai'),
                         ])->columns(2),
 
                         Forms\Components\Group::make()->schema([
                             TextInput::make('trip_nominal')
                                 ->required()
+                                ->prefix('Rp')
                                 ->numeric()
                                 ->label('Nominal Perjalanan'),
 
                             TextInput::make('minimum_dp')
                                 ->required()
+                                ->prefix('Rp')
                                 ->numeric()
                                 ->label('Minimum DP'),
                         ])->columns(2),
                         Forms\Components\Repeater::make('payment')
                             ->label('Pembayaran')
                             ->relationship('incomes')
+                            ->live()
                             ->schema([
                                 Forms\Components\Group::make()
                                     ->schema([
@@ -133,6 +142,7 @@ class BookingResource extends Resource
                                         Select::make('id_ms_income')
                                             ->relationship('ms_income', 'name')
                                             ->required()
+                                            ->default(2)
                                             ->label('Status'),
                                     ])
                                     ->columns(3),
@@ -141,35 +151,45 @@ class BookingResource extends Resource
                                         TextInput::make('nominal')
                                             ->numeric()
                                             ->required()
+                                            ->prefix('Rp.')
                                             ->label('Nominal'),
                                         DateTimePicker::make('datetime')
                                             ->readOnly()
                                             ->default(now()),
                                     ])
                                     ->columns(2),
-                                Forms\Components\Group::make()
-                                    ->schema([
-                                        TextInput::make('payment_received')
-                                            ->numeric()
-                                            ->label('Pembayaran Diterima'),
 
-                                        TextInput::make('payment_remaining')
-                                            ->numeric()
-                                            ->label('Sisa Pembayaran'),
-                                    ])
-                                    ->columns(2),
                                 Forms\Components\FileUpload::make('image_receipt')
                                     ->label('Silahkan unggah bukti pembayaran dibawah ini')
                                     ->disk('public') //
-                                    ->directory('image_receipt') 
+                                    ->directory('image_receipt')
                                     ->image()
                                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg'])
                                     ->helperText('Unggah gambar dalam format JPG atau PNG, maksimal ukuran 2MB.')
                                     ->visibility('public')
-                                    ->maxSize(2048)
+                                    ->maxSize(2048),
                             ])
+                            ->afterStateUpdated(function (Get $get, Set $set) {
+                                self::updateReceivedRemaining($get, $set);
+                            })
                             ->columnSpanFull(),
-                    ])->columnSpan(2),  
+
+                        Forms\Components\Group::make()
+                            ->schema([
+                                TextInput::make('payment_received')
+                                    ->numeric()
+                                    ->readOnly()
+                                    ->prefix('Rp.')
+                                    ->label('Pembayaran Diterima'),
+
+                                TextInput::make('payment_remaining')
+                                    ->numeric()
+                                    ->readOnly()
+                                    ->prefix('Rp')
+                                    ->label('Sisa Pembayaran'),
+                            ])
+                            ->columns(2),
+                    ])->columnSpan(2),
 
                 // Card untuk status pembayaran di kanan
                 Forms\Components\Card::make()
@@ -178,10 +198,12 @@ class BookingResource extends Resource
                         Select::make('id_ms_payment')
                             ->label('Status Pembayaran')
                             ->relationship('ms_payment', 'name')
+                            ->default(1)
                             ->required(),
                         Select::make('id_ms_booking')
                             ->label('Status Pemesanan')
                             ->relationship('ms_booking', 'name')
+                            ->default(2)
                             ->required(),
                     ])->columnSpan(1),  // Mengatur agar card ini berada di kolom kanan
             ])->columns(3),  // Menggunakan tiga kolom: dua untuk form kiri, satu untuk status pembayaran di kanan
@@ -211,6 +233,10 @@ class BookingResource extends Resource
                 ->label('Status Pembayaran')
                 ->searchable()
                 ->sortable(),
+            TextColumn::make('ms_booking.name')
+                ->label('Status')
+                ->searchable()
+                ->sortable(),
             TextColumn::make('deleted_at')
                 ->label('Data dihapus')
                 ->searchable()
@@ -225,11 +251,15 @@ class BookingResource extends Resource
                 ->dateTime()
                 ->sortable()
                 ->toggleable(isToggledHiddenByDefault: true),
+
         ])
             ->filters([
                 Tables\Filters\SelectFilter::make('id_ms_payment')
                     ->label('Status Pembayaran')
                     ->relationship('ms_payment', 'name'),
+                Tables\Filters\SelectFilter::make('id_ms_booking')
+                    ->label('Status Pemesanan')
+                    ->relationship('ms_booking', 'name'),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()
@@ -241,6 +271,28 @@ class BookingResource extends Resource
                     ->modalButton('Simpan Perubahan'),
                 Tables\Actions\DeleteAction::make()
                     ->label('Hapus'),
+                Tables\Actions\Action::make('refund')
+                    ->label('Refund')
+                    ->color('info') // Warna tombol
+                    ->icon('heroicon-s-receipt-refund') // Ikon tombol
+                    ->action(function ($record, $livewire) {
+                        // Logika refund dengan model yang digunakan
+                        // Menggunakan $record untuk akses data model
+                        //Livewire::notify('success', 'Refund berhasil dilakukan!');
+                        Outcome::create([
+                            'id_booking' => $record->id,
+                            'id_m_outcome' => 1,
+                            'check' => 0,
+                            'id_m_method_payment' => 1,
+                            'description' => 'Refund for transaction Booking Code : ' . $record->booking_code, // Menambahkan deskripsi refund
+                            'datetime' => now(), // Tanggal refund
+                        ]);
+                    })
+                    ->requiresConfirmation()
+                    ->modalHeading('Refund Confirmation')
+                    ->modalSubheading('Apakah Anda yakin ingin melakukan refund untuk transaksi ini?')
+                    ->modalButton('Refund')
+                    ->visible(fn($record) => $record->id_ms_booking === 4), // Kondisi menampilkan tombol
             ])
             ->bulkActions([
                 DeleteBulkAction::make(),
@@ -258,5 +310,21 @@ class BookingResource extends Resource
             'index' => Pages\ListBookings::route('/'),
             'create' => Pages\CreateBooking::route('/create'),
         ];
+    }
+
+    public static function updateReceivedRemaining(Get $get, Set $set): void
+    {
+        $paymentReceived = collect($get('payment'))
+            ->pluck('nominal')
+            ->filter()
+            ->sum();
+
+        $tripNominal = $get('trip_nominal');
+
+        $set('payment_received', number_format($paymentReceived, 2, '.', ''));
+
+        $paymentRemaining = $tripNominal - $paymentReceived;
+
+        $set('payment_remaining', number_format($paymentRemaining, 2, '.', ''));
     }
 }

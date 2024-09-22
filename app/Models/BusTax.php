@@ -25,7 +25,7 @@ class BusTax extends Model
         'date_test',
         'expiration',
         'expiration_number_bus',
-        'cost',
+        'nominal',
         'image',
     ];
 

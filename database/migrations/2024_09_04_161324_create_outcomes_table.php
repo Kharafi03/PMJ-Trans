@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('nominal', 12, 2)->nullable();
             $table->dateTime('datetime')->nullable();
             $table->longText('image_receipt')->nullable();
+            $table->boolean('check');
             $table->softDeletes();
             $table->timestamps();
         });

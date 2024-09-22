@@ -27,29 +27,9 @@ class MSpendResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
-            TextInput::make('bbm')
-                ->label('BBM')
-                ->numeric()
-                ->required(),
-
-            TextInput::make('tol')
-                ->label('Tol')
-                ->numeric()
-                ->required(),
-
-            TextInput::make('parkir')
-                ->label('Parkir')
-                ->numeric()
-                ->required(),
-
-            TextInput::make('makan')
-                ->label('Makan')
-                ->numeric()
-                ->required(),
-
-            TextInput::make('darurat')
-                ->label('Darurat')
-                ->numeric()
+            TextInput::make('name')
+                ->label('Jenis')
+                ->placeholder('Masukkan jenis pengeluaran yang dilakukan')
                 ->required(),
         ]);
     }
@@ -58,28 +38,8 @@ class MSpendResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('bbm')
-                    ->label('BBM')
-                    ->sortable()
-                    ->searchable(),
-
-                TextColumn::make('tol')
-                    ->label('Tol')
-                    ->sortable()
-                    ->searchable(),
-
-                TextColumn::make('parkir')
-                    ->label('Parkir')
-                    ->sortable()
-                    ->searchable(),
-
-                TextColumn::make('makan')
-                    ->label('Makan')
-                    ->sortable()
-                    ->searchable(),
-
-                TextColumn::make('darurat')
-                    ->label('Darurat')
+                TextColumn::make('name')
+                    ->label('Jenis')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('deleted_at')
