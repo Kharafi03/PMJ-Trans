@@ -8,6 +8,7 @@ use App\Models\Booking; // Pastikan Anda membuat model Booking
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
@@ -26,7 +27,7 @@ class BookingController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'email|max:255',
             'number_phone' => 'required|string|max:20',
-            // 'alamat' => 'required|string',
+            'address' => 'required|string',
             'destination_point' => 'required|string',
             'capacity' => 'required|integer',
             'date_start' => 'required|date',
@@ -46,7 +47,7 @@ class BookingController extends Controller
             'password' => Hash::make('12345678'), // Anda dapat menggunakan password default atau meminta input password
             'number_phone' => $request->input('number_phone'),
             'id_ms' => '1',
-            'alamat' => $request->input('alamat'),
+            'address' => $request->input('address'),
         ]);
 
         $booking_code = 'PMJ-' . strtoupper(\Illuminate\Support\Str::random(4)) . rand(1000, 9999);
@@ -64,6 +65,9 @@ class BookingController extends Controller
             'id_ms_booking' => '1',
             'id_ms_payment' => '1',
         ]);
+
+         // Login otomatis setelah akun dibuat
+        Auth::login($user);
 
         return redirect()->route('homepage')
             ->with('message', 'Pemesanan Berhasil.')
