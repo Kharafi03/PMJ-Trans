@@ -55,12 +55,15 @@ class BookingResource extends Resource
                                 ->createOptionForm([
                                     TextInput::make('name')
                                         ->required()
+                                        ->label('Nama')
                                         ->maxLength(255),
                                     TextInput::make('number_phone')
                                         ->required()
+                                        ->label('Nomor Telephone')
                                         ->maxLength(255),
                                     TextInput::make('email')
                                         ->email()
+                                        ->label('Alamat Email')
                                         ->maxLength(255)
                                         ->unique('users', 'email'),
                                 ])
@@ -213,6 +216,9 @@ class BookingResource extends Resource
     public static function table(Tables\Table $table): Tables\Table
     {
         return $table->columns([
+            TextColumn::make('id')
+                ->label('No')
+                ->sortable(),
             TextColumn::make('booking_code')
                 ->label('Kode Booking')
                 ->searchable()

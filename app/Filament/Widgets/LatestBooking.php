@@ -21,6 +21,9 @@ class LatestBooking extends BaseWidget
             ->defaultPaginationPageOption(5) // Pagination default, menampilkan 5 booking per halaman
             ->defaultSort('created_at', 'desc') // Urutkan berdasarkan tanggal terbaru
             ->columns([
+                Tables\Columns\TextColumn::make('id')
+                    ->label('No')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('booking_code')
                     ->label('Kode Booking')
                     ->searchable()

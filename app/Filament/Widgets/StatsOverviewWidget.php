@@ -39,19 +39,16 @@ class StatsOverviewWidget extends BaseWidget
                 ->color('success')
                 ->icon('heroicon-m-user')
                 ->extraAttributes(['class' => 'bg-green-100 hover:bg-green-200 transition-transform transform hover:scale-105 p-4 rounded shadow-lg']),
-
             Stat::make('Total Customer', $totalCustomer)
                 ->description('Total Customer')
                 ->color('warning')
                 ->icon('heroicon-s-user-group')
                 ->extraAttributes(['class' => 'bg-yellow-100 hover:bg-yellow-200 transition-transform transform hover:scale-105 p-4 rounded shadow-lg']),
-
             Stat::make('Total Pesan', $totalPesan)
                 ->description('Total Pesan')
                 ->color('info')
                 ->icon('heroicon-s-envelope')
                 ->extraAttributes(['class' => 'bg-teal-100 hover:bg-teal-200 transition-transform transform hover:scale-105 p-4 rounded shadow-lg']),
-
         ];
     }
 }

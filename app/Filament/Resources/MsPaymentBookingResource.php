@@ -21,7 +21,7 @@ class MsPaymentBookingResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
 
-    protected static ?string $navigationGroup = 'Status';
+    protected static ?string $navigationGroup = 'Pemesanan';
 
     protected static ?int $navigationSort = 4;
 
