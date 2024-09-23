@@ -22,9 +22,9 @@ class MsBusResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-truck';
 
-    protected static ?string $navigationGroup = 'Status';
+    protected static ?string $navigationGroup = 'Bus';
 
-    protected static ?int $navigationSort = 20;
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
