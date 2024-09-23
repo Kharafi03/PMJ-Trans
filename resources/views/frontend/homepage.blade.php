@@ -6,7 +6,7 @@
 @section('content')
         <!-- HEADER -->
         <section id="header">
-        <div class="bg-image" style="background-image: url('img/bg1.png');">
+        <div class="bg-image" style="background-image: url('img/bgx.png');">
             <!-- NAVBAR -->
             <x-navbar-customer />
             <div class="header-text container" style="padding-top: 100px">
@@ -58,9 +58,9 @@
                           </div>
                         </div>
                         <ul>
-                          <li>Tempat duduk yang bisa direbahkan 180 derajat untuk kenyamanan maksimal.</li>
-                          <li>Privasi ekstra dengan pembatas dan fasilitas hiburan pribadi.</li>
-                          <li>Dilengkapi dengan Wi-Fi gratis dan colokan listrik/USB.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
                         </ul>
                       </div>
                        
@@ -97,9 +97,9 @@
                           </div>
                         </div>
                         <ul>
-                          <li>Tempat duduk ergonomis yang bisa direbahkan.</li>
-                          <li>Dilengkapi dengan Wi-Fi gratis dan colokan listrik/USB.</li>
-                          <li>Layar hiburan bersama.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
                         </ul>
                       </div>
                        
@@ -136,9 +136,9 @@
                           </div>
                         </div>
                         <ul>
-                          <li>Tempat duduk yang sangat nyaman dengan fitur tambahan.</li>
-                          <li>Wi-Fi dan colokan listrik untuk setiap kursi.</li>
-                          <li>Hiburan multimedia premium.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
                         </ul>
                       </div>
                        
@@ -180,9 +180,9 @@
                           </div>
                         </div>
                         <ul>
-                          <li>Kursi yang sangat nyaman dengan fitur pijat.</li>
-                          <li>Wi-Fi super cepat dan beberapa colokan listrik.</li>
-                          <li>Pengalaman hiburan kelas atas lalala yeyey lulu.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
                         </ul>
                       </div>
                        
@@ -219,9 +219,9 @@
                           </div>
                         </div>
                         <ul>
-                          <li>Tempat duduk yang bisa direbahkan 180 derajat untuk kenyamanan maksimal.</li>
-                          <li>Privasi ekstra dengan pembatas dan fasilitas hiburan pribadi.</li>
-                          <li>Dilengkapi dengan Wi-Fi gratis dan colokan listrik/USB.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
                         </ul>
                       </div>
                        
@@ -373,6 +373,88 @@
                     </div>
                 </div>   
             </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+     <!-- CONTENT -->
+    <section id="faq">
+        <div class="container mt-5">
+          <div class="title-faq"><p>Pertanyaan<span> Umum</span></p></div>
+          
+          <!-- FAQ -->
+          <div class="accordion accordion-flush" id="faq">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="false">
+                  Pertanyaan1
+                </button>
+              </h2>
+              <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faq">
+                <div class="accordion-body">Pembayaran bisa dilakukan dengan membayar DP terlebih dahulu, untuk pelunasanya boleh setelah trip.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false">
+                  Pertanyaan 2
+                </button>
+              </h2>
+              <div id="faq2" class="accordion-collapse collapse" data-bs-parent=" #faq">
+                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false">
+                  Pertanyaan 3
+                </button>
+              </h2>
+              <div id="faq3" class="accordion-collapse collapse" data-bs-parent=" #faq">
+                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false">
+                  Pertanyaan 4
+                </button>
+              </h2>
+              <div id="faq4" class="accordion-collapse collapse" data-bs-parent=" #faq">
+                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false">
+                  Pertanyaan 5
+                </button>
+              </h2>
+              <div id="faq5" class="accordion-collapse collapse" data-bs-parent=" #faq">
+                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6" aria-expanded="false">
+                  Pertanyaan 6
+                </button>
+              </h2>
+              <div id="faq6" class="accordion-collapse collapse" data-bs-parent=" #faq">
+                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq7" aria-expanded="false">
+                  Pertanyaan 7
+                </button>
+              </h2>
+              <div id="faq7" class="accordion-collapse collapse" data-bs-parent=" #faq">
+                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+              </div>
+            </div>
+          </div>      
         </div>
     </section>
 
