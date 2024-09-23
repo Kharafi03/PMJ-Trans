@@ -76,6 +76,21 @@ Route::get('/faq', function () {
 //     return view('frontend.booking-history.index');
 // })->name('booking-history');
 
+Route::get('/payment', function () {
+    return view('frontend.payment.index');
+})->name('payment');
+
+Route::get('/booking-payment', function () {
+    return view('frontend.booking-payment.index');
+})->name('booking-payment');
+
+Route::get('/booking-code', function () {
+    return view('frontend.booking-code.index');
+})->name('booking-code');
+
+Route::get('/bus', function () {
+    return view('frontend.bus.index');
+})->name('bus');
 
 
 // DRIVER

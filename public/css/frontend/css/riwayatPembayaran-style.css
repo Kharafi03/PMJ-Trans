@@ -1,0 +1,176 @@
+/* TITLE */
+.title p{
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* TABLE */
+table{
+    font-size: 14px;
+}
+.tabel-riwayat{
+    padding: 30px 0px 10px 0px;
+    border: 1px solid #E0E2E7;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+thead{
+    background-color: #CBCBCD40;
+    color: #333843;
+    text-align: center;
+}
+td{
+    height: 70px;
+    text-overflow: ellipsis;
+    padding: 20px;
+}
+table.table-fit {
+    width: auto !important;
+    table-layout: auto !important;
+}
+  table.table-fit thead th,
+  table.table-fit tbody td,
+  table.table-fit tfoot th,
+  table.table-fit tfoot td {
+    width: auto !important;
+}
+td button{
+    border: none;
+    background: none;
+}
+
+/* STATUS & ULASAN */
+.status{
+    padding: 8px;
+    background-color: #E7F4EE;
+    color: #0D894F;
+    font-weight: 600;
+    border-radius: 100px;
+}
+.btn-lihat{
+    text-decoration: none;
+    padding: 5px;
+    width: 50px;
+    color: #EC2B2B;
+    background-color: #EC2B2B36;
+    border: 1px solid  #EC2B2B36;
+    &:hover{
+        background-color: white;
+    }
+
+}
+
+/* INPUT => date & filters */
+input[type='text'], input[type='date']{
+    border-left: none;
+}
+
+#basic-addon1{
+    border-radius: 5px 0px 0px 5px;
+    background-color: white;
+    border-right: none;
+    /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
+}
+input[type='date']::-webkit-calendar-picker-indicator {background: 
+    transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+}
+.date-input-wrapper {
+    width: fit-content;
+  }
+  
+  input {
+    width: 100%;
+  }
+  
+  input[type=date]::-webkit-calendar-picker-indicator {
+    visibility: hidden;
+  }
+  
+  .date-input-wrapper {
+    position: relative;
+  }
+  
+  .date-input-wrapper::after {
+    display: none;
+    width: 17px;
+    height: 16px;
+    background: red;
+    /* background: white; */
+    position: absolute;
+    content: "";
+    right: 0px;
+    top: 2px;
+  }
+  
+  @supports not selector(::-webkit-calendar-picker-indicator) {
+    .date-input-wrapper::before {
+      display: block;
+    }
+  }
+
+/* PAGINATION */
+.page-item{
+    padding-right: 10px;
+    border-radius: 7px;
+   
+}
+.pagination > li > a{
+    background-color: #DEDEFA;
+    border-radius: 7px;
+    border: none; 
+    font-weight: 600;
+    color: #5C59E8;
+}
+.pagination > li > a > i{
+    color: #5C59E8;
+}
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > a > i:hover
+{
+    color: white;
+    background-color: #5C59E8;
+    
+}
+.caption{
+    font-size: 14px;
+    color: #667085;
+}
+
+.btn-kembali{
+    height: 40px;
+    width: 120px;
+    background-color: #4FB472;
+    text-align: center;
+    border: 1px solid #4FB472;
+    border-radius: 4px;
+    padding: 5px;
+}
+.btn-kembali a{
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+}
+
+/* MODAL */
+.modal-content{
+    border: none;
+}
+.modal-body{
+    padding: 10px;
+}
+.modal-body input[readonly]{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: white;
+    border: none;
+}
