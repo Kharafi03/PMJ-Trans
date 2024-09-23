@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\Customer\BookingCheckController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Customer\LoginController;
 use App\Http\Controllers\Customer\RegistrationController;
 use App\Http\Controllers\Customer\BookingController;
 use App\Http\Controllers\Customer\ProfileController;
 use App\Http\Controllers\Customer\HistoryController;
+use App\Http\Controllers\Customer\BookingCodeController;
+use App\Http\Controllers\Customer\BookingStatusController;
 
 // CUSTOMER
 
@@ -29,8 +32,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/history', [HistoryController::class, 'index'])->name('history.index');
-
+    Route::get('/booking-code/{booking_code}', [BookingCodeController::class, 'show'])->name('booking.code');
 });
+
+Route::get('/booking-check', [BookingCheckController::class, 'index'])->name('cek.status');
+Route::post('/booking-check', [BookingCheckController::class, 'status'])->name('post.cek.status');
+
+Route::post('/booking/upload-proof/{id}', [BookingStatusController::class, 'uploadProof'])->name('booking.uploadProof');
+
 
 Route::get('/', function () {
     return view('frontend.homepage');
@@ -84,9 +93,9 @@ Route::get('/booking-payment', function () {
     return view('frontend.booking-payment.index');
 })->name('booking-payment');
 
-Route::get('/booking-code', function () {
-    return view('frontend.booking-code.index');
-})->name('booking-code');
+// Route::get('/booking-code', function () {
+//     return view('frontend.booking-code.index');
+// })->name('booking-code');
 
 Route::get('/bus', function () {
     return view('frontend.bus.index');

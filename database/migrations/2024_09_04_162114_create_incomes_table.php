@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('booking_code')->constrained('bookings')->cascadeOnDelete();
             $table->foreignId('id_m_income')->constrained('m_incomes')->cascadeOnDelete();
-            $table->foreignId('id_m_method_payment')->constrained('m_method_payments')->cascadeOnDelete();
+            $table->foreignId('id_m_method_payment')->nullable()->constrained('m_method_payments')->cascadeOnDelete();
             $table->string('description')->nullable();
             $table->decimal('nominal', 12, 2)->nullable();
             $table->foreignId('id_ms_income')->constrained('ms_incomes')->cascadeOnDelete();

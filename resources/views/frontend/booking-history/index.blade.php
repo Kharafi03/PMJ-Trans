@@ -75,9 +75,6 @@
                                     <td><button type="button" class="btn-ulasan">Beri Ulasan</button></td>
                                 </tr>
                             @empty
-                                <tr>
-                                    <td colspan="9" class="text-center">Belum ada riwayat pemesanan.</td>
-                                </tr>
                             @endforelse
                         </tbody>
                     </table>

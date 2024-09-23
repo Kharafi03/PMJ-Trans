@@ -25,14 +25,14 @@ class BookingController extends Controller
         // Validasi data
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'email' => 'email|max:255',
+            'email' => 'email|max:255|nullable',
             'number_phone' => 'required|string|max:20',
             'address' => 'required|string',
             'destination_point' => 'required|string',
             'capacity' => 'required|integer',
             'date_start' => 'required|date',
             'date_end' => 'required|date',
-            'fleet_amount' => 'required|integer',
+            // 'fleet_amount' => 'required|integer',
             'pickup_point' => 'required|string',
         ]);
 
@@ -60,16 +60,20 @@ class BookingController extends Controller
             'capacity' => $request->input('capacity'),
             'date_start' => $request->input('date_start'),
             'date_end' => $request->input('date_end'),
-            'fleet_amount' => $request->input('fleet_amount'),
+            // 'fleet_amount' => $request->input('fleet_amount'),
             'pickup_point' => $request->input('pickup_point'),
             'id_ms_booking' => '1',
             'id_ms_payment' => '1',
         ]);
 
-         // Login otomatis setelah akun dibuat
+        // Login otomatis setelah akun dibuat
         Auth::login($user);
 
-        return redirect()->route('homepage')
+        // return redirect()->route('booking-code.show', $booking_code)
+        //     ->with('message', 'Pemesanan Berhasil.')
+        //     ->with('alert-type', 'success');
+        // // Redirect ke /booking-code dan kirim data booking
+        return redirect()->route('booking.code', ['booking_code' => $booking_code])
             ->with('message', 'Pemesanan Berhasil.')
             ->with('alert-type', 'success');
     }

@@ -35,12 +35,12 @@
                                 <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama lengkap" value="{{ $user->name }}" required>
                             </div>
                             <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan alamat email" value="{{ $user->email }}">
-                            </div> 
-                            <div class="mb-3">
                                 <label for="number_phone" class="form-label">Nomor Telepon<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="number_phone" name="number_phone" placeholder="Masukkan nomor telepon" value="{{ $user->number_phone }}" required>
+                            </div> 
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan alamat email" value="{{ $user->email }}">
                             </div> 
                             <div class="mb-3">
                                 <label for="address" class="form-label">Alamat<span class="text-danger">*</span></label>

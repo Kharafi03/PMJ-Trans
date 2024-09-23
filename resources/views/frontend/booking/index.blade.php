@@ -76,7 +76,7 @@
                                 <small class="text-danger" id="error-tglmulai" style="display: none;">Lengkapi tanggal mulai
                                     perjalanan anda.</small>
                             </div>
-                            <div class="col-md-6 mb-4">
+                            <div class="mb-4">
                                 <label for="date_end" class="form-label"><b>Tanggal Selesai</b><span
                                         class="text-danger">*</span></label>
                                 <div class="input-group">
@@ -98,7 +98,7 @@
                                             <small class="text-danger" id="error-waktujemput" style="display: none;">Lengkapi waktu
                                                 penjemputan.</small>
                                         </div> -->
-                            <div class="col-md-6 mb-4">
+                            {{-- <div class="col-md-6 mb-4">
                                 <label for="fleet_amount" class="form-label"><b>Jumlah Bus</b><span
                                         class="text-danger">*</span></label>
                                 <div class="input-group">
@@ -108,7 +108,7 @@
                                 </div>
                                 <small class="text-danger" id="error-jmlarmada" style="display: none;">Lengkapi jumlah
                                     armada yang dibutuhkan.</small>
-                            </div>
+                            </div> --}}
                             <div class="mb-4">
                                 <label for="pickup_point" class="form-label"><b>Titik Jemput</b><span
                                         class="text-danger">*</span></label>
@@ -145,15 +145,6 @@
                                     lengkap anda.</small>
                             </div>
                             <div class="mb-4">
-                                <label for="email" class="form-label"><b>Email</b></label>
-                                <div class="input-group">
-                                    <input type="email" class="detail-pemesanan form-control" id="email"
-                                        name="email" placeholder="Masukkan alamat email"
-                                    <span class="input-group-text" id="icon"><i
-                                            class="fa-solid fa-envelope"></i></i></span>
-                                </div>
-                            </div>
-                            <div class="mb-4">
                                 <label for="number_phone" class="form-label"><b>Nomor Telephone</b><span
                                         class="text-danger">*</span></label>
                                 <div class="input-group">
@@ -165,6 +156,15 @@
                                 </div>
                                 <small class="text-danger" id="error-notelp" style="display: none;">Lengkapi data nomor
                                     telepon anda.</small>
+                            </div>
+                            <div class="mb-4">
+                                <label for="email" class="form-label"><b>Email</b></label>
+                                <div class="input-group">
+                                    <input type="email" class="detail-pemesanan form-control" id="email"
+                                        name="email" placeholder="Masukkan alamat email">
+                                    <span class="input-group-text" id="icon"><i
+                                            class="fa-solid fa-envelope"></i></i></span>
+                                </div>
                             </div>
                             <div class="mb-4">
                                 <label for="address" class="form-label"><b>Alamat</b><span

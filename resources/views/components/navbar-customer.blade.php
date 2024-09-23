@@ -16,7 +16,7 @@
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Beranda</a>
+                        <a class="nav-link" href="{{ route('homepage') }}">Beranda</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Bus</a>
@@ -25,10 +25,10 @@
                         <a class="nav-link" href="#">Tentang Kami</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('contact') }}">Pusat Bantuan</a>
+                        <a class="nav-link" href="{{ route('contact') }}">Kontak Kami</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('booking-status') }}">Cek Pesanan</a>
+                        <a class="nav-link" href="{{ route('cek.status') }}">Cek Pesanan</a>
                     </li>
                     @auth
                         <li class="nav-item dropdown">
