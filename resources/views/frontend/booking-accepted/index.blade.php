@@ -6,7 +6,50 @@
 @endpush
 @section('content')
     <!-- NAVBAR -->
+    <x-navbar-customer />
 
+     <!-- Modal -->
+     <div class="modal fade" id="modalPemesananDiterima" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><img src="img/close.png"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex justify-content-center mb-3">
+                        <img class="img-fluid" src="img/accepted-img.png">
+                    </div>
+                    <h5>Pemesanan Anda Diterima.</h5>
+                    <form>
+                        <div class="mb-3">
+                            <label for="kodeBooking" class="form-label">Kode Booking</label>
+                            <input type="text" class="form-control" id="kodeBooking" placeholder="PMJOKE123" value="" readonly >                                
+                        </div>
+                        <div class="mb-3">
+                            <label for="nominal" class="form-label">Nominal Pembayaran</label>
+                            <input type="text" class="form-control" id="nominal" placeholder="Rp 5.000.000,00" value="" readonly >                                
+                        </div>
+                        <div class="mb-3">
+                            <label for="minDp" class="form-label">Minimum DP</label>
+                            <input type="text" class="form-control" id="minDp" placeholder="Rp 2.5000.000,00" value="" readonly >                                
+                        </div>
+
+                        <div class="mt-5 d-flex justify-content-center align-items-center">
+                            <p><span class="text-danger">*</span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia dicta labore, assumenda numquam doloribus consequatur enim cumque.</p>
+                        </div>
+                        <div class="row d-flex justify-content-between align-items-center">
+                            <div class="col-md-6">
+                                <button type="button" class="btn-bayarSekarang" data-bs-dismiss="modal">Bayar Sekarang</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="button" class="btn-bayarNanti" data-bs-dismiss="modal"><a href="../page/statusPemesanan.html">Bayar Nanti</a></button>
+                            </div>
+                        </div>
+                    </form>  
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- CONTENT -->
     <section id="pemesananDiterima">
         <div class="container mt-5">
@@ -117,6 +160,7 @@
     </section>
 
     <!-- FOOTER -->
+    <x-footer-customer />
 
     <script>
         document.getElementById('formFile').addEventListener('change', function() {
@@ -158,6 +202,13 @@
                 });
             }
         }
+
+        //SCRIPT MODAL
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var myModal = new bootstrap.Modal(document.getElementById('modalPemesananDiterima'));
+            myModal.show();
+        });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"

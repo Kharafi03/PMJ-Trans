@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 // CUSTOMER
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.homepage');
 });
 
 Route::get('/contact', function () {
