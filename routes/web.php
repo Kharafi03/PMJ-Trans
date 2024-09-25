@@ -101,6 +101,11 @@ Route::get('/bus', function () {
     return view('frontend.bus.index');
 })->name('bus');
 
+Route::get('/about', function () {
+    return view('frontend.about.index');
+})->name('about');
+
+
 
 // DRIVER
 Route::get('/dashboard-driver', function () {
@@ -126,6 +131,7 @@ Route::get('/form-pengeluaran', function () {
 Route::get('/end-trip', function () {
     return view('frontend.driver.end-trip.index');
 })->name('end-trip');
+
 
 // AUTH
 // Route::get('/login', function () {

@@ -4,9 +4,9 @@
     <link id="pagestyle" href="{{ asset('css/frontend/css/homepage-style.css') }}" rel="stylesheet" />
 @endpush
 @section('content')
-    <!-- HEADER -->
-    <section id="header">
-        <div class="bg-image" style="background-image: url('img/bg1.png');">
+        <!-- HEADER -->
+        <section id="header">
+        <div class="bg-image" style="background-image: url('img/bgx.png');">
             <!-- NAVBAR -->
             <x-navbar-customer />
             <div class="header-text container" style="padding-top: 100px">
@@ -21,230 +21,226 @@
     <!-- DAFTAR BUS -->
     <section id="package">
         <div class="package-container container">
-            <h2>Daftar Bus PMJ</h2>
-            <div id="carouselExampleIndicators" class="carousel slide carousel-dark mb-5">
-                <div class="carousel-inner">
-                    <!-- Carousel Item 1 -->
-                    <div class="carousel-item active">
-                        <div class="row">
-                            <!-- Card 1 -->
-                            <div class="col-lg-4 col-md-6 mb-4">
-                                <div class="package-card card h-100">
-                                    <img src="img/image-bus1.png" alt="Bus 1" class="img-fluid">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between">
-                                            <p class="package-card-title">PMJ Suites</p>
-                                            <div class="package-icon">
-                                                <i class="fa-solid fa-star"></i> 4.8
-                                            </div>
-                                        </div>
-                                        <p class="small">Lorem ipsum dolor sit amet consectetur elit.</p>
-                                        <div class="row mt-3 mb-3 text-center">
-                                            <div class="col-3 text-icon">
-                                                <i class="fa-solid fa-chair"></i>
-                                                <p>30 Kursi</p>
-                                            </div>
-                                            <div class="col-3 text-icon">
-                                                <i class="fa-solid fa-tv"></i>
-                                                <p>TV Pribadi</p>
-                                            </div>
-                                            <div class="col-3 text-icon">
-                                                <i class="fa-solid fa-wifi"></i>
-                                                <p>Free Wifi</p>
-                                            </div>
-                                            <div class="col-3 text-icon">
-                                                <i class="fa-solid fa-bolt"></i>
-                                                <p>Charger</p>
-                                            </div>
-                                        </div>
-                                        <ul>
-                                            <li>Tempat duduk yang bisa direbahkan 180 derajat untuk kenyamanan maksimal.
-                                            </li>
-                                            <li>Privasi ekstra dengan pembatas dan fasilitas hiburan pribadi.</li>
-                                            <li>Dilengkapi dengan Wi-Fi gratis dan colokan listrik/USB.</li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <!-- Card 2 -->
-                            <div class="col-lg-4 col-md-6 mb-4">
-                                <div class="package-card card h-100">
-                                    <img src="img/image-bus1.png" alt="Bus 2" class="img-fluid">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between">
-                                            <p class="package-card-title">PMJ Eksekutif</p>
-                                            <div class="package-icon">
-                                                <i class="fa-solid fa-star"></i> 4.8
-                                            </div>
-                                        </div>
-                                        <p class="small">Lorem ipsum dolor sit amet consectetur elit.</p>
-                                        <div class="row mt-3 mb-3 text-center">
-                                            <div class="col-3 text-icon">
-                                                <i class="fa-solid fa-chair"></i>
-                                                <p>30 Kursi</p>
-                                            </div>
-                                            <div class="col-3 text-icon">
-                                                <i class="fa-solid fa-tv"></i>
-                                                <p>TV Pribadi</p>
-                                            </div>
-                                            <div class="col-3 text-icon">
-                                                <i class="fa-solid fa-wifi"></i>
-                                                <p>Free Wifi</p>
-                                            </div>
-                                            <div class="col-3 text-icon">
-                                                <i class="fa-solid fa-bolt"></i>
-                                                <p>Charger</p>
-                                            </div>
-                                        </div>
-                                        <ul>
-                                            <li>Tempat duduk ergonomis yang bisa direbahkan.</li>
-                                            <li>Dilengkapi dengan Wi-Fi gratis dan colokan listrik/USB.</li>
-                                            <li>Layar hiburan bersama.</li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <!-- Card 3 -->
-                            <div class="col-lg-4 col-md-6 mb-4">
-                                <div class="package-card card h-100">
-                                    <img src="img/image-bus1.png" alt="Bus 3" class="img-fluid">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between">
-                                            <p class="package-card-title">PMJ Premium</p>
-                                            <div class="package-icon">
-                                                <i class="fa-solid fa-star"></i> 4.7
-                                            </div>
-                                        </div>
-                                        <p class="small">Lorem ipsum dolor sit amet consectetur elit.</p>
-                                        <div class="row mt-3 mb-3 text-center">
-                                            <div class="col-3 text-icon">
-                                                <i class="fa-solid fa-chair"></i>
-                                                <p>30 Kursi</p>
-                                            </div>
-                                            <div class="col-3 text-icon">
-                                                <i class="fa-solid fa-tv"></i>
-                                                <p>TV Pribadi</p>
-                                            </div>
-                                            <div class="col-3 text-icon">
-                                                <i class="fa-solid fa-wifi"></i>
-                                                <p>Free Wifi</p>
-                                            </div>
-                                            <div class="col-3 text-icon">
-                                                <i class="fa-solid fa-bolt"></i>
-                                                <p>Charger</p>
-                                            </div>
-                                        </div>
-                                        <ul>
-                                            <li>Tempat duduk yang sangat nyaman dengan fitur tambahan.</li>
-                                            <li>Wi-Fi dan colokan listrik untuk setiap kursi.</li>
-                                            <li>Hiburan multimedia premium.</li>
-                                        </ul>
-                                    </div>
-
-                                </div>
+          <h2>Daftar Bus PMJ</h2>
+          <div id="carouselExampleIndicators" class="carousel slide carousel-dark mb-5">
+            <div class="carousel-inner">
+              <!-- Carousel Item 1 -->
+              <div class="carousel-item active">
+                <div class="row">
+                  <!-- Card 1 -->
+                  <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="package-card card h-100">
+                      <img src="img/image-bus1.png" alt="Bus 1" class="img-fluid">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="package-card-title">PMJ Suites</p>
+                            <div class="package-icon">
+                                <i class="fa-solid fa-star"></i> 4.8
+                            </div>  
+                        </div>
+                        <p class="small">Lorem ipsum dolor sit amet consectetur elit.</p>
+                        <div class="row mt-3 mb-3 text-center">
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-chair"></i>
+                            <p>30 Kursi</p>
+                          </div>
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-tv"></i>
+                            <p>TV Pribadi</p>
+                          </div>
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-wifi"></i>
+                            <p>Free Wifi</p>
+                          </div>
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-bolt"></i>
+                            <p>Charger</p>
+                          </div>
+                        </div>
+                        <ul>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                        </ul>
+                      </div>
+                       
+                    </div>
+                  </div>
+                  <!-- Card 2 -->
+                  <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="package-card card h-100">
+                      <img src="img/image-bus1.png" alt="Bus 2" class="img-fluid">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="package-card-title">PMJ Eksekutif</p>
+                            <div class="package-icon">
+                                <i class="fa-solid fa-star"></i> 4.8
                             </div>
                         </div>
-                    </div>
-                    <!-- Carousel Item 2 -->
-                    <div class="carousel-item">
-                        <div class="row">
-                            <!-- Card 4 -->
-                            <div class="col-lg-4 col-md-6 mb-4">
-                                <div class="package-card card h-100">
-                                    <img src="img/image-bus1.png" alt="Bus 4" class="img-fluid">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between">
-                                            <p class="package-card-title">PMJ Luxury</p>
-                                            <div class="package-icon">
-                                                <i class="fa-solid fa-star"></i> 4.6
-                                            </div>
-                                        </div>
-                                        <p class="small">Lorem ipsum dolor sit amet consectetur elit.</p>
-                                        <div class="row mt-3 mb-3 text-center">
-                                            <div class="col-3 text-icon">
-                                                <i class="fa-solid fa-chair"></i>
-                                                <p>30 Kursi</p>
-                                            </div>
-                                            <div class="col-3 text-icon">
-                                                <i class="fa-solid fa-tv"></i>
-                                                <p>TV Pribadi</p>
-                                            </div>
-                                            <div class="col-3 text-icon">
-                                                <i class="fa-solid fa-wifi"></i>
-                                                <p>Free Wifi</p>
-                                            </div>
-                                            <div class="col-3 text-icon">
-                                                <i class="fa-solid fa-bolt"></i>
-                                                <p>Charger</p>
-                                            </div>
-                                        </div>
-                                        <ul>
-                                            <li>Kursi yang sangat nyaman dengan fitur pijat.</li>
-                                            <li>Wi-Fi super cepat dan beberapa colokan listrik.</li>
-                                            <li>Pengalaman hiburan kelas atas lalala yeyey lulu.</li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <!-- Card 5 -->
-                            <div class="col-lg-4 col-md-6 mb-4">
-                                <div class="package-card card h-100">
-                                    <img src="img/image-bus1.png" alt="Bus 1" class="img-fluid">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between">
-                                            <p class="package-card-title">PMJ Suites</p>
-                                            <div class="package-icon">
-                                                <i class="fa-solid fa-star"></i> 4.9
-                                            </div>
-                                        </div>
-                                        <p class="small">Lorem ipsum dolor sit amet consectetur elit.</p>
-                                        <div class="row mt-3 mb-3 text-center">
-                                            <div class="col-3 text-icon">
-                                                <i class="fa-solid fa-chair"></i>
-                                                <p>30 Kursi</p>
-                                            </div>
-                                            <div class="col-3 text-icon">
-                                                <i class="fa-solid fa-tv"></i>
-                                                <p>TV Pribadi</p>
-                                            </div>
-                                            <div class="col-3 text-icon">
-                                                <i class="fa-solid fa-wifi"></i>
-                                                <p>Free Wifi</p>
-                                            </div>
-                                            <div class="col-3 text-icon">
-                                                <i class="fa-solid fa-bolt"></i>
-                                                <p>Charger</p>
-                                            </div>
-                                        </div>
-                                        <ul>
-                                            <li>Tempat duduk yang bisa direbahkan 180 derajat untuk kenyamanan maksimal.
-                                            </li>
-                                            <li>Privasi ekstra dengan pembatas dan fasilitas hiburan pribadi.</li>
-                                            <li>Dilengkapi dengan Wi-Fi gratis dan colokan listrik/USB.</li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-                            </div>
-
+                        <p class="small">Lorem ipsum dolor sit amet consectetur elit.</p>
+                        <div class="row mt-3 mb-3 text-center">
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-chair"></i>
+                            <p>30 Kursi</p>
+                          </div>
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-tv"></i>
+                            <p>TV Pribadi</p>
+                          </div>
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-wifi"></i>
+                            <p>Free Wifi</p>
+                          </div>
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-bolt"></i>
+                            <p>Charger</p>
+                          </div>
                         </div>
+                        <ul>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                        </ul>
+                      </div>
+                       
                     </div>
+                  </div>
+                  <!-- Card 3 -->
+                  <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="package-card card h-100">
+                      <img src="img/image-bus1.png" alt="Bus 3" class="img-fluid">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="package-card-title">PMJ Premium</p>
+                            <div class="package-icon">
+                                <i class="fa-solid fa-star"></i> 4.7
+                            </div>
+                        </div>
+                        <p class="small">Lorem ipsum dolor sit amet consectetur elit.</p>
+                        <div class="row mt-3 mb-3 text-center">
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-chair"></i>
+                            <p>30 Kursi</p>
+                          </div>
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-tv"></i>
+                            <p>TV Pribadi</p>
+                          </div>
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-wifi"></i>
+                            <p>Free Wifi</p>
+                          </div>
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-bolt"></i>
+                            <p>Charger</p>
+                          </div>
+                        </div>
+                        <ul>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                        </ul>
+                      </div>
+                       
+                    </div>
+                  </div>
                 </div>
-                <!-- Navigation Buttons -->
-                <button class="package-button package-control-prev" type="button"
-                    data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                    <span aria-hidden="true"><i class="fa-solid fa-chevron-left"></i></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="package-button package-control-next" type="button"
-                    data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                    <span aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+              </div>
+              <!-- Carousel Item 2 -->
+              <div class="carousel-item">
+                <div class="row">
+                  <!-- Card 4 -->
+                  <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="package-card card h-100">
+                      <img src="img/image-bus1.png" alt="Bus 4" class="img-fluid">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="package-card-title">PMJ Luxury</p>
+                            <div class="package-icon">
+                                <i class="fa-solid fa-star"></i> 4.6
+                            </div>
+                        </div>
+                        <p class="small">Lorem ipsum dolor sit amet consectetur elit.</p>
+                        <div class="row mt-3 mb-3 text-center">
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-chair"></i>
+                            <p>30 Kursi</p>
+                          </div>
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-tv"></i>
+                            <p>TV Pribadi</p>
+                          </div>
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-wifi"></i>
+                            <p>Free Wifi</p>
+                          </div>
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-bolt"></i>
+                            <p>Charger</p>
+                          </div>
+                        </div>
+                        <ul>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                        </ul>
+                      </div>
+                       
+                    </div>
+                  </div>
+                  <!-- Card 5 -->
+                  <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="package-card card h-100">
+                      <img src="img/image-bus1.png" alt="Bus 1" class="img-fluid">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="package-card-title">PMJ Suites</p>
+                            <div class="package-icon">
+                                <i class="fa-solid fa-star"></i> 4.9
+                            </div>
+                        </div>
+                        <p class="small">Lorem ipsum dolor sit amet consectetur elit.</p>
+                        <div class="row mt-3 mb-3 text-center">
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-chair"></i>
+                            <p>30 Kursi</p>
+                          </div>
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-tv"></i>
+                            <p>TV Pribadi</p>
+                          </div>
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-wifi"></i>
+                            <p>Free Wifi</p>
+                          </div>
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-bolt"></i>
+                            <p>Charger</p>
+                          </div>
+                        </div>
+                        <ul>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                        </ul>
+                      </div>
+                       
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
             </div>
+              <!-- Navigation Buttons -->
+            <button class="package-button package-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span aria-hidden="true"><i class="fa-solid fa-chevron-left"></i></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="package-button package-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+          </div>
         </div>
     </section>
 
@@ -337,59 +333,138 @@
             </div>
         </section>
 
-        <!-- TENTANG KAMI -->
-        <section id="about" class="py-5">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 mb-4 mb-lg-0 d-flex justify-content-center">
-                        <img class="img-fluid" src="img/about-imgage.png" alt="gambar"
-                            style="max-width: 100%; height: auto;">
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="text-about">
-                            <p style="font-size: 44px;"><b>Tentang Kami</b></p>
-                            <p class="caption">PMJ Trans adalah layanan penyewaan bus pariwisata di Jl. Lingkar Timur
-                                Ngembel, Kudus. Kami menyediakan armada berkualitas untuk perjalanan yang nyaman dan aman,
-                                dengan fokus pada kepuasan pelanggan.</p>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6 col-md-3 mb-4">
-                                <div class="about-card card text-center">
-                                    <div class="card-body">
-                                        <h5 class="card-title">30+</h5>
-                                        <p class="card-text">Bus</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-3 mb-4">
-                                <div class="about-card card text-center">
-                                    <div class="card-body">
-                                        <h5 class="card-title">450+</h5>
-                                        <p class="card-text">Jam Perjalanan</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-3 mb-4">
-                                <div class="about-card card text-center">
-                                    <div class="card-body">
-                                        <h5 class="card-title">50+</h5>
-                                        <p class="card-text">Destinasi</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-3 mb-4">
-                                <div class="about-card card text-center">
-                                    <div class="card-body">
-                                        <h5 class="card-title">12k+</h5>
-                                        <p class="card-text">Pelanggan</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <!-- TENTANG KAMI -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0 d-flex justify-content-center">
+                    <img class="img-fluid" src="img/about-imgage.png" alt="gambar" style="max-width: 100%; height: auto;">
                 </div>
+                <div class="col-lg-6">
+                    <div class="text-about">
+                        <p style="font-size: 44px;"><b>Tentang Kami</b></p>
+                        <p class="caption">PMJ Trans adalah layanan penyewaan bus pariwisata di Jl. Lingkar Timur Ngembel, Kudus. Kami menyediakan armada berkualitas untuk perjalanan yang nyaman dan aman, dengan fokus pada kepuasan pelanggan.</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-3 mb-4">
+                          <div class="about-card card text-center">
+                            <div class="card-body">
+                              <h5 class="card-title">30+</h5>
+                              <p class="card-text">Bus</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 col-md-3 mb-4">
+                          <div class="about-card card text-center">
+                            <div class="card-body">
+                              <h5 class="card-title">450+</h5>
+                              <p class="card-text">Jam Perjalanan</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 col-md-3 mb-4">
+                          <div class="about-card card text-center">
+                            <div class="card-body">
+                              <h5 class="card-title">50+</h5>
+                              <p class="card-text">Destinasi</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 col-md-3 mb-4">
+                          <div class="about-card card text-center">
+                            <div class="card-body">
+                              <h5 class="card-title">12k+</h5>
+                              <p class="card-text">Pelanggan</p>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>   
             </div>
-        </section>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+     <!-- CONTENT -->
+    <section id="faq">
+        <div class="container mt-5">
+          <div class="title-faq"><p>Pertanyaan<span> Umum</span></p></div>
+          
+          <!-- FAQ -->
+          <div class="accordion accordion-flush" id="faq">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="false">
+                  Pertanyaan1
+                </button>
+              </h2>
+              <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faq">
+                <div class="accordion-body">Pembayaran bisa dilakukan dengan membayar DP terlebih dahulu, untuk pelunasanya boleh setelah trip.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false">
+                  Pertanyaan 2
+                </button>
+              </h2>
+              <div id="faq2" class="accordion-collapse collapse" data-bs-parent=" #faq">
+                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false">
+                  Pertanyaan 3
+                </button>
+              </h2>
+              <div id="faq3" class="accordion-collapse collapse" data-bs-parent=" #faq">
+                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false">
+                  Pertanyaan 4
+                </button>
+              </h2>
+              <div id="faq4" class="accordion-collapse collapse" data-bs-parent=" #faq">
+                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false">
+                  Pertanyaan 5
+                </button>
+              </h2>
+              <div id="faq5" class="accordion-collapse collapse" data-bs-parent=" #faq">
+                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6" aria-expanded="false">
+                  Pertanyaan 6
+                </button>
+              </h2>
+              <div id="faq6" class="accordion-collapse collapse" data-bs-parent=" #faq">
+                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq7" aria-expanded="false">
+                  Pertanyaan 7
+                </button>
+              </h2>
+              <div id="faq7" class="accordion-collapse collapse" data-bs-parent=" #faq">
+                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+              </div>
+            </div>
+          </div>      
+        </div>
+    </section>
 
         <!-- TESTIMONI -->
         <section id="testimoni" class="py-5">

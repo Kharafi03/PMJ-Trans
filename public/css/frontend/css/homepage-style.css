@@ -24,11 +24,11 @@
 
 /* HEADER */
 .bg-image {
-    height: 130vh; /* atau ukuran lain */
+    height: 150vh; /* atau ukuran lain */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    border-bottom-right-radius: 50%;   
+    
 }
 .btn-pesan{
     margin-top: 50px;
@@ -401,3 +401,67 @@ h1{
   .title {
     animation: fadeInUp 0.5s ease-out;
   }
+
+  /* FAQ */
+  /* Title */
+#faq{
+  margin-top: 100px;
+}
+.title-faq p{
+  font-size: 60px;
+  font-weight: bold;
+  text-align: center;
+}
+.title-faq span{
+  color: #FE9C06;
+}
+
+/* faq item */
+.accordion{
+  border: none;
+  padding: 0px 100px;
+}
+.accordion-button{
+  background-color: #F8F8F8;
+  color: #1E9781;
+  font-weight: bold;
+  font-size: 20px;
+}
+.accordion-item{
+  margin-bottom: 20px;
+  border: none;
+}
+.accordion-body{
+border-radius: 0px 0px 10px 10px;
+border: 1px solid #F8F8F8;
+}
+.accordion-button::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-plus' viewBox='0 0 16 16'%3E%3Cpath d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z'/%3E%3C/svg%3E");
+  background-color: #1E9781;
+  background-size: 30px 30px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.accordion-button:not(.collapsed)::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-dash' viewBox='0 0 16 16'%3E%3Cpath d='M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z'/%3E%3C/svg%3E");
+  background-color: #1E9781;
+  background-size: 30px 30px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.accordion-button:not(.collapsed) {
+  background-color: #F8F8F8;
+  color: inherit;
+}
+
+button.accordion-button:focus{
+  box-shadow: inherit;
+  color:#1E9781;
+}
+@media (max-width: 767.98px) {
+  .accordion{
+     padding: 0px;
+  }
+}

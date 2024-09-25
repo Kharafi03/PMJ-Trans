@@ -64,7 +64,7 @@
                                 <small class="text-danger" id="error-kapasitas" style="display: none;">Lengkapi data
                                     kapasitas penumpang.</small>
                             </div>
-                            <div class="mb-4">
+                            <div class="col-md-6 mb-4">
                                 <label for="date_start" class="form-label"><b>Tanggal Mulai</b><span
                                         class="text-danger">*</span></label>
                                 <div class="input-group">
@@ -89,17 +89,17 @@
                                     selesai perjalanan anda.</small>
                             </div>
                             <!-- <div class="col-md-6 mb-4">
-                                            <label for="waktuJemput" class="form-label"><b>Waktu Jemput</b><span
-                                                    class="text-danger">*</span></label>
-                                            <div class="input-group">
-                                                <input type="time" class="detail-pemesanan form-control" id="waktuJemput" required>
-                                                <span class="input-group-text" id="icon"><i class="fa-solid fa-clock"></i></span>
-                                            </div>
-                                            <small class="text-danger" id="error-waktujemput" style="display: none;">Lengkapi waktu
-                                                penjemputan.</small>
-                                        </div> -->
-                            {{-- <div class="col-md-6 mb-4">
-                                <label for="fleet_amount" class="form-label"><b>Jumlah Bus</b><span
+                                <label for="waktuJemput" class="form-label"><b>Waktu Jemput</b><span
+                                        class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input type="time" class="detail-pemesanan form-control" id="waktuJemput" required>
+                                    <span class="input-group-text" id="icon"><i class="fa-solid fa-clock"></i></span>
+                                </div>
+                                <small class="text-danger" id="error-waktujemput" style="display: none;">Lengkapi waktu
+                                    penjemputan.</small>
+                            </div> -->
+                            <!-- <div class="col-md-6 mb-4">
+                                <label for="jmlArmada" class="form-label"><b>Jumlah Bus</b><span
                                         class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <input type="number" class="detail-pemesanan form-control" id="fleet_amount"
@@ -108,7 +108,7 @@
                                 </div>
                                 <small class="text-danger" id="error-jmlarmada" style="display: none;">Lengkapi jumlah
                                     armada yang dibutuhkan.</small>
-                            </div> --}}
+                            </div> -->
                             <div class="mb-4">
                                 <label for="pickup_point" class="form-label"><b>Titik Jemput</b><span
                                         class="text-danger">*</span></label>

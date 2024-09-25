@@ -8,15 +8,29 @@
     <!-- NAVBAR -->
     <x-navbar-customer />
 
+    <!-- Header Start -->
+    <div class="container-fluid header bg-white p-0">
+        <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
+            <div class="col-md-6 p-5 mt-lg-5">
+                <h1 class="display-5 mb-4">Kontak Kami</h1>
+                <p class="mb-4">Untuk informasi lebih lanjut, silakan hubungi kami melalui kontak yang tersedia di halaman Kontak Kami.</p>
+            </div>
+            <div class="col-md-6">
+                <img class="img-fluid" src="img/contact-img.jpg" style="width: 100%; align-items:center" alt="gambar">
+                <!-- src="{{ asset('frontend/img/carousel/carousel-2.jpg') }}" -->
+            </div>
+        </div>
+    </div>
+
     <!-- CONTENT -->
     <!-- CONTACT -->
     <section id="contact">
         <div class="container mt-5">
             <!-- TITLE -->
-            <div class="contact-title">
+            <!-- <div class="contact-title">
                 <h3>Hubungi Kami</h3>
                 <p>Mempunyai Pertanyaan terkait Trans PMJ? Tim kami siap membantu anda.</p>
-            </div>
+            </div> -->
             <!-- ICON CARD -->
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-5 mt-5">
                 <div class="col">

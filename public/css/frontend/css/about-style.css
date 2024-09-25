@@ -1,0 +1,52 @@
+#about{
+    margin: 50px 0px;
+}
+.header{
+    margin-top: 75px;
+}
+.caption, .card-text{
+    color: #A8A8A8;
+    font-size: 18px;
+}
+.card-title{
+    color: #4ABDAC;
+    font-weight: 700;
+    font-size: 25px;
+}
+.about-card{
+    border-radius: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.about-card:hover {
+    box-shadow: #89ebdc 0px 2px 8px 0px;
+    cursor: pointer;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+/* ANIMASI */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+  }
+  
+    .text-about, .about-card, img {
+        animation: fadeInUp 0.5s ease-out forwards;
+        opacity: 0; 
+    }
+    img {
+        animation-delay: 0.1s;
+    }
+
+    .text-about {
+        animation-delay: 0.3s; 
+    }
+
+    .about-card {
+        animation-delay: 0.5s; 
+    }
