@@ -17,13 +17,13 @@ class MsPaymentBookingResource extends Resource
 {
     protected static ?string $model = MsPaymentBooking::class;
 
-    protected static ?string $pluralModelLabel = "Status Pembayaran Booking";
+    protected static ?string $pluralModelLabel = "Pembayaran";
 
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
 
     protected static ?string $navigationGroup = 'Pemesanan';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {

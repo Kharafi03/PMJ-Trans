@@ -34,27 +34,36 @@ class UserResource extends Resource
                                 Forms\Components\TextInput::make('name')
                                     ->label('Nama')
                                     ->maxLength(255)
+                                    ->placeholder('Masukan nama lengkap')
                                     ->required(),
-                                Forms\Components\TextInput::make('email')
-                                    ->label('Email')
-                                    ->email()
-                                    ->maxLength(255),
                                 Forms\Components\TextInput::make('number_phone')
                                     ->label('Nomor Telepon')
                                     ->numeric()
                                     ->maxLength(14)
+                                    ->placeholder('Masukan nomor telephone')
                                     ->required(),
+                                Forms\Components\TextInput::make('email')
+                                    ->label('Email')
+                                    ->email()
+                                    ->maxLength(255)
+                                    ->placeholder('Masukan alamat email'),
+                                Forms\Components\TextInput::make('address')
+                                    ->label('Alamat')
+                                    ->maxLength(255)
+                                    ->placeholder('Masukan alamat tempat tinggal'),
                                 Forms\Components\TextInput::make('password')
                                     ->label('Password')
                                     ->password()
                                     ->revealable()
                                     ->maxLength(255)
                                     ->dehydrated(fn ($state) => filled($state)) // Password hanya dikirim jika ada isi
+                                    ->placeholder('Password minimal 8 karakter. minimal 1 huruf besar, 1 angka, 1 karater spesial')
                                     ->nullable(), // Mengizinkan nilai kosong
                                 Forms\Components\TextInput::make('nik')
                                     ->label('NIK')
                                     ->numeric()
-                                    ->maxLength(16),
+                                    ->maxLength(16)
+                                    ->placeholder('Masukan NIK dengan benar'),
                             ]),
                     ]),
 
@@ -67,8 +76,8 @@ class UserResource extends Resource
                             ->disk('public')
                             ->directory('sim')
                             ->image()
-                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'])
-                            ->helperText('Unggah SIM dalam format JPG, PNG atau PDF, maksimal ukuran 2MB.')
+                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg'])
+                            ->helperText('Unggah SIM dalam format JPG atau PNG maksimal ukuran 2MB.')
                             ->visibility('public')
                             ->maxSize(2048),
                     ]),

@@ -6,6 +6,7 @@ use App\Filament\Resources\BusMaintenanceResource\Pages;
 use App\Filament\Resources\BusMaintenanceResource\RelationManagers;
 use App\Models\BusMaintenance;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -22,9 +23,7 @@ class BusMaintenanceResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-m-calendar-days';
 
-    // protected static ?string $navigationGroup = 'Bus';
-
-    protected static ?int $navigationSort = 15;
+    protected static ?int $navigationSort = 6;
 
     public static function form(Form $form): Form
     {
@@ -34,25 +33,27 @@ class BusMaintenanceResource extends Resource
                 Forms\Components\Card::make()
                     ->heading('Data Utama')
                     ->schema([
-                        Forms\Components\Select::make('id_bus')
-                            ->label('Bus')
-                            ->relationship('buses', 'name')
-                            ->required(),
+                        Forms\Components\Group::make()->schema([
+                            Select::make('id_bus')
+                                ->label('Bus')
+                                ->relationship('buses', 'name')
+                                ->required(),
 
-                        Forms\Components\Select::make('id_user')
-                            ->label('User')
-                            ->relationship('users', 'name')
-                            ->required(),
+                            Select::make('id_user')
+                                ->label('User')
+                                ->relationship('users', 'name')
+                                ->required(),
 
-                        Forms\Components\Select::make('id_m_maintenance')
-                            ->label('Jenis Perawatan')
-                            ->relationship('m_maintenances', 'name')
-                            ->required(),
-
-                        Forms\Components\Textarea::make('description')
-                            ->label('Deskripsi')
-                            ->maxLength(255)
-                            ->nullable(),
+                            Select::make('id_m_maintenance')
+                                ->label('Jenis Perawatan')
+                                ->relationship('m_maintenances', 'name')
+                                ->required(),
+                            
+                            Forms\Components\Textarea::make('description')
+                                ->label('Deskripsi')
+                                ->maxLength(255)
+                                ->nullable(),
+                        ])->columns(2),
                     ])
                     ->columns(1),
 
@@ -70,18 +71,15 @@ class BusMaintenanceResource extends Resource
                             ->helperText('Unggah gambar dalam format JPG atau PNG, maksimal ukuran 2MB.')
                             ->nullable(),
 
-                        Forms\Components\DateTimePicker::make('date')
-                            ->label('Tanggal')
-                            ->required(),
+                        Forms\Components\Group::make()->schema([
+                            Forms\Components\DateTimePicker::make('date')
+                                ->label('Tanggal')
+                                ->required(),
 
-                        Forms\Components\TextInput::make('location')
-                            ->label('Lokasi')
-                            ->nullable(),
-
-                        Forms\Components\TextInput::make('cost')
-                            ->label('Biaya')
-                            ->numeric()
-                            ->nullable(),
+                            Forms\Components\TextInput::make('location')
+                                ->label('Lokasi')
+                                ->nullable(),
+                        ])->columns(2),
                     ])
                     ->columns(1),
 
@@ -89,6 +87,12 @@ class BusMaintenanceResource extends Resource
                 Forms\Components\Card::make()
                     ->heading('Data Pembayaran')
                     ->schema([
+                        Forms\Components\TextInput::make('nominal')
+                            ->label('Biaya')
+                            ->numeric()
+                            ->prefix('Rp')
+                            ->nullable(),
+
                         Forms\Components\FileUpload::make('image_receipt')
                             ->label('Unggah Bukti Pembayaran')
                             ->disk('public')
@@ -99,15 +103,15 @@ class BusMaintenanceResource extends Resource
                             ->maxSize(2048)
                             ->nullable(),
 
-                        Forms\Components\TextInput::make('latitude')
-                            ->label('Latitude')
-                            ->numeric()
-                            ->nullable(),
+                        // Forms\Components\TextInput::make('latitude')
+                        //     ->label('Latitude')
+                        //     ->numeric()
+                        //     ->nullable(),
 
-                        Forms\Components\TextInput::make('longitude')
-                            ->label('Longitude')
-                            ->numeric()
-                            ->nullable(),
+                        // Forms\Components\TextInput::make('longitude')
+                        //     ->label('Longitude')
+                        //     ->numeric()
+                        //     ->nullable(),
                     ])
                     ->columns(1),
             ]);
@@ -131,8 +135,13 @@ class BusMaintenanceResource extends Resource
                     ->label('Jenis Perawatan')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('description')
-                    ->label('Deskripsi')
+                // Tables\Columns\ImageColumn::make('image')
+                //     ->label('Gambar Bus')
+                //     ->getStateUsing(fn(Model $record) => optional($record->images)->image)
+                //     ->size(50), 
+                Tables\Columns\TextColumn::make('cost')
+                    ->label('Biaya')
+                    ->prefix('Rp. ')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('date')

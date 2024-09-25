@@ -6,6 +6,7 @@ use App\Filament\Resources\IncomeResource\Pages;
 use App\Filament\Resources\IncomeResource\RelationManagers;
 use App\Models\Income;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -37,26 +38,26 @@ class IncomeResource extends Resource
                             ->label('Kode Booking') //aslinya ID Booking
                             ->relationship('booking', 'booking_code')
                             ->required(),
-                            // ->afterStateUpdated(function ($state, callable $set) {
-                            //     $booking = \App\Models\Booking::where('code', $state)->first();
-                            //     if ($booking) {
-                            //         $set('booking_code', $booking->id);
-                            //     } else {
-                            //         $set('booking_code', null);
-                            //     }
-                            // }),
+                        // ->afterStateUpdated(function ($state, callable $set) {
+                        //     $booking = \App\Models\Booking::where('code', $state)->first();
+                        //     if ($booking) {
+                        //         $set('booking_code', $booking->id);
+                        //     } else {
+                        //         $set('booking_code', null);
+                        //     }
+                        // }),
 
                         // Forms\Components\Hidden::make('booking_code')
                         //     ->required(),
 
                         Forms\Components\Select::make('id_m_income')
                             ->label('Tipe Pendapatan')
-                            ->relationship('m_income','name')
+                            ->relationship('m_income', 'name')
                             ->required(),
 
                         Forms\Components\Select::make('id_m_method_payment')
                             ->label('Metode Pembayaran')
-                            ->relationship('m_method_payment','name')
+                            ->relationship('m_method_payment', 'name')
                             ->required(),
                     ]),
 
@@ -70,13 +71,24 @@ class IncomeResource extends Resource
                             ->maxLength(255),
                         Forms\Components\TextInput::make('nominal')
                             ->label('Nominal')
+                            ->prefix('Rp.')
                             ->numeric(),
                         Forms\Components\Select::make('id_ms_income')
                             ->label('Status')
-                            ->relationship('ms_income','name')
+                            ->relationship('ms_income', 'name')
                             ->required(),
                         Forms\Components\DateTimePicker::make('datetime')
                             ->label('Tanggal dan Waktu'),
+
+                        // Forms\Components\TextInput::make('payment_received')
+                        //     ->numeric()
+                        //     ->prefix('Rp.')
+                        //     ->label('Pembayaran Diterima'),
+
+                        // Forms\Components\TextInput::make('payment_remaining')
+                        //     ->numeric()
+                        //     ->prefix('Rp.')
+                        //     ->label('Sisa Pembayaran'),
                     ]),
 
                 // Group untuk Upload Bukti Pembayaran
@@ -90,6 +102,7 @@ class IncomeResource extends Resource
                             ->image()
                             ->columnSpanFull(),
                     ]),
+
             ]);
     }
 
@@ -114,6 +127,7 @@ class IncomeResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('nominal')
+                    ->prefix('Rp. ')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('ms_income.name')

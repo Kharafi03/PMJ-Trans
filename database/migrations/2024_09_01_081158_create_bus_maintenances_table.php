@@ -20,7 +20,7 @@ return new class extends Migration
             $table->longText('image')->nullable(); // Gambar terkait maintenance
             $table->dateTime('date'); // Tanggal maintenance
             $table->string('location')->nullable(); // Lokasi maintenance
-            $table->decimal('cost', 12, 2)->nullable(); // Biaya maintenance
+            $table->decimal('nominal', 12, 2)->nullable(); // Biaya maintenance
             $table->longText('image_receipt')->nullable(); // Gambar tanda terima
             $table->float('latitude', 12, 8)->nullable(); // Latitude
             $table->float('longitude', 12, 8)->nullable(); // Longitude

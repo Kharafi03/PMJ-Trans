@@ -21,16 +21,16 @@ class MMethodPaymentResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-c-building-library';
 
-    protected static ?string $navigationGroup = 'Pendapatan';
+    protected static ?string $navigationGroup = 'Keuangan';
 
-    protected static ?int $navigationSort = 5;
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->label("Nama")
+                    ->label("Metode")
                     ->required()
                     ->maxLength(255),
             ]);
@@ -41,7 +41,7 @@ class MMethodPaymentResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label("Nama")
+                    ->label("Metode")
                     ->searchable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()

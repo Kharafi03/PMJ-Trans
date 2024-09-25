@@ -18,9 +18,7 @@ class OutcomeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-c-arrow-trending-down';
 
-    // protected static ?string $navigationGroup = 'Pengeluaran';
-
-    protected static ?int $navigationSort = -1;
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
@@ -34,28 +32,33 @@ class OutcomeResource extends Resource
                         Forms\Components\Select::make('id_m_outcome')
                             ->label('Tipe Pengeluaran')
                             ->required()
-                            ->relationship('m_outcome','name'),
-                        
+                            ->relationship('m_outcome', 'name'),
+
                         Forms\Components\Select::make('id_booking')
                             ->label('Kode Booking')
                             ->required()
-                            ->relationship('booking','booking_code'),
+                            ->relationship('booking', 'booking_code'),
 
                         Forms\Components\Select::make('id_m_method_payment')
                             ->label('Metode Pembayaran')
                             ->required()
                             ->relationship('m_method_payment', 'name'),
 
-                        Forms\Components\TextInput::make('description')
+                        Forms\Components\Textarea::make('description')
                             ->label('Deskripsi')
                             ->maxLength(255),
 
                         Forms\Components\TextInput::make('nominal')
                             ->label('Nominal')
+                            ->prefix('Rp.')
                             ->integer(),
 
                         Forms\Components\DateTimePicker::make('datetime')
                             ->label('Tanggal dan Waktu'),
+
+                        Forms\Components\Toggle::make('check')
+                            ->label('Selesai')
+                            ->required(),
                     ]),
 
                 // Group untuk Upload Bukti Pembayaran
@@ -80,13 +83,18 @@ class OutcomeResource extends Resource
                 Tables\Columns\TextColumn::make('m_outcome.name')
                     ->label('Tipe')
                     ->sortable(),
+                Tables\Columns\IconColumn::make('check')
+                    ->label('Selesai')
+                    ->boolean(),
                 Tables\Columns\TextColumn::make('booking.booking_code')
                     ->label('Kode Booking')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('m_method_payment.name')
+                    ->label('Metode')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('nominal')
+                    ->prefix('Rp. ')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('datetime')
@@ -106,7 +114,12 @@ class OutcomeResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('id_m_outcome')
+                    ->label('Tipe')
+                    ->relationship('m_outcome', 'name'),
+                Tables\Filters\SelectFilter::make('id_m_method_payment')
+                    ->label('Status Pemesanan')
+                    ->relationship('m_method_payment', 'name'),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()
