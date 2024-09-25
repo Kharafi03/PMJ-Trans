@@ -6,13 +6,9 @@
 @section('content')
 <!-- CONTENT -->
 <section id="qrCode">
-
-    <!-- HEADER -->
     <div class="dashboard-container container p-3">
-        <div class="header mb-4">
-            <p>Halo, Nida Aulia Karima!</p>
-        </div>
-
+        <!-- HEADER -->
+        <x-header-driver />
         <!-- CAMERA -->
         <div  class="d-flex justify-content-center align-items-center mb-3">
             <div id="camera-frame">

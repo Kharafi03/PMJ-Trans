@@ -1,0 +1,14 @@
+@extends('frontend.layouts.app')
+@push('styles')
+    <link id="pagestyle" href="{{ asset('css/frontend/css/driver/headerDriver-style.css') }}" rel="stylesheet" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@endpush
+<div>
+    <div class="profile-card mb-5">
+        <img src="img/driver.png" alt="Profile Image">
+        <div class="profile-text">
+            <h5>Hi, Nida</h5>
+            <p>Berkendaralah dengan hati-hati</p>
+        </div>
+    </div>
+</div>
