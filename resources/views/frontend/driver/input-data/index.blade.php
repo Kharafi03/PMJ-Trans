@@ -9,9 +9,7 @@
     <section id="inputData">
         <div class="dashboard-container container p-3">
             <!-- HEADER -->
-            <div class="header mb-4">
-                <p>Halo, Nida Aulia Karima!</p>
-            </div>
+            <x-header-driver />
             <!-- TEXT CONTENT -->
             <div class="text-content text-center">
                 <p class="title">DATA PERJALANAN</p>
@@ -39,7 +37,7 @@
                         <button class="btn-end">
                             <div class="btn-container">
                                 <div class="icon">
-                                    <i class="fa-solid fa-location-dot"></i>
+                                    <i class="fa-solid fa-circle"></i>
                                 </div>
                                 <div class="text">
                                     <h6>Akhiri Trip</h6>
@@ -48,7 +46,39 @@
                             </div>
                         </button>
                     </a>
-                </div>                
+                </div>  
+                
+                <!-- TOMBOL INI MUNCUL KETIKA DRIVER INGIN MELANJUTKAN PERJALANAN -->
+                <div class="mb-3">
+                    <a href="{{ route('form-pengeluaran') }}">
+                        <button class="btn-riwayatTrip">
+                            <div class="btn-container">
+                                <div class="icon">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div class="text">
+                                    <h6>Riwayat Trip</h6>
+                                    <p>Riwayat Trip saat On Trip</p>
+                                </div>
+                            </div>
+                        </button>
+                    </a>
+                </div>
+                <div class="mb-3">
+                    <a href="{{ route('form-pengeluaran') }}">
+                        <button class="btn-lanjutPengeluaran">
+                            <div class="btn-container">
+                                <div class="icon">
+                                    <i class="fa-solid fa-circle"></i>
+                                </div>
+                                <div class="text">
+                                    <h6>Lanjutkan Trip</h6>
+                                    <p>Klik di sini untuk lanjutkan trip</p>
+                                </div>
+                            </div>
+                        </button>
+                    </a>
+                </div>
             </div>
 
             <!-- NAVBAR -->

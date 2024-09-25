@@ -5,26 +5,90 @@
      <!-- FONT -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
 @endpush
 @section('content')
     <!-- CONTENT -->
     <section id="dashboard">
+
+        <!-- HEADER -->
         <div class="dashboard-container container p-3">
-            <div class="header mb-4">
-                <p>Halo, Nida Aulia Karima!</p>
+            <x-header-driver/>
+
+            <!-- TEXT CONTENT -->
+            <div class="text-content">
+                <p>Semangat.. Hari ini ada trip!</p>
             </div>
-            <div class="content">
-                <img src="img/dashboard-img.png" alt="dashboard">
-                <div class="text-img">
-                    <p>Selamat Datang di Dashboard Driver</p>
+
+            <!-- TITLE -->
+            <div class="title">
+                <p>Booking yang akan datang</p>
+            </div>       
+            <!-- CARD -->
+            <div class="card-content">
+                <div class="banner" style="background-image: url('img/banner.png');">
+                    <div class="banner-isi">
+                        <div class="header">
+                            <p>PMJOKE123</p>
+                            <h5>PMJOKE123</h5>
+                        </div>
+                        <div class="row tujuan"> 
+                            <div class="col-4 col-md-6 col-lg-4"> 
+                                <p>Semarang</p>
+                                <p>(SMG)</p>
+                            </div>
+                            <div class="col-4 col-md-6 col-lg-4">
+                                <p>Pekalongan</p>
+                                <p>(PKL)</p>
+                            </div>
+                        </div>
+                            <button type="button" class="btn-lihat mt-3">Lihat</button>
+                    </div>
                 </div>
-                <div>
-                    <a href="{{ route('qr-code') }}">
-                        <button class="btn-mulai">Mulai</button>
-                    </a>
+                <div class="banner" style="background-image: url('img/banner.png');">
+                    <div class="banner-isi">
+                        <div class="header">
+                            <p>PMJOKE123</p>
+                            <h5>PMJOKE123</h5>
+                        </div>
+                        <div class="row tujuan"> 
+                            <div class="col-4 col-md-6 col-lg-4"> 
+                                <p>Semarang</p>
+                                <p>(SMG)</p>
+                            </div>
+                            <div class="col-4 col-md-6 col-lg-4">
+                                <p>Pekalongan</p>
+                                <p>(PKL)</p>
+                            </div>
+                        </div>
+                            <button type="button" class="btn-lihat mt-3">Lihat</button>
+                    </div>
+                </div>
+                <div class="banner" style="background-image: url('img/banner.png');">
+                    <div class="banner-isi">
+                        <div class="header">
+                            <p>PMJOKE123</p>
+                            <h5>PMJOKE123</h5>
+                        </div>
+                        <div class="row tujuan"> 
+                            <div class="col-4 col-md-6 col-lg-4"> 
+                                <p>Semarang</p>
+                                <p>(SMG)</p>
+                            </div>
+                            <div class="col-4 col-md-6 col-lg-4">
+                                <p>Pekalongan</p>
+                                <p>(PKL)</p>
+                            </div>
+                        </div>
+                            <button type="button" class="btn-lihat mt-3">Lihat</button>
+                    </div>
                 </div>
             </div>
+            <div class="p-3">
+                <button type="button" class="btn-mulai">Mulai Trip</button>
+            </div>
+            
+            <!-- NAVBAR -->
+            <x-navbar-driver/>
         </div>
      </section>
    

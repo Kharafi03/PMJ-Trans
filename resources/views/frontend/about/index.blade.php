@@ -12,7 +12,7 @@
     <div class="container-fluid header bg-white p-0">
         <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
             <div class="col-md-6 p-5 mt-lg-5">
-                <h1 class="display-5 mb-4">Daftar Bus PMJ Trans</h1>
+                <h1 class="display-5 mb-4">Tentang kami</h1>
                 <p class="mb-4">Mari mengenal kami lebih lanjut melalui artikel dibawah ini, yang memberikan gambaran singkat tentang perusahaan.</p>
             </div>
             <div class="col-md-6">

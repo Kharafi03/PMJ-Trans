@@ -9,39 +9,70 @@
     <section id="dashboardKm">
         <!-- HEADER -->
         <div class="dashboard-container container p-3">
-            <div class="header mb-4">
-                <p>Halo, Nida Aulia Karima!</p>
-            </div>
+            <x-header-driver />
             <!-- BUS IMAGE -->
-            <div class="content d-flex justify-content-center align-items-center mb-3">
-                <div class="card">
-                    <img class="img-fluid" src="img/image1.png" alt="bus">
-                    <div class="card-body">
-                    <p class="text-title">Nama Bus</p>
-                    <p class="text-icon"><i class="fa-solid fa-ticket-simple"></i> Kode Bus : PMJ7777777</p>
+            <div class="mt-5">
+                <div class="img-bus d-flex justify-content-center align-items-center mb-4">
+                    <img src="img/image1.png" alt="bus">
+                </div>
+                <div class="tiket">
+                    <div class="header-tiket ">
+                        <p><img src="img/bus.png"> PMJ Trans</p>
+                    </div>
+                    <div class="content-tiket">
+                        <div class="tujuan">
+                            <div class="row">
+                                <div class="col">
+                                    <p>Pekalongan</p>
+                                    <h5>PKL</h5>
+                                </div>
+                                <div class="col" style="text-align: right;">
+                                    <p>Pekalongan</p>
+                                    <h5>PKL</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="waktu">
+                            <div class="row">
+                                <div class="col">
+                                    <h5>08.30 WIB</h5>
+                                    <p>18 September 2024</p>
+                                </div>
+                                <div class="col-2 d-flex justify-content-center align-items-start" >
+                                    <img src="img/tiket-icon.png" >
+                                </div>
+                                <div class="col" style="text-align: right;">
+                                    <h5>10.00 WIB</h5>
+                                    <p>19 September 2024</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer-tiket">
+                            <p>Durasi 1 Jam 15 Menit</p>
+                        </div>
                     </div>
                 </div>
             </div>
             <!-- FORM INPUT -->
             <div class="form-km p-3 mb-5">
-                <form id="formKmAwal">
+                <form>
                     <div class="mb-3">
                         <label for="kmAwal" class="form-label">Kilometer Awal<span class="text-danger">*</span></label>
                         <div class="input-group">
                             <span class="input-group-text" id="icon"><i class="fa-solid fa-gauge"></i></span>                      
-                            <input type="text" class="form-control" id="kmAwal" placeholder="Masukkan Kilometer Awal" required autofocus>
+                            <input type="text" class="form-control" id="kmAwal" placeholder="Masukkan Kilometer Awal" required>
                         </div>
-                        <small class="text-danger" id="error-input" style="display: none;">Masukkan data kilometer awal.</small>
+                        <small class="text-danger" id="error" style="display: none;">Masukkan data kilometer awal.</small>
                     </div>
                     <!-- BUTTON -->
-                    <div class="mb-3">
+                    <div>
                         <button type="button" class="btn-inputkm" onclick="submitKmAwal()">Kirim</button>
                     </div>                     
                 </form>
             </div>
-        
+            
             <!-- NAVBAR -->
-            <x-navbar-driver />
+             <x-navbar-driver/>
         </div>
     </section>
 

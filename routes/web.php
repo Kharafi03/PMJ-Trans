@@ -94,6 +94,26 @@ Route::get('/end-trip', function () {
     return view('frontend.driver.end-trip.index');
 })->name('end-trip');
 
+Route::get('/welcome-screen', function () {
+    return view('frontend.driver.welcome-screen.index');
+})->name('welcome-screen');
+
+Route::get('/dashboard-detail', function () {
+    return view('frontend.driver.dashboard-detail.index');
+})->name('dashboard-detail');
+
+Route::get('/profile-driver', function () {
+    return view('frontend.driver.profile-driver.index');
+})->name('profile-driver');
+
+Route::get('/no-trip', function () {
+    return view('frontend.driver.no-trip.index');
+})->name('no-trip');
+
+Route::get('/trip-history', function () {
+    return view('frontend.driver.trip-history.index');
+})->name('trip-history');
+
 
 // AUTH
 Route::get('/login', function () {

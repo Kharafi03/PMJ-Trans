@@ -1,0 +1,21 @@
+/* TEXT HEADER */
+.profile-card {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    max-width: 400px;
+}
+.profile-text {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+}
+
+.profile-text h5 {
+    margin: 0px;
+}
+
+.profile-text p {
+    margin: 0px;
+    color: #777;
+}
