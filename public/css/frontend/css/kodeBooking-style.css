@@ -1,0 +1,162 @@
+/* NAVBAR */
+#kode{
+    margin-top: 100px;
+}
+header{
+    background-color: white;
+    position: sticky;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+header.scrolled{
+    background-color: white;
+}
+.navbar-brand {
+    font-weight: bold;
+  }
+  
+  .nav-link {
+    font-weight: bold;
+    color: black;
+    font-size: 16px;
+  }
+  .btn-login{
+    background-color: white;
+    font-size: 16px;
+    padding: 8px 15px;
+    font-weight: bold;
+    color: black;
+    border: 1px solid white;
+    &:hover{
+        background: none;
+        border: 1px solid #1E9781;
+        color: #1E9781;
+    }
+  }
+  .btn-signup{
+    font-size: 16px;
+    font-weight: bold;
+    padding: 8px 15px;
+    background-color: #1E9781;
+    border: 1px solid #1E9781;
+    color: white;
+    &:hover{
+        background: none;
+        border: 1px solid #1E9781;
+        color:#1E9781;
+    }
+
+  }
+
+/* TIKET CONTENT */
+.col-md-9{
+    padding: 30px 50px 0px 50px;
+}
+.ticket-card{
+    background-image: url('img/vector.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+h5{
+    font-size: 30px;
+}
+h6{
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+.title{
+    padding-top: 110px;
+}
+h3{
+    font-size: 65px;
+    color: white;
+    font-weight: bolder;
+    text-align: center;
+    transform: rotate(-90deg);
+}
+i, .small{
+    color: white;
+}
+i{
+    font-size: 50px;
+}
+.caption{
+    font-size: 15px;
+    color: white;
+}
+.container-kode{
+    padding: 20px;
+    border: 10px solid #EFF0F6;
+    border-radius: 20px;
+}
+.info{
+    padding: 0px;
+}
+
+/* button */
+.btn-next, .btn-prev{
+    padding: 10px 20px;
+    color: white;
+    border: 1px solid #4A3AFF;
+    background-color: #4A3AFF;
+    margin: 50px 0px;
+    border-radius: 50px;
+    &:hover{
+        color: #4A3AFF;
+        background-color: white;
+
+    }
+}
+.btn-download{
+    text-decoration: none;
+    color: red;
+    border: none;
+    background: none;
+}
+
+/* RESPONSIF */
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    /* Media query for tablet devices */
+    .ticket-card {
+        background-size: 100% 80%;
+        background-position: top;
+    }
+    h3 {
+        font-size: 40px;
+        padding-bottom: 40px;
+    }
+    .title {
+        padding: 130px 0px 0px 60px;
+    }
+   
+    .info {
+        padding-bottom: 105px;
+    }
+}
+@media (max-width: 767.98px) {
+    /* Media query for mobile devices */
+    .ticket-card{
+        background-image: url('img/vector2.png');
+    }
+    h3{
+        transform: rotate(-360deg);
+        font-size: 50px;
+        padding-bottom: 50px;
+    }
+    .title{
+        padding-top: 90px;
+    }
+    .col-md-7{
+        right: 150px;
+        left: 0px;
+    }
+    .col-md-9{
+        padding-top: 80px;
+    }
+    .info{
+        padding-bottom: 50px;
+    }
+
+}

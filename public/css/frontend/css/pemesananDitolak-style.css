@@ -1,4 +1,7 @@
 /* FORM */
+#pemesananDitolak{
+    margin-top: 100px;
+}
 .card-form{
     background-color: white;
     border-radius: 10px;
@@ -30,7 +33,7 @@ input[type='text'], input[type="email"]{
     height: 100px;
     border-radius: 4px;
 }
-.status-alert {
+.status-alert-ditolak {
     background-color: #EC2B2B;
     color: #000;
     border-radius: 4px;

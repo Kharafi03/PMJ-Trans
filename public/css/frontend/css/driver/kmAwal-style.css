@@ -2,43 +2,71 @@
 .dashboard-container{
     max-width: 375px;
     position: relative;
-    background-color: #FCFCFC;
 }
-.content{
+/* .content{
     padding-bottom: 50px;
+} */
+
+/* IMAGE BUS */
+.img-bus img{
+    border-radius: 14px;
+    width: 258px;
 }
 
-/* TEXT HEADER */
-.header{
+/* TIKET */
+.tiket{
+    background-image: url('/img/tiket.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.header-tiket{
+    text-align: center;
+    font-weight: 700;
     padding-top: 10px;
-    font-size: 16px;
-    font-weight: 500;
-    color: #292D32;
-}
-
-/* CARD IMAGE */
-.card{
-    width: 202px;
-    padding: 8px;
-    border-radius: 15px;
-}
-.card img{
-    border-radius: 15px;
-    height: 160px;
-}
-.card-body{
-    padding: 5px;
-}
-.text-title{
     font-size: 20px;
-    font-weight: 600;
-    line-height: 5px;
-    padding-top: 20px;
-
 }
-.text-icon{
+.tujuan{
+    padding: 0px 30px;
+}
+.tujuan p{
+    font-size: 14px;
+    color: #8C8E98;
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
+.tujuan h5{
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+.waktu{
+    padding: 0px 30px;
+    margin-top: 10px;
+    align-items: center;
+}
+.waktu h5{
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 0px;
+}
+.waktu img{
+    margin-top: 5px;
+    width: 100px;
+    height: 25px;
+}
+.waktu p{
+    font-size: 10px;
+    color: #8C8E98;
+    margin-bottom: 5px;
+    margin-top: 0px;
+}
+.footer-tiket p{
     font-size: 12px;
-    color: #00000080;
+    color: #8C8E98;
+    margin-top: 0px;
+    padding-bottom: 20px;
+    text-align: center;
 }
 
 /* FORM */
@@ -76,4 +104,3 @@ input[type="text"]{
         color: #FFB800;
     }
 }
-

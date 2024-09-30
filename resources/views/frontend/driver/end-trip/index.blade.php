@@ -9,9 +9,7 @@
     <section id="dashboardEnd">
         <div class="dashboard-container container p-3">
             <!-- HEADER -->
-            <div class="header mb-4">
-                <p>Halo, Nida Aulia Karima!</p>
-            </div>
+            <x-header-driver />
             <!-- TEXT CONTENT -->
             <div class="text-content text-center">
                 <p class="title">DATA PERJALANAN</p>
@@ -22,7 +20,7 @@
                 <button class="btn-end"  disabled>
                     <div class="btn-container">
                         <div class="icon">
-                            <i class="fa-solid fa-house"></i>
+                            <i class="fa-solid fa-circle"></i>
                         </div>
                         <div class="text">
                             <h6>Akhiri Trip</h6>

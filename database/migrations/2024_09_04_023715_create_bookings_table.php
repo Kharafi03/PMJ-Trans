@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('booking_code', 255)->nullable();
             $table->foreignId('id_cus')->constrained('users')->cascadeOnDelete();
-            $table->string('destination_point', 50)->nullable();
+            $table->string('destination_point', 255)->nullable();
             //$table->time('destination_time')->nullable();
             $table->integer('capacity')->nullable();
             $table->dateTime('date_start')->nullable();
             $table->date('date_end')->nullable();
-            $table->string('pickup_point', 50)->nullable();
+            $table->string('pickup_point', 255)->nullable();
             //$table->time('pickup_time')->nullable();
             $table->integer('fleet_amount')->nullable();
             $table->decimal('trip_nominal', 12, 2)->nullable();

@@ -5,6 +5,9 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @endpush
 @section('content')
+    <!-- NAVBAR -->
+    <x-navbar-customer />
+    
     <!-- CUSTOMER PROFIL -->
     <section id="profil">
         <div class="container mt-5">
@@ -18,31 +21,32 @@
                         <h5>Foto Profil</h5>
                         <p>Photo</p>
                         <div class="avatar text-center">
-                            <!-- <i class="fa-solid fa-user"></i> -->
-                            <img src="img/avatar.png" class="img-fluid" alt="avatar">
+                            <img src="{{ asset('img/avatar.png') }}" class="img-fluid" alt="avatar">
                         </div>
                     </div>
                 </div>
                 <!-- FORM -->
                 <div class="col-md-8 mb-3 d-flex">
                     <div class="profil-form card h-100 w-100">
-                        <form id="formProfilCustomer">
+                        <form id="formProfilCustomer" action="{{ route('profile.update') }}" method="POST">
+                            @csrf
                             <div class="mb-3">
-                                <label for="namaLengkap" class="form-label">Nama Lengkap<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="namaLengkap" placeholder="Masukkan nama lengkap" required>
+                                <label for="name" class="form-label">Nama Lengkap<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama lengkap" value="{{ $user->name }}" required>
                             </div>
+                            <div class="mb-3">
+                                <label for="number_phone" class="form-label">Nomor Telepon<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="number_phone" name="number_phone" placeholder="Masukkan nomor telepon" value="{{ $user->number_phone }}" required>
+                            </div> 
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="Masukkan alamat email">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan alamat email" value="{{ $user->email }}">
                             </div> 
                             <div class="mb-3">
-                                <label for="noTelp" class="form-label">Nomor Telepon<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="noTelp" placeholder="Masukkan nomor telepin aktif fan dapat dihubungi" required>
-                            </div> 
-                            <div class="mb-3">
-                                <label for="alamat" class="form-label">Alamat<span class="text-danger">*</span></label>
-                                <textarea class="form-control" id="alamat" rows="3" placeholder="Masukkan alamat lengkap" required></textarea>
+                                <label for="address" class="form-label">Alamat<span class="text-danger">*</span></label>
+                                <textarea class="form-control" id="address" name="address" rows="3" placeholder="Masukkan alamat lengkap" required>{{ $user->address }}</textarea>
                             </div>
+                            <button type="submit" class="btn-profil">Perbarui Profil</button>
                         </form>                         
                     </div>
                 </div>
@@ -55,15 +59,12 @@
                         <p>Keterangan : <span class="text-danger">Wajib diisi (*)</span></p>
                     </div>
                 </div>
-                <!-- BUTTON -->
-                <div class="col-md-8">
-                    <div class="container-btn">
-                        <buton type="button" class="btn-profil" onclick="konfirmasiUbahProfil()">Perbarui Profil</buton>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
+
+    <!-- FOOTER -->
+    <x-footer-customer />
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 @endsection

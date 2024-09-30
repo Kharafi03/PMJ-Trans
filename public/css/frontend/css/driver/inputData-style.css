@@ -2,7 +2,6 @@
 .dashboard-container{
     max-width: 375px;
     position: relative;
-    background-color: #FCFCFC;
 }
 .content{
     padding-bottom: 50px;
@@ -51,6 +50,9 @@
     color:#19182580;
     line-height: 0px;
 }
+.btn-riwayatTrip p, .btn-riwayatTrip h6, .btn-lanjutPengeluaran p, .btn-lanjutPengeluaran h6{
+    color: white;
+}
 .btn-pengeluaran .icon {
     font-size: 20px;
     margin-right: 20px;
@@ -85,9 +87,43 @@
     width: 100%;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+.btn-riwayatTrip .icon {
+    font-size: 20px;
+    margin-right: 20px;
+    padding-top: 8px;
+    color: white;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: #E50A3E;
+}
+.btn-riwayatTrip{
+    background-color: #000000;
+    border: 1px solid #000000;
+    border-radius: 15px;
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.btn-lanjutPengeluaran .icon {
+    font-size: 20px;
+    margin-right: 20px;
+    padding-top: 8px;
+    color: white;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: #072B24;
+}
+.btn-lanjutPengeluaran{
+    background-color: #0FA958;
+    border: 1px solid #0FA958;
+    border-radius: 15px;
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-.btn-pengeluaran:hover, .btn-end:hover {
-    transform: scale(1.05); /* Membesarkan tombol saat di hover */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Menambahkan efek bayangan saat hover */
+.btn-pengeluaran:hover, .btn-end:hover, .btn-riwayatTrip:hover, .btn-lanjutPengeluaran:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
 }
 

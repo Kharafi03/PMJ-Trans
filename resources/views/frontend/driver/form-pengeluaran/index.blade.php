@@ -9,9 +9,7 @@
     <section id="dashboardKm">
         <div class="dashboard-container container p-3">
             <!-- HEADER -->
-            <div class="header mb-4">
-                <p>Halo, Nida Aulia Karima!</p>
-            </div>
+            <x-header-driver />
             <!-- TEXT CONTENT -->
             <div class="text-content text-center">
                 <p class="title">DATA PERJALANAN</p>

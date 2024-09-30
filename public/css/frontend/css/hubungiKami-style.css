@@ -1,4 +1,10 @@
 /* Title */
+#contact{
+    margin-top: 100px;
+}
+.header{
+    margin-top: 75px;
+}
 .contact-title{
     text-align: center;
 }
