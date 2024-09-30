@@ -60,16 +60,16 @@ class MailResource extends Resource
                             ->nullable()
                             ->email()
                             ->maxLength(255)
-                            ->placeholder('Masukkan alamat email yang valid, harus berakhiran @gmail.com.')
-                            ->reactive()
-                            ->afterStateUpdated(function ($set, $get) {
-                                if (!str_ends_with($get('email'), '@gmail.com')) {
-                                    $set('email', ''); // Mengosongkan input jika tidak valid
-                                }
-                                if (self::isFormComplete($get)) {
-                                    $set('template_chat', self::generateTemplateChat($get));
-                                }
-                            }),
+                            ->placeholder('Masukkan alamat email yang valid, harus berakhiran @gmail.com.'),
+                        // ->reactive()
+                        // ->afterStateUpdated(function ($set, $get) {
+                        //     if (!str_ends_with($get('email'), '@gmail.com')) {
+                        //         $set('email', ''); // Mengosongkan input jika tidak valid
+                        //     }
+                        //     if (self::isFormComplete($get)) {
+                        //         $set('template_chat', self::generateTemplateChat($get));
+                        //     }
+                        // }),
 
                         Forms\Components\Textarea::make('message')
                             ->label('Pesan')
@@ -134,7 +134,6 @@ class MailResource extends Resource
 
                 Tables\Columns\TextColumn::make('template_chat')
                     ->label('Template Chat')
-                    ->default(fn($record) => $record->template_chat)
                     ->searchable()
                     ->toggleable(),
 
@@ -171,7 +170,7 @@ class MailResource extends Resource
 
                 Tables\Actions\Action::make('email')
                     ->label('Email')
-                    ->url(fn($record) => "mailto:{$record->email}?subject=Hubungi&body=" . urlencode($record->template_chat))
+                    ->url(fn($record) => "mailto:{$record->email}?subject=Hubungi&body=" . rawurlencode($record->template_chat))
                     ->icon('heroicon-s-envelope')
                     ->hidden(fn($record) => empty($record->email))
                     ->openUrlInNewTab()

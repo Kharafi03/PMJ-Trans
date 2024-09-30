@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->longText('message');
+            $table->longText('template_chat');
             $table->softDeletes();
             $table->timestamps();
         });
