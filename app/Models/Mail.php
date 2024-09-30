@@ -18,9 +18,20 @@ class Mail extends Model
 
     protected $fillable = [
         'name',
-        'no/email',
+        'phone',
+        'email',
         'message',
     ];
 
     protected $guarded = ['id'];
+
+    public function getTemplateChatAttribute()
+    {
+
+        $name = $this->name ?? 'Pelanggan';
+        $phone = $this->phone ?? '(tidak ada nomor telepon)';
+        $message = $this->message ?? '(tidak ada pesan)';
+
+        return "Halo {$name},\nTerima kasih atas pesan Anda. Kami akan segera menghubungi Anda di nomor telepon: {$phone}.\nPesan Anda: {$message}";
+    }
 }
