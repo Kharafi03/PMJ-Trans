@@ -21,10 +21,11 @@ class TripBus extends Model
     protected $fillable = [
         'id_booking',
         'id_bus',
-        'id_customer',
+        //'id_customer',
         'id_driver',
         'id_codriver',
         'nominal',
+        'legrest',
         'km_start',
         'km_end',
         'total_spend',
@@ -61,8 +62,13 @@ class TripBus extends Model
         return $this->hasMany(TripBusSpend::class, 'id_trip_bus');
     }
 
-    // public function ()
-    // {
-    //     return $this->hasMany(Outcome::class, 'id_booking');
-    // }
+    public function tripbus():BelongsTo
+    {
+        return $this->belongsTo(Booking::class, 'id_booking');
+    }
+
+    public function tripbuss():BelongsTo
+    {
+        return $this->belongsTo(Booking::class, 'id_booking');
+    }
 }
