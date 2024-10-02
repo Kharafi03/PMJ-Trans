@@ -315,6 +315,11 @@ class BookingResource extends Resource
                                                     ->label('Co-Driver'),
                                             ])
                                             ->columns(2),
+                                        Select::make('id_ms_trip')
+                                            ->label('Status Trip')
+                                            ->required()
+                                            ->default(1)
+                                            ->relationship('ms_trip', 'name'),
                                     ])
                                     ->minItems(0)
                                     ->maxItems(function (Get $get) {

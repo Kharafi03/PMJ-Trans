@@ -81,6 +81,10 @@ class TripBusResource extends Resource
                                             ->label('Co-Driver')
                                             ->required()
                                             ->relationship('codriver', 'name'),
+                                        Forms\Components\Select::make('id_ms_trip')
+                                            ->label('Status Trip')
+                                            ->required()
+                                            ->relationship('ms_trip', 'name'),
                                     ]),
                                 Repeater::make('spendtrip')
                                     ->label('Pengeluaran Trip')
