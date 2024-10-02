@@ -588,7 +588,7 @@ class BookingResource extends Resource
                     ->modalHeading('Refund Confirmation')
                     ->modalSubheading('Apakah Anda yakin ingin melakukan refund untuk transaksi ini?')
                     ->modalButton('Refund')
-                    ->visible(fn($record) => $record->id_ms_booking === 4), // Kondisi menampilkan tombol
+                    ->visible(fn($record) => $record->id_ms_booking === 5), // Kondisi menampilkan tombol
             ])
             ->bulkActions([
                 DeleteBulkAction::make(),

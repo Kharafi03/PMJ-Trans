@@ -51,7 +51,7 @@ class OutcomeResource extends Resource
                         Forms\Components\TextInput::make('nominal')
                             ->label('Nominal')
                             ->prefix('Rp.')
-                            ->integer(),
+                            ->numeric(),
 
                         Forms\Components\DateTimePicker::make('datetime')
                             ->label('Tanggal dan Waktu'),
