@@ -5,24 +5,28 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @endpush
 @section('content')
-    <!-- Header Start -->
-    <div class="container-fluid header bg-white p-0">
-        <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
-            <div class="col-md-6 p-5 mt-lg-5">
-                <h1 class="display-5 mb-4">Daftar Bus PMJ Trans</h1>
-                <p class="mb-4">Temukan bus ideal Anda dengan pilihan kategori, rentang harga, dan
-                    kapasitas penumpang yang telah kami sediakan !</p>
-            </div>
-            <div class="col-md-6">
-                <img class="img-fluid" src="img/image-bus1.png" style="width: 100%; align-items:center" alt="">
-                <!-- src="{{ asset('frontend/img/carousel/carousel-2.jpg') }}" -->
-            </div>
-        </div>
-    </div>
-    <!-- Header End -->
 
-    <!-- Property List Start -->
-    <div class="container px-5 mt-5 mb-5">
+    <!-- NAVBAR -->
+    <x-navbar-customer/>
+    <section id="bus">
+      <!-- Header Start -->
+      <div class="container-fluid header bg-white p-0">
+          <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
+              <div class="col-md-6 p-5 mt-lg-5">
+                  <h1 class="display-5 mb-4">Daftar Bus PMJ Trans</h1>
+                  <p class="mb-4">Temukan bus ideal Anda dengan pilihan kategori, rentang harga, dan
+                      kapasitas penumpang yang telah kami sediakan !</p>
+              </div>
+              <div class="col-md-6">
+                  <img class="img-fluid" src="img/image-bus1.png" style="width: 100%; align-items:center" alt="">
+                  <!-- src="{{ asset('frontend/img/carousel/carousel-2.jpg') }}" -->
+              </div>
+          </div>
+      </div>
+      <!-- Header End -->
+
+      <!-- Property List Start -->
+      <div class="container px-5 mt-5 mb-5">
         <div class="row g-0 gx-5 align-items-end">
             <div class="col-lg-6">
                 <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
@@ -187,205 +191,208 @@
 
         <!-- CARD BUS -->
         <div class="col-lg-12">
-            <div class="row g-4">
-                <!-- Card 1 -->
-                <div class="col-lg-4 col-md-6 mb-4">
+          <div class="row g-4">
+            <!-- CARD 1 -->
+            <div class="col-lg-4 col-md-6 mb-4">
                     <div class="package-card card h-100">
-                      <img src="img/image-bus1.png" alt="Bus 1" class="img-fluid">
+                      <img src="img/pmj01-1.jpg" alt="Bus 1" class="img-fluid">
                       <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <p class="package-card-title">PMJ Suites</p>
-                            <div class="package-icon">
-                                <i class="fa-solid fa-star"></i> 4.8
-                            </div>  
-                        </div>
-                        <p class="small">Lorem ipsum dolor sit amet consectetur elit.</p>
-                        <div class="row mt-3 mb-3 text-center d-flex justify-content-center align-items-center">
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-chair"></i>
-                            <p>30 Kursi</p>
-                          </div>
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-tv"></i>
-                            <p>TV Pribadi</p>
-                          </div>
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-wifi"></i>
-                            <p>Free Wifi</p>
-                          </div>
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-bolt"></i>
-                            <p>Charger</p>
-                          </div>
-                        </div>
-                        <ul>
-                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                        </ul>
-                      </div>
-                       
-                    </div>
-                  </div>
-                  <!-- Card 2 -->
-                  <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="package-card card h-100">
-                      <img src="img/image-bus1.png" alt="Bus 2" class="img-fluid">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <p class="package-card-title">PMJ Eksekutif</p>
+                            <p class="package-card-title">PMJ 01</p>
                             <div class="package-icon">
                                 <i class="fa-solid fa-star"></i> 4.8
                             </div>
                         </div>
-                        <p class="small">Lorem ipsum dolor sit amet consectetur elit.</p>
+                        <p class="small">Jetbus 3+ Voyager Adiputro</p>
                         <div class="row mt-3 mb-3 text-center">
                           <div class="col-3 text-icon">
-                            <i class="fa-solid fa-chair"></i>
-                            <p>30 Kursi</p>
+                            <i class="fa-solid fa-bed"></i>
+                            <p>Bantal & Selimut</p>
                           </div>
                           <div class="col-3 text-icon">
                             <i class="fa-solid fa-tv"></i>
-                            <p>TV Pribadi</p>
+                            <p>Entertain System</p>
                           </div>
                           <div class="col-3 text-icon">
-                            <i class="fa-solid fa-wifi"></i>
-                            <p>Free Wifi</p>
+                            <i class="fa-solid fa-mug-hot"></i>
+                            <p>Dispenser</p>
                           </div>
                           <div class="col-3 text-icon">
                             <i class="fa-solid fa-bolt"></i>
-                            <p>Charger</p>
+                            <p>USB Charger</p>
                           </div>
                         </div>
                         <ul>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                          <li>Dilengkapi dengan AC, bantal, dan selimut untuk kenyamanan perjalanan.</li>
+                          <li>Berbagai entertain system, seperti youtube android tv, subwoofer audio, wireless mic, dan karaoke.</li>
+                          <li>Tempat duduk nyaman dengan seat 2-2.</li>
                         </ul>
                       </div>
                        
                     </div>
                   </div>
-                  <!-- Card 3 -->
-                  <div class="col-lg-4 col-md-6 mb-4">
+            <!-- CARD 2 -->
+            <div class="col-lg-4 col-md-6 mb-4">
                     <div class="package-card card h-100">
-                      <img src="img/image-bus1.png" alt="Bus 3" class="img-fluid">
+                      <img src="img/pmj02-1.jpg" alt="Bus 2" class="img-fluid">
                       <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <p class="package-card-title">PMJ Premium</p>
+                            <p class="package-card-title">PMJ 02</p>
+                            <div class="package-icon">
+                                <i class="fa-solid fa-star"></i> 4.8
+                            </div>
+                        </div>
+                        <p class="small">Jetbus 3+ Voyager Adiputro</p>
+                        <div class="row mt-3 mb-3 text-center">
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-bed"></i>
+                            <p>Bantal & Selimut</p>
+                          </div>
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-tv"></i>
+                            <p>Entertain System</p>
+                          </div>
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-mug-hot"></i>
+                            <p>Dispenser</p>
+                          </div>
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-bolt"></i>
+                            <p>USB Charger</p>
+                          </div>
+                        </div>
+                        <ul>
+                          <li>Dilengkapi dengan AC, bantal, dan selimut untuk kenyamanan perjalanan.</li>
+                          <li>Berbagai entertain system, seperti youtube android tv, subwoofer audio, wireless mic, dan karaoke.</li>
+                          <li>Tempat duduk nyaman dengan seat 2-2.</li>
+                        </ul>
+                      </div>   
+                    </div>
+            </div>
+            <!-- CARD 3 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="package-card card h-100">
+                      <img src="img/pmj01-1.jpg" alt="Bus 3" class="img-fluid">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="package-card-title">PMJ 03</p>
+                            <div class="package-icon">
+                                <i class="fa-solid fa-star"></i> 4.8
+                            </div>
+                        </div>
+                        <p class="small">Jetbus 3+ Voyager Adiputro</p>
+                        <div class="row mt-3 mb-3 text-center">
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-bed"></i>
+                            <p>Bantal & Selimut</p>
+                          </div>
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-tv"></i>
+                            <p>Entertain System</p>
+                          </div>
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-mug-hot"></i>
+                            <p>Dispenser</p>
+                          </div>
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-bolt"></i>
+                            <p>USB Charger</p>
+                          </div>
+                        </div>
+                        <ul>
+                          <li>Dilengkapi dengan AC, bantal, dan selimut untuk kenyamanan perjalanan.</li>
+                          <li>Berbagai entertain system, seperti youtube android tv, subwoofer audio, wireless mic, dan karaoke.</li>
+                          <li>Tempat duduk nyaman dengan seat 2-2.</li>
+                        </ul>
+                      </div>
+                       
+                    </div>
+                  </div>
+            <!-- CARD 4 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="package-card card h-100">
+                      <img src="img/pmj02-1.jpg" alt="Bus 4" class="img-fluid">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="package-card-title">PMJ 04</p>
+                            <div class="package-icon">
+                                <i class="fa-solid fa-star"></i> 4.9
+                            </div>
+                        </div>
+                        <p class="small">Jetbus 3+ Voyager Adiputro</p>
+                        <div class="row mt-3 mb-3 text-center">
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-bed"></i>
+                            <p>Bantal & Selimut</p>
+                          </div>
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-tv"></i>
+                            <p>Entertain System</p>
+                          </div>
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-mug-hot"></i>
+                            <p>Dispenser</p>
+                          </div>
+                          <div class="col-3 text-icon">
+                            <i class="fa-solid fa-bolt"></i>
+                            <p>USB Charger</p>
+                          </div>
+                        </div>
+                        <ul>
+                          <li>Dilengkapi dengan AC, bantal, dan selimut untuk kenyamanan perjalanan.</li>
+                          <li>Berbagai entertain system, seperti youtube android tv, subwoofer audio, wireless mic, dan karaoke.</li>
+                          <li>Tempat duduk nyaman dengan seat 2-2.</li>
+                        </ul>
+                      </div>
+                       
+                    </div>
+                  </div>
+            <!-- CARD 5 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="package-card card h-100">
+                      <img src="img/pmj01-1.jpg" alt="Bus 5" class="img-fluid">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="package-card-title">PMJ 05</p>
                             <div class="package-icon">
                                 <i class="fa-solid fa-star"></i> 4.7
                             </div>
                         </div>
-                        <p class="small">Lorem ipsum dolor sit amet consectetur elit.</p>
+                        <p class="small">Jetbus 3+ Voyager Adiputro</p>
                         <div class="row mt-3 mb-3 text-center">
                           <div class="col-3 text-icon">
-                            <i class="fa-solid fa-chair"></i>
-                            <p>30 Kursi</p>
+                            <i class="fa-solid fa-bed"></i>
+                            <p>Bantal & Selimut</p>
                           </div>
                           <div class="col-3 text-icon">
                             <i class="fa-solid fa-tv"></i>
-                            <p>TV Pribadi</p>
+                            <p>Entertain System</p>
                           </div>
                           <div class="col-3 text-icon">
-                            <i class="fa-solid fa-wifi"></i>
-                            <p>Free Wifi</p>
+                            <i class="fa-solid fa-mug-hot"></i>
+                            <p>Dispenser</p>
                           </div>
                           <div class="col-3 text-icon">
                             <i class="fa-solid fa-bolt"></i>
-                            <p>Charger</p>
+                            <p>USB Charger</p>
                           </div>
                         </div>
                         <ul>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                          <li>Dilengkapi dengan AC, bantal, dan selimut untuk kenyamanan perjalanan.</li>
+                          <li>Berbagai entertain system, seperti youtube android tv, subwoofer audio, wireless mic, dan karaoke.</li>
+                          <li>Tempat duduk nyaman dengan seat 2-2.</li>
                         </ul>
                       </div>
                        
                     </div>
                   </div>
-                  <!-- Card 1 -->
-                  <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="package-card card h-100">
-                      <img src="img/image-bus1.png" alt="Bus 1" class="img-fluid">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <p class="package-card-title">PMJ Suites</p>
-                            <div class="package-icon">
-                                <i class="fa-solid fa-star"></i> 4.8
-                            </div>  
-                        </div>
-                        <p class="small">Lorem ipsum dolor sit amet consectetur elit.</p>
-                        <div class="row mt-3 mb-3 text-center">
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-chair"></i>
-                            <p>30 Kursi</p>
-                          </div>
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-tv"></i>
-                            <p>TV Pribadi</p>
-                          </div>
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-wifi"></i>
-                            <p>Free Wifi</p>
-                          </div>
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-bolt"></i>
-                            <p>Charger</p>
-                          </div>
-                        </div>
-                        <ul>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                        </ul>
-                      </div>
-                       
-                    </div>
-                  </div>
-                  <!-- Card 2 -->
-                  <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="package-card card h-100">
-                      <img src="img/image-bus1.png" alt="Bus 2" class="img-fluid">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <p class="package-card-title">PMJ Eksekutif</p>
-                            <div class="package-icon">
-                                <i class="fa-solid fa-star"></i> 4.8
-                            </div>
-                        </div>
-                        <p class="small">Lorem ipsum dolor sit amet consectetur elit.</p>
-                        <div class="row mt-3 mb-3 text-center">
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-chair"></i>
-                            <p>30 Kursi</p>
-                          </div>
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-tv"></i>
-                            <p>TV Pribadi</p>
-                          </div>
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-wifi"></i>
-                            <p>Free Wifi</p>
-                          </div>
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-bolt"></i>
-                            <p>Charger</p>
-                          </div>
-                        </div>
-                        <ul>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                        </ul>
-                      </div>
-                       
-                    </div>
-                  </div>
-            </div>
+          </div>
         </div>
-    </div>
+
+    
+    </section>
+        <!-- FOOTER -->
+    <x-footer-customer/>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 @endsection
 

@@ -743,13 +743,11 @@
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators2"
                     data-bs-slide="prev">
-                    <span aria-hidden="true"><span aria-hidden="true"><i
-                                class="fa-solid fa-chevron-left"></i></span></span>
+                    <span aria-hidden="true"><span aria-hidden="true"><i class="fa-solid fa-chevron-left"></i></span></span>
                 </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators2"
                     data-bs-slide="next">
-                    <span aria-hidden="true"><span aria-hidden="true"><i
-                                class="fa-solid fa-chevron-right"></i></span></span>
+                    <span aria-hidden="true"><span aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span></span>
                 </button>
             </div>
         </div>

@@ -39,8 +39,8 @@
                             <i class="fa-solid fa-phone"></i>
                         </div>
                         <div class="card-body flex-column align-items-end">
-                            <h5 class="card-title">No Telp</h5>
-                            <p class="card-text">0898-1234-5678</p>
+                            <h5 class="card-title">No. Telephone</h5>
+                            <p class="card-text">0812-2562-5255</p>
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">Email</h5>
-                            <p class="card-text">pmjtrans@gmail.com</p>
+                            <p class="card-text">buspmjtrans@gmail.com</p>
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">Lokasi</h5>
-                            <p class="card-text">Jl. Lingkar Timur, Ngembal Rejo, Kudus, Jawa Tengah</p>
+                            <p class="card-text">Jl. Lingkar Timur, Ngembal Rejo, Kecamatan Jati, Kabupaten Kudus</p>
                         </div>
                     </div>
                 </div>
@@ -214,7 +214,7 @@
     </script>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
-    </script>
+    </script> -->
 @endsection
