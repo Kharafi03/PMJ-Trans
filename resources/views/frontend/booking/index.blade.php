@@ -291,6 +291,7 @@
         field.remove();
         fieldCount--; // Decrement jumlah field
         updateLabels(); // Perbarui label setelah menghapus field
+        toggleAddButton(); // Periksa kembali apakah tombol tambah harus diaktifkan
     }
 
     // Inisialisasi field pertama dengan label
