@@ -16,27 +16,27 @@
                 <div class="col-md-3 mb-3">
                     <h6>Hubungi Kami</h6>
                     <ul class="list-unstyled">
-                        <li><li><a href="#" style="text-decoration: none;"> Jl. Lingkar Timur, Kabupaten Kudus, Jawa Tengah</a></li></li>
-                        <li><li><a href="#" style="text-decoration: none;">pmjtrans@gmail.com</a></li></li>
-                        <li><li><a href="#" style="text-decoration: none;">0856-9877-5655</a></li></li>
+                        <li><li><a href="https://g.co/kgs/VGfUFPB" target="_blank" style="text-decoration: none;">Jl. Lingkar Timur, Ngembal Rejo, Kecamatan Jati, Kabupaten Kudus, Jawa Tengah</a></li></li>
+                        <li><li><a href="mailto:buspmjtrans@gmail.com" target="_blank" style="text-decoration: none;">buspmjtrans@gmail.com</a></li></li>
+                        <li><li><a href="https://api.whatsapp.com/send?phone=6281225625255&text=Halo,%20saya%20ingin%20bertanya" target="_blank" style="text-decoration: none;">0812-2562-5255</a></li></li>
                     </ul>
                 </div>
                 <div class="col-md-2 mb-3">
                     <h6>Link Cepat</h6>
                     <ul class="list-unstyled">
                         <li><a href="#" style="text-decoration: none;">Beranda</a></li>
-                        <li><a href="#package" style="text-decoration: none;">Bus</a></li>
-                        <li><a href="#about" style="text-decoration: none;">Tentang Kami</a></li>
-                        <li><a href="#" style="text-decoration: none;">Pusat Bantuan</a></li>
+                        <li><a href="{{ route('bus')}}" style="text-decoration: none;">Bus</a></li>
+                        <li><a href="{{ route('about')}}" style="text-decoration: none;">Tentang Kami</a></li>
+                        <li><a href="{{ route('contact')}}" style="text-decoration: none;">Kontak Kami</a></li>
                         <li><a href="#" style="text-decoration: none;">Cek Pesanan</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2">
                     <h6>Sosial Media</h6>
-                    <div>
-                        <a href="#" class="text-light mx-2"><i class="fab fa-instagram"></i></i></a>
-                        <a href="#" class="text-light mx-2"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-light mx-2"><i class="fa-brands fa-x-twitter"></i></a>
+                    <div class="sosmed-icon">
+                        <a href="#" target="_blank" class="text-light mx-2"><i class="fab fa-instagram"></i></i></a>
+                        <a href="https://web.facebook.com/pmjtrans" target="_blank" class="text-light mx-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://youtube.com/@buspmjtrans?si=wgoX0EPE6PeY0u7S"target="_blank"  class="text-light mx-2"><i class="fa-brands fa-youtube"></i></a>
                     </div>
                 </div>
             </div>

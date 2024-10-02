@@ -21,10 +21,11 @@ class TripBus extends Model
     protected $fillable = [
         'id_booking',
         'id_bus',
-        'id_customer',
+        //'id_customer',
         'id_driver',
         'id_codriver',
         'nominal',
+        'legrest',
         'km_start',
         'km_end',
         'id_ms_trip',

@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_booking')->constrained('bookings')->cascadeOnDelete();
             $table->foreignId('id_bus')->constrained('buses')->cascadeOnDelete();
-            $table->foreignId('id_customer')->constrained('users')->cascadeOnDelete();
+            //$table->foreignId('id_customer')->constrained('users')->cascadeOnDelete()->nullable();
             $table->foreignId('id_driver')->constrained('users')->cascadeOnDelete();
             $table->foreignId('id_codriver')->constrained('users')->cascadeOnDelete();
             $table->decimal('nominal', 12, 2)->nullable();
+            $table->boolean('legrest')->nullable();
             $table->integer('km_start')->nullable();
             $table->integer('km_end')->nullable();
             $table->decimal('total_spend', 12, 2)->nullable();

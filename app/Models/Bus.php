@@ -36,6 +36,11 @@ class Bus extends Model
         return $this->belongsTo(MsBus::class);
     }
 
+    public function bus():BelongsTo
+    {
+        return $this->belongsTo(Booking::class);
+    }
+
     public function images()
     {
         return $this->hasMany(BusImage::class, 'id_bus');
