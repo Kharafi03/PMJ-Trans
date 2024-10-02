@@ -18,8 +18,10 @@ class Mail extends Model
 
     protected $fillable = [
         'name',
-        'no/email',
+        'phone',
+        'email',
         'message',
+        'template_chat'
     ];
 
     protected $guarded = ['id'];
