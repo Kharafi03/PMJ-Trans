@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('location')->nullable(); // Lokasi maintenance
             $table->decimal('nominal', 12, 2)->nullable(); // Biaya maintenance
             $table->longText('image_receipt')->nullable(); // Gambar tanda terima
-            $table->float('latitude', 12, 8)->nullable(); // Latitude
-            $table->float('longitude', 12, 8)->nullable(); // Longitude
+            $table->string('latitude')->nullable(); // Latitude
+            $table->string('longitude')->nullable(); // Longitude
             $table->softDeletes(); // Kolom deleted_at
             $table->timestamps(); // Kolom created_at dan updated_at
         });

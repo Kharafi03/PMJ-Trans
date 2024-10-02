@@ -35,4 +35,9 @@ class TripBusSpend extends Model
     {
         return $this->belongsTo(MSpend::class, 'id_m_spend');
     }
+
+    public function tripbus(): BelongsTo
+    {
+        return $this->belongsTo(TripBus::class, 'id_trip_bus');
+    }
 }

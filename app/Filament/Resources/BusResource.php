@@ -72,7 +72,7 @@ class BusResource extends Resource
                             ->relationship('ms_buses', 'name')
                             ->required(),
                     ])
-                    ->columns(2), // Mengatur jumlah kolom dalam card
+                    ->columns(4), // Mengatur jumlah kolom dalam card
 
                 Forms\Components\Repeater::make('images')
                     ->label('Gambar Bus')
@@ -90,7 +90,7 @@ class BusResource extends Resource
                             ->required(),
                     ])
                     ->minItems(1)
-                    ->maxItems(4)
+                    ->maxItems(5)
                     ->columnSpanFull(), // Mengatur card agar se layar
             ]);
     }
