@@ -11,22 +11,33 @@
             <div class="p-3  sticky-bottom">
                 <nav class="navbar navbar-bottom">
                     <div class="container justify-content-center align-items-center">
-                      <ul class="navbar-nav d-flex flex-row">
-                        <li class="nav-item">
-                          <a class="nav-link text-white" href="{{ route('dashboard-driver') }}"><i class="fa-solid fa-house"></i></a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link text-white" href="{{ route('profile-driver') }}"><i class="fa-regular fa-user"></i></a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link text-white" href="{{ route('trip-history') }}"><i class="fa-regular fa-bookmark"></i></a>
-                        </li>
-                      </ul>
+                        <ul class="navbar-nav d-flex flex-row">
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{{ route('dashboard-driver') }}"><i
+                                        class="fa-solid fa-house"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{{ route('profile-driver') }}"><i
+                                        class="fa-regular fa-user"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{{ route('trip-history') }}"><i
+                                        class="fa-regular fa-bookmark"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                </a>
+                            </li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </ul>
                     </div>
                 </nav>
             </div>
         </div>
     </section>
-   
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </div>

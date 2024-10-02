@@ -5,9 +5,9 @@
 @endpush
 <div>
     <div class="profile-card mb-5">
-        <img src="img/driver.png" alt="Profile Image">
+        <img src="{{ asset('img/driver.png') }}" alt="Profile Image">
         <div class="profile-text">
-            <h5>Hi, Nida</h5>
+            <h5>Hi, {{ Auth::user()->name }}</h5>
             <p>Berkendaralah dengan hati-hati</p>
         </div>
     </div>

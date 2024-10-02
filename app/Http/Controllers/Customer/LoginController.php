@@ -28,6 +28,18 @@ class LoginController extends Controller
         ];
 
         if (Auth::attempt($credentials, $request->remember)) {
+
+            // Jika login berhasil, cek role pengguna
+            $user = Auth::user();
+            
+            $role = $user->roles->first(); // Ambil role pertama dari koleksi roles
+            
+            if ($role && $role->name === 'Driver') {
+                return redirect('/driver/dashboard')
+                    ->with('message', 'Login Berhasil! Anda di arahkan ke dashboard driver.')
+                    ->with('alert-type', 'success');
+            }
+
             // Jika login berhasil, arahkan ke halaman yang sesuai
             return redirect()->intended(route('homepage'))
                 ->with('message', 'Login Berhasil!')

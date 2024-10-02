@@ -27,6 +27,7 @@ class TripBus extends Model
         'nominal',
         'km_start',
         'km_end',
+        'id_ms_trip',
         'total_spend',
         'total_spend_bbm',
     ];
@@ -59,6 +60,11 @@ class TripBus extends Model
     public function tripbusspend()
     {
         return $this->hasMany(TripBusSpend::class, 'id_trip_bus');
+    }
+
+    public function ms_trip()
+    {
+        return $this->belongsTo(MsTrip::class, 'id_ms_trip');
     }
 
     // public function ()

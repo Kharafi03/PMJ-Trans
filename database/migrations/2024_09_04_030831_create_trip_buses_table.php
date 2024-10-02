@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('km_end')->nullable();
             $table->decimal('total_spend', 12, 2)->nullable();
             $table->decimal('total_spend_bbm', 12, 2)->nullable();
+            $table->foreignId('id_ms_trip')->constrained('ms_trips')->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });

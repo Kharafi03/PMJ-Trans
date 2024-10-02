@@ -54,6 +54,11 @@ class TripBusResource extends Resource
                             ->label('Co-Driver')
                             ->required()
                             ->relationship('codriver', 'name'),
+                        Forms\Components\Select::make('id_ms_trip')
+                            ->label('Status Trip')
+                            ->default(1)
+                            ->relationship('ms_trip', 'name')
+                            ->required(),
                     ]),
 
                 // Group untuk Data Perjalanan
@@ -67,7 +72,7 @@ class TripBusResource extends Resource
                         Forms\Components\TextInput::make('km_end')
                             ->label('KM Akhir')
                             ->numeric(),
-                        Forms\Components\TextInput::make('balanced')
+                        Forms\Components\TextInput::make('nominal')
                             ->label('Saldo')
                             ->numeric(),
                     ]),
@@ -111,7 +116,7 @@ class TripBusResource extends Resource
                     ->numeric()
                     ->label('Co-Driver')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('balanced')
+                Tables\Columns\TextColumn::make('nominal')
                     ->numeric()
                     ->label('Saldo')
                     ->sortable(),
