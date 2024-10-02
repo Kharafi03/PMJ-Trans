@@ -27,6 +27,10 @@ class MsBookingSeeder extends Seeder
         ]);
 
         MsBooking::create([
+            'name' => 'Selesai',
+        ]);
+
+        MsBooking::create([
             'name' => 'Dibatalkan',
         ]);
     }

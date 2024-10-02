@@ -44,7 +44,8 @@
 /* TABEL */
 table{
     border-radius: 20px;
-    background-color: #F1F2F2;
+    background-color: transparent; /* Mengubah dari #F1F2F2 menjadi transparent */
+
     overflow: hidden;
 }
 thead{
@@ -55,12 +56,12 @@ thead{
 }
 th h5{
     padding-left: 10px;
-    color: white;
+    color: black;
 }
 th p{
     margin-bottom: 0;
     padding-left: 10px;
-    color: white;
+    color: black;
 }
 table td {
     padding: 10px 15px !important; 

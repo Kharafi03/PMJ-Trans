@@ -7,7 +7,7 @@
 @section('content')
     <section id="dashboardDetail">
         <div class="dashboard-container container p-3">
-            <x-header-driver/>
+            <x-header-driver />
 
             <!-- TEXT CONTENT -->
             <div class="text-content">
@@ -17,7 +17,7 @@
             <!-- TITLE -->
             <div class="title">
                 <p>Booking yang akan datang</p>
-            </div>       
+            </div>
             <!-- CARD -->
             <div class="detail">
                 <div class="detail-sewa mb-5">
@@ -26,52 +26,72 @@
                             <thead>
                                 <tr>
                                     <th colspan="2">
-                                        <h5>PMJ 1</h5>
-                                        <p>PMJ-7654435</p>
+                                        <h5>{{ $trip->booking->booking_code }}</h5>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td class="keterangan">Driver</td>
+                                    <td>
+                                        {{ $trip->driver->name }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="keterangan">Co Driver</td>
+                                    <td>
+                                        {{ $trip->codriver->name }}
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="keterangan">Jenis Armada</td>
+                                    <td>{{ $trip->bus->name }}</td>
+                                </tr>
+                                <tr>
                                     <td class="keterangan">Tanggal</td>
                                     <td>
                                         <div class="tgl">
-                                            21 september 2024
+                                            {{ \Carbon\Carbon::parse($trip->booking->date_start)->translatedFormat('d F Y') }}
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="keterangan ">Customer</td>
-                                    <td >Nida Aulia Karima</td>
+                                    <td>{{ $trip->booking->customer->name }}</td>
                                 </tr>
                                 <tr>
                                     <td class="keterangan ">Nomor Telephone</td>
-                                    <td >089876542232</td>
+                                    <td>{{ $trip->booking->customer->number_phone }}</td>
                                 </tr>
                                 <tr>
                                     <td class="keterangan ">Email</td>
-                                    <td >nida@gmail.com</td>
+                                    <td>{{ $trip->booking->customer->email }}</td>
                                 </tr>
                                 <tr>
                                     <td class="keterangan ">Titik Jemput</td>
-                                    <td >Pekalongan</td>
+                                    <td>{{ $trip->booking->pickup_point }}</td>
                                 </tr>
                                 <tr>
                                     <td class="keterangan ">Tujuan</td>
-                                    <td >Itali</td>
+                                    <td>{{ $trip->booking->destination_point }}</td>
                                 </tr>
-                                <tr></tr>
+                                <tr>
                                     <td class="keterangan ">Kapasitas</td>
-                                    <td >40</td>
+                                    <td>{{ $trip->booking->capacity }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="keterangan ">Status</td>
+                                    <td>{{ $trip->booking->ms_booking->name }}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            
+
             <!-- NAVBAR -->
-            <x-navbar-driver/>
+            <x-navbar-driver />
         </div>
     </section>
 @endsection

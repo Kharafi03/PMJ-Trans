@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('pickup_point', 255)->nullable();
             //$table->time('pickup_time')->nullable();
             $table->integer('fleet_amount')->nullable();
+            $table->boolean('legrest')->nullable();
+            $table->string('description')->nullable();
             $table->decimal('trip_nominal', 12, 2)->nullable();
             $table->decimal('minimum_dp', 12, 2)->nullable();
             $table->foreignId('id_ms_booking')->constrained('ms_bookings')->cascadeOnDelete();

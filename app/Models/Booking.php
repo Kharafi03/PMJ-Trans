@@ -26,8 +26,9 @@ class Booking extends Model
         'date_end',
         'pickup_point',
         //'pickup_time',
-        'fleet_type',
         'fleet_amount',
+        'legrest',
+        'description',
         'trip_nominal',
         'minimum_dp',
         'id_ms_payment',
@@ -74,6 +75,11 @@ class Booking extends Model
         return $this->hasMany(TripBus::class, 'id_booking');
     }
 
+    public function tripbuss()
+    {
+        return $this->hasMany(TripBus::class, 'id_booking', 'id_bus', 'id_driver', 'id_codriver');
+    }
+
     public function incomes()
     {
         return $this->hasMany(Income::class, 'booking_code');
@@ -87,5 +93,20 @@ class Booking extends Model
     public function ms_income(): BelongsTo
     {
         return $this->belongsTo(MsIncome::class, 'id_ms_income');
+    }
+
+    public function m_method_payment(): BelongsTo
+    {
+        return $this->belongsTo(MMethodPayment::class, 'id_ms_income');
+    }
+
+    public function tripbusspend()
+    {
+        return $this->hasMany(TripBusSpend::class, 'id_trip_bus');
+    }
+
+    public function destination()
+    {
+        return $this->hasMany(Destination::class, 'id_booking');
     }
 }

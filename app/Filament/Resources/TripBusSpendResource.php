@@ -34,10 +34,10 @@ class TripBusSpendResource extends Resource
                     ->columns(2) // 2 kolom untuk data utama
                     ->heading('Data Pengeluaran')
                     ->schema([
-                        Forms\Components\TextInput::make('id_trip_bus')
+                        Forms\Components\Select::make('id_trip_bus')
                             ->label('ID Trip Bus')
-                            ->required()
-                            ->numeric(),
+                            ->relationship('tripbus', 'id')
+                            ->required(),
                         Forms\Components\Select::make('id_m_spend')
                             ->label('Jenis Pengeluaran')
                             ->relationship('mspend', 'name')
@@ -88,9 +88,6 @@ class TripBusSpendResource extends Resource
                     ->label('Jenis')
                     ->numeric()
                     ->sortable(),
-                // Tables\Columns\TextColumn::make('description')
-                //     ->label('Deskripsi')
-                //     ->searchable(),
                 Tables\Columns\TextColumn::make('nominal')
                     ->numeric()
                     ->label('Nominal')
@@ -103,14 +100,6 @@ class TripBusSpendResource extends Resource
                     ->dateTime()
                     ->label('Tanggal dan Waktu')
                     ->sortable(),
-                // Tables\Columns\TextColumn::make('latitude')
-                //     ->numeric()
-                //     ->label('Latitude')
-                //     ->sortable(),
-                // Tables\Columns\TextColumn::make('longitude')
-                //     ->numeric()
-                //     ->label('Longitude')
-                //     ->sortable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()
                     ->sortable()

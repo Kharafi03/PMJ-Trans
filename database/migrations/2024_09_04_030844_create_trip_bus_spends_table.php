@@ -20,8 +20,8 @@ return new class extends Migration
             $table->integer('kilometer')->nullable();
             $table->longText('image_receipt')->nullable();
             $table->dateTime('datetime')->nullable();
-            $table->float('latitude', 10,8)->nullable();
-            $table->float('longitude', 10,8)->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->softDeletes(); // Kolom deleted_at
             $table->timestamps();
         });
