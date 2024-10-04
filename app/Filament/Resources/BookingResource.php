@@ -34,6 +34,7 @@ use finfo;
 use Illuminate\Database\Eloquent\Model;
 use League\Flysystem\Visibility;
 use Svg\Tag\Rect;
+use Filament\Tables\Columns\BadgeColumn;
 
 class BookingResource extends Resource
 {
@@ -343,6 +344,20 @@ class BookingResource extends Resource
             TextColumn::make('id')
                 ->label('No')
                 ->sortable(),
+            BadgeColumn::make('ms_booking.name')
+                ->label('Status')
+                ->searchable()
+                ->sortable()
+                ->colors([
+                    'info' => 'Draf',
+                    'success' => 'Selesai',
+                    'warning' => 'Diterima',
+                    'danger' => 'Ditolak',
+                    'gray' => 'Dibatalkan', 
+                ])
+                ->formatStateUsing(function ($state) {
+                    return ucfirst($state);
+                }),
             TextColumn::make('booking_code')
                 ->label('Kode Booking')
                 ->searchable()
@@ -360,14 +375,19 @@ class BookingResource extends Resource
                 ->getStateUsing(fn(Model $record) => optional($record->destination->last())->name)
                 ->searchable()
                 ->sortable(),
-            TextColumn::make('ms_payment.name')
-                ->label('Status Pembayaran')
+            BadgeColumn::make('ms_payment.name')
+                ->label('Pembayaran')
                 ->searchable()
-                ->sortable(),
-            TextColumn::make('ms_booking.name')
-                ->label('Status')
-                ->searchable()
-                ->sortable(),
+                ->sortable()
+                ->colors([
+                    'info' => 'Draf',
+                    'success' => 'Lunas',
+                    'warning' => 'DP Dibayarkan',
+                    'danger' => 'DP Belum Dibayar',
+                ])
+                ->formatStateUsing(function ($state) {
+                    return ucfirst($state);
+                }),
             TextColumn::make('deleted_at')
                 ->label('Data dihapus')
                 ->searchable()

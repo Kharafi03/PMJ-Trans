@@ -18,7 +18,7 @@ class MailResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-envelope';
 
-    protected static ?string $navigationGroup = 'Manajemen Sistem';
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {

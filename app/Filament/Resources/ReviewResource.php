@@ -21,9 +21,9 @@ class ReviewResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-ellipsis';
 
-    protected static ?string $navigationGroup = 'Manajemen Sistem';
+    protected static ?int $navigationSort = 5;
 
-    protected static ?int $navigationSort = 23;
+
 
 
     public static function form(Form $form): Form
