@@ -114,11 +114,18 @@ class BusResource extends Resource
                     ->label('Kapasitas'),
                 Tables\Columns\TextColumn::make('ms_buses.name')
                     ->label('Status Bus'),
+                    Tables\Columns\TextColumn::make('deleted_at')
+                    ->label('Tanggal dihapus')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Tanggal dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Tanggal diubah')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

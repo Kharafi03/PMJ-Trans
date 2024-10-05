@@ -389,16 +389,18 @@ class BookingResource extends Resource
                     return ucfirst($state);
                 }),
             TextColumn::make('deleted_at')
-                ->label('Data dihapus')
+                ->label('Tanggal dihapus')
                 ->searchable()
                 ->dateTime()
                 ->sortable()
                 ->toggleable(isToggledHiddenByDefault: true),
             TextColumn::make('created_at')
+               ->label('Tanggal dibuat')
                 ->dateTime()
                 ->sortable()
                 ->toggleable(isToggledHiddenByDefault: true),
             TextColumn::make('updated_at')
+               ->label('Tanggal diubah')
                 ->dateTime()
                 ->sortable()
                 ->toggleable(isToggledHiddenByDefault: true),

@@ -8,12 +8,12 @@ use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Widgets\UserStatsOverview;
+use Filament\Tables\Columns\BadgeColumn;
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
-
-    //protected static ?string $pluralModelLabel = "User";
 
     protected static ?string $navigationIcon = 'heroicon-s-user-group';
 
@@ -107,6 +107,10 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
+        
+                Tables\Columns\TextColumn::make('id')
+                        ->label('No')
+                        ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama')
                     ->searchable()
@@ -119,23 +123,35 @@ class UserResource extends Resource
                     ->label('Email')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('roles.name')
+                Tables\Columns\BadgeColumn::make('roles.name')
                     ->label('Peran')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->colors([
+                        'info' => 'admin',
+                        'success' => 'driver',
+                        'warning' => 'panel_user',
+                        'danger' => 'super_admin',
+                    ])
+                    ->formatStateUsing(function ($state) {
+                        return ucfirst($state);
+                    }),
                 Tables\Columns\TextColumn::make('msUsers.name')
                     ->label('Status')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('deleted_at')
+                    Tables\Columns\TextColumn::make('deleted_at')
+                    ->label('Tanggal dihapus')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Tanggal dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Tanggal diubah')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -166,6 +182,12 @@ class UserResource extends Resource
                 ]),
             ]);
     }
+    public static function getWidgets(): array
+   {
+        return [
+                UserStatsOverview::class,
+               ];
+   }
 
     public static function getRelations(): array
     {

@@ -83,14 +83,17 @@ class TripBusSpendResource extends Resource
                 Tables\Columns\TextColumn::make('id_trip_bus')
                     ->label('ID Trip Bus')
                     ->numeric()
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('mspend.name')
                     ->label('Jenis')
                     ->numeric()
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('nominal')
                     ->numeric()
                     ->label('Nominal')
+                    ->searchable()
                     ->sortable(),
                 // Tables\Columns\TextColumn::make('kilometer')
                 //     ->numeric()
@@ -99,16 +102,20 @@ class TripBusSpendResource extends Resource
                 Tables\Columns\TextColumn::make('datetime')
                     ->dateTime()
                     ->label('Tanggal dan Waktu')
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('deleted_at')
+                    ->label('Tanggal dihapus')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Tanggal dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Tanggal diubah')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
