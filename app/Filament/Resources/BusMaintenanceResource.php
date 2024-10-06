@@ -139,7 +139,7 @@ class BusMaintenanceResource extends Resource
                 //     ->label('Gambar Bus')
                 //     ->getStateUsing(fn(Model $record) => optional($record->images)->image)
                 //     ->size(50), 
-                Tables\Columns\TextColumn::make('cost')
+                Tables\Columns\TextColumn::make('nominal')
                     ->label('Biaya')
                     ->prefix('Rp. ')
                     ->searchable()
