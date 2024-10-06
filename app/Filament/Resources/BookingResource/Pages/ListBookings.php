@@ -7,6 +7,8 @@ use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Tables\Actions\BulkAction;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\BookingsExport;
 use App\Models\Booking;
 
 class ListBookings extends ListRecords
@@ -18,59 +20,82 @@ class ListBookings extends ListRecords
         return [
             Actions\CreateAction::make()->label('Tambah Booking'),
 
-            // Tambahkan aksi untuk download semua data sebagai PDF
+            // Aksi untuk download semua data sebagai PDF
             Actions\Action::make('downloadAllPDF')
                 ->label('Download PDF')
                 ->action(function () {
-                    // Mengambil semua data booking
                     $bookings = Booking::all();
-
-                    // Render PDF dengan semua data booking
                     $pdf = Pdf::loadView('pdf.bookings', ['bookings' => $bookings]);
 
-                    // Kembalikan respons untuk mengunduh file PDF
-                    return response()->streamDownload(
-                        fn() => print($pdf->output()),
-                        "Data Booking PMJ Trans.pdf"
+                    return response()->stream(
+                        function () use ($pdf) {
+                            echo $pdf->output();
+                        },
+                        200,
+                        [
+                            'Content-Type' => 'application/pdf',
+                            'Content-Disposition' => 'attachment; filename="Data Booking PMJ Trans.pdf"',
+                        ]
                     );
                 })
                 ->requiresConfirmation()
                 ->color('info'),
+
+            // Aksi untuk export semua data ke Excel
+            Actions\Action::make('exportExcel')
+                ->label('Export Excel')
+                ->action(function () {
+                    return Excel::download(new BookingsExport(Booking::all()), 'bookings.xlsx');
+                })
+                ->color('warning'),
         ];
     }
 
     protected function getTableBulkActions(): array
     {
         return [
-            // Bulk Action untuk download data yang dipilih
             BulkAction::make('downloadSelectedPDF')
                 ->label('Download Data Terpilih PDF')
                 ->action(function (array $records) {
                     if (empty($records)) {
-                        // Jika tidak ada data yang dipilih, tampilkan pesan kesalahan
                         $this->notify('danger', 'Tidak ada data yang dipilih.');
                         return;
                     }
 
-                    // Ambil data yang dipilih berdasarkan ID yang terpilih
                     $bookings = Booking::whereIn('id', $records)->get();
-
                     if ($bookings->isEmpty()) {
                         $this->notify('danger', 'Tidak ada data booking yang ditemukan.');
                         return;
                     }
 
-                    // Render PDF menggunakan view `pdf.bookings` dengan data yang dipilih
                     $pdf = Pdf::loadView('pdf.bookings', ['bookings' => $bookings]);
 
-                    // Kembalikan respons untuk mengunduh file PDF dengan data yang dipilih
-                    return response()->streamDownload(
-                        fn() => print($pdf->output()),
-                        "Selected-Bookings.pdf"
+                    return response()->stream(
+                        function () use ($pdf) {
+                            echo $pdf->output();
+                        },
+                        200,
+                        [
+                            'Content-Type' => 'application/pdf',
+                            'Content-Disposition' => 'attachment; filename="Selected-Bookings.pdf"',
+                        ]
                     );
                 })
                 ->requiresConfirmation()
                 ->color('info'),
+
+            // Aksi untuk export data terpilih ke Excel
+            BulkAction::make('exportSelectedExcel')
+                ->label('Export Data Terpilih Excel')
+                ->action(function (array $records) {
+                    if (empty($records)) {
+                        $this->notify('danger', 'Tidak ada data yang dipilih.');
+                        return;
+                    }
+
+                    return Excel::download(new BookingsExport(Booking::whereIn('id', $records)->get()), 'selected-bookings.xlsx');
+                })
+                ->color('success'),
         ];
     }
 }

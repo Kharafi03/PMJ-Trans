@@ -18,7 +18,7 @@ class MailResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-envelope';
 
-    protected static ?string $navigationGroup = 'Manajemen Sistem';
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
@@ -29,6 +29,7 @@ class MailResource extends Resource
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->label('Nama')
+                            ->placeholder('Masukkan nama lengkap')
                             ->debounce(6000)
                             ->required()
                             ->maxLength(255)
@@ -44,7 +45,7 @@ class MailResource extends Resource
                             ->required()
                             ->maxLength(15)
                             ->inputMode('tel')
-                            ->placeholder('Masukkan nomor telepon yang valid. Hanya angka yang diperbolehkan.')
+                            ->placeholder('Masukkan nomor wa yang valid. Hanya angka yang diperbolehkan.')
                             ->reactive()
                             ->afterStateUpdated(function ($set, $get) {
                                 if (!preg_match('/^\d+$/', $get('phone'))) {
@@ -73,6 +74,7 @@ class MailResource extends Resource
 
                         Forms\Components\Textarea::make('message')
                             ->label('Pesan')
+                            ->placeholder('Masukkan pesan')
                             ->required()
                             ->columnSpanFull()
                             ->reactive()
@@ -134,13 +136,13 @@ class MailResource extends Resource
 
                 Tables\Columns\TextColumn::make('template_chat')
                     ->label('Template Chat')
-                    ->searchable()
-                    ->toggleable(),
+                    ->searchable(),
 
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Tanggal diterima')
+                    ->label('Tanggal dibuat')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->label('Tanggal dihapus')
@@ -149,7 +151,7 @@ class MailResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Tanggal diperbarui')
+                    ->label('Tanggal diubah')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

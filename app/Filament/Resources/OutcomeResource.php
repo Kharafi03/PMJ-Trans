@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Tables\Columns\BadgeColumn;
 
 class OutcomeResource extends Resource
 {
@@ -18,7 +19,7 @@ class OutcomeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-c-arrow-trending-down';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {
@@ -80,35 +81,57 @@ class OutcomeResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('m_outcome.name')
+                Tables\Columns\TextColumn::make('id')
+                ->label('No')
+                ->sortable(),
+                BadgeColumn::make('m_outcome.name')
                     ->label('Tipe')
-                    ->sortable(),
+                    ->sortable()
+                    ->colors([
+                        'danger' => 'Refund',
+                        'success' => 'Operasional',
+                    ])
+                    ->formatStateUsing(function ($state) {
+                        return ucfirst($state);
+                    }),
                 Tables\Columns\IconColumn::make('check')
                     ->label('Selesai')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('booking.booking_code')
                     ->label('Kode Booking')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('m_method_payment.name')
-                    ->label('Metode')
-                    ->numeric()
-                    ->sortable(),
+                BadgeColumn::make('m_method_payment.name')
+                        ->label('Metode')
+                        ->sortable()
+                        ->colors([
+                            'info' => 'Transfer Bank',
+                            'warning' => 'Transfer E-Wallet',
+                            'success' => 'Tunai', 
+                        ])
+                        ->formatStateUsing(function ($state) {
+                            return ucfirst($state);
+                        }),
+                    
                 Tables\Columns\TextColumn::make('nominal')
                     ->prefix('Rp. ')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('datetime')
+                    ->label('Tanggal Pengeluaran')
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('deleted_at')
+                    ->label('Tanggal dihapus')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Tanggal dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Tanggal diubah')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

@@ -115,14 +115,18 @@ class BusKirResource extends Resource
                     ->prefix('Rp. ')
                     ->sortable(),
 
-                TextColumn::make('created_at')
-                    ->label('Dibuat')
+                TextColumn::make('deleted_at')
+                    ->label('Tanggal dihapus')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-
+                TextColumn::make('created_at')
+                    ->label('Tanggal dibuat')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->label('Diperbarui')
+                    ->label('Tanggal diubah')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
