@@ -65,4 +65,15 @@ class Bus extends Model
     {
         return $this->hasMany(TripBus::class, 'id_bus');
     }
+
+    public function bustaxlast()
+    {
+        return $this->hasMany(BusTax::class, 'id_bus')->orderBy('date', 'desc')->limit(1);
+    }
+
+    public function buskirlast()
+    {
+        return $this->hasMany(BusKir::class, 'id_bus')->orderBy('date_test', 'desc')->limit(1);
+    }
+
 }

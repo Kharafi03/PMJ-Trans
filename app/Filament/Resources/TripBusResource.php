@@ -157,6 +157,7 @@ class TripBusResource extends Resource
                                             ->numeric(),
                                         Forms\Components\TextInput::make('nominal')
                                             ->label('Saldo')
+                                            ->prefix('Rp.')
                                             ->numeric(),
                                     ]),
                                 Forms\Components\Section::make()
@@ -165,10 +166,12 @@ class TripBusResource extends Resource
                                     ->schema([
                                         Forms\Components\TextInput::make('total_spend')
                                             ->label('Total Pengeluaran')
+                                            ->prefix('Rp.')
                                             ->readOnly()
                                             ->numeric(),
                                         Forms\Components\TextInput::make('total_spend_bbm')
                                             ->label('Total Pengeluaran BBM')
+                                            ->prefix('Rp.')
                                             ->readOnly()
                                             ->numeric(),
                                     ]),
@@ -214,14 +217,17 @@ class TripBusResource extends Resource
                     ->label('Total Pengeluaran')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('deleted_at')
+                    ->label('Tanggal dihapus')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Tanggal dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Tanggal diubah')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

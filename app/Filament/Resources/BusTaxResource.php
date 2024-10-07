@@ -33,32 +33,34 @@ class BusTaxResource extends Resource
                 Forms\Components\Card::make()
                     ->heading('Data Utama')
                     ->schema([
-                        Forms\Components\TextInput::make('id_bus')
+                        Forms\Components\Select::make('id_bus')
                             ->label('Bus')
                             ->required()
-                            ->numeric()
+                            ->relationship('buses','name')
                             ->placeholder('Masukkan ID Bus'),
-                        Forms\Components\TextInput::make('id_user')
+                        Forms\Components\Select::make('id_user')
                             ->label('User')
                             ->required()
-                            ->numeric()
+                            ->relationship('users','name')
                             ->placeholder('Masukkan ID User'),
-                        Forms\Components\TextInput::make('description')
+                        Forms\Components\Textarea::make('description')
                             ->label('Deskripsi')
                             ->maxLength(255)
+                            ->columnSpan(2)
                             ->placeholder('Deskripsi singkat pajak'),
                         Forms\Components\DatePicker::make('date')
                             ->label('Tanggal Pajak')
                             ->required(),
                         Forms\Components\DatePicker::make('expiration')
-                            ->label('Tanggal Expirasi')
+                            ->label('Tanggal Kadaluarsa STNK')
                             ->required(),
                         Forms\Components\DatePicker::make('expiration_number_bus')
-                            ->label('Tanggal Expirasi Nomor Bus')
+                            ->label('Tanggal Kadaluarsa Nomor Bus')
                             ->required(),
                         Forms\Components\TextInput::make('nominal')
                             ->label('Biaya')
                             ->numeric()
+                            ->required()
                             ->prefix('Rp')
                             ->placeholder('Masukkan biaya pajak'),
                     ])
@@ -86,42 +88,45 @@ class BusTaxResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id_bus')
+                Tables\Columns\TextColumn::make('buses.name')
                     ->numeric()
-                    ->label('ID Bus')
+                    ->label('Bus')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('id_user')
+                Tables\Columns\TextColumn::make('users.name')
                     ->numeric()
-                    ->label('ID User')
+                    ->label('Pelaksana')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('description')
-                    ->label('Deskripsi')
-                    ->searchable(),
+                // Tables\Columns\TextColumn::make('description')
+                //     ->label('Deskripsi')
+                //     ->searchable(),
                 Tables\Columns\TextColumn::make('date')
                     ->date()
                     ->label('Tanggal Pajak')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('expiration')
                     ->date()
-                    ->label('Tanggal Expirasi')
+                    ->label('Tgl Exp STNK')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('expiration_number_bus')
                     ->date()
-                    ->label('Tanggal Expirasi Nomor Bus')
+                    ->label('Tgl Exp Nomor Bus')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('nominal')
                     ->prefix('Rp. ')
                     ->label('Biaya')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('deleted_at')
+                    ->label('Tanggal dihapus')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Tanggal dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Tanggal diubah')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -133,12 +138,12 @@ class BusTaxResource extends Resource
                 Tables\Actions\ViewAction::make()
                     ->label('Lihat')
                     ->modalHeading('Lihat Pajak')
-                    ->modalWidth('lg'),
+                    ->modalWidth('5xl'),
                 Tables\Actions\EditAction::make()
                     ->label('Edit')
                     ->modalHeading('Edit Pajak')
                     ->modalButton('Simpan Perubahan')
-                    ->modalWidth('lg'),
+                    ->modalWidth('5xl'),
                 Tables\Actions\DeleteAction::make()
                     ->label('Hapus')
             ])

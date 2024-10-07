@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('buses', function (Blueprint $table) {
             $table->id(); // Kolom id sebagai primary key
             $table->string('name', 24); // Kolom name dengan tipe varchar panjang 24 karakter
-            $table->string('license_plate', 10); // Kolom license_plate dengan tipe varchar panjang 8 karakter
+            $table->string('license_plate', 16); // Kolom license_plate dengan tipe varchar panjang 8 karakter
             $table->integer('production_year'); // Kolom production_year dengan tipe integer
-            $table->string('color', 10); // Kolom color dengan tipe varchar panjang 10 karakter
+            $table->string('color', 24); // Kolom color dengan tipe varchar panjang 10 karakter
             $table->string('machine_number', 255); // Kolom machine_number dengan tipe varchar panjang 255 karakter
             $table->string('chassis_number', 255); // Kolom chassis_number dengan tipe varchar panjang 255 karakter
             $table->integer('capacity'); // Kolom capacity dengan tipe integer

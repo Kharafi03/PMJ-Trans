@@ -13,6 +13,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Columns\BadgeColumn;
 
 class IncomeResource extends Resource
 {
@@ -24,7 +25,7 @@ class IncomeResource extends Resource
 
     //protected static ?string $navigationGroup = 'Pendapatan';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
@@ -110,7 +111,21 @@ class IncomeResource extends Resource
     {
         return $table
             ->columns([
-                // Kolom yang sudah ada
+                Tables\Columns\TextColumn::make('id')
+                ->label('No')
+                ->sortable(),
+                BadgeColumn::make('ms_income.name')
+                    ->label('Status')
+                    ->numeric()
+                    ->sortable()
+                    ->colors([
+                        'info' => 'Draf',
+                        'warning' => 'Diterima',
+                        'danger' => 'Ditolak',
+                    ])
+                    ->formatStateUsing(function ($state) {
+                        return ucfirst($state);
+                    }),
                 Tables\Columns\TextColumn::make('booking.booking_code')
                     ->label('Kode Booking')
                     ->searchable()
@@ -121,17 +136,21 @@ class IncomeResource extends Resource
                     ->numeric()
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('m_method_payment.name')
+               BadgeColumn::make('m_method_payment.name')
                     ->label('Metode')
                     ->numeric()
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->colors([
+                        'info' => 'Transfer Bank',
+                        'warning' => 'Transfer E-Wallet',
+                        'success' => 'Tunai',
+                    ])
+                    ->formatStateUsing(function ($state) {
+                        return ucfirst($state);
+                    }),
                 Tables\Columns\TextColumn::make('nominal')
                     ->prefix('Rp. ')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('ms_income.name')
-                    ->label('Status')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('datetime')
@@ -141,14 +160,17 @@ class IncomeResource extends Resource
 
                 // Kolom yang disembunyikan secara default
                 Tables\Columns\TextColumn::make('deleted_at')
+                    ->label('Tanggal dihapus')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Tanggal dihapus')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Tanggal diubah')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

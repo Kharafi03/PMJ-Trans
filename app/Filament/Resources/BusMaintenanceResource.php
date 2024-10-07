@@ -139,7 +139,7 @@ class BusMaintenanceResource extends Resource
                 //     ->label('Gambar Bus')
                 //     ->getStateUsing(fn(Model $record) => optional($record->images)->image)
                 //     ->size(50), 
-                Tables\Columns\TextColumn::make('cost')
+                Tables\Columns\TextColumn::make('nominal')
                     ->label('Biaya')
                     ->prefix('Rp. ')
                     ->searchable()
@@ -148,11 +148,18 @@ class BusMaintenanceResource extends Resource
                     ->label('Tanggal')
                     ->searchable()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('deleted_at')
+                    ->label('Tanggal dihapus')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Tanggal dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Tanggal diubah')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

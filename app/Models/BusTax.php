@@ -22,7 +22,7 @@ class BusTax extends Model
         'id_bus',
         'id_user',
         'description',
-        'date_test',
+        'date',
         'expiration',
         'expiration_number_bus',
         'nominal',

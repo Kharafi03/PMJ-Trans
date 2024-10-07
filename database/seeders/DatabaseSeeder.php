@@ -27,6 +27,8 @@ class DatabaseSeeder extends Seeder
         $this->call(MsIncomeSeeder::class);
         $this->call(MsBookingSeeder::class);
         $this->call(MsTripSeeder::class);
+        $this->call(BusSeeder::class);
+        $this->call(BusImageSeeder::class);
         // $this->call(PermisionsSeeder::class);
     }
 }
