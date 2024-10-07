@@ -52,7 +52,7 @@
                                 <div class="row header">
                                     <div class="col-7">
                                         <p>{{ $trip->booking->booking_code }}</p>
-                                        <h5>{{ $trip->booking->booking_code }}</h5>
+                                        <h5>{{ $trip->bus->name }}</h5>
                                     </div>
                                     <div class="col-5">
                                         @if (\Carbon\Carbon::parse($trip->booking->date_start)->isToday())
@@ -76,32 +76,29 @@
                         </div>
                     @endforeach
                 </div>
-
-                <!-- BUTTON -->
-                @if ($continueTrips->isNotEmpty())
-                    <div class="p-3">
-                        <a href="{{ route('dashboard-trip') }}" class="btn-lanjut">Lanjutkan Trip</a>
-                    </div>
-                @elseif (
-                    $trips->filter(function ($trip) {
-                            $dateStart = \Carbon\Carbon::parse($trip->booking->date_start);
-                            $now = \Carbon\Carbon::now();
-                
-                            // Menghitung selisih waktu
-                            $differenceInHours = $now->diffInHours($dateStart, false);
-                
-                            // Memeriksa apakah trip dimulai hari ini atau sudah 16 jam lewat
-                            return $dateStart->isToday() ||
-                                ($now->isToday() && $differenceInHours < 0 && abs($differenceInHours) <= 16);
-                        })->isNotEmpty())
-                    <div class="p-3">
-                        <a href="{{ route('scan-trip') }}" class="btn-mulai">Mulai Trip</a>
-                    </div>
-                @endif
             @else
                 <!-- IMAGE -->
                 <div class="image-content">
+                    <h4>Tidak ada booking berikutnya</h4>
                     <img src="{{ asset('img/notrip-image.png') }}">
+                </div>
+            @endif
+            <!-- BUTTON -->
+            @if ($continueTrips->isNotEmpty())
+                <div class="p-3">
+                    <a href="{{ route('dashboard-trip') }}" class="btn-lanjut">Lanjutkan Trip</a>
+                </div>
+            @elseif (
+                $trips->filter(function ($trip) {
+                        $dateStart = \Carbon\Carbon::parse($trip->booking->date_start);
+                        $dateEnd = \Carbon\Carbon::parse($trip->booking->date_end);
+                        $now = \Carbon\Carbon::now();
+            
+                        // Memeriksa apakah waktu sekarang berada di antara date_start dan date_end
+                        return $dateStart->isToday() || $now->between($dateStart, $dateEnd);
+                    })->count() > 0)
+                <div class="p-3">
+                    <a href="{{ route('scan-trip') }}" class="btn-mulai">Mulai Trip</a>
                 </div>
             @endif
             <!-- NAVBAR -->

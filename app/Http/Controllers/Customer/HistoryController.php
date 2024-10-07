@@ -15,8 +15,10 @@ class HistoryController extends Controller
         // Mengambil data booking berdasarkan id user yang sedang login
         $userId = Auth::id(); // Mendapatkan ID user yang sedang login
         $bookings = Booking::where('id_cus', $userId)->get(); // Ambil booking berdasarkan id_cus
-
-        // Mengirimkan data booking ke view
-        return view('frontend.booking-history.index', compact('bookings'));
+        $destination = $bookings->map(function ($booking) {
+            return $booking->destination;
+        });
+        
+        return view('frontend.booking-history.index', compact('bookings', 'destination'));
     }
 }

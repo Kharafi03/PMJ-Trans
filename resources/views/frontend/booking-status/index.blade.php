@@ -30,28 +30,13 @@
                         </div>
                         <div class="mb-3">
                             <label for="nominal" class="form-label">Nominal Pembayaran</label>
-                            <input type="text" class="form-control" id="nominal" value="{{ $booking->trip_nominal }}"
-                                readonly>
+                            <input type="text" class="form-control" id="nominal"
+                                value="Rp. {{ number_format($booking->trip_nominal, 0, ',', '.') }}" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="minDp" class="form-label">Minimum DP</label>
-                            <input type="text" class="form-control" id="minDp" value="{{ $booking->minimum_dp }}"
-                                readonly>
-                        </div>
-
-                        <div class="mt-5 d-flex justify-content-center align-items-center">
-                            <p><span class="text-danger">*</span>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                                Quia dicta labore, assumenda numquam doloribus consequatur enim cumque.</p>
-                        </div>
-                        <div class="row d-flex justify-content-between align-items-center">
-                            <div class="col-md-6">
-                                <button type="button" class="btn-bayarSekarang" data-bs-dismiss="modal">Bayar
-                                    Sekarang</button>
-                            </div>
-                            <div class="col-md-6">
-                                <button type="button" class="btn-bayarNanti" data-bs-dismiss="modal"><a
-                                        href="../page/statusPemesanan.html">Bayar Nanti</a></button>
-                            </div>
+                            <input type="text" class="form-control" id="minDp"
+                                value="Rp. {{ number_format($booking->minimum_dp, 0, ',', '.') }}" readonly>
                         </div>
                     </form>
                 </div>
@@ -116,9 +101,12 @@
                                             9876543212345
                                             <br>Sejumlah
                                             @if ($booking->id_ms_payment == 2)
-                                                Rp {{ $booking->payment_received === null ? $booking->payment_received : $booking->minimum_dp }} untuk menyelesaikan DP
+                                                Rp
+                                                {{ number_format($booking->payment_received === null ? $booking->minimum_dp : $booking->payment_received, 0, ',', '.') }}
+                                                untuk menyelesaikan DP
                                             @elseif ($booking->id_ms_payment == 3)
-                                                Rp {{ $booking->payment_remaining }} untuk menyelesaikan pelunasan
+                                                Rp {{ number_format($booking->payment_remaining, 0, ',', '.') }} untuk
+                                                menyelesaikan pelunasan
                                             @endif
                                         </span>
                                         <!-- nominal -->
@@ -176,6 +164,7 @@
                                     </div>
                                 </div>
                                 <!-- BUTTON -->
+                                {{-- @dd($booking->incomes); --}}
                                 @if ($booking->id_ms_booking == 1 || $booking->id_ms_booking == 3 || $booking->id_ms_booking == 4)
                                     <div class="mb-3">
                                         <div
@@ -185,6 +174,22 @@
                                     </div>
                                 @elseif ($booking->id_ms_booking == 2)
                                     @if ($booking->id_ms_payment == 2)
+                                        @if ($booking->incomes->isNotEmpty())
+                                            <div class="row mb-3">
+                                                @foreach ($booking->incomes as $income)
+                                                    @if ($income->image_receipt != null)
+                                                        <div class="col-6 mb-3">
+                                                            <label for="formFile{{ $loop->iteration }}"
+                                                                class="form-label">Bukti DP ke
+                                                                {{ $loop->iteration }}</label>
+                                                            <img src="{{ asset('storage/' . $income->image_receipt) }}"
+                                                                class="rounded-image w-100" alt="Receipt Image"
+                                                                style="border-radius: 4px;">
+                                                        </div>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                        @endif
                                         <div class="mb-3">
                                             <label for="formFile" class="form-label">Unggah Bukti DP<span
                                                     class="text-danger">*</span></label>

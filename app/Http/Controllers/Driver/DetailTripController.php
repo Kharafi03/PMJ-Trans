@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Driver;
 use App\Http\Controllers\Controller;
 use App\Models\TripBus;
 use Illuminate\Http\Request;
+use App\Models\Destination;
 
 class DetailTripController extends Controller
 {
@@ -21,6 +22,8 @@ class DetailTripController extends Controller
         // Ambil data customer jika ada relasi dengan booking
         $customer = $trip->booking->customer; // Misalnya jika ada relasi dengan customer
 
-        return view('frontend.driver.dashboard-detail.index', compact('trip', 'customer'));
+        $destination = Destination::where('id_booking', $trip->booking->id)->get();
+
+        return view('frontend.driver.dashboard-detail.index', compact('trip', 'customer', 'destination'));
     }
 }

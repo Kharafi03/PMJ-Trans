@@ -72,8 +72,14 @@
                                     <td class="keterangan ">Titik Jemput</td>
                                     <td>{{ $trip->booking->pickup_point }}</td>
                                 </tr>
+                                @foreach ($destination as $dest)
+                                    <tr>
+                                        <td class="keterangan ">Tujuan {{ $loop->iteration }}</td>
+                                        <td>{{ $dest->name }}</td>
+                                    </tr>
+                                @endforeach
                                 <tr>
-                                    <td class="keterangan ">Tujuan</td>
+                                    <td class="keterangan ">Tujuan Akhir</td>
                                     <td>{{ $trip->booking->destination_point }}</td>
                                 </tr>
                                 <tr>

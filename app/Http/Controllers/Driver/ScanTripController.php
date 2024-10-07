@@ -47,8 +47,14 @@ class ScanTripController extends Controller
             })
             ->where('id_ms_trip', 1) // Tambahkan kondisi untuk id_ms_trip
             ->whereHas('booking', function ($query) use ($now) {
-                // Tampilkan data hanya jika waktu sekarang belum lebih dari 16 jam setelah date_start
-                $query->where('date_start', '>=', $now->subHours(16)); // Tampilkan hingga 16 jam dari date_start
+                // Menambahkan logika untuk memeriksa apakah trip dimulai hari ini atau dalam rentang waktu sekarang
+                $query->where(function($query) use ($now) {
+                    $query->whereDate('date_start', '=', $now->toDateString())  // Memeriksa apakah trip dimulai hari ini
+                        ->orWhere(function($query) use ($now) {
+                            $query->where('date_start', '<=', $now)  // Memeriksa jika trip sudah dimulai
+                                ->where('date_end', '>=', $now);  // Memeriksa jika trip belum berakhir
+                        });
+                });
             })
             ->first();
             

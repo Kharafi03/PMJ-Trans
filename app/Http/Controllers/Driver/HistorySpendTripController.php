@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\TripBus;
 use App\Models\TripBusSpend;
 use App\Models\Booking;
+use App\Models\Destination;
 
 class HistorySpendTripController extends Controller
 {
@@ -37,6 +38,8 @@ class HistorySpendTripController extends Controller
 
         $tripspends = TripBusSpend::where('id_trip_bus', $trip->id)->get();
 
-        return view('frontend.driver.riwayat-pengeluaran.index', compact('trip', 'tripspends'));
+        $destinations = Destination::where('id_booking', $trip->booking->id)->get();
+
+        return view('frontend.driver.riwayat-pengeluaran.index', compact('trip', 'tripspends', 'destinations'));
     }
 }

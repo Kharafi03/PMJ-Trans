@@ -54,6 +54,11 @@ class SpendTripController extends Controller
         $trip = TripBus::findOrFail($tripId);
         $trip->total_spend += $request->nominal;
         $trip->nominal -= $request->nominal;
+
+        if ($request->id_m_spend == 1) {
+            $trip->total_spend_bbm += $request->nominal;
+        }
+
         $trip->save();
 
         // Menyimpan file gambar

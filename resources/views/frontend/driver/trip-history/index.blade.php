@@ -13,12 +13,12 @@
 
             <!-- TEXT CONTENT -->
             <div class="text-content mb-3">
-                <p>Riwayat Trip Nida</p>
+                <p>Riwayat Trip {{ auth()->user()->name }}</p>
             </div>
 
             <!-- RIWAYAT BUS -->
             <div class="accordion accordion-flush" id="item">
-                @foreach ($trips as $trip)
+                @foreach ($trips as $index => $trip)
                     <div class="accordion-item">
                         <div class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -70,8 +70,14 @@
                                                     <td class="keterangan ">Titik Jemput</td>
                                                     <td>{{ $trip->booking->pickup_point }}</td>
                                                 </tr>
+                                                @foreach ($destinations[$index] as $dest)
+                                                    <tr>
+                                                        <td class="keterangan ">Tujuan {{ $loop->iteration }}</td>
+                                                        <td>{{ $dest->name }}</td>
+                                                    </tr>
+                                                @endforeach
                                                 <tr>
-                                                    <td class="keterangan ">Tujuan</td>
+                                                    <td class="keterangan ">Tujuan Akhir</td>
                                                     <td>{{ $trip->booking->destination_point }}</td>
                                                 </tr>
                                                 <tr>
@@ -137,7 +143,8 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="d-flex justify-content-end">
-                            <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+                            <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><i
+                                    class="fa fa-times"></i></button>
                         </div>
                         <div class="modal-body">
                             <h5>Bukti Pengeluaran</h5>

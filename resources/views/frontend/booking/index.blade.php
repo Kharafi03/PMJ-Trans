@@ -39,25 +39,31 @@
                             </p>
                         </div>
                         <div class="row">
-                            <div class="mb-4">
-                                <label for="destination_point" class="form-label">Tujuan Akhir<span class="text-danger">*</span></label>
-                                <div class="input-group">
-                                    <input type="text" class="detail-pemesanan form-control" id="destination_point" name="destination_point" placeholder="Masukkan tujuan perjalanan" required autofocus>
-                                    <span class="input-group-text" id="icon"><i class="fa-solid fa-location-dot"></i></span>
-                                </div>
-                            </div>
                             <!-- Kontainer Field Tujuan Tambahan -->
                             <div id="dynamic-fields"></div>
-
+                            <div class="mb-4">
+                                <label for="destination_point" class="form-label">Tujuan Akhir<span
+                                        class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input type="text" class="detail-pemesanan form-control" id="destination_point"
+                                        name="destination_point" placeholder="Masukkan tujuan perjalanan" required
+                                        autofocus>
+                                    <span class="input-group-text" id="icon"><i
+                                            class="fa-solid fa-location-dot"></i></span>
+                                </div>
+                            </div>
                             <!-- Tombol untuk Menambah Field -->
                             <button type="button" class="btn-tambahTujuan mb-4" id="add-field">Tambah Tujuan</button>
 
                             <div class="row">
                                 <div class="col-md-8">
-                                    <label for="capacity" class="form-label">Jumlah Penumpang<span class="text-danger">*</span></label>
+                                    <label for="capacity" class="form-label">Jumlah Penumpang<span
+                                            class="text-danger">*</span></label>
                                     <div class="input-group">
-                                        <input type="number" class="detail-pemesanan form-control" id="capacity" name="capacity" placeholder="Masukkan jumlah penumpang" required>
-                                        <span class="input-group-text" id="icon"><i class="fa-solid fa-person"></i></span>
+                                        <input type="number" class="detail-pemesanan form-control" id="capacity"
+                                            name="capacity" placeholder="Masukkan jumlah penumpang" min="1" required>
+                                        <span class="input-group-text" id="icon"><i
+                                                class="fa-solid fa-person"></i></span>
                                     </div>
                                     <!-- Placeholder for dynamically added leg rest -->
                                     <!-- <div id="leg-rests" class="mt-2 mb-2"></div> -->
@@ -70,26 +76,34 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <!-- Placeholder for dynamically added leg rest input -->
                             <div id="leg-rests" class="mb-4"></div>
+                            <input type="hidden" name="legrest" value="0">
 
-                               <!-- Tombol Tambah Leg Rest -->
-                                <!-- <div class="mb-4" id="leg-rest-container">
-                                    <button type="button" class="btn-legRest" id="add-leg-rest">Tambah Leg Rest</button>
-                                </div> -->
-                       
+                            <!-- Tombol Tambah Leg Rest -->
+                            <!-- <div class="mb-4" id="leg-rest-container">
+                                                                                    <button type="button" class="btn-legRest" id="add-leg-rest">Tambah Leg Rest</button>
+                                                                                </div> -->
+
                             <div class="mb-4">
-                                <label for="date_start" class="form-label">Tanggal Mulai<span class="text-danger">*</span></label>
+                                <label for="date_start" class="form-label">Tanggal Mulai<span
+                                        class="text-danger">*</span></label>
                                 <div class="input-group">
-                                    <input type="datetime-local" class="detail-pemesanan form-control" id="date_start" name="date_start" required>
-                                    <span class="input-group-text" id="icon"><i class="fa-solid fa-calendar"></i></span>
+                                    <input type="datetime-local" class="detail-pemesanan form-control" id="date_start"
+                                        name="date_start" min="{{ \Carbon\Carbon::tomorrow()->format('Y-m-d\TH:i') }}"
+                                        required>
+
+                                    <span class="input-group-text" id="icon"><i
+                                            class="fa-solid fa-calendar"></i></span>
                                 </div>
                             </div>
                             <div class="mb-4">
-                                <label for="pickup_point" class="form-label">Titik Jemput<span class="text-danger">*</span></label>
+                                <label for="pickup_point" class="form-label">Titik Jemput<span
+                                        class="text-danger">*</span></label>
                                 <div>
-                                    <textarea class="form-control" placeholder="Masukkan alamat lengkap" id="pickup_point" name="pickup_point" style="height: 100px;" required></textarea>
+                                    <textarea class="form-control" placeholder="Masukkan alamat lengkap" id="pickup_point" name="pickup_point"
+                                        style="height: 100px;" required></textarea>
                                 </div>
                             </div>
                             <div>
@@ -105,30 +119,42 @@
                         </div>
                         <div class="row">
                             <div class="mb-4">
-                                <label for="name" class="form-label">Nama Lengkap<span class="text-danger">*</span></label>
+                                <label for="name" class="form-label">Nama Lengkap<span
+                                        class="text-danger">*</span></label>
                                 <div class="input-group">
-                                    <input type="text" class="detail-pemesanan form-control" id="name" name="name" placeholder="Masukkan nama lengkap" required>
+                                    <input type="text" class="detail-pemesanan form-control" id="name"
+                                        name="name" placeholder="Masukkan nama lengkap" required
+                                        @if (Auth::check()) value="{{ Auth::user()->name }}" readonly @endif>
                                     <span class="input-group-text" id="icon"><i class="fa-solid fa-user"></i></span>
                                 </div>
                             </div>
                             <div class="mb-4">
-                                <label for="number_phone" class="form-label">Nomor Telephone<span class="text-danger">*</span></label>
+                                <label for="number_phone" class="form-label">Nomor Telephone<span
+                                        class="text-danger">*</span></label>
                                 <div class="input-group">
-                                    <input type="text" class="detail-pemesanan form-control" id="number_phone" name="number_phone" placeholder="Masukkan nomor telepon aktif dan dapat dihubungi." required>
-                                    <span class="input-group-text" id="icon"><i class="fa-solid fa-phone"></i></span>
+                                    <input type="number" class="detail-pemesanan form-control" id="number_phone"
+                                        name="number_phone"
+                                        placeholder="Masukkan nomor telepon aktif dan dapat dihubungi." required
+                                        @if (Auth::check()) value="{{ Auth::user()->number_phone }}" readonly @endif>
+                                    <span class="input-group-text" id="icon"><i
+                                            class="fa-solid fa-phone"></i></span>
                                 </div>
                             </div>
                             <div class="mb-4">
                                 <label for="email" class="form-label">Email</label>
                                 <div class="input-group">
-                                    <input type="email" class="detail-pemesanan form-control" id="email" name="email" placeholder="Masukkan alamat email">
-                                    <span class="input-group-text" id="icon"><i class="fa-solid fa-envelope"></i></span>
+                                    <input type="email" class="detail-pemesanan form-control" id="email"
+                                        name="email" placeholder="Masukkan alamat email"
+                                        @if (Auth::check() && Auth::user()->email) value="{{ Auth::user()->email }}" readonly @endif>
+                                    <span class="input-group-text" id="icon"><i
+                                            class="fa-solid fa-envelope"></i></span>
                                 </div>
                             </div>
                             <div class="mb-4">
                                 <label for="address" class="form-label">Alamat<span class="text-danger">*</span></label>
                                 <div>
-                                    <textarea class="form-control" placeholder="Alamat Lengkap" id="address" name="address" style="height: 100px" required></textarea>
+                                    <textarea class="form-control" placeholder="Alamat Lengkap" id="address" name="address" style="height: 100px"
+                                        @if (Auth::check()) readonly @endif>{{ Auth::check() ? Auth::user()->address : '' }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -147,238 +173,236 @@
 
     <!-- SCRIPT -->
     <script>
-    // Counter untuk field yang ditambahkan secara dinamis
-    // let fieldCount = 1;
+        // Counter untuk field yang ditambahkan secara dinamis
+        let fieldCount = 0; // Inisialisasi ke 0
 
-    // // Fungsi untuk menambah field baru
-    // document.getElementById('add-field').addEventListener('click', function () {
-    //     const dynamicFields = document.getElementById('dynamic-fields');
-    //     const newField = document.createElement('div');
-        
-    //     newField.setAttribute('id', 'field-' + fieldCount);
+        // Fungsi untuk menonaktifkan atau mengaktifkan tombol
+        function toggleAddButton() {
+            const inputs = document.querySelectorAll('.tujuan-input');
+            const lastInput = inputs[inputs.length - 1]; // Input terakhir
 
-    //     // Input field untuk tujuan tambahan
-    //     newField.innerHTML = `
-    //         <div class="input-group">
-    //             <input type="text" class="form-control tujuan-input" placeholder="Tujuan Tambahan" name="tujuan[]" id="tujuan-${fieldCount}" required>
-    //             <span class="input-group-text" id="icon"><i class="fa-solid fa-location-dot"></i></span>
-    //         </div>
-    //         <button type="button" class="btn btn-danger mt-2 mb-4" onclick="removeField(${fieldCount})">Hapus</button>
-    //     `;
+            // Jika input terakhir kosong, nonaktifkan tombol
+            if (lastInput && lastInput.value.trim() === '') {
+                document.getElementById('add-field').disabled = true;
+            } else {
+                document.getElementById('add-field').disabled = false;
+            }
+        }
 
-    //     dynamicFields.appendChild(newField);
-    //     fieldCount++;
+        // Event listener untuk menambah field tujuan baru
+        document.getElementById('add-field').addEventListener('click', function() {
+            const dynamicFields = document.getElementById('dynamic-fields');
+            const destinationPointField = document.getElementById('destination-point-field');
 
-    //     // Nonaktifkan tombol tambah sampai field baru diisi
-    //     toggleAddButton();
-    // });
+            // Menambahkan field baru
+            fieldCount++; // Increment jumlah field
+            const newField = document.createElement('div');
+            newField.setAttribute('id', 'field-' + fieldCount);
 
-    // // Fungsi untuk mengaktifkan/menonaktifkan tombol tambah
-    // function toggleAddButton() {
-    //     const inputs = document.querySelectorAll('.tujuan-input');
-    //     const addButton = document.getElementById('add-field');
-
-    //     // Nonaktifkan tombol jika ada input yang kosong
-    //     let allFilled = true;
-    //     inputs.forEach(input => {
-    //         if (!input.value) {
-    //             allFilled = false;
-    //         }
-    //     });
-
-    //     addButton.disabled = !allFilled;
-    // }
-
-    // // Tambahkan event listener ke input yang dibuat secara dinamis
-    // document.addEventListener('input', function (event) {
-    //     if (event.target && event.target.classList.contains('tujuan-input')) {
-    //         toggleAddButton();
-    //     }
-    // });
-
-
-    // // Remove field function
-    // function removeField(id) {
-    //     const field = document.getElementById('field-' + id);
-    //     field.remove();
-    // }
-
-    // Counter untuk field yang ditambahkan secara dinamis
-    let fieldCount = 0; // Inisialisasi ke 0
-
-    // Fungsi untuk menambah field baru
-    document.getElementById('add-field').addEventListener('click', function () {
-        const dynamicFields = document.getElementById('dynamic-fields');
-
-        // Menambahkan field baru
-        const newField = document.createElement('div');
-        fieldCount++; // Increment jumlah field
-
-        newField.setAttribute('id', 'field-' + fieldCount);
-
-        // Input field untuk tujuan tambahan
-        newField.innerHTML = `
-            <div class="mb-4">
-                <label for="tujuan-${fieldCount}" class="form-label">Tujuan Akhir<span class="text-danger">*</span></label>
-                <div class="input-group">
-                    <input type="text" class="form-control tujuan-input" placeholder="Tujuan Akhir" name="tujuan[]" id="tujuan-${fieldCount}" required>
-                    <span class="input-group-text" id="icon"><i class="fa-solid fa-location-dot"></i></span>
-                </div>
+            newField.innerHTML = `
+        <div class="mb-4">
+            <label for="tujuan-${fieldCount}" class="form-label">Tujuan ${fieldCount}<span class="text-danger">*</span></label>
+            <div class="input-group">
+                <input type="text" class="form-control tujuan-input" placeholder="Tujuan ${fieldCount}" name="tujuan[]" id="tujuan-${fieldCount}" required>
+                <span class="input-group-text" id="icon"><i class="fa-solid fa-location-dot"></i></span>
             </div>
-            <button type="button" class="btn-hapusTujuan btn btn-danger mb-4" onclick="removeField(${fieldCount})">Hapus</button>
-        `;
+        </div>
+        <button type="button" class="btn-hapusTujuan btn btn-danger mb-4" onclick="removeField(${fieldCount})">Hapus</button>
+    `;
 
-        dynamicFields.appendChild(newField);
+            // Tambahkan field baru sebelum tujuan akhir
+            dynamicFields.insertBefore(newField, destinationPointField);
 
-        // Nonaktifkan tombol tambah sampai field baru diisi
-        toggleAddButton();
-        // Perbarui label setelah menambah field
-        updateLabels();
-    });
+            // Setelah menambah field, periksa input terakhir
+            toggleAddButton();
+        });
 
-    // Fungsi untuk mengaktifkan/menonaktifkan tombol tambah
-    function toggleAddButton() {
-        const inputs = document.querySelectorAll('.tujuan-input');
-        const addButton = document.getElementById('add-field');
-
-        // Nonaktifkan tombol jika ada input yang kosong
-        let allFilled = true;
-        inputs.forEach(input => {
-            if (!input.value) {
-                allFilled = false;
+        // Event listener untuk setiap input tujuan
+        document.addEventListener('input', function(e) {
+            if (e.target.matches('.tujuan-input')) {
+                toggleAddButton(); // Periksa apakah inputan terakhir sudah terisi
             }
         });
 
-        addButton.disabled = !allFilled;
-    }
+        // Pada awal load, cek apakah input sudah terisi
+        toggleAddButton();
 
-    // Fungsi untuk memperbarui label tujuan
-    function updateLabels() {
-        const inputs = document.querySelectorAll('.tujuan-input');
-        const firstLabel = document.querySelector('label[for="destination_point"]');
+        // Fungsi untuk mengaktifkan/menonaktifkan tombol tambah
+        function toggleAddButton() {
+            const inputs = document.querySelectorAll('.tujuan-input');
+            const addButton = document.getElementById('add-field');
 
-        // Update label untuk input pertama hanya jika ada field tambahan
-        if (inputs.length > 0) {
-            firstLabel.innerHTML = `Tujuan 1<span class="text-danger">*</span>`; // Label input awal
-
-            // Update label untuk input tambahan
-            inputs.forEach((input, index) => {
-                const label = input.parentElement.previousElementSibling;
-
-                // Perbarui label: yang terakhir menjadi "Tujuan Akhir", lainnya menjadi "Tujuan 2", "Tujuan 3", ...
-                if (index === inputs.length - 1) {
-                    label.innerHTML = 'Tujuan Akhir<span class="text-danger">*</span>';
-                } else {
-                    label.innerHTML = `Tujuan ${index + 2}<span class="text-danger">*</span>`; // Increment untuk tujuan tambahan
+            // Nonaktifkan tombol jika ada input yang kosong
+            let allFilled = true;
+            inputs.forEach(input => {
+                if (!input.value) {
+                    allFilled = false;
                 }
             });
-        } else {
-            // Jika tidak ada input tambahan, kembalikan ke label default
-            firstLabel.innerHTML = 'Tujuan Akhir<span class="text-danger">*</span>';
+
+            addButton.disabled = !allFilled;
         }
-    }
 
-    // Tambahkan event listener ke input yang dibuat secara dinamis
-    document.addEventListener('input', function (event) {
-        if (event.target && event.target.classList.contains('tujuan-input')) {
-            toggleAddButton();
+        // Fungsi untuk memperbarui label tujuan
+        function updateLabels() {
+            const inputs = document.querySelectorAll('.tujuan-input');
+            const firstLabel = document.querySelector('label[for="destination_point"]');
+
+            // Jika ada field tambahan, ubah label pertama menjadi "Tujuan 1"
+            if (inputs.length > 0) {
+                // Label untuk "Tujuan 1" (input tambahan pertama)
+                inputs.forEach((input, index) => {
+                    const label = input.parentElement.previousElementSibling;
+
+                    // Update label input tambahan
+                    label.innerHTML =
+                        `Tujuan ${index + 1}<span class="text-danger">*</span>`; // Sesuaikan label untuk setiap tujuan tambahan
+                });
+
+                // Tetap pertahankan label "Tujuan Akhir" untuk input terakhir
+                firstLabel.innerHTML = 'Tujuan Akhir<span class="text-danger">*</span>';
+
+            } else {
+                // Jika tidak ada tujuan tambahan, kembalikan ke label default "Tujuan Akhir"
+                firstLabel.innerHTML = 'Tujuan Akhir<span class="text-danger">*</span>';
+            }
         }
-    });
 
-    // Fungsi untuk menghapus field
-    function removeField(id) {
-        const field = document.getElementById('field-' + id);
-        field.remove();
-        fieldCount--; // Decrement jumlah field
-        updateLabels(); // Perbarui label setelah menghapus field
-        toggleAddButton(); // Periksa kembali apakah tombol tambah harus diaktifkan
-    }
+        // Tambahkan event listener ke input yang dibuat secara dinamis
+        document.addEventListener('input', function(event) {
+            if (event.target && event.target.classList.contains('tujuan-input')) {
+                toggleAddButton();
+            }
+        });
 
-    // Inisialisasi field pertama dengan label
-    updateLabels(); // Pastikan label benar dari awal
+        // Fungsi untuk menghapus field
+        function removeField(id) {
+            const field = document.getElementById('field-' + id);
+            field.remove();
+            fieldCount--; // Decrement jumlah field
+            updateLabels(); // Perbarui label setelah menghapus field
+            toggleAddButton(); // Periksa kembali apakah tombol tambah harus diaktifkan
+        }
+
+        // Inisialisasi field pertama dengan label
+        updateLabels(); // Pastikan label benar dari awal
 
 
-    // let debounceTimeout;
+        // let debounceTimeout;
 
-    // // Fungsi untuk memunculkan atau menyembunyikan tombol
-    // function checkCapacity() {
-    //     const capacityValue = parseInt(document.getElementById('capacity').value);
+        // // Fungsi untuk memunculkan atau menyembunyikan tombol
+        // function checkCapacity() {
+        //     const capacityValue = parseInt(document.getElementById('capacity').value);
 
-    //     // Tampilkan tombol jika jumlah penumpang <= 32 dan lebih dari 0
-    //     if (capacityValue > 0 && capacityValue <= 32) {
-    //         document.getElementById('leg-rest-container').style.display = 'block';
-    //     } else {
-    //         document.getElementById('leg-rest-container').style.display = 'none';
-    //     }
-    // }
+        //     // Tampilkan tombol jika jumlah penumpang <= 32 dan lebih dari 0
+        //     if (capacityValue > 0 && capacityValue <= 32) {
+        //         document.getElementById('leg-rest-container').style.display = 'block';
+        //     } else {
+        //         document.getElementById('leg-rest-container').style.display = 'none';
+        //     }
+        // }
 
-    // // Debounce function untuk menghindari eksekusi cepat saat mengetik
-    // function debounce(func, delay) {
-    //     return function() {
-    //         clearTimeout(debounceTimeout);
-    //         debounceTimeout = setTimeout(func, delay);
-    //     };
-    // }
+        // // Debounce function untuk menghindari eksekusi cepat saat mengetik
+        // function debounce(func, delay) {
+        //     return function() {
+        //         clearTimeout(debounceTimeout);
+        //         debounceTimeout = setTimeout(func, delay);
+        //     };
+        // }
 
-    // // Event listener dengan debounce
-    // document.getElementById('capacity').addEventListener('input', debounce(checkCapacity, 500));
+        // // Event listener dengan debounce
+        // document.getElementById('capacity').addEventListener('input', debounce(checkCapacity, 500));
 
-    // document.getElementById('add-leg-rest').addEventListener('click', function() {
-    //     // Create a new div to contain the leg rest text and remove button
-    //     const legRestDiv = document.createElement('div');
-    //     legRestDiv.classList.add('mb-2', 'leg-rest-item');
+        // document.getElementById('add-leg-rest').addEventListener('click', function() {
+        //     // Create a new div to contain the leg rest text and remove button
+        //     const legRestDiv = document.createElement('div');
+        //     legRestDiv.classList.add('mb-2', 'leg-rest-item');
 
-    //     // Create the text for leg rest
-    //     const legRestText = document.createElement('span');
-    //     legRestText.innerText = 'Tambah Leg Rest ';
-    //     legRestText.classList.add('me-2'); // Add margin to the right
+        //     // Create the text for leg rest
+        //     const legRestText = document.createElement('span');
+        //     legRestText.innerText = 'Tambah Leg Rest ';
+        //     legRestText.classList.add('me-2'); // Add margin to the right
 
-    //     // Create the remove button (x icon)
-    //     const removeButton = document.createElement('button');
-    //     removeButton.type = 'button';
-    //     removeButton.classList.add('btn', 'btn-danger', 'btn-sm', 'btn-x');
-    //     removeButton.innerHTML = '&times;'; // Using HTML entity for multiplication sign (x)
-    //     removeButton.addEventListener('click', function() {
-    //         // Remove this leg rest item
-    //         legRestDiv.remove();
-    //         // Enable the add leg rest button again if there are no items left
-    //         if (document.querySelectorAll('.leg-rest-item').length === 0) {
-    //             document.getElementById('add-leg-rest').disabled = false; // Enable button again
-    //         }
-    //     });
+        //     // Create the remove button (x icon)
+        //     const removeButton = document.createElement('button');
+        //     removeButton.type = 'button';
+        //     removeButton.classList.add('btn', 'btn-danger', 'btn-sm', 'btn-x');
+        //     removeButton.innerHTML = '&times;'; // Using HTML entity for multiplication sign (x)
+        //     removeButton.addEventListener('click', function() {
+        //         // Remove this leg rest item
+        //         legRestDiv.remove();
+        //         // Enable the add leg rest button again if there are no items left
+        //         if (document.querySelectorAll('.leg-rest-item').length === 0) {
+        //             document.getElementById('add-leg-rest').disabled = false; // Enable button again
+        //         }
+        //     });
 
-    //     // Append text and button to the new div
-    //     legRestDiv.appendChild(legRestText);
-    //     legRestDiv.appendChild(removeButton);
+        //     // Append text and button to the new div
+        //     legRestDiv.appendChild(legRestText);
+        //     legRestDiv.appendChild(removeButton);
 
-    //     // Append the new div to the leg rests container
-    //     document.getElementById('leg-rests').appendChild(legRestDiv);
+        //     // Append the new div to the leg rests container
+        //     document.getElementById('leg-rests').appendChild(legRestDiv);
 
-    //     // Disable the add leg rest button after adding one
-    //     this.disabled = true; // Disable button after adding
-    // });
+        //     // Disable the add leg rest button after adding one
+        //     this.disabled = true; // Disable button after adding
+        // });
 
-     // LEGREST
-     // Ambil elemen switch dan placeholder untuk input leg rest
-    const toggleLegRest = document.getElementById('toggle-leg-rest');
-    const legRestsContainer = document.getElementById('leg-rests');
+        // LEGREST
+        // Ambil elemen switch dan placeholder untuk input leg rest
+        const toggleLegRest = document.getElementById('toggle-leg-rest');
+        const legRestsContainer = document.getElementById('leg-rests');
+        const hiddenLegRestInput = document.querySelector('input[name="legrest"]'); // Ambil input hidden legrest
 
-    // Tambahkan event listener untuk mengontrol input leg rest
-    toggleLegRest.addEventListener('change', function () {
-        if (this.checked) {
-            // Jika switch diaktifkan, tambahkan input leg rest
-            const legRestInput = `
-                <div class="input-group">
-                    <input type="text" class="form-control" id="leg-rest" name="leg_rest" placeholder="Masukkan detail leg rest" required>
-                    <span class="input-group-text" id="icon"><i class="fa-solid fa-couch"></i></span>
-                </div>
+        // Tambahkan event listener untuk mengontrol input leg rest
+        toggleLegRest.addEventListener('change', function() {
+            if (this.checked) {
+                // Jika switch diaktifkan, tambahkan input leg rest hanya jika belum ada
+                hiddenLegRestInput.value = 1; // Mengubah nilai hidden field menjadi 1
+
+                if (!document.getElementById('legrest')) {
+                    const legRestInput = `
+            <div class="input-group">
+                <input type="text" class="form-control" id="description" name="description" placeholder="Masukkan detail leg rest">
+                <span class="input-group-text" id="icon"><i class="fa-solid fa-couch"></i></span>
+            </div>
             `;
-            legRestsContainer.innerHTML = legRestInput;
-        } else {
-            // Jika switch dimatikan, hapus input leg rest
-            legRestsContainer.innerHTML = '';
-        }
-    });
+                    legRestsContainer.innerHTML = legRestInput; // Menambahkan input leg rest
+                }
+            } else {
+                // Jika switch dimatikan, hapus input leg rest
+                legRestsContainer.innerHTML = ''; // Menghapus input leg rest
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const numberInputs = document.querySelectorAll('input[type="number"]');
 
+            numberInputs.forEach(function(input) {
+                // Prevent "-" from being entered
+                input.addEventListener('keypress', function(event) {
+                    if (event.which === 45 || event.key === '-') {
+                        event.preventDefault();
+                    }
+                });
+
+                // Remove any negative signs that might have been pasted
+                input.addEventListener('input', function() {
+                    let value = input.value;
+                    if (value.indexOf('-') !== -1) {
+                        input.value = value.replace('-', '');
+                    }
+                });
+
+                // Ensure no negative value remains after input loses focus
+                input.addEventListener('blur', function() {
+                    let value = input.value;
+                    if (value < 0) {
+                        input.value = Math.abs(value); // Convert negative to positive
+                    }
+                });
+            });
+        });
     </script>
 @endsection

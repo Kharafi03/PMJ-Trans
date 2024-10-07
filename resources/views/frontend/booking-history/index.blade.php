@@ -18,27 +18,7 @@
                 <div class="row">
                     <div class="col-md-8" style="padding: 0px 30px;">
                         <p class="title">Detail Riwayat Sewa</p>
-                    </div>
-                    <div class="col-md-4" style="padding: 0px 30px;">
-                        <div class="row">
-                            <div class="col">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1"><i
-                                            class="fa-solid fa-calendar"></i></span>
-                                    <input type="date" class="form-control" placeholder="Select Date"
-                                        aria-describedby="basic-addon1">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1"><i
-                                            class="fa-solid fa-sliders"></i></span>
-                                    <input type="text" class="form-control" placeholder="Filters"
-                                        aria-describedby="basic-addon1">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </div> 
                 </div>
 
                 <div class="table-responsive">
@@ -46,8 +26,8 @@
                         class="table table-bordered table-striped table-hover text-nowrap text-center align-middle w-100">
                         <thead class="align-middle text-center">
                             <tr>
-                                <th scope="col" style="background-color: #A8A8A840;">No</th>
-                                <th scope="col">ID Booking</th>
+                                <th scope="col">No</th>
+                                <th scope="col">Kode Booking</th>
                                 <th scope="col">Nama</th>
                                 <th scope="col">Tujuan</th>
                                 <th scope="col">Titik Jemput</th>
@@ -59,18 +39,32 @@
                         </thead>
                         <tbody>
                             <!-- Looping melalui data booking -->
-                            @forelse ($bookings as $booking)
+                            @forelse ($bookings as $index => $booking)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $booking->booking_code }}</td>
                                     <td>{{ $booking->customer ? $booking->customer->name : 'Tidak Ditemukan' }}</td>
-                                    <td>{{ $booking->destination_point }}</td>
+                                    <td style="text-align: left;">
+                                        @foreach ($destination[$index] as $dest)
+                                            {{ $loop->iteration }}. {{ $dest->name }}
+                                            <br>
+                                        @endforeach
+                                        @php
+                                            $totalDestinations = count($destination[$index]);
+                                        @endphp
+                                        {{ $totalDestinations + 1 }}. {{ $booking->destination_point }}
+                                    </td>
                                     <td>{{ $booking->pickup_point }}</td>
-                                    <td>{{ $booking->date_start->format('d F Y') }}</td>
-                                    <td>{{ $booking->date_end->format('d F Y') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($booking->date_start)->translatedFormat('l, d F Y') }}</td>
                                     <td>
-                                        <p class="status">
-                                            {{ $booking->ms_booking ? $booking->ms_booking->name : 'Tidak Ditemukan' }}</p>
+                                        @if ($booking->date_end == null)
+                                            Tidak Ditemukan
+                                        @else
+                                            {{ \Carbon\Carbon::parse($booking->date_end)->translatedFormat('l, d F Y') }}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        {{ $booking->ms_booking ? $booking->ms_booking->name : 'Tidak Ditemukan' }}
                                     </td>
                                     <td><button type="button" class="btn-ulasan">Beri Ulasan</button></td>
                                 </tr>

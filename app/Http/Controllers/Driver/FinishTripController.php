@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\TripBus;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Booking;
 
 class FinishTripController extends Controller
 {
@@ -50,6 +51,10 @@ class FinishTripController extends Controller
         // $trip->km_end = $request->km_end;
         // $trip->id_ms_trip = 3;
         // $trip->save();
+
+        $booking = Booking::where('id', $tripId)->first();
+        $booking->id_ms_booking = 4;
+        $booking->save();
 
         // Temukan trip berdasarkan ID
         $trip = TripBus::findOrFail($tripId);

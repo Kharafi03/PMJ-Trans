@@ -20,14 +20,14 @@ class StartTripController extends Controller
         // Ambil ID user yang sedang login
         $driverId = Auth::id();
 
-        // Tentukan batas waktu 16 jam yang lalu
-        $maxLateTime = Carbon::now()->subHours(16);
-
         // Ambil trip dari tabel trip_buses yang memenuhi kriteria
-        $trip = TripBus::whereHas('booking', function ($query) use ($maxLateTime) {
-            // Ambil trip jika date_start adalah hari ini ATAU sudah lewat maksimal 16 jam yang lalu
-            $query->whereDate('date_start', now()); // Ambil booking dengan date_start pada hari ini
-                // ->orWhere('date_start', '>=', $maxLateTime); // Atau date_start yang maksimal 16 jam lalu
+        $trip = TripBus::whereHas('booking', function ($query) {
+            // Ambil booking jika date_start adalah hari ini
+            $query->whereDate('date_start', now())  // Memeriksa apakah date_start hari ini
+                ->orWhere(function ($query) {
+                    $query->whereDate('date_start', '<=', now())
+                        ->whereDate('date_end', '>=', now()); // Memeriksa jika sekarang berada dalam rentang date_start dan date_end
+                });
         })
             ->where(function ($query) use ($driverId) {
                 // Cek apakah id_driver atau id_codriver adalah user yang login
@@ -54,7 +54,6 @@ class StartTripController extends Controller
         // Hapus flag setelah mengakses halaman
         session()->forget('scanned');
 
-        dd($trip, $booking, $busImage);
         // Kirim data ke view
         return view('frontend.driver.start-trip.index', compact('trip', 'booking', 'busImage'));
     }
