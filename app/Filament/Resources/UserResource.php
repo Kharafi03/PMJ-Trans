@@ -109,7 +109,7 @@ class UserResource extends Resource
             ->columns([
         
                 Tables\Columns\TextColumn::make('id')
-                        ->label('No')
+                        ->label('Nomor')
                         ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama')
