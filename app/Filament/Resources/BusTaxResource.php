@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BusTaxResource\Pages;
 use App\Filament\Resources\BusTaxResource\RelationManagers;
 use App\Models\BusTax;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -39,9 +40,15 @@ class BusTaxResource extends Resource
                             ->relationship('buses','name')
                             ->placeholder('Masukkan ID Bus'),
                         Forms\Components\Select::make('id_user')
-                            ->label('User')
+                            ->label('Pelaksana')
                             ->required()
                             ->relationship('users','name')
+                            ->options(function () {
+                                return User::whereHas('roles', function ($query) {
+                                    $query->where('name', 'driver')
+                                    ->orWhere('name', 'admin');
+                                })->pluck('name', 'id'); // Mengambil nama dan id user
+                            })
                             ->placeholder('Masukkan ID User'),
                         Forms\Components\Textarea::make('description')
                             ->label('Deskripsi')

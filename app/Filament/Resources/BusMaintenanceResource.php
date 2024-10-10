@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BusMaintenanceResource\Pages;
 use App\Filament\Resources\BusMaintenanceResource\RelationManagers;
 use App\Models\BusMaintenance;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
@@ -21,7 +22,7 @@ class BusMaintenanceResource extends Resource
 
     protected static ?string $pluralModelLabel = "Perawatan";
 
-    protected static ?string $navigationIcon = 'heroicon-m-calendar-days';
+    protected static ?string $navigationIcon = 'heroicon-s-wrench-screwdriver';
 
     protected static ?int $navigationSort = 6;
 
@@ -40,8 +41,14 @@ class BusMaintenanceResource extends Resource
                                 ->required(),
 
                             Select::make('id_user')
-                                ->label('User')
+                                ->label('Pelaksana')
                                 ->relationship('users', 'name')
+                                ->options(function () {
+                                    return User::whereHas('roles', function ($query) {
+                                        $query->where('name', 'driver')
+                                        ->orWhere('name', 'admin');
+                                    })->pluck('name', 'id'); // Mengambil nama dan id user
+                                })
                                 ->required(),
 
                             Select::make('id_m_maintenance')
@@ -128,7 +135,7 @@ class BusMaintenanceResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('users.name')
-                    ->label('User')
+                    ->label('Pelaksana')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('m_maintenances.name')
