@@ -47,27 +47,33 @@
                 <!-- CARD -->
                 <div class="card-content">
                     @foreach ($trips as $trip)
-                        <div class="banner" style="background-image: url('{{ asset('img/banner2.png') }}');"> <!-- kalau tidak ada trip nanti pakai file banner1.png-->
+                        <div class="banner"
+                            style="background-image: url('{{ \Carbon\Carbon::parse($trip->booking->date_start)->isToday() ? asset('img/banner2.png') : asset('img/banner1.png') }}');">
                             <div class="banner-isi">
                                 <div class="header">
-                                        <p style="text-align: center;padding-bottom: 5px; font-weight: 600; font-size: 14px;">Hari ini, 07 Oktober 2024, pukul 15.00</p>
+                                    @if (\Carbon\Carbon::parse($trip->booking->date_start)->isToday())
+                                        <p style="padding-top: 1rem; font-weight: 600; font-size: 14px;"
+                                            class="text-center">
+                                            Hari ini,
+                                            {{ \Carbon\Carbon::parse($trip->booking->date_start)->translatedFormat('d F \p\u\k\u\l H.i') }}
+                                        </p>
+                                    @else
+                                        <p style="padding-top: 1rem; font-weight: 600; font-size: 14px;"
+                                            class="text-center">
+                                            {{ \Carbon\Carbon::parse($trip->booking->date_start)->translatedFormat('d F \p\u\k\u\l H.i') }}
+                                        </p>
+                                    @endif
+                                    <div class="kode">
                                         <p>{{ $trip->booking->booking_code }}</p>
                                         <h5>{{ $trip->bus->name }}</h5>
-                                    
-                                    <!-- <div class="col-5">
-                                        @if (\Carbon\Carbon::parse($trip->booking->date_start)->isToday())
-                                            <p>Hari ini</p>
-                                        @endif
-                                        <p>{{ \Carbon\Carbon::parse($trip->booking->date_start)->translatedFormat('d F \p\u\k\u\l H.i') }}
-                                        </p>
-                                    </div> -->
+                                    </div>
                                 </div>
                                 <div class="row tujuan">
                                     <div class="col-4 col-md-6 col-lg-4">
                                         <p>{{ $trip->booking->pickup_point }}</p>
                                     </div>
                                     <div class="col-4 col-md-6 col-lg-4">
-                                        <p>{{ $trip->booking->destination_point }}</p>
+                                        <p>{{ $trip->booking->destination->last()->name }}</p>
                                     </div>
                                 </div>
                                 <a href="{{ url('/driver/detail-trip/' . $trip->booking->booking_code) }}"

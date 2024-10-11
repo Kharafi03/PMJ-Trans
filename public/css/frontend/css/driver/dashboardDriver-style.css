@@ -49,8 +49,8 @@
 .banner-isi{
     padding-bottom: 5px;
 }
-.header{
-    padding: 30px 30px 0px 30px;
+.kode{
+    padding: 15px 0px 0px 30px;
 }
 .header p{
     margin-bottom: 0px;
@@ -73,15 +73,20 @@
 }
 
 /* BUTTON LIHAT */
-.btn-lihat{
-    padding: 3px;
-    background-color: #FEC400;
-    color: white;
-    border-radius: 5px;
-    border: none;
-    width: 65px;
-    margin: 10px 0px 40px 30px;
-    font-size: 14px;
+.btn-lihat {
+    display: inline-block; /* Pastikan tautan ditampilkan sebagai blok inline */
+    padding: 5px; 
+    background-color: #FEC400; 
+    color: white; 
+    border-radius: 5px; 
+    text-align: center; /* Tambahkan ini agar teks ditampilkan di tengah */
+    width: 74px; 
+    margin: 10px 0 20px 30px; 
+    text-decoration: none; /* Hilangkan garis bawah pada tautan */
+}
+
+.btn-lihat:hover {
+    background-color: #FFD700; /* Contoh perubahan warna saat hover */
 }
 
 /* BUTTON KIRIM */
