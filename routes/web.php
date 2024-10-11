@@ -114,6 +114,10 @@ Route::get('/about', function () {
     return view('frontend.about.index');
 })->name('about');
 
+Route::get('/payment-history', function () {
+    return view('frontend.payment-history.index');
+})->name('payment-history');
+
 
 
 // DRIVER
