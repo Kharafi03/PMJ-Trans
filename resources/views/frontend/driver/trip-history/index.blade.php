@@ -72,14 +72,15 @@
                                                 </tr>
                                                 @foreach ($destinations[$index] as $dest)
                                                     <tr>
-                                                        <td class="keterangan ">Tujuan {{ $loop->iteration }}</td>
+                                                        <td class="keterangan ">Tujuan 
+                                                            @if ($loop->last)
+                                                                Akhir
+                                                            @else
+                                                                {{ $loop->iteration }}</td>
+                                                            @endif
                                                         <td>{{ $dest->name }}</td>
                                                     </tr>
                                                 @endforeach
-                                                <tr>
-                                                    <td class="keterangan ">Tujuan Akhir</td>
-                                                    <td>{{ $trip->booking->destination_point }}</td>
-                                                </tr>
                                                 <tr>
                                                     <td class="keterangan ">Kapasitas</td>
                                                     <td>{{ $trip->bus->capacity }}</td>

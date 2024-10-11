@@ -28,8 +28,8 @@
 .banner-isi{
     padding-bottom: 10px;
 }
-.header{
-    padding: 30px 30px 0px 30px;
+.kode{
+    padding: 15px 0px 0px 30px;
 }
 .header p{
     margin-bottom: 0px;
@@ -60,7 +60,7 @@
     border-radius: 5px; 
     text-align: center; /* Tambahkan ini agar teks ditampilkan di tengah */
     width: 74px; 
-    margin: 10px 0 30px 30px; 
+    margin: 10px 0 20px 30px; 
     text-decoration: none; /* Hilangkan garis bawah pada tautan */
 }
 

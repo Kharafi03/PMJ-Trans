@@ -29,7 +29,7 @@ class BookingController extends Controller
             'email' => 'email|max:255|nullable',
             'number_phone' => 'required|string|max:20',
             'address' => 'required|string',
-            'destination_point' => 'required|string',
+            // 'destination_point' => 'required|string',
             'capacity' => 'required|integer',
             'date_start' => 'required|date',
             'pickup_point' => 'required|string',

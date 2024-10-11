@@ -34,5 +34,25 @@ class UserSeeder extends Seeder
             'sim' => '1234567890123456',
             'id_ms' => 1,
         ]);
+
+        User::create([
+            'name' => 'Driver 1', // Nama pengguna
+            'email' => 'driver1@admin.com', // Email pengguna
+            'number_phone' => '089637222301',
+            'password' => Hash::make('12345678'), // Password pengguna yang dienkripsi
+            'nik' => '1234567890123456',
+            'sim' => '1234567890123456',
+            'id_ms' => 1,
+        ]);
+
+        User::create([
+            'name' => 'Driver 2', // Nama pengguna
+            'email' => 'driver2@admin.com', // Email pengguna
+            'number_phone' => '089637222302',
+            'password' => Hash::make('12345678'), // Password pengguna yang dienkripsi
+            'nik' => '1234567890123456',
+            'sim' => '1234567890123456',
+            'id_ms' => 1,
+        ]);
     }
 }

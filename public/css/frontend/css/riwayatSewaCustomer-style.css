@@ -23,6 +23,9 @@ thead{
     color: #333843;
     text-align: center;
 }
+#data-table thead th {
+    background-color: #A8A8A840; /* Warna latar belakang */
+}
 td{
     height: 70px;
     text-overflow: ellipsis;

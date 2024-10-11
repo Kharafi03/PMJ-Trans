@@ -40,8 +40,22 @@
                         </div>
                         <div class="row">
                             <!-- Kontainer Field Tujuan Tambahan -->
-                            <div id="dynamic-fields"></div>
-                            <div class="mb-4">
+                            <div id="dynamic-fields">
+                                <!-- Input pertama sebagai "Tujuan Akhir" -->
+                                <div id="destination-point-field">
+                                    <div class="mb-4">
+                                        <label for="destination_point" class="form-label">Tujuan Akhir<span
+                                                class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control tujuan-input"
+                                                placeholder="Tujuan Akhir" name="tujuan[]" id="destination_point" required>
+                                            <span class="input-group-text" id="icon"><i
+                                                    class="fa-solid fa-location-dot"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- <div class="mb-4">
                                 <label for="destination_point" class="form-label">Tujuan Akhir<span
                                         class="text-danger">*</span></label>
                                 <div class="input-group">
@@ -51,7 +65,7 @@
                                     <span class="input-group-text" id="icon"><i
                                             class="fa-solid fa-location-dot"></i></span>
                                 </div>
-                            </div>
+                            </div> --}}
                             <!-- Tombol untuk Menambah Field -->
                             <button type="button" class="btn-tambahTujuan mb-4" id="add-field">Tambah Tujuan</button>
 
@@ -83,8 +97,8 @@
 
                             <!-- Tombol Tambah Leg Rest -->
                             <!-- <div class="mb-4" id="leg-rest-container">
-                                                                                    <button type="button" class="btn-legRest" id="add-leg-rest">Tambah Leg Rest</button>
-                                                                                </div> -->
+                                                                                            <button type="button" class="btn-legRest" id="add-leg-rest">Tambah Leg Rest</button>
+                                                                                        </div> -->
 
                             <div class="mb-4">
                                 <label for="date_start" class="form-label">Tanggal Mulai<span
@@ -172,6 +186,7 @@
 
 
     <!-- SCRIPT -->
+
     <script>
         // Counter untuk field yang ditambahkan secara dinamis
         let fieldCount = 0; // Inisialisasi ke 0
@@ -179,14 +194,17 @@
         // Fungsi untuk menonaktifkan atau mengaktifkan tombol
         function toggleAddButton() {
             const inputs = document.querySelectorAll('.tujuan-input');
-            const lastInput = inputs[inputs.length - 1]; // Input terakhir
 
-            // Jika input terakhir kosong, nonaktifkan tombol
-            if (lastInput && lastInput.value.trim() === '') {
-                document.getElementById('add-field').disabled = true;
-            } else {
-                document.getElementById('add-field').disabled = false;
-            }
+            // Periksa apakah semua input terisi
+            let allFilled = true;
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    allFilled = false;
+                }
+            });
+
+            // Aktifkan tombol hanya jika semua input terisi
+            document.getElementById('add-field').disabled = !allFilled;
         }
 
         // Event listener untuk menambah field tujuan baru
@@ -200,48 +218,30 @@
             newField.setAttribute('id', 'field-' + fieldCount);
 
             newField.innerHTML = `
-        <div class="mb-4">
-            <label for="tujuan-${fieldCount}" class="form-label">Tujuan ${fieldCount}<span class="text-danger">*</span></label>
-            <div class="input-group">
-                <input type="text" class="form-control tujuan-input" placeholder="Tujuan ${fieldCount}" name="tujuan[]" id="tujuan-${fieldCount}" required>
-                <span class="input-group-text" id="icon"><i class="fa-solid fa-location-dot"></i></span>
+            <div class="mb-4">
+                <label for="tujuan-${fieldCount}" class="form-label">Tujuan ${fieldCount}<span class="text-danger">*</span></label>
+                <div class="input-group">
+                    <input type="text" class="form-control tujuan-input" placeholder="Tujuan ${fieldCount}" name="tujuan[]" id="tujuan-${fieldCount}" required>
+                    <span class="input-group-text" id="icon"><i class="fa-solid fa-location-dot"></i></span>
+                </div>
             </div>
-        </div>
-        <button type="button" class="btn-hapusTujuan btn btn-danger mb-4" onclick="removeField(${fieldCount})">Hapus</button>
-    `;
+            <button type="button" class="btn-hapusTujuan btn btn-danger mb-4" onclick="removeField(${fieldCount})">Hapus</button>
+        `;
 
             // Tambahkan field baru sebelum tujuan akhir
             dynamicFields.insertBefore(newField, destinationPointField);
 
             // Setelah menambah field, periksa input terakhir
             toggleAddButton();
+            updateLabels(); // Perbarui label setelah menambah field
         });
 
         // Event listener untuk setiap input tujuan
         document.addEventListener('input', function(e) {
             if (e.target.matches('.tujuan-input')) {
-                toggleAddButton(); // Periksa apakah inputan terakhir sudah terisi
+                toggleAddButton(); // Periksa apakah semua input sudah terisi
             }
         });
-
-        // Pada awal load, cek apakah input sudah terisi
-        toggleAddButton();
-
-        // Fungsi untuk mengaktifkan/menonaktifkan tombol tambah
-        function toggleAddButton() {
-            const inputs = document.querySelectorAll('.tujuan-input');
-            const addButton = document.getElementById('add-field');
-
-            // Nonaktifkan tombol jika ada input yang kosong
-            let allFilled = true;
-            inputs.forEach(input => {
-                if (!input.value) {
-                    allFilled = false;
-                }
-            });
-
-            addButton.disabled = !allFilled;
-        }
 
         // Fungsi untuk memperbarui label tujuan
         function updateLabels() {
@@ -250,30 +250,18 @@
 
             // Jika ada field tambahan, ubah label pertama menjadi "Tujuan 1"
             if (inputs.length > 0) {
-                // Label untuk "Tujuan 1" (input tambahan pertama)
                 inputs.forEach((input, index) => {
                     const label = input.parentElement.previousElementSibling;
-
-                    // Update label input tambahan
-                    label.innerHTML =
-                        `Tujuan ${index + 1}<span class="text-danger">*</span>`; // Sesuaikan label untuk setiap tujuan tambahan
+                    label.innerHTML = `Tujuan ${index + 1}<span class="text-danger">*</span>`;
                 });
 
                 // Tetap pertahankan label "Tujuan Akhir" untuk input terakhir
                 firstLabel.innerHTML = 'Tujuan Akhir<span class="text-danger">*</span>';
-
             } else {
                 // Jika tidak ada tujuan tambahan, kembalikan ke label default "Tujuan Akhir"
                 firstLabel.innerHTML = 'Tujuan Akhir<span class="text-danger">*</span>';
             }
         }
-
-        // Tambahkan event listener ke input yang dibuat secara dinamis
-        document.addEventListener('input', function(event) {
-            if (event.target && event.target.classList.contains('tujuan-input')) {
-                toggleAddButton();
-            }
-        });
 
         // Fungsi untuk menghapus field
         function removeField(id) {
@@ -284,70 +272,11 @@
             toggleAddButton(); // Periksa kembali apakah tombol tambah harus diaktifkan
         }
 
-        // Inisialisasi field pertama dengan label
+        // Inisialisasi untuk pertama kali
+        toggleAddButton(); // Cek tombol tambah awal
         updateLabels(); // Pastikan label benar dari awal
-
-
-        // let debounceTimeout;
-
-        // // Fungsi untuk memunculkan atau menyembunyikan tombol
-        // function checkCapacity() {
-        //     const capacityValue = parseInt(document.getElementById('capacity').value);
-
-        //     // Tampilkan tombol jika jumlah penumpang <= 32 dan lebih dari 0
-        //     if (capacityValue > 0 && capacityValue <= 32) {
-        //         document.getElementById('leg-rest-container').style.display = 'block';
-        //     } else {
-        //         document.getElementById('leg-rest-container').style.display = 'none';
-        //     }
-        // }
-
-        // // Debounce function untuk menghindari eksekusi cepat saat mengetik
-        // function debounce(func, delay) {
-        //     return function() {
-        //         clearTimeout(debounceTimeout);
-        //         debounceTimeout = setTimeout(func, delay);
-        //     };
-        // }
-
-        // // Event listener dengan debounce
-        // document.getElementById('capacity').addEventListener('input', debounce(checkCapacity, 500));
-
-        // document.getElementById('add-leg-rest').addEventListener('click', function() {
-        //     // Create a new div to contain the leg rest text and remove button
-        //     const legRestDiv = document.createElement('div');
-        //     legRestDiv.classList.add('mb-2', 'leg-rest-item');
-
-        //     // Create the text for leg rest
-        //     const legRestText = document.createElement('span');
-        //     legRestText.innerText = 'Tambah Leg Rest ';
-        //     legRestText.classList.add('me-2'); // Add margin to the right
-
-        //     // Create the remove button (x icon)
-        //     const removeButton = document.createElement('button');
-        //     removeButton.type = 'button';
-        //     removeButton.classList.add('btn', 'btn-danger', 'btn-sm', 'btn-x');
-        //     removeButton.innerHTML = '&times;'; // Using HTML entity for multiplication sign (x)
-        //     removeButton.addEventListener('click', function() {
-        //         // Remove this leg rest item
-        //         legRestDiv.remove();
-        //         // Enable the add leg rest button again if there are no items left
-        //         if (document.querySelectorAll('.leg-rest-item').length === 0) {
-        //             document.getElementById('add-leg-rest').disabled = false; // Enable button again
-        //         }
-        //     });
-
-        //     // Append text and button to the new div
-        //     legRestDiv.appendChild(legRestText);
-        //     legRestDiv.appendChild(removeButton);
-
-        //     // Append the new div to the leg rests container
-        //     document.getElementById('leg-rests').appendChild(legRestDiv);
-
-        //     // Disable the add leg rest button after adding one
-        //     this.disabled = true; // Disable button after adding
-        // });
-
+    </script>
+    <script>
         // LEGREST
         // Ambil elemen switch dan placeholder untuk input leg rest
         const toggleLegRest = document.getElementById('toggle-leg-rest');
