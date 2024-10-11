@@ -6,6 +6,7 @@ use App\Filament\Resources\TripBusResource\Pages;
 use App\Filament\Resources\TripBusResource\RelationManagers;
 use App\Models\Booking;
 use App\Models\TripBus;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Group;
@@ -76,10 +77,20 @@ class TripBusResource extends Resource
                                         Forms\Components\Select::make('id_driver')
                                             ->label('Driver')
                                             ->required()
+                                            ->options(function () {
+                                                return User::whereHas('roles', function ($query) {
+                                                    $query->where('name', 'driver');
+                                                })->pluck('name', 'id');
+                                            })
                                             ->relationship('driver', 'name'),
                                         Forms\Components\Select::make('id_codriver')
                                             ->label('Co-Driver')
                                             ->required()
+                                            ->options(function () {
+                                                return User::whereHas('roles', function ($query) {
+                                                    $query->where('name', 'driver');
+                                                })->pluck('name', 'id');
+                                            })
                                             ->relationship('codriver', 'name'),
                                         Forms\Components\Select::make('id_ms_trip')
                                             ->label('Status Trip')
