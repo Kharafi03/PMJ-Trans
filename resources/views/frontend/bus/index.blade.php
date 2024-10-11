@@ -195,7 +195,7 @@
             <!-- CARD 1 -->
             <div class="col-lg-4 col-md-6 mb-4">
                     <div class="package-card card h-100">
-                      <img src="img/pmj01-1.jpg" alt="Bus 1" class="img-fluid">
+                      <img src="img/pmj02-1.jpg" alt="Bus 1" class="img-fluid">
                       <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <p class="package-card-title">PMJ 01</p>
@@ -234,7 +234,7 @@
             <!-- CARD 2 -->
             <div class="col-lg-4 col-md-6 mb-4">
                     <div class="package-card card h-100">
-                      <img src="img/pmj02-1.jpg" alt="Bus 2" class="img-fluid">
+                      <img src="img/pmj03-1.jpg" alt="Bus 2" class="img-fluid">
                       <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <p class="package-card-title">PMJ 02</p>
@@ -272,7 +272,7 @@
             <!-- CARD 3 -->
             <div class="col-lg-4 col-md-6 mb-4">
                     <div class="package-card card h-100">
-                      <img src="img/pmj01-1.jpg" alt="Bus 3" class="img-fluid">
+                      <img src="img/pmj02-1.jpg" alt="Bus 3" class="img-fluid">
                       <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <p class="package-card-title">PMJ 03</p>
@@ -311,7 +311,7 @@
             <!-- CARD 4 -->
             <div class="col-lg-4 col-md-6 mb-4">
                     <div class="package-card card h-100">
-                      <img src="img/pmj02-1.jpg" alt="Bus 4" class="img-fluid">
+                      <img src="img/pmj03-1.jpg" alt="Bus 4" class="img-fluid">
                       <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <p class="package-card-title">PMJ 04</p>
@@ -350,7 +350,7 @@
             <!-- CARD 5 -->
             <div class="col-lg-4 col-md-6 mb-4">
                     <div class="package-card card h-100">
-                      <img src="img/pmj01-1.jpg" alt="Bus 5" class="img-fluid">
+                      <img src="img/pmj02-1.jpg" alt="Bus 5" class="img-fluid">
                       <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <p class="package-card-title">PMJ 05</p>

@@ -62,6 +62,11 @@ class BookingResource extends Resource
                                 ->label('Kode Booking'),
                             Select::make('id_cus')
                                 ->relationship('customer', 'name')
+                                ->options(function () {
+                                    return User::whereHas('roles', function ($query) {
+                                        $query->where('name', 'panel_user');
+                                    })->pluck('name', 'id'); // Mengambil nama dan id user
+                                })
                                 ->searchable()
                                 ->required()
                                 ->reactive()
@@ -307,11 +312,21 @@ class BookingResource extends Resource
                                             ->schema([
                                                 Select::make('id_driver')
                                                     ->relationship('driver', 'name')
+                                                    ->options(function () {
+                                                        return User::whereHas('roles', function ($query) {
+                                                            $query->where('name', 'driver');
+                                                        })->pluck('name', 'id');
+                                                    })
                                                     ->required()
                                                     ->label('Driver'),
 
                                                 Select::make('id_codriver')
                                                     ->relationship('codriver', 'name')
+                                                    ->options(function () {
+                                                        return User::whereHas('roles', function ($query) {
+                                                            $query->where('name', 'driver');
+                                                        })->pluck('name', 'id');
+                                                    })
                                                     ->required()
                                                     ->label('Co-Driver'),
                                             ])
@@ -573,15 +588,15 @@ class BookingResource extends Resource
                             ])
                     ])
                     ->modalHeading('Pengeluaran Perjalanan')
-                    // ->modalSubheading('Daftar semua pengeluaran dalam booking')
+                    ->modalSubheading('Daftar semua pengeluaran dalam booking')
                     // ->modalButton('Simpan')
-                    ->requiresConfirmation()
+                    //->requiresConfirmation()
                     ->modalIcon('heroicon-c-shopping-cart')
                     ->modalWidth('7xl')
                     ->label('Spend'),
                 Tables\Actions\Action::make('refund')
                     ->label('Refund')
-                    ->color('info') 
+                    ->color('warning') 
                     ->icon('heroicon-s-receipt-refund')
                     ->action(function ($record, $data) {
                         Outcome::create([

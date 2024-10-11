@@ -74,14 +74,21 @@
                                 </tr>
                                 @foreach ($destination as $dest)
                                     <tr>
-                                        <td class="keterangan ">Tujuan {{ $loop->iteration }}</td>
+                                        <td class="keterangan">
+                                            @if ($destination->count() === 1 || $loop->last)
+                                                Tujuan Akhir
+                                            @else
+                                                Tujuan {{ $loop->iteration }}
+                                            @endif
+                                        </td>
                                         <td>{{ $dest->name }}</td>
                                     </tr>
                                 @endforeach
-                                <tr>
+
+                                {{-- <tr>
                                     <td class="keterangan ">Tujuan Akhir</td>
                                     <td>{{ $trip->booking->destination_point }}</td>
-                                </tr>
+                                </tr> --}}
                                 <tr>
                                     <td class="keterangan ">Kapasitas</td>
                                     <td>{{ $trip->booking->capacity }}</td>

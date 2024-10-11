@@ -19,44 +19,44 @@ class BusImageSeeder extends Seeder
         $images = [
             [
                 'id_bus' => '1',
-                'image' => 'pmj01-1.jpg'
+                'image' => 'pmj02-1.jpg'
             ],
             [
                 'id_bus' => '1',
-                'image' => 'pmj01-2.jpg'
+                'image' => 'pmj02-2.jpg'
             ],
             [
                 'id_bus' => '1',
-                'image' => 'pmj01-3.jpg'
+                'image' => 'pmj02-3.jpg'
             ],
             [
                 'id_bus' => '1',
-                'image' => 'pmj01-4.jpg'
+                'image' => 'pmj02-4.jpg'
             ],
             [
                 'id_bus' => '1',
-                'image' => 'pmj01-5.jpg'
+                'image' => 'pmj02-5.jpg'
             ],
 
             [
                 'id_bus' => '2',
-                'image' => 'pmj02-1.jpg'
+                'image' => 'pmj03-1.jpg'
             ],
             [
                 'id_bus' => '2',
-                'image' => 'pmj02-2.jpg'
+                'image' => 'pmj03-2.jpg'
             ],
             [
                 'id_bus' => '2',
-                'image' => 'pmj02-3.jpg'
+                'image' => 'pmj03-3.jpg'
             ],
             [
                 'id_bus' => '2',
-                'image' => 'pmj02-4.jpg'
+                'image' => 'pmj03-4.jpg'
             ],
             [
                 'id_bus' => '2',
-                'image' => 'pmj02-5.jpg'
+                'image' => 'pmj03-5.jpg'
             ],
         ];
 
