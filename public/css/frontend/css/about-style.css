@@ -1,6 +1,13 @@
 #about{
     margin: 50px 0px;
 }
+body {
+    background-image: url('/img/bg-page.png');
+    background-position: 0 100%; 
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
+  
 .header{
     margin-top: 75px;
 }

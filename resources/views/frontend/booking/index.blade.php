@@ -10,12 +10,20 @@
     <!-- CONTENT -->
     <!-- TITLE -->
     <section id="pemesanan">
-        <div class="container mt-5">
-            <h5><b>PEMESANAN</b></h5>
-            <p class="caption">Pilih jadwal, destinasi, serta tipe kendaraan yang sesuai dengan kebutuhan Anda. Rasakan
-                pengalaman perjalanan yang nyaman bersama layanan PMJ Trans</p>
+        <div class="container mt-5 mb-5">
+            <h5 style="font-size: 44px; font-weight: 700; color: #1E9781;">PEMESANAN</h5>
+            <p style="font-size: 18px; font-weight: 600; color: #666666B5;">Pilih jadwal, destinasi, serta tipe kendaraan yang sesuai dengan kebutuhan Anda. Rasakan pengalaman perjalanan yang nyaman bersama layanan PMJ Trans</p> 
+            <div class="info">
+                <p class="info-title"><i class="fa-solid fa-circle-exclamation"></i> Informasi Pemesanan</p>
+                <ul>
+                    <li>Simbol <span style="font-weight: 700; color: #F44C28;">( * )</span> menandakan forumilir wajib diiisi</li>
+                    <li>Masukan “Tujuan Akhir” terlebih dahulu, jika ingin menambah tujuan, klik botton “ + Tujuan” , kemudian masukan tujuan 1,2, dst.</li>
+                    <li>1 unit bus = 32 penumpang. </li>
+                    <li>Leg Rest adalah sandaran kaki. Kursi ini mampu meningkatkan rasa nyaman para penumpang yang ingin beristirahat selama perjalanan jauh.</li>
+                    <li>Masukan “Titik Jemput dengan format :  Nama jalan, No Rumah (opsional), RT/RW, Kelurahan, Kecamatan, dan Kabupaten.</li>
+                </ul>
+            </div>
         </div>
-    </section>
 
     @if ($errors->any())
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -27,16 +35,14 @@
     @endif
 
     <!-- FORM -->
-    <section id="form">
         <div class="container">
             <form id="formPemesanan" action="{{ route('booking.store') }} " method="POST">
                 @csrf
                 <div class="row form-container">
-                    <div class="col-lg-6" style="padding: 40px;">
+                    <div class="col-lg-7" style="padding: 40px;">
                         <div class="text-content">
-                            <h5><b>Detail Pemesanan</b></h5>
-                            <p class="caption">Silahkan isi formulir detail pemesanan di bawah ini untuk melakukan pemesanan
-                            </p>
+                            <h5 style="font-size: 30px; font-weight: 700; color: #1E9781;">Detail <span style="color: #FD9C07;">Pemesanan</span></h5>
+                            <p style="font-size: 16px; font-weight: 500; color: #666666B5;">Silahkan isi formulir detail pemesanan di bawah ini untuk melakukan pemesanan</p>
                         </div>
                         <div class="row">
                             <!-- Kontainer Field Tujuan Tambahan -->
@@ -48,7 +54,7 @@
                                                 class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <input type="text" class="form-control tujuan-input"
-                                                placeholder="Tujuan Akhir" name="tujuan[]" id="destination_point" required>
+                                            placeholder="Masukkan nama dan kota tujuan (contoh: Malioboro, Yogyakarta)" name="tujuan[]" id="destination_point" required>
                                             <span class="input-group-text" id="icon"><i
                                                     class="fa-solid fa-location-dot"></i></span>
                                         </div>
@@ -67,10 +73,10 @@
                                 </div>
                             </div> --}}
                             <!-- Tombol untuk Menambah Field -->
-                            <button type="button" class="btn-tambahTujuan mb-4" id="add-field">Tambah Tujuan</button>
+                            <button type="button" class="btn-tambahTujuan mb-4" id="add-field"><i class="fa-solid fa-plus"></i> Tambah Tujuan</button>
 
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-9">
                                     <label for="capacity" class="form-label">Jumlah Penumpang<span
                                             class="text-danger">*</span></label>
                                     <div class="input-group">
@@ -82,7 +88,7 @@
                                     <!-- Placeholder for dynamically added leg rest -->
                                     <!-- <div id="leg-rests" class="mt-2 mb-2"></div> -->
                                 </div>
-                                <div class="col-md-4 d-flex align-items-center">
+                                <div class="col-md-3 d-flex align-items-center">
                                     <!-- Switch untuk menampilkan/menghilangkan input leg rest -->
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" id="toggle-leg-rest">
@@ -94,11 +100,6 @@
                             <!-- Placeholder for dynamically added leg rest input -->
                             <div id="leg-rests" class="mb-4"></div>
                             <input type="hidden" name="legrest" value="0">
-
-                            <!-- Tombol Tambah Leg Rest -->
-                            <!-- <div class="mb-4" id="leg-rest-container">
-                                                                                            <button type="button" class="btn-legRest" id="add-leg-rest">Tambah Leg Rest</button>
-                                                                                        </div> -->
 
                             <div class="mb-4">
                                 <label for="date_start" class="form-label">Tanggal Mulai<span
@@ -112,7 +113,7 @@
                                             class="fa-solid fa-calendar"></i></span>
                                 </div>
                             </div>
-                            <div class="mb-4">
+                            <div class="mb-2">
                                 <label for="pickup_point" class="form-label">Titik Jemput<span
                                         class="text-danger">*</span></label>
                                 <div>
@@ -121,15 +122,14 @@
                                 </div>
                             </div>
                             <div>
-                                <p class="text-danger" style="font-size:18px;">*Wajib Diisi.</p>
+                                <p class="text-danger" style="font-size:14px;">Contoh : Jalan Mangga Besar III No. 17, RT 06 RW 07, Kelurahan Bedali, Kecamatan Lawang, Kab. Malang, Jawa Timur, 60256</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6" style="padding: 40px;">
+                    <div class="col-lg-5" style="padding: 40px;">
                         <div class="text-content">
-                            <h5><b>Detail Kontak</b></h5>
-                            <p class="caption">Silahkan lengkapi formulir detail kontak di bawah ini untuk melakukan
-                                pemesanan</p>
+                            <h5 style="font-size: 30px; font-weight: 700; color: #1E9781;">Detail <span style="color: #FD9C07;">Kontak</span></h5>
+                            <p style="font-size: 16px; font-weight: 500; color: #666666B5;">Silahkan lengkapi formulir detail kontak di bawah ini untuk melakukan pemesanan</p>
                         </div>
                         <div class="row">
                             <div class="mb-4">
@@ -143,12 +143,12 @@
                                 </div>
                             </div>
                             <div class="mb-4">
-                                <label for="number_phone" class="form-label">Nomor Telephone<span
+                                <label for="number_phone" class="form-label">Nomor WhatsApp<span
                                         class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <input type="number" class="detail-pemesanan form-control" id="number_phone"
                                         name="number_phone"
-                                        placeholder="Masukkan nomor telepon aktif dan dapat dihubungi." required
+                                        placeholder="Masukkan nomor whatsapp" required
                                         @if (Auth::check()) value="{{ Auth::user()->number_phone }}" readonly @endif>
                                     <span class="input-group-text" id="icon"><i
                                             class="fa-solid fa-phone"></i></span>
@@ -173,9 +173,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="container d-flex justify-content-end">
-                    <button type="submit" class="btn-pemesanan">Kirim</button>
+                    <div class="container d-flex justify-content-end">
+                        <button type="submit" class="btn-pemesanan">Kirim</button>
+                    </div>
                 </div>
             </form>
         </div>
