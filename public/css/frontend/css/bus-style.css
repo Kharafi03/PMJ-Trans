@@ -1,3 +1,9 @@
+body {
+    background-image: url('/img/bg-page.png');
+    background-position: 0 100%; 
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
 .property-item {
     display: flex;
     flex-direction: column;
@@ -73,16 +79,6 @@
     padding-left: 5px;
 }
 
-/* BUTTON */
-.btn-pesan{
-    background-color: #4FB472;
-    padding: 5px;
-    border-radius: 5px;
-    color: white;
-    width: 100px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-}
-
 
 /* CARD BUS */
 /* PACKAGE-DAFTAR BUS PMJ */
@@ -113,14 +109,32 @@
 }
 .package-icon{
   font-size: 20px;
-  margin-left: 0px;
+}
+.package-icon i{
+    color: #FEC400;
 }
 .fasilitas-package i{
-  font-size: 20px;
+  font-size: 16px;
 }
 .fasilitas-package p {
-  font-size: 11px;
+  font-size: 10px;
 }
 .package-card ul{
     font-size: 14px;
 }
+.btn-detail{
+    padding: 10px;
+    width: 110px;
+    border: none;
+    border-radius: 10px;
+    background-color: #1E9781;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.308) 0px 10px 10px -5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    &:hover{
+        transform: scale(1.05); 
+    }
+  }

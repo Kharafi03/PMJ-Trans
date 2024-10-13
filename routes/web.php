@@ -110,6 +110,10 @@ Route::get('/bus', function () {
     return view('frontend.bus.index');
 })->name('bus');
 
+Route::get('/bus-detail', function () {
+    return view('frontend.bus-detail.index');
+})->name('bus-detail');
+
 Route::get('/about', function () {
     return view('frontend.about.index');
 })->name('about');
@@ -117,6 +121,10 @@ Route::get('/about', function () {
 Route::get('/payment-history', function () {
     return view('frontend.payment-history.index');
 })->name('payment-history');
+
+Route::get('/ticket', function () {
+    return view('frontend.ticket.index');
+})->name('ticket');
 
 
 

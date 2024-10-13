@@ -25,19 +25,47 @@
                     <form>
                         <div class="mb-3">
                             <label for="kodeBooking" class="form-label">Kode Booking</label>
-                            <input type="text" class="form-control" id="kodeBooking" value="{{ $booking->booking_code }}"
-                                readonly>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="icon"><i class="fa-solid fa-ticket-simple"></i></span>
+                                <input type="text" class="form-control" id="kodeBooking" value="{{ $booking->booking_code }}" readonly>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="nominal" class="form-label">Nominal Pembayaran</label>
-                            <input type="text" class="form-control" id="nominal"
-                                value="Rp. {{ number_format($booking->trip_nominal, 0, ',', '.') }}" readonly>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="icon"><i class="fa-solid fa-wallet"></i></span>
+                                <input type="text" class="form-control" id="nominal" value="Rp. {{ number_format($booking->trip_nominal, 0, ',', '.') }}" readonly>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="minDp" class="form-label">Minimum DP</label>
-                            <input type="text" class="form-control" id="minDp"
-                                value="Rp. {{ number_format($booking->minimum_dp, 0, ',', '.') }}" readonly>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="icon"><i class="fa-solid fa-wallet"></i></span>
+                                <input type="text" class="form-control" id="minDp" value="Rp. {{ number_format($booking->minimum_dp, 0, ',', '.') }}" readonly>
+                            </div>
                         </div>
+                        <!-- TAMABAHAN -->
+                        <div class="mb-3">
+                            <label for="noRek" class="form-label">Nomor Rekening</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="icon"><i class="fa-solid fa-building-columns"></i></span>
+                                <input type="text" class="form-control" id="noRek" placeholder="1234567890" readonly>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <p class="text-danger">Tekan "Bayar Sekarang" untuk unggah bukti transfer, atau pilih "Bayar Nanti" jika menunda.</p>
+                        </div>
+                        <div class="mb-3">
+                            <div class="row d-flex justify-content-between align-items-center">
+                                <div class="col-md-6">
+                                    <button type="button" class="btn-bayarSekarang" data-bs-dismiss="modal">Bayar Sekarang</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn-bayarNanti" data-bs-dismiss="modal"><a href="../page/statusPemesanan.html">Bayar Nanti</a></button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END TAMBAHAN -->
                     </form>
                 </div>
             </div>
@@ -48,15 +76,23 @@
     <section id="pemesananDiproses">
         <div class="container mt-5">
             <!-- CARD -->
-            <div class="card-form card mb-3">
+            <div class="mb-3">
                 <div class="row">
-                    <div class="col-md-6">
-                        <img src="img/image-bus1.png" height="100%" width="100%" alt="Bus Image">
+                    <!-- HEADER -->
+                    <div class="col-md-12 col-lg-6 mb-3 d-flex flex-column justify-content-center">
+                        <h5 style="font-size: 44px; font-weight: 700; color: #1E9781;">Cek <span style="color: #FD9C07;">Pesanan</span></h5>
+                        <div class="status-pemesanan">
+                            <p>Status pemesan Anda saat ini</p>
+                        </div>
+                        <img src="/img/cek-img.png" class="img-fluid" alt="images" style="padding: 0px 50px 0px 50px;">
                     </div>
                     <!-- FORM -->
-                    <div class="col-md-6">
+                    <div class="col-md-12 col-lg-6 mb-3">
                         <form action="{{ route('booking.uploadProof', $booking->id) }}" method="POST"
                             enctype="multipart/form-data" id="formUploadDP">
+                            <div class="form-header text-center mb-5">
+                                <h5 style="font-size: 30px; font-weight: 700; color: #1E9781;">Cek <span style="color: #FD9C07;">Pesanan</span></h5>
+                            </div>
                             @csrf
                             <div class="pemesanan-diproses">
                                 <div class="mb-3">
@@ -71,7 +107,7 @@
 
                                 @if ($booking->id_ms_booking == 1)
                                     <div class="status-alert-diproses d-flex align-items-center">
-                                        <span class="card-icon me-2" style="padding-left: 10px;"><i
+                                        <span class="card-icon me-2" style="padding-left: 10px; color: white;"><i
                                                 class="fa-solid fa-calendar"></i></span>
                                         <span style=" margin-left: 10px;"><b>Pesanan diproses </b><br><small>Admin sedang
                                                 memproses pesanan anda, silakan cek status pemesanan secara
@@ -113,7 +149,7 @@
                                     </div>
                                 @elseif ($booking->id_ms_booking == 3)
                                     <div class="status-alert-ditolak d-flex align-items-center">
-                                        <span class="card-icon me-2" style="padding-left: 10px;"><i
+                                        <span class="card-icon me-2" style="padding-left: 10px; color: white;"><i
                                                 class="fa-solid fa-triangle-exclamation"></i></span>
                                         <span style=" margin-left: 10px;"><b>Pesanan ditolak admin</b><br><small>Admin
                                                 menolak pesanan anda, pastikan data yang dimasukan benar.</small></span>
@@ -121,7 +157,7 @@
                                 @endif
 
                                 {{-- <div class="d-flex align-items-center mb-3">
-                                    <img src="img/image1.png" class="rounded-image me-2" alt="Bus Image" height="70px" width="106px" style="border-radius: 4px;">
+                                    <img src="img/image1.png" class="rounded-image me-2" alt="Bus Image" height="70px" width="106px" style="border-radius: 10px;">
                                     <div>
                                         <strong>{{ $booking->bus->name }}</strong>
                                     </div>
@@ -148,7 +184,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="noTelp" class="form-label">Nomor Telephone</label>
+                                    <label for="noTelp" class="form-label">Nomor WhatsApp</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="icon"><i
                                                 class="fa-solid fa-phone"></i></span>
@@ -166,11 +202,8 @@
                                 <!-- BUTTON -->
                                 {{-- @dd($booking->incomes); --}}
                                 @if ($booking->id_ms_booking == 1 || $booking->id_ms_booking == 3 || $booking->id_ms_booking == 4)
-                                    <div class="mb-3">
-                                        <div
-                                            class="input-group mt-5 d-flex align-items-center justify-content-center flex-column text-left mb-5">
-                                            <button type="submit" class="btn-hubungi">Hubungi Admin</button>
-                                        </div>
+                                    <div class="mt-5">
+                                        <button type="submit" class="btn-hubungi">Hubungi Admin</button>
                                     </div>
                                 @elseif ($booking->id_ms_booking == 2)
                                     @if ($booking->id_ms_payment == 2)
@@ -184,7 +217,7 @@
                                                                 {{ $loop->iteration }}</label>
                                                             <img src="{{ asset('storage/' . $income->image_receipt) }}"
                                                                 class="rounded-image w-100" alt="Receipt Image"
-                                                                style="border-radius: 4px;">
+                                                                style="border-radius: 10px;">
                                                         </div>
                                                     @endif
                                                 @endforeach
@@ -200,11 +233,8 @@
                                             <small class="text-danger" id="error-file"
                                                 style="display: none;padding-top: 10px;">Unggah foto bukti DP.</small>
                                         </div>
-                                        <div class="mb-3">
-                                            <div
-                                                class="input-group mt-5 d-flex align-items-center justify-content-center flex-column text-left mb-5">
-                                                <button type="submit" class="btn-kirimdp">Kirim</button>
-                                            </div>
+                                        <div class="mt-5">
+                                            <button type="submit" class="btn-kirimdp">Kirim</button>
                                         </div>
                                     @elseif ($booking->id_ms_payment == 3)
                                         <div class="mb-3">
@@ -218,11 +248,8 @@
                                                 style="display: none;padding-top: 10px;">Unggah foto bukti
                                                 Pelunasan.</small>
                                         </div>
-                                        <div class="mb-3">
-                                            <div
-                                                class="input-group mt-5 d-flex align-items-center justify-content-center flex-column text-left mb-5">
-                                                <button type="submit" class="btn-kirimdp">Kirim</button>
-                                            </div>
+                                        <div class="mt-5">
+                                            <button type="submit" class="btn-kirimdp">Kirim</button>
                                         </div>
                                     @endif
                                 @endif

@@ -2,8 +2,24 @@
 #pemesanan{
     margin-top: 100px;
 }
-h5{
-    font-size: 30px;
+.info{
+    padding: 10px;
+    border: 1px solid #4180CC;
+    border-radius: 6px;
+    border-left: 4px solid #4180CC;
+    background-color: #F5F7F9;
+}
+.info i{
+    color: #4180CC;
+}
+.info p{
+    font-size: 18px;
+    font-weight: 700;
+    color: #252A31;
+}
+.info li{
+    font-size: 16px;
+    color: #252A31;
 }
 
 /* FORM */
@@ -11,11 +27,15 @@ h5{
     padding: 20px;
     border: 10px solid #EFF0F6;
     border-radius: 30px;
+    margin-bottom: 50px;
 }
 input[type="text"], input[type="date"], input[type="number"], input[type="email"],input[type="datetime-local"]{
     height: 50px;
     border-radius: 15px;
     border-right: none;
+}
+label{
+    font-weight: 500;
 }
 .form-select{
     border-right: none;
@@ -47,16 +67,18 @@ input[type="date"] {
 .btn-pemesanan{
     padding: 10px 20px;
     color: white;
-    border: 1px solid #4FB472;
-    background-color: #4FB472;
-    margin: 50px 0px;
-    border-radius: 5px;
+    border: 1px solid #1E9781;
+    background-color: #1E9781;
+    font-weight: 700;
+    margin: 10px 0px;
+    border-radius: 10px;
     width: 120px;
-    &:hover{
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.308) 0px 10px 10px -5px;
+    /* &:hover{
         color: #4FB472;
         background-color: white;
 
-    }
+    } */
 }
 .btn-tambahTujuan{
     padding: 5px;
@@ -64,10 +86,14 @@ input[type="date"] {
     border: 1px solid #4180CC;
     background-color: #4180CC;
     margin-left: 10px;
-    border-radius: 5px;
-    width: 120px;
+    border-radius: 10px;
+    width: 130px;
     font-size: 14px;
 }
+.btn-tambahTujuan i{
+    font-size: 14px;
+}
+
 
 button:disabled, button[disabled]{
     opacity: 70%;
@@ -76,6 +102,8 @@ button:disabled, button[disabled]{
 
 .btn-hapusTujuan{
     margin-top: -15px;
+    font-size: 14px;
+    border-radius: 10px;
 }
 
 /* LEGREST */

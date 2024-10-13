@@ -51,11 +51,8 @@ i{
     padding: 10px 50px;
     text-align: center;
     color: white;
-    background-color: #5C59E8;
-    border: 1px solid #5C59E8;
+    background-color: #1E9781;
+    border: 1px solid #1E9781;
     border-radius: 8px;
-    &:hover{
-        background-color: white;
-        color: #5C59E8;
-    }
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.308) 0px 10px 10px -5px;
 }

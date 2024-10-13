@@ -9,16 +9,25 @@
     <x-navbar-customer />
     
     <!-- PEMESANAN DITOLAK -->
-    <section id="pemesanan-diproses">
-        <div class="container mt-5">
-            <div class="card-form card mb-3">
+    <section id="pemesananDitolak">
+        <div class="container mb-5 mt-5">
+            <!-- CARD -->
+            <div class="mb-3">
                 <div class="row">
-                    <div class="col-md-6">
-                        <img src="img/image-bus1.png"  height="100%" width="100%" alt="images">
+                    <!-- HEADER -->
+                    <div class="col-md-12 col-lg-6 mb-3 d-flex flex-column justify-content-center">
+                        <h5 style="font-size: 44px; font-weight: 700; color: #1E9781;">Cek <span style="color: #FD9C07;">Pesanan</span></h5>
+                        <div class="status-pemesanan">
+                            <p>Status pemesan Anda saat ini</p>
+                        </div>
+                        <img src="/img/cek-img.png" class="img-fluid" alt="images" style="padding: 0px 50px 0px 50px;">
                     </div>
                     <!-- FORM -->
-                    <div class="col-md-6">
+                    <div class="col-md-12 col-lg-6 mb-3">
                         <form id="formPemesananDitolak">
+                            <div class="form-header text-center mb-5">
+                                <h5 style="font-size: 30px; font-weight: 700; color: #1E9781;">Cek <span style="color: #FD9C07;">Pesanan</span></h5>
+                            </div>
                             <div class="pemesanan-ditolak">
                                 <div class="mb-3">
                                     <label for="kodeBooking" class="form-label">Kode Booking</label>
@@ -35,7 +44,7 @@
                                 </div>
             
                                 <div class="d-flex align-items-center mb-3">
-                                    <img src="img/image1.png" class="rounded-image me-2" alt="Bus Image" height="70px" width="106px" style="border-radius: 4px;">
+                                    <img src="img/pmj02-1.jpg" class="rounded-image me-2" alt="Bus Image" height="70px" width="106px" style="border-radius: 4px;">
                                     <div>
                                         <strong>BUS PMJ Trans 01</strong>
                                     </div>
@@ -71,10 +80,8 @@
                                         <textarea class="form-control" id="alamat" placeholder="Jl. Nakula Raya, No.20, Pendrikan Kidul, Semarang Tengah, semarang, Jawa Tengah" value=""></textarea>
                                     </div>
                                 </div>
-                                <div class="mb-3">
-                                    <div class="input-group mt-5 d-flex align-items-center justify-content-center flex-column text-left mb-5">
-                                        <button type="submit" class="btn-perbaiki">Perbaiki Pesanan</button>
-                                    </div>
+                                <div class="mt-5">
+                                    <button type="submit" class="btn-perbaiki">Pesan Ulang</button>
                                 </div>
                             </div>
                          </form>
