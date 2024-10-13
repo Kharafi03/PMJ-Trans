@@ -9,6 +9,7 @@ use App\Http\Controllers\Customer\ProfileController;
 use App\Http\Controllers\Customer\HistoryController;
 use App\Http\Controllers\Customer\BookingCodeController;
 use App\Http\Controllers\Customer\BookingStatusController;
+use App\Http\Controllers\Customer\DetailPaymentController;
 use App\Http\Controllers\Driver\DashboardController;
 use App\Http\Controllers\Driver\DashboardTripController;
 use App\Http\Controllers\Driver\DetailTripController;
@@ -41,6 +42,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/history', [HistoryController::class, 'index'])->name('history.index');
+    Route::get('/history/payment/{booking}', [DetailPaymentController::class, 'show'])->name('payment-history');
     Route::get('/booking-code/{booking_code}', [BookingCodeController::class, 'show'])->name('booking.code');
 });
 
@@ -114,9 +116,9 @@ Route::get('/about', function () {
     return view('frontend.about.index');
 })->name('about');
 
-Route::get('/payment-history', function () {
-    return view('frontend.payment-history.index');
-})->name('payment-history');
+// Route::get('/payment-history', function () {
+//     return view('frontend.payment-history.index');
+// })->name('payment-history');
 
 
 

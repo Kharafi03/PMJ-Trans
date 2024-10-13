@@ -91,6 +91,7 @@
 
 /* BUTTON KIRIM */
 .btn-mulai{
+    text-decoration: none;
     height: 48px;
     width: 100%;
     background-color: #FFB800;
@@ -100,29 +101,32 @@
     padding: 10px;
     text-align: center;
     border: 1px solid #FFB800;
-    border-radius: 8px;
-    margin: 10px 0px;
-    &:hover{
-        background-color: white;
-        color: #FFB800;
-    }
+    border-radius: 15px;
+    display: inline-block;
+}
+
+.btn-mulai:hover {
+    background-color: white;
+    color: #FFB800;
 }
 .btn-lanjut{
+    text-decoration: none;
     height: 48px;
     width: 100%;
-    background-color: #E50A3E;
+    background-color: #ff0000;
     color: white;
     font-size: 16px;
     font-weight: 700;
     padding: 10px;
     text-align: center;
-    border: 1px solid #E50A3E;
-    border-radius: 8px;
-    margin: 10px 0px;
-    &:hover{
-        background-color: white;
-        color: #E50A3E;
-    }
+    border: 1px solid #ff0000;
+    border-radius: 15px;
+    display: inline-block;
+}
+
+.btn-lanjut:hover {
+    background-color: white;
+    color: #ff0000;
 }
 
 body, html {

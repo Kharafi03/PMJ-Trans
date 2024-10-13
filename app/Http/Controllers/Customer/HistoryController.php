@@ -19,11 +19,7 @@ class HistoryController extends Controller
 
         // Ambil booking dengan DP (id_m_income = 1) dan Pelunasan (id_m_income = 2)
         $bookings = Booking::where('id_cus', $userId)
-                ->with([
-                    'incomes' => function ($query) {
-                        $query->whereIn('id_m_income', [1, 2]); // DP dan Pelunasan
-                    }
-                ])
+                ->with('incomes') // Mengambil semua incomes tanpa filter
                 ->get();
 
         $destination = $bookings->map(function ($booking) {

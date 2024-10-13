@@ -1,6 +1,6 @@
 @push('styles')
     <!-- DataTables -->
-    <link rel="stylesheet" href="{{ asset('frontend/css/datatables/dataTables.bootstrap5.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/frontend/css/dataTables.bootstrap5.css') }}">
     <style>
         .table td  {
             white-space: normal;

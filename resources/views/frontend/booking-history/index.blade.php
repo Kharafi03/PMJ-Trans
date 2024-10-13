@@ -2,8 +2,6 @@
 @push('styles')
     <title>Order History</title>
     <link id="pagestyle" href="{{ asset('css/frontend/css/riwayatSewaCustomer-style.css') }}" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.bootstrap5.min.css">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @endpush
 @section('content')
     <!-- NAVBAR -->
@@ -30,12 +28,14 @@
                                 <th scope="col">Kode Booking</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Nama</th>
-                                <th scope="col">Tujuan</th>
                                 <th scope="col">Titik Jemput</th>
+                                <th scope="col">Tujuan</th>
+                                <th scope="col">Jumlah Penumpang</th>
+                                <th scope="col">Biaya</th>
+                                <th scope="col">Minimum DP</th>
                                 <th scope="col">Tanggal Mulai</th>
                                 <th scope="col">Tanggal Selesai</th>
-                                <th scope="col">DP</th>
-                                <th scope="col">Pelunasan</th>
+                                <th scope="col">Pembayaran</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
@@ -64,18 +64,33 @@
                                             {{ $booking->ms_booking ? $booking->ms_booking->name : 'Tidak Ditemukan' }}
                                         </span>
                                     </td>
-
                                     <td>{{ $booking->customer ? $booking->customer->name : 'Tidak Ditemukan' }}</td>
-                                    <td style="text-align: left;">
+                                    <td>{{ $booking->pickup_point }}</td>
+                                    <td style="text-align: {{ $destination[$index]->count() > 1 ? 'left' : 'center' }};">
                                         @foreach ($destination[$index] as $dest)
-                                            {{ $loop->iteration }}. {{ $dest->name }}
+                                            @if ($loop->count > 1)
+                                                {{ $loop->iteration }}. {{ $dest->name }}
+                                            @else
+                                                {{ $dest->name }}
+                                            @endif
                                             <br>
                                         @endforeach
-                                        @php
-                                            $totalDestinations = count($destination[$index]);
-                                        @endphp
                                     </td>
-                                    <td>{{ $booking->pickup_point }}</td>
+                                    <td>{{ $booking->capacity }} penumpang</td>
+                                    <td>
+                                        @if ($booking->trip_nominal != null)
+                                            Rp {{ number_format($booking->trip_nominal, 0, ',', '.') }}
+                                        @else
+                                            Tidak Ditemukan
+                                        @endif
+                                    </td>                                    
+                                    <td>
+                                        @if ($booking->minimum_dp != null)
+                                            Rp {{ number_format($booking->minimum_dp, 0, ',', '.') }}
+                                        @else
+                                            Tidak Ditemukan
+                                        @endif
+                                    </td>
                                     <td>{{ \Carbon\Carbon::parse($booking->date_start)->translatedFormat('l, d F Y') }}
                                     </td>
                                     <td>
@@ -86,85 +101,11 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($booking->incomes->where('id_m_income', 1)->isNotEmpty())
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#dpModal{{ $booking->id }}">
-                                                Detail
-                                            </button>
-                                    
-                                            <!-- Modal DP -->
-                                            <div class="modal fade" id="dpModal{{ $booking->id }}" tabindex="-1" aria-labelledby="dpModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="dpModalLabel">Detail DP - {{ $booking->booking_code }}</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="row">
-                                                                @foreach ($booking->incomes->where('id_m_income', 1) as $income)
-                                                                    <div class="col-md-6 {{ $loop->last && $loop->count % 2 != 0 ? 'mx-auto' : '' }}">
-                                                                        @if ($loop->count === 1)
-                                                                            <p>DP: Rp {{ number_format($income->nominal, 0, ',', '.') }}</p>
-                                                                        @else
-                                                                            <p>DP ke-{{ $loop->iteration }}: Rp {{ number_format($income->nominal, 0, ',', '.') }}</p>
-                                                                        @endif
-                                                                        <p>Status: {{ $income->ms_income->name }}</p>
-                                                                        <img src="{{ asset('storage/' . $income->image_receipt) }}" alt="Bukti Pembayaran" class="img-fluid" style="width: 100%;">
-                                                                        <hr>
-                                                                    </div>
-                                    
-                                                                    @if ($loop->iteration % 2 == 0 && !$loop->last)
-                                                                        </div><div class="row">
-                                                                    @endif
-                                                                @endforeach
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        @if ($booking->incomes->isNotEmpty())
+                                            <a href="{{ route('payment-history', $booking->id) }}"
+                                                class="btn btn-primary">Detail</a>
                                         @else
-                                            <button type="button" class="btn btn-secondary" disabled>Tidak Ada DP</button>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if ($booking->incomes->where('id_m_income', 2)->isNotEmpty())
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pelunasanModal{{ $booking->id }}">
-                                                Detail
-                                            </button>
-                                    
-                                            <!-- Modal Pelunasan -->
-                                            <div class="modal fade" id="pelunasanModal{{ $booking->id }}" tabindex="-1" aria-labelledby="pelunasanModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="pelunasanModalLabel">Detail Pelunasan - {{ $booking->booking_code }}</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="row">
-                                                                @foreach ($booking->incomes->where('id_m_income', 2) as $income)
-                                                                    <div class="col-md-6 {{ $loop->last && $loop->count % 2 != 0 ? 'mx-auto' : '' }}">
-                                                                        @if ($loop->count === 1)
-                                                                            <p>Pelunasan: Rp {{ number_format($income->nominal, 0, ',', '.') }}</p>
-                                                                        @else
-                                                                            <p>Pelunasan ke-{{ $loop->iteration }}: Rp {{ number_format($income->nominal, 0, ',', '.') }}</p>
-                                                                        @endif
-                                                                        <p>Status: {{ $income->ms_income->name }}</p>
-                                                                        <img src="{{ asset('storage/' . $income->image_receipt) }}" alt="Bukti Pelunasan" class="img-fluid" style="width: 100%;">
-                                                                        <hr>
-                                                                    </div>
-                                    
-                                                                    @if ($loop->iteration % 2 == 0 && !$loop->last)
-                                                                        </div><div class="row">
-                                                                    @endif
-                                                                @endforeach
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @else
-                                            <button type="button" class="btn btn-secondary" disabled>Tidak Ada Pelunasan</button>
+                                            Tidak Ditemukan
                                         @endif
                                     </td>
                                     <td><button type="button" class="btn-ulasan">Beri Ulasan</button></td>
@@ -181,8 +122,4 @@
     <!-- FOOTER -->
     <x-footer-customer />
     @include('frontend.layouts.datatable')
-
-    <!-- SCRIPT JS -->
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 @endsection
