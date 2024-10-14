@@ -46,6 +46,20 @@ class BookingResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
+    public static function getNavigationBadge(): ?string
+    {
+        $newdraf = static::getModel()::where('id_ms_booking', 1)->count();
+        if ($newdraf > 0) {
+            return "{$newdraf}";
+        }
+        return "";
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'warning';
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([
@@ -364,11 +378,11 @@ class BookingResource extends Resource
                 ->searchable()
                 ->sortable()
                 ->colors([
-                    'info' => 'Draf',
-                    'success' => 'Selesai',
-                    'warning' => 'Diterima',
+                    'warning' => 'Draf',
+                    'info' => 'Selesai',
+                    'success' => 'Diterima',
                     'danger' => 'Ditolak',
-                    'gray' => 'Dibatalkan', 
+                    'danger' => 'Dibatalkan',
                 ])
                 ->formatStateUsing(function ($state) {
                     return ucfirst($state);
@@ -410,12 +424,12 @@ class BookingResource extends Resource
                 ->sortable()
                 ->toggleable(isToggledHiddenByDefault: true),
             TextColumn::make('created_at')
-               ->label('Tanggal dibuat')
+                ->label('Tanggal dibuat')
                 ->dateTime()
                 ->sortable()
                 ->toggleable(isToggledHiddenByDefault: true),
             TextColumn::make('updated_at')
-               ->label('Tanggal diubah')
+                ->label('Tanggal diubah')
                 ->dateTime()
                 ->sortable()
                 ->toggleable(isToggledHiddenByDefault: true),
@@ -580,9 +594,9 @@ class BookingResource extends Resource
                                                             ->label('Longitude')
                                                             ->disabled(),
                                                     ])
-                                                    ->columns(2), 
+                                                    ->columns(2),
                                             ])
-                                            ->columns(2) 
+                                            ->columns(2)
                                             ->columnSpan(4)
                                     ])
                             ])
@@ -596,7 +610,7 @@ class BookingResource extends Resource
                     ->label('Spend'),
                 Tables\Actions\Action::make('refund')
                     ->label('Refund')
-                    ->color('warning') 
+                    ->color('warning')
                     ->icon('heroicon-s-receipt-refund')
                     ->action(function ($record, $data) {
                         Outcome::create([

@@ -10,6 +10,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB; // Tambahkan ini
+
+use App\Models\Bus;
 
 class BookingController extends Controller
 {
@@ -45,6 +48,90 @@ class BookingController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        // Ambil semua bus yang tersedia dengan ms_buses_id != 2
+        $availableBuses = Bus::where('ms_buses_id', '!=', 2)->get();
+        $totalRequestedCapacity = $request->input('capacity'); // Ambil kapasitas yang diminta
+
+        // Ambil date_start dari input
+        $dateStart = $request->input('date_start');
+
+        // Cek semua booking yang sudah diterima admin untuk bus ini
+        $totalBookedCapacity = DB::table('trip_buses')
+            ->join('bookings', 'trip_buses.id_booking', '=', 'bookings.id')
+            ->where('bookings.id_ms_booking', 2) // Sudah diterima admin
+            ->whereDate('bookings.date_start', '<=', \Carbon\Carbon::parse($dateStart)->toDateString()) // Booking yang dimulai pada atau sebelum tanggal input
+            ->whereDate('bookings.date_end', '>=', \Carbon\Carbon::parse($dateStart)->toDateString()) // Pastikan date_end mencakup tanggal inputan
+            ->select('bookings.id', 'bookings.capacity') // Ambil booking ID dan kapasitas
+            ->distinct('bookings.id') // Hindari duplikasi kapasitas dari booking yang sama
+            ->get(); // Ambil semua record
+
+        // Hitung total kapasitas yang terbooking
+        $capacitybooked = $totalBookedCapacity->sum('capacity');
+
+        // Hitung total kapasitas semua bus yang tersedia
+        $totalCapacityAvailable = $availableBuses->sum('capacity'); // Total kapasitas semua bus yang ada
+
+        // Hitung kapasitas tersisa
+        $totalRemainingCapacity = $totalCapacityAvailable - $capacitybooked;
+
+        // Hitung bus yang dibutuhkan untuk memenuhi permintaan
+        $neededBuses = 0;
+        $currentCapacity = 0;
+
+        // Hitung bus yang dibutuhkan untuk memenuhi permintaan
+        foreach ($availableBuses as $bus) {
+            $currentCapacity += $bus->capacity; // Tambah kapasitas dari bus yang tersedia
+            if ($currentCapacity >= $totalRequestedCapacity) {
+                $neededBuses++; // Bus yang dibutuhkan untuk memenuhi permintaan
+                break; // Hentikan loop jika kapasitas sudah cukup
+            }
+            $neededBuses++; // Menghitung jumlah bus yang dibutuhkan
+        }
+
+        // Hitung jumlah bus yang sudah terpakai berdasarkan kapasitas yang terbooking
+        $remainingCapacityToBook = $capacitybooked; // Menggunakan kapasitas yang terbooking
+        $busesUsed = 0;
+
+        // Menghitung berapa banyak bus yang digunakan
+        foreach ($availableBuses as $bus) {
+            if ($remainingCapacityToBook <= 0) {
+                break; // Hentikan jika sudah tidak ada kapasitas yang perlu dipenuhi
+            }
+
+            // Tambahkan bus yang digunakan
+            $busesUsed++;
+            // Kurangi kapasitas yang terbooking dengan kapasitas bus yang digunakan
+            $remainingCapacityToBook -= $bus->capacity;
+        }
+
+        // Hitung total bus yang tersedia
+        $totalBusesAvailable = $availableBuses->count();
+
+        // Hitung sisa bus yang tersedia
+        $remainingBuses = $totalBusesAvailable - $busesUsed;
+
+        // Debug informasi
+        // dd(
+        //     "Total kapasitas terbooking: $capacitybooked",
+        //     "Total kapasitas semua bus yang tersedia: $totalCapacityAvailable",
+        //     "Total kapasitas tersisa: $totalRemainingCapacity",
+        //     "Total kapasitas yang diminta: $totalRequestedCapacity",
+        //     "Jumlah bus yang terpakai: $busesUsed",
+        //     "Jumlah bus yang tersisa: $remainingBuses",
+        //     "Jumlah bus yang dibutuhkan untuk memenuhi permintaan: $neededBuses",
+        //     "Apakah ada cukup bus? $remainingBuses >= $neededBuses",
+        //     $remainingBuses >= $neededBuses,
+        //     "Apakah kapasitas bus dapat memenuhi yang diminta? $totalRequestedCapacity <= $totalRemainingCapacity",
+        //     $totalRequestedCapacity <= $totalRemainingCapacity,
+
+        //     "maka: $remainingBuses < $neededBuses || $totalRequestedCapacity > $totalRemainingCapacity",
+        //     $remainingBuses < $neededBuses || $totalRequestedCapacity > $totalRemainingCapacity
+        // );
+
+        if ($remainingBuses < $neededBuses || $totalRequestedCapacity > $totalRemainingCapacity) {
+            return redirect()->back()->withErrors(['capacity' => 'Tidak ada cukup bus yang tersedia untuk memenuhi permintaan.'])->withInput();
+        }
+
         // Cek apakah pengguna sudah login
         if (Auth::check()) {
             // Gunakan id user yang sudah login
@@ -70,7 +157,7 @@ class BookingController extends Controller
         $booking = Booking::create([
             'booking_code' => $booking_code,
             'id_cus' => $user->id, // Gunakan id dari user yang login
-            'destination_point' => $request->input('destination_point'),
+            // 'destination_point' => $request->input('destination_point'),
             'capacity' => $request->input('capacity'),
             'date_start' => $request->input('date_start'),
             'date_end' => $request->input('date_end'),

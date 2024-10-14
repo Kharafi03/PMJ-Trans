@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('sim')->nullable();
             $table->foreignId('id_ms')->constrained('ms_users')->cascadeOnDelete();
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
 

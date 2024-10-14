@@ -21,6 +21,11 @@ class UserResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::whereNull('deleted_at')->count();
+    }
+
     public static function form(Forms\Form $form): Forms\Form
     {
         return $form
@@ -56,7 +61,7 @@ class UserResource extends Resource
                                     ->password()
                                     ->revealable()
                                     ->maxLength(255)
-                                    ->dehydrated(fn ($state) => filled($state)) // Password hanya dikirim jika ada isi
+                                    ->dehydrated(fn($state) => filled($state)) // Password hanya dikirim jika ada isi
                                     ->placeholder('Password minimal 8 karakter. minimal 1 huruf besar, 1 angka, 1 karater spesial')
                                     ->nullable(), // Mengizinkan nilai kosong
                                 Forms\Components\TextInput::make('nik')
@@ -107,10 +112,10 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-        
+
                 Tables\Columns\TextColumn::make('id')
-                        ->label('Nomor')
-                        ->sortable(),
+                    ->label('Nomor')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama')
                     ->searchable()
@@ -140,7 +145,7 @@ class UserResource extends Resource
                     ->label('Status')
                     ->searchable()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('deleted_at')
+                Tables\Columns\TextColumn::make('deleted_at')
                     ->label('Tanggal dihapus')
                     ->dateTime()
                     ->sortable()
@@ -183,11 +188,11 @@ class UserResource extends Resource
             ]);
     }
     public static function getWidgets(): array
-   {
+    {
         return [
-                UserStatsOverview::class,
-               ];
-   }
+            UserStatsOverview::class,
+        ];
+    }
 
     public static function getRelations(): array
     {

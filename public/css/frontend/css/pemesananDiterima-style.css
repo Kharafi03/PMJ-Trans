@@ -1,3 +1,19 @@
+/* HEADER */
+.status-pemesanan{
+    border-radius: 10px;
+    background-color: #A8A8A8;
+    margin-bottom: 50px;
+    height: 44px;
+    width: 350px;
+}
+.status-pemesanan p{
+    padding: 6px;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+}
+
 /* FORM */
 #pemesananDiterima{
     margin-top: 100px;
@@ -13,13 +29,16 @@
     border-bottom-left-radius: 10px;
 }
 form{
-    padding: 20px;
+    padding: 50px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 /* INPUT */
 #icon{
     background-color: white;
-    border-radius: 4px 0px 0px 4px;
+    border-radius: 10px 0px 0px 10px;
     background-color: #E4E4E4;
 }
 input[type='text'], input[type="email"]{
@@ -31,31 +50,31 @@ input[type='text'], input[type="email"]{
 #alamat{
     background-color: #E4E4E4;
     height: 100px;
-    border-radius: 4px;
+    border-radius: 10px;
 }
 .status-alert-diterima {
     background-color: #0FA958;
     color: white;
-    border-radius: 4px;
+    border-radius: 10px;
     padding: 10px;
     margin-bottom: 15px;
 }
 .rekening {
     background-color: black;
     color: white;
-    border-radius: 4px;
+    border-radius: 10px;
     padding: 10px;
     margin-bottom: 15px;
 }
 .warning{
     background-color: #EF1818;
-    border-radius: 4px;
+    border-radius: 10px;
     padding: 10px 50px 10px 30px;
     color: white;
 }
 .custom-file{
     border: 1px solid #E4E4E4;
-    border-radius: 4px;
+    border-radius: 10px;
     height: 50px;
     padding: 10px;
     overflow: hidden;
@@ -78,17 +97,18 @@ small{
     margin-top: 20px;
 }
 .btn-kirimdp{
-    width: 300px;
+    width: 30%;
     padding: 10px;
-    border: 1px solid #4FB472;
-    border-radius: 4px;
-    background-color: #4FB472;
+    border: 1px solid #1E9781;
+    border-radius: 10px;
+    background-color: #1E9781;
     color: white;
     font-size: 16px;
     font-weight: bold;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.308) 0px 10px 10px -5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     &:hover{
-        color: #4FB472;
-        background-color: white;
+        transform: scale(1.05); 
     }
 }
 
@@ -103,7 +123,7 @@ label{
 }
 i{
     font-size: 24px;
-    color: #535353;
+    color: black;
 }
 /* RESPONSIF */
 /* RESPONSIF GAMBAR */
@@ -139,23 +159,32 @@ i{
 .btn-bayarSekarang{
     height: 40px;
     width: 100%;
+    border: 1px solid #1E9781;
+    border-radius: 10px;
+    background-color: #1E9781;
     color: white;
-    background-color: #0D894F;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    text-align: center;
-    padding: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.308) 0px 10px 10px -5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    &:hover{
+        transform: scale(1.05); 
+    }
 }
 .btn-bayarNanti{
     height: 40px;
     width: 100%;
     background-color: #EC2B2B;
-    border: none;
-    border-radius: 4px;
+    border: 1px solid #EC2B2B;
+    border-radius: 10px;
     color: white;
-    text-align: center;
-    padding: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.308) 0px 10px 10px -5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    &:hover{
+        transform: scale(1.05); 
+    }
 }
 .btn-bayarNanti a{
     text-decoration: none;

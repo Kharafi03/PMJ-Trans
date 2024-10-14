@@ -2,44 +2,43 @@
 @push('styles')
     <title>Contact</title>
     <link id="pagestyle" href="{{ asset('css/frontend/css/hubungiKami-style.css') }}" rel="stylesheet" />
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 @endpush
 @section('content')
     <!-- NAVBAR -->
     <x-navbar-customer />
 
-    <!-- Header Start -->
-    <div class="container-fluid header bg-white p-0">
-        <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
-            <div class="col-md-6 p-5 mt-lg-5">
-                <h1 class="display-5 mb-4">Kontak Kami</h1>
-                <p class="mb-4">Untuk informasi lebih lanjut, silakan hubungi kami melalui kontak yang tersedia di halaman Kontak Kami.</p>
-            </div>
-            <div class="col-md-6">
-                <img class="img-fluid" src="img/contact-img.jpg" style="width: 100%; align-items:center" alt="gambar">
-                <!-- src="{{ asset('frontend/img/carousel/carousel-2.jpg') }}" -->
+        <!-- Header Start -->
+        <div class="container-fluid header bg-white p-0">
+            <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
+                <div class="col-md-6 p-5 mt-lg-5">
+                    <h1 class="mb-4" style="font-size: 44px; font-weight: 700; color: #1E9781;">Kontak <span style="color: #FD9C07;">Kami</span></h1>
+                    <p class="mb-4" style="font-size: 16px; font-weight: 500; color: #666666B5;">Untuk informasi lebih lanjut, silakan hubungi kami melalui kontak yang tersedia di halaman Kontak Kami.</p>
+                </div>
+                <div class="col-md-6">
+                    <img class="img-fluid" src="img/contact-img.png" style="width: 100%; height: 100%; align-items:center; padding: 30px;" alt="gambar">
+                    <!-- src="{{ asset('frontend/img/carousel/carousel-2.jpg') }}" -->
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- CONTENT -->
     <!-- CONTACT -->
     <section id="contact">
-        <div class="container mt-5">
+        <div class="container">
             <!-- TITLE -->
             <!-- <div class="contact-title">
                 <h3>Hubungi Kami</h3>
                 <p>Mempunyai Pertanyaan terkait Trans PMJ? Tim kami siap membantu anda.</p>
             </div> -->
             <!-- ICON CARD -->
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-5 mt-5">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-5 mt-3">
                 <div class="col">
                     <div class="contact-card card h-100 text-center d-flex justify-content-center align-items-center">
                         <div class="icon">
                             <i class="fa-solid fa-phone"></i>
                         </div>
                         <div class="card-body flex-column align-items-end">
-                            <h5 class="card-title">No. Telephone</h5>
+                            <h5 class="card-title">Nomor WhatsApp</h5>
                             <p class="card-text">0812-2562-5255</p>
                         </div>
                     </div>
@@ -92,43 +91,42 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6 mt-3">
-                                <label for="namaLengkap" class="form-label"><b>Nama Lengkap</b><span
+                                <label for="namaLengkap" class="form-label">Nama Lengkap<span
                                         class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="namaLengkap"
-                                    placeholder="Masukkan Nama Lengkap Anda" required autofocus>
+                                    placeholder="Masukkan nama lengkap" required>
                                 <small class="text-danger" id="error-nama" style="display: none;">Lengkapi data nama lengkap
                                     anda.</small>
                             </div>
                             <div class="col-md-6 mt-3">
-                                <label for="kategori" class="form-label"><b>Kategori</b><span
+                                <label for="kategori" class="form-label">Kategori<span
                                         class="text-danger">*</span></label>
                                 <select class="form-select" id="kategori" required>
                                     <option selected>Pilih Kategori</option>
                                     <option value="pertanyaan">Pertanyaan</option>
-                                    <option value="pemesanan">Pemesanan</option>
                                     <option value="komplain">Komplain</option>
                                 </select>
                                 <small class="text-danger" id="error-kategori" style="display: none;">Pilih kategori yang
                                     anda inginkan.</small>
                             </div>
                             <div class="col-md-6 mt-3">
-                                <label for="email" class="form-label"><b>Email</b></label>
-                                <input type="email" class="form-control" id="email" placeholder="Masukkan Email Anda">
-                            </div>
-                            <div class="col-md-6 mt-3">
-                                <label for="noTelp" class="form-label"><b>No Telepon</b><span
+                                <label for="noTelp" class="form-label">Nomor WhatsApp<span
                                         class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="noTelp"
-                                    placeholder="Masukkan No Telepon Aktif" required>
+                                    placeholder="Masukkan nomor whatsapp" required>
                                 <small class="text-danger" id="error-notelp" style="display: none;">Lengkapi data nomor
                                     telepon anda.</small>
+                            </div>
+                            <div class="col-md-6 mt-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Masukkan alamat email">
                             </div>
                         </div>
                         <div class="row">
                             <div class="mt-3">
-                                <label for="pesan" class="form-label"><b>Pesan</b><span
+                                <label for="pesan" class="form-label">Pesan<span
                                         class="text-danger">*</span></label>
-                                <textarea class="form-control" id="pesan" rows="3" required></textarea>
+                                <textarea class="form-control" id="pesan" rows="3" placeholder="Tuliskan Pesan yang ingin disampaikan..." required></textarea>
                                 <small class="text-danger" id="error-pesan" style="display: none;">Lengkapi pesan yang ingin
                                     anda kirim.</small>
                             </div>
@@ -212,9 +210,4 @@
             }
         }
     </script>
-
-
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
-    </script> -->
 @endsection

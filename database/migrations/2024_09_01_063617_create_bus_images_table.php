@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_bus')->constrained('buses')->cascadeOnDelete();
             $table->longText('image'); // Jika Anda ingin menyimpan path gambar, gunakan tipe string
-            $table->timestamp('deleted_at')->nullable();
+            $table->softDeletes();
+            //$table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

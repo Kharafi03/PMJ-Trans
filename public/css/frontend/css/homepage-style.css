@@ -1,70 +1,87 @@
-/* BUTTON LOGIN REGISTER */
-.btn-login{
-  font-size: 14px;
-  font-weight: bold;
-  padding: 8px 15px;
-  background-color: #1E9781;
-  border: 1px solid #1E9781;
-  color: white;
-  &:hover{
-      background: none;
-      border: 1px solid #1E9781;
-      color: white;
-  }
-
-}
-
-
-
 /* HEADER */
-.bg-image {
-  height: 150vh; /* atau ukuran lain */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  
+#header{
+  margin-top: 100px;
 }
 .btn-pesan{
-  margin-top: 50px;
-  padding: 5px;
+  margin: 20px 20px 0px 0px;
+  padding: 5px 20px;
   background-color: #0FA958;
   color: white;
   border: 2px solid #0FA958;
   border-radius: 10px;
   text-align: center;
   font-size: 20px;
-  width: 160px;
+  height: 50px;
+  font-weight: bold;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+}
+.btn-callAdmin{
+  margin: 20px 20px 0px 0px;
+  padding: 5px 20px;
+  background: none;
+  color: #686D77;
+  border: none;
+  text-align: center;
+  font-size: 20px;
   height: 50px;
   font-weight: bold;
 }
-h1{
-  color: white;
-  margin-top: 150px;
+.btn-callAdmin i{
+  color: #FE9708;
+  padding: 12px;
+  margin-right: 10px;
+  border: 1px solid #FE9708;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
 }
-.header-title span{
-  color: #F0BB1F;
+h1{
+  font-weight: 700;
+}
+.header-text{
+  padding-left: 40px;
+}
+/* RESPONSIF */
+@media (min-width: 768px) and (max-width: 991px) {
+  .btn-callAdmin, .btn-pesan{
+    font-size: 13px;
+  }
+}
+@media (max-width: 767px) {
+  .btn-callAdmin, .btn-pesan{
+    font-size: 13px;
+    height: auto;
+    margin: 20px 5px 0px 0px;
+  }
+  .btn-callAdmin i{
+    margin-right: 5px;
+  }
+  .header-img{
+    padding-left: 20px;
+  }
 }
 
+
 /* BACKGROUND IMAGE */
-.homepage-content{
+body{
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; 
+  margin: 0;
+  background-image: url('/img/bg-all2.png');
 }
 
 /* PACKAGE-DAFTAR BUS PMJ */
 
 .package-container {
   position: relative;
-  margin-top: -200px;
-  z-index: 1; 
-  padding: 0px 60px;
+  padding: 0px 20px;
 }
 .text-icon p{
 font-size: 10px;
 }
 .text-icon i{
-font-size: 12px;
+font-size: 18px;
 }
 .package-container h2{
   color: white;
@@ -77,37 +94,48 @@ font-size: 12px;
   margin: 0 10px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   border: none;
-  border: 20px;
+  border-radius: 20px;
   padding: 10px;
-  z-index: 2; /* Memastikan setiap kartu berada di atas banner */
+
 }
 .package-card img{
-border-radius: 10px;
+  border-radius: 10px;
+  margin: 10px;
 }
 .package-card-title{
-font-size: 21px;
-/* font-weight: bold; */
+  font-size: 21px;
+  color: black !important;
 }
 .package-icon{
-font-size: 21px;
-margin-left: 0px;
+  font-size: 21px;
+  margin-left: 0px;
 }
-.fasilitas-package i{
-font-size: 20px;
+.package-icon i{
+  color: #FEC400;
 }
-.fasilitas-package p {
-font-size: 11px;
+.btn-detail{
+  padding: 10px;
+  width: 110px;
+  border: none;
+  border-radius: 10px;
+  background-color: #1E9781;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.308) 0px 10px 10px -5px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+    &:hover{
+      transform: scale(1.05); 
+    }
 }
 .package-button{
   margin: 0px -25px;
 }
 .package-button i{
-  color:#4ABDAC;
+  color:#FD9C07;
   font-size: 30px;
   font-weight: bold;
-  &:hover{
-    color: white;
-  }
 }
 
 .package-control-prev,
@@ -118,24 +146,22 @@ font-size: 11px;
   top: 40%;
   position: absolute;
   background-color: white;
-  border: 2px solid #4ABDAC;
+  border: 2px solid #FD9C07;
   &:hover{
-    background-color: #4ABDAC;
-    border: 1px solid #4ABDAC;
+    background-color: #FD9C07;
+    border: 1px solid #FD9C07;
   }
 }
+.package-control-prev:hover i,
+.package-control-next:hover i{
+  color: white;
+} 
 .package-control-prev {
   left: -35px; 
-  font-size: 30px;
-  font-weight: bold;
-  color: #4ABDAC;
   text-align: center;
 }
 .package-control-next {
   right: -35px; 
-  font-size: 30px;
-  font-weight: bold;
-  color: #4ABDAC;
   text-align: center;
 }
 
@@ -145,11 +171,14 @@ font-size: 11px;
 }
 .cara-title h5{
   font-size: 44px;
-  color: #14183E;
+  color: #1E9781;
   font-weight: 700;
 }
+.cara-title span{
+  color: #FD9C07;
+}
 .cara-title p{
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
   color: #666666BA;
 }
@@ -173,7 +202,7 @@ font-size: 11px;
 
 /* WHY */
 #why{
-  margin: 50px 0px;
+  margin: 50px;
 }
 .why-card{
   padding: 30px 30px 20px 30px;
@@ -181,21 +210,30 @@ font-size: 11px;
   background-color: #fcfcfc;
   text-align: center;
   border-radius: 30px;
-
 }
 .why-card:hover {
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 9px 27px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
   cursor: pointer;
-  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  transition: transform 0.5s ease-out, box-shadow 0.5s ease-out;
   transform: translateY(-10px) scale(1.05); 
-  background-color: white;
+  background-color: #1E9781;
   border: none !important;
+  color: white !important;
+}
+
+.why-card:hover .why-title, 
+.why-card:hover .card-text {
+  color: white !important;
 }
 .why-title{
-font-size: 28px;
-font-weight: 600;
-color: black;
+  font-size: 28px;
+  font-weight: 600;
+  color: black;
 }
+.card-text{
+  color: #A8A8A8;
+}
+
 
 /* ANIMASI */
 @keyframes fadeInUp {
@@ -229,31 +267,6 @@ color: black;
   }
 
 
-/* ABOUT */
-#about{
-  margin: 50px 0px;
-}
-.caption, .card-text{
-  color: #A8A8A8;
-  font-size: 18px;
-}
-.card-title{
-  color: #4ABDAC;
-  font-weight: 700;
-  font-size: 25px;
-}
-.about-card{
-  border-radius: 30px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: none;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-}
-.about-card:hover {
-  box-shadow: #89ebdc 0px 2px 8px 0px;
-  cursor: pointer;
-  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
-}
-
 /* ANIMASI */
 @keyframes fadeInUp {
   0% {
@@ -283,24 +296,74 @@ color: black;
   }
 
 
+/* BANNER */
+.banner-content{
+  border-radius: 24px;
+  background-color: #FE9A0726;
+  margin: 0px 50px;
+ 
+}
+.bg-banner{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto; 
+  background-image: url('/img/bg-banner.png');
+  padding: 50px 20px;
+}
+.banner-text h5{
+  font-size: 35px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.banner-text p{
+  margin: 20px 50px;
+  font-weight: 600;
+  font-size: 16px;
+}
+.btn-banner{
+  width: 180px;
+  border-radius: 50px;
+  background-color: #1E9781;
+  border: none;
+  padding: 20px;
+  text-align: center;
+}
+.btn-banner a{
+  text-decoration: none;
+  color: white;
+}
+
 /* TESTIMONI */
 #testimoni{
   margin: 50px 0px 100px 0px;
 }
+.caption-testimoni{
+  font-size: 20px;
+  font-weight: 600;
+  color: #666666BA;
+  margin-top: 0;
+}
 .testi {
     position: relative;
     padding: 50px;
-    text-align: center;
-    margin: 30px 300px 100px 300px;
-    width: 500px;
+    text-align: center; 
   }
   .container-testi{
-    max-width: 600px;
+    max-width: 900px;
+  }
+
+  .carousel-item p{
+    color: #A8A8A8;
+  }
+  .testimonial-text{
+    font-size: 20px;
+    font-weight: 500;
   }
   .carousel-inner-testi{
     padding: 20px 50px;
     border-radius: 30px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background-color: white;
   }
   .carousel-indicators {
     position: absolute;
@@ -315,26 +378,26 @@ color: black;
     height: 60px;
     border-radius: 50%;
     background-color: white;
-    border: 2px solid #4ABDAC;
+    border: 2px solid #FD9C07;
     top: 50%;
     transform: translateY(-50%);
     &:hover{
-      background-color: #4ABDAC;
-      border: 1px solid #4ABDAC;
+      background-color: #FD9C07;
+      border: 1px solid #FD9C07;
     }
   }
   .carousel-control-prev {
     left: -30px; 
     font-size: 30px;
     font-weight: bold;
-    color: #4ABDAC;
+    color: #FD9C07;
     text-align: center;
   }
   .carousel-control-next {
     right: -30px; 
     font-size: 30px;
     font-weight: bold;
-    color: #4ABDAC;
+    color: #FD9C07;
     text-align: center;
   }
   
@@ -363,7 +426,7 @@ color: black;
       &:hover{
         background: none;
         border: none;
-        color: #4ABDAC;
+        color: #FD9C07;
       }
     }
     .carousel-control-next {
@@ -396,38 +459,46 @@ color: black;
 /* FAQ */
 /* Title */
 #faq{
-margin-top: 100px;
+margin-top: 50px;
 }
 .title-faq p{
-font-size: 60px;
+font-size: 44px;
 font-weight: bold;
-text-align: center;
+color: #1E9781;
+margin-bottom: 0;
 }
 .title-faq span{
 color: #FE9C06;
 }
+.caption-faq{
+  font-size: 20px;
+  font-weight: 600;
+  color: #666666BA;
+  margin-top: 0;
+}
 
-/* faq item */
 .accordion{
-border: none;
-padding: 0px 100px;
+  border: none;
 }
 .accordion-button{
-background-color: #F8F8F8;
-color: #1E9781;
-font-weight: bold;
-font-size: 20px;
+  background-color: #F8F8F8;
+  color: #1E9781;
+  font-weight: bold;
+  font-size: 20px; 
+  border-radius: 20px 20px 0px 0px !important;
 }
 .accordion-button.collapsed{
-color: #1E9781;
+  color: #1E9781;
+  border-radius: 20px !important;
 }
 .accordion-item{
-margin-bottom: 20px;
-border: none;
+  margin-bottom: 20px;
+  border: none;
+  background: none;
 }
 .accordion-body{
-border-radius: 0px 0px 10px 10px;
-border: 1px solid #F8F8F8;
+border-radius: 0px 0px 20px 20px;
+background-color: #FE9C064D;
 }
 .accordion-button::after {
 background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-plus' viewBox='0 0 16 16'%3E%3Cpath d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z'/%3E%3C/svg%3E");
@@ -461,29 +532,70 @@ color:#1E9781;
 }
 
 
-/* NAVBAR */
-.nav-link {
-margin: 0px 20px;
-color: white !important;
+/* FOOTER */
+
+footer{
+  color: white;
+  background-color: #1E9781;
+  padding: 0px 30px;
 }
-
-.navbar-brand {
-color: white !important;
+footer a{
+  color: white;
+  font-size: 16px;
 }
-
-
-/* BUTTON LOGIN REGISTER */
-.btn-login {
-font-size: 14px;
-font-weight: bold;
-padding: 8px 15px;
-background-color: #1E9781;
-border: 1px solid #1E9781;
-color: white;
+footer li:hover{
+  text-decoration: underline;
 }
+footer i{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  color: black;
+  text-align: center;
+  padding-top: 12px;
+  font-size: 18px;
+  margin-bottom: 15px;
+  &:hover{
+    background-color: #FA7436;
+    color: white;
+  }
+}
+h6{
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 50px;
+  margin-top: 30px;
+}
+.caption1{
+  font-size: 16px;
+  text-align: justify; 
+  margin-top: 10px;
+  line-height: 30px;
+  /* padding-right: 30px; */
+}
+.sosmed-icon{
+  margin-top: 0px;
+}
+/* RESPONSIF */
 
-.btn-login:hover {
-background: none;
-border: 1px solid #1E9781;
-color: #1E9781;
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* Media query for tablet devices */
+  .caption1{
+    margin-top: 55px;
+  }
+  .sosmed-icon{
+    margin-top: 80px !important;
+  }
+  footer a{
+    font-size: 16px;
+  }
+}
+@media (max-width: 767.98px) {
+  h6{
+      margin-bottom: 20px;
+  }
+  .caption1{
+      margin-top: 20px;
+  }
 }
