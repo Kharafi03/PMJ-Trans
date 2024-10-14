@@ -32,6 +32,11 @@ class BusResource extends Resource
 
     protected static ?int $navigationSort = 6;
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::whereNull('deleted_at')->count();
+    }
+
     public static function form(Form $form): Form
     {
         return $form

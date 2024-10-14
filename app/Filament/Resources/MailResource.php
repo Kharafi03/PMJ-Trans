@@ -20,6 +20,21 @@ class MailResource extends Resource
 
     protected static ?int $navigationSort = 4;
 
+    public static function getNavigationBadge(): ?string
+    {
+        $new = static::getModel()::whereColumn('created_at', 'updated_at')->count();
+        if ($new > 0) {
+            //return (string) $newdraf;
+            return "{$new}";
+        }
+        return "";
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'warning';
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -132,10 +147,18 @@ class MailResource extends Resource
 
                 Tables\Columns\TextColumn::make('message')
                     ->label('Pesan')
+                    ->limit(20)
+                    ->tooltip(function ($record) {
+                        return $record->message;
+                    })
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('template_chat')
                     ->label('Template Chat')
+                    ->limit(50)
+                    ->tooltip(function ($record) {
+                        return $record->template_chat;
+                    })
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('created_at')
@@ -198,7 +221,7 @@ class MailResource extends Resource
         return [
             'index' => Pages\ListMails::route('/'),
             'create' => Pages\CreateMail::route('/create'),
-            'edit' => Pages\EditMail::route('/{record}/edit'),
+            //'edit' => Pages\EditMail::route('/{record}/edit'),
         ];
     }
 }

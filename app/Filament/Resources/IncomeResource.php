@@ -27,6 +27,17 @@ class IncomeResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
+    public static function getNavigationBadge(): ?string
+    {
+        $newdraf = static::getModel()::where('id_ms_income', 1)->count();
+        return "{$newdraf}";
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'warning';
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -112,8 +123,8 @@ class IncomeResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')
-                ->label('No')
-                ->sortable(),
+                    ->label('No')
+                    ->sortable(),
                 BadgeColumn::make('ms_income.name')
                     ->label('Status')
                     ->numeric()
@@ -136,7 +147,7 @@ class IncomeResource extends Resource
                     ->numeric()
                     ->searchable()
                     ->sortable(),
-               BadgeColumn::make('m_method_payment.name')
+                BadgeColumn::make('m_method_payment.name')
                     ->label('Metode')
                     ->numeric()
                     ->searchable()

@@ -23,9 +23,11 @@ class ReviewResource extends Resource
 
     protected static ?int $navigationSort = 5;
 
-
-
-
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::whereNull('deleted_at')->count();
+    }
+    
     public static function form(Form $form): Form
     {
         return $form

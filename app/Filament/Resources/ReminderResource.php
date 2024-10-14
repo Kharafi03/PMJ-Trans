@@ -26,6 +26,19 @@ class ReminderResource extends Resource
 
     protected static ?int $navigationSort = 22;
 
+    public static function getNavigationBadge(): ?string
+    {
+        $newdraf = static::getModel()::where('check', false)->count();
+        if ($newdraf > 0) {
+            return "{$newdraf}";
+        }
+        return "";
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+            return 'warning';
+    }
 
     public static function form(Form $form): Form
     {
