@@ -33,6 +33,7 @@
                                 <th scope="col">Jumlah Penumpang</th>
                                 <th scope="col">Biaya</th>
                                 <th scope="col">Minimum DP</th>
+                                <th scope="col">Status Pembayaran</th>
                                 <th scope="col">Tanggal Mulai</th>
                                 <th scope="col">Tanggal Selesai</th>
                                 <th scope="col">Pembayaran</th>
@@ -91,6 +92,7 @@
                                             Tidak Ditemukan
                                         @endif
                                     </td>
+                                    <td>{{ $booking->ms_payment->name }}</td>
                                     <td>{{ \Carbon\Carbon::parse($booking->date_start)->translatedFormat('l, d F Y') }}
                                     </td>
                                     <td>

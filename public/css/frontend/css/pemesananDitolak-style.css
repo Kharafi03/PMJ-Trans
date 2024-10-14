@@ -94,6 +94,8 @@ small{
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     &:hover{
         transform: scale(1.05); 
+        color: white;
+        background-color: #1E9781;
     }
 }
 

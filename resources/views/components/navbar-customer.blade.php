@@ -1,7 +1,5 @@
-@extends('frontend.layouts.app')
 @push('styles')
     <link id="pagestyle" href="{{ asset('css/frontend/css/navbarCustomer-style.css') }}" rel="stylesheet" />
-    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 @endpush
 <div>
     <nav id="navbar" class="navbar navbar-expand-lg fixed-top">

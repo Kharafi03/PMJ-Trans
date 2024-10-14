@@ -2,7 +2,6 @@
 @push('styles')
     <title>Customer Profile</title>
     <link id="pagestyle" href="{{ asset('css/frontend/css/profilCustomer-style.css') }}" rel="stylesheet" />
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @endpush
 @section('content')
     <!-- NAVBAR -->
@@ -66,5 +65,4 @@
     <!-- FOOTER -->
     <x-footer-customer />
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 @endsection

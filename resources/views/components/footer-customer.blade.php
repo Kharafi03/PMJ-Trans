@@ -1,4 +1,3 @@
-@extends('frontend.layouts.app')
 @push('styles')
     <link id="pagestyle" href="{{ asset('css/frontend/css/footer-style.css') }}" rel="stylesheet" />
 @endpush
