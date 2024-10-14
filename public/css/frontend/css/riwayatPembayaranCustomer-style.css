@@ -1,0 +1,60 @@
+body{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; 
+    margin: 0;
+    background-image: url('/img/bg-body.png');
+  }
+#riwayatPembayaran{
+    margin-top: 100px;
+}
+.dp-title{
+    font-size: 25px; 
+    font-weight: 700; 
+    color: #1E9781;
+    width: 230px;
+    padding: 10px;
+    margin-bottom: 30px;
+    text-align: center;
+    background-color: #1E978133;
+    border: 1px solid #1E9781;
+    border-radius: 10px;
+}
+.pelunasan-title{
+    font-size: 25px; 
+    font-weight: 700; 
+    color: #1E9781;
+    width: 230px;
+    padding: 10px;
+    margin-bottom: 30px;
+    text-align: center;
+    background-color: #FE9A0733;
+    border: 1px solid #FE9A07;
+    border-radius: 10px;
+}
+.content{
+    padding: 15px;
+    margin: 0px 10px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.bayar-title{
+    font-size: 17px;
+    font-weight: 600;
+    color: #666666;
+    margin-bottom: 5px;
+}
+.header h5{
+    font-size: 22px;
+    font-weight: 700;
+}
+.status{
+    font-size: 14px;
+    font-weight: 500;
+    color: #4180CC;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #4180CC47;
+    width: 140px;
+}

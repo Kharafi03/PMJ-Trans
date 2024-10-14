@@ -1,6 +1,12 @@
+body {
+    background-image: url('/img/bg-page.png');
+    background-position: 0 100%; 
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
 /* Title */
 #contact{
-    margin-top: 100px;
+    margin-top: 0px;
 }
 .header{
     margin-top: 75px;
@@ -64,7 +70,9 @@ form{
 #contact-form{
     margin-top: 100px;
 }
-
+.form-label{
+    font-weight: 510;
+}
 /* Button */
 .btn-kirim{
     width: 160px;
@@ -100,7 +108,8 @@ form{
 }
 .contact-card:hover {
     transform: translateY(-10px) scale(1.05); 
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+    box-shadow: #89ebdc 0px 2px 8px 0px;
+    border: 1px solid #89ebdc;
 }
 .contact-card .icon {
     font-size: 40px;

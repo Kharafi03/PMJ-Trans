@@ -1,7 +1,6 @@
 @extends('frontend.layouts.app')
 @push('styles')
     <title>Registrasi</title>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link id="pagestyle" href="{{ asset('css/frontend/css/register-style.css') }}" rel="stylesheet" />
 @endpush
 @section('content')
@@ -16,7 +15,7 @@
         <div class="container mt-3 mb-5">
             <div class="row">
                 <div class="col-md-4">
-                    <div class="header mb-5">
+                    <div class="header mb-3">
                         <h5>Registrasi</h5>
                         <p>Jika Anda sudah memiliki akun, silakan <a href="{{ route('login') }}">Login di sini.</a></p>
                     </div>
@@ -34,13 +33,13 @@
                     <div class="form-login>">
                         <form id="formRegistrasi" action="{{ route('register') }}" method="POST">
                             @csrf                            
-                            <div class="mb-5">
-                                <label for="number_phone" class="form-label">Nomor Telephone<span
+                            <div class="mb-3">
+                                <label for="number_phone" class="form-label">Nomor WhatsApp<span
                                         class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="number_phone" name="number_phone"
-                                    placeholder="Masukkan no telephone aktif" required>
+                                    placeholder="Masukkan nomor whatsapp" required>
                             </div>
-                            <div class="mb-5">
+                            <div class="mb-3">
                                 <label for="name" class="form-label">Nama Lengkap<span
                                         class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="name" name="name"
@@ -56,13 +55,9 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="d-flex justify-content-between align-items-center mb-5">
-                                <div>
-                                    <input type="checkbox" value="" id="ingatSaya">
-                                    <label for="ingatSaya" class="label-ingat">Ingat Saya?</label>
-                                </div>
-                                <div>
-                                    <a class="lupa-sandi" href="#">Lupa kata sandi?</a>
+                            <div class="d-flex justify-content-end align-items-center mb-5">
+                                <div class="lupa-sandi">
+                                    <a href="#">Lupa kata sandi?</a>
                                 </div>
                             </div>
                             <div class="mb-2">
@@ -72,7 +67,7 @@
                     </div>
                 </div>
                 <div class="col-md-8 d-flex align-items-center justify-content-center col-img mb-3">
-                    <img src="img/register-img.png" class="img-fluid" width="600px" height="700px">
+                    <img src="img/pmj03-1.jpg" class="img-fluid" width="600px" height="700px">
                 </div>
             </div>
         </div>
@@ -124,5 +119,4 @@
         // }
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 @endsection

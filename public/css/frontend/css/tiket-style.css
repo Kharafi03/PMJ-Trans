@@ -1,0 +1,210 @@
+/* HEADER + CONTAINER */
+#tiket{
+    margin-top: 120px;
+}
+.tiket-container{
+    padding: 30px;
+    background-color: white;
+    border: 10px solid #EFF0F6;
+    border-radius: 34px;
+
+}
+
+/* Main Ticket Style */
+.ticketContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.tiket-ruler{
+    padding: 5px;
+    width: 100%;
+    background-color: #A8A8A8;
+    border-radius: 5px;
+    position: relative;
+}
+.ticket{
+    animation: bouncingCard 0.6s ease-out infinite alternate;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
+    top: -30px;
+    z-index: 1;
+    transform: translateY(-3px);
+}
+/* .ticketShadow{
+    animation: bouncingShadow 0.6s ease-out infinite alternate;
+    margin-top: 4px;
+    width: 95%;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.4);
+    filter: blur(12px);
+} */
+
+/* Ticket Content */
+.ticketTitle{
+    font-size: 13px;
+    font-weight: 400;
+    color: white;
+    padding: 12px 16px 4px;
+    background-color: #1E9781;
+    border-radius: 10px 10px 0px 0px;
+}
+hr{
+    width: 90%;
+    border: 1px solid #efefef;
+}
+.ticketDetail{
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 4px 16px;
+}
+.ticketSubDetail{
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    padding: 12px 16px;
+}
+.ticketSubDetail .code{
+    margin-right: 24px;
+}
+
+/* Ticket Ripper */
+.ticketRip{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.circleLeft{
+    width: 12px;
+    height: 24px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 0 12px 12px 0;
+}
+.ripLine{
+    width: 100%;
+    border-top: 3px solid #efefef;
+    border-top-style: dashed ;
+}
+.circleRight{
+    width: 12px;
+    height: 24px;
+    background-color: white;
+    border-radius: 12px 0 0 12px;
+    background-color: rgba(0, 0, 0, 0.05) ;
+}
+
+/* TIKET-CARD */
+.tiket-card{
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}
+.info-tiket{
+    padding: 10px;
+}
+.tujuan-container{
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #D9D9D94D;
+}
+.info-tiket h5, .tujuan-tiket h5{
+    font-size: 11px;
+    font-weight: 700;
+    color: black;
+}
+.info-tiket li{
+    font-size: 11px;
+    color: black;
+}
+.info-tiket p{
+    font-size: 11px;
+    color: black;
+}
+.tujuan-tiket p{
+    font-size: 11px;
+    text-align: justify;
+    margin-top: 20px;
+}
+.tujuan-tiket li{
+    font-size: 11px;
+    text-align: justify;
+}
+/* TEXT HEADER */
+.profile-card {
+    display: flex;
+    align-items: center;
+    padding: 10px 70px 10px 10px;
+    max-width: 100%;
+    background-color: #FE9A07;
+    border-radius: 8px 8px 0px 0px;
+}
+.profile-text {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+}
+
+.profile-text h5 {
+    margin: 0px;
+    font-size: 15px;
+    color: black;
+}
+
+.profile-text p {
+    margin: 0px;
+    color: black;
+    font-size: 12px;
+}
+/* END STYLE TIKET */
+
+/* TEXT CONTAINER */
+.text-container{
+    padding: 30px;
+}
+.warning i{
+    color: white;
+    font-size: 35px;
+    text-align: center;
+    padding: 12px 11px;
+}
+.icon-warning{
+    background-color: #1E9781;
+    color: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+}
+.warning p{
+    font-size: 16px;
+    line-height: 20px;
+    color: 18px;
+}
+
+/* BUTTON */
+.btn-download{
+    margin-left: 35px;
+    padding: 10px;
+    width: 110px;
+    border: none;
+    border-radius: 10px;
+    background-color: #4180CC;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, #4475F236 0px 10px 10px -5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    &:hover{
+        transform: scale(1.05); 
+    }
+}
+@media (min-width: 375px) and (max-width: 991px) {
+    .profile-card{
+        padding: 10px 10px 10px 10px;      
+    }
+}
