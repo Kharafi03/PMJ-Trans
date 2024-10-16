@@ -176,7 +176,7 @@
 
             document.addEventListener("DOMContentLoaded", function() {
                 const stars = document.querySelectorAll(".rating-stars .star");
-                const ratingValue = document.getElementById("rating-value");
+                const ratingValue = document.getElementById("rating");
 
                 stars.forEach((star) => {
                     star.addEventListener("click", function() {
