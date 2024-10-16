@@ -6,10 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" media="all">
     {{-- <link rel="stylesheet" href="{{ asset('css/frontend/css/argon-dashboard.css') }}"> --}}
-    <script src="https://kit.fontawesome.com/637b45b8b3.js" crossorigin="anonymous"></script>
     @stack('styles')
 </head>
 
@@ -19,10 +17,9 @@
 
 @stack('scripts')
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-</script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('js/sweetalert2@11.js') }}"></script>
+<script src="{{ asset('js/fontawesome.js') }}"></script>
 
 
 @if (session('message'))
@@ -44,4 +41,5 @@
         });
     </script>
 @endif
+
 </html>

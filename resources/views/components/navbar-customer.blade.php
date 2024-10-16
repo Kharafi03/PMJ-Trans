@@ -4,7 +4,7 @@
 <div>
     <nav id="navbar" class="navbar navbar-expand-lg fixed-top">
         <div class="container-fluid  justify-content-start">
-            <a class="navbar-brand" href="#"><img src="img/logo.png" width="60px" height="45px" style="margin-left: 20px;"></a>
+            <a class="navbar-brand" href="#"><img src="{{ asset('img/logo.png') }}" width="60px" height="45px" style="margin-left: 20px;"></a>
             <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="margin-right: 30px;">
                 <span class="navbar-toggler-icon"></span>

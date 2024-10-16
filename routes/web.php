@@ -42,8 +42,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/history', [HistoryController::class, 'index'])->name('history.index');
+    Route::get('/history/{booking_code}', [HistoryController::class, 'show'])->name('history.show');
+    Route::post('/history/review', [HistoryController::class, 'storeReview'])->name('history.storeReview');
     Route::get('/history/payment/{booking}', [DetailPaymentController::class, 'show'])->name('payment-history');
     Route::get('/booking-code/{booking_code}', [BookingCodeController::class, 'show'])->name('booking.code');
+    Route::get('/booking/{booking_code}/pdf', [BookingCodeController::class, 'downloadPdf'])->name('booking.downloadPdf');
 });
 
 Route::get('/booking-check', [BookingCheckController::class, 'index'])->name('cek.status');

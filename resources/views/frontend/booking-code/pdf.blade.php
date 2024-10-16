@@ -1,13 +1,18 @@
-@extends('frontend.layouts.app')
-@push('styles')
-    <title>E-Ticket</title>
-    <link id="pagestyle" href="{{ asset('css/frontend/css/tiket-style.css') }}" rel="stylesheet" />
-@endpush
-@section('content')
-    <!-- NAVBAR -->
-    <x-navbar-customer />
+<!DOCTYPE html>
+<html lang="en">
 
-    <!-- CONTENT -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking PDF</title>
+        <link href="{{ public_path('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+
+        <script src="{{ public_path('js/bootstrap.bundle.min.js') }}" type="text/javascript"></script>
+    </script>
+    <link id="pagestyle" href="{{ public_path('css/frontend/css/tiket-pdf.css') }}" rel="stylesheet">
+</head>
+
+<body>
     <section id="tiket">
         <div class="container mb-5">
             <div class="text-content mb-5">
@@ -15,27 +20,27 @@
                 <p style="font-size: 16px; font-weight: 500; color: #6F6C90;">Berikut Detail Pembayaran selama menyewa bus
                     PMJ Trans.</p>
             </div>
-            <div class="tiket-container" style="width: 100% !important">
+            <div class="tiket-container">
                 <div class="row">
                     <!-- Kolom 1 -->
-                    <div class="col-xl-5">
+                    <div class="col-xl-4">
                         <div class="ticketContainer">
                             <div class="tiket-ruler"></div>
                             <div class="ticket">
                                 <div class="ticketTitle mb-2">
                                     {{-- <div class="header-tiket"> --}}
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <img src="{{ asset('img/logo.png') }}" alt="icon" width="50px"
-                                                height="40px">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <img src="{{ asset('img/logo.png') }}" alt="icon" width="50px"
+                                                    height="40px">
+                                            </div>
+                                            <div class="col-9">
+                                                <p class="text-end">
+                                                    {{ \Carbon\Carbon::parse($booking->date_start)->translatedFormat('l, d F Y') }}
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="col-9">
-                                            <p class="text-end">
-                                                {{ \Carbon\Carbon::parse($booking->date_start)->translatedFormat('l, d F Y') }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    </p>
+                                        </p>
                                     {{-- </div> --}}
                                     <div class="tiket-card mb-3">
                                         <div class="profile-card p-3">
@@ -53,8 +58,7 @@
                                         </div>
                                         <div class="info-tiket mt-3">
                                             <div class="row text-center align-items-stretch">
-                                                <div class="col-6 d-flex flex-column justify-content-center"
-                                                    style="border-right: 3px solid #C9C9C93D;">
+                                                <div class="col-6 d-flex flex-column justify-content-center" style="border-right: 3px solid #C9C9C93D;">
                                                     <h5 class="mt-auto mb-3">Kode Booking</h5>
                                                     <p class="mt-auto">{{ $booking->booking_code }}</p>
                                                 </div>
@@ -63,7 +67,7 @@
                                                     <p class="mt-auto">{{ $booking->customer->number_phone }}</p>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>                                        
                                     </div>
                                 </div>
                                 <div class="ticketRip">
@@ -94,15 +98,15 @@
                                                 <p>{{ $booking->pickup_point }}</p>
                                             </div>
                                             <div class="col-6">
-
-                                                @foreach ($destinations as $dest)
-                                                    @if ($loop->count > 1)
-                                                        <p class="m-0">{{ $loop->iteration }}. {{ $dest->name }}</p>
-                                                    @else
-                                                        <p>{{ $dest->name }}</p>
-                                                    @endif
-                                                @endforeach
-
+                                                
+                                                    @foreach ($destinations as $dest)
+                                                        @if ($loop->count > 1)
+                                                            <p class="m-0">{{ $loop->iteration }}. {{ $dest->name }}</p>
+                                                        @else
+                                                            <p>{{ $dest->name }}</p>
+                                                        @endif
+                                                    @endforeach
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -111,7 +115,7 @@
                         </div>
                     </div>
                     <!-- Kolom 2 -->
-                    <div class="col-xl-7">
+                    <div class="col-xl-8">
                         <div class="text-container mt-5">
                             <div class="text-content mb-5">
                                 <h5 style="font-size: 30px; font-weight: 700; color: #1E9781;">Petunjuk <span
@@ -152,51 +156,14 @@
                                         membahayakan.</p>
                                 </div>
                             </div>
-
-
-                            <button id="download" class="btn btn-primary">Download PDF</button>
-                            {{-- <a href="{{ route('booking.downloadPdf', $booking->booking_code) }}"
-                                class="btn btn-primary mt-5" target="_blank">Download</a> --}}
+                            <a href="{{ route('booking.downloadPdf', $booking->booking_code) }}"
+                                class="btn btn-primary mt-5" target="_blank">Download</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+</body>
 
-    <!-- FOOTER -->
-    <x-footer-customer />
-@endsection
-
-@push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script>
-        document.getElementById("download").addEventListener("click", function() {
-            // Pilih hanya bagian tiket-container untuk didownload sebagai PDF
-            const element = document.querySelector(".container");
-
-            html2pdf()
-                .from(element)
-                .set({
-                    margin: [10, 10, 10, 10], // Margin dalam satuan milimeter (atas, kanan, bawah, kiri)
-                    filename: 'e-ticket.pdf',
-                    html2canvas: {
-                        scale: 2, // Meningkatkan skala untuk kualitas lebih baik
-                        useCORS: true // Menghindari masalah CORS pada gambar
-                    },
-                    jsPDF: {
-                        unit: 'mm',
-                        format: 'a3',
-                        orientation: 'landscape' // Format PDF portrait
-                    }
-                })
-                .output('blob') // Ubah menjadi 'blob' untuk pratinjau
-                .then(function(pdfBlob) {
-                    // Buat URL objek untuk Blob PDF
-                    const url = URL.createObjectURL(pdfBlob);
-                    // Buka tab baru dan tampilkan pratinjau PDF
-                    window.open(url, '_blank');
-                });
-        });
-    </script>
-@endpush
+</html>
