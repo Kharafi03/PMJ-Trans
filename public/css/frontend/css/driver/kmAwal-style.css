@@ -2,71 +2,32 @@
 .dashboard-container{
     max-width: 375px;
     position: relative;
+    background-color: white;
 }
-/* .content{
-    padding-bottom: 50px;
-} */
-
-/* IMAGE BUS */
-.img-bus img{
-    border-radius: 14px;
-    width: 258px;
+#dashboardKm{
+    margin: 70px 0px;
 }
 
-/* TIKET */
-.tiket{
-    background-image: url('/img/tiket.png');
-    background-repeat: no-repeat;
-    background-position: center;
-}
-.header-tiket{
-    text-align: center;
-    font-weight: 700;
-    padding-top: 10px;
-    font-size: 20px;
-}
-.tujuan{
-    padding: 0px 30px;
-}
-.tujuan p{
-    font-size: 14px;
-    color: #8C8E98;
-    margin-bottom: 0px;
-    margin-top: 10px;
-}
-.tujuan h5{
-    font-size: 18px;
-    font-weight: 700;
-    margin-top: 0px;
-    margin-bottom: 10px;
-}
-.waktu{
-    padding: 0px 30px;
-    margin-top: 10px;
+/* TEXT HEADER */
+.profile-card {
+    display: flex;
     align-items: center;
+    padding: 10px;
+    max-width: 400px;
 }
-.waktu h5{
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 0px;
+.profile-text {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
 }
-.waktu img{
-    margin-top: 5px;
-    width: 100px;
-    height: 25px;
+
+.profile-text h5 {
+    margin: 0px;
 }
-.waktu p{
-    font-size: 10px;
-    color: #8C8E98;
-    margin-bottom: 5px;
-    margin-top: 0px;
-}
-.footer-tiket p{
-    font-size: 12px;
-    color: #8C8E98;
-    margin-top: 0px;
-    padding-bottom: 20px;
-    text-align: center;
+
+.profile-text p {
+    margin: 0px;
+    color: #777;
 }
 
 /* FORM */
@@ -80,27 +41,131 @@
     height: 48px;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
+    border-top: 1px solid #666666;
+    border-left: 1px solid #666666;
+    border-bottom: 1px solid #666666;
 }
 input[type="text"]{
     border-left: none;
     height: 48px;
     border-radius: 15px;
+    border-top: 1px solid #666666;
+    border-right: 1px solid #666666;
+    border-bottom: 1px solid #666666;
 }
 
-/* BUTTON KIRIN */
+/* BUTTON KIRIM */
 .btn-inputkm{
     height: 48px;
     width: 100%;
-    background-color: #FFB800;
+    background-color: #F44C28;
     color: white;
     font-size: 16px;
     font-weight: 700;
     padding: 10px;
     text-align: center;
-    border: 1px solid #FFB800;
     border-radius: 15px;
+    border: none;
+    margin-bottom: 70px;
+    transition: transform 0.3s ease;
     &:hover{
-        background-color: white;
-        color: #FFB800;
+        transform: scale(1.02); 
     }
+}
+
+
+/* TIKET */
+
+.ticketTitle{
+    font-size: 13px;
+    font-weight: 400;
+    color: white;
+    padding: 12px 16px 4px;
+    border-radius: 10px 10px 0px 0px;
+    background-color: #F2F2F2;
+}
+
+.ticketDetail{
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 4px 16px;
+    background-color: #F2F2F2;
+}
+.ticketSubDetail{
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    padding: 12px 16px;
+    background-color: #F2F2F2;
+}
+.ticketSubDetail .code{
+    margin-right: 24px;
+}
+
+/* Ticket Ripper */
+.ticketRip{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F2F2F2;
+}
+.circleLeft{
+    width: 15px;
+    height: 30px;
+    background-color: white;
+    border-radius: 0 12px 12px 0;
+}
+.ripLine{
+    width: 100%;
+    border-top: 2px solid black;
+    border-top-style: dashed ;
+}
+.circleRight{
+    width: 15px;
+    height: 30px;
+    background-color: white;
+    border-radius: 12px 0 0 12px;
+}
+
+/* TIKET-CARD */
+.tiket-card{
+    background-color: #F2F2F2;
+}
+.info-tiket{
+    padding: 10px;
+}
+.tujuan-container{
+    padding: 10px;
+}
+.jam-tiket{
+    background-color: #F2F2F2;
+    border-radius: 0px 0px 12px 12px;
+}
+.info-tiket h5{
+    font-size: 14px;
+    font-weight: 700;
+    color: #191D31;
+    text-align: center;
+}
+.jam-tiket h5{
+    font-size: 14px;
+    font-weight: 600;
+    color: #8C8E98;
+}
+.info-tiket li{
+    font-size: 11px;
+    color: #8C8E98;
+    text-align: left;
+}
+.info-tiket p{
+    font-size: 11px;
+    color: #8C8E98;
+    text-align: justify;
+}
+.info-jam p{
+    font-size: 11px;
+    font-weight: 400;
+    text-align: center;
+    color: #A7AEC1;
+    padding: 20px 0px;
 }

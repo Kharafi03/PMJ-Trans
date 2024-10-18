@@ -17,31 +17,27 @@
             </div>
 
             <!-- FORM -->
-            <!-- sementara tak isi di placeholder -->
             <div class="p-3 mb-5">
                 <form id="formProfilDriver">
                     <div class="mb-3">
                         <label for="name" class="form-label">Nama Lengkap</label>
                         <div class="input-group">
-                            <span class="input-group-text" id="icon"><i class="fa-solid fa-pen-to-square"></i></span>
-                            <input type="text" class="form-control" id="name" name="name"
-                                value="{{ Auth::user()->name }}" readonly>
+                            <span class="input-group-text" id="icon"><img src="{{ asset('img/icon-deskripsi.png') }}"></span>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->name }}" readonly>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="number_phone" class="form-label">Nomor Telephone</label>
                         <div class="input-group">
-                            <span class="input-group-text" id="icon"><i class="fa-solid fa-pen-to-square"></i></span>
-                            <input type="text" class="form-control" id="number_phone" name="number_phone"
-                                value="{{ Auth::user()->number_phone }}" readonly>
+                            <span class="input-group-text" id="icon"><img src="{{ asset('img/icon-deskripsi.png') }}"></span>
+                            <input type="text" class="form-control" id="number_phone" name="number_phone" value="{{ Auth::user()->number_phone }}" readonly>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
                         <div class="input-group">
-                            <span class="input-group-text" id="icon"><i class="fa-solid fa-pen-to-square"></i></span>
-                            <input type="text" class="form-control" id="email" name="email"
-                                value="{{ Auth::user()->email }}" readonly>
+                            <span class="input-group-text" id="icon"><img src="{{ asset('img/icon-deskripsi.png') }}"></span>
+                            <input type="text" class="form-control" id="email" name="email" value="{{ Auth::user()->email }}" readonly>
                         </div>
                     </div>
                     <div class="mt-4 mb-3">
@@ -63,8 +59,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="d-flex justify-content-end">
-                            <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><img
-                                    src="{{ asset('img/close.png') }}"></button>
+                            <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><img src="{{ asset('img/close.png') }}"></button>
                         </div>
                         <div class="modal-body">
                             <h5>Ubah Password</h5>
@@ -73,23 +68,19 @@
                                 <div class="mb-3">
                                     <label for="passwordBaru" class="form-label">Password Baru</label>
                                     <div class="input-group">
-                                        <span class="input-group-text" id="toggle-passwordBaru"><i
-                                                class="fas fa-eye"></i></span>
-                                        <input type="password" class="form-control" id="passwordBaru" name="passwordBaru"
-                                            placeholder="Masukkan password baru">
+                                        <span class="input-group-text" id="toggle-passwordBaru"><img src="{{ asset('img/icon-deskripsi.png') }}"></span>
+                                        <input type="password" class="form-control" id="passwordBaru" placeholder="Masukkan password baru">
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="konfirmasiPassword" class="form-label">Konfirmasi Password</label>
                                     <div class="input-group">
-                                        <span class="input-group-text" id="toggle-konfirmasiPassword"><i
-                                                class="fas fa-eye"></i></span>
-                                        <input type="password" class="form-control" id="konfirmasiPassword"
-                                            name="konfirmasiPassword" placeholder="Konfirmasi password">
+                                        <span class="input-group-text" id="toggle-konfirmasiPassword"><img src="{{ asset('img/icon-deskripsi.png') }}"></span>
+                                        <input type="password" class="form-control" id="konfirmasiPassword" name="konfirmasiPassword" placeholder="Konfirmasi password">
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <button type="submit" class="btn-updatePassword">Update Password</button>
+                                    <button type="submit" class="btn-updatePassword">Simpan</button>
                                 </div>
                             </form>
                         </div>

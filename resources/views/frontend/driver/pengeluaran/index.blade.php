@@ -10,10 +10,28 @@
         <div class="dashboard-container container p-3">
             <!-- HEADER -->
             <x-header-driver />
+
             <!-- TEXT CONTENT -->
-            <div class="text-content text-center">
-                <p class="title">DATA PERJALANAN</p>
+            <div class="text-content text-center mb-4">
+                <h5 style="font-size: 25px; font-weight: 700; color: #1E9781;">DATA <span style="color: #FD9C07;">PERJALANAN</span></h5>
             </div>
+            <div class="mb-3">
+                <a href="{{ route('spend-trip') }}" disabled>
+                    <button class="btn-pengeluaran">
+                        <div class="btn-container">
+                            <div class="icon">
+                                <!-- <i class="fa-solid fa-dollar-sign"></i> -->
+                                <img src="{{ asset('img/icon-pengeluaran.png') }}">
+                            </div>
+                            <div class="text">
+                                <h6>Pengeluaran Saat Trip</h6>
+                                <p>Masukan data saat trip dimulai</p>
+                            </div>
+                        </div>
+                    </button>
+                </a>
+            </div>
+
             <!-- FORM -->
             <div class="form-pengeluaran p-3">
                 <form id="formPengeluaran" action="{{ route('spend-trip.store', ['tripId' => $trip->id]) }}" method="POST"
@@ -24,10 +42,9 @@
                     <input type="hidden" id="longitude" name="longitude">
 
                     <div class="mb-3">
-                        <label for="id_m_spend" class="form-label">Jenis Pengeluaran<span
-                                class="text-danger">*</span></label>
+                        <label for="id_m_spend" class="form-label">Jenis Pengeluaran<span class="text-danger">*</span></label>
                         <div class="input-group">
-                            <span class="input-group-text" id="icon"><i class="fa-solid fa-wrench"></i></span>
+                            <span class="input-group-text" id="icon"><img src="{{ asset('img/icon-nama-pengeluaran.png') }}"></span>
                             <select class="form-select" id="id_m_spend" name="id_m_spend" required>
                                 <option selected value="">Pilih Jenis Pengeluaran</option>
                                 @foreach ($spends as $spend)
@@ -39,7 +56,7 @@
                     <div class="mb-3">
                         <label for="description" class="form-label">Deskripsi<span class="text-danger">*</span></label>
                         <div class="input-group">
-                            <span class="input-group-text" id="icon"><i class="fa-solid fa-pen-to-square"></i></span>
+                            <span class="input-group-text" id="icon"><img src="{{ asset('img/icon-deskripsi.png') }}"></span>
                             <input type="text" class="form-control" id="description" name="description"
                                 placeholder="Deskripsi pengeluaran" required>
                         </div>
@@ -47,7 +64,7 @@
                     <div class="mb-3">
                         <label for="nominal" class="form-label">Nominal<span class="text-danger">*</span></label>
                         <div class="input-group">
-                            <span class="input-group-text" id="icon"><i class="fa-solid fa-wallet"></i></span>
+                            <span class="input-group-text" id="icon"><img src="{{ asset('img/icon-nominal.png') }}"></span>
                             <input type="number" class="form-control" id="nominal" name="nominal"
                                 placeholder="Nominal yang dikeluarkan" required>
                         </div>
@@ -56,7 +73,7 @@
                         <label for="kilometer" class="form-label">Kilometer Speedometer<span
                                 class="text-danger">*</span></label>
                         <div class="input-group">
-                            <span class="input-group-text" id="icon"><i class="fa-solid fa-gauge"></i></span>
+                            <span class="input-group-text" id="icon"><img src="{{ asset('img/icon-speedometer.png') }}"></span>
                             <input type="number" class="form-control" id="kilometer" name="kilometer"
                                 placeholder="Kilometer speedometer" required>
                         </div>
@@ -68,25 +85,22 @@
                             <input type="file" class="custom-file-input" id="image_receipt" name="image_receipt" required
                                 accept="image/*">
                             <label class="custom-file-label" for="image_receipt">
-                                <i class="fa-solid fa-arrow-up-from-bracket" style="padding-left: 10px; color:#595c5f;"></i>
+                                <i class="fa-solid fa-arrow-up-from-bracket" style="padding-left: 10px; color:#595c5f; border: 1px solid #666666;"></i>
                                 Pilih file
                             </label>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <p class="text-danger">*Wajib Diisi.</p>
-                    </div>
-                    <div class="mb-3">
+                    <div class="mt-5 mb-3">
                         <button type="submit" class="btn-kirim">Kirim</button>
                     </div>
-                    <div class="mb-3">
+
+                    <!-- PETA LOKASI -->
+                    <div style="margin-bottom: 70px;">
                         <h5>Peta Lokasi</h5>
                         <iframe id="map" width="100%" height="200" style="border:0;" loading="lazy"></iframe>
                     </div>
                 </form>
             </div>
-
-            <!-- PETA LOKASI -->
 
             <!-- NAVBAR -->
             <x-navbar-driver />

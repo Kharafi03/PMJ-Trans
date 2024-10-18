@@ -11,13 +11,10 @@
         <div class="dashboard-container container p-3">
             <x-header-driver />
             <!-- BUS IMAGE -->
-            <div class="mt-5">
-                <div class="img-bus d-flex justify-content-center align-items-center mb-4">
-                    <img src="{{ asset('storage/' . ($busImage ? $busImage->image : 'default-image.png')) }}" alt="bus">
-                </div>
+            <!-- <div class="mt-5">
                 <div class="tiket">
                     <div class="header-tiket ">
-                        <p><img src="{{ asset('img/bus.png') }}"> PMJ Trans</p>
+                        <img src="{{ asset('img/logo.png') }}" alt="bus" height="45px" width="50px"> 
                     </div>
                     <div class="content-tiket">
                         <div class="tujuan">
@@ -52,28 +49,86 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
+
             <!-- FORM INPUT -->
-            <div class="form-km p-3 mb-5">
+            <div class="form-km mb-4">
                 <form action="{{ route('km-start', $trip->id) }}" method="POST">
                     @csrf <!-- Tambahkan token CSRF -->
                     <div class="mb-3">
-                        <label for="km_start" class="form-label">Kilometer Awal<span class="text-danger">*</span></label>
+                        <label for="km_start" class="form-label">Kilometer Awal</label>
                         <div class="input-group">
-                            <span class="input-group-text" id="icon"><i class="fa-solid fa-gauge"></i></span>
-                            <input type="text" class="form-control" id="km_start" name="km_start"
-                                placeholder="Masukkan Kilometer Awal" required>
+                            <span class="input-group-text" id="icon"><i class="fa-regular fa-file"></i></span>
+                            <input type="text" class="form-control" id="km_start" name="km_start" placeholder="Masukkan Kilometer Awal" required>
                         </div>
-                        <small class="text-danger" id="error" style="display: none;">Masukkan data kilometer
-                            awal.</small>
-                    </div>
-                    <!-- BUTTON -->
-                    <div>
-                        <button type="submit" class="btn-inputkm">Kirim</button>
                     </div>
                 </form>
-
             </div>
+
+                <div class="mb-4">
+                    <div class="tiket-container">
+                        <div class="ticketContainer">
+                            <div class="ticket">
+                                <div class="ticketTitle">
+                                    <div class="d-flex justify-content-center align-items-center mb-2">
+                                        <img src="{{ asset('img/logo.png') }}" alt="bus" height="45px" width="50px">
+                                    </div>
+                                    <div class="tiket-card">
+                                        <div class="info-tiket">
+                                            <div class="row">
+                                                <div class="col" style="padding-top: 10px;">
+                                                    <!-- <h5>Titik Jemput</h5>
+                                                    <p>Jalan Mangga Besar III No. 17, RT 06 RW 07, Kelurahan Bedali, Kecamatan Lawang, Kab. Malang.</p> -->
+                                                    <h5>Titik Jemput</h5>
+                                                    <p>{{ $booking->pickup_point }}</p>
+                                                </div>
+                                                <div class="col" style="padding-top: 10px;">
+                                                    <h5>Tujuan</h5>
+                                                    <ol style="text-align: justify; ">
+                                                        <li>Simpang Lima (Semarang)</li>
+                                                        <li>Simpang Lima (Semarang)</li>
+                                                        <li>Simpang Lima (Semarang)</li>
+                                                    </ol>
+                                                    <!-- <p>{{ $booking->destination_point }}</p>
+                                                    <h5>{{ $booking->destination_point }}</h5> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                              <div class="ticketRip">
+                                <div class="circleLeft"></div>
+                                <div class="ripLine"></div>
+                                <div class="circleRight"></div>
+                              </div>
+                              <div class="jam-tiket">
+                                <div class="jam-container">
+                                    <div class="row">
+                                        <div class="col-5 d-flex justify-content-center align-items-center">
+                                            <!-- <h5>08:00 WIB</h5> -->
+                                            <h5>{{ \Carbon\Carbon::parse($booking->date_start)->format('H:i') }} WIB</h5>
+                                        </div>
+                                        <div class="col-2 d-flex justify-content-center align-items-center" >
+                                            <img src="{{ asset('img/km-img.png') }}" alt="image km">
+                                        </div>
+                                        <div class="col-5 d-flex justify-content-center align-items-center">
+                                            <h5>23:00 WIB</h5>
+                                        </div>
+                                    </div>
+                                    <div class="info-jam">
+                                        <p>Durasi 1 Jam 15 Menit</p>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BUTTON -->
+                <div>
+                    <button type="submit" class="btn-inputkm">Kirim</button>
+                </div>
 
             <!-- NAVBAR -->
             <x-navbar-driver />
