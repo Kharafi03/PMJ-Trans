@@ -56,17 +56,25 @@ class BookingController extends Controller
         $dateStart = $request->input('date_start');
 
         // Cek semua booking yang sudah diterima admin untuk bus ini
-        $totalBookedCapacity = DB::table('trip_buses')
-            ->join('bookings', 'trip_buses.id_booking', '=', 'bookings.id')
-            ->where('bookings.id_ms_booking', 2) // Sudah diterima admin
-            ->whereDate('bookings.date_start', '<=', \Carbon\Carbon::parse($dateStart)->toDateString()) // Booking yang dimulai pada atau sebelum tanggal input
-            ->whereDate('bookings.date_end', '>=', \Carbon\Carbon::parse($dateStart)->toDateString()) // Pastikan date_end mencakup tanggal inputan
-            ->select('bookings.id', 'bookings.capacity') // Ambil booking ID dan kapasitas
-            ->distinct('bookings.id') // Hindari duplikasi kapasitas dari booking yang sama
-            ->get(); // Ambil semua record
+        $totalBookedCapacity = DB::table('bookings')
+            ->where('id_ms_booking', '=', '2') // Sudah diterima admin
+            ->where(function ($query) use ($dateStart) {
+                $query->where(function ($subQuery) use ($dateStart) {
+                    // Jika date_end tidak ada (null), cek hanya date_start
+                    $subQuery->whereNull('bookings.date_end')
+                        ->whereDate('bookings.date_start', '=', \Carbon\Carbon::parse($dateStart)->toDateString());
+                })
+                    ->orWhere(function ($subQuery) use ($dateStart) {
+                        // Jika date_end ada, cek rentang dari date_start sampai date_end
+                        $subQuery->whereNotNull('bookings.date_end')
+                            ->whereDate('bookings.date_start', '<=', \Carbon\Carbon::parse($dateStart)->toDateString())
+                            ->whereDate('bookings.date_end', '>=', \Carbon\Carbon::parse($dateStart)->toDateString());
+                    });
+            })
+            ->select('capacity')
+            ->first();
 
-        // Hitung total kapasitas yang terbooking
-        $capacitybooked = $totalBookedCapacity->sum('capacity');
+        $capacitybooked = $totalBookedCapacity ? $totalBookedCapacity->capacity : 0;
 
         // Hitung total kapasitas semua bus yang tersedia
         $totalCapacityAvailable = $availableBuses->sum('capacity'); // Total kapasitas semua bus yang ada
@@ -129,7 +137,13 @@ class BookingController extends Controller
         // );
 
         if ($remainingBuses < $neededBuses || $totalRequestedCapacity > $totalRemainingCapacity) {
-            return redirect()->back()->withErrors(['capacity' => 'Tidak ada cukup bus yang tersedia untuk memenuhi permintaan.'])->withInput();
+            return redirect()->back()
+                ->withErrors(['capacity' => 'Tidak ada cukup bus yang tersedia untuk memenuhi permintaan!, Silakan hubungi admin untuk informasi lebih lanjut.'])
+                ->withInput()
+                ->with([
+                    'message' => 'Tidak ada cukup bus yang tersedia untuk memenuhi permintaan! Silakan hubungi admin untuk informasi lebih lanjut.',
+                    'alert-type' => 'error',
+                ]);
         }
 
         // Cek apakah pengguna sudah login
@@ -137,6 +151,30 @@ class BookingController extends Controller
             // Gunakan id user yang sudah login
             $user = Auth::user();
         } else {
+
+            // Pengecekan apakah email atau nomor telepon sudah terdaftar
+            $existingUser = User::where('email', $request->input('email'))
+                ->orWhere('number_phone', $request->input('number_phone'))
+                ->first();
+
+            // Jika pengguna ditemukan berdasarkan email atau nomor telepon
+            if ($existingUser) {
+                // Menambahkan error untuk email dan nomor telepon
+                $errors = [];
+                if ($existingUser->email == $request->email) {
+                    $errors['email'] = 'Email sudah terdaftar, silakan login terlebih dahulu!';
+                }
+                if ($existingUser->number_phone == $request->number_phone) {
+                    $errors['number_phone'] = 'Nomor telepon sudah terdaftar, silakan login terlebih dahulu!';
+                }
+
+                return redirect()->back()->withErrors($errors)->withInput()
+                    ->with([
+                        'message' => 'Email atau nomor telepon sudah terdaftar, silakan login terlebih dahulu!',
+                        'alert-type' => 'error',
+                    ]);
+            }
+
             // Simpan data ke tabel users jika belum login
             $user = User::create([
                 'name' => $request->input('name'),
@@ -157,7 +195,6 @@ class BookingController extends Controller
         $booking = Booking::create([
             'booking_code' => $booking_code,
             'id_cus' => $user->id, // Gunakan id dari user yang login
-            // 'destination_point' => $request->input('destination_point'),
             'capacity' => $request->input('capacity'),
             'date_start' => $request->input('date_start'),
             'date_end' => $request->input('date_end'),
@@ -182,7 +219,9 @@ class BookingController extends Controller
         }
 
         return redirect()->route('booking.code', ['booking_code' => $booking_code])
-            ->with('message', 'Pemesanan Berhasil.')
-            ->with('alert-type', 'success');
+            ->with([
+                'message' => 'Booking berhasil dibuat!',
+                'alert-type' => 'success',
+            ]);
     }
 }

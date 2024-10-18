@@ -31,23 +31,4 @@ class BookingCodeController extends Controller
 
         return view('frontend.booking-code.index', compact('booking', 'destinations'));
     }
-
-    // Tambahkan metode untuk generate PDF
-    public function downloadPdf($booking_code)
-    {
-        // Ambil data booking dan destinasi
-        $booking = Booking::where('booking_code', $booking_code)->first();
-        $destinations = Destination::where('id_booking', $booking->id)->get();
-
-        if (!$booking) {
-            return redirect()->route('home')->with('error', 'Booking tidak ditemukan.');
-        }
-
-        // Generate PDF dari view 'pdf.booking-code'
-        $pdf = Pdf::loadView('frontend.booking-code.pdf', compact('booking', 'destinations'))
-            ->setPaper('a4', 'portrait');
-        
-        // Unduh file PDF dengan nama sesuai booking code
-        return $pdf->stream('Booking-'.$booking_code.'.pdf');
-    }
 }

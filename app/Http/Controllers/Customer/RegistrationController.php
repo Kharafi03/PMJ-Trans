@@ -56,8 +56,17 @@ class RegistrationController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'number_phone' => ['required', 'string', 'max:15', 'unique:users,number_phone'],
             'password' => ['required', 'string', 'min:8'],
+        ], [
+            'name.required' => 'Nama wajib diisi!',
+            'name.max' => 'Nama tidak boleh lebih dari 255 karakter!',
+            'number_phone.required' => 'Nomor WhatsApp wajib diisi!',
+            'number_phone.max' => 'Nomor WhatsApp tidak boleh lebih dari 15 digit!',
+            'number_phone.unique' => 'Nomor WhatsApp ini sudah terdaftar, silakan gunakan nomor lain!',
+            'password.required' => 'Kata sandi wajib diisi!',
+            'password.min' => 'Kata sandi harus minimal 8 karakter!',
         ]);
     }
+
 
     /**
      * Buat user baru setelah validasi berhasil.

@@ -8,7 +8,7 @@
     <x-navbar-customer />
 
     <section id="riwayatSewa">
-        <div class="container mt-5">
+        <div class="container mb-5">
             <div class="mb-3">
                 <h3>Riwayat Sewa</h3>
             </div>
@@ -97,7 +97,7 @@
                                                     </button>
                                                 @else
                                                     <button class="btn btn-secondary text-center" disabled>Anda sudah
-                                                        memberikan feedback</button>
+                                                        memberikan ulasan</button>
                                                 @endif
                                             @endif
                                             <div>
@@ -126,7 +126,7 @@
                                     @csrf
                                     <input type="hidden" name="id_booking" id="id_booking" value="{{ $booking->id }}">
                                     <div class="mb-3">
-                                        <label for="feedback">Feedback</label>
+                                        <label for="feedback">Ulasan</label>
                                         <span class="text-danger text-lg">*</span>
                                         <textarea class="form-control" id="feedback" name="feedback" rows="3" required></textarea>
                                     </div>
@@ -148,7 +148,7 @@
                                         <input type="hidden" name="rating" id="rating" value="0" required>
                                     </div>
                                     <p class="text-danger">* Wajib diisi</p>
-                                    <button type="submit" class="btn btn-primary">Kirim Feedback</button>
+                                    <button type="submit" class="btn btn-primary">Kirim Ulasan</button>
                                 </form>
                             </div>
                         </div>
@@ -161,7 +161,7 @@
 
     <!-- FOOTER -->
     <x-footer-customer />
-    @include('frontend.layouts.datatable')
+    @include('frontend.assets.datatable')
     @push('scripts')
         <script>
             var feedbackModal = document.getElementById('feedbackModal');

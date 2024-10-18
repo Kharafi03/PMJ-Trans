@@ -8,13 +8,22 @@
     <x-navbar-customer />
 
     <!-- CONTENT -->
-    <section id="tiket">
-        <div class="container mb-5">
+    <section id="tiket" class="py-5 mt-5">
+        <div class="container">
             <div class="text-content mb-5">
-                <h5 style="font-size: 44px; font-weight: 700; color: #1E9781;">E-Ticket</h5>
-                <p style="font-size: 16px; font-weight: 500; color: #6F6C90;">Berikut Detail Pembayaran selama menyewa bus
-                    PMJ Trans.</p>
+                <div class="row">
+                    <div class="col-xl-6">
+                        <h5 style="font-size: 44px; font-weight: 700; color: #1E9781;">E-Ticket</h5>
+                        <p style="font-size: 16px; font-weight: 500; color: #6F6C90;">Berikut Detail Pembayaran selama
+                            menyewa bus
+                            PMJ Trans.</p>
+                    </div>
+                    <div class="col-xl-6 d-flex justify-content-end align-items-center">
+                        <button id="download" class="btn btn-success">Download PDF</button>
+                    </div>
+                </div>
             </div>
+            @include('frontend.assets.alert')
             <div class="tiket-container" style="width: 100% !important">
                 <div class="row">
                     <!-- Kolom 1 -->
@@ -23,7 +32,6 @@
                             <div class="tiket-ruler"></div>
                             <div class="ticket">
                                 <div class="ticketTitle mb-2">
-                                    {{-- <div class="header-tiket"> --}}
                                     <div class="row">
                                         <div class="col-3">
                                             <img src="{{ asset('img/logo.png') }}" alt="icon" width="50px"
@@ -35,8 +43,6 @@
                                             </p>
                                         </div>
                                     </div>
-                                    </p>
-                                    {{-- </div> --}}
                                     <div class="tiket-card mb-3">
                                         <div class="profile-card p-3">
                                             <div class="row">
@@ -152,11 +158,6 @@
                                         membahayakan.</p>
                                 </div>
                             </div>
-
-
-                            <button id="download" class="btn btn-primary">Download PDF</button>
-                            {{-- <a href="{{ route('booking.downloadPdf', $booking->booking_code) }}"
-                                class="btn btn-primary mt-5" target="_blank">Download</a> --}}
                         </div>
                     </div>
                 </div>
@@ -169,34 +170,48 @@
 @endsection
 
 @push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script> --}}
+    <script src="{{ asset('js/html2pdf.bundle.min.js') }}"></script>
     <script>
-        document.getElementById("download").addEventListener("click", function() {
-            // Pilih hanya bagian tiket-container untuk didownload sebagai PDF
-            const element = document.querySelector(".container");
+        document.getElementById('download').addEventListener('click', function() {
+            // Element yang ingin diubah menjadi PDF
+            const element = document.querySelector('.tiket-container');
 
-            html2pdf()
-                .from(element)
-                .set({
-                    margin: [10, 10, 10, 10], // Margin dalam satuan milimeter (atas, kanan, bawah, kiri)
-                    filename: 'e-ticket.pdf',
-                    html2canvas: {
-                        scale: 2, // Meningkatkan skala untuk kualitas lebih baik
-                        useCORS: true // Menghindari masalah CORS pada gambar
-                    },
-                    jsPDF: {
-                        unit: 'mm',
-                        format: 'a3',
-                        orientation: 'landscape' // Format PDF portrait
-                    }
-                })
-                .output('blob') // Ubah menjadi 'blob' untuk pratinjau
-                .then(function(pdfBlob) {
-                    // Buat URL objek untuk Blob PDF
-                    const url = URL.createObjectURL(pdfBlob);
-                    // Buka tab baru dan tampilkan pratinjau PDF
-                    window.open(url, '_blank');
-                });
+            // Simpan elemen yang perlu disembunyikan
+            const nonPrintableElements = document.body.children;
+
+            // Sembunyikan elemen non-printable
+            for (let i = 0; i < nonPrintableElements.length; i++) {
+                if (nonPrintableElements[i] !== element) {
+                    nonPrintableElements[i].style.display = 'none'; // Sembunyikan elemen lainnya
+                }
+            }
+
+            // Opsi untuk pdf
+            const options = {
+                margin: 0.1,
+                filename: `E-Ticket {{{ $booking->booking_code }}}.pdf`, // Menggunakan nama file dinamis
+                image: {
+                    type: 'jpeg',
+                    quality: 0.98
+                },
+                html2canvas: {
+                    scale: 3
+                },
+                jsPDF: {
+                    unit: 'in',
+                    format: 'b4',
+                    orientation: 'portrait'
+                }
+            };
+
+            // Mengonversi elemen ke PDF
+            html2pdf().from(element).set(options).save().then(() => {
+                // Kembalikan tampilan ke semula
+                for (let i = 0; i < nonPrintableElements.length; i++) {
+                    nonPrintableElements[i].style.display = ''; // Kembalikan tampilan elemen lainnya
+                }
+            });
         });
     </script>
 @endpush

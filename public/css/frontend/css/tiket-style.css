@@ -1,24 +1,24 @@
 /* HEADER + CONTAINER */
-#tiket{
+/* #tiket {
     margin-top: 100px;
-}
-.tiket-container{
+} */
+.tiket-container {
     padding: 30px;
     background-color: white;
-    border: 10px solid #EFF0F6;
+    border: 10px solid #eff0f6;
     border-radius: 34px;
     /* margin: 100px; */
 }
 
 /* Main Ticket Style */
-.tiket-ruler{
+.tiket-ruler {
     padding: 5px;
     width: 100%;
-    background-color: #A8A8A8;
+    background-color: #a8a8a8;
     border-radius: 5px;
     position: relative;
 }
-.ticket{
+.ticket {
     animation: bouncingCard 0.6s ease-out infinite alternate;
     background-color: white;
     border-radius: 12px;
@@ -30,90 +30,91 @@
 }
 
 /* Ticket Content */
-.ticketTitle{
+.ticketTitle {
     /* font-size: 13px; */
     font-weight: 400;
     color: white;
     padding: 12px 16px 4px;
-    background-color: #FE9A07;
+    background-color: #fe9a07;
     border-radius: 10px 10px 0px 0px;
 }
-hr{
+hr {
     width: 90%;
     border: 1px solid #efefef;
 }
-.ticketDetail{
+.ticketDetail {
     font-size: 1.1rem;
     font-weight: 500;
     padding: 4px 16px;
 }
-.circleLeft{
+.circleLeft {
     width: 12px;
     height: 24px;
     background-color: rgba(0, 0, 0, 0.05);
     border-radius: 0 12px 12px 0;
     margin-left: 0;
 }
-.ripLine{
+.ripLine {
     width: 100%;
     border-top: 3px solid #efefef;
-    border-top-style: dashed ;
+    border-top-style: dashed;
 }
-.circleRight{
+.circleRight {
     width: 12px;
     height: 24px;
     background-color: white;
     border-radius: 12px 0 0 12px;
-    background-color: rgba(0, 0, 0, 0.05) ;
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 /* TIKET-CARD */
-.tiket-card{
+.tiket-card {
     background-color: white;
     border-radius: 8px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+        rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 }
-.info-tiket{
+.info-tiket {
     padding: 10px;
 }
-.tujuan-container{
+.tujuan-container {
     margin: 10px;
     padding: 10px;
     border-radius: 5px;
-    background-color: #D9D9D94D;
+    background-color: #d9d9d94d;
 }
-.info-tiket h5, .tujuan-tiket h5{
+.info-tiket h5,
+.tujuan-tiket h5 {
     /* font-size: 11px; */
     font-weight: 700;
     color: black;
 }
-.info-tiket li{
+.info-tiket li {
     /* font-size: 11px; */
     color: black;
 }
-.info-tiket p{
+.info-tiket p {
     /* font-size: 11px; */
     color: black;
     padding: 5px;
-    background-color: #C9C9C94A;
+    background-color: #c9c9c94a;
     border-radius: 5px;
     /* margin: 10px; */
 }
-.tujuan-tiket p{
+.tujuan-tiket p {
     /* font-size: 11px; */
     text-align: justify;
 }
-.tujuan-tiket li{
+.tujuan-tiket li {
     /* font-size: 11px; */
-    
 }
 /* TEXT HEADER */
 .profile-card {
     /* padding: 10px 70px 10px 10px; */
     max-width: 100%;
-    background-color: #1E9781;
+    background-color: #1e9781;
     border-radius: 8px 8px 0px 0px;
-    display: inline-block;
+    /* display: inline-block; */
     width: 100%;
 }
 
@@ -131,46 +132,47 @@ hr{
 /* END STYLE TIKET */
 
 /* TEXT CONTAINER */
-.text-container{
+.text-container {
     padding: 0px 20px 0px 20px;
 }
-.warning img{
+.warning img {
     padding: 5px;
 }
-.icon-warning{
-    background-color: #1E9781;
+.icon-warning {
+    background-color: #1e9781;
     color: white;
     border-radius: 50%;
     width: 60px;
     height: 60px;
     margin-right: 10px;
 }
-.warning span{
+.warning span {
     /* font-size: 16px; */
     line-height: 20px;
-    color: #6F6C90;
+    color: #6f6c90;
 }
 
 /* BUTTON */
-.btn-download{
+.btn-download {
     margin-left: 35px;
     padding: 10px;
     width: 110px;
     border: none;
     border-radius: 10px;
-    background-color: #4180CC;
+    background-color: #4180cc;
     color: white;
     text-align: center;
     font-size: 16px;
     font-weight: 700;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, #4475F236 0px 10px 10px -5px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+        #4475f236 0px 10px 10px -5px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    &:hover{
-        transform: scale(1.05); 
+    &:hover {
+        transform: scale(1.05);
     }
 }
 @media (min-width: 375px) and (max-width: 991px) {
-    .profile-card{
-        padding: 10px 10px 10px 10px;      
+    .profile-card {
+        padding: 10px 10px 10px 10px;
     }
 }

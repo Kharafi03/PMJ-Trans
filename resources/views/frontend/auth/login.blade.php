@@ -21,14 +21,7 @@
                             silakan <a href="{{ route('register') }}">Registrasi di sini.</a></p>
                     </div>
 
-                    @if ($errors->any())
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            @foreach ($errors->all() as $error)
-                                <li class="text-white">{{ $error }}</li>
-                            @endforeach
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
+                    @include('frontend.assets.alert')
 
                     <!-- FORM -->
                     <div class="form-login>">
@@ -37,7 +30,7 @@
                             <div class="mb-5">
                                 <label for="number_phone" class="form-label">Nomor Telephone<span
                                         class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="number_phone" name="number_phone"
+                                <input type="tel" class="form-control" id="number_phone" name="number_phone"
                                     placeholder="Masukkan no telephone aktif" required>
                             </div>
                             <div class="mb-2">
@@ -89,32 +82,5 @@
             this.querySelector('i').classList.toggle('fa-eye-slash');
         });
 
-        //ALERT LOGIN
-        // jaga2 tak tambahi dulu
-        // function prosesLogin() {
-        //     // Simulasi proses login
-        //     var isLoginSuccessful = true; // Ganti dengan logika login Anda
-
-        //     if (isLoginSuccessful) {
-        //         Swal.fire({
-        //             title: 'Login Berhasil!',
-        //             text: 'Anda berhasil masuk ke akun Anda.',
-        //             icon: 'success',
-        //             confirmButtonText: 'OK'
-        //         }).then((result) => {
-        //             if (result.isConfirmed) {
-        //                 // Arahkan ke halaman dashboard setelah login berhasil
-        //                 window.location.href = "{{ url('/') }}"; // Ganti dengan URL halaman dashboard Anda
-        //             }
-        //         });
-        //     } else {
-        //         Swal.fire({
-        //             title: 'Login Gagal!',
-        //             text: 'Nama pengguna atau kata sandi salah. Silakan coba lagi.',
-        //             icon: 'error',
-        //             confirmButtonText: 'OK'
-        //         });
-        //     }
-        // }
     </script>
 @endsection
