@@ -20,6 +20,7 @@
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('js/sweetalert2@11.js') }}"></script>
 <script src="{{ asset('js/fontawesome.js') }}"></script>
+<script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
 
 
 @if (session('message'))
@@ -35,8 +36,8 @@
                             : '')) }}',
                 text: '{{ session('message') }}',
                 icon: '{{ session('alert-type') }}',
-                confirmButtonText: 'OK',
-                timer: 1500
+                timer: 1500,
+                showConfirmButton: false
             });
         });
     </script>
