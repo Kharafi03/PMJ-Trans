@@ -13,7 +13,8 @@
 
             <!-- TEXT CONTENT -->
             <div class="text-content mb-3">
-                <p>Riwayat Trip Nida</p>
+                <!-- <p>Riwayat On Trip Hari Ini ! </p> -->
+                <p>Riwayat On Trip {{ auth()->user()->name }} Hari Ini !</p>
             </div>
 
             <!-- RIWAYAT BUS -->
@@ -27,8 +28,10 @@
                                 <p>{{ $trip->booking->booking_code }}</p>
                             </div>
                             <span class="ms-auto">
-                                <p>{{ \Carbon\Carbon::parse($trip->booking->date_start)->translatedFormat('d F \p\u\k\u\l H.i') }}
-                                </p>
+                                <!-- <p>{{ \Carbon\Carbon::parse($trip->booking->date_start)->translatedFormat('d F \p\u\k\u\l H.i') }}</p> -->
+                                <div class="riwayat-image">
+                                <img src="{{asset('img/pmj02-1.jpg')}}" class="img-fluid" width="60px" height="60px">
+                            </div>
                             </span>
                         </button>
                     </div>

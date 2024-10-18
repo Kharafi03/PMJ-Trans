@@ -15,18 +15,18 @@
             </div>
 
             <!-- TITLE -->
-            <div class="title">
-                <p>Booking yang akan datang</p>
+            <div class="title mb-3">
+            <h5 style="font-size: 25px; font-weight: 700; color: #1E9781; text-align: center;">Detail <span style="color: #FD9C07;">Trip</span></h5>
             </div>
             <!-- CARD -->
-            <div class="detail">
+            <div class="detail mb-5">
                 <div class="detail-sewa mb-5">
                     <div class="tabel-detail d-flex align-items-center">
                         <table class="table table-borderless">
                             <thead>
                                 <tr>
-                                    <th colspan="2">
-                                        <h5>{{ $trip->booking->booking_code }}</h5>
+                                    <th colspan="2" style="background-color:#F44C28">
+                                        <h5 style="color: white;">{{ $trip->booking->booking_code }}</h5>
                                     </th>
                                 </tr>
                             </thead>

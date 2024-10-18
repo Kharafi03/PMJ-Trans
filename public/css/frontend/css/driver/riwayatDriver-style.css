@@ -1,131 +1,20 @@
 /* CONTAINER LAYOUT*/
-.dashboard-container{
+.notrip-container{
     max-width: 375px;
     position: relative;
     background-color: white;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
 }
 
-#dashboard{
-    margin-top: 70px;
+#riwayatTrip{
+    margin: 70px 0px 80px 0px;
 }
 
-/* CARD */
-.banner{
-    background-repeat: no-repeat;
-    background-position: center;
-}
-.banner-isi{
-    padding-bottom: 5px;
-}
-.kode{
-    padding: 15px 0px 0px 30px;
-}
-.header p{
-    margin-bottom: 0px;
-    font-size: 14px;
-    font-weight: 200;
-    color: white;
-}
-.header h5{
-    font-size: 18px;
-    font-weight: 700;
-    color: white;
-}
-.tujuan{
-    padding: 0px 30px;
-}
-.tujuan p{
-    margin-bottom: 0px;
-    font-size: 14px;
-    color: white;
-}
-
-/* BUTTON LIHAT */
-.btn-lihat {
-    display: inline-block; /* Pastikan tautan ditampilkan sebagai blok inline */
-    padding: 5px; 
-    background-color: #FEC400; 
-    color: white; 
-    border-radius: 5px; 
-    text-align: center; /* Tambahkan ini agar teks ditampilkan di tengah */
-    width: 74px; 
-    margin: 10px 0 20px 30px; 
-    text-decoration: none; /* Hilangkan garis bawah pada tautan */
-}
-
-.btn-lihat:hover {
-    background-color: #FFD700; /* Contoh perubahan warna saat hover */
-}
-
-/* BUTTON KIRIM */
-.btn-mulai{
-    text-decoration: none;
-    height: 48px;
-    width: 100%;
-    background-color: #FFB800;
-    color: white;
+/* TEXT CONTTENT */
+.text-content p{
     font-size: 16px;
     font-weight: 700;
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #FFB800;
-    border-radius: 15px;
-    display: inline-block;
-}
-
-.btn-mulai:hover {
-    background-color: white;
-    color: #FFB800;
-}
-.btn-lanjut{
-    text-decoration: none;
-    height: 48px;
-    width: 100%;
-    background-color: #F44C28;
-    color: white;
-    font-size: 16px;
-    font-weight: 700;
-    padding: 10px;
-    text-align: center;
-    border: none;
-    border-radius: 15px;
-    display: inline-block;
-    margin-bottom: 80px;
-    transition: transform 0.3s ease;
-    &:hover{
-        transform: scale(1.02); 
-    }
-}
-
-
-body, html {
-    height: 100%; 
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-}
-
-#dashboardUpcomming {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow-x: hidden;
-}
-
-.title {
-    position: sticky; 
-    top: 0;
-    z-index: 10;
-    background-color: white; 
-}
-
-.card-content {
-    flex-grow: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
+    color: #1E9781;
+    padding-left: 10px;
 }
 
 /* DROPDOWN */
@@ -276,17 +165,3 @@ body, html {
 .modal-body{
     padding: 20px 60px;
 }
-
-.riwayat-title{
-    padding: 0px 5px;
-}
-.riwayat-title p{
-    font-size: 20px;
-    font-weight: 500;
-}
-.riwayat-title i{
-    font-size: 20px;
-}
-
-
-

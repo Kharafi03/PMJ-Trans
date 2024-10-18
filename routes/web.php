@@ -245,3 +245,26 @@ Route::get('/welcome-screen', function () {
 // Route::get('/register', function () {
 //     return view('frontend.auth.register');
 // })->name('register');
+
+
+// HALAMAN TAMBAHAN DRIVER
+Route::get('/login-driver', function () {
+    return view('frontend.driver.auth.login');
+})->name('login-driver');
+
+Route::get('/reset-pw-driver', function () {
+    return view('frontend.driver.auth.reset-pw');
+})->name('reset-pw-driver');
+
+Route::get('/welcome-screen1', function () {
+    return view('frontend.driver.welcome-screen.welcomescreen1');
+})->name('welcome-screen1');
+
+Route::get('/welcome-screen2', function () {
+    return view('frontend.driver.welcome-screen.welcomescreen2');
+})->name('welcome-screen1');
+
+Route::get('/welcome-screen3', function () {
+    return view('frontend.driver.welcome-screen.welcomescreen3');
+})->name('welcome-screen1');
+
