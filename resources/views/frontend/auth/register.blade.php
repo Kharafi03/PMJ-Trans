@@ -19,29 +19,20 @@
                         <h5>Registrasi</h5>
                         <p>Jika Anda sudah memiliki akun, silakan <a href="{{ route('login') }}">Login di sini.</a></p>
                     </div>
-
-                    @if ($errors->any())
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            @foreach ($errors->all() as $error)
-                                <li class="text-white">{{ $error }}</li>
-                            @endforeach
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-
+                    @include('frontend.assets.alert')
                     <!-- FORM -->
                     <div class="form-login>">
                         <form id="formRegistrasi" action="{{ route('register') }}" method="POST">
-                            @csrf                            
+                            @csrf
                             <div class="mb-3">
                                 <label for="number_phone" class="form-label">Nomor WhatsApp<span
                                         class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="number_phone" name="number_phone"
+                                <input type="tel" class="form-control" id="number_phone" name="number_phone"
                                     placeholder="Masukkan nomor whatsapp" required>
                             </div>
                             <div class="mb-3">
                                 <label for="name" class="form-label">Nama Lengkap<span
-                                        class="text-danger">*</span></label>
+                                        class="rtext-danger">*</span></label>
                                 <input type="text" class="form-control" id="name" name="name"
                                     placeholder="Masukkan nama lengkap anda" required>
                             </div>
@@ -73,8 +64,6 @@
         </div>
     </section>
 
-
-
     <!-- SCRIPT -->
     <script>
         //MATA
@@ -90,33 +79,5 @@
             this.querySelector('i').classList.toggle('fa-eye');
             this.querySelector('i').classList.toggle('fa-eye-slash');
         });
-
-        // //ALERT REGISTRASI
-        // function prosesRegistrasi() { //jaga2 tak tambahi dulu
-        //     // Simulasi proses registrasi
-        //     var isRegistrationSuccessful = true; // Ganti dengan logika registrasi Anda
-
-        //     if (isRegistrationSuccessful) {
-        //         Swal.fire({
-        //             title: 'Registrasi Berhasil!',
-        //             text: 'Akun Anda telah berhasil dibuat. Silakan login untuk melanjutkan.',
-        //             icon: 'success',
-        //             confirmButtonText: 'OK'
-        //         }).then((result) => {
-        //             if (result.isConfirmed) {
-        //                 // Arahkan ke halaman login setelah registrasi berhasil
-        //                 window.location.href = 'login.html'; // Ganti dengan URL halaman login Anda
-        //             }
-        //         });
-        //     } else {
-        //         Swal.fire({
-        //             title: 'Registrasi Gagal!',
-        //             text: 'Terjadi kesalahan saat membuat akun. Silakan coba lagi.',
-        //             icon: 'error',
-        //             confirmButtonText: 'OK'
-        //         });
-        //     }
-        // }
     </script>
-
 @endsection

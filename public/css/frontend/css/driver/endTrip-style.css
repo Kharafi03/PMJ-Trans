@@ -75,37 +75,39 @@
 }
 
 /* FORM */
-.input-group i{
-    color: #595c5f;
-    font-size: 20px;
-}
 #icon{
     border-right: none;
     background-color: white;
     height: 48px;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
+    border-top: 1px solid #666666;
+    border-left: 1px solid #666666;
+    border-bottom: 1px solid #666666;
 }
 input[type="text"]{
     border-left: none;
     height: 48px;
     border-radius: 15px;
+    border-top: 1px solid #666666;
+    border-right: 1px solid #666666;
+    border-bottom: 1px solid #666666;
 }
 
 /* BUTTON KIRIN */
 .btn-endtrip{
     height: 48px;
     width: 100%;
-    background-color: #FFB800;
+    background-color: #F44C28;
     color: white;
     font-size: 16px;
     font-weight: 700;
     padding: 10px;
     text-align: center;
-    border: 1px solid #FFB800;
+    border: none;
     border-radius: 15px;
+    transition: transform 0.3s ease;
     &:hover{
-        background-color: white;
-        color: #FFB800;
+        transform: scale(1.02); 
     }
 }

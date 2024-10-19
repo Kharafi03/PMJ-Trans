@@ -25,17 +25,10 @@
             </div>
         </div>
 
-    @if ($errors->any())
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            @foreach ($errors->all() as $error)
-                <li class="text-white">{{ $error }}</li>
-            @endforeach
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
 
     <!-- FORM -->
         <div class="container">
+            @include('frontend.assets.alert')
             <form id="formPemesanan" action="{{ route('booking.store') }} " method="POST">
                 @csrf
                 <div class="row form-container">
@@ -53,10 +46,15 @@
                                         <label for="destination_point" class="form-label">Tujuan Akhir<span
                                                 class="text-danger">*</span></label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control tujuan-input"
+                                            <input type="text" class="form-control tujuan-input @error('destination_point') is-invalid @enderror"
                                             placeholder="Masukkan nama dan kota tujuan (contoh: Malioboro, Yogyakarta)" name="tujuan[]" id="destination_point" required>
                                             <span class="input-group-text" id="icon"><i
                                                     class="fa-solid fa-location-dot"></i></span>
+                                            @error('destination_point')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -80,10 +78,15 @@
                                     <label for="capacity" class="form-label">Jumlah Penumpang<span
                                             class="text-danger">*</span></label>
                                     <div class="input-group">
-                                        <input type="number" class="detail-pemesanan form-control" id="capacity"
+                                        <input type="number" class="detail-pemesanan form-control @error('capacity') is-invalid @enderror" id="capacity"
                                             name="capacity" placeholder="Masukkan jumlah penumpang" min="1" required>
                                         <span class="input-group-text" id="icon"><i
                                                 class="fa-solid fa-person"></i></span>
+                                        @error('capacity')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <!-- Placeholder for dynamically added leg rest -->
                                     <!-- <div id="leg-rests" class="mt-2 mb-2"></div> -->
@@ -105,21 +108,28 @@
                                 <label for="date_start" class="form-label">Tanggal Mulai<span
                                         class="text-danger">*</span></label>
                                 <div class="input-group">
-                                    <input type="datetime-local" class="detail-pemesanan form-control" id="date_start"
+                                    <input type="datetime-local" class="detail-pemesanan form-control @error('date_start') is-invalid @enderror" id="date_start"
                                         name="date_start" min="{{ \Carbon\Carbon::tomorrow()->format('Y-m-d\TH:i') }}"
                                         required>
-
                                     <span class="input-group-text" id="icon"><i
                                             class="fa-solid fa-calendar"></i></span>
+                                    @error('date_start')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="mb-2">
-                                <label for="pickup_point" class="form-label">Titik Jemput<span
+                                <label for="pickup_point" class="form-label @error('pickup_point') is-invalid @enderror">Titik Jemput<span
                                         class="text-danger">*</span></label>
-                                <div>
                                     <textarea class="form-control" placeholder="Masukkan alamat lengkap" id="pickup_point" name="pickup_point"
                                         style="height: 100px;" required></textarea>
-                                </div>
+                                    @error('pickup_point')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                             </div>
                             <div>
                                 <p class="text-danger" style="font-size:14px;">Contoh : Jalan Mangga Besar III No. 17, RT 06 RW 07, Kelurahan Bedali, Kecamatan Lawang, Kab. Malang, Jawa Timur, 60256</p>
@@ -136,39 +146,59 @@
                                 <label for="name" class="form-label">Nama Lengkap<span
                                         class="text-danger">*</span></label>
                                 <div class="input-group">
-                                    <input type="text" class="detail-pemesanan form-control" id="name"
+                                    <input type="text" class="detail-pemesanan form-control @error('name') is-invalid @enderror" id="name"
                                         name="name" placeholder="Masukkan nama lengkap" required
                                         @if (Auth::check()) value="{{ Auth::user()->name }}" readonly @endif>
                                     <span class="input-group-text" id="icon"><i class="fa-solid fa-user"></i></span>
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="mb-4">
                                 <label for="number_phone" class="form-label">Nomor WhatsApp<span
                                         class="text-danger">*</span></label>
                                 <div class="input-group">
-                                    <input type="number" class="detail-pemesanan form-control" id="number_phone"
+                                    <input type="number" class="detail-pemesanan form-control @error('number_phone') is-invalid @enderror" id="number_phone"
                                         name="number_phone"
                                         placeholder="Masukkan nomor whatsapp" required
                                         @if (Auth::check()) value="{{ Auth::user()->number_phone }}" readonly @endif>
                                     <span class="input-group-text" id="icon"><i
                                             class="fa-solid fa-phone"></i></span>
+                                    @error('number_phone')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="mb-4">
                                 <label for="email" class="form-label">Email</label>
                                 <div class="input-group">
-                                    <input type="email" class="detail-pemesanan form-control" id="email"
+                                    <input type="email" class="detail-pemesanan form-control @error('email') is-invalid @enderror" id="email"
                                         name="email" placeholder="Masukkan alamat email"
                                         @if (Auth::check() && Auth::user()->email) value="{{ Auth::user()->email }}" readonly @endif>
                                     <span class="input-group-text" id="icon"><i
                                             class="fa-solid fa-envelope"></i></span>
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="mb-4">
                                 <label for="address" class="form-label">Alamat<span class="text-danger">*</span></label>
                                 <div>
-                                    <textarea class="form-control" placeholder="Alamat Lengkap" id="address" name="address" style="height: 100px"
+                                    <textarea class="form-control @error('address') is-invalid @enderror" placeholder="Alamat Lengkap" id="address" name="address" style="height: 100px"
                                         @if (Auth::check()) readonly @endif>{{ Auth::check() ? Auth::user()->address : '' }}</textarea>
+                                    @error('address')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>

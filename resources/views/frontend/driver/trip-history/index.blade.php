@@ -1,8 +1,7 @@
 @extends('frontend.layouts.app')
 @push('styles')
     <title>Trip History</title>
-    <link id="pagestyle" href="{{ asset('css/frontend/css/driver/riwayatPerjalanan-style.css') }}" rel="stylesheet" />
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link id="pagestyle" href="{{ asset('css/frontend/css/driver/riwayatDriver-style.css') }}" rel="stylesheet" />
 @endpush
 @section('content')
     <section id="riwayatTrip">
@@ -13,22 +12,29 @@
 
             <!-- TEXT CONTENT -->
             <div class="text-content mb-3">
-                <p>Riwayat Trip {{ auth()->user()->name }}</p>
+                <!-- <p>Riwayat On Trip Hari Ini ! </p> -->
+                <!-- <p>Riwayat Trip {{ auth()->user()->name }}</p> -->
+                <div class="text-content text-center mb-4">
+                <h5 style="font-size: 25px; font-weight: 700; color: #1E9781;">RIWAYAT TRIP <span style="color: #FD9C07;">DRIVER</span></h5>
+            </div>
             </div>
 
             <!-- RIWAYAT BUS -->
-            <div class="accordion accordion-flush" id="item">
+            <div class="riwayat-content accordion accordion-flush" id="item">
                 @foreach ($trips as $index => $trip)
                     <div class="accordion-item">
                         <div class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#item{{ $trip->id }}" aria-expanded="false">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#item{{ $trip->id }}" aria-expanded="false">
+                                <div class="riwayat-image">
+                                    <img src="{{asset('img/pmj02-1.jpg')}}" class="img-fluid" width="60px" height="60px">
+                                </div>
                                 <div class="kode">
                                     <h5>{{ $trip->bus->name }}</h5>
                                     <p>{{ $trip->booking->booking_code }}</p>
                                 </div>
                                 <span class="ms-auto">
-                                    <p>{{ \Carbon\Carbon::parse($trip->booking->date_start)->translatedFormat('d F \p\u\k\u\l H.i') }}
+                                    <!-- <p>{{ \Carbon\Carbon::parse($trip->booking->date_start)->translatedFormat('d F \p\u\k\u\l H.i') }} -->
+                                    <p>Hari ini, 07 Oktober 2024<br>Pukul 15.00</p>
                                 </span>
                             </button>
                         </div>
@@ -169,5 +175,4 @@
         }
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 @endsection
