@@ -2,17 +2,6 @@
 @push('styles')
     <title>QR Qode</title>
     <link id="pagestyle" href="{{ asset('css/frontend/css/driver/QRCode-style.css') }}" rel="stylesheet">
-    <style>
-        #reader {
-            width: 600px; /* Ukuran lebar yang diinginkan */
-            height: 550px; /* Ukuran tinggi yang diinginkan */
-            border: 5px solid #28a745; /* Border berwarna hijau */
-            border-radius: 15px; /* Sudut melengkung */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Bayangan */
-            position: relative; /* Memungkinkan posisi absolut untuk elemen dalam */
-            overflow: hidden; /* Menyembunyikan elemen yang keluar dari container */
-        }
-    </style>
 @endpush
 @section('content')
     <!-- CONTENT -->
@@ -20,14 +9,14 @@
         <div class="dashboard-container container p-3">
             <!-- HEADER -->
             <x-header-driver />
+
+            <div class="text-content text-center mb-4">
+                <h5 style="font-size: 25px; font-weight: 700; color: #1E9781;">SCAN QR CODE <span style="color: #FD9C07;">DRIVER</span></h5>
+                <p class="caption">Silahkan Scan QR-Code diatas untuk memulai trip</p>
+            </div>
             <!-- CAMERA -->
             <div class="d-flex justify-content-center align-items-center mb-3">
                 <div id="reader"></div>
-            </div>
-
-            <div class="text-content text-center">
-                <p class="title">SCAN QR CODE DRIVER</p>
-                <p class="caption">Silahkan Scan QR-Code diatas untuk memulai trip</p>
             </div>
 
             <!-- NAVBAR -->

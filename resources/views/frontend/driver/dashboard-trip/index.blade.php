@@ -11,10 +11,9 @@
             <!-- HEADER -->
             <x-header-driver />
             <!-- TEXT CONTENT -->
-            <div class="text-content text-center">
-                <p class="title">DATA PERJALANAN</p>
-                <p class="caption">Driver wajib mengisi data perjalanan dari mulai saat perjalanan hingga mengakhir
-                    perjalanan.</p>
+            <div class="text-content text-center mb-4">
+                <h5 style="font-size: 25px; font-weight: 700; color: #1E9781;">DATA <span style="color: #FD9C07;">PERJALANAN</span></h5>
+                <p class="caption">Driver wajib mengisi data perjalanan dari mulai saat perjalanan hingga mengakhir perjalanan.</p>
             </div>
             <!-- BUTTON -->
             <div class="p-3 mb-4">
@@ -24,7 +23,8 @@
                             <button class="btn-pengeluaran">
                                 <div class="btn-container">
                                     <div class="icon">
-                                        <i class="fa-solid fa-dollar-sign"></i>
+                                        <!-- <i class="fa-solid fa-dollar-sign"></i> -->
+                                        <img src="{{ asset('img/icon-pengeluaran.png') }}">
                                     </div>
                                     <div class="text">
                                         <h6>Pengeluaran Saat Trip</h6>
@@ -41,7 +41,8 @@
                         <button class="btn-riwayatTrip">
                             <div class="btn-container">
                                 <div class="icon">
-                                    <i class="fa-solid fa-clock"></i>
+                                    <!-- <i class="fa-solid fa-clock"></i> -->
+                                    <img src="{{ asset('img/icon-riwayat.png') }}">
                                 </div>
                                 <div class="text">
                                     <h6>Riwayat Trip</h6>
@@ -56,7 +57,8 @@
                         <button class="btn-end">
                             <div class="btn-container">
                                 <div class="icon">
-                                    <i class="fa-solid fa-flag"></i>
+                                    <!-- <i class="fa-solid fa-flag"></i> -->
+                                    <img src="{{ asset('img/icon-endtrip.png') }}">
                                 </div>
                                 <div class="text">
                                     <h6>Akhiri Trip</h6>

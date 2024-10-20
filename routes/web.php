@@ -41,7 +41,10 @@ Route::get('/booking', [BookingController::class, 'showForm'])->name('frontend.b
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
     Route::get('/history', [HistoryController::class, 'index'])->name('history.index');
+    Route::get('/history/{booking_code}', [HistoryController::class, 'show'])->name('history.show');
+    Route::post('/history/review', [HistoryController::class, 'storeReview'])->name('history.storeReview');
     Route::get('/history/payment/{booking}', [DetailPaymentController::class, 'show'])->name('payment-history');
     Route::get('/booking-code/{booking_code}', [BookingCodeController::class, 'show'])->name('booking.code');
 });
@@ -242,3 +245,26 @@ Route::get('/welcome-screen', function () {
 // Route::get('/register', function () {
 //     return view('frontend.auth.register');
 // })->name('register');
+
+
+// HALAMAN TAMBAHAN DRIVER
+Route::get('/login-driver', function () {
+    return view('frontend.driver.auth.login');
+})->name('login-driver');
+
+Route::get('/reset-pw-driver', function () {
+    return view('frontend.driver.auth.reset-pw');
+})->name('reset-pw-driver');
+
+Route::get('/welcome-screen1', function () {
+    return view('frontend.driver.welcome-screen.welcomescreen1');
+})->name('welcome-screen1');
+
+Route::get('/welcome-screen2', function () {
+    return view('frontend.driver.welcome-screen.welcomescreen2');
+})->name('welcome-screen1');
+
+Route::get('/welcome-screen3', function () {
+    return view('frontend.driver.welcome-screen.welcomescreen3');
+})->name('welcome-screen1');
+

@@ -1,77 +1,80 @@
 /* BACKGROUND */
-body{
+body {
     background-size: cover;
     background-repeat: none;
     background-position: center;
-    background-image: url('/img/bg2.png');
+    background-image: url("/img/bg2.png");
 }
 
 /* section */
-#login{
+#login {
     padding: 10px;
 }
 
 /* TITLE */
-.header h5{
+.header h5 {
     font-size: 35px;
     font-weight: 600;
 }
-.header p{
-    color: #B9B8B8;
+.header p {
+    color: #b9b8b8;
     font-size: 16px;
 }
-.header span{
+.header span {
     font-weight: 700;
-    color: #F44C28;
+    color: #f44c28;
 }
-.header a{
+.header a {
     text-decoration: underline;
     font-weight: 700;
-    color: #10DA70;
+    color: #10da70;
 }
 
 /* INPUT FORM */
-input[type="text"], input[type="password"]{
+input[type="tel"],
+input[type="password"],
+input[type="text"] {
     height: 70px;
 }
-a.lupa-sandi{
+a.lupa-sandi {
     text-decoration: none;
     font-size: 16px;
-    color: #8E8E8E;
+    color: #8e8e8e;
 }
-.label-ingat{
+.label-ingat {
     font-size: 16px;
-    color: #8E8E8E;
+    color: #8e8e8e;
 }
-i{
-    color: #8E8E8E;
+i {
+    color: #8e8e8e;
 }
 .input-group-text {
     cursor: pointer;
 }
-#password{
+#password {
     border-right: none;
 }
-#toggle-password{
+#toggle-password {
     border-left: none;
     background-color: white;
 }
-a{
+a {
     cursor: pointer;
 }
 
 /* INPUT AKTIF */
 .input-group:focus-within {
-    border: 1px solid #ced4da; 
-    border-bottom: 4px solid #54E28D;
+    border: 1px solid #ced4da;
+    border-bottom: 4px solid #54e28d;
     border-radius: 6px;
 }
 
-#noTelp:focus{
-    border-bottom: 4px solid #54E28D;
+#number_phone:focus {
+    border-bottom: 4px solid #54e28d;
 }
-input[type="text"]:focus,input[type="password"]:focus{
-    outline:none !important;
+input[type="tel"]:focus,
+input[type="password"]:focus {
+    outline: none !important;
     outline-width: 0 !important;
     box-shadow: none;
     -moz-box-shadow: none;
@@ -82,20 +85,20 @@ input[type="text"]:focus,input[type="password"]:focus{
 }
 
 /* BUTTON */
-.btn-login{
+.btn-login {
     height: 70px;
     width: 100%;
-    background-color: #1E9781;
+    background-color: #1e9781;
     color: white;
     text-align: center;
     padding: auto;
     font-size: 20px;
     font-weight: 700;
-    border: 2px solid #1E9781;
+    border: 2px solid #1e9781;
     border-radius: 6px;
-    &:hover{
+    &:hover {
         background-color: white;
-        color: #1E9781;
+        color: #1e9781;
     }
 }
 
@@ -105,11 +108,11 @@ input[type="text"]:focus,input[type="password"]:focus{
     .col-img {
         order: -1; /* Place image column before form column */
     }
-    .navbar-brand img{
-       padding: 0px 45%;
+    .navbar-brand img {
+        padding: 0px 45%;
     }
-    body{
-        background-image: url('/img/bg3.png');
+    body {
+        background-image: url("/img/bg3.png");
         background-size: cover;
         background-repeat: none;
         background-position: center;

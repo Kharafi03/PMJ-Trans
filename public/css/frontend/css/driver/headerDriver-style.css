@@ -4,6 +4,11 @@
     align-items: center;
     padding: 10px;
     max-width: 400px;
+    width: 100%;
+    position: fixed; /* Membuat elemen menjadi sticky */
+    top: 0; /* Menentukan posisi sticky dari atas halaman */
+    z-index: 100; /* Memberikan lapisan di atas elemen lainnya */
+    background-color: white; /* Tambahkan background untuk memastikan kontennya tetap terlihat */
 }
 .profile-text {
     display: flex;

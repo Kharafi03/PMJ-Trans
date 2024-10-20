@@ -4,6 +4,7 @@
     position: relative;
     background-image: url('/img/bg4.png');
     background-repeat: no-repeat;
+    background-attachment: scroll;
 }
 .content{
     padding-bottom: 50px;
@@ -29,10 +30,6 @@
 }
 
 /* FORM */
-.input-group i{
-    color: #595c5f;
-    font-size: 20px;
-}
 #icon, #toggle-password, #toggle-passwordBaru, #toggle-konfirmasiPassword{
     border-right: none;
     background-color: white;
@@ -61,17 +58,18 @@ input[type="text"], input[type="number"], input[type="password"], .form-select{
 .btn-ubahPassword{
     height: 48px;
     width: 100%;
-    background-color: #FFB800;
+    background-color: #F44C28;
     color: white;
     font-size: 16px;
     font-weight: 700;
     padding: 10px;
     text-align: center;
-    border: 1px solid #FFB800;
     border-radius: 15px;
+    transition: transform 0.3s ease;
+    border: none;
+    margin-bottom: 50px;
     &:hover{
-        background-color: white;
-        color: #FFB800;
+        transform: scale(1.02); 
     }
 }
 

@@ -8,37 +8,8 @@
     height: 100%;
 }
 
-/* TEXT HEADER */
-.profile-card {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    max-width: 400px;
-}
-.profile-text {
-    display: flex;
-    flex-direction: column;
-    padding-left: 10px;
-}
-
-.profile-text h5 {
-    margin: 0px;
-}
-
-.profile-text p {
-    margin: 0px;
-    color: #777;
-}
-
-.text-content{
-    color:#000000A1;
-    font-size: 16px;
-    font-weight: 500;
-}
-
-.title p{
-    font-size: 18px;
-    font-weight: 700;
+#dashboard{
+    margin-top: 70px;
 }
 
 /* CARD */
@@ -113,21 +84,22 @@
     text-decoration: none;
     height: 48px;
     width: 100%;
-    background-color: #ff0000;
+    background-color: #F44C28;
     color: white;
     font-size: 16px;
     font-weight: 700;
     padding: 10px;
     text-align: center;
-    border: 1px solid #ff0000;
+    border: none;
     border-radius: 15px;
     display: inline-block;
+    margin-bottom: 80px;
+    transition: transform 0.3s ease;
+    &:hover{
+        transform: scale(1.02); 
+    }
 }
 
-.btn-lanjut:hover {
-    background-color: white;
-    color: #ff0000;
-}
 
 body, html {
     height: 100%; 
@@ -156,7 +128,165 @@ body, html {
     overflow-x: hidden;
 }
 
+/* DROPDOWN */
+.accordion-item{
+    margin-bottom: 10px;
+    border: 1px solid #4180CC;
+    border: 10px;
 
+}
+.accordion-header{
+    border-radius: 8px;
+    background-color: #F1F2F2;
+}
+
+.accordion-button h5{
+    font-size: 16px;
+    color: black;
+    font-weight: 700;
+    margin-bottom: 0px;
+}
+.accordion-button p{
+    font-size: 14px;
+    color: black;
+    margin-bottom: 0px;
+    font-weight: 600;
+}
+
+.accordion-button:not(.collapsed)::after {
+    display: none;
+}
+
+.accordion-button::after {
+    display: none;
+}
+
+.accordion-button {
+    background-color: #D9D9D9;
+    color: black;
+    padding: 10px;
+    text-align: left;
+    border-radius: 10px 10px 0px 0px !important;
+}
+.accordion-button.collapsed{
+    border-radius: 10px !important;
+  }
+.accordion-button:focus {
+    box-shadow: none;
+}
+.accordion-button:not(.collapsed) {
+    background-color: #D9D9D9;
+    color: white;
+}
+.accordion-body {
+    background-color: #F1F2F2;
+    margin-top: 0px;
+}
+.info-pmj {
+    font-size: 12px;
+    color: #bcd;
+}
+.riwayat-image img{
+    border-radius: 10px;
+    margin-right: 10px;
+}
+.ms-auto p{
+    text-align: right;
+    font-size: 12px;
+    font-weight: 400;
+    margin-left: 5px;
+}
+.kode p{
+    font-size: 12px;
+    font-weight: 400;
+}
+
+
+/* TABEL */
+table{
+    font-size: 14px;
+}
+thead{
+    background-color: #FFB21D;
+    overflow: hidden;
+    vertical-align: middle;
+    color: white;
+}
+th h5{
+    padding-left: 10px;
+    color: white;
+}
+table td {
+    padding: 10px 15px !important; 
+    text-align: right;
+}
+.keterangan{
+    text-align: left;
+    padding-left: 10px;
+}
+.tgl{
+    padding: 5px;
+    background-color: #E50A3E;
+    color: white;
+    border-radius: 20px;
+    text-align: center;
+}
+.status{
+    padding: 5px;
+    background-color: #0FA958;
+    color: white;
+    border-radius: 20px;
+    text-align: center;
+}
+.btn-bukti{
+    background: none;
+    border: none;
+}
+.detail-pengeluaran th{
+    background-color: #FFB21D;
+    padding: 5px;
+    color: white;
+}
+
+/* SCROLL */
+body, html {
+    height: 100%; 
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.accordion-body {
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    overflow-x: hidden;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+/* MODAL */
+/* MODAL */
+.modal-content{
+    border: none;
+}
+.modal-dialog{
+    max-width: 375px;
+}
+.modal-body{
+    padding: 20px 60px;
+}
+
+.riwayat-title{
+    padding: 0px 5px;
+}
+.riwayat-title p{
+    font-size: 20px;
+    font-weight: 500;
+}
+.riwayat-title i{
+    font-size: 20px;
+}
 
 
 
