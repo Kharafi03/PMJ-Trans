@@ -29,13 +29,16 @@ class IncomeResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        $newdraf = static::getModel()::where('id_ms_income', 1)->count();
-        return "{$newdraf}";
+        $newdraf = static::getModel()::where('id_ms_income', 2)->count();
+        if ($newdraf > 0) {
+            return "{$newdraf}";
+        }
+        return "";
     }
 
     public static function getNavigationBadgeColor(): ?string
     {
-        return 'warning';
+            return 'warning';
     }
 
     public static function form(Form $form): Form
@@ -46,7 +49,7 @@ class IncomeResource extends Resource
                     ->columns(3)
                     ->heading('Data Utama')
                     ->schema([
-                        Forms\Components\Select::make('booking_code')
+                        Forms\Components\Select::make('id_booking')
                             ->label('Kode Booking') //aslinya ID Booking
                             ->relationship('booking', 'booking_code')
                             ->required(),

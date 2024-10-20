@@ -66,6 +66,10 @@ class ReviewResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('feedback')
                     ->label('Ulasan')
+                    ->limit(100)
+                    ->tooltip(function ($record) {
+                        return $record->feedback;
+                    })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('rating')
                     ->label('Rating')
@@ -92,7 +96,8 @@ class ReviewResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                //Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

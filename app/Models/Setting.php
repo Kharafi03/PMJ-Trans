@@ -25,8 +25,9 @@ class Setting extends Model
         'open_hours',
         'description',
         'maps',
-        'sosmed_id',
+        'sosmed_ig',
         'sosmed_fb',
+        'sosmed_yt',
         'footer',
         'about_us',
     ];

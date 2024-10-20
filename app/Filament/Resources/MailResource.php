@@ -14,7 +14,7 @@ class MailResource extends Resource
 {
     protected static ?string $model = Mail::class;
 
-    protected static ?string $pluralModelLabel = "Pesan";
+    protected static ?string $pluralModelLabel = "Kontak";
 
     protected static ?string $navigationIcon = 'heroicon-s-envelope';
 
@@ -137,6 +137,10 @@ class MailResource extends Resource
                     ->label('Nama')
                     ->searchable(),
 
+                Tables\Columns\TextColumn::make('category')
+                    ->label('Kategori')
+                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('phone')
                     ->label('Nomor Telepon')
                     ->searchable(),
@@ -180,9 +184,9 @@ class MailResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->actions([
-                Tables\Actions\EditAction::make()
-                    ->label('Edit')
-                    ->color('secondary'),
+                // Tables\Actions\EditAction::make()
+                //     ->label('Edit')
+                //     ->color('secondary'),
 
                 Tables\Actions\Action::make('hubungi')
                     ->label('Hubungi')

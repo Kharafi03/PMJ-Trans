@@ -68,6 +68,8 @@ class TripBusSpendResource extends Resource
                         Forms\Components\FileUpload::make('image_receipt')
                             ->label('Bukti Pembayaran')
                             ->required()
+                            ->disk('public')
+                            ->directory('receipt_spend')
                             ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg'])
                             ->helperText('Unggah gambar dalam format JPG atau PNG, maksimal ukuran 2MB.')
                             ->image() // Menentukan bahwa yang diunggah harus berupa file gambar

@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ms_trip_finisheds', function (Blueprint $table) {
+        Schema::create('booking_mails', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->foreignId('id_booking')->constrained('bookings')->cascadeOnDelete();
+            $table->longText('message')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ms_trip_finisheds');
+        Schema::dropIfExists('booking_mails');
     }
 };

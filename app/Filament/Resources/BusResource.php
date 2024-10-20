@@ -378,43 +378,43 @@ class BusResource extends Resource
                                             // ->collapsed()
                                             ->schema([
                                                 Card::make()
-                                                ->collapsed()
-                                                ->collapsible()
-                                                ->heading(fn($record) => $record->m_maintenances->name . '  ->  ' . $record->date)
-                                                ->schema([
-                                                    Forms\Components\Select::make('id_m_maintenance')
-                                                    ->label('Jenis Perawatan')
-                                                    ->reactive()
-                                                    ->relationship('m_maintenances', 'name'),
-                                                Forms\Components\Select::make('id_user')
-                                                    ->label('Pelaksana')
-                                                    ->relationship('users', 'name'),
-                                                Forms\Components\DateTimePicker::make('date')
-                                                    ->label('Tanggal'),
-                                                Forms\Components\TextInput::make('location')
-                                                    ->label('Lokasi'),
-                                                Forms\Components\FileUpload::make('image')
-                                                    ->label('Bukti Perawatan')
-                                                    ->disk('public')
-                                                    ->directory('maintenance_images')
-                                                    ->image()
-                                                    ->columnSpan(2)
-                                                    ->visibility('public'),
-                                                Forms\Components\TextInput::make('nominal')
-                                                    ->label('Biaya'),
-                                                Forms\Components\TextInput::make('description')
-                                                    ->label('Deskripsi'),
-                                                Forms\Components\FileUpload::make('image_receipt')
-                                                    ->label('Bukti Pembayaran')
-                                                    ->disk('public')
-                                                    ->directory('maintenance_receipts')
-                                                    ->image()
-                                                    ->columnSpan(2)
-                                                    ->visibility('public'),
+                                                    ->collapsed()
+                                                    ->collapsible()
+                                                    ->heading(fn($record) => $record->m_maintenances->name . '  ->  ' . $record->date)
+                                                    ->schema([
+                                                        Forms\Components\Select::make('id_m_maintenance')
+                                                            ->label('Jenis Perawatan')
+                                                            ->reactive()
+                                                            ->relationship('m_maintenances', 'name'),
+                                                        Forms\Components\Select::make('id_user')
+                                                            ->label('Pelaksana')
+                                                            ->relationship('users', 'name'),
+                                                        Forms\Components\DateTimePicker::make('date')
+                                                            ->label('Tanggal'),
+                                                        Forms\Components\TextInput::make('location')
+                                                            ->label('Lokasi'),
+                                                        Forms\Components\FileUpload::make('image')
+                                                            ->label('Bukti Perawatan')
+                                                            ->disk('public')
+                                                            ->directory('maintenance_images')
+                                                            ->image()
+                                                            ->columnSpan(2)
+                                                            ->visibility('public'),
+                                                        Forms\Components\TextInput::make('nominal')
+                                                            ->label('Biaya'),
+                                                        Forms\Components\TextInput::make('description')
+                                                            ->label('Deskripsi'),
+                                                        Forms\Components\FileUpload::make('image_receipt')
+                                                            ->label('Bukti Pembayaran')
+                                                            ->disk('public')
+                                                            ->directory('maintenance_receipts')
+                                                            ->image()
+                                                            ->columnSpan(2)
+                                                            ->visibility('public'),
+                                                    ])
+                                                    ->columns(2)
                                             ])
-                                            ->columns(2)
-                                                ])
-                                                
+
                                     ])
                                     ->columnSpan(1),
                                 Group::make()

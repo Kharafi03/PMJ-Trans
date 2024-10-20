@@ -6,18 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class MsTripFinished extends Model
+class Faq extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
-    use SoftDeletes;
+    protected $table = 'faqs';
 
     protected $dates = ['deleted_at'];
 
-    protected $table = 'ms_trip_finisheds';
-
     protected $fillable = [
-        'name',
+        'question',
+        'answer',
     ];
 
     protected $guarded = ['id'];

@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mails', function (Blueprint $table) {
+        Schema::create('faqs', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('phone')->nullable();
-            $table->string('email')->nullable();
-            $table->string('category')->nullable();
-            $table->longText('message');
-            $table->longText('template_chat');
+            $table->longText('question')->nullable();
+            $table->longText('answer')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mails');
+        Schema::dropIfExists('faqs');
     }
 };

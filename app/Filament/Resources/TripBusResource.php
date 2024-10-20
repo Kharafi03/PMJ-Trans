@@ -53,7 +53,7 @@ class TripBusResource extends Resource
                                 Forms\Components\Section::make()
                                     ->columns(3) // Mengatur menjadi 3 kolom agar lebih ringkas
                                     ->schema([
-                                        Forms\Components\Select::make('id_booking')
+                                        Select::make('id_booking')
                                             ->label('Kode Booking')
                                             ->reactive()
                                             ->relationship('booking', 'booking_code')
@@ -64,22 +64,20 @@ class TripBusResource extends Resource
                                                 }
                                             })
                                             ->required(),
-                                        Forms\Components\Select::make('id_bus')
+                                        Select::make('id_bus')
                                             ->label('Bus')
                                             ->required()
                                             ->relationship('bus', 'name'),
-                                        Forms\Components\Select::make('id_customer')
+                                        Select::make('id_customer')
                                             ->label('Customer')
                                             ->disabled()
                                             ->afterStateHydrated(function (callable $set, $state, $record) {
-                                                // Cek apakah sedang dalam proses edit
                                                 if ($record && $record->booking) {
-                                                    // Mengambil id_cus dari relasi booking untuk di-set ke field id_customer
                                                     $set('id_customer', $record->booking->id_cus);
                                                 }
                                             })
                                             ->relationship('cus', 'name'),
-                                        Forms\Components\Select::make('id_driver')
+                                        Select::make('id_driver')
                                             ->label('Driver')
                                             ->required()
                                             ->options(function () {
@@ -88,7 +86,7 @@ class TripBusResource extends Resource
                                                 })->pluck('name', 'id');
                                             })
                                             ->relationship('driver', 'name'),
-                                        Forms\Components\Select::make('id_codriver')
+                                        Select::make('id_codriver')
                                             ->label('Co-Driver')
                                             ->required()
                                             ->options(function () {
@@ -97,7 +95,7 @@ class TripBusResource extends Resource
                                                 })->pluck('name', 'id');
                                             })
                                             ->relationship('codriver', 'name'),
-                                        Forms\Components\Select::make('id_ms_trip')
+                                        Select::make('id_ms_trip')
                                             ->label('Status Trip')
                                             ->required()
                                             ->relationship('ms_trip', 'name'),
@@ -165,13 +163,13 @@ class TripBusResource extends Resource
                                     ->columns(2)
                                     ->heading('Data Perjalanan')
                                     ->schema([
-                                        Forms\Components\TextInput::make('km_start')
+                                        TextInput::make('km_start')
                                             ->label('KM Awal')
                                             ->numeric(),
-                                        Forms\Components\TextInput::make('km_end')
+                                        TextInput::make('km_end')
                                             ->label('KM Akhir')
                                             ->numeric(),
-                                        Forms\Components\TextInput::make('nominal')
+                                        TextInput::make('nominal')
                                             ->label('Saldo')
                                             ->prefix('Rp.')
                                             ->numeric(),
@@ -180,12 +178,12 @@ class TripBusResource extends Resource
                                     ->columns(1)
                                     ->heading('Data Pengeluaran')
                                     ->schema([
-                                        Forms\Components\TextInput::make('total_spend')
+                                        TextInput::make('total_spend')
                                             ->label('Total Pengeluaran')
                                             ->prefix('Rp.')
                                             ->readOnly()
                                             ->numeric(),
-                                        Forms\Components\TextInput::make('total_spend_bbm')
+                                        TextInput::make('total_spend_bbm')
                                             ->label('Total Pengeluaran BBM')
                                             ->prefix('Rp.')
                                             ->readOnly()
@@ -215,11 +213,9 @@ class TripBusResource extends Resource
                     ->label('Pelanggan')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('driver.name')
-                    ->numeric()
                     ->label('Driver')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('codriver.name')
-                    ->numeric()
                     ->label('Co-Driver')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('nominal')
@@ -231,6 +227,11 @@ class TripBusResource extends Resource
                     ->numeric()
                     ->prefix('Rp. ')
                     ->label('Total Pengeluaran')
+                    ->hidden()
+                    //->visible(fn($record) => $record->id_ms_trip === 2 || 3)
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('ms_trip.name')
+                    ->label('Status')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->label('Tanggal dihapus')
@@ -254,12 +255,153 @@ class TripBusResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make()
                     ->label('Lihat')
+                    ->modalWidth('7xl')
                     ->modalHeading('Lihat Tripp Bus'),
                 Tables\Actions\EditAction::make()
                     ->label('Edit')
                     ->modalWidth('7xl')
                     ->modalHeading('Edit Trip Bus')
                     ->modalButton('Simpan Perubahan'),
+                Tables\Actions\ViewAction::make('manage')
+                    ->modalWidth('7xl')
+                    ->color('info')
+                    ->form([
+                        Group::make()
+                            ->schema([
+                                Select::make('id_driver')
+                                    ->label('Driver')
+                                    ->required()
+                                    ->disabled()
+                                    ->relationship('driver', 'name'),
+                                Select::make('id_codriver')
+                                    ->label('Co-Driver')
+                                    ->required()
+                                    ->disabled()
+                                    ->relationship('codriver', 'name'),
+                                TextInput::make('km_start')
+                                    ->label('KM Awal')
+                                    ->numeric(),
+                                TextInput::make('km_end')
+                                    ->label('KM Akhir')
+                                    ->numeric(),
+                                TextInput::make('nominal')
+                                    ->label('Saldo')
+                                    ->prefix('Rp.')
+                                    ->numeric(),
+                                TextInput::make('total_spend')
+                                    ->label('Total Pengeluaran')
+                                    ->prefix('Rp.')
+                                    ->readOnly()
+                                    ->reactive()
+                                    ->numeric(),
+                                TextInput::make('total_spend_bbm')
+                                    ->label('Total Pengeluaran BBM')
+                                    ->prefix('Rp.')
+                                    ->readOnly()
+                                    ->reactive()
+                                    ->numeric(),
+                            ])
+                            ->columns([
+                                'default' => 1,
+                                'md' => 2,
+                                'lg' => 4,
+                                'xl' => 4,
+                            ]),
+
+                        Repeater::make('listspend')
+                            ->relationship('tripbusspend')
+                            ->label('Pengeluaran')
+                            ->schema([
+                                Forms\Components\Card::make()
+                                    ->collapsed()
+                                    ->heading(fn($record) => $record->mspend->name . ' => ' . $record->nominal)
+                                    ->schema([
+                                        Group::make()
+                                            ->schema([
+                                                Group::make()
+                                                    ->schema([
+                                                        Select::make('id_m_spend')
+                                                            ->label('Tipe Pengeluaran')
+                                                            ->relationship('mspend', 'name')
+                                                            ->disabled(),
+
+                                                        TextInput::make('nominal')
+                                                            ->label('Nominal')
+                                                            ->prefix('Rp.')
+                                                            ->reactive()
+                                                            //->getStateUsing()
+                                                            ->disabled(),
+
+                                                        TextInput::make('kilometer')
+                                                            ->label('Kilometer')
+                                                            ->disabled(),
+
+                                                        TextInput::make('datetime')
+                                                            ->label('Tanggal & Waktu')
+                                                            ->disabled(),
+                                                        Textarea::make('description')
+                                                            ->label('Deskripsi')
+                                                            ->rows(1)
+                                                            ->columnSpan([
+                                                                'default' => 1,
+                                                                'md' => 2,
+                                                                'lg' => 2,
+                                                                'xl' => 2,
+                                                            ])
+                                                            ->disabled(),
+                                                        TextInput::make('latitude')
+                                                            ->label('Latitude')
+                                                            ->disabled(),
+                                                        TextInput::make('longitude')
+                                                            ->label('Longitude')
+                                                            ->disabled(),
+                                                    ])
+                                                    ->columnSpan([
+                                                        'default' => 1,
+                                                        'md' => 2,
+                                                        'lg' => 3,
+                                                        'xl' => 4,
+                                                    ])
+                                                    ->columns([
+                                                        'default' => 1,
+                                                        'md' => 2,
+                                                        'lg' => 3,
+                                                        'xl' => 4,
+                                                    ]),
+                                                // Forms\Components\Group::make()
+                                                //     ->schema([])
+                                                //     ->columns(4)
+                                                Group::make()
+                                                    ->schema([
+                                                        Forms\Components\FileUpload::make('image_receipt')
+                                                            ->label('Bukti Pembayaran')
+                                                            ->required()
+                                                            ->disk('public')
+                                                            ->directory('receipt_spend')
+                                                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg'])
+                                                            //->helperText('Unggah gambar dalam format JPG atau PNG, maksimal ukuran 2MB.')
+                                                            ->image() // Menentukan bahwa yang diunggah harus berupa file gambar
+                                                            ->columnSpanFull(),
+                                                    ])
+                                                    ->columns(1)
+
+                                            ])
+                                            ->columns(
+                                                [
+                                                    'default' => 1,
+                                                    'md' => 3,
+                                                    'lg' => 4,
+                                                    'xl' => 5,
+                                                ]
+                                            )
+                                    ])
+
+                            ])
+                    ])
+                    ->modalButton('Simpan')
+                    ->icon('heroicon-m-calendar-days')
+                    ->modalHeading(fn($record) => 'Manajement Pengeluaran ' .  $record->bus->name)
+                    ->label('Manajement'),
                 Tables\Actions\DeleteAction::make()
                     ->label('Hapus')
             ])
@@ -300,9 +442,9 @@ class TripBusResource extends Resource
     {
         $idbbm = 1;
         $bbmtotal = collect($get('spendtrip'))
-        ->filter(function ($spend) use ($idbbm) {
-            return $spend['id_m_spend'] == $idbbm;
-        })
+            ->filter(function ($spend) use ($idbbm) {
+                return $spend['id_m_spend'] == $idbbm;
+            })
             ->pluck('nominal')
             ->filter()
             ->sum();

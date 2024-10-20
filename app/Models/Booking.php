@@ -35,6 +35,8 @@ class Booking extends Model
         'id_ms_booking',
         'payment_received',
         'payment_remaining',
+        'total_spend',
+        'profit',
     ];
 
     // Casting untuk kolom tanggal
@@ -82,7 +84,7 @@ class Booking extends Model
 
     public function incomes()
     {
-        return $this->hasMany(Income::class, 'booking_code');
+        return $this->hasMany(Income::class, 'id_booking');
     }
 
     public function outcomes()
@@ -108,5 +110,10 @@ class Booking extends Model
     public function destination()
     {
         return $this->hasMany(Destination::class, 'id_booking');
+    }
+
+    public function message(): BelongsTo
+    {
+        return $this->belongsTo(BookingMail::class, 'id_booking');
     }
 }

@@ -98,4 +98,5 @@ class ListBookings extends ListRecords
                 ->color('success'),
         ];
     }
+    
 }

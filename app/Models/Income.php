@@ -18,7 +18,7 @@ class Income extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'booking_code',
+        'id_booking',
         'id_m_income',
         'id_m_method_payment',
         'description',
@@ -34,7 +34,7 @@ class Income extends Model
 
     public function booking(): BelongsTo
     {
-        return $this->belongsTo(Booking::class, 'booking_code');
+        return $this->belongsTo(Booking::class, 'id_booking');
     }
 
     public function m_income(): BelongsTo

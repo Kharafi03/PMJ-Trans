@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MMaintenanceSeeder::class);
         $this->call(MSpendSeeder::class);
         $this->call(MsPaymentBookingSeeder::class);
-        $this->call(MsTripFinishedSeeder::class);
+        //$this->call(MsTripFinishedSeeder::class);
         $this->call(MIncomeSeeder::class);
         $this->call(MOutcomeSeeder::class);
         $this->call(MMethodPaymentSeeder::class);
@@ -29,6 +29,9 @@ class DatabaseSeeder extends Seeder
         $this->call(MsTripSeeder::class);
         $this->call(BusSeeder::class);
         $this->call(BusImageSeeder::class);
+        $this->call(TestSeeder::class);
+        $this->call(SettingSeeder::class);
+        //$this->call(ShieldSeeder::class);
         // $this->call(PermisionsSeeder::class);
     }
 }

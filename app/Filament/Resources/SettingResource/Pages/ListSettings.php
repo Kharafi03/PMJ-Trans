@@ -10,10 +10,11 @@ class ListSettings extends ListRecords
 {
     protected static string $resource = SettingResource::class;
 
-    protected function getHeaderActions(): array
-    {
-        return [
-            Actions\CreateAction::make()->label('Tambah Setting'),
-        ];
-    }
+    // protected function getHeaderActions(): array
+    // {
+    //     return [
+    //         Actions\CreateAction::make()->label('Tambah Setting'),
+    //         Actions\EditAction::make(),
+    //     ];
+    // }
 }
