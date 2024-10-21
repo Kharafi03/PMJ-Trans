@@ -26,7 +26,7 @@ input[type="file"]{
     padding: 12px;
     background-color: white;
     height: 50px;
-    
+    width: 100%;
 }
 #icon{
     background-color: #E5E5E5;
