@@ -1,11 +1,16 @@
-body {
+/* body {
     background-image: url('/img/bg-page.png');
     background-position: 0 100%; 
     background-repeat: no-repeat;
     background-size: cover; 
+} */
+#syaratKetentuan{
+    margin-top: 120px;
+    margin-bottom: 80px;
 }
-.header{
-    margin-top: 75px;
+
+.text-content{
+    margin-bottom: 60px;
 }
 
 /* CONTENT */
@@ -33,10 +38,11 @@ body {
     background-color: white;
     font-size: 20px; 
     border-radius: 18px 18px 0px 0px !important;
-    height: 80px;
+    height: 109px;
     font-size: 22px;
     font-weight: 500;
     color: #170F49;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 }
 .accordion-button.collapsed{
     border-radius: 18px !important;

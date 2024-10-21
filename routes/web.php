@@ -272,3 +272,8 @@ Route::get('/welcome-screen3', function () {
     return view('frontend.driver.welcome-screen.welcomescreen3');
 })->name('welcome-screen1');
 
+
+// TAMBAHAN RESET PASSWORD CUSTOMER
+Route::get('/reset-pw-customer', function () {
+    return view('frontend.auth.reset');
+})->name('reset-pw-customer');
