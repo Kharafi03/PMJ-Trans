@@ -2,7 +2,6 @@
 @push('styles')
     <title>Input Data</title>
     <link id="pagestyle" href="{{ asset('css/frontend/css/driver/inputData-style.css') }}" rel="stylesheet" />
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @endpush
 @section('content')
     <!-- CONTENT -->
@@ -12,28 +11,28 @@
             <x-header-driver />
             <!-- TEXT CONTENT -->
             <div class="text-content text-center mb-4">
-                <h5 style="font-size: 25px; font-weight: 700; color: #1E9781;">DATA <span style="color: #FD9C07;">PERJALANAN</span></h5>
-                <p class="caption">Driver wajib mengisi data perjalanan dari mulai saat perjalanan hingga mengakhir perjalanan.</p>
+                <h5 style="font-size: 25px; font-weight: 700; color: #1E9781;">DATA <span
+                        style="color: #FD9C07;">PERJALANAN</span></h5>
+                <p class="caption">Driver wajib mengisi data perjalanan dari mulai saat perjalanan hingga mengakhir
+                    perjalanan.</p>
             </div>
             <!-- BUTTON -->
             <div class="p-3 mb-4">
                 <div class="mb-3">
-                    {{-- @foreach ($trips as $trip) --}}
-                        <a href="{{ route('spend-trip') }}">
-                            <button class="btn-pengeluaran">
-                                <div class="btn-container">
-                                    <div class="icon">
-                                        <!-- <i class="fa-solid fa-dollar-sign"></i> -->
-                                        <img src="{{ asset('img/icon-pengeluaran.png') }}">
-                                    </div>
-                                    <div class="text">
-                                        <h6>Pengeluaran Saat Trip</h6>
-                                        <p>Masukan data saat trip dimulai</p>
-                                    </div>
+                    <a href="{{ route('spend-trip') }}">
+                        <button class="btn-pengeluaran">
+                            <div class="btn-container">
+                                <div class="icon">
+                                    <!-- <i class="fa-solid fa-dollar-sign"></i> -->
+                                    <img src="{{ asset('img/icon-pengeluaran.png') }}">
                                 </div>
-                            </button>
-                        </a>
-                    {{-- @endforeach --}}
+                                <div class="text">
+                                    <h6>Pengeluaran Saat Trip</h6>
+                                    <p>Masukan data saat trip dimulai</p>
+                                </div>
+                            </div>
+                        </button>
+                    </a>
 
                 </div>
                 <div class="mb-3">
@@ -74,6 +73,4 @@
             <x-navbar-driver />
         </div>
     </section>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 @endsection

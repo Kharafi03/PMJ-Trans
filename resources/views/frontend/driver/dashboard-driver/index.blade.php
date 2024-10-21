@@ -2,134 +2,127 @@
 @push('styles')
     <title>Dashboard Driver</title>
     <link id="pagestyle" href="{{ asset('css/frontend/css/driver/dashboardDriver-style.css') }}" rel="stylesheet">
+    {{-- <link rel="stylesheet" href="{{ asset('css/frontend/css/driver/dashboardTrip-style.css') }}"> --}}
     <!-- FONT -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 @endpush
 @section('content')
-    <!-- CONTENT -->
     <section id="dashboard">
-
-        <!-- HEADER -->
         <div class="dashboard-container container p-3">
+            {{-- HEADER --}}
             <x-header-driver />
 
+            {{-- TITLE --}}
             @if ($continueTrips->isNotEmpty())
                 <div class="title">
-                    <p>Jangan lupa selalu mengisi data perjalanan!</p>
+                    <p class="mb-3" style="color: #ff0000">Jangan lupa selalu mengisi data perjalanan!</p>
                 </div>
             @elseif (
                 $trips->filter(function ($trip) {
                         return \Carbon\Carbon::parse($trip->booking->date_start)->isToday();
-                    })->count() == 0)
-                <div class="text-content">
+                    })->count() == 0
+            )
+                <div class="title mb-3">
                     <p>Wahh.. Hari ini belum ada trip!</p>
-                </div>
-                <div class="title">
-                    <p>Tidak ada booking untuk hari ini</p>
+                    <h5 style="color: #ff0000">Tidak ada booking untuk hari ini</h5>
                 </div>
             @else
-                <!-- TEXT CONTENT -->
-                <div class="text-content">
-                    <p>Semangat.. Hari ini ada trip!</p>
-                </div>
-
-                <!-- TITLE -->
-                <div class="title">
-                    <p>Booking yang akan datang</p>
+                <div class="title mb-3">
+                    <p>Semangat, hari ini ada trip!</p>
+                    <h5 style="color: #1E9781">Hari ini kamu akan melakukan perjalanan.</h5>
                 </div>
             @endif
 
+            {{-- CARD CONTENT --}}
             @if ($trips->count() > 0)
-                <!-- CARD -->
-                <div class="card-content">
-                    @foreach ($trips as $trip)
-                        <div class="banner"
-                            style="background-image: url('{{ \Carbon\Carbon::parse($trip->booking->date_start)->isToday() ? asset('img/banner2.png') : asset('img/banner1.png') }}');">
-                            <div class="banner-isi">
-                                <div class="header">
-                                    @if (\Carbon\Carbon::parse($trip->booking->date_start)->isToday())
-                                        <p style="padding-top: 1rem; font-weight: 600; font-size: 14px;"
-                                            class="text-center">
-                                            Hari ini,
-                                            {{ \Carbon\Carbon::parse($trip->booking->date_start)->translatedFormat('d F \p\u\k\u\l H.i') }}
-                                        </p>
-                                    @else
-                                        <p style="padding-top: 1rem; font-weight: 600; font-size: 14px;"
-                                            class="text-center">
-                                            {{ \Carbon\Carbon::parse($trip->booking->date_start)->translatedFormat('d F \p\u\k\u\l H.i') }}
-                                        </p>
-                                    @endif
-                                    <div class="kode">
-                                        <p>{{ $trip->booking->booking_code }}</p>
-                                        <h5>{{ $trip->bus->name }}</h5>
+
+                <div id="bannerCarousel" class="carousel slide" style="padding-bottom: 30px;" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @foreach ($trips as $index => $trip)
+                        <div class="carousel-item {{ $index == 0 ? 'active' : '' }} p-1">
+                            <div class="card-content">
+                                <div class="content mb-2">
+                                    <div class="banner" style="background-image: url('{{ \Carbon\Carbon::parse($trip->booking->date_start)->isToday() ? asset('img/bg-banner1.png') : asset('img/bg-banner2.png') }}');">
+                                        <div class="@if (\Carbon\Carbon::parse($trip->booking->date_start)->isToday()) banner-header-sekarang @else banner-header-nanti @endif">
+                                            @if (\Carbon\Carbon::parse($trip->booking->date_start)->isToday())
+                                                <p>
+                                                    Hari ini,
+                                                    {{ \Carbon\Carbon::parse($trip->booking->date_start)->translatedFormat('d F \p\u\k\u\l H.i') }}
+                                                </p>
+                                            @else
+                                                <p>
+                                                    {{ \Carbon\Carbon::parse($trip->booking->date_start)->translatedFormat('d F \p\u\k\u\l H.i') }}
+                                                </p>
+                                            @endif
+                                        </div>
+                                        <div class="row d-flex">
+                                            <div class="col-7 col-md-7">
+                                                <div class="banner-isi">
+                                                    <div class="banner-kode">
+                                                        <p>{{ $trip->booking->booking_code }}</p>
+                                                        <h5>{{ $trip->bus->name }}</h5>
+                                                    </div>
+                                                    <div class="banner-tujuan d-flex justify-content-between">
+                                                        <p>{{ Str::limit($trip->booking->pickup_point, 20, '...') }}</p>
+                                                        <p>{{ Str::limit($trip->booking->destination->last()->name, 20, '...') }}</p>
+                                                    </div>
+                                                    <div class="banner-btn">
+                                                        <a href="{{ url('/driver/detail-trip/' . $trip->booking->booking_code) }}" class="btn-detail">Detail</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-5 col-md-5">
+                                                <div class="banner-img d-flex justify-content-center align-items-center">
+                                                    <img src="{{ \Carbon\Carbon::parse($trip->booking->date_start)->isToday() ? asset('img/banner1-img.png') : asset('img/banner2-img.png') }}" class="img-fluid">
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row tujuan">
-                                    <div class="col-4 col-md-6 col-lg-4">
-                                        <p>{{ $trip->booking->pickup_point }}</p>
-                                    </div>
-                                    <div class="col-4 col-md-6 col-lg-4">
-                                        <p>{{ $trip->booking->destination->last()->name }}</p>
-                                    </div>
-                                </div>
-                                <a href="{{ url('/driver/detail-trip/' . $trip->booking->booking_code) }}"
-                                    class="btn-lihat mt-3">Lihat</a>
                             </div>
                         </div>
-                    @endforeach
+                        @endforeach
+                    </div>
+                    <!-- Indicators -->
+                    <div class="carousel-indicators">
+                        @foreach ($trips as $index => $trip)
+                        <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}" aria-label="Slide {{ $index + 1 }}"></button>
+                        @endforeach
+                    </div>
                 </div>
             @else
-                <!-- IMAGE -->
                 <div class="image-content">
-                    <!-- <h4>Tidak ada booking berikutnya</h4> -->
                     <img src="{{ asset('img/notrip-image.png') }}" style="padding-top: 20px;">
-                </div>
-            @endif
-            <!-- BUTTON -->
-            @if ($continueTrips->isNotEmpty())
-                <div class="mt-5">
-                    <a href="{{ route('dashboard-trip') }}" class="btn-lanjut">Lanjutkan Trip</a>
-                </div>
-            @elseif (
-                $trips->filter(function ($trip) {
-                        $dateStart = \Carbon\Carbon::parse($trip->booking->date_start);
-                        $dateEnd = \Carbon\Carbon::parse($trip->booking->date_end);
-                        $now = \Carbon\Carbon::now();
-            
-                        // Memeriksa apakah waktu sekarang berada di antara date_start dan date_end
-                        return $dateStart->isToday() || $now->between($dateStart, $dateEnd);
-                    })->count() > 0)
-                <div class="p-3">
-                    <a href="{{ route('scan-trip') }}" class="btn-mulai">Mulai Trip</a>
                 </div>
             @endif
 
             <!-- RIWAYAT TRIP -->
-            <div class="mb-5" style="margin-bottom: 50px;">
-                <div class="riwayat-title d-flex justify-content-between mt-5 mb-3">
-                    <p>Riwayat Trip</p>
+            <div class="mb-5">
+                <div class="riwayat-title d-flex justify-content-between align-items-center mt-3 mb-3">
+                    <p class="mb-0">Riwayat Trip</p>
                     <i class="fa-solid fa-chevron-right"></i>
                 </div>
-                <div class="riwayat-content accordion accordion-flush" id="item">
-                    @foreach ($trips as $index => $trip)
+
+                <div class="riwayat-content accordion accordion-flush mb-5" style="padding-bottom: 60px;" id="item">
+                    @foreach ($historyTrips->sortByDesc('created_at')->take(3) as $index => $historyTrip)
                         <div class="accordion-item">
                             <div class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#item{{ $trip->id }}" aria-expanded="false">
-                                    <div class="riwayat-image">
-                                        <img src="{{asset('img/pmj02-1.jpg')}}" class="img-fluid" width="60px" height="60px">
+                                <button class="accordion-button collapsed d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#item{{ $historyTrip->id }}" aria-expanded="false">
+                                    <div class="riwayat-image me-3">
+                                        <img src="{{ asset('storage/' . $historyTrip->bus->images->first()->image) }}" class="img-fluid" width="60" height="60" style="object-fit: cover;">
                                     </div>
                                     <div class="kode">
-                                        <h5>{{ $trip->bus->name }}</h5>
-                                        <p>{{ $trip->booking->booking_code }}</p>
+                                        <h5 class="mb-0">{{ $historyTrip->bus->name }}</h5>
+                                        <p class="mb-0">{{ $historyTrip->booking->booking_code }}</p>
                                     </div>
                                     <span class="ms-auto">
-                                        <!-- <p>{{ \Carbon\Carbon::parse($trip->booking->date_start)->translatedFormat('d F \p\u\k\u\l H.i') }} -->
-                                        <p>Hari ini, 07 Oktober 2024<br>Pukul 15.00</p>
+                                        <p class="mb-0">{{ \Carbon\Carbon::parse($historyTrip->booking->date_start)->translatedFormat('d F Y') }}</p>
+                                        <p class="mb-0">Pukul {{ \Carbon\Carbon::parse($historyTrip->booking->date_start)->translatedFormat('H.i') }}</p>
                                     </span>
                                 </button>
-                            </div>
-                            <div id="item{{ $trip->id }}" class="accordion-collapse collapse" data-bs-parent="#item">
+                            </div>                                                    
+                            <div id="item{{ $historyTrip->id }}" class="accordion-collapse collapse">
                                 <div class="accordion-body">
                                     <div class="detail-trip">
                                         <div class="tabel-detail d-flex align-items-center">
@@ -139,7 +132,7 @@
                                                         <td class="keterangan">Status</td>
                                                         <td>
                                                             <div class="status">
-                                                                {{ $trip->booking->ms_booking->name }}
+                                                                {{ $historyTrip->booking->ms_booking->name }}
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -147,100 +140,77 @@
                                                         <td class="keterangan">Tanggal</td>
                                                         <td>
                                                             <div class="tgl">
-                                                                {{ \Carbon\Carbon::parse($trip->booking->date_start)->translatedFormat('d F Y') }}
+                                                                {{ \Carbon\Carbon::parse($historyTrip->booking->date_start)->translatedFormat('d F Y') }}
                                                             </div>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td class="keterangan ">Customer</td>
-                                                        <td>{{ $trip->booking->customer->name }}</td>
+                                                        <td>{{ $historyTrip->booking->customer->name }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="keterangan ">Nomor Telepon</td>
-                                                        <td>{{ $trip->booking->customer->number_phone }}</td>
+                                                        <td>{{ $historyTrip->booking->customer->number_phone }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="keterangan ">Email</td>
-                                                        <td>{{ $trip->booking->customer->email }}</td>
+                                                        <td>{{ $historyTrip->booking->customer->email }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="keterangan ">Titik Jemput</td>
-                                                        <td>{{ $trip->booking->pickup_point }}</td>
+                                                        <td>{{ $historyTrip->booking->pickup_point }}</td>
                                                     </tr>
-                                                    @foreach ($destinations[$index] as $dest)
+                                                    @foreach ($historyDestinations[$index] as $dest)
                                                         <tr>
-                                                            <td class="keterangan ">Tujuan 
+                                                            <td class="keterangan ">Tujuan
                                                                 @if ($loop->last)
                                                                     Akhir
                                                                 @else
-                                                                    {{ $loop->iteration }}</td>
+                                                                    {{ $loop->iteration }}
+                                                            </td>
                                                                 @endif
                                                             <td>{{ $dest->name }}</td>
                                                         </tr>
                                                     @endforeach
                                                     <tr>
-                                                        <td class="keterangan ">Kapasitas</td>
-                                                        <td>{{ $trip->bus->capacity }}</td>
+                                                        <td class="keterangan ">Jumlah Penumpang</td>
+                                                        <td>{{ $historyTrip->booking->capacity }}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
-
-                                    @foreach ($trip->tripbusspend as $spend)
-                                        <div class="detail-pengeluaran">
-                                            <div class="tabel-detail d-flex align-items-center">
-                                                <table class="table table-borderless">
-                                                    <thead>
-                                                        <tr>
-                                                            <th colspan="2">
-                                                                Detail Pengeluaran Trip {{ $loop->iteration }}
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="keterangan">Nama Pengeluaran</td>
-                                                            <td>{{ $spend->spend_name }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="keterangan ">Deskripsi</td>
-                                                            <td>{{ $spend->description }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="keterangan ">Nominal</td>
-                                                            <td>Rp {{ number_format($spend->nominal, 0, ',', '.') }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="keterangan ">Kilometer Speedometer</td>
-                                                            <td>{{ $spend->kilometer }} KM</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="keterangan ">Bukti Pengeluaran</td>
-                                                            <td>
-                                                                <button type="button"
-                                                                    onclick="modalBukti('{{ asset('storage/' . $spend->image_receipt) }}')"
-                                                                    class="btn-bukti">
-                                                                    <i class="fa-regular fa-eye"></i>
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    @endforeach
                                 </div>
                             </div>
                         </div>
                     @endforeach
                 </div>
+                
+                <!-- BUTTON CONTINUE TRIP -->
+                <div class="text-center button-trip p-3">
+                    @if ($continueTrips->isNotEmpty())
+                        <div class="mb-5">
+                            <a href="{{ route('dashboard-trip') }}" class="btn-lanjut">Lanjutkan Trip</a>
+                        </div>
+                    @elseif (
+                        $trips->filter(function ($trip) {
+                            $dateStart = \Carbon\Carbon::parse($trip->booking->date_start);
+                            $dateEnd = \Carbon\Carbon::parse($trip->booking->date_end);
+                            $now = \Carbon\Carbon::now();
+
+                            // Memeriksa apakah waktu sekarang berada di antara date_start dan date_end
+                            return $dateStart->isToday() || $now->between($dateStart, $dateEnd);
+                        })->count() > 0)
+                        <div class="mb-5">
+                            <a href="{{ route('scan-trip') }}" class="btn-mulai">Mulai Trip</a>
+                        </div>
+                    @endif
+                </div>
             </div>
 
-            <!-- NAVBAR -->
-            <x-navbar-driver />
+        <x-navbar-driver />
+
         </div>
     </section>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
 @endsection

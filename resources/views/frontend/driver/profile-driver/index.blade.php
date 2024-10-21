@@ -2,7 +2,6 @@
 @push('styles')
     <title>Profile</title>
     <link id="pagestyle" href="{{ asset('css/frontend/css/driver/profilDriver-style.css') }}" rel="stylesheet" />
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @endpush
 @section('content')
     <section id="profilDriver">
@@ -12,32 +11,47 @@
                 <p class="title">PROFIL DRIVER</p>
             </div>
             <div class="profil-image d-flex justify-content-center">
-                {{-- <img src="img/avatar-driver.png" alt="profil"> --}}
                 <img src="{{ asset('img/avatar-driver.png') }}" alt="profil">
             </div>
 
             <!-- FORM -->
             <div class="p-3 mb-5">
+                @include('frontend.assets.alert')
                 <form id="formProfilDriver">
                     <div class="mb-3">
                         <label for="name" class="form-label">Nama Lengkap</label>
                         <div class="input-group">
                             <span class="input-group-text" id="icon"><img src="{{ asset('img/icon-deskripsi.png') }}"></span>
-                            <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->name }}" readonly>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ Auth::user()->name }}" readonly>
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="number_phone" class="form-label">Nomor Telephone</label>
                         <div class="input-group">
                             <span class="input-group-text" id="icon"><img src="{{ asset('img/icon-deskripsi.png') }}"></span>
-                            <input type="text" class="form-control" id="number_phone" name="number_phone" value="{{ Auth::user()->number_phone }}" readonly>
+                            <input type="text" class="form-control @error('number_phone') is-invalid @enderror" id="number_phone" name="number_phone" value="{{ Auth::user()->number_phone }}" readonly>
+                            @error('number_phone')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
                         <div class="input-group">
                             <span class="input-group-text" id="icon"><img src="{{ asset('img/icon-deskripsi.png') }}"></span>
-                            <input type="text" class="form-control" id="email" name="email" value="{{ Auth::user()->email }}" readonly>
+                            <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ Auth::user()->email }}" readonly>
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="mt-4 mb-3">
@@ -45,14 +59,6 @@
                     </div>
                 </form>
             </div>
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                        @foreach ($errors->all() as $error)
-                            <p class="text-center">{{ $error }}</p>
-                        @endforeach
-                </div>
-            @endif
-
 
             <!-- MODAL -->
             <div class="modal fade" id="modalUbahPassword" tabindex="-1" aria-hidden="true">
@@ -69,15 +75,24 @@
                                     <label for="passwordBaru" class="form-label">Password Baru</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="toggle-passwordBaru"><img src="{{ asset('img/icon-deskripsi.png') }}"></span>
-                                        <input type="password" class="form-control" id="passwordBaru" placeholder="Masukkan password baru">
+                                        <input type="password" class="form-control" id="passwordBaru" name="passwordBaru" placeholder="Masukkan password baru" autocomplete="new-password" required>
+                                        <span class="input-group-text" onclick="togglePassword(this)"
+                                            style="cursor: pointer;">
+                                            <i class="fas fa-eye-slash text-success" style="font-size: 1rem"></i>
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="konfirmasiPassword" class="form-label">Konfirmasi Password</label>
+                                    <label for="konfirmasiPassword" class="form-label">Konfirmasi Password Baru</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="toggle-konfirmasiPassword"><img src="{{ asset('img/icon-deskripsi.png') }}"></span>
-                                        <input type="password" class="form-control" id="konfirmasiPassword" name="konfirmasiPassword" placeholder="Konfirmasi password">
+                                        <input type="password" class="form-control" id="konfirmasiPassword" name="konfirmasiPassword" placeholder="Konfirmasi password" autocomplete="new-password" required>
+                                        <span class="input-group-text" onclick="togglePassword(this)"
+                                            style="cursor: pointer;">
+                                            <i class="fas fa-eye-slash text-success" style="font-size: 1rem"></i>
+                                        </span>
                                     </div>
+
                                 </div>
                                 <div class="mb-3">
                                     <button type="submit" class="btn-updatePassword">Simpan</button>
@@ -97,30 +112,17 @@
     <!-- SCRIPT -->
     <script>
         // MATA
-        // Inisialisasi toggle untuk setiap input password
-        const togglePassword = document.querySelector('#toggle-password');
-        const password = document.querySelector('#password');
-        togglePasswordVisibility(togglePassword, password);
+        function togglePassword(element) {
+            const $input = $(element).closest('.input-group').find('input');
+            const $icon = $(element).find('i');
 
-        const togglePasswordBaru = document.querySelector('#toggle-passwordBaru');
-        const passwordBaru = document.querySelector('#passwordBaru');
-        togglePasswordVisibility(togglePasswordBaru, passwordBaru);
-
-        const toggleKonfirmasiPassword = document.querySelector('#toggle-konfirmasiPassword');
-        const konfirmasiPassword = document.querySelector('#konfirmasiPassword');
-        togglePasswordVisibility(toggleKonfirmasiPassword, konfirmasiPassword);
-
-        // Fungsi untuk toggle visibility
-        function togglePasswordVisibility(toggleBtn, passwordField) {
-            toggleBtn.addEventListener('click', function() {
-                // toggle the type attribute
-                const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
-                passwordField.setAttribute('type', type);
-
-                // toggle the eye icon
-                this.querySelector('i').classList.toggle('fa-eye');
-                this.querySelector('i').classList.toggle('fa-eye-slash');
-            });
+            if ($input.attr('type') === 'password') {
+                $input.attr('type', 'text');
+                $icon.removeClass('fa-eye-slash').addClass('fa-eye');
+            } else {
+                $input.attr('type', 'password');
+                $icon.removeClass('fa-eye').addClass('fa-eye-slash');
+            }
         }
 
         //MODAL
@@ -129,6 +131,4 @@
             myModal.show();
         };
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 @endsection

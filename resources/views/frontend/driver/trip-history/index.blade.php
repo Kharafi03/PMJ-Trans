@@ -26,15 +26,15 @@
                         <div class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#item{{ $trip->id }}" aria-expanded="false">
                                 <div class="riwayat-image">
-                                    <img src="{{asset('img/pmj02-1.jpg')}}" class="img-fluid" width="60px" height="60px">
+                                    <img src="{{ asset('storage/' . $trip->bus->images->first()->image) }}" class="img-fluid" width="60" height="60">
                                 </div>
                                 <div class="kode">
                                     <h5>{{ $trip->bus->name }}</h5>
                                     <p>{{ $trip->booking->booking_code }}</p>
                                 </div>
                                 <span class="ms-auto">
-                                    <!-- <p>{{ \Carbon\Carbon::parse($trip->booking->date_start)->translatedFormat('d F \p\u\k\u\l H.i') }} -->
-                                    <p>Hari ini, 07 Oktober 2024<br>Pukul 15.00</p>
+                                    <p class="mb-0">{{ \Carbon\Carbon::parse($trip->booking->date_start)->translatedFormat('d F Y') }}</p>
+                                    <p class="mb-0">Pukul {{ \Carbon\Carbon::parse($trip->booking->date_start)->translatedFormat('H.i') }}</p>
                                 </span>
                             </button>
                         </div>
@@ -88,7 +88,7 @@
                                                     </tr>
                                                 @endforeach
                                                 <tr>
-                                                    <td class="keterangan ">Kapasitas</td>
+                                                    <td class="keterangan ">Jumlah Penumpang</td>
                                                     <td>{{ $trip->bus->capacity }}</td>
                                                 </tr>
                                             </tbody>

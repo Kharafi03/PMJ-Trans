@@ -148,10 +148,10 @@ body, html {
 .accordion-body {
     display: flex;
     flex-direction: column;
-    height: 80vh;
     overflow-x: hidden;
     flex-grow: 1;
     overflow-y: auto;
+    border-radius: 0px 0px 1rem 1rem;
 }
 
 /* MODAL */
