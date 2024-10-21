@@ -4,17 +4,24 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
+use Filament\Panel;
+use App\Models\MsUser;
+use App\Models\BusMaintenance;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Facades\Storage;
+use Filament\Models\Contracts\HasAvatar;
+use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Models\Permission;
 use Filament\Models\Contracts\FilamentUser;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable // implements FilamentUser
+class User extends Authenticatable implements FilamentUser, HasAvatar
 {
-    use HasFactory, Notifiable, HasRoles, HasPanelShield;
+    use HasFactory, Notifiable, HasRoles, HasPanelShield, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -30,6 +37,7 @@ class User extends Authenticatable // implements FilamentUser
         'nik',
         'sim',
         'id_ms',
+        'avatar_url',
     ];
 
     /**
@@ -63,6 +71,16 @@ class User extends Authenticatable // implements FilamentUser
     public function msUsers(): BelongsTo
     {
         return $this->belongsTo(MsUser::class, 'id_ms');
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        $user = auth()->user()->roles->first()->name === 'super_admin';
+        return $user;
+    }
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return $this->avatar_url ? Storage::url("$this->avatar_url") : null;
     }
 
     // public function permissions(): BelongsTo

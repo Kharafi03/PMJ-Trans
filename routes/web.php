@@ -1,26 +1,27 @@
 <?php
 
-use App\Http\Controllers\Customer\BookingCheckController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\Customer\LoginController;
-use App\Http\Controllers\Customer\RegistrationController;
-use App\Http\Controllers\Customer\BookingController;
-use App\Http\Controllers\Customer\ProfileController;
-use App\Http\Controllers\Customer\HistoryController;
-use App\Http\Controllers\Customer\BookingCodeController;
-use App\Http\Controllers\Customer\BookingStatusController;
-use App\Http\Controllers\Customer\DetailPaymentController;
-use App\Http\Controllers\Driver\DashboardController;
-use App\Http\Controllers\Driver\DashboardTripController;
-use App\Http\Controllers\Driver\DetailTripController;
-use App\Http\Controllers\Driver\FinishTripController;
-use App\Http\Controllers\Driver\HistorySpendTripController;
-use App\Http\Controllers\Driver\HistoryTripController;
-use App\Http\Controllers\Driver\ProfileController as DriverProfileController;
 use App\Http\Controllers\Driver\ScanTripController;
-use App\Http\Controllers\Driver\InitiateTripController;
+use App\Http\Controllers\Customer\BookingController;
+use App\Http\Controllers\Customer\HistoryController;
+use App\Http\Controllers\Customer\ProfileController;
+use App\Http\Controllers\Driver\DashboardController;
 use App\Http\Controllers\Driver\SpendTripController;
 use App\Http\Controllers\Driver\StartTripController;
+use App\Http\Controllers\Driver\DetailTripController;
+use App\Http\Controllers\Driver\FinishTripController;
+use App\Http\Controllers\Driver\HistoryTripController;
+use App\Http\Controllers\Driver\InitiateTripController;
+use App\Http\Controllers\Customer\BookingCodeController;
+use App\Http\Controllers\Driver\DashboardTripController;
+use App\Http\Controllers\Customer\BookingCheckController;
+use App\Http\Controllers\Customer\RegistrationController;
+use App\Http\Controllers\Customer\BookingStatusController;
+use App\Http\Controllers\Customer\DetailPaymentController;
+use App\Http\Controllers\Driver\HistorySpendTripController;
+use App\Http\Controllers\Driver\ProfileController as DriverProfileController;
 
 // CUSTOMER
 
@@ -55,9 +56,11 @@ Route::post('/booking-check', [BookingCheckController::class, 'status'])->name('
 Route::post('/booking/upload-proof/{id}', [BookingStatusController::class, 'uploadProof'])->name('booking.uploadProof');
 
 
-Route::get('/', function () {
-    return view('frontend.homepage');
-})->name('homepage');
+// Route::get('/', function () {
+//     return view('frontend.homepage');
+// })->name('homepage');
+
+Route::get('/', [HomepageController::class, 'index'])->name('homepage');
 
 Route::get('/contact', function () {
     return view('frontend.contact.index');

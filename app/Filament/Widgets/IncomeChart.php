@@ -5,9 +5,11 @@ namespace App\Filament\Widgets;
 use Filament\Widgets\BarChartWidget;
 use App\Models\Income;
 use Carbon\Carbon;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 
 class IncomeChart extends BarChartWidget
 {
+    use HasWidgetShield;
     protected static ?string $heading = 'Total Pendapatan';
 
     protected function getData(): array

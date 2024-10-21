@@ -5,9 +5,11 @@ namespace App\Filament\Widgets;
 use Filament\Widgets\BarChartWidget;
 use App\Models\Outcome;
 use Carbon\Carbon;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 
 class OutcomeChart extends BarChartWidget
 {
+    use HasWidgetShield;
     protected static ?string $heading = 'Total Pengeluaran';
 
     protected function getData(): array

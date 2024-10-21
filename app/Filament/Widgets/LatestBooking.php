@@ -6,9 +6,12 @@ use App\Models\Booking;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 
 class LatestBooking extends BaseWidget
+
 {
+    use HasWidgetShield;
     protected int | string | array $columnSpan = 'full';
 
     protected static ?string $heading = 'Booking Terbaru';

@@ -25,6 +25,8 @@ class TripFinishedResource extends Resource
 
     protected static ?int $navigationSort = 5;
 
+    protected static ?string $slug = 'trip-selesai';
+
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::whereNull('deleted_at')->count();
@@ -105,7 +107,7 @@ class TripFinishedResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()
@@ -122,10 +124,12 @@ class TripFinishedResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->paginated([25, 50, 100, 'all']);
     }
-
     public static function getRelations(): array
     {
         return [

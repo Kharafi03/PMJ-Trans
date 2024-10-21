@@ -36,6 +36,8 @@ class TripBusResource extends Resource
 
     protected static ?int $navigationSort = -3;
 
+    protected static ?string $slug = 'trip-bus';
+
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::whereNull('deleted_at')->count();
@@ -204,34 +206,41 @@ class TripBusResource extends Resource
                 Tables\Columns\TextColumn::make('booking.booking_code')
                     ->numeric()
                     ->label('Kode Booking')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('bus.name')
                     ->numeric()
                     ->label('Bus')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('cus.name')
                     ->numeric()
                     ->getStateUsing(fn(Model $record) => optional($record->booking->customer)->name)
                     ->label('Pelanggan')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('driver.name')
                     ->numeric()
                     ->label('Driver')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('codriver.name')
                     ->numeric()
                     ->label('Co-Driver')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('nominal')
                     ->numeric()
                     ->prefix('Rp. ')
                     ->label('Saldo')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('total_spend')
                     ->numeric()
                     ->prefix('Rp. ')
                     ->label('Total Pengeluaran')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->label('Tanggal dihapus')
                     ->dateTime()
@@ -249,7 +258,7 @@ class TripBusResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()
@@ -267,10 +276,12 @@ class TripBusResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
                 ]),
-            ]);
-    }
-
+            ])
+            ->paginated([25, 50, 100, 'all']);
+            }
     public static function getRelations(): array
     {
         return [
