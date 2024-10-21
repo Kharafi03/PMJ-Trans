@@ -4,30 +4,43 @@
 html, body {
     margin: 0;
     overflow: hidden;
+    height: 100%; /* Ensure body takes full height */
 }
 
 #register {
     display: flex;
     align-items: center; 
+    height: 100vh; /* Set full viewport height */
 }
 
 .row {
     width: 100%;
+    height: 100%; /* Ensure row takes full height */
     margin: 0;
 }
 
 .container {
     height: 100%;
+    display: flex; /* Use flexbox to manage the layout */
+    flex-direction: column; /* Stack items vertically */
 }
 
-.col-img{
+.col-img {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     background-image: url("/img/bg2.png");
+    height: 100%;
 }
-.form-container{
-    padding: 15px 130px;
+
+.form-container {
+    padding: auto; 
+    max-width: 60%;
+    margin: auto; 
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
 }
 /* TITLE */
 .header h5 {
@@ -132,6 +145,7 @@ img {
     /* Media query for mobile devices */
     .col-img {
         order: -1; 
+        height: 50%;
     }
     .navbar-brand img {
         padding: 0px 45%;
@@ -143,23 +157,21 @@ img {
     }
     .form-container{
         padding: 20px;
+        max-width: 100%;
     }
 }
 
 @media (min-width: 768px) and (max-width: 1024px){
+    .col-img { 
+        height: 70%;
+    }
     html, body {
         height: 100%;
         margin: 0;
         overflow: auto;
     }
-    .col-img{
-        background-size: auto;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-image: url("/img/bg2.png");
-        padding-right: 130px;
-    }
     .form-container{
         padding: 50px 200px;
+        max-width: 100%;
     }
 }

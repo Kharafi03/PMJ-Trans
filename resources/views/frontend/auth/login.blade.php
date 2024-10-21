@@ -67,13 +67,12 @@
         <section id="login">
             <div class="row">
                 <!-- KIRI -->
-                <div class="col-lg-6 col-md-12 order-md-last order-lg-first">
-                    <div class="logo mt-3">
+                <div class="col-lg-6 col-md-12 order-md-last order-lg-first d-flex flex-column justify-content-center align-items-center">
                         <!-- FORM -->
                         <div class="form-container">
                             <div class="header mb-4">
                                 <h5>Login</h5>
-                                <p><span>Gunakan nomor telepon yang aktif dan dapat dihubungi.</span></p>
+                                <p>Gunakan nomor telepon yang aktif dan dapat dihubungi.</p>
                             </div>
 
                             @include('frontend.assets.alert')
@@ -82,16 +81,13 @@
                                 <form id="formLogin" action="{{ route('login') }}" method="POST">
                                     @csrf
                                     <div class="mb-3">
-                                        <label for="number_phone" class="form-label">Nomor WhatsApp<span
-                                                class="text-danger">*</span></label>
-                                        <input type="tel" class="form-control" id="number_phone" name="number_phone"
-                                            placeholder="Masukkan nomor whatsapp aktif" required>
+                                        <label for="number_phone" class="form-label">Nomor WhatsApp<span class="text-danger">*</span></label>
+                                        <input type="tel" class="form-control" id="number_phone" name="number_phone" placeholder="Masukkan nomor whatsapp aktif" required>
                                     </div>
                                     <div class="mb-2">
                                         <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
                                         <div class="input-group">
-                                            <input type="password" class="form-control" id="password" name="password"
-                                                placeholder="Masukkan Password" required>
+                                            <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password" required>
                                             <span class="input-group-text" id="toggle-password">
                                                 <i class="fas fa-eye"></i>
                                             </span>
@@ -111,10 +107,10 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
+                    
                 </div>
-                <div class="col-lg-6 col-md-12 d-flex align-items-center justify-content-end col-img">
-                    <img src="img/login-img.png" class="img-fluid" width="500px" height="600px">
+                <div class="col-lg-6 col-md-12 d-flex align-items-center justify-content-center col-img">
+                    <img src="img/login-img.png" class="img-fluid" width="70%" height="auto">
                 </div>
             </div>
         </section>

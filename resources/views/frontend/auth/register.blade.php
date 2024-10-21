@@ -67,11 +67,11 @@
     <section id="register">
             <div class="row">
                 <!-- KIRI -->
-                <div class="col-lg-6 col-md-12 order-md-last order-lg-first">
-                    <div class="logo mt-3">
+                <div class="col-lg-6 col-md-12 order-md-last order-lg-first d-flex flex-column justify-content-center align-items-center">
+                    
                         <!-- FORM -->
                         <div class="form-container">
-                            <div class="header mb-4">
+                            <div class="header mb-2">
                                 <h5>Registrasi</h5>
                                 <p>Jika Anda sudah memiliki akun, silakan <a href="{{ route('login') }}">Login di sini.</a></p>
                             </div>
@@ -96,7 +96,7 @@
                                             <span class="input-group-text" id="toggle-password"><i class="fas fa-eye"></i></span>
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-end align-items-center mb-5">
+                                    <div class="d-flex justify-content-end align-items-center mb-4">
                                         <div class="lupa-sandi">
                                             <a href="#">Lupa kata sandi?</a>
                                         </div>
@@ -107,10 +107,10 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
+                    
                 </div>
-                <div class="col-lg-6 col-md-12 d-flex align-items-center justify-content-end col-img">
-                    <img src="img/register-img.png" class="img-fluid" width="460px" height="500px">
+                <div class="col-lg-6 col-md-12 d-flex align-items-center justify-content-center col-img">
+                    <img src="img/register-img.png" class="img-fluid" width="70%">
                 </div>
             </div>
         </section>
