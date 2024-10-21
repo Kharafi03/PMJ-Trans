@@ -131,6 +131,10 @@ Route::get('/ticket', function () {
     return view('frontend.ticket.index');
 })->name('ticket');
 
+Route::get('/terms-conditions', function () {
+    return view('frontend.terms-conditions.index');
+})->name('terms-conditions');
+
 
 
 // DRIVER
