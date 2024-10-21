@@ -1,4 +1,6 @@
 @extends('frontend.layouts.app')
+    <title>Detail Booking</title>
+    <link id="pagestyle" href="{{ asset('css/frontend/css/detailRiwayat-style.css') }}" rel="stylesheet" />
 @section('content')
     <x-navbar-customer />
     <section id="detailSewa" class="py-5">
@@ -13,7 +15,9 @@
             @endif
             <div class="row justify-content-center py-3">
                 <div class="col-md-6">
-                    <h1 class="mb-4">Detail Pemesanan</h1>
+                    <div class="text-content mb-5">
+                        <h5 style="font-size: 44px; font-weight: 700; color: #1E9781;">Detail <span style="color: #FD9C07;">Booking</span></h5>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-responsive table-bordered table-hover table-striped align-middle">
                             <tbody>
@@ -24,7 +28,7 @@
                                 <tr>
                                     <th scope="row">Status</th>
                                     <td>
-                                        <span class="badge fs-6
+                                        <!-- <span class="badge fs-6
                                             @if ($booking->ms_booking->id == 1) 
                                                 bg-warning
                                             @elseif ($booking->ms_booking->id == 2)
@@ -36,7 +40,8 @@
                                             @elseif ($booking->ms_booking->id == 5)
                                                 bg-danger @endif">
                                             {{ $booking->ms_booking->name }}
-                                        </span>
+                                        </span> -->
+                                        {{ $booking->ms_booking->name }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -88,7 +93,7 @@
                                 <tr>
                                     <th scope="row">Status Pembayaran</th>
                                     <td>
-                                        <span class="badge fs-6
+                                        <!-- <span class="badge fs-6
                                             @if ($booking->ms_payment->id == 1) 
                                                 bg-warning
                                             @elseif ($booking->ms_payment->id == 2)
@@ -97,6 +102,7 @@
                                                 bg-info
                                             @elseif ($booking->ms_payment->id == 4)
                                                 bg-primary @endif">
+                                        {{ $booking->ms_payment->name }} -->
                                         {{ $booking->ms_payment->name }}
                                     </td>
                                 </tr>
@@ -120,14 +126,17 @@
                     <hr>
                     <div>
                         @if ($booking->ms_booking->id == 4)
-                            <h3>Terima kasih telah menggunakan sewa bus kami! Sampai jumpa di pemesanan selanjutnya!
-                            </h3>
+                            <!-- <h3>Terima kasih telah menggunakan sewa bus kami! Sampai jumpa di pemesanan selanjutnya!
+                            </h3> -->
+                            <div>
+                                <h1 style="font-size: 44px; font-weight: 700; color: #1E9781; margin-bottom: 5px;">Detail <span style="color: #FD9C07;">Ulasan</span></h1>
+                                <p style="font-size: 20px; font-weight: 500; color: black;">Terima kasih telah menggunakan sewa bus kami! Sampai jumpa di pemesanan selanjutnya!</p>
+                            </div>
                             <div class="col-md-12">
                                 <div class="d-flex align-items-center mb-3" data-bs-toggle="collapse" href="#feedbackForm"
                                     aria-expanded="false">
                                     <div style="border-top: 1px solid #000; flex-grow: 1;"></div>
-                                    <span class="btn mx-3">Lihat Ulasan</span>
-                                    <i class="fas fa-chevron-down"></i>
+                                    <span class="btn btn-lihat mx-3">Lihat Ulasan <i class="fas fa-chevron-down"></i></span>
                                 </div>
                                 @if ($feedbacks->isNotEmpty())
                                     @foreach ($feedbacks as $feedback)
@@ -158,58 +167,72 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    @if ($booking->ms_booking->id == 1)
-                        <h1 class="mb-4">Silahkan menunggu admin mengkonfirmasi</h>
-                        @elseif ($booking->ms_booking->id == 2)
-                            <h1 class="mb-4">Pemesanan 
-                                <span class="badge bg-success">
-                                    Diterima
-                                </span>
-                            </h1>
-                            @elseif ($booking->ms_booking->id == 3)
-                                <h1 class="mb-4">Pemesanan 
-                                    <span class="badge bg-danger">
-                                        Ditolak
+                    <div class="row mb-4">
+                        <div class="col-md-7">
+                            <div class="text-content text-center">
+                                <h5 style="font-size: 44px; font-weight: 700; color: #1E9781;">Riwayat <span style="color: #FD9C07;">Sewa</span></h5>
+                            </div>
+                        </div>
+                        <div class="col-md-5" style="padding-top: 10px;">
+                            @if ($booking->ms_booking->id == 1)
+                                <!-- <p class="mb-4">Silahkan menunggu admin mengkonfirmasi</p> -->
+                                <p class="mb-4 status-draf">Status Pemesanan : Diproses</p>
+                                @elseif ($booking->ms_booking->id == 2)
+                                    <!-- <p class="mb-4">Pemesanan 
+                                        <span class="badge bg-success">
+                                            Diterima
+                                        </span>
+                                    </p> -->
+                                    <p class="mb-4 status-diterima">Status Pemesanan : Diterima</p>
+                                    @elseif ($booking->ms_booking->id == 3)
+                                        <!-- <p class="mb-4">Pemesanan 
+                                            <span class="badge bg-danger">
+                                                Ditolak
+                                            </span>
+                                        </p> -->
+                                        <p class="mb-4 status-ditolak">Status Pemesanan : Ditolak</p>
+                                    @elseif ($booking->ms_booking->id == 4)
+                                        <!-- <p class="mb-4">Pemesanan 
+                                            <span class="badge bg-primary">
+                                                Selesai
+                                            </span>
+                                        </p> -->
+                                        <p class="mb-4 status-selesai">Status Pemesanan : Selesai</p>
+                                    @elseif ($booking->ms_booking->id == 5)
+                                        <!-- <p class="mb-4">Pemesanan
+                                            <span class="badge bg-danger">
+                                                Dibatalkan
+                                            </span>
+                                        </p> -->
+                                        <p class="mb-4 status-dibatalkan">Status Pemesanan : Dibatalkan</p>
+                            @endif
+                            <!-- @if ($booking->ms_payment->id == 1)
+                                <h4 class="mb-4">Status Pembayaran:
+                                    <span class="badge bg-warning">
+                                        {{ $booking->ms_payment->name }}
                                     </span>
-                                </h1>
-                            @elseif ($booking->ms_booking->id == 4)
-                                <h1 class="mb-4">Pemesanan 
+                                </h4>
+                            @elseif ($booking->ms_payment->id == 2)
+                                <h4 class="mb-4">Status Pembayaran:
+                                    <span class="badge bg-success">
+                                        {{ $booking->ms_payment->name }}
+                                    </span>
+                                </h4>
+                            @elseif ($booking->ms_payment->id == 3)
+                                <h4 class="mb-4">Status Pembayaran: 
+                                    <span class="badge bg-info">
+                                        {{ $booking->ms_payment->name }}
+                                    </span>
+                                </h4>
+                            @elseif ($booking->ms_payment->id == 4)
+                                <h4 class="mb-4">Status Pembayaran: 
                                     <span class="badge bg-primary">
-                                        Selesai
+                                    {{ $booking->ms_payment->name }}
                                     </span>
-                                </h1>
-                            @elseif ($booking->ms_booking->id == 5)
-                                <h1 class="mb-4">Pemesanan
-                                    <span class="badge bg-danger">
-                                        Dibatalkan
-                                    </span>
-                                </h1>
-                    @endif
-                    @if ($booking->ms_payment->id == 1)
-                        <h4 class="mb-4">Status Pembayaran:
-                            <span class="badge bg-warning">
-                                {{ $booking->ms_payment->name }}
-                            </span>
-                        </h4>
-                    @elseif ($booking->ms_payment->id == 2)
-                        <h4 class="mb-4">Status Pembayaran:
-                            <span class="badge bg-success">
-                                {{ $booking->ms_payment->name }}
-                            </span>
-                        </h4>
-                    @elseif ($booking->ms_payment->id == 3)
-                        <h4 class="mb-4">Status Pembayaran: 
-                            <span class="badge bg-info">
-                                {{ $booking->ms_payment->name }}
-                            </span>
-                        </h4>
-                    @elseif ($booking->ms_payment->id == 4)
-                        <h4 class="mb-4">Status Pembayaran: 
-                            <span class="badge bg-primary">
-                            {{ $booking->ms_payment->name }}
-                            </span>
-                        </h4>
-                    @endif
+                                </h4>
+                            @endif -->
+                        </div>
+                    </div>
                     <div class="row">
                         @if ($booking->incomes->isNotEmpty())
                             <div class="row">
@@ -217,15 +240,13 @@
                                     {{-- Loop untuk DP (id_m_income == 1) --}}
                                     @php $dpCount = 1; @endphp
                                     @foreach ($booking->incomes->where('id_m_income', 1) as $income)
-                                        <div class="col-lg-4 col-md-6 mb-4 riwayat-content">
-                                            <div class="content">
-                                                <div
-                                                    class="header text-center d-flex flex-column justify-content-center align-items-center">
+                                        <div class="col-lg-6 col-md-12 mb-4 riwayat-content">
+                                            <div class="content h-100">
+                                                <div class="header text-center d-flex flex-column justify-content-center align-items-center">
                                                     <p class="bayar-title">DP ke-{{ $dpCount }}</p>
                                                     <h5>Rp {{ number_format($income->nominal, 0, ',', '.') }}</h5>
                                                     <p class="status">Status: {{ $income->ms_income->name }}</p>
-                                                    <img src="{{ asset('storage/' . $income->image_receipt) }}"
-                                                        alt="Bukti Pembayaran" class="img-fluid" style="width: 100%;">
+                                                    <img src="{{ asset('storage/' . $income->image_receipt) }}" alt="Bukti Pembayaran" class="img-fluid" style="width: 100%;">
                                                 </div>
                                             </div>
                                         </div>
@@ -240,8 +261,8 @@
                         {{-- Loop untuk Pelunasan (id_m_income == 2) --}}
                         @php $pelunasanCount = 1; @endphp
                         @foreach ($booking->incomes->where('id_m_income', 2) as $income)
-                            <div class="col-lg-4 col-md-6 mb-4 riwayat-content">
-                                <div class="content">
+                            <div class="col-lg-6 col-md-12 mb-4 riwayat-content">
+                                <div class="content h-100">
                                     <div
                                         class="header text-center d-flex flex-column justify-content-center align-items-center">
                                         <p class="bayar-title">Pelunasan ke-{{ $pelunasanCount }}</p>
@@ -271,7 +292,7 @@
     <x-footer-customer />
 @endsection
 
-@section('styles')
+<!-- @section('styles')
     <style>
         .fa-chevron-down {
             font-size: 16px;
@@ -292,4 +313,4 @@
             color: gold !important;
         }
     </style>
-@endsection
+@endsection -->
