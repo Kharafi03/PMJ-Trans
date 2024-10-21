@@ -40,6 +40,8 @@ class HistorySpendTripController extends Controller
 
         $destinations = Destination::where('id_booking', $trip->booking->id)->get();
 
+        // dd($destinations);
+
         return view('frontend.driver.riwayat-pengeluaran.index', compact('trip', 'tripspends', 'destinations'));
     }
 }

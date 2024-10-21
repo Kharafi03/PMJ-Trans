@@ -305,28 +305,43 @@
                                         @endif
                                     @endif
 
-                                    <div class="mb-3">
-                                        <label for="destination_point" class="form-label">Tujuan Akhir<span class="text-danger">*</span></label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-tujuan.png') }}" alt="icon"></span>
-                                            <input type="text" class="detail-pemesanan form-control" id="destination_point" name="destination_point" placeholder="Masukkan tujuan perjalanan" readonly>
+                                    @foreach ($destinations as $destination)
+                                        <div class="mb-3">
+                                            <label for="destination_point" class="form-label">
+                                                @if ($loop->count === 1)
+                                                    {{-- Jika hanya ada satu destinasi --}}
+                                                    Tujuan Akhir
+                                                @elseif ($loop->last)
+                                                    {{-- Jika iterasi terakhir --}}
+                                                    Tujuan Akhir
+                                                @else
+                                                    {{-- Jika lebih dari satu dan bukan yang terakhir --}}
+                                                    Tujuan {{ $loop->iteration }}
+                                                @endif
+                                                <span class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-tujuan.png') }}" alt="icon"></span>
+                                                <input type="text" class="detail-pemesanan form-control" id="destination_point" name="destination_point" placeholder="Masukkan tujuan perjalanan" value="{{ $destination->name }}" readonly>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <button type="button" class="btn-tambahTujuan mb-4" id="add-field" disabled><i class="fa-solid fa-plus"></i> Tambah Tujuan</button>
+                                    @endforeach
+                                    {{-- <button type="button" class="btn-tambahTujuan mb-4" id="add-field" disabled><i class="fa-solid fa-plus"></i> Tambah Tujuan</button> --}}
                                     <div class="mb-3">
                                         <div class="row">
                                             <div class="col-md-9">
                                                 <label for="capacity" class="form-label">Jumlah Penumpang<span class="text-danger">*</span></label>
                                                 <div class="input-group">
                                                     <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-penumpang.png') }}" alt="icon"></span>
-                                                    <input type="number" class="detail-pemesanan form-control" id="capacity" name="capacity" placeholder="Masukkan jumlah penumpang" min="1" readonly>
+                                                    <input type="number" class="detail-pemesanan form-control" id="capacity" name="capacity" value="{{ $booking->capacity }}" placeholder="Masukkan jumlah penumpang" min="1" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-3 d-flex align-items-center mt-4">
                                                 <div class="form-check form-switch">
-                                                    <input class="form-check-input" type="checkbox" id="toggle-leg-rest" readonly>
+                                                    <input class="form-check-input" type="checkbox" id="toggle-leg-rest" 
+                                                        {{ $booking->legrest == 1 ? 'checked' : '' }} 
+                                                        disabled>
                                                     <label class="form-check-label" for="toggle-leg-rest">Leg Rest</label>
-                                                </div>
+                                                </div>                                                
                                             </div>
                                         </div>
                                     </div>
@@ -334,13 +349,13 @@
                                         <label for="date_start" class="form-label">Tanggal Mulai<span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-kalender1.png') }}" alt="icon"></span>
-                                            <input type="datetime-local" class="detail-pemesanan form-control" id="date_start" readonly>
+                                            <input type="datetime-local" class="detail-pemesanan form-control" id="date_start" name="date_start" value="{{ $booking->date_start }}" readonly>
                                         </div>
                                     </div>
                                     <div class="mb-2">
                                         <label for="pickup_point" class="form-label">Titik Jemput<span class="text-danger">*</span></label>
                                         <div>
-                                            <textarea class="form-control" placeholder="Masukkan alamat lengkap" id="pickup_point" name="pickup_point" readonly></textarea>
+                                            <textarea class="form-control" placeholder="Masukkan alamat lengkap" id="pickup_point" name="pickup_point" readonly>{{ $booking->pickup_point }}</textarea>
                                         </div>
                                     </div>
                                     <div>

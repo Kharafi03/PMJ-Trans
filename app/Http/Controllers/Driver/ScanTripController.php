@@ -21,6 +21,8 @@ class ScanTripController extends Controller
     {
         $today = Carbon::today();
 
+        // dd($bus_code);
+
         // Cek apakah kode bus valid
         $bus = Bus::where('name', $bus_code)->first();
 
@@ -46,6 +48,7 @@ class ScanTripController extends Controller
                 $query->where('name', 'Diterima'); // Filter untuk hanya menampilkan yang status "Diterima"
             })
             ->where('id_ms_trip', 1) // Tambahkan kondisi untuk id_ms_trip
+            ->where('id_bus', $bus->id) // Menambahkan pengecekan apakah id bus sama dengan id_bus di tabel trip_buses
             ->whereHas('booking', function ($query) use ($now) {
                 // Menambahkan logika untuk memeriksa apakah trip dimulai hari ini atau dalam rentang waktu sekarang
                 $query->where(function($query) use ($now) {
