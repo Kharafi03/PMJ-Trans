@@ -10,12 +10,12 @@
             <!-- HEADER -->
             <x-header-driver />
 
-            @include('frontend.assets.alert')
-
+            
             <!-- TEXT CONTENT -->
             <div class="text-content text-center mb-4">
                 <h5 style="font-size: 25px; font-weight: 700; color: #1E9781;">DATA <span style="color: #FD9C07;">PERJALANAN</span></h5>
             </div>
+            @include('frontend.assets.alert')
             <div class="mb-3">
                 <a href="{{ route('spend-trip') }}" disabled>
                     <button class="btn-pengeluaran">

@@ -95,7 +95,7 @@
                                     </div>
                                     <div class="d-flex justify-content-end align-items-center mb-5">
                                         <div class="lupa-sandi">
-                                            <a href="#">Lupa kata sandi?</a>
+                                            <a href="{{ route('password.reset') }}">Lupa kata sandi?</a>
                                         </div>
                                     </div>
                                     <div class="mb-4">

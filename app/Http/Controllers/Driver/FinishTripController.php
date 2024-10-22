@@ -52,17 +52,13 @@ class FinishTripController extends Controller
         // $trip->id_ms_trip = 3;
         // $trip->save();
 
-        $booking = Booking::where('id', $tripId)->first();
-        $booking->id_ms_booking = 4;
-        $booking->save();
-
         // Temukan trip berdasarkan ID
         $trip = TripBus::findOrFail($tripId);
         // Update km_end
         $trip->km_end = $request->km_end;
         $trip->id_ms_trip = 3;
         $trip->save();
-        
+
         // Update id_ms_user
         $driver = User::where('id', $trip->id_driver)->first();
         $driver->id_ms = 1;
@@ -83,6 +79,21 @@ class FinishTripController extends Controller
                 'message' => 'Bus tidak ditemukan!',
                 'alert-type' => 'error'
             ]);
+        }
+
+        // Ambil semua trip buses yang terkait dengan booking
+        $tripBuses = $trip->booking->tripbus; // Relasi tripbus ke booking
+
+        // Cek apakah semua id_ms_trip adalah 3 (selesai)
+        $allTripsCompleted = $tripBuses->every(function ($tripBus) {
+            return $tripBus->id_ms_trip == 3; // 3 adalah status "selesai"
+        });
+
+        // Jika semua trip sudah selesai, update id_ms_booking menjadi 4 (selesai)
+        if ($allTripsCompleted) {
+            $booking = $trip->booking; // Ambil data booking melalui relasi
+            $booking->id_ms_booking = 4; // 4 adalah status "selesai"
+            $booking->save(); // Simpan perubahan
         }
 
         return redirect()->route('dashboard-driver')

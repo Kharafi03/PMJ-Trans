@@ -48,7 +48,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-end align-items-center mb-5">
-                            <a class="lupa-sandi" href="#">Lupa kata sandi?</a>
+                            <a class="lupa-sandi" href="{{ route('driver.password.reset') }}">Lupa kata sandi?</a>
                         </div>
                         <div class="mb-2">
                             <button type="submit" class="btn-login">Log In</button>
