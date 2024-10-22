@@ -8,7 +8,27 @@ th, td{
     font-weight: 500;
     height: 50px;
 }
-
+.diterima, .draf, .ditolak, .selesai, .dibatalkan, .lunas, .belumBayar, .sudahBayar{
+    padding: 5px 8px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 14px;
+}
+.draf{
+    background-color: #666666;
+}
+.diterima, .sudahBayar, .belumBayar{
+    background-color: #4180CC;
+}
+.selesai, .lunas{
+    background-color: #1E9781;
+}
+.ditolak, .dibatalkan{
+    background-color: #F44C28;
+}
 /* ULASAN */
 #feedbackForm h3, #feedbackForm label{
     font-size: 20px;
@@ -40,7 +60,7 @@ th, td{
     padding: 5px;
     border: none;
     border-radius: 10px;
-    background-color: #00BD90 !important;
+    background-color: #4180CC !important;
     color: white !important;
     text-align: center;
 }
@@ -48,6 +68,16 @@ th, td{
     color: white;
     font-size: 20px;
 }
+/* Default icon style */
+.btn-lihat i {
+    transition: transform 0.3s ease; /* Smooth transition */
+}
+
+/* Rotate icon when collapse is expanded */
+[aria-expanded="true"] .btn-lihat i {
+    transform: rotate(180deg); /* Rotate the icon upwards */
+}
+
 
 /* STATUS PEMESANAN */
 .status-draf{
@@ -57,61 +87,46 @@ th, td{
     font-size: 14px;
     font-weight: 600;
     text-align: center;
-    background-color: #FEC40038;
-    color: #FE9A07;
+    background-color: #666666;
+    color: white;
     border: none;
     border-radius: 5px;
 }
-.status-diterima{
+.status-diterima, .status-belumBayar, .status-sudahBayar{
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    color: white;
+    background-color: #4180CC;
+    border-radius: 5px;
+}
+.status-ditolak, .status-dibatalkan{
     width: 100%;
     height: 44px;
     padding: 10px;
     font-size: 14px;
     font-weight: 600;
     text-align: center;
-    color: #4180CC;
-    background-color: #4180CC47;
+    background-color: #F44C28;
+    color: white;
     border: none;
     border-radius: 5px;
 }
-.status-ditolak{
-    width: 100%;
-    height: 44px;
-    padding: 10px;
-    font-size: 14px;
-    font-weight: 600;
-    text-align: center;
-    background-color: #F44C284A;
-    color: #F44C28;
-    border: none;
-    border-radius: 5px;
-}
-.status-selesai{
+.status-selesai, .status-lunas{
     width: 100%;
     height: auto;
     padding: 10px;
     font-size: 14px;
     font-weight: 600;
     text-align: center;
-    /* color: #4180CC;
-    background-color: #4180CC47; */
-    background-color: #E7F4EE;
-    color: #0D894F;
+    background-color: #1E9781;
+    color: white;
     border: none;
     border-radius: 5px;
 }
-.status-dibatalkan{
-    width: 100%;
-    height: 44px;
-    padding: 10px;
-    font-size: 14px;
-    font-weight: 600;
-    text-align: center;
-    background-color: #F44C284A;
-    color: #F44C28;
-    border: none;
-    border-radius: 5px;
-}
+
 
 /* BUKTI PEMBAYARAN */
 .content{

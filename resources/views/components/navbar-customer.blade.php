@@ -25,10 +25,10 @@
                         <a class="nav-link" href="{{ route('contact') }}">Kontak Kami</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Syarat & Ketentuan</a>
+                        <a class="nav-link" href="{{ route('terms-conditions') }}">Syarat & Ketentuan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('cek.status') }}">Cek Pesanan</a>
+                        <a class="nav-link" href="{{ route('cek.status') }}">Cek Pemesanan</a>
                     </li>
                     @auth
                         <li class="nav-item dropdown">

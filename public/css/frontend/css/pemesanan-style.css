@@ -1,6 +1,6 @@
 /* CONTENT */
 #pemesanan{
-    margin-top: 100px;
+    margin-top: 150px;
 }
 .info{
     padding: 10px;
@@ -20,6 +20,26 @@
 .info li{
     font-size: 16px;
     color: #252A31;
+}
+
+/* BREADCRUMB */
+.breadcrumb{
+    margin-top: 85px;
+    padding: 20px;
+    background-color: #1E9781;
+    position: fixed; 
+    width: 100%;
+    top: 0;           
+    z-index: 1000;
+}
+.breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+    color: white !important;
+}
+.breadcrumb li, .breadcrumb a{
+    color: white !important;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
 }
 
 /* FORM */
@@ -74,11 +94,10 @@ input[type="date"] {
     border-radius: 10px;
     width: 120px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.308) 0px 10px 10px -5px;
-    /* &:hover{
-        color: #4FB472;
-        background-color: white;
-
-    } */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    &:hover{
+        transform: scale(1.05); 
+    }
 }
 .btn-tambahTujuan{
     padding: 5px;

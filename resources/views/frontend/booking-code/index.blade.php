@@ -6,6 +6,14 @@
 @section('content')
     <!-- NAVBAR -->
     <x-navbar-customer />
+    <!-- Bread Crumbs -->
+    <nav aria-label="breadcrumb" style="margin-top: 100px;">
+        <ol class="breadcrumb d-flex justify-content-center align-items-center">
+            <li class="breadcrumb-item"><a href="{{route('homepage')}}">Beranda</a></li>
+            <li class="breadcrumb-item"><a href="{{route('cek.status')}}">Cek Pemesanan</a></li>
+            <li class="breadcrumb-item active" aria-current="page">E-Tiket</li>
+        </ol>
+    </nav>
 
     <!-- CONTENT -->
     <section id="tiket" class="py-5 mt-5">
@@ -19,7 +27,7 @@
                             PMJ Trans.</p>
                     </div>
                     <div class="col-xl-6 d-flex justify-content-end align-items-center">
-                        <button id="download" class="btn btn-success">Download PDF</button>
+                        <button id="download" class="btn btn-download">Download PDF</button>
                     </div>
                 </div>
             </div>
@@ -32,13 +40,13 @@
                             <div class="tiket-ruler"></div>
                             <div class="ticket">
                                 <div class="ticketTitle mb-2">
-                                    <div class="row">
+                                    <div class="row mb-3">
                                         <div class="col-3">
                                             <img src="{{ asset('img/logo.png') }}" alt="icon" width="50px"
                                                 height="40px">
                                         </div>
                                         <div class="col-9">
-                                            <p class="text-end">
+                                            <p class="text-end" style="padding-top: 5px;">
                                                 {{ \Carbon\Carbon::parse($booking->date_start)->translatedFormat('l, d F Y') }}
                                             </p>
                                         </div>

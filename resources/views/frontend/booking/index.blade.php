@@ -7,6 +7,14 @@
     <!-- NAVBAR -->
     <x-navbar-customer />
 
+    <!-- BREADCRUMBS -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb d-flex justify-content-center align-items-center">
+            <li class="breadcrumb-item"><a href="{{route('homepage')}}">Beranda</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Formulir Pemesanan</li>
+        </ol>
+    </nav>
+
     <!-- CONTENT -->
     <!-- TITLE -->
     <section id="pemesanan">
