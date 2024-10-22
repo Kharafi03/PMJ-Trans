@@ -41,7 +41,20 @@
                                                 bg-danger @endif">
                                             {{ $booking->ms_booking->name }}
                                         </span> -->
-                                        {{ $booking->ms_booking->name }}
+                                        <span class="
+                                            @if ($booking->ms_booking->id == 1) 
+                                                draf
+                                            @elseif ($booking->ms_booking->id == 2)
+                                                diterima
+                                            @elseif ($booking->ms_booking->id == 3)
+                                                ditolak
+                                            @elseif ($booking->ms_booking->id == 4)
+                                                selesai
+                                            @elseif ($booking->ms_booking->id == 5)
+                                                dibatalkan @endif">
+                                            {{ $booking->ms_booking->name }}
+                                        </span>
+                                        <!-- {{ $booking->ms_booking->name }} -->
                                     </td>
                                 </tr>
                                 <tr>
@@ -103,7 +116,18 @@
                                             @elseif ($booking->ms_payment->id == 4)
                                                 bg-primary @endif">
                                         {{ $booking->ms_payment->name }} -->
-                                        {{ $booking->ms_payment->name }}
+                                        <span class="
+                                            @if ($booking->ms_payment->id == 1) 
+                                                draf
+                                            @elseif ($booking->ms_payment->id == 2)
+                                                belumBayar
+                                            @elseif ($booking->ms_payment->id == 3)
+                                                sudahBayar
+                                            @elseif ($booking->ms_payment->id == 4)
+                                                lunas @endif">
+                                            {{ $booking->ms_payment->name }}
+                                        </span>
+                                        <!-- {{ $booking->ms_payment->name }} -->
                                     </td>
                                 </tr>
                                 <tr>
@@ -133,78 +157,84 @@
                                 <p style="font-size: 20px; font-weight: 500; color: black;">Terima kasih telah menggunakan sewa bus kami! Sampai jumpa di pemesanan selanjutnya!</p>
                             </div>
                             <div class="col-md-12">
-                                <div class="d-flex align-items-center mb-3" data-bs-toggle="collapse" href="#feedbackForm"
+                                <!-- <div class="d-flex align-items-center mb-3" data-bs-toggle="collapse" href="#feedbackForm"
                                     aria-expanded="false">
                                     <div style="border-top: 1px solid #000; flex-grow: 1;"></div>
                                     <span class="btn btn-lihat mx-3">Lihat Ulasan <i class="fas fa-chevron-down"></i></span>
+                                </div> -->
+                                <div class="d-flex align-items-center mb-3" data-bs-toggle="collapse" href="#feedbackForm" aria-expanded="false">
+                                    <div style="border-top: 1px solid #000; flex-grow: 1;"></div>
+                                    <span class="btn btn-lihat mx-3">Lihat Ulasan&nbsp;<i class="fas fa-chevron-down"></i></span>
                                 </div>
-                                @if ($feedbacks->isNotEmpty())
-                                    @foreach ($feedbacks as $feedback)
-                                        <div id="feedbackForm" class="collapse">
-                                            <h3 class="mt-4 mb-3">Ulasan Anda</h3>
-                                            <div class="mb-3">
-                                                <textarea class="form-control bg-light" id="feedback" name="feedback" rows="3" required disabled>{{ $feedback->feedback }}</textarea>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="rating">Rating</label>
-                                                <div class="rating-stars">
-                                                    @for ($i = 1; $i <= 5; $i++)
-                                                        @if ($i <= $feedback->rating)
-                                                            <span class="star" data-rating="{{ $i }}"><i
-                                                                    class="fas fa-star text-warning"></i></span>
-                                                        @else
-                                                            <span class="star" data-rating="{{ $i }}"><i
-                                                                    class="fas fa-star text-secondary"></i></span>
-                                                        @endif
-                                                    @endfor
+                                <div id="feedbackForm" class="collapse">
+                                    @if ($feedbacks->isNotEmpty())
+                                        @foreach ($feedbacks as $feedback)
+                                            <div id="feedbackForm" class="collapse">
+                                                <h3 class="mt-4 mb-3">Ulasan Anda</h3>
+                                                <div class="mb-3">
+                                                    <textarea class="form-control bg-light" id="feedback" name="feedback" rows="3" required disabled>{{ $feedback->feedback }}</textarea>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="rating">Rating</label>
+                                                    <div class="rating-stars">
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                            @if ($i <= $feedback->rating)
+                                                                <span class="star" data-rating="{{ $i }}"><i
+                                                                        class="fas fa-star text-warning"></i></span>
+                                                            @else
+                                                                <span class="star" data-rating="{{ $i }}"><i
+                                                                        class="fas fa-star text-secondary"></i></span>
+                                                            @endif
+                                                        @endfor
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endforeach
-                                @endif
+                                        @endforeach
+                                    @endif
+                                </div>
                             </div>
                         @endif
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="row mb-4">
+                <div class="col-md-6 mt-2">
+                    <div class="row">
                         <div class="col-md-7">
-                            <div class="text-content text-center">
-                                <h5 style="font-size: 44px; font-weight: 700; color: #1E9781;">Riwayat <span style="color: #FD9C07;">Sewa</span></h5>
+                            <div class="text-content">
+                                <h5 style="font-size: 32px; font-weight: 700; color: #1E9781;">Detail <span style="color: #FD9C07;">Pemesanan</span></h5>
                             </div>
                         </div>
-                        <div class="col-md-5" style="padding-top: 10px;">
+                        <div class="col-md-5">
                             @if ($booking->ms_booking->id == 1)
                                 <!-- <p class="mb-4">Silahkan menunggu admin mengkonfirmasi</p> -->
-                                <p class="mb-4 status-draf">Status Pemesanan : Diproses</p>
+                                <p class="status-draf">Status Pemesanan : Diproses</p>
                                 @elseif ($booking->ms_booking->id == 2)
                                     <!-- <p class="mb-4">Pemesanan 
                                         <span class="badge bg-success">
                                             Diterima
                                         </span>
                                     </p> -->
-                                    <p class="mb-4 status-diterima">Status Pemesanan : Diterima</p>
+                                    <p class="status-diterima">Status Pemesanan : Diterima</p>
                                     @elseif ($booking->ms_booking->id == 3)
                                         <!-- <p class="mb-4">Pemesanan 
                                             <span class="badge bg-danger">
                                                 Ditolak
                                             </span>
                                         </p> -->
-                                        <p class="mb-4 status-ditolak">Status Pemesanan : Ditolak</p>
+                                        <p class="status-ditolak">Status Pemesanan : Ditolak</p>
                                     @elseif ($booking->ms_booking->id == 4)
                                         <!-- <p class="mb-4">Pemesanan 
                                             <span class="badge bg-primary">
                                                 Selesai
                                             </span>
                                         </p> -->
-                                        <p class="mb-4 status-selesai">Status Pemesanan : Selesai</p>
+                                        <p class="status-selesai">Status Pemesanan : Selesai</p>
                                     @elseif ($booking->ms_booking->id == 5)
                                         <!-- <p class="mb-4">Pemesanan
                                             <span class="badge bg-danger">
                                                 Dibatalkan
                                             </span>
                                         </p> -->
-                                        <p class="mb-4 status-dibatalkan">Status Pemesanan : Dibatalkan</p>
+                                        <p class="status-dibatalkan">Status Pemesanan : Dibatalkan</p>
                             @endif
                             <!-- @if ($booking->ms_payment->id == 1)
                                 <h4 class="mb-4">Status Pembayaran:
@@ -233,6 +263,44 @@
                             @endif -->
                         </div>
                     </div>
+                    <div class="row mb-3">
+                        <div class="col-md-7">
+                            <div class="text-content">
+                                <h5 style="font-size: 32px; font-weight: 700; color: #1E9781;">Detail <span style="color: #FD9C07;">Pembayaran</span></h5>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                        @if ($booking->ms_payment->id == 1)
+                                <!-- <h4 class="mb-4">Status Pembayaran:
+                                    <span class="badge bg-warning">
+                                        {{ $booking->ms_payment->name }}
+                                    </span>
+                                </h4> -->
+                                <p class="status-draf">Status Pembayaran : {{ $booking->ms_payment->name }}</p>
+                            @elseif ($booking->ms_payment->id == 2)
+                                <!-- <h4 class="mb-4">Status Pembayaran:
+                                    <span class="badge bg-success">
+                                        {{ $booking->ms_payment->name }}
+                                    </span>
+                                </h4> -->
+                                <p class="status-belumBayar">Status Pembayaran : {{ $booking->ms_payment->name }}</p>
+                            @elseif ($booking->ms_payment->id == 3)
+                                <!-- <h4 class="mb-4">Status Pembayaran: 
+                                    <span class="badge bg-info">
+                                        {{ $booking->ms_payment->name }}
+                                    </span>
+                                </h4> -->
+                                <p class="status-sudahBayar">Status Pembayaran : {{ $booking->ms_payment->name }}</p>
+                            @elseif ($booking->ms_payment->id == 4)
+                                <!-- <h4 class="mb-4">Status Pembayaran: 
+                                    <span class="badge bg-primary">
+                                    {{ $booking->ms_payment->name }}
+                                    </span>
+                                </h4> -->
+                                <p class="status-selesai">Status Pembayaran : {{ $booking->ms_payment->name }}</p>
+                            @endif
+                        </div>
+                    </div>
                     <div class="row">
                         @if ($booking->incomes->isNotEmpty())
                             <div class="row">
@@ -245,7 +313,18 @@
                                                 <div class="header text-center d-flex flex-column justify-content-center align-items-center">
                                                     <p class="bayar-title">DP ke-{{ $dpCount }}</p>
                                                     <h5>Rp {{ number_format($income->nominal, 0, ',', '.') }}</h5>
-                                                    <p class="status">Status: {{ $income->ms_income->name }}</p>
+                                                    <!-- <p class="status">Status: {{ $income->ms_income->name }}</p> -->
+                                                    <p class="
+                                                        @if ($booking->ms_payment->id == 1) 
+                                                            draf
+                                                        @elseif ($booking->ms_payment->id == 2)
+                                                            belumBayar
+                                                        @elseif ($booking->ms_payment->id == 3)
+                                                            sudahBayar
+                                                        @elseif ($booking->ms_payment->id == 4)
+                                                            lunas @endif">
+                                                        Status : {{ $booking->ms_payment->name }}
+                                                    </p>
                                                     <img src="{{ asset('storage/' . $income->image_receipt) }}" alt="Bukti Pembayaran" class="img-fluid" style="width: 100%;">
                                                 </div>
                                             </div>
@@ -267,7 +346,18 @@
                                         class="header text-center d-flex flex-column justify-content-center align-items-center">
                                         <p class="bayar-title">Pelunasan ke-{{ $pelunasanCount }}</p>
                                         <h5>Rp {{ number_format($income->nominal, 0, ',', '.') }}</h5>
-                                        <p class="status">Status: {{ $income->ms_income->name }}</p>
+                                        <!-- <p class="status">Status: {{ $income->ms_income->name }}</p> -->
+                                        <p class="
+                                            @if ($booking->ms_payment->id == 1) 
+                                                draf
+                                            @elseif ($booking->ms_payment->id == 2)
+                                                belumBayar
+                                            @elseif ($booking->ms_payment->id == 3)
+                                                sudahBayar
+                                            @elseif ($booking->ms_payment->id == 4)
+                                                lunas @endif">
+                                            Status : {{ $booking->ms_payment->name }}
+                                        </p>
                                         <img src="{{ asset('storage/' . $income->image_receipt) }}" alt="Bukti Pembayaran"
                                             class="img-fluid" style="width: 100%;">
                                     </div>

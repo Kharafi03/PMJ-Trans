@@ -14,8 +14,8 @@
             <div class="header-text" >
               <h1 style="color: #1E9781;">Menghubungkan Anda ke Seluruh<br><span style="color: #FD9C07;">Destinasi🏝️</span></h1>
               <div class="d-flex">
-                <button class="btn-pesan">Pesan Sekarang <i class="fa-solid fa-arrow-right"></i></button>
-                <button class="btn-callAdmin"><i class="fa-solid fa-phone"></i> Hubungi Admin</button>
+                <button class="btn-pesan"><a href="{{ route('booking.store')}}" style="text-decoration: none; color: white;">Pesan Sekarang <i class="fa-solid fa-arrow-right"></i></a></button>
+                <button class="btn-callAdmin"><a href="https://api.whatsapp.com/send?phone=6281225625255&text=Halo,%20saya%20ingin%20bertanya" style="text-decoration: none;color: #686D77;"><i class="fa-solid fa-phone"></i> Hubungi Admin</a></button>
               </div>
             </div>
           </div>
@@ -27,215 +27,214 @@
 
     <!-- DAFTAR BUS -->
     <section id="package">
-        <div class="package-container container">
+      <div class="package-container container">
           <h5 style="font-size: 44px; font-weight: 700; color: #1E9781;">Daftar <span style="color: #FD9C07;">Bus PMJ</span></h5>
           <p style="font-size: 20px; font-weight: 600; color: #666666B5;">Berikut daftar bus yang tersedia di PMJ Trans.</p>
-          <div id="daftar-bus" class="carousel slide carousel-dark mb-5">
-            <div class="carousel-inner">
-              <!-- Carousel Item 1 -->
-              <div class="carousel-item active">
-                <div class="row">
-                  <!-- Card 1 -->
-                  <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="package-card card h-100">
-                      <img src="img/pmj02-1.jpg" alt="Bus 1" class="img-fluid">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <p class="package-card-title">PMJ 01</p>
-                            <div class="package-icon">
-                                <i class="fa-solid fa-star"></i> 4.8
-                            </div>  
-                        </div>
-                        <p class="small">Jetbus 3+ Voyager Adiputro</p>
-                        <div class="row mt-3 mb-3 text-center">
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-bed"></i>
-                            <p>Bantal & Selimut</p>
+          <div id="daftar-bus" class="carousel slide carousel-dark mb-5" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                  <!-- Carousel Item 1 -->
+                  <div class="carousel-item active">
+                      <div class="row">
+                          <!-- Card 1 -->
+                          <div class="col-12 col-md-6 col-lg-4 mb-4">
+                              <div class="package-card card h-100">
+                                  <img src="img/pmj02-1.jpg" alt="Bus 1" class="img-fluid">
+                                  <div class="card-body">
+                                      <div class="d-flex justify-content-between">
+                                          <p class="package-card-title">PMJ 01</p>
+                                          <div class="package-icon">
+                                              <i class="fa-solid fa-star"></i> 4.8
+                                          </div>
+                                      </div>
+                                      <p class="small">Jetbus 3+ Voyager Adiputro</p>
+                                      <div class="row mt-3 mb-3 text-center">
+                                          <div class="col-3 text-icon">
+                                              <i class="fa-solid fa-bed"></i>
+                                              <p>Bantal & Selimut</p>
+                                          </div>
+                                          <div class="col-3 text-icon">
+                                              <i class="fa-solid fa-tv"></i>
+                                              <p>Entertain System</p>
+                                          </div>
+                                          <div class="col-3 text-icon">
+                                              <i class="fa-solid fa-mug-hot"></i>
+                                              <p>Dispenser</p>
+                                          </div>
+                                          <div class="col-3 text-icon">
+                                              <i class="fa-solid fa-bolt"></i>
+                                              <p>USB Charger</p>
+                                          </div>
+                                      </div>
+                                      <div class="detail-package d-flex justify-content-end">
+                                          <button type="button" class="btn-detail">Detail</button>
+                                      </div>
+                                  </div>
+                              </div>
                           </div>
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-tv"></i>
-                            <p>Entertain System</p>
+                          <!-- Card 2 -->
+                          <div class="col-12 col-md-6 col-lg-4 mb-4 d-none d-md-block">
+                              <div class="package-card card h-100">
+                                  <img src="img/pmj03-1.jpg" alt="Bus 2" class="img-fluid">
+                                  <div class="card-body">
+                                      <div class="d-flex justify-content-between">
+                                          <p class="package-card-title">PMJ 02</p>
+                                          <div class="package-icon">
+                                              <i class="fa-solid fa-star"></i> 4.8
+                                          </div>
+                                      </div>
+                                      <p class="small">Jetbus 3+ Voyager Adiputro</p>
+                                      <div class="row mt-3 mb-3 text-center">
+                                          <div class="col-3 text-icon">
+                                              <i class="fa-solid fa-bed"></i>
+                                              <p>Bantal & Selimut</p>
+                                          </div>
+                                          <div class="col-3 text-icon">
+                                              <i class="fa-solid fa-tv"></i>
+                                              <p>Entertain System</p>
+                                          </div>
+                                          <div class="col-3 text-icon">
+                                              <i class="fa-solid fa-mug-hot"></i>
+                                              <p>Dispenser</p>
+                                          </div>
+                                          <div class="col-3 text-icon">
+                                              <i class="fa-solid fa-bolt"></i>
+                                              <p>USB Charger</p>
+                                          </div>
+                                      </div>
+                                      <div class="detail-package d-flex justify-content-end">
+                                          <button type="button" class="btn-detail">Detail</button>
+                                      </div>
+                                  </div>
+                              </div>
                           </div>
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-mug-hot"></i>
-                            <p>Dispenser</p>
+                          <div class="col-12 col-md-6 col-lg-4 mb-4 d-none d-md-block">
+                              <div class="package-card card h-100">
+                                  <img src="img/pmj03-1.jpg" alt="Bus 2" class="img-fluid">
+                                  <div class="card-body">
+                                      <div class="d-flex justify-content-between">
+                                          <p class="package-card-title">PMJ 02</p>
+                                          <div class="package-icon">
+                                              <i class="fa-solid fa-star"></i> 4.8
+                                          </div>
+                                      </div>
+                                      <p class="small">Jetbus 3+ Voyager Adiputro</p>
+                                      <div class="row mt-3 mb-3 text-center">
+                                          <div class="col-3 text-icon">
+                                              <i class="fa-solid fa-bed"></i>
+                                              <p>Bantal & Selimut</p>
+                                          </div>
+                                          <div class="col-3 text-icon">
+                                              <i class="fa-solid fa-tv"></i>
+                                              <p>Entertain System</p>
+                                          </div>
+                                          <div class="col-3 text-icon">
+                                              <i class="fa-solid fa-mug-hot"></i>
+                                              <p>Dispenser</p>
+                                          </div>
+                                          <div class="col-3 text-icon">
+                                              <i class="fa-solid fa-bolt"></i>
+                                              <p>USB Charger</p>
+                                          </div>
+                                      </div>
+                                      <div class="detail-package d-flex justify-content-end">
+                                          <button type="button" class="btn-detail">Detail</button>
+                                      </div>
+                                  </div>
+                              </div>
                           </div>
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-bolt"></i>
-                            <p>USB Charger</p>
-                          </div>
-                        </div>
-                        <div class="detail-package d-flex justify-content-end">
-                          <button type="button" class="btn-detail">Detail</button>
-                        </div>
-                      </div>   
-                    </div>
-                  </div>
-                  <!-- Card 2 -->
-                  <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="package-card card h-100">
-                      <img src="img/pmj03-1.jpg" alt="Bus 2" class="img-fluid">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <p class="package-card-title">PMJ 02</p>
-                            <div class="package-icon">
-                                <i class="fa-solid fa-star"></i> 4.8
-                            </div>
-                        </div>
-                        <p class="small">Jetbus 3+ Voyager Adiputro</p>
-                        <div class="row mt-3 mb-3 text-center">
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-bed"></i>
-                            <p>Bantal & Selimut</p>
-                          </div>
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-tv"></i>
-                            <p>Entertain System</p>
-                          </div>
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-mug-hot"></i>
-                            <p>Dispenser</p>
-                          </div>
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-bolt"></i>
-                            <p>USB Charger</p>
-                          </div>
-                        </div>
-                        <div class="detail-package d-flex justify-content-end">
-                          <button type="button" class="btn-detail">Detail</button>
-                        </div>
                       </div>
-                    </div>
                   </div>
-                  <!-- Card 3 -->
-                  <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="package-card card h-100">
-                      <img src="img/pmj03-1.jpg" alt="Bus 3" class="img-fluid">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <p class="package-card-title">PMJ 03</p>
-                            <div class="package-icon">
-                                <i class="fa-solid fa-star"></i> 4.8
-                            </div>  
-                        </div>
-                        <p class="small">Jetbus 3+ Voyager Adiputro</p>
-                        <div class="row mt-3 mb-3 text-center">
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-bed"></i>
-                            <p>Bantal & Selimut</p>
+                  <!-- Carousel Item 2 -->
+                  <div class="carousel-item">
+                      <div class="row">
+                          <!-- Card 3 -->
+                          <div class="col-12 col-md-6 col-lg-4 mb-4">
+                              <div class="package-card card h-100">
+                                  <img src="img/pmj03-1.jpg" alt="Bus 3" class="img-fluid">
+                                  <div class="card-body">
+                                      <div class="d-flex justify-content-between">
+                                          <p class="package-card-title">PMJ 03</p>
+                                          <div class="package-icon">
+                                              <i class="fa-solid fa-star"></i> 4.8
+                                          </div>
+                                      </div>
+                                      <p class="small">Jetbus 3+ Voyager Adiputro</p>
+                                      <div class="row mt-3 mb-3 text-center">
+                                          <div class="col-3 text-icon">
+                                              <i class="fa-solid fa-bed"></i>
+                                              <p>Bantal & Selimut</p>
+                                          </div>
+                                          <div class="col-3 text-icon">
+                                              <i class="fa-solid fa-tv"></i>
+                                              <p>Entertain System</p>
+                                          </div>
+                                          <div class="col-3 text-icon">
+                                              <i class="fa-solid fa-mug-hot"></i>
+                                              <p>Dispenser</p>
+                                          </div>
+                                          <div class="col-3 text-icon">
+                                              <i class="fa-solid fa-bolt"></i>
+                                              <p>USB Charger</p>
+                                          </div>
+                                      </div>
+                                      <div class="detail-package d-flex justify-content-end">
+                                          <button type="button" class="btn-detail">Detail</button>
+                                      </div>
+                                  </div>
+                              </div>
                           </div>
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-tv"></i>
-                            <p>Entertain System</p>
+                          <!-- Card 4 -->
+                          <div class="col-12 col-md-6 col-lg-4 mb-4 d-none d-md-block">
+                              <div class="package-card card h-100">
+                                  <img src="img/pmj02-1.jpg" alt="Bus 4" class="img-fluid">
+                                  <div class="card-body">
+                                      <div class="d-flex justify-content-between">
+                                          <p class="package-card-title">PMJ 04</p>
+                                          <div class="package-icon">
+                                              <i class="fa-solid fa-star"></i> 4.9
+                                          </div>
+                                      </div>
+                                      <p class="small">Jetbus 3+ Voyager Adiputro</p>
+                                      <div class="row mt-3 mb-3 text-center">
+                                          <div class="col-3 text-icon">
+                                              <i class="fa-solid fa-bed"></i>
+                                              <p>Bantal & Selimut</p>
+                                          </div>
+                                          <div class="col-3 text-icon">
+                                              <i class="fa-solid fa-tv"></i>
+                                              <p>Entertain System</p>
+                                          </div>
+                                          <div class="col-3 text-icon">
+                                              <i class="fa-solid fa-mug-hot"></i>
+                                              <p>Dispenser</p>
+                                          </div>
+                                          <div class="col-3 text-icon">
+                                              <i class="fa-solid fa-bolt"></i>
+                                              <p>USB Charger</p>
+                                          </div>
+                                      </div>
+                                      <div class="detail-package d-flex justify-content-end">
+                                          <button type="button" class="btn-detail">Detail</button>
+                                      </div>
+                                  </div>
+                              </div>
                           </div>
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-mug-hot"></i>
-                            <p>Dispenser</p>
-                          </div>
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-bolt"></i>
-                            <p>USB Charger</p>
-                          </div>
-                        </div>
-                        <div class="detail-package d-flex justify-content-end">
-                          <button type="button" class="btn-detail">Detail</button>
-                        </div>
-                      </div>   
-                    </div>
+                      </div>
                   </div>
-                </div>
               </div>
-              <!-- Carousel Item 2 -->
-              <div class="carousel-item">
-                <div class="row">
-                  <!-- Card 4 -->
-                  <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="package-card card h-100">
-                      <img src="img/pmj03-1.jpg" alt="Bus 4" class="img-fluid">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <p class="package-card-title">PMJ 04</p>
-                            <div class="package-icon">
-                                <i class="fa-solid fa-star"></i> 4.9
-                            </div>  
-                        </div>
-                        <p class="small">Jetbus 3+ Voyager Adiputro</p>
-                        <div class="row mt-3 mb-3 text-center">
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-bed"></i>
-                            <p>Bantal & Selimut</p>
-                          </div>
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-tv"></i>
-                            <p>Entertain System</p>
-                          </div>
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-mug-hot"></i>
-                            <p>Dispenser</p>
-                          </div>
-                          <div class="col-3 text-icon">
-                            <i class="fa-solid fa-bolt"></i>
-                            <p>USB Charger</p>
-                          </div>
-                        </div>
-                        <div class="detail-package d-flex justify-content-end">
-                          <button type="button" class="btn-detail">Detail</button>
-                        </div>
-                      </div>       
-                    </div>
-                  </div>
-                  <!-- Card 5 -->
-                  <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="package-card card h-100">
-                        <img src="img/pmj02-1.jpg" alt="Bus 5" class="img-fluid">
-                        <div class="card-body">
-                          <div class="d-flex justify-content-between">
-                              <p class="package-card-title">PMJ 05</p>
-                              <div class="package-icon">
-                                  <i class="fa-solid fa-star"></i> 4.7
-                              </div>  
-                          </div>
-                          <p class="small">Jetbus 3+ Voyager Adiputro</p>
-                          <div class="row mt-3 mb-3 text-center">
-                            <div class="col-3 text-icon">
-                              <i class="fa-solid fa-bed"></i>
-                              <p>Bantal & Selimut</p>
-                            </div>
-                            <div class="col-3 text-icon">
-                              <i class="fa-solid fa-tv"></i>
-                              <p>Entertain System</p>
-                            </div>
-                            <div class="col-3 text-icon">
-                              <i class="fa-solid fa-mug-hot"></i>
-                              <p>Dispenser</p>
-                            </div>
-                            <div class="col-3 text-icon">
-                              <i class="fa-solid fa-bolt"></i>
-                              <p>USB Charger</p>
-                            </div>
-                          </div>
-                          <div class="detail-package d-flex justify-content-end">
-                            <button type="button" class="btn-detail">Detail</button>
-                          </div>
-                      </div>  
-                    </div>
-                  </div>
-                  
-                </div>
-              </div>
-            </div>
               <!-- Navigation Buttons -->
-            <button class="package-button package-control-prev" type="button" data-bs-target="#daftar-bus" data-bs-slide="prev">
-                <span aria-hidden="true"><i class="fa-solid fa-chevron-left"></i></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="package-button package-control-next" type="button" data-bs-target="#daftar-bus" data-bs-slide="next">
-                <span aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+              <button class="package-button package-control-prev" type="button" data-bs-target="#daftar-bus" data-bs-slide="prev">
+                  <span aria-hidden="true"><i class="fa-solid fa-chevron-left"></i></span>
+                  <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="package-button package-control-next" type="button" data-bs-target="#daftar-bus" data-bs-slide="next">
+                  <span aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
+                  <span class="visually-hidden">Next</span>
+              </button>
           </div>
-        </div>
+      </div>
     </section>
+
 
     <!-- KENAPA -->
     <section id="why">
@@ -245,7 +244,7 @@
                     <p style="font-size: 20px; font-weight: 600; color: #666666B5;">Berikut alasan yang kenapa harus sewa
                         di PMJ</p>
                 </div>
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 p-5">
+                <div class="row mt-5">
                     <div class="col-md-4 mb-3" id="card1">
                         <div class="why-card card h-100 d-flex justify-content-center align-items-center">
                             <img class="img-fluid mb-4" src="img/why-image1.png" width="60px" height="60px"
@@ -415,11 +414,11 @@
                         </div>
                     </div>
 
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselTestimoni"
+                    <button class="testi-control-prev" type="button" data-bs-target="#carouselTestimoni"
                         data-bs-slide="prev">
                         <i class="fa-solid fa-chevron-left"></i>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselTestimoni"
+                    <button class="testi-control-next" type="button" data-bs-target="#carouselTestimoni"
                         data-bs-slide="next">
                         <i class="fa-solid fa-chevron-right"></i>
                     </button>
