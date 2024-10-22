@@ -2,14 +2,15 @@
 
 namespace App\Filament\Resources\BookingResource\Pages;
 
-use App\Filament\Resources\BookingResource;
 use Filament\Actions;
-use Filament\Resources\Pages\ListRecords;
-use Filament\Tables\Actions\BulkAction;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\BookingsExport;
 use App\Models\Booking;
+use App\Exports\BookingsExport;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\HtmlString;
+use Maatwebsite\Excel\Facades\Excel;
+use Filament\Tables\Actions\BulkAction;
+use Filament\Resources\Pages\ListRecords;
+use App\Filament\Resources\BookingResource;
 
 class ListBookings extends ListRecords
 {
@@ -22,7 +23,8 @@ class ListBookings extends ListRecords
 
             // Aksi untuk download semua data sebagai PDF
             Actions\Action::make('downloadAllPDF')
-                ->label('Download PDF')
+                ->label('PDF')
+                ->icon('heroicon-o-document') 
                 ->action(function () {
                     $bookings = Booking::all();
                     $pdf = Pdf::loadView('pdf.bookings', ['bookings' => $bookings]);
@@ -39,15 +41,23 @@ class ListBookings extends ListRecords
                     );
                 })
                 ->requiresConfirmation()
-                ->color('info'),
+                ->color('danger'),
+
+           // Aksi untuk import exvel
+                \EightyNine\ExcelImport\ExcelImportAction::make()
+                ->color('info')
+                ->label("Import Excel")
+                ->modalDescription(new HtmlString('Download Format Excel <a class="underline text-blue-600" href="/format_booking.xlsx">disini</a>')),
 
             // Aksi untuk export semua data ke Excel
             Actions\Action::make('exportExcel')
                 ->label('Export Excel')
+                ->icon('heroicon-o-arrow-up-on-square') 
                 ->action(function () {
                     return Excel::download(new BookingsExport(Booking::all()), 'bookings.xlsx');
                 })
                 ->color('warning'),
+
         ];
     }
 

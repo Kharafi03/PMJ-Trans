@@ -19,9 +19,20 @@ class UserResource extends Resource
 
     protected static ?string $navigationGroup = 'User Management';
 
+    protected static ?string $recordTitleAttribute = 'number_phone';
+    
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'email', 'number_phone'];
+    }
+
     protected static ?int $navigationSort = 2;
 
+    protected static ?string $slug = 'users';
+
+
     public static function getNavigationBadge(): ?string
+
     {
         return static::getModel()::whereNull('deleted_at')->count();
     }
@@ -30,7 +41,6 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                // Card pertama dengan Grid 2 kolom
                 Forms\Components\Card::make()
                     ->heading('Data Utama')
                     ->schema([
@@ -57,13 +67,19 @@ class UserResource extends Resource
                                     ->maxLength(255)
                                     ->placeholder('Masukan alamat tempat tinggal'),
                                 Forms\Components\TextInput::make('password')
-                                    ->label('Password')
                                     ->password()
+                                    ->placeholder('Password minimal 8 karakter. minimal 1 huruf besar, 1 angka, 1 karakter spesial')
+                                    ->required(fn($record) => $record === null)
+                                    ->minLength(8)
+                                    ->maxLength(20)
                                     ->revealable()
-                                    ->maxLength(255)
-                                    ->dehydrated(fn($state) => filled($state)) // Password hanya dikirim jika ada isi
-                                    ->placeholder('Password minimal 8 karakter. minimal 1 huruf besar, 1 angka, 1 karater spesial')
-                                    ->nullable(), // Mengizinkan nilai kosong
+                                    ->dehydrateStateUsing(function ($state, $record) {
+                                        if ($record === null) {
+                                            return bcrypt($state);
+                                        } else {
+                                            return $state ? bcrypt($state) : $record->password;
+                                        }
+                                    }),
                                 Forms\Components\TextInput::make('nik')
                                     ->label('NIK')
                                     ->numeric()
@@ -72,7 +88,6 @@ class UserResource extends Resource
                             ]),
                     ]),
 
-                // Card untuk upload file SIM
                 Forms\Components\Card::make()
                     ->heading('Unggah File SIM')
                     ->schema([
@@ -87,7 +102,6 @@ class UserResource extends Resource
                             ->maxSize(2048),
                     ]),
 
-                // Card dengan pilihan select, juga dengan Grid 2 kolom
                 Forms\Components\Card::make()
                     ->heading('Informasi User')
                     ->schema([
@@ -112,22 +126,21 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-
                 Tables\Columns\TextColumn::make('id')
-                    ->label('Nomor')
-                    ->sortable(),
+                ->label('Nomor')
+                ->sortable(),
                 Tables\Columns\TextColumn::make('name')
-                    ->label('Nama')
-                    ->searchable()
-                    ->sortable(),
+                ->label('Nama')
+                ->searchable()
+                ->sortable(),
                 Tables\Columns\TextColumn::make('number_phone')
-                    ->label('No. Hp')
-                    ->searchable()
-                    ->sortable(),
+                ->label('No. Hp')
+                ->searchable()
+                ->sortable(),
                 Tables\Columns\TextColumn::make('email')
-                    ->label('Email')
-                    ->searchable()
-                    ->sortable(),
+                ->label('Email')
+                ->searchable()
+                ->sortable(),
                 Tables\Columns\BadgeColumn::make('roles.name')
                     ->label('Peran')
                     ->searchable()
@@ -138,55 +151,57 @@ class UserResource extends Resource
                         'warning' => 'panel_user',
                         'danger' => 'super_admin',
                     ])
-                    ->formatStateUsing(function ($state) {
-                        return ucfirst($state);
-                    }),
+                    ->formatStateUsing(fn($state) => ucfirst($state)),
                 Tables\Columns\TextColumn::make('msUsers.name')
-                    ->label('Status')
-                    ->searchable()
-                    ->sortable(),
+                ->label('Status')
+                ->searchable()
+                ->sortable(),
                 Tables\Columns\TextColumn::make('deleted_at')
-                    ->label('Tanggal dihapus')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                ->label('Tanggal dihapus')
+                ->dateTime()->sortable()
+                ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Tanggal dibuat')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                ->label('Tanggal dibuat')
+                ->dateTime()
+                ->sortable()
+                ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Tanggal diubah')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                ->label('Tanggal diubah')
+                ->dateTime()
+                ->sortable()
+                ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
                 Tables\Filters\SelectFilter::make('id_role')
-                    ->label('Peran')
-                    ->relationship('roles', 'name'),
+                ->label('Peran')
+                ->relationship('roles', 'name'),
                 Tables\Filters\SelectFilter::make('id_ms')
-                    ->label('Status')
-                    ->relationship('msUsers', 'name'),
+                ->label('Status')
+                ->relationship('msUsers', 'name'),
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
+                Tables\Actions\ForceDeleteAction::make(),
                 Tables\Actions\ViewAction::make()
-                    ->label('Lihat')
-                    ->modalHeading('Lihat User'),
+                ->label('Lihat')
+                ->modalHeading('Lihat User'),
                 Tables\Actions\EditAction::make()
-                    ->label('Edit')
-                    ->modalHeading('Edit User')
-                    ->modalButton('Simpan Perubahan'),
+                ->label('Edit')
+                ->modalHeading('Edit User')
+                ->modalButton('Simpan Perubahan'),
                 Tables\Actions\DeleteAction::make()
-                    ->label('Hapus')
+                ->label('Hapus'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->paginated([25, 50, 100, 'all']);
     }
+
     public static function getWidgets(): array
     {
         return [
@@ -196,9 +211,7 @@ class UserResource extends Resource
 
     public static function getRelations(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
     public static function getPages(): array
@@ -206,7 +219,7 @@ class UserResource extends Resource
         return [
             'index' => Pages\ListUsers::route('/'),
             'create' => Pages\CreateUser::route('/create'),
-            //'edit' => Pages\EditUser::route('/{record}/edit'),
+            // 'edit' => Pages\CreateUser::route('/{record}/edit'),
         ];
     }
 }

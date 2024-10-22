@@ -20,11 +20,12 @@ class MailResource extends Resource
 
     protected static ?int $navigationSort = 4;
 
+    protected static ?string $slug = 'kontak-kami';
+
     public static function getNavigationBadge(): ?string
     {
         $new = static::getModel()::whereColumn('created_at', 'updated_at')->count();
         if ($new > 0) {
-            //return (string) $newdraf;
             return "{$new}";
         }
         return "";
@@ -77,15 +78,6 @@ class MailResource extends Resource
                             ->email()
                             ->maxLength(255)
                             ->placeholder('Masukkan alamat email yang valid, harus berakhiran @gmail.com.'),
-                        // ->reactive()
-                        // ->afterStateUpdated(function ($set, $get) {
-                        //     if (!str_ends_with($get('email'), '@gmail.com')) {
-                        //         $set('email', ''); // Mengosongkan input jika tidak valid
-                        //     }
-                        //     if (self::isFormComplete($get)) {
-                        //         $set('template_chat', self::generateTemplateChat($get));
-                        //     }
-                        // }),
 
                         Forms\Components\Textarea::make('message')
                             ->label('Pesan')
@@ -205,18 +197,23 @@ class MailResource extends Resource
                     ->openUrlInNewTab()
                     ->color('info'),
             ])
-
+            ->filters([
+                Tables\Filters\TrashedFilter::make(),
+            ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->paginated([25, 50, 100, 'all']);
     }
 
     public static function getRelations(): array
     {
         return [
-            //
+            // Tambahkan relasi jika ada
         ];
     }
 

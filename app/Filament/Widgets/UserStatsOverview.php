@@ -6,11 +6,14 @@ use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 
 class UserStatsOverview extends BaseWidget
 {
+    use HasWidgetShield;
     protected function getStats(): array
     {
+    
         // Menghitung total driver berdasarkan role
         $roleDriver = Role::where('name', 'driver')->first();
         $totalDriver = $roleDriver ? User::role('driver')->count() : 0;

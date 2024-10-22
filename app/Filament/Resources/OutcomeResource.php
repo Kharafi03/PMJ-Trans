@@ -21,6 +21,8 @@ class OutcomeResource extends Resource
 
     protected static ?int $navigationSort = 3;
 
+    protected static ?string $slug = 'pengeluaran-booking';
+
     public static function getNavigationBadge(): ?string
     {
         $newdraf = static::getModel()::where('check', false)->count();
@@ -98,8 +100,9 @@ class OutcomeResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')
-                    ->label('No')
-                    ->sortable(),
+                ->label('No')
+                ->sortable()
+                ->searchable(),
                 BadgeColumn::make('m_outcome.name')
                     ->label('Tipe')
                     ->sortable()
@@ -112,10 +115,12 @@ class OutcomeResource extends Resource
                     }),
                 Tables\Columns\IconColumn::make('check')
                     ->label('Selesai')
-                    ->boolean(),
+                    ->boolean()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('booking.booking_code')
                     ->label('Kode Booking')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 BadgeColumn::make('m_method_payment.name')
                     ->label('Metode')
                     ->sortable()
@@ -131,26 +136,31 @@ class OutcomeResource extends Resource
                 Tables\Columns\TextColumn::make('nominal')
                     ->prefix('Rp. ')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('datetime')
                     ->label('Tanggal Pengeluaran')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->label('Tanggal dihapus')
                     ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Tanggal dibuat')
                     ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label('Tanggal diubah')
                     ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->searchable(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('id_m_outcome')
@@ -159,8 +169,10 @@ class OutcomeResource extends Resource
                 Tables\Filters\SelectFilter::make('id_m_method_payment')
                     ->label('Status Pemesanan')
                     ->relationship('m_method_payment', 'name'),
-            ])
+                Tables\Filters\TrashedFilter::make(),
+                    ])
             ->actions([
+                Tables\Actions\ForceDeleteAction::make(),
                 Tables\Actions\ViewAction::make()
                     ->label('Lihat')
                     ->modalHeading('Lihat Pengeluaran'),
@@ -175,8 +187,11 @@ class OutcomeResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->paginated([25, 50, 100, 'all']);
     }
 
     public static function getRelations(): array

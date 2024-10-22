@@ -81,9 +81,10 @@ class ReminderResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
+                Tables\Actions\ForceDeleteAction::make(),
                 Tables\Actions\ViewAction::make()
                     ->label('Lihat')
                     ->modalHeading('Lihat Reminder'),
@@ -92,13 +93,17 @@ class ReminderResource extends Resource
                     ->modalHeading('Edit Reminder')
                     ->modalButton('Simpan Perubahan'),
                 Tables\Actions\DeleteAction::make()
-                    ->label('Hapus')
+                    ->label('Hapus'),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->paginated([25, 50, 100, 'all']);
     }
 
     public static function getRelations(): array

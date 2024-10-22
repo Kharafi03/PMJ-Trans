@@ -24,10 +24,9 @@ class BusKirResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-check';
 
-    //protected static ?string $navigationGroup = 'Bus';
-
     protected static ?int $navigationSort = 14;
 
+    protected static ?string $slug = 'kir-bus';
 
     public static function form(Forms\Form $form): Forms\Form
     {
@@ -90,31 +89,30 @@ class BusKirResource extends Resource
             ->columns([
                 TextColumn::make('buses.name')
                     ->label('Bus')
-                    ->sortable(),
-
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('users.name')
                     ->label('User')
-                    ->sortable(),
-
+                    ->sortable()
+                    ->searchable(),
                 // TextColumn::make('description')
                 //     ->label('Deskripsi')
                 //     ->searchable(),
-
                 TextColumn::make('date_test')
                     ->label('Tanggal Uji KIR')
                     ->date()
-                    ->sortable(),
-
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('expiration')
                     ->label('Kadaluarsa KIR')
                     ->date()
-                    ->sortable(),
-
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('nominal')
                     ->label('Biaya')
                     ->prefix('Rp. ')
-                    ->sortable(),
-
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('deleted_at')
                     ->label('Tanggal dihapus')
                     ->dateTime()
@@ -132,7 +130,7 @@ class BusKirResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                    Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()
@@ -147,9 +145,14 @@ class BusKirResource extends Resource
             ])
 
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
-            ]);
-    }
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
+                ]),
+            ])
+            ->paginated([25, 50, 100, 'all']);
+            }
 
     public static function getRelations(): array
     {

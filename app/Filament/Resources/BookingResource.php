@@ -48,6 +48,8 @@ class BookingResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
+    protected static ?string $slug = 'booking';
+
     protected $refresh = ['table.records' => 10];
 
     public static function getNavigationBadge(): ?string
@@ -483,8 +485,11 @@ class BookingResource extends Resource
                 Tables\Filters\SelectFilter::make('id_ms_booking')
                     ->label('Status Pemesanan')
                     ->relationship('ms_booking', 'name'),
+                   
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
+                Tables\Actions\ForceDeleteAction::make(),
                 Tables\Actions\ViewAction::make()
                     //->label('Lihat')
                     ->modalWidth('7xl')
@@ -806,9 +811,15 @@ class BookingResource extends Resource
                 //->label(''),
             ])
             ->bulkActions([
-                DeleteBulkAction::make(),
-            ]);
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
+                ]),
+            ])
+            ->paginated([25, 50, 100, 'all']);
     }
+
 
     public static function getRelations(): array
     {

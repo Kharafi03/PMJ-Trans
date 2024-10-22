@@ -23,7 +23,7 @@ class IncomeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-m-currency-dollar';
 
-    //protected static ?string $navigationGroup = 'Pendapatan';
+    protected static ?string $slug = 'pendapatan-booking';
 
     protected static ?int $navigationSort = 2;
 
@@ -197,8 +197,10 @@ class IncomeResource extends Resource
                 Tables\Filters\SelectFilter::make('id_ms_income')
                     ->label('Status')
                     ->relationship('ms_income', 'name'),
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
+                Tables\Actions\ForceDeleteAction::make(),
                 Tables\Actions\ViewAction::make()
                     ->label('Lihat')
                     ->modalHeading('Lihat Pendapatan'),
@@ -212,8 +214,11 @@ class IncomeResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->paginated([25, 50, 100, 'all']);
     }
 
     public static function getRelations(): array

@@ -22,9 +22,10 @@ class BusTaxResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
-    // protected static ?string $navigationGroup = 'Bus';
-
     protected static ?int $navigationSort = 17;
+
+    protected static ?string $slug = 'pajak';
+
 
     public static function form(Form $form): Form
     {
@@ -98,30 +99,36 @@ class BusTaxResource extends Resource
                 Tables\Columns\TextColumn::make('buses.name')
                     ->numeric()
                     ->label('Bus')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('users.name')
                     ->numeric()
                     ->label('Pelaksana')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 // Tables\Columns\TextColumn::make('description')
                 //     ->label('Deskripsi')
                 //     ->searchable(),
                 Tables\Columns\TextColumn::make('date')
                     ->date()
                     ->label('Tanggal Pajak')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('expiration')
                     ->date()
                     ->label('Tgl Exp STNK')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('expiration_number_bus')
                     ->date()
                     ->label('Tgl Exp Nomor Bus')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('nominal')
                     ->prefix('Rp. ')
                     ->label('Biaya')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->label('Tanggal dihapus')
                     ->dateTime()
@@ -139,7 +146,7 @@ class BusTaxResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()
@@ -158,10 +165,12 @@ class BusTaxResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
                 ]),
-            ]);
-    }
-
+            ])
+            ->paginated([25, 50, 100, 'all']);
+            }
     public static function getRelations(): array
     {
         return [
