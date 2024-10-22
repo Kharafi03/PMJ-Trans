@@ -1,13 +1,12 @@
 /* BACKGROUND */
 
-/* section */
 html, body {
     margin: 0;
     overflow: hidden;
     height: 100%; /* Ensure body takes full height */
 }
 
-#register {
+#reset {
     display: flex;
     align-items: center; 
     height: 100vh; /* Set full viewport height */
@@ -123,7 +122,7 @@ img {
 }
 
 /* BUTTON */
-.btn-register {
+.btn-reset {
     height: 70px;
     width: 100%;
     background-color: #1e9781;
