@@ -48,6 +48,21 @@ class SpendTripController extends Controller
             'nominal' => 'required|numeric',
             'kilometer' => 'required|numeric',
             'image_receipt' => 'required|image|mimes:jpeg,png,jpg|max:2048', // Maksimal 2MB
+        ], [
+            'image_receipt.image' => 'File harus berupa gambar.',
+            'image_receipt.mimes' => 'File harus berupa jpeg, png, atau jpg.',
+            'image_receipt.max' => 'File tidak boleh lebih dari 2MB.',
+            'image_receipt.required' => 'Bukti pembayaran harus diunggah.',
+            'nominal.required' => 'Nominal harus diisi.',
+            'nominal.numeric' => 'Nominal harus berupa angka.',
+            'nominal.min' => 'Nominal harus lebih dari 0.',
+            'kilometer.required' => 'Kilometer harus diisi.',
+            'kilometer.numeric' => 'Kilometer harus berupa angka.',
+            'kilometer.min' => 'Kilometer harus lebih dari 0.',
+            'description.required' => 'Deskripsi harus diisi.',
+            'description.string' => 'Deskripsi harus berupa teks.',
+            'id_m_spend.required' => 'Pengeluaran harus dipilih.',
+            'id_m_spend.exists' => 'Pengeluaran tidak valid.',
         ]);
 
         // update trip_buses kolom total_spend

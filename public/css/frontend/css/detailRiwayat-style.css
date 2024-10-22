@@ -1,0 +1,142 @@
+/* TABEL */
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+    background-color: #F9F9FC ;
+}
+th, td{
+    font-size: 14px;
+    color: #333843;
+    font-weight: 500;
+    height: 50px;
+}
+
+/* ULASAN */
+#feedbackForm h3, #feedbackForm label{
+    font-size: 20px;
+    font-weight: 500;
+    color: black;
+}
+
+/* RATING ULASAN */
+
+.rating-stars {
+    cursor: pointer;
+    padding-top: 10px;
+}
+
+.rating-stars .star {
+    font-size: 30px;
+    padding-right: 5px;
+    color: #ccc;
+    transition: color 0.2s;
+}
+
+.rating-stars .star.selected i {
+    color: gold !important;
+}
+
+/* BUTTON */
+.btn-lihat{
+    width: 185px;
+    padding: 5px;
+    border: none;
+    border-radius: 10px;
+    background-color: #00BD90 !important;
+    color: white !important;
+    text-align: center;
+}
+.btn-lihat i{
+    color: white;
+    font-size: 20px;
+}
+
+/* STATUS PEMESANAN */
+.status-draf{
+    width: 100%;
+    height: 44px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    background-color: #FEC40038;
+    color: #FE9A07;
+    border: none;
+    border-radius: 5px;
+}
+.status-diterima{
+    width: 100%;
+    height: 44px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    color: #4180CC;
+    background-color: #4180CC47;
+    border: none;
+    border-radius: 5px;
+}
+.status-ditolak{
+    width: 100%;
+    height: 44px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    background-color: #F44C284A;
+    color: #F44C28;
+    border: none;
+    border-radius: 5px;
+}
+.status-selesai{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    /* color: #4180CC;
+    background-color: #4180CC47; */
+    background-color: #E7F4EE;
+    color: #0D894F;
+    border: none;
+    border-radius: 5px;
+}
+.status-dibatalkan{
+    width: 100%;
+    height: 44px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    background-color: #F44C284A;
+    color: #F44C28;
+    border: none;
+    border-radius: 5px;
+}
+
+/* BUKTI PEMBAYARAN */
+.content{
+    padding: 15px;
+    margin: 0px 10px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.bayar-title{
+    font-size: 17px;
+    font-weight: 600;
+    color: #666666;
+    margin-bottom: 5px;
+}
+.header h5{
+    font-size: 22px;
+    font-weight: 700;
+}
+.status{
+    font-size: 14px;
+    font-weight: 500;
+    color: #4180CC;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #4180CC47;
+    width: 140px;
+}

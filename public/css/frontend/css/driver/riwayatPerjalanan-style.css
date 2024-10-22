@@ -102,6 +102,20 @@ table td {
     text-align: left;
     padding-left: 10px;
 }
+.saldo{
+    padding: 5px;
+    background-color: #4180CC;
+    color: white;
+    border-radius: 20px;
+    text-align: center;
+}
+.total{
+    padding: 5px;
+    background-color: #FFB21D;
+    color: white;
+    border-radius: 20px;
+    text-align: center;
+}
 .tgl{
     padding: 5px;
     background-color: #E50A3E;
@@ -137,10 +151,10 @@ body, html {
 .accordion-body {
     display: flex;
     flex-direction: column;
-    height: 80vh;
     overflow-x: hidden;
     flex-grow: 1;
     overflow-y: auto;
+    border-radius: 0px 0px 1rem 1rem;
 }
 
 /* MODAL */

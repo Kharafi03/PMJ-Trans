@@ -16,12 +16,40 @@ class CheckIfDriver
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Memeriksa apakah pengguna terautentikasi dan memiliki role 'Driver'
-        if (Auth::check() && Auth::user()->roles->first()->name === 'Driver') {
-            return $next($request);
+        // Jika user belum login
+        if (!Auth::check()) {
+            // Jika user mencoba mengakses /driver, arahkan ke /driver/login
+            if ($request->is('driver')) {
+                return redirect()->route('driver.login');
+            }
+        } else {
+            // Jika user sudah login, pastikan role-nya adalah 'Driver'
+            $userRole = Auth::user()->roles->first()->name;
+            
+            // Jika user adalah driver
+            if ($userRole === 'Driver') {
+                // Jika user mencoba mengakses /driver/login, arahkan ke dashboard driver
+                if ($request->is('driver/login')) {
+                    return redirect()->route('dashboard-driver');
+                }
+
+                // Jika user mencoba mengakses /driver, arahkan juga ke dashboard driver
+                if ($request->is('driver')) {
+                    return redirect()->route('dashboard-driver');
+                }
+
+                // Lanjutkan request jika tidak ada masalah
+                return $next($request);
+            } else {
+                // Jika user bukan driver, arahkan ke halaman lain
+                return redirect()->route('homepage')->with([
+                    'message' => 'Anda harus login sebagai Driver terlebih dahulu.',
+                    'alert-type' => 'error',
+                ]);
+            }
         }
 
-        // Jika tidak memiliki akses, redirect ke halaman lain (misalnya homepage)
+        // Jika bukan Driver atau belum login, arahkan ke halaman lain
         return redirect()->route('homepage')->with([
             'message' => 'Anda harus login sebagai Driver terlebih dahulu.',
             'alert-type' => 'error',

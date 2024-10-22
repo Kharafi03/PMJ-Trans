@@ -1,0 +1,199 @@
+/* CONTAINER LAYOUT*/
+.dashboard-container{
+    max-width: 375px;
+    position: relative;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* TEXT HEADER */
+.profile-card {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    max-width: 400px;
+}
+.profile-text {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+}
+
+.profile-text h5 {
+    margin: 0px;
+}
+
+.profile-text p {
+    margin: 0px;
+    color: #777;
+}
+
+.text-content{
+    color:#000000A1;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.title h5{
+    font-size: 17px;
+    font-weight: 700;
+    color: #1E9781;
+    margin-top: 0;
+}
+.title p{
+    font-size: 15px;
+    font-weight: 500;
+    color: #000000A1;
+    margin-bottom: 0;
+}
+
+/* BANNER */
+.banner{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+    padding-bottom: 20px;
+}
+.banner-header-sekarang{
+    background-color: #F44C28;
+    border-radius: 10px 10px 0px 0px;
+}
+.banner-header-nanti{
+    background-color: #FE9A07;
+    border-radius: 10px 10px 0px 0px;
+}
+.banner-header-sekarang p, .banner-header-nanti p{
+    padding: 8px 0px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    color: white;
+}
+.banner-kode, .banner-tujuan{
+    margin-left: 20px;
+}
+.banner-kode p{
+    font-size: 12px;
+    font-weight: 200;
+    margin-bottom: 0px;
+    color: white;
+}
+.banner-kode h5{
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 0px;
+    color: white;
+}
+.banner-tujuan p{
+    font-size: 12px;
+    font-weight: 300;
+    color: white;
+}
+
+/* BUTTON LIHAT */
+.banner-btn{
+    transition: transform 0.3s ease;
+    &:hover{
+        transform: scale(1.05); 
+    }
+}
+.btn-detail{
+    padding: 5px 20px;
+    background-color: #FEC400;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    margin: 10px 0px 30px 20px;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* BUTTON KIRIM */
+.btn-mulai{
+    height: 48px;
+    width: 100%;
+    background-color: #F44C28;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 10px;
+    text-align: center;
+    border-radius: 8px;
+    margin: 10px 0px;
+    border: none;
+    transition: transform 0.3s ease;
+    &:hover{
+        transform: scale(1.02); 
+    }
+}
+
+.card-content-wrapper {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    white-space: nowrap;
+    padding-bottom: 10px;
+}
+
+.card-content {
+    display: inline-block;
+    width: 100%; 
+    margin-right: 16px; 
+    flex: 0 0 auto; 
+}
+.card-content-wrapper {
+    scrollbar-width: 2px; 
+    scrollbar-color: #1E9781 #f1f1f1; 
+}
+
+/* RIWAYAT */
+.riwayat-content{
+    background-color: #D9D9D9;
+    padding: 8px;
+    border-radius: 10px;
+}
+.riwayat-title{
+    padding: 0px 5px;
+}
+.riwayat-title p{
+    font-size: 20px;
+    font-weight: 500;
+}
+.riwayat-title i{
+    font-size: 20px;
+}
+.riwayat-image img{
+    border-radius: 10px;
+}
+.riwayat-kode{
+    padding-left: 10px;
+}
+.riwayat-kode p{
+    font-size: 12px;
+    font-weight: 300;
+}
+.riwayat-kode h5{
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 0px;
+    margin-top: 12px;
+}
+.riwayat-tgl p{
+    font-size: 12px;
+    font-weight: 400;
+    text-align: right;
+    margin: 12px 5px;
+}
+
+
+
+
+
+
+
+
+

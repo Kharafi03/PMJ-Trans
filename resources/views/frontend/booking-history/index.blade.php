@@ -9,8 +9,8 @@
 
     <section id="riwayatSewa">
         <div class="container mb-5">
-            <div class="mb-3">
-                <h3>Riwayat Sewa</h3>
+            <div class="text-content mb-5">
+                <h5 style="font-size: 44px; font-weight: 700; color: #1E9781;">Riwayat <span style="color: #FD9C07;">Sewa</span></h5>
             </div>
             <div class="tabel-riwayat justify-content-between align-items-center p-3">
                 <div class="row">
@@ -43,7 +43,7 @@
                                     <td style="text-align: center;"><strong>{{ $loop->iteration }}</strong></td>
                                     <td>{{ $booking->booking_code }}</td>
                                     <td>
-                                        <span
+                                        <!-- <span
                                             class="badge fs-6
                                             @if ($booking->ms_booking->id == 1) bg-warning
                                             @elseif ($booking->ms_booking->id == 2)
@@ -54,6 +54,19 @@
                                                 bg-primary
                                             @elseif ($booking->ms_booking->id == 5)
                                                 bg-danger @endif">
+                                            {{ $booking->ms_booking->name }}
+                                        </span> -->
+                                        <span
+                                            class="badge fs-6
+                                            @if ($booking->ms_booking->id == 1) draf
+                                            @elseif ($booking->ms_booking->id == 2)
+                                                diterima
+                                            @elseif ($booking->ms_booking->id == 3)
+                                                ditolak
+                                            @elseif ($booking->ms_booking->id == 4)
+                                                selesai
+                                            @elseif ($booking->ms_booking->id == 5)
+                                                dibatalkan @endif">
                                             {{ $booking->ms_booking->name }}
                                         </span>
                                     </td>
@@ -87,17 +100,15 @@
                                     <td>
                                         <div class="d-flex justify-content-center align-items-center text-center">
                                             <a href="{{ route('history.show', ['booking_code' => $booking->booking_code]) }}"
-                                                class="btn btn-primary me-2 text-center align-items-center">Detail</a>
+                                                class="btn-detail me-2 text-center align-items-center">Detail</a>
                                             @if ($booking->ms_booking->id == 4)
                                                 @if (!$booking->review)
-                                                    <button class="btn btn-success text-center"
-                                                        data-bs-toggle="modal" data-bs-target="#feedbackModal"
-                                                        data-id-booking="{{ $booking->id }}">
+                                                    <button class="btn-ulasan text-center" data-bs-toggle="modal" data-bs-target="#feedbackModal" data-id-booking="{{ $booking->id }}">
                                                         Beri Ulasan
                                                     </button>
                                                 @else
-                                                    <button class="btn btn-secondary text-center" disabled>Anda sudah
-                                                        memberikan ulasan</button>
+                                                    <!-- <button class="btn btn-secondary text-center" disabled>Anda sudah memberikan ulasan</button> -->
+                                                    <button class="btn-ulasan text-center" disabled>Lihat Ulasan</button>
                                                 @endif
                                             @endif
                                             <div>
@@ -118,8 +129,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="feedbackModalLabel">Ulasan</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <form action="{{ route('history.storeReview') }}" method="POST">
@@ -127,12 +137,12 @@
                                     <input type="hidden" name="id_booking" id="id_booking" value="{{ $booking->id }}">
                                     <div class="mb-3">
                                         <label for="feedback">Ulasan</label>
-                                        <span class="text-danger text-lg">*</span>
-                                        <textarea class="form-control" id="feedback" name="feedback" rows="3" required></textarea>
+                                        <span class="text-danger" style="font-size: 24px;">*</span>
+                                        <textarea class="form-control" id="feedback" name="feedback" rows="3" placeholder="Masukan pengalaman anda selama menyewa di PMJ Trans" required></textarea>
                                     </div>
                                     <div class="mb-3">
                                         <label for="rating">Rating</label>
-                                        <span class="text-danger text-lg">*</span>
+                                        <span class="text-danger" style="font-size: 24px;">*</span>
                                         <div class="rating-stars">
                                             <span class="star" data-rating="1"><i
                                                     class="fas fa-star text-secondary"></i></span>
@@ -147,8 +157,7 @@
                                         </div>
                                         <input type="hidden" name="rating" id="rating" value="0" required>
                                     </div>
-                                    <p class="text-danger">* Wajib diisi</p>
-                                    <button type="submit" class="btn btn-primary">Kirim Ulasan</button>
+                                    <button type="submit" class="btn-kirimUlasan">Kirim</button>
                                 </form>
                             </div>
                         </div>

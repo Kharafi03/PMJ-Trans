@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Booking;
+use App\Models\Destination;
 
 class BookingCheckController extends Controller
 {
@@ -35,7 +36,8 @@ class BookingCheckController extends Controller
         // Jika pemesanan ditemukan
         if ($booking) {
             // return view('frontend.detailPemesanan', ['booking' => $booking]);
-            return view('frontend.booking-status.index', ['booking' => $booking]);
+            $destinations = Destination::where('id_booking', $booking->id)->get();
+            return view('frontend.booking-status.index', ['booking' => $booking, 'destinations' => $destinations]);
         }
 
         // Jika tidak ditemukan, kembali dengan pesan error

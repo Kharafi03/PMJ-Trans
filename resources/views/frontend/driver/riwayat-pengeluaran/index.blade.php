@@ -2,7 +2,6 @@
 @push('styles')
     <title>Trip History</title>
     <link id="pagestyle" href="{{ asset('css/frontend/css/driver/riwayatPerjalanan-style.css') }}" rel="stylesheet" />
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @endpush
 @section('content')
     <section id="riwayatTrip">
@@ -30,12 +29,12 @@
                             <span class="ms-auto">
                                 <!-- <p>{{ \Carbon\Carbon::parse($trip->booking->date_start)->translatedFormat('d F \p\u\k\u\l H.i') }}</p> -->
                                 <div class="riwayat-image">
-                                <img src="{{asset('img/pmj02-1.jpg')}}" class="img-fluid" width="60px" height="60px">
-                            </div>
+                                    <img src="{{ asset('storage/' . $trip->bus->images->first()->image) }}" class="img-fluid" width="60" height="60">
+                                </div>
                             </span>
                         </button>
                     </div>
-                    <div id="item2" class="accordion-collapse collapse" data-bs-parent="#item">
+                    <div id="item2" class="accordion-collapse collapse show" data-bs-parent="#item">
                         <div class="accordion-body">
                             <div class="detail-trip">
                                 <div class="tabel-detail d-flex align-items-center">
@@ -58,16 +57,28 @@
                                                 </td>
                                             </tr>
                                             <tr>
+                                                <td class="keterangan ">Total Pengeluaran</td>
+                                                <td>
+                                                    <div class="total">
+                                                        Rp {{ number_format($trip->total_spend, 0, ',', '.') }}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="keterangan ">Sisa Uang Jalan</td>
+                                                <td>
+                                                    <div class="saldo">
+                                                        Rp {{ number_format($trip->nominal, 0, ',', '.') }}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td class="keterangan ">Customer</td>
                                                 <td>{{ $trip->booking->customer->name }}</td>
                                             </tr>
                                             <tr>
-                                                <td class="keterangan ">Nomor Telephone</td>
+                                                <td class="keterangan ">Nomor Telepon</td>
                                                 <td>{{ $trip->booking->customer->number_phone }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="keterangan ">Email</td>
-                                                <td>{{ $trip->booking->customer->email }}</td>
                                             </tr>
                                             <tr>
                                                 <td class="keterangan ">Titik Jemput</td>
@@ -75,17 +86,19 @@
                                             </tr>
                                             @foreach ($destinations as $dest)
                                                 <tr>
-                                                    <td class="keterangan ">Tujuan {{ $loop->iteration }}</td>
-                                                    <td>{{ $dest->name }}</td>
-                                                </tr>
+                                                    <td class="keterangan ">Tujuan
+                                                        @if ($loop->last)
+                                                            Akhir
+                                                        @else
+                                                            {{ $loop->iteration }}
+                                                    </td>
+                                            @endif
+                                            <td>{{ $dest->name }}</td>
+                                            </tr>
                                             @endforeach
                                             <tr>
-                                                <td class="keterangan ">Tujuan Akhir</td>
-                                                <td>{{ $trip->booking->destination_point }}</td>
-                                            </tr>
-                                            <tr></tr>
-                                            <td class="keterangan ">Kapasitas</td>
-                                            <td>{{ $trip->bus->capacity }}</td>
+                                                <td class="keterangan ">Kapasitas</td>
+                                                <td>{{ $trip->booking->capacity }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -113,7 +126,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="keterangan ">Nominal</td>
-                                                    <td>Rp {{ $tripspend->nominal }}</td>
+                                                    <td>Rp {{ number_format($tripspend->nominal, 0, ',', '.') }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="keterangan ">Kilometer Speedometer</td>
@@ -145,7 +158,8 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="d-flex justify-content-end">
-                            <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+                            <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><i
+                                    class="fa fa-times"></i></button>
                         </div>
                         <div class="modal-body">
                             <h5>Bukti Pengeluaran</h5>
@@ -167,6 +181,4 @@
             myModal.show();
         }
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 @endsection

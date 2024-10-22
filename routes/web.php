@@ -20,8 +20,19 @@ use App\Http\Controllers\Customer\BookingCheckController;
 use App\Http\Controllers\Customer\RegistrationController;
 use App\Http\Controllers\Customer\BookingStatusController;
 use App\Http\Controllers\Customer\DetailPaymentController;
+use App\Http\Controllers\Customer\ResetPasswordController;
+use App\Http\Controllers\Driver\DashboardController;
+use App\Http\Controllers\Driver\DashboardTripController;
+use App\Http\Controllers\Driver\DetailTripController;
+use App\Http\Controllers\Driver\DriverLoginController;
+use App\Http\Controllers\Driver\FinishTripController;
 use App\Http\Controllers\Driver\HistorySpendTripController;
 use App\Http\Controllers\Driver\ProfileController as DriverProfileController;
+use App\Http\Controllers\Driver\ScanTripController;
+use App\Http\Controllers\Driver\InitiateTripController;
+use App\Http\Controllers\Driver\ResetPasswordController as DriverResetPasswordController;
+use App\Http\Controllers\Driver\SpendTripController;
+use App\Http\Controllers\Driver\StartTripController;
 
 // CUSTOMER
 
@@ -31,6 +42,9 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/register', [RegistrationController::class, 'showRegistrationForm'])->name('register');
     Route::post('/register', [RegistrationController::class, 'register']);
+
+    Route::get('/reset-password', [ResetPasswordController::class, 'index'])->name('password.reset');
+    Route::post('/send-whatsapp', [ResetPasswordController::class, 'sendWhatsApp'])->name('send.whatsapp');
 });
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -134,13 +148,27 @@ Route::get('/ticket', function () {
     return view('frontend.ticket.index');
 })->name('ticket');
 
+Route::get('/terms-conditions', function () {
+    return view('frontend.terms-conditions.index');
+})->name('terms-conditions');
+
 
 
 // DRIVER
 
-Route::redirect('/driver', '/driver/dashboard');
+Route::get('/driver/login', [DriverLoginController::class, 'showLoginForm'])->name('driver.login');
+Route::post('/driver/login', [DriverLoginController::class, 'login'])->name('driver.login.post');
+
+Route::get('/driver/reset-password', [DriverResetPasswordController::class, 'index'])->name('driver.password.reset');
+Route::post('/driver/send-whatsapp', [DriverResetPasswordController::class, 'sendWhatsApp'])->name('driver.send.whatsapp');
+// Route::redirect('/driver', '/driver/dashboard');
 
 Route::middleware(['checkIfDriver'])->group(function () {
+
+    Route::get('/driver', function () {
+        return redirect()->route('dashboard-driver');
+    });
+
     Route::get('/driver/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard-driver');
 
@@ -150,17 +178,15 @@ Route::middleware(['checkIfDriver'])->group(function () {
 
     Route::get('/driver/profile', [DriverProfileController::class, 'index'])
         ->name('profile-driver');
-    
+
     Route::get('/driver/history', [HistoryTripController::class, 'index'])
         ->name('trip-history');
 
     Route::get('/driver/trip/scan', [ScanTripController::class, 'index'])
         ->name('scan-trip');
-        // ->middleware('checkDriverTripToday');
 
-    Route::get('/driver/trip/scan/{bus_code}', [ScanTripController::class, 'checkTripForBus']);
-        // ->name('check-trip')
-        // ->middleware('checkDriverTripToday');
+    Route::get('/driver/trip/scan/{bus_code}', [ScanTripController::class, 'checkTripForBus'])
+    ->name('check-trip');
 
     Route::get('/driver/trip/start/', [StartTripController::class, 'index'])
         ->name('start-trip')
@@ -177,21 +203,19 @@ Route::middleware(['checkIfDriver'])->group(function () {
 
     Route::get('/driver/trip/finish/', [FinishTripController::class, 'index'])
         ->name('finish-trip');
-    
+
+    Route::post('/driver/update-password', [DriverProfileController::class, 'updatePassword'])
+        ->name('driver.update-password');
+
+    Route::post('/driver/trip/update-km-start/{tripId}', [StartTripController::class, 'kmStart'])
+        ->name('km-start');
+
+    Route::post('/driver/trip/update-km-end/{tripId}', [FinishTripController::class, 'kmEnd'])
+        ->name('km-end');
+
+    Route::post('/driver/trip/spend/{tripId}/store', [SpendTripController::class, 'store'])
+        ->name('spend-trip.store');
 });
-
-Route::post('/driver/update-password', [DriverProfileController::class, 'updatePassword'])
-    ->name('driver.update-password')
-    ->middleware('auth');
-
-Route::post('/driver/trip/update-km-start/{tripId}', [StartTripController::class, 'kmStart'])
-    ->name('km-start');
-
-Route::post('/driver/trip/update-km-end/{tripId}', [FinishTripController::class, 'kmEnd'])
-    ->name('km-end');
-
-Route::post('/driver/trip/spend/{tripId}/store', [SpendTripController::class, 'store'])
-    ->name('spend-trip.store');
 
 
 
@@ -251,13 +275,13 @@ Route::get('/welcome-screen', function () {
 
 
 // HALAMAN TAMBAHAN DRIVER
-Route::get('/login-driver', function () {
-    return view('frontend.driver.auth.login');
-})->name('login-driver');
+// Route::get('/login-driver', function () {
+//     return view('frontend.driver.auth.login');
+// })->name('login-driver');
 
-Route::get('/reset-pw-driver', function () {
-    return view('frontend.driver.auth.reset-pw');
-})->name('reset-pw-driver');
+// Route::get('/reset-pw-driver', function () {
+//     return view('frontend.driver.auth.reset-pw');
+// })->name('reset-pw-driver');
 
 Route::get('/welcome-screen1', function () {
     return view('frontend.driver.welcome-screen.welcomescreen1');
@@ -271,3 +295,7 @@ Route::get('/welcome-screen3', function () {
     return view('frontend.driver.welcome-screen.welcomescreen3');
 })->name('welcome-screen1');
 
+// // TAMBAHAN RESET PASSWORD CUSTOMER
+// Route::get('/reset-pw-customer', function () {
+//     return view('frontend.auth.reset');
+// })->name('reset-pw-customer');

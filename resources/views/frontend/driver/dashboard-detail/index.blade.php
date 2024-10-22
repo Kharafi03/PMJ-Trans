@@ -2,17 +2,11 @@
 @push('styles')
     <title>Detail Trip</title>
     <link id="pagestyle" href="{{ asset('css/frontend/css/driver/dashboardDetail-style.css') }}" rel="stylesheet" />
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @endpush
 @section('content')
     <section id="dashboardDetail">
         <div class="dashboard-container container p-3">
             <x-header-driver />
-
-            <!-- TEXT CONTENT -->
-            <div class="text-content">
-                <p>Semangat.. Hari ini ada trip!</p>
-            </div>
 
             <!-- TITLE -->
             <div class="title mb-3">
@@ -61,7 +55,7 @@
                                     <td>{{ $trip->booking->customer->name }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="keterangan ">Nomor Telephone</td>
+                                    <td class="keterangan ">Nomor Telepon</td>
                                     <td>{{ $trip->booking->customer->number_phone }}</td>
                                 </tr>
                                 <tr>
@@ -90,7 +84,7 @@
                                     <td>{{ $trip->booking->destination_point }}</td>
                                 </tr> --}}
                                 <tr>
-                                    <td class="keterangan ">Kapasitas</td>
+                                    <td class="keterangan ">Jumlah Penumpang</td>
                                     <td>{{ $trip->booking->capacity }}</td>
                                 </tr>
                                 <tr>
