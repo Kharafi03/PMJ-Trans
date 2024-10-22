@@ -62,11 +62,11 @@ Route::post('/booking-check', [BookingCheckController::class, 'status'])->name('
 Route::post('/booking/upload-proof/{id}', [BookingStatusController::class, 'uploadProof'])->name('booking.uploadProof');
 
 
-// Route::get('/', function () {
-//     return view('frontend.homepage');
-// })->name('homepage');
+Route::get('/', function () {
+    return view('frontend.homepage');
+})->name('homepage');
 
-Route::get('/', [HomepageController::class, 'index'])->name('homepage');
+//Route::get('/', [HomepageController::class, 'index'])->name('homepage');
 
 Route::get('/contact', function () {
     return view('frontend.contact.index');
