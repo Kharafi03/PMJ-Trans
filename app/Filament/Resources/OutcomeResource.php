@@ -32,7 +32,7 @@ class OutcomeResource extends Resource
 
     public static function getNavigationBadgeColor(): ?string
     {
-            return 'warning';
+        return 'warning';
     }
 
     public static function form(Form $form): Form
@@ -83,6 +83,8 @@ class OutcomeResource extends Resource
                         Forms\Components\FileUpload::make('image_receipt')
                             ->label('Bukti Pembayaran')
                             ->required()
+                            ->disk('public')
+                            ->directory('outcomes_image_receipt')
                             ->image() // Harus berupa gambar
                             ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg'])
                             ->helperText('Unggah gambar dalam format JPG atau PNG, maksimal ukuran 2MB.')
@@ -96,8 +98,8 @@ class OutcomeResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')
-                ->label('No')
-                ->sortable(),
+                    ->label('No')
+                    ->sortable(),
                 BadgeColumn::make('m_outcome.name')
                     ->label('Tipe')
                     ->sortable()
@@ -115,17 +117,17 @@ class OutcomeResource extends Resource
                     ->label('Kode Booking')
                     ->sortable(),
                 BadgeColumn::make('m_method_payment.name')
-                        ->label('Metode')
-                        ->sortable()
-                        ->colors([
-                            'info' => 'Transfer Bank',
-                            'warning' => 'Transfer E-Wallet',
-                            'success' => 'Tunai', 
-                        ])
-                        ->formatStateUsing(function ($state) {
-                            return ucfirst($state);
-                        }),
-                    
+                    ->label('Metode')
+                    ->sortable()
+                    ->colors([
+                        'info' => 'Transfer Bank',
+                        'warning' => 'Transfer E-Wallet',
+                        'success' => 'Tunai',
+                    ])
+                    ->formatStateUsing(function ($state) {
+                        return ucfirst($state);
+                    }),
+
                 Tables\Columns\TextColumn::make('nominal')
                     ->prefix('Rp. ')
                     ->numeric()

@@ -36,7 +36,7 @@ class Booking extends Model
         'id_ms_booking',
         'payment_received',
         'payment_remaining',
-        'total_spend',
+        'total_booking_spend',
         'profit',
     ];
 

@@ -29,7 +29,7 @@ class IncomeResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        $newdraf = static::getModel()::where('id_ms_income', 2)->count();
+        $newdraf = static::getModel()::where('id_ms_income', 1)->count();
         if ($newdraf > 0) {
             return "{$newdraf}";
         }

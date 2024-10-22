@@ -167,7 +167,7 @@ class UserResource extends Resource
                     ->label('Peran')
                     ->relationship('roles', 'name'),
                 Tables\Filters\SelectFilter::make('id_ms')
-                    ->label('Peran')
+                    ->label('Status')
                     ->relationship('msUsers', 'name'),
             ])
             ->actions([

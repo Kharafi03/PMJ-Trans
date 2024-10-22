@@ -6,6 +6,7 @@ use App\Filament\Resources\TripBusResource\Pages;
 use App\Filament\Resources\TripBusResource\RelationManagers;
 use App\Models\Booking;
 use App\Models\TripBus;
+use App\Models\TripBusSpend;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
@@ -40,6 +41,29 @@ class TripBusResource extends Resource
     {
         return static::getModel()::whereNull('deleted_at')->count();
     }
+
+    // protected function mounted(): void
+    // {
+    //     $this->calculateTotalSpends();
+    // }
+
+    // protected function calculateTotalSpends(): void
+    // {
+    //     $tripBus = $this->getRecord();
+
+    //     $listspend = $tripBus->tripbusspend;
+
+    //     $totalSpend = $listspend->sum('nominal');
+    //     $totalSpendBBM = $listspend->where('id_m_spend', 1)->sum('nominal');
+
+    //     // Set nilai ke form jika kamu menggunakan form
+    //     $this->fillForm([
+    //         'total_spend' => $totalSpend,
+    //         'total_spend_bbm' => $totalSpendBBM,
+    //     ]);
+    // }
+
+
 
     public static function form(Form $form): Form
     {
@@ -151,10 +175,10 @@ class TripBusResource extends Resource
                                                     ->columnSpanFull(),
                                             ]),
                                     ])
-                                    ->afterStateUpdated(function (Get $get, Set $set) {
-                                        self::updateTotal($get, $set);
-                                        self::updateBBMTotal($get, $set);
-                                    })
+                                // ->afterStateUpdated(function (Get $get, Set $set) {
+                                //     self::updateTotal($get, $set);
+                                //     self::updateBBMTotal($get, $set);
+                                // })
 
                             ])->columnSpan(2),
                         Forms\Components\Card::make()
@@ -171,6 +195,12 @@ class TripBusResource extends Resource
                                             ->numeric(),
                                         TextInput::make('nominal')
                                             ->label('Saldo')
+                                            ->columnSpan(2)
+                                            //->formatStateUsing(fn ($state) => number_format($state, 0, ',', '.'))
+                                            // ->mask(
+                                            //     fn(TextInput $mask) => $mask
+                                            //         ->money(prefix: 'Rp. ', thousandsSeparator: '.', decimalSeparator: ',', precision: 0) // Atur mask untuk format ribuan
+                                            // )
                                             ->prefix('Rp.')
                                             ->numeric(),
                                     ]),
@@ -182,10 +212,18 @@ class TripBusResource extends Resource
                                             ->label('Total Pengeluaran')
                                             ->prefix('Rp.')
                                             ->readOnly()
+                                            ->afterStateHydrated(function (Get $get, Set $set, $record) {
+                                                if ($record && $record->id) {
+                                                    self::updateTotal($get, $set, $record->id);
+                                                }                                            })
                                             ->numeric(),
                                         TextInput::make('total_spend_bbm')
                                             ->label('Total Pengeluaran BBM')
                                             ->prefix('Rp.')
+                                            ->afterStateHydrated(function (Get $get, Set $set, $record) {
+                                                if ($record && $record->id) {
+                                                    self::updateBBMTotal($get, $set, $record->id);
+                                                }                                            })
                                             ->readOnly()
                                             ->numeric(),
                                     ]),
@@ -262,9 +300,24 @@ class TripBusResource extends Resource
                     ->modalWidth('7xl')
                     ->modalHeading('Edit Trip Bus')
                     ->modalButton('Simpan Perubahan'),
-                Tables\Actions\ViewAction::make('manage')
+                Tables\Actions\EditAction::make('manage')
                     ->modalWidth('7xl')
                     ->color('info')
+                    // ->action(function ($record, $data) {
+
+                    //     // $totalSpend = $record->tripBusSpends()->sum('nominal');
+                    //     // $record->update([
+                    //     //     'total_spend' => $totalSpend,
+                    //     // ]);
+                    //     $totspend = 1000;
+                    //     $totbbm = 1000;
+                    //     dd($record->id);
+
+                    //     TripBus::where('id', $record->id)->update([
+                    //         'total_spend' => $totspend,
+                    //         'total_spend_bbm' => $totbbm,
+                    //     ]);
+                    // })
                     ->form([
                         Group::make()
                             ->schema([
@@ -292,12 +345,18 @@ class TripBusResource extends Resource
                                     ->label('Total Pengeluaran')
                                     ->prefix('Rp.')
                                     ->readOnly()
+                                    ->afterStateHydrated(function (Get $get, Set $set, $record) {
+                                        self::updateTotal($get, $set, $record->id);
+                                    })
                                     ->reactive()
                                     ->numeric(),
                                 TextInput::make('total_spend_bbm')
                                     ->label('Total Pengeluaran BBM')
                                     ->prefix('Rp.')
                                     ->readOnly()
+                                    ->afterStateHydrated(function (Get $get, Set $set, $record) {
+                                        self::updateBBMTotal($get, $set, $record->id);
+                                    })
                                     ->reactive()
                                     ->numeric(),
                             ])
@@ -310,6 +369,7 @@ class TripBusResource extends Resource
 
                         Repeater::make('listspend')
                             ->relationship('tripbusspend')
+                            ->reactive()
                             ->label('Pengeluaran')
                             ->schema([
                                 Forms\Components\Card::make()
@@ -322,23 +382,22 @@ class TripBusResource extends Resource
                                                     ->schema([
                                                         Select::make('id_m_spend')
                                                             ->label('Tipe Pengeluaran')
-                                                            ->relationship('mspend', 'name')
-                                                            ->disabled(),
+                                                            ->relationship('mspend', 'name'),
 
                                                         TextInput::make('nominal')
                                                             ->label('Nominal')
                                                             ->prefix('Rp.')
-                                                            ->reactive()
-                                                            //->getStateUsing()
-                                                            ->disabled(),
+                                                            // ->afterStateHydrated(function (Get $get, Set $set) {
+                                                            //     self::updateTotal($get, $set);
+                                                            // })
+                                                            ->reactive(),
 
                                                         TextInput::make('kilometer')
-                                                            ->label('Kilometer')
-                                                            ->disabled(),
+                                                            ->label('Kilometer'),
 
                                                         TextInput::make('datetime')
-                                                            ->label('Tanggal & Waktu')
-                                                            ->disabled(),
+                                                            ->label('Tanggal & Waktu'),
+
                                                         Textarea::make('description')
                                                             ->label('Deskripsi')
                                                             ->rows(1)
@@ -347,14 +406,13 @@ class TripBusResource extends Resource
                                                                 'md' => 2,
                                                                 'lg' => 2,
                                                                 'xl' => 2,
-                                                            ])
-                                                            ->disabled(),
+                                                            ]),
+
                                                         TextInput::make('latitude')
-                                                            ->label('Latitude')
-                                                            ->disabled(),
+                                                            ->label('Latitude'),
+
                                                         TextInput::make('longitude')
-                                                            ->label('Longitude')
-                                                            ->disabled(),
+                                                            ->label('Longitude'),
                                                     ])
                                                     ->columnSpan([
                                                         'default' => 1,
@@ -368,9 +426,6 @@ class TripBusResource extends Resource
                                                         'lg' => 3,
                                                         'xl' => 4,
                                                     ]),
-                                                // Forms\Components\Group::make()
-                                                //     ->schema([])
-                                                //     ->columns(4)
                                                 Group::make()
                                                     ->schema([
                                                         Forms\Components\FileUpload::make('image_receipt')
@@ -428,27 +483,32 @@ class TripBusResource extends Resource
             // 'edit' => Pages\EditTripBus::route('/{record}/edit'),
         ];
     }
-    public static function updateTotal(Get $get, Set $set): void
+    public static function updateTotal(Get $get, Set $set, $tripBusId): void
     {
-        $spendtotal = collect($get('spendtrip'))
-            ->pluck('nominal')
-            ->filter()
-            ->sum();
+        $spendtotal = TripBusSpend::where('id_trip_bus', $tripBusId)
+            ->sum('nominal');
 
         $set('total_spend', number_format($spendtotal, 2, '.', ''));
+
+        TripBus::where('id', $tripBusId)
+            ->update([
+                'total_spend' => $spendtotal,
+            ]);
     }
 
-    public static function updateBBMTotal(Get $get, Set $set): void
+    public static function updateBBMTotal(Get $get, Set $set, $tripBusId): void
     {
         $idbbm = 1;
-        $bbmtotal = collect($get('spendtrip'))
-            ->filter(function ($spend) use ($idbbm) {
-                return $spend['id_m_spend'] == $idbbm;
-            })
-            ->pluck('nominal')
-            ->filter()
-            ->sum();
+
+        $bbmtotal = TripBusSpend::where('id_trip_bus', $tripBusId)
+            ->where('id_m_spend', $idbbm)
+            ->sum('nominal');
 
         $set('total_spend_bbm', number_format($bbmtotal, 2, '.', ''));
+
+        TripBus::where('id', $tripBusId)
+            ->update([
+                'total_spend_bbm' => $bbmtotal,
+            ]);
     }
 }

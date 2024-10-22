@@ -7,6 +7,7 @@ use App\Models\Booking;
 use App\Models\BookingMail;
 use App\Models\Outcome;
 use App\Models\TripBus;
+use App\Models\TripBusSpend;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
@@ -184,15 +185,18 @@ class BookingResource extends Resource
                                             Toggle::make('legrest')
                                                 //->inlineLabel()
                                                 ->label('Leg Rest')
+                                                ->reactive()
+                                                //->afterStateUpdated(fn($record) => $record->legrest)
                                                 ->default(0),
                                         ])
                                         ->columnSpan(1)
                                         ->columns(1),
-
                                 ])
                                 ->columns(3),
                         ])->columns(2),
                         TextInput::make('description')
+                            ->reactive()
+                            ->visible(fn(Get $get) => $get('legrest') == 1)
                             ->label('Deskripsi'),
 
 
@@ -243,6 +247,7 @@ class BookingResource extends Resource
                                             ->label('Nominal'),
                                         DateTimePicker::make('datetime')
                                             ->readOnly()
+                                            ->label('Waktu Pembayaran')
                                             ->default(now()),
                                     ])
                                     ->columns(2),
@@ -250,7 +255,7 @@ class BookingResource extends Resource
                                 Forms\Components\FileUpload::make('image_receipt')
                                     ->label('Silahkan unggah bukti pembayaran dibawah ini')
                                     ->disk('public') //
-                                    ->directory('image_receipt')
+                                    ->directory('payment_image_receipt')
                                     ->image()
                                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg'])
                                     ->helperText('Unggah gambar dalam format JPG atau PNG, maksimal ukuran 2MB.')
@@ -279,6 +284,8 @@ class BookingResource extends Resource
                             ->columns(2),
                         Forms\Components\Group::make()
                             //->visible(fn($record) => $record->id_ms_booking === 4)
+                            ->visible(fn(Get $get) => $get('id_ms_booking') == 4)
+
                             ->reactive()
                             ->schema([
                                 TextInput::make('total_spend')
@@ -382,7 +389,7 @@ class BookingResource extends Resource
                                         return $get('fleet_amount') ?? 1;
                                     })
                                     ->defaultItems(function (Get $get) {
-                                        return $get('fleet_amount') ?? 1;
+                                        return $get('fleet_amount');
                                     })
                                     ->columnSpan(1),
                             ])->columnSpan(1),
@@ -424,11 +431,19 @@ class BookingResource extends Resource
             TextColumn::make('pickup_point')
                 ->label('Titik Jemput')
                 ->searchable()
+                ->limit(25)
+                ->tooltip(function ($record) {
+                    return $record->pickup_point;
+                })
                 ->sortable(),
             TextColumn::make('destination.name')
                 ->label('Tujuan')
                 ->getStateUsing(fn(Model $record) => optional($record->destination->last())->name)
                 ->searchable()
+                ->limit(25)
+                ->tooltip(function ($record) {
+                    return ($record->destination->last())->name;
+                })
                 ->sortable(),
             BadgeColumn::make('ms_payment.name')
                 ->label('Pembayaran')
@@ -483,7 +498,7 @@ class BookingResource extends Resource
                 Tables\Actions\ViewAction::make('pengeluaran')
                     ->color('info')
                     ->icon('heroicon-c-shopping-cart')
-                    ->visible(fn($record) => $record->id_ms_booking === 2 || 4)
+                    ->visible(fn($record) => $record->id_ms_booking === 2 || $record->id_ms_booking === 4)
                     ->form([
                         Forms\Components\Group::make()
                             ->schema([
@@ -511,7 +526,6 @@ class BookingResource extends Resource
                                     ->live()
                                     ->schema([
                                         TextInput::make('name')
-                                            ->required()
                                             ->label(false),
                                     ]),
                             ])
@@ -525,10 +539,19 @@ class BookingResource extends Resource
                             ->visible(fn($record) => $record->id_ms_booking === 4)
                             ->reactive()
                             ->schema([
-                                TextInput::make('total_spend')
+                                TextInput::make('trip_nominal')
+                                    ->required()
+                                    ->prefix('Rp')
+                                    ->numeric()
+                                    ->label('Nominal Perjalanan'),
+
+                                TextInput::make('total_booking_spend')
                                     ->numeric()
                                     ->readOnly()
                                     ->prefix('Rp.')
+                                    ->afterStateHydrated(function (Get $get, Set $set, $record) {
+                                        self::updateBookingSpendTotal($get, $set, $record->id);
+                                    })
                                     ->label('Total Pengeluaran'),
 
                                 TextInput::make('profit')
@@ -537,7 +560,7 @@ class BookingResource extends Resource
                                     ->prefix('Rp')
                                     ->label('Keuntungan'),
                             ])
-                            ->columns(2),
+                            ->columns(3),
                         Forms\Components\Repeater::make('listtripbus')
                             ->label('Pengeluaran Bus')
                             ->relationship('tripbus')
@@ -572,6 +595,9 @@ class BookingResource extends Resource
 
                                         TextInput::make('total_spend')
                                             ->label('Total Pengeluaran')
+                                            ->afterStateHydrated(function (Get $get, Set $set, $record) {
+                                                self::updateTripSpendTotal($get, $set, $record->id);
+                                            })
                                             ->disabled(),
 
                                         TextInput::make('km_start')
@@ -664,7 +690,7 @@ class BookingResource extends Resource
                                                                     ->columnSpanFull(),
                                                             ])
                                                             ->columns(1)
-                                                            
+
                                                     ])
                                                     ->columns(
                                                         [
@@ -693,12 +719,19 @@ class BookingResource extends Resource
                         Outcome::create([
                             'id_booking' => $record->id,
                             'id_m_outcome' => 1,
-                            'check' => 0,
+                            'check' => 1,
+                            'image_receipt' => $data['image_receipt'],
                             'nominal' => $data['nominal'],
                             'id_m_method_payment' => $data['id_m_method_payment'],
                             'description' => 'Refund for transaction Booking Code : ' . $record->booking_code,
                             'datetime' => now(),
                         ]);
+
+                        
+                        TripBus::where('id_booking', $record->id)
+                            ->update([
+                                'deleted_at' => now(),
+                            ]);
                     })
                     ->form([
                         TextInput::make('nominal')
@@ -711,6 +744,15 @@ class BookingResource extends Resource
                             ->required()
                             ->default(1)
                             ->label('Metode'),
+                        Forms\Components\FileUpload::make('image_receipt')
+                            ->label('Bukti Pembayaran')
+                            ->required()
+                            ->disk('public')
+                            ->directory('outcomes_image_receipt')
+                            ->image()
+                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg'])
+                            ->helperText('Unggah gambar dalam format JPG atau PNG, maksimal ukuran 2MB.')
+                            ->columnSpanFull()
                     ])
                     ->requiresConfirmation()
                     ->modalHeading('Refund Confirmation')
@@ -793,9 +835,10 @@ class BookingResource extends Resource
     public static function updateReceivedRemaining(Get $get, Set $set): void
     {
         $paymentReceived = collect($get('payment'))
-            // ->filter(function ($payment){
+            // ->filter(function ($payment) {
             //     return isset($payment['id_ms_income']) && $payment['id_ms_income'] === 2;
             // })
+            ->where('id_ms_income', 2)
             ->pluck('nominal')
             ->filter()
             ->sum();
@@ -811,12 +854,42 @@ class BookingResource extends Resource
 
         if ($paymentReceived >= $tripNominal) {
             $set('id_ms_payment', 4);
-        }
-        else if ($paymentReceived >= $minDp) {
+        } else if ($paymentReceived >= $minDp) {
             $set('id_ms_payment', 3);
-        }
-        else{
+        } else {
             $set('id_ms_payment', 2);
         }
+    }
+
+    public static function updateBookingSpendTotal(Get $get, Set $set, $bookingId): void
+    {
+        $bookingspendtotal = TripBus::where('id_booking', $bookingId)
+            ->sum('total_spend');
+
+        $tripNominal = $get('trip_nominal');
+        $profit = $tripNominal - $bookingspendtotal;
+
+        $set('profit', number_format($profit, 2, '.', ''));
+
+        $set('total_booking_spend', number_format($bookingspendtotal, 2, '.', ''));
+
+        Booking::where('id', $bookingId)
+            ->update([
+                'total_booking_spend' => $bookingspendtotal,
+                'profit' => $profit,
+            ]);
+    }
+
+    public static function updateTripSpendTotal(Get $get, Set $set, $tripBusId): void
+    {
+        $spendtotal = TripBusSpend::where('id_trip_bus', $tripBusId)
+            ->sum('nominal');
+
+        $set('total_spend', number_format($spendtotal, 2, '.', ''));
+
+        TripBus::where('id', $tripBusId)
+            ->update([
+                'total_spend' => $spendtotal,
+            ]);
     }
 }
