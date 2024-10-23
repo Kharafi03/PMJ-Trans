@@ -29,6 +29,8 @@ class DatabaseSeeder extends Seeder
         $this->call(MsTripSeeder::class);
         $this->call(BusSeeder::class);
         $this->call(BusImageSeeder::class);
+        $this->call(SettingSeeder::class);
+
         // $this->call(PermisionsSeeder::class);
     }
 }

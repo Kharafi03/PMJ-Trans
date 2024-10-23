@@ -21,18 +21,10 @@ use App\Http\Controllers\Customer\RegistrationController;
 use App\Http\Controllers\Customer\BookingStatusController;
 use App\Http\Controllers\Customer\DetailPaymentController;
 use App\Http\Controllers\Customer\ResetPasswordController;
-use App\Http\Controllers\Driver\DashboardController;
-use App\Http\Controllers\Driver\DashboardTripController;
-use App\Http\Controllers\Driver\DetailTripController;
 use App\Http\Controllers\Driver\DriverLoginController;
-use App\Http\Controllers\Driver\FinishTripController;
 use App\Http\Controllers\Driver\HistorySpendTripController;
 use App\Http\Controllers\Driver\ProfileController as DriverProfileController;
-use App\Http\Controllers\Driver\ScanTripController;
-use App\Http\Controllers\Driver\InitiateTripController;
 use App\Http\Controllers\Driver\ResetPasswordController as DriverResetPasswordController;
-use App\Http\Controllers\Driver\SpendTripController;
-use App\Http\Controllers\Driver\StartTripController;
 
 // CUSTOMER
 

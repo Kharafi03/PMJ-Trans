@@ -21,8 +21,9 @@ return new class extends Migration
             $table->string('open_hours');
             $table->longText('description');
             $table->longText('maps');
-            $table->string('sosmed_id');
+            $table->string('sosmed_ig');
             $table->string('sosmed_fb');
+            $table->string('sosmed_yt');
             $table->longText('footer');
             $table->longText('about_us');
             $table->softDeletes();
