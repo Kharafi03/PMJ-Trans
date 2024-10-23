@@ -10,6 +10,26 @@
     /* margin: 100px; */
 }
 
+/* BREADCRUMB */
+.breadcrumb{
+    margin-top: 85px;
+    padding: 20px;
+    background-color: #1E9781;
+    position: fixed; 
+    width: 100%;
+    top: 0;           
+    z-index: 1000;
+}
+.breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+    color: white !important;
+}
+.breadcrumb li, .breadcrumb a{
+    color: white !important;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
 /* Main Ticket Style */
 .tiket-ruler {
     padding: 5px;
@@ -56,8 +76,9 @@ hr {
 }
 .ripLine {
     width: 100%;
-    border-top: 3px solid #efefef;
+    border-top: 2px solid #efefef;
     border-top-style: dashed;
+    margin-top: 10px;
 }
 .circleRight {
     width: 12px;
@@ -65,6 +86,7 @@ hr {
     background-color: white;
     border-radius: 12px 0 0 12px;
     background-color: rgba(0, 0, 0, 0.05);
+    margin-right: 0;
 }
 
 /* TIKET-CARD */
@@ -105,9 +127,9 @@ hr {
     /* font-size: 11px; */
     text-align: justify;
 }
-.tujuan-tiket li {
+/* .tujuan-tiket li { */
     /* font-size: 11px; */
-}
+/* } */
 /* TEXT HEADER */
 .profile-card {
     /* padding: 10px 70px 10px 10px; */
@@ -153,22 +175,21 @@ hr {
 }
 
 /* BUTTON */
-.btn-download {
-    margin-left: 35px;
-    padding: 10px;
-    width: 110px;
-    border: none;
-    border-radius: 10px;
-    background-color: #4180cc;
+.btn-download{
+    padding: 10px 20px;
     color: white;
-    text-align: center;
-    font-size: 16px;
+    border: 1px solid #1E9781;
+    background-color: #1E9781;
     font-weight: 700;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
-        #4475f236 0px 10px 10px -5px;
+    margin: 10px 0px;
+    border-radius: 10px;
+    width: auto;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.308) 0px 10px 10px -5px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    &:hover {
-        transform: scale(1.05);
+    &:hover{
+        transform: scale(1.05); 
+        background-color: #1E9781;
+        color: white;
     }
 }
 @media (min-width: 375px) and (max-width: 991px) {

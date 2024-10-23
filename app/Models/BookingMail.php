@@ -4,26 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Mail extends Model
+class BookingMail extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
-    use SoftDeletes;
+    protected $table = 'booking_mails';
 
     protected $dates = ['deleted_at'];
 
-    protected $table = 'mails';
-
     protected $fillable = [
-        'name',
-        'phone',
-        'email',
-        'category',
+        'id_booking',
         'message',
-        'template_chat'
     ];
 
     protected $guarded = ['id'];
+
+    public function message(): BelongsTo
+    {
+        return $this->belongsTo(Booking::class, 'id_booking');
+    }
 }

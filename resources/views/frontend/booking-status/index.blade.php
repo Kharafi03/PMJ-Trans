@@ -11,13 +11,13 @@
     <x-navbar-customer />
 
     <!-- Bread Crumbs -->
-    <!-- <nav aria-label="breadcrumb" style="margin-top: 100px;">
-        <ol class="breadcrumb">
+    <nav aria-label="breadcrumb" style="margin-top: 100px;">
+        <ol class="breadcrumb d-flex justify-content-center align-items-center">
             <li class="breadcrumb-item"><a href="{{route('homepage')}}">Beranda</a></li>
-            <li class="breadcrumb-item"><a href="{{route('booking-status')}}">Cek Pemesanan</a></li>
+            <li class="breadcrumb-item"><a href="{{route('cek.status')}}">Cek Pemesanan</a></li>
             <li class="breadcrumb-item active" aria-current="page">Status Pemesanan</li>
         </ol>
-    </nav> -->
+    </nav>
 
     <!-- Modal -->
     <div class="modal fade" id="modalPemesananDiterima" tabindex="-1" aria-hidden="true">

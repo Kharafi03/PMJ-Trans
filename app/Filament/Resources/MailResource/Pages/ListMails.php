@@ -13,7 +13,7 @@ class ListMails extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Tambah Pesan'),
+            //Actions\CreateAction::make()->label('Tambah Pesan'),
         ];
     }
 }
