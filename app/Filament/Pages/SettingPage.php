@@ -1,32 +1,45 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Pages;
 
-use App\Filament\Resources\SettingResource\Pages;
-use App\Filament\Resources\SettingResource\RelationManagers;
-use App\Models\Setting;
+
 use Filament\Forms;
+use App\Models\Setting;
 use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Pages\Page;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Notifications\Notification;
+use Filament\Forms\Components\Actions\Action;
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 
-class SettingResource extends Resource
+class SettingPage extends Page implements HasForms
 {
-    protected static ?string $model = Setting::class;
 
-    protected static ?string $pluralModelLabel = "Setting";
+    use HasPageShield;
+    
+    protected static string $view = 'filament.pages.setting-page';
+
+    protected static ?string $navigationLabel = "Setting";
 
     protected static ?string $navigationIcon = 'heroicon-c-cog-8-tooth';
 
     protected static ?string $navigationGroup = 'Manajemen Sistem';
-
+    
     protected static ?int $navigationSort = 24;
 
+    protected static ?string $slug = 'setting';
 
-    public static function form(Form $form): Form
+    public ?array $data = [];
+
+    public function mount() :void 
+    {
+       
+        $setting = Setting::find(1);
+        // dd($setting);
+        $this->form->fill($setting->attributesToArray());
+    }
+
+    public function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -93,75 +106,31 @@ class SettingResource extends Resource
                                     ->label('Tentang Kami'),
                             ]),
                     ]),
-            ]);
+            ])->statePath('data');
     }
 
-
-    public static function table(Table $table): Table
-    {
-        return $table
-            ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->label('Nama')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('email')
-                    ->label('Email')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('contact')
-                    ->label('Kontak')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('open_hours')
-                    ->label('Jam Buka')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('sosmed_id')
-                    ->label('Instagram')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('sosmed_fb')
-                    ->label('Facebook')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->label('Tanggal dihapus')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->label('Tanggal dibuat')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Tanggal diubah')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
-
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
-    }
-
-    public static function getRelations(): array
+    public function getFormActions() :array
     {
         return [
-            //
+            Action::make('save')
+                ->label('Simpan')
+                ->submit('save'),
         ];
     }
 
-    public static function getPages(): array
+    public function save() :void
     {
-        return [
-            'index' => Pages\ListSettings::route('/'),
-            'create' => Pages\CreateSetting::route('/create'),
+        $data = $this->form->getState();
+        $setting = Setting::find(1);
+        $setting->update($data);
 
-        ];
+        redirect()->to('admin/setting');
+
+        Notification::make()
+            ->title('Setting Berhasil di simpan')
+            ->success()
+            ->send();
     }
+
+
 }

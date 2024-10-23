@@ -32,6 +32,9 @@ class BusResource extends Resource
 
     protected static ?int $navigationSort = 6;
 
+    protected static ?string $slug = 'bus';
+
+
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::whereNull('deleted_at')->count();
@@ -301,21 +304,28 @@ class BusResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label('Bus'),
+                    ->label('Bus')
+                    ->searchable(),
                 Tables\Columns\ImageColumn::make('images.image')
                     ->label('Gambar Bus')
                     ->getStateUsing(fn(Model $record) => optional($record->images->first())->image) // Ambil gambar pertama
-                    ->size(50), // Ukuran gambar thumbnail
+                    ->size(50) // Ukuran gambar thumbnail
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('license_plate')
-                    ->label('Plat Nomor'),
+                    ->label('Plat Nomor')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('production_year')
-                    ->label('Tahun Produksi'),
+                    ->label('Tahun Produksi')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('color')
-                    ->label('Warna'),
+                    ->label('Warna')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('capacity')
-                    ->label('Kapasitas'),
+                    ->label('Kapasitas')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('ms_buses.name')
-                    ->label('Status Bus'),
+                    ->label('Status Bus')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->label('Tanggal dihapus')
                     ->dateTime()
@@ -333,7 +343,7 @@ class BusResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
                 Tables\Filters\SelectFilter::make('ms_buses_id')
                     ->label('Status Bus')
                     ->relationship('ms_buses', 'name'),
@@ -513,19 +523,28 @@ class BusResource extends Resource
                     ->label('Hapus'),
             ])
 
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make()
-                        ->label('Hapus')
-                        ->action(function ($records) {
-                            foreach ($records as $record) {
-                                $record->delete(); // Menggunakan soft delete
-                            }
-                        }),
-                ]),
-            ]);
-    }
+    //         ->bulkActions([
+    //             Tables\Actions\BulkActionGroup::make([
+    //                 Tables\Actions\DeleteBulkAction::make()
+    //                     ->label('Hapus')
+    //                     ->action(function ($records) {
+    //                         foreach ($records as $record) {
+    //                             $record->delete(); // Menggunakan soft delete
+    //                         }
+    //                     }),
+    //             ]),
+    //         ]);
+    // }
 
+    ->bulkActions([
+        Tables\Actions\BulkActionGroup::make([
+            Tables\Actions\DeleteBulkAction::make(),
+            Tables\Actions\RestoreBulkAction::make(),
+            Tables\Actions\ForceDeleteBulkAction::make(),
+        ]),
+    ])
+    ->paginated([25, 50, 100, 'all']);
+    }
     public static function getRelations(): array
     {
         return [

@@ -25,6 +25,8 @@ class TripBusSpendResource extends Resource
 
     protected static ?int $navigationSort = 4;
 
+    protected static ?string $slug = 'pengeluaran-trip';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -121,7 +123,7 @@ class TripBusSpendResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()
@@ -140,8 +142,11 @@ class TripBusSpendResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->paginated([25, 50, 100, 'all']);
     }
 
     public static function getRelations(): array

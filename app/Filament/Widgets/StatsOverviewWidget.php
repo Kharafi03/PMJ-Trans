@@ -8,9 +8,11 @@ use App\Models\Booking;
 use App\Models\User;
 use App\Models\Mail;
 use Spatie\Permission\Models\Role;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 
 class StatsOverviewWidget extends BaseWidget
 {
+    use HasWidgetShield;
     protected function getStats(): array
     {
         // Menghitung total booking

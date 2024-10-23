@@ -26,6 +26,8 @@ class BusMaintenanceResource extends Resource
 
     protected static ?int $navigationSort = 6;
 
+    protected static ?string $slug = 'perawatan';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -172,7 +174,7 @@ class BusMaintenanceResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
                 Tables\Filters\SelectFilter::make('id_m_maintenance')
                     ->label('Jenis Perawatan')
                     ->relationship('m_maintenances', 'name'),

@@ -23,6 +23,8 @@ class ReviewResource extends Resource
 
     protected static ?int $navigationSort = 5;
 
+    protected static ?string $slug = 'ulasan';
+
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::whereNull('deleted_at')->count();

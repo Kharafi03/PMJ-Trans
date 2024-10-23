@@ -20,13 +20,13 @@ class Dashboard extends BaseDashboard
             ->schema([]);
     }
 
-    public function getWidgets(): array // Pastikan method ini adalah public
+    public function getWidgets(): array 
     {
         return [
             StatsOverviewWidget::class, // Widget pertama
-            IncomeChart::class,       // Widget ketiga
+            IncomeChart::class,       // Widget kedua
             OutcomeChart::class,       // Widget ketiga
-            LatestBooking::class, // Tambah LatestBooking di sini
+            LatestBooking::class, // Widget keempat
         ];
     }
 }
