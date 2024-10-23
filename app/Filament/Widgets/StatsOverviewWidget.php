@@ -13,6 +13,7 @@ use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 class StatsOverviewWidget extends BaseWidget
 {
     use HasWidgetShield;
+
     protected function getStats(): array
     {
         // Menghitung total booking
@@ -33,24 +34,39 @@ class StatsOverviewWidget extends BaseWidget
         return [
             Stat::make('Total Booking', $totalBooking)
                 ->description('Total Booking')
-                ->color('primary')
-                ->icon('heroicon-c-shopping-bag')
-                ->extraAttributes(['class' => 'bg-blue-100 hover:bg-blue-200 transition-transform transform hover:scale-105 p-4 rounded shadow-lg']),
+                ->icon('heroicon-c-shopping-bag') 
+                ->color('success') 
+                ->extraAttributes([
+                    'class' => 'card-stat bg-green-100 text-green-800 p-6 rounded shadow-lg',
+                    'style' => 'font-size: 1.5em; display: flex; align-items: center;'
+                ]), 
+            
             Stat::make('Total Driver', $totalDriver)
                 ->description('Total Driver')
-                ->color('success')
                 ->icon('heroicon-m-user')
-                ->extraAttributes(['class' => 'bg-green-100 hover:bg-green-200 transition-transform transform hover:scale-105 p-4 rounded shadow-lg']),
+                ->color('info') 
+                ->extraAttributes([
+                    'class' => 'card-stat bg-blue-100 text-blue-800 p-6 rounded shadow-lg',
+                    'style' => 'font-size: 1.5em; display: flex; align-items: center;'
+                ]),
+            
             Stat::make('Total Customer', $totalCustomer)
                 ->description('Total Customer')
-                ->color('warning')
                 ->icon('heroicon-s-user-group')
-                ->extraAttributes(['class' => 'bg-yellow-100 hover:bg-yellow-200 transition-transform transform hover:scale-105 p-4 rounded shadow-lg']),
+                ->color('warning') 
+                ->extraAttributes([
+                    'class' => 'card-stat bg-yellow-100 text-yellow-800 p-6 rounded shadow-lg',
+                    'style' => 'font-size: 1.5em; display: flex; align-items: center;'
+                ]),
+            
             Stat::make('Total Pesan', $totalPesan)
                 ->description('Total Pesan')
-                ->color('info')
                 ->icon('heroicon-s-envelope')
-                ->extraAttributes(['class' => 'bg-teal-100 hover:bg-teal-200 transition-transform transform hover:scale-105 p-4 rounded shadow-lg']),
+                ->color('primary') 
+                ->extraAttributes([
+                    'class' => 'card-stat bg-teal-100 text-teal-800 p-6 rounded shadow-lg',
+                    'style' => 'font-size: 1.5em; display: flex; align-items: center;'
+                ]),
         ];
     }
 }

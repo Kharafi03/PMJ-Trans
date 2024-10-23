@@ -11,9 +11,9 @@ use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 class UserStatsOverview extends BaseWidget
 {
     use HasWidgetShield;
+
     protected function getStats(): array
     {
-    
         // Menghitung total driver berdasarkan role
         $roleDriver = Role::where('name', 'driver')->first();
         $totalDriver = $roleDriver ? User::role('driver')->count() : 0;
@@ -30,31 +30,42 @@ class UserStatsOverview extends BaseWidget
         $roleSuperAdmin = Role::where('name', 'super_admin')->first();
         $totalSuperAdmin = $roleSuperAdmin ? User::role('super_admin')->count() : 0;
 
-        // Mengembalikan data untuk ditampilkan di widget dalam flex container
         return [
             Stat::make('Total Driver', $totalDriver)
                 ->description('Total Driver')
-                ->color('success')
+                ->color('info')
                 ->icon('heroicon-m-user')
-                ->extraAttributes(['class' => 'bg-green-100 hover:bg-green-200 transition-transform duration-300 ease-in-out transform hover:scale-105 p-4 rounded shadow-lg flex-1']),
+                ->extraAttributes([
+                    'class' => 'card-stat bg-blue-100 text-blue-800 p-6 rounded shadow-lg',
+                    'style' => 'font-size: 1.5em; display: flex; align-items: center;'
+                ]),
 
             Stat::make('Total Customer', $totalCustomer)
                 ->description('Total Customer')
                 ->color('warning')
                 ->icon('heroicon-s-user-group')
-                ->extraAttributes(['class' => 'hover:bg-yellow-200 transition-transform duration-300 ease-in-out transform hover:scale-105 p-4 rounded shadow-lg flex-1']),
+                ->extraAttributes([
+                    'class' => 'card-stat bg-yellow-100 text-yellow-800 p-6 rounded shadow-lg',
+                    'style' => 'font-size: 1.5em; display: flex; align-items: center;'
+                ]),
 
             Stat::make('Total Admin', $totalAdmin)
                 ->description('Total Admin')
-                ->color('info')
+                ->color('green')
                 ->icon('heroicon-s-cog')
-                ->extraAttributes(['class' => 'bg-blue-100 hover:bg-blue-200 transition-transform duration-300 ease-in-out transform hover:scale-105 p-4 rounded shadow-lg flex-1']),
+                ->extraAttributes([
+                    'class' => 'card-stat bg-green-100 text-yellow-800 p-6 rounded shadow-lg',
+                    'style' => 'font-size: 1.5em; display: flex; align-items: center;'
+                ]),
 
             Stat::make('Total Super Admin', $totalSuperAdmin)
                 ->description('Total Super Admin')
                 ->color('danger')
                 ->icon('heroicon-s-star')
-                ->extraAttributes(['class' => 'hover:bg-red-200 transition-transform duration-300 ease-in-out transform hover:scale-105 p-4 rounded shadow-lg flex-1']),
+                ->extraAttributes([
+                    'class' => 'card-stat bg-danger-100 text-yellow-800 p-6 rounded shadow-lg',
+                    'style' => 'font-size: 1.5em; display: flex; align-items: center;'
+                ]),
         ];
     }
 }
