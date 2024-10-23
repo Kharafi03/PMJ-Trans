@@ -22,7 +22,7 @@ class TermsAndConditionsResource extends Resource
 
     protected static ?string $navigationGroup = 'Manajemen Sistem';
 
-    protected static ?int $navigationSort = 26;
+    protected static ?int $navigationSort = 22;
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
 

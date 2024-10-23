@@ -25,7 +25,7 @@ class SettingPage extends Page implements HasForms
 
     protected static ?string $navigationGroup = 'Manajemen Sistem';
     
-    protected static ?int $navigationSort = 24;
+    protected static ?int $navigationSort = 20;
 
     protected static ?string $slug = 'setting';
 
