@@ -93,7 +93,7 @@
                             <p>Kontak Kami</p>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 mt-3">
+                            <div class="col-md-6 mb-4">
                                 <label for="namaLengkap" class="form-label">Nama Lengkap<span
                                         class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="namaLengkap" name="namaLengkap"
@@ -111,7 +111,7 @@
                                 </select>
                                 <small class="text-danger" id="error-kategori" style="display: none;">Pilih kategori yang anda inginkan.</small>
                             </div>
-                            <div class="col-md-6 mt-3">
+                            <div class="col-md-6 mb-4">
                                 <label for="noTelp" class="form-label">Nomor WhatsApp<span
                                         class="text-danger">*</span></label>
                                 <input type="tel" class="form-control" id="noTelp" name="noTelp"
