@@ -82,10 +82,13 @@
 
     <!-- FORM -->
     <section id="contact-form">
+        
         <div class="container mb-5">
-            <div class="row ">
+            @include('frontend.assets.alert')
+            <div class="row mt-5">
                 <div class="col-md-6 mb-3">
-                    <form id="formHubungiKami">
+                    <form id="formHubungiKami" method="POST" action="{{ route('contact.store') }}">
+                        @csrf
                         <div class="form-header">
                             <p>Kontak Kami</p>
                         </div>
@@ -93,7 +96,7 @@
                             <div class="col-md-6 mt-3">
                                 <label for="namaLengkap" class="form-label">Nama Lengkap<span
                                         class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="namaLengkap"
+                                <input type="text" class="form-control" id="namaLengkap" name="namaLengkap"
                                     placeholder="Masukkan nama lengkap" required>
                                 <small class="text-danger" id="error-nama" style="display: none;">Lengkapi data nama lengkap
                                     anda.</small>
@@ -101,10 +104,10 @@
                             <div class="col-md-6 mt-3">
                                 <label for="kategori" class="form-label">Kategori<span
                                         class="text-danger">*</span></label>
-                                <select class="form-select" id="kategori" required>
+                                <select class="form-select" id="kategori" name="kategori" required>
                                     <option selected>Pilih Kategori</option>
-                                    <option value="pertanyaan">Pertanyaan</option>
-                                    <option value="komplain">Komplain</option>
+                                    <option value="Pertanyaan">Pertanyaan</option>
+                                    <option value="Komplain">Komplain</option>
                                 </select>
                                 <small class="text-danger" id="error-kategori" style="display: none;">Pilih kategori yang
                                     anda inginkan.</small>
@@ -112,21 +115,21 @@
                             <div class="col-md-6 mt-3">
                                 <label for="noTelp" class="form-label">Nomor WhatsApp<span
                                         class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="noTelp"
+                                <input type="tel" class="form-control" id="noTelp" name="noTelp"
                                     placeholder="Masukkan nomor whatsapp" required>
                                 <small class="text-danger" id="error-notelp" style="display: none;">Lengkapi data nomor
                                     telepon anda.</small>
                             </div>
                             <div class="col-md-6 mt-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="Masukkan alamat email">
+                                <input type="email" class="form-control" id="email" placeholder="Masukkan alamat email" name="email">
                             </div>
                         </div>
                         <div class="row">
                             <div class="mt-3">
                                 <label for="pesan" class="form-label">Pesan<span
                                         class="text-danger">*</span></label>
-                                <textarea class="form-control" id="pesan" rows="3" placeholder="Tuliskan Pesan yang ingin disampaikan..." required></textarea>
+                                <textarea class="form-control" id="pesan" rows="3" placeholder="Tuliskan Pesan yang ingin disampaikan..." required name="pesan"></textarea>
                                 <small class="text-danger" id="error-pesan" style="display: none;">Lengkapi pesan yang ingin
                                     anda kirim.</small>
                             </div>
@@ -135,7 +138,7 @@
                             </div>
                         </div>
                         <div class="mt-3">
-                            <button type="button" class="btn-kirim" onclick="submitHubungiKami()">KIRIM PESAN</button>
+                            <button type="submit" class="btn-kirim" onclick="submitHubungiKami()">KIRIM PESAN</button>
                         </div>
                     </form>
                 </div>
@@ -186,27 +189,6 @@
             if (pesan === "") {
                 document.getElementById('error-pesan').style.display = 'block';
                 isValid = false;
-            }
-
-
-            // Jika semua field valid, tampilkan SweetAlert sukses
-            if (isValid) {
-                swal({
-                    title: "Berhasil!",
-                    text: "Pesan berhasil dikirim",
-                    icon: "success",
-                    button: true
-                }).then(() => {
-                    document.getElementById('formHubungiKami').reset(); // Reset form
-                    // window.location.href = "kodeBooking.html";
-                });
-            } else {
-                swal({
-                    title: "Error!",
-                    text: "Semua data harus diisi.",
-                    icon: "error",
-                    button: true
-                });
             }
         }
     </script>

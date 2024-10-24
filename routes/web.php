@@ -21,6 +21,7 @@ use App\Http\Controllers\Customer\RegistrationController;
 use App\Http\Controllers\Customer\BookingStatusController;
 use App\Http\Controllers\Customer\DetailPaymentController;
 use App\Http\Controllers\Customer\ResetPasswordController;
+use App\Http\Controllers\Customer\ContactController;
 use App\Http\Controllers\Driver\DriverLoginController;
 use App\Http\Controllers\Driver\HistorySpendTripController;
 use App\Http\Controllers\Driver\ProfileController as DriverProfileController;
@@ -44,6 +45,8 @@ Route::get('/booking', [BookingController::class, 'showForm'])->name('frontend.b
 Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
 
 Route::get('/booking', [BookingController::class, 'showForm'])->name('frontend.booking.index');
+
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -176,9 +176,9 @@ class MailResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->actions([
-                // Tables\Actions\EditAction::make()
-                //     ->label('Edit')
-                //     ->color('secondary'),
+                Tables\Actions\EditAction::make()
+                    ->label('Edit')
+                    ->color('secondary'),
 
                 Tables\Actions\Action::make('hubungi')
                     ->label('Hubungi')
