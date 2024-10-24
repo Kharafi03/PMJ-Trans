@@ -10,29 +10,49 @@ use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 class IncomeChart extends BarChartWidget
 {
     use HasWidgetShield;
-    protected static ?string $heading = 'Total Pendapatan';
+
+    protected static ?string $heading = 'Total Pendapatan'; 
+    protected static string $color = 'info'; 
+    public ?string $filter = 'today'; // Default 
+
+    protected function getFilters(): ?array
+    {
+        // Pilihan filter untuk tampilan data berdasarkan rentang waktu
+        return [
+            'today' => 'Today',
+            'week' => 'Last week',
+            'month' => 'Last month',
+            'year' => 'This year',
+        ];
+    }
 
     protected function getData(): array
     {
-        // Mengambil tanggal 12 bulan yang lalu
-        $twelveMonthsAgo = Carbon::now()->subMonths(12);
+        // Mengambil tanggal berdasarkan filter yang dipilih
+        $startDate = match ($this->filter) {
+            'today' => Carbon::today(),
+            'week' => Carbon::now()->subWeek(),
+            'month' => Carbon::now()->subMonth(),
+            'year' => Carbon::now()->subYear(),
+            default => Carbon::now()->subMonths(12),
+        };
 
-        // Mengambil data pendapatan per bulan dari 12 bulan terakhir
+        // Mengambil data pendapatan per bulan dari rentang waktu yang dipilih
         $incomePerMonth = Income::selectRaw('DATE_FORMAT(datetime, "%Y-%m") as month, SUM(nominal) as total')
-            ->where('datetime', '>=', $twelveMonthsAgo) // Hanya data dari 12 bulan terakhir
+            ->where('datetime', '>=', $startDate)
             ->groupBy('month')
             ->orderBy('month')
             ->get()
             ->pluck('total', 'month')
             ->toArray();
 
-        // array dari 12 bulan terakhir
+        // Array untuk 12 bulan terakhir atau sesuai filter
         $months = [];
         $data = [];
         for ($i = 11; $i >= 0; $i--) {
-            $month = Carbon::now()->subMonths($i)->format('Y-m'); // Format bulan (contoh: 2023-09)
-            $months[] = Carbon::now()->subMonths($i)->format('M Y'); // Format untuk label (contoh: Sep 2023)
-            $data[] = $incomePerMonth[$month] ?? 0; // Mengambil jumlah pendapatan atau 0 jika tidak ada
+            $month = Carbon::now()->subMonths($i)->format('Y-m');
+            $months[] = Carbon::now()->subMonths($i)->format('M Y');
+            $data[] = $incomePerMonth[$month] ?? 0;
         }
 
         return [
@@ -46,5 +66,11 @@ class IncomeChart extends BarChartWidget
             ],
             'labels' => $months,
         ];
+    }
+
+    protected function getType(): string
+    {
+        
+        return 'bar';
     }
 }

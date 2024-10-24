@@ -2,15 +2,14 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\FaqResource\Pages;
-use App\Filament\Resources\FaqResource\RelationManagers;
 use App\Models\Faq;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
+use Filament\Resources\Resource;
+use Tables\Columns\Markdowneditor;
+use App\Filament\Resources\FaqResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class FaqResource extends Resource
@@ -33,10 +32,22 @@ class FaqResource extends Resource
                     ->required()
                     ->rows(3)
                     ->label('Pertanyaan'),
-                Forms\Components\Textarea::make('answer')
+               
+                Forms\Components\MarkdownEditor::make('answer')
+                    ->columnSpan('full')
                     ->required()
-                    ->rows(3)
-                    ->label('Jawaban'),
+                    ->label('Jawaban')
+                    ->toolbarButtons([
+                        'bold', 
+                        'italic', 
+                        'strike', 
+                        'link', 
+                        'list', 
+                        'orderedList', 
+                        'codeBlock', 
+                        'blockquote', 
+                        'heading' 
+                    ]),
             ]);
     }
 
@@ -48,10 +59,13 @@ class FaqResource extends Resource
                     ->searchable()
                     ->label('Pertanyaan')
                     ->sortable(),
+                
                 Tables\Columns\TextColumn::make('answer')
-                    ->searchable()
                     ->label('Jawaban')
-                    ->sortable(),
+                    ->html() //  mendukung format HTML
+                    ->sortable()
+                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()
                     ->sortable()
@@ -66,9 +80,10 @@ class FaqResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
+                Tables\Actions\ForceDeleteAction::make(),
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
@@ -76,8 +91,11 @@ class FaqResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->paginated([25, 50, 100, 'all']);
     }
 
     public static function getRelations(): array

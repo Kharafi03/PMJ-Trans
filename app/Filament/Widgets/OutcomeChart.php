@@ -10,23 +10,51 @@ use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 class OutcomeChart extends BarChartWidget
 {
     use HasWidgetShield;
-    protected static ?string $heading = 'Total Pengeluaran';
 
+    protected static ?string $heading = 'Total Pengeluaran';
+    protected static string $color = 'danger';
+    protected static ?string $icon = 'heroicon-o-cash'; // Ikon untuk pengeluaran
+    protected static ?string $iconColor = 'danger';
+    protected static ?string $iconBackgroundColor = 'danger';
+    protected static ?string $label = 'Monthly Outcome';
+
+    public ?string $filter = 'today'; // Default filter
+
+    //Mengatur pilihan filter untuk periode waktu.
+    protected function getFilters(): ?array
+    {
+        return [
+            'today' => 'Today',
+            'week' => 'Last Week',
+            'month' => 'Last Month',
+            'year' => 'This Year',
+        ];
+    }
+
+
+    // Mengambil data pengeluaran berdasarkan filter periode waktu yang dipilih.
+  
     protected function getData(): array
     {
-        // Mengambil tanggal 12 bulan yang lalu
-        $twelveMonthsAgo = Carbon::now()->subMonths(12);
+        // Mengambil tanggal awal berdasarkan filter yang dipilih
+        $startDate = match ($this->filter) {
+            'today' => Carbon::today(),
+            'week' => Carbon::now()->subWeek(),
+            'month' => Carbon::now()->subMonth(),
+            'year' => Carbon::now()->subYear(),
+            default => Carbon::now()->subMonths(12),
+        };
 
-        // Mengambil data pengeluaran per bulan dari 12 bulan terakhir
+        // Mengambil data pengeluaran per bulan dari rentang waktu yang dipilih
         $outcomePerMonth = Outcome::selectRaw('DATE_FORMAT(datetime, "%Y-%m") as month, SUM(nominal) as total')
-            ->where('datetime', '>=', $twelveMonthsAgo) // Hanya data dari 12 bulan terakhir
+            ->where('datetime', '>=', $startDate)
             ->groupBy('month')
             ->orderBy('month')
             ->get()
             ->pluck('total', 'month')
             ->toArray();
 
-        // array dari 12 bulan terakhir
+        // Membuat array 12 bulan terakhir untuk label dan data
         $months = [];
         $data = [];
         for ($i = 11; $i >= 0; $i--) {
@@ -40,11 +68,18 @@ class OutcomeChart extends BarChartWidget
                 [
                     'label' => 'Pengeluaran',
                     'data' => $data,
-                    'backgroundColor' => '#FFA500',
+                    'backgroundColor' => '#FFA500', // Warna oranye untuk pengeluaran
                     'borderWidth' => 0,
                 ],
             ],
             'labels' => $months,
         ];
+    }
+
+
+    // Tipe grafik yang digunakan.
+    protected function getType(): string
+    {
+        return 'bar'; 
     }
 }
