@@ -32,18 +32,19 @@ class BookingCodeController extends Controller
         }
 
         // Cek apakah booking ditemukan dan customer memiliki email dan ticket_sent = false
-        if ($booking && !$booking->ticket_sent && $booking->customer->email != null) {
-            // Kirim email e-ticket kepada customer
-            $setting = Setting::all();
-            Mail::send('vendor.mail.ticket-email', compact('booking', 'destinations', 'setting'), function ($message) use ($booking) {
-                $message->to($booking->customer->email, $booking->customer->name)
-                    ->subject('E-Ticket PMJ Trans - ' . $booking->booking_code);
-            });
+        // if ($booking && !$booking->ticket_sent && $booking->customer->email != null) {
+        //     // Kirim email e-ticket kepada customer
+        //     $setting = Setting::all();
+        //     // dd($setting);
+        //     Mail::send('vendor.mail.ticket-email', compact('booking', 'destinations', 'setting'), function ($message) use ($booking) {
+        //         $message->to($booking->customer->email, $booking->customer->name)
+        //             ->subject('E-Ticket PMJ Trans - ' . $booking->booking_code);
+        //     });
 
-            // Update kolom ticket_sent menjadi true
-            $booking->ticket_sent = true;
-            $booking->save();
-        }
+        //     // Update kolom ticket_sent menjadi true
+        //     $booking->ticket_sent = true;
+        //     $booking->save();
+        // }
 
         return view('frontend.booking-code.index', compact('booking', 'destinations'));
     }
