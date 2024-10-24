@@ -33,6 +33,7 @@ return new class extends Migration
             $table->decimal('payment_remaining', 12, 2)->nullable();
             $table->decimal('total_booking_spend',12 , 2)->nullable();
             $table->decimal('profit',12 , 2)->nullable();
+            $table->boolean('ticket_sent')->nullable()->default(false);  // Kolom untuk menandai email tiket
             $table->softDeletes();
             $table->timestamps();
         });

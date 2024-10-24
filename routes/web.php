@@ -20,6 +20,7 @@ use App\Http\Controllers\Customer\BookingCheckController;
 use App\Http\Controllers\Customer\RegistrationController;
 use App\Http\Controllers\Customer\BookingStatusController;
 use App\Http\Controllers\Customer\DetailPaymentController;
+use App\Http\Controllers\Customer\EmailTemplateController;
 use App\Http\Controllers\Customer\ResetPasswordController;
 use App\Http\Controllers\Customer\ContactController;
 use App\Http\Controllers\Driver\DriverLoginController;
@@ -48,6 +49,8 @@ Route::get('/booking', [BookingController::class, 'showForm'])->name('frontend.b
 
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
+Route::get('/develop-email-template', [EmailTemplateController::class, 'showTicketEmail']);
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -57,6 +60,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/history/review', [HistoryController::class, 'storeReview'])->name('history.storeReview');
     Route::get('/history/payment/{booking}', [DetailPaymentController::class, 'show'])->name('payment-history');
     Route::get('/booking-code/{booking_code}', [BookingCodeController::class, 'show'])->name('booking.code');
+    Route::post('/send-ticket-email/{booking_code}', [BookingController::class, 'sendTicketEmail'])->name('sendTicketEmail');
 });
 
 Route::get('/booking-check', [BookingCheckController::class, 'index'])->name('cek.status');

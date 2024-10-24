@@ -41,42 +41,6 @@
                                   <img src="img/pmj02-1.jpg" alt="Bus 1" class="img-fluid">
                                   <div class="card-body">
                                       <div class="d-flex justify-content-between">
-                                          <p class="package-card-title">PMJ 01</p>
-                                          <div class="package-icon">
-                                              <i class="fa-solid fa-star"></i> 4.8
-                                          </div>
-                                      </div>
-                                      <p class="small">Jetbus 3+ Voyager Adiputro</p>
-                                      <div class="row mt-3 mb-3 text-center">
-                                          <div class="col-3 text-icon">
-                                              <i class="fa-solid fa-bed"></i>
-                                              <p>Bantal & Selimut</p>
-                                          </div>
-                                          <div class="col-3 text-icon">
-                                              <i class="fa-solid fa-tv"></i>
-                                              <p>Entertain System</p>
-                                          </div>
-                                          <div class="col-3 text-icon">
-                                              <i class="fa-solid fa-mug-hot"></i>
-                                              <p>Dispenser</p>
-                                          </div>
-                                          <div class="col-3 text-icon">
-                                              <i class="fa-solid fa-bolt"></i>
-                                              <p>USB Charger</p>
-                                          </div>
-                                      </div>
-                                      <div class="detail-package d-flex justify-content-end">
-                                          <button type="button" class="btn-detail">Detail</button>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <!-- Card 2 -->
-                          <div class="col-12 col-md-6 col-lg-4 mb-4 d-none d-md-block">
-                              <div class="package-card card h-100">
-                                  <img src="img/pmj03-1.jpg" alt="Bus 2" class="img-fluid">
-                                  <div class="card-body">
-                                      <div class="d-flex justify-content-between">
                                           <p class="package-card-title">PMJ 02</p>
                                           <div class="package-icon">
                                               <i class="fa-solid fa-star"></i> 4.8
@@ -102,6 +66,42 @@
                                           </div>
                                       </div>
                                       <div class="detail-package d-flex justify-content-end">
+                                          <button type="button" class="btn-detail"><a href="{{ route('bus-detail')}}" style="text-decoration:none; color: white;">Detail</a></button>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <!-- Card 2 -->
+                          <div class="col-12 col-md-6 col-lg-4 mb-4 d-none d-md-block">
+                              <div class="package-card card h-100">
+                                  <img src="img/pmj03-1.jpg" alt="Bus 2" class="img-fluid">
+                                  <div class="card-body">
+                                      <div class="d-flex justify-content-between">
+                                          <p class="package-card-title">PMJ 03</p>
+                                          <div class="package-icon">
+                                              <i class="fa-solid fa-star"></i> 4.8
+                                          </div>
+                                      </div>
+                                      <p class="small">Jetbus 3+ Voyager Adiputro</p>
+                                      <div class="row mt-3 mb-3 text-center">
+                                          <div class="col-3 text-icon">
+                                              <i class="fa-solid fa-bed"></i>
+                                              <p>Bantal & Selimut</p>
+                                          </div>
+                                          <div class="col-3 text-icon">
+                                              <i class="fa-solid fa-tv"></i>
+                                              <p>Entertain System</p>
+                                          </div>
+                                          <div class="col-3 text-icon">
+                                              <i class="fa-solid fa-mug-hot"></i>
+                                              <p>Dispenser</p>
+                                          </div>
+                                          <div class="col-3 text-icon">
+                                              <i class="fa-solid fa-bolt"></i>
+                                              <p>USB Charger</p>
+                                          </div>
+                                      </div>
+                                      <div class="detail-package d-flex justify-content-end">
                                           <button type="button" class="btn-detail">Detail</button>
                                       </div>
                                   </div>
@@ -109,7 +109,7 @@
                           </div>
                           <div class="col-12 col-md-6 col-lg-4 mb-4 d-none d-md-block">
                               <div class="package-card card h-100">
-                                  <img src="img/pmj03-1.jpg" alt="Bus 2" class="img-fluid">
+                                  <img src="img/pmj02-1.jpg" alt="Bus 2" class="img-fluid">
                                   <div class="card-body">
                                       <div class="d-flex justify-content-between">
                                           <p class="package-card-title">PMJ 02</p>
@@ -189,7 +189,7 @@
                                   <img src="img/pmj02-1.jpg" alt="Bus 4" class="img-fluid">
                                   <div class="card-body">
                                       <div class="d-flex justify-content-between">
-                                          <p class="package-card-title">PMJ 04</p>
+                                          <p class="package-card-title">PMJ 02</p>
                                           <div class="package-icon">
                                               <i class="fa-solid fa-star"></i> 4.9
                                           </div>
@@ -435,71 +435,79 @@
             <div class="accordion-item">
               <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="false">
-                  Pertanyaan 1
+                    Bagaimana cara memesan bus ?
                 </button>
               </h2>
               <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faq">
-                <div class="accordion-body">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam, possimus quaerat! Consequuntur nihil reiciendis enim odit maiores eveniet rerum dolore? Aut quod delectus blanditiis nisi? Nihil, distinctio libero! Non, odit.</div>
+                <div class="accordion-body">
+                    <p>Anda bisa memesan bus dengan dua cara:
+                        <ul>
+                            <li>Melalui Admin: Klik ikon “WhatsApp” atau menuju halaman “Kontak Kami” untuk terhubung langsung dengan kami.</li>
+                            <li>Melalui Website: Klik tombol "Pesan" di halaman pemesanan</li>
+                        </ul>
+                    </p>
+                </div>
               </div>
             </div>
             <div class="accordion-item">
               <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false">
-                  Pertanyaan 2
+                    Bagaimana cara melakukan pembayaran ?
                 </button>
               </h2>
               <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faq">
-                <div class="accordion-body">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Est officiis temporibus quae tenetur esse ut quo praesentium quam. Possimus cupiditate consequatur perspiciatis ad recusandae explicabo unde quaerat, facere illum. Libero?</div>
+                <div class="accordion-body">
+                    <p>
+                    Setelah memesan, Anda bisa melakukan pembayaran dengan mengupload bukti transfer di website kami.
+                    </p>
+                </div>
               </div>
             </div>
             <div class="accordion-item">
               <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false">
-                  Pertanyaan 3
+                    Fasilitas apa saja yang ada di bus PMJ ?
                 </button>
               </h2>
               <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faq">
-                <div class="accordion-body">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non nulla illum et minus assumenda pariatur aspernatur eveniet quisquam tenetur facilis ipsam ea, nemo ipsum odio earum? Veniam eos pariatur autem!</div>
+                <div class="accordion-body">
+                    <p>Di dalam bus PMJ, Anda akan menemukan:
+                        <ul>
+                            <li>Bantal dan selimut</li>
+                            <li>USB charger untuk mengisi daya perangkat</li>
+                            <li>Sistem hiburan untuk kenyamanan selama perjalanan</li>
+                            <li>Pemanas air atau dispenser untuk kebutuhan minum</li>
+                        </ul>
+                    </p>
+                </div>
               </div>
             </div>
             <div class="accordion-item">
               <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false">
-                  Pertanyaan 4
+                    Apa itu Leg Rest dan berapa banyak yang tersedia ?
                 </button>
               </h2>
               <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faq">
-                <div class="accordion-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas, quia dolores? Sint nostrum deserunt fuga magnam minus autem sequi molestiae soluta excepturi iusto fugit cum qui temporibus, pariatur rem esse!</div>
+                <div class="accordion-body">
+                    <p>
+                    Leg Rest adalah tempat untuk menyokong kaki agar lebih nyaman. Kami menyediakan 32 Leg Rest per unit bus. Jika Anda membawa 64 penumpang, kami sarankan untuk menyewa 2 unit bus agar semua penumpang bisa menggunakan Leg Rest.
+                    </p>
+                </div>
               </div>
             </div>
             <div class="accordion-item">
               <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false">
-                  Pertanyaan 5
+                    Apa yang harus dilakukan terkait tujuan perjalanan ?
                 </button>
               </h2>
               <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faq">
-                <div class="accordion-body">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi earum eveniet ducimus dolorem itaque quae sequi, molestias veritatis, ratione rem dolorum laudantium! Minus nesciunt adipisci repellat ut culpa laboriosam maiores.</div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6" aria-expanded="false">
-                  Pertanyaan 6
-                </button>
-              </h2>
-              <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faq">
-                <div class="accordion-body">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae dolore excepturi a facilis obcaecati ad reiciendis nisi maiores labore dolorum harum deserunt distinctio, sapiente cumque ut vero eos quae provident!</div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq7" aria-expanded="false">
-                  Pertanyaan 7
-                </button>
-              </h2>
-              <div id="faq7" class="accordion-collapse collapse" data-bs-parent="#faq">
-                <div class="accordion-body">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur eligendi maxime aut error laudantium molestiae qui tenetur ullam repellat unde blanditiis, nulla harum explicabo hic deleniti dolores magni illum suscipit.</div>
+                <div class="accordion-body">
+                    <p>
+                    Saat memesan, pastikan Anda mengisi tujuan wisata dengan lengkap. Jika ada perubahan tujuan tanpa memberi tahu kami sebelumnya, Anda akan dikenakan denda.
+                    </p>
+                </div>
               </div>
             </div>
           </div>      

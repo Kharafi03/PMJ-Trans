@@ -29,7 +29,7 @@ class BookingStatusController extends Controller
 
             // Create a new income record
             Income::create([
-                'booking_code' => $booking->id,
+                'id_booking' => $booking->id,
                 'id_m_income' => 1,
                 'id_ms_income' => 1,
                 'datetime' => now(),
@@ -52,7 +52,7 @@ class BookingStatusController extends Controller
 
             // Create a new income record
             Income::create([
-                'booking_code' => $booking->id,
+                'id_booking' => $booking->id,
                 'id_m_income' => 2,
                 'id_ms_income' => 1,
                 'datetime' => now(),

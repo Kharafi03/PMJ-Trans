@@ -9,8 +9,8 @@
     <!-- Bread Crumbs -->
     <nav aria-label="breadcrumb" style="margin-top: 100px;">
         <ol class="breadcrumb d-flex justify-content-center align-items-center">
-            <li class="breadcrumb-item"><a href="{{route('homepage')}}">Beranda</a></li>
-            <li class="breadcrumb-item"><a href="{{route('cek.status')}}">Cek Pemesanan</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('homepage') }}">Beranda</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('booking.store')}}">Formulir Pemesanan</a></li>
             <li class="breadcrumb-item active" aria-current="page">E-Tiket</li>
         </ol>
     </nav>
@@ -67,8 +67,7 @@
                                         </div>
                                         <div class="info-tiket mt-3">
                                             <div class="row text-center align-items-stretch">
-                                                <div class="col-6 d-flex flex-column justify-content-center"
-                                                    style="border-right: 3px solid #C9C9C93D;">
+                                                <div class="col-6 d-flex flex-column justify-content-center" style="border-right: 3px solid #C9C9C93D;">
                                                     <h5 class="mt-auto mb-3">Kode Booking</h5>
                                                     <p class="mt-auto">{{ $booking->booking_code }}</p>
                                                 </div>
@@ -80,18 +79,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="ticketRip">
-                                    <div class="row">
-                                        <div class="col-1">
-                                            <div class="circleLeft"></div>
-                                        </div>
-                                        <div class="col-10">
-                                            <div class="ripLine"></div>
-                                        </div>
-                                        <div class="col-1">
-                                            <div class="circleRight"></div>
-                                        </div>
-                                    </div>
+                                <div class="ticketRip d-flex justify-content-between">
+                                    <div class="circleLeft"></div>
+                                    <div class="ripLine"></div>
+                                    <div class="circleRight"></div>
                                 </div>
                                 <div class="tujuan-tiket">
                                     <div class="tujuan-container">

@@ -35,7 +35,7 @@
                 <div class="col">
                     <div class="contact-card card h-100 text-center d-flex justify-content-center align-items-center">
                         <div class="icon">
-                            <i class="fa-solid fa-phone"></i>
+                            <i class="fa-brands fa-whatsapp"></i>
                         </div>
                         <div class="card-body flex-column align-items-end">
                             <h5 class="card-title">Nomor WhatsApp</h5>
@@ -93,7 +93,7 @@
                             <p>Kontak Kami</p>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 mt-3">
+                            <div class="col-md-6 mb-4">
                                 <label for="namaLengkap" class="form-label">Nama Lengkap<span
                                         class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="namaLengkap" name="namaLengkap"
@@ -101,7 +101,7 @@
                                 <small class="text-danger" id="error-nama" style="display: none;">Lengkapi data nama lengkap
                                     anda.</small>
                             </div>
-                            <div class="col-md-6 mt-3">
+                            <div class="col-md-6 mb-4">
                                 <label for="kategori" class="form-label">Kategori<span
                                         class="text-danger">*</span></label>
                                 <select class="form-select" id="kategori" name="kategori" required>
@@ -109,10 +109,9 @@
                                     <option value="Pertanyaan">Pertanyaan</option>
                                     <option value="Komplain">Komplain</option>
                                 </select>
-                                <small class="text-danger" id="error-kategori" style="display: none;">Pilih kategori yang
-                                    anda inginkan.</small>
+                                <small class="text-danger" id="error-kategori" style="display: none;">Pilih kategori yang anda inginkan.</small>
                             </div>
-                            <div class="col-md-6 mt-3">
+                            <div class="col-md-6 mb-4">
                                 <label for="noTelp" class="form-label">Nomor WhatsApp<span
                                         class="text-danger">*</span></label>
                                 <input type="tel" class="form-control" id="noTelp" name="noTelp"
@@ -120,7 +119,7 @@
                                 <small class="text-danger" id="error-notelp" style="display: none;">Lengkapi data nomor
                                     telepon anda.</small>
                             </div>
-                            <div class="col-md-6 mt-3">
+                            <div class="col-md-6 mb-4">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="email" placeholder="Masukkan alamat email" name="email">
                             </div>
@@ -138,14 +137,14 @@
                             </div>
                         </div>
                         <div class="mt-3">
-                            <button type="submit" class="btn-kirim" onclick="submitHubungiKami()">KIRIM PESAN</button>
+                            <button type="submit" class="btn-kirim" onclick="submitHubungiKami()">Kirim Pesan</button>
                         </div>
                     </form>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end mb-3">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12978.348270618128!2d110.8778704!3d-6.8190866!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e70c5cdd4042793%3A0x22dfa84ed6ce52de!2sGarasi%20Bus%20PMJ%20Trans!5e1!3m2!1sid!2sid!4v1724347397670!5m2!1sid!2sid"
-                        width="450" height="530" style="border:0;" allowfullscreen="" loading="lazy"
+                        width="450" height="580" style="border:0;" allowfullscreen="" loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>

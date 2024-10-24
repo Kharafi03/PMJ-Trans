@@ -50,7 +50,7 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sk3" aria-expanded="false">
-                                Pembetulan dan Pengembalian Dana
+                                Pembatalan dan Pengembalian Dana
                             </button>
                         </h2>
                         <div id="sk3" class="accordion-collapse collapse" data-bs-parent="#sk">
@@ -58,7 +58,7 @@
                                 <ul>
                                     <li>Pembatalan yang dilakukan lebih dari 3 hari sebelum keberangkatan akan dikenakan biaya administrasi sebesar 10% dari total biaya sewa.</li>
                                     <li>Pembatalan yang dilakukan dalam waktu kurang dari 3 hari sebelum keberangkatan tidak akan mendapatkan pengembalian dana (DP hangus).</li>
-                                    <li>LPMJ Trans berhak membatalkan perjalanan jika terdapat kondisi yang membahayakan keselamatan atau terjadi force majeure, dengan pengembalian dana penuh kepada penyewa.</li>
+                                    <li>PMJ Trans berhak membatalkan perjalanan jika terdapat kondisi yang membahayakan keselamatan atau terjadi force majeure, dengan pengembalian dana penuh kepada penyewa.</li>
                                 </ul>
                             </div>
                         </div>
