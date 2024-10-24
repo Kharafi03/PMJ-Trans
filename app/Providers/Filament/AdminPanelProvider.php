@@ -31,7 +31,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->brandLogo(fn () => view('logo'))
-            ->favicon('logo')
+            ->favicon(asset('favicon.ico'))
             ->darkMode(false)
             ->spa() //agar realtime
             ->profile()
@@ -73,20 +73,22 @@ class AdminPanelProvider extends PanelProvider
                 'profile' => MenuItem::make()
                     ->label(fn() => auth()->user()->name)
                     ->url(fn (): string => EditProfilePage::getUrl())
-                    ->icon('heroicon-m-user-circle')
-                    //If you are using tenancy need to check with the visible method where ->company() is the relation between the user and tenancy model as you called
-                    
+                    ->icon('heroicon-o-user-circle') 
             ])
             ->viteTheme("resources/css/filament/admin/theme.css")
             ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 \Hasnayeen\Themes\ThemesPlugin::make(),
                 FilamentEditProfilePlugin::make()
-                ->shouldShowAvatarForm(
-                    value: true,
-                    directory: 'avatars', // image will be stored in 'storage/app/public/avatars
-                    rules: 'mimes:jpeg,png|max:1024' //only accept jpeg and png files with a maximum size of 1MB
-                )
-            ]);;
+                ->setIcon('heroicon-o-user-circle')
+                    ->shouldShowAvatarForm(
+                        value: true,
+                        directory: 'avatars',
+                        rules: 'mimes:jpeg,png|max:1024'
+                    )
+                    ->shouldShowDeleteAccountForm(false) 
+                    ->shouldShowBrowserSessionsForm(false) 
+                    
+            ]);
     }
 }
