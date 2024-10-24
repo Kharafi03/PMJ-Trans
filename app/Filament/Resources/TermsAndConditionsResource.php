@@ -20,9 +20,11 @@ class TermsAndConditionsResource extends Resource
 {
     protected static ?string $model = TermsAndConditions::class;
 
+    protected static ?string $pluralModelLabel = "Syarat & Ketentuan";
+
     protected static ?string $navigationGroup = 'Manajemen Sistem';
 
-    protected static ?int $navigationSort = 22;
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
 
