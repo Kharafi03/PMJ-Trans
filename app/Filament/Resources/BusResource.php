@@ -327,17 +327,17 @@ class BusResource extends Resource
                     ->label('Status Bus')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('deleted_at')
-                    ->label('Tanggal dihapus')
+                    ->label('Tanggal Dihapus')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Tanggal dibuat')
+                    ->label('Tanggal Dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Tanggal diubah')
+                    ->label('Tanggal Diperbarui')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -523,27 +523,27 @@ class BusResource extends Resource
                     ->label('Hapus'),
             ])
 
-    //         ->bulkActions([
-    //             Tables\Actions\BulkActionGroup::make([
-    //                 Tables\Actions\DeleteBulkAction::make()
-    //                     ->label('Hapus')
-    //                     ->action(function ($records) {
-    //                         foreach ($records as $record) {
-    //                             $record->delete(); // Menggunakan soft delete
-    //                         }
-    //                     }),
-    //             ]),
-    //         ]);
-    // }
+            //         ->bulkActions([
+            //             Tables\Actions\BulkActionGroup::make([
+            //                 Tables\Actions\DeleteBulkAction::make()
+            //                     ->label('Hapus')
+            //                     ->action(function ($records) {
+            //                         foreach ($records as $record) {
+            //                             $record->delete(); // Menggunakan soft delete
+            //                         }
+            //                     }),
+            //             ]),
+            //         ]);
+            // }
 
-    ->bulkActions([
-        Tables\Actions\BulkActionGroup::make([
-            Tables\Actions\DeleteBulkAction::make(),
-            Tables\Actions\RestoreBulkAction::make(),
-            Tables\Actions\ForceDeleteBulkAction::make(),
-        ]),
-    ])
-    ->paginated([25, 50, 100, 'all']);
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
+                ]),
+            ])
+            ->paginated([25, 50, 100, 'all']);
     }
     public static function getRelations(): array
     {

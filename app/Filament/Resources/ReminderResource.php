@@ -37,7 +37,7 @@ class ReminderResource extends Resource
 
     public static function getNavigationBadgeColor(): ?string
     {
-            return 'warning';
+        return 'warning';
     }
 
     public static function form(Form $form): Form
@@ -65,17 +65,17 @@ class ReminderResource extends Resource
                     ->label('Tandai')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('deleted_at')
-                    ->label('Tanggal dihapus')
+                    ->label('Tanggal Dihapus')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Tanggal dibuat')
+                    ->label('Tanggal Dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Tanggal diubah')
+                    ->label('Tanggal Diperbarui')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

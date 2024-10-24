@@ -25,6 +25,8 @@ class TermsAndConditionsResource extends Resource
 
     protected static ?int $navigationSort = 22;
 
+    protected static ?string $pluralModelLabel = "Syarat & Ketentuan";
+
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
 
     public static function form(Form $form): Form
@@ -34,13 +36,26 @@ class TermsAndConditionsResource extends Resource
                 Group::make()
                     ->schema([
                         TextInput::make('heading')
-                            ->label('Heading')
+                            ->label('Judul')
                             ->placeholder('Masukkan Heading'),
-                        Textarea::make('description')
+                        Forms\Components\MarkdownEditor::make('description')
+                            ->columnSpan('full')
+                            ->required()
                             ->label('Deskripsi')
-                            ->rows(5)
-                            ->placeholder('Masukkan Syarat dan Ketentuan')
+                            ->toolbarButtons([
+                                'bold',
+                                'italic',
+                                'strike',
+                                'link',
+                                'list',
+                                'orderedList',
+                                'bulletList',
+                                // 'codeBlock',
+                                'blockquote',
+                                'heading'
+                            ]),
                     ])
+                    ->columnSpanFull()
             ]);
     }
 
@@ -48,27 +63,51 @@ class TermsAndConditionsResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id')
-                    ->label('No')
-                    ->sortable(),
+                // TextColumn::make('id')
+                //     ->label('No')
+                //     ->sortable(),
                 TextColumn::make('heading')
-                    ->label('Heading')
+                    ->label('Judul')
                     ->searchable()
+                    ->limit(40)
+                    ->wrap(20)
+                    ->tooltip(function ($record) {
+                        return $record->heading;
+                    })
                     ->sortable(),
                 TextColumn::make('description')
                     ->label('Syarat dan Ketentuan')
-                    ->limit(100)
+                    ->limit(250)
+                    ->wrap(75)
                     ->searchable()
                     ->tooltip(function ($record) {
                         return $record->description;
                     })
                     ->sortable(),
+
+                Tables\Columns\TextColumn::make('deleted_at')
+                    ->label('Tanggal Dihapus')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Tanggal Dibuat')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Tanggal Diperbarui')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

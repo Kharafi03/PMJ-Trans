@@ -157,20 +157,18 @@ class MailResource extends Resource
                     })
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('created_at')
-                    ->label('Tanggal dibuat')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-
                 Tables\Columns\TextColumn::make('deleted_at')
-                    ->label('Tanggal dihapus')
+                    ->label('Tanggal Dihapus')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Tanggal Dibuat')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Tanggal diubah')
+                    ->label('Tanggal Diperbarui')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -199,6 +197,12 @@ class MailResource extends Resource
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
+                Tables\Filters\SelectFilter::make('category')
+                    ->options([
+                        'Pertanyaan' => 'Pertanyaan',
+                        'Komplain' => 'Komplain',
+                    ])
+                    ->label('Kategori'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

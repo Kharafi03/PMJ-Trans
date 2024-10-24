@@ -38,16 +38,16 @@ class BusTaxResource extends Resource
                         Forms\Components\Select::make('id_bus')
                             ->label('Bus')
                             ->required()
-                            ->relationship('buses','name')
+                            ->relationship('buses', 'name')
                             ->placeholder('Masukkan ID Bus'),
                         Forms\Components\Select::make('id_user')
                             ->label('Pelaksana')
                             ->required()
-                            ->relationship('users','name')
+                            ->relationship('users', 'name')
                             ->options(function () {
                                 return User::whereHas('roles', function ($query) {
                                     $query->where('name', 'driver')
-                                    ->orWhere('name', 'admin');
+                                        ->orWhere('name', 'admin');
                                 })->pluck('name', 'id'); // Mengambil nama dan id user
                             })
                             ->placeholder('Masukkan ID User'),
@@ -130,17 +130,17 @@ class BusTaxResource extends Resource
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('deleted_at')
-                    ->label('Tanggal dihapus')
+                    ->label('Tanggal Dihapus')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Tanggal dibuat')
+                    ->label('Tanggal Dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Tanggal diubah')
+                    ->label('Tanggal Diperbarui')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -170,7 +170,7 @@ class BusTaxResource extends Resource
                 ]),
             ])
             ->paginated([25, 50, 100, 'all']);
-            }
+    }
     public static function getRelations(): array
     {
         return [

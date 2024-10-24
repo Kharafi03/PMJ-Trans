@@ -460,19 +460,18 @@ class BookingResource extends Resource
                 ->formatStateUsing(function ($state) {
                     return ucfirst($state);
                 }),
-            TextColumn::make('deleted_at')
-                ->label('Tanggal dihapus')
-                ->searchable()
+            Tables\Columns\TextColumn::make('deleted_at')
+                ->label('Tanggal Dihapus')
                 ->dateTime()
                 ->sortable()
                 ->toggleable(isToggledHiddenByDefault: true),
-            TextColumn::make('created_at')
-                ->label('Tanggal dibuat')
+            Tables\Columns\TextColumn::make('created_at')
+                ->label('Tanggal Dibuat')
                 ->dateTime()
                 ->sortable()
                 ->toggleable(isToggledHiddenByDefault: true),
-            TextColumn::make('updated_at')
-                ->label('Tanggal diubah')
+            Tables\Columns\TextColumn::make('updated_at')
+                ->label('Tanggal Diperbarui')
                 ->dateTime()
                 ->sortable()
                 ->toggleable(isToggledHiddenByDefault: true),
@@ -485,7 +484,7 @@ class BookingResource extends Resource
                 Tables\Filters\SelectFilter::make('id_ms_booking')
                     ->label('Status Pemesanan')
                     ->relationship('ms_booking', 'name'),
-                   
+
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
@@ -732,7 +731,7 @@ class BookingResource extends Resource
                             'datetime' => now(),
                         ]);
 
-                        
+
                         TripBus::where('id_booking', $record->id)
                             ->update([
                                 'deleted_at' => now(),

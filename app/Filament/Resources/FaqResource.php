@@ -31,22 +31,24 @@ class FaqResource extends Resource
                 Forms\Components\Textarea::make('question')
                     ->required()
                     ->rows(3)
+                    ->columnSpan('full')
                     ->label('Pertanyaan'),
-               
+
                 Forms\Components\MarkdownEditor::make('answer')
                     ->columnSpan('full')
                     ->required()
                     ->label('Jawaban')
                     ->toolbarButtons([
-                        'bold', 
-                        'italic', 
-                        'strike', 
-                        'link', 
-                        'list', 
-                        'orderedList', 
-                        'codeBlock', 
-                        'blockquote', 
-                        'heading' 
+                        'bold',
+                        'italic',
+                        'strike',
+                        'link',
+                        'list',
+                        'orderedList',
+                        'bulletList',
+                        // 'codeBlock',
+                        'blockquote',
+                        'heading'
                     ]),
             ]);
     }
@@ -57,24 +59,67 @@ class FaqResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('question')
                     ->searchable()
+                    ->tooltip(function ($record) {
+                        return $record->question;
+                    })
+                    ->wrap(75)
+                    ->limit(150)
+                    ->searchable()
                     ->label('Pertanyaan')
                     ->sortable(),
-                
+
+                // Tables\Columns\TextColumn::make('answer')
+                //     ->label('Jawaban')
+                //     ->html() //  mendukung format HTML
+                //     ->sortable()
+                //     ->formatStateUsing(function ($record) {
+                //         return nl2br(str_replace('. ', ".\n", $record->answer));
+                //     })
+                //     ->tooltip(function ($record) {
+                //         return $record->answer;
+                //     })
+                //     // ->tooltip(function ($record) {
+                //     //     // Mengganti titik menjadi baris baru
+                //     //     return nl2br(str_replace('.', ".\n", $record->answer));
+                //     // })
+                //     // ->tooltip(function ($record) {
+                //     //     // Pisahkan teks berdasarkan titik (.)
+                //     //     $formattedAnswer = '<ul>';
+                //     //     foreach (explode('.', $record->answer) as $line) {
+                //     //         if (trim($line) !== '') {
+                //     //             $formattedAnswer .= '<li>' . trim($line) . '</li>';
+                //     //         }
+                //     //     }
+                //     //     $formattedAnswer .= '</ul>';
+                //     //     return $formattedAnswer;
+                //     // })
+                //     ->limit(75)
+                //     ->searchable(),
+
                 Tables\Columns\TextColumn::make('answer')
                     ->label('Jawaban')
-                    ->html() //  mendukung format HTML
+                    ->html()
                     ->sortable()
+                    ->tooltip(function ($record) {
+                        return strip_tags($record->answer);
+                    })
+                    ->wrap()
+                    //->grow()
+                    ->limit(200)
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('deleted_at')
+                    ->label('Tanggal Dihapus')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Tanggal Dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Tanggal Diperbarui')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

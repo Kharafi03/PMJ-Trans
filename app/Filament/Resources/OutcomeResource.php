@@ -100,9 +100,9 @@ class OutcomeResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')
-                ->label('No')
-                ->sortable()
-                ->searchable(),
+                    ->label('No')
+                    ->sortable()
+                    ->searchable(),
                 BadgeColumn::make('m_outcome.name')
                     ->label('Tipe')
                     ->sortable()
@@ -144,23 +144,20 @@ class OutcomeResource extends Resource
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('deleted_at')
-                    ->label('Tanggal dihapus')
+                    ->label('Tanggal Dihapus')
                     ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true)
-                    ->searchable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Tanggal dibuat')
+                    ->label('Tanggal Dibuat')
                     ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true)
-                    ->searchable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Tanggal diubah')
+                    ->label('Tanggal Diperbarui')
                     ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true)
-                    ->searchable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('id_m_outcome')
@@ -170,7 +167,7 @@ class OutcomeResource extends Resource
                     ->label('Status Pemesanan')
                     ->relationship('m_method_payment', 'name'),
                 Tables\Filters\TrashedFilter::make(),
-                    ])
+            ])
             ->actions([
                 Tables\Actions\ForceDeleteAction::make(),
                 Tables\Actions\ViewAction::make()

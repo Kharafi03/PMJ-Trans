@@ -75,7 +75,7 @@ class BusKirResource extends Resource
                             ->directory('kir')
                             ->visibility('public')
                             ->maxSize(2048)
-                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg']) 
+                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg'])
                             ->required()
                             ->helperText('Unggah gambar dalam format JPG atau PNG, maksimal ukuran 2MB.')
                             ->image(),
@@ -113,24 +113,24 @@ class BusKirResource extends Resource
                     ->prefix('Rp. ')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('deleted_at')
-                    ->label('Tanggal dihapus')
+                Tables\Columns\TextColumn::make('deleted_at')
+                    ->label('Tanggal Dihapus')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('created_at')
-                    ->label('Tanggal dibuat')
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Tanggal Dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->label('Tanggal diubah')
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Tanggal Diperbarui')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                    Tables\Filters\TrashedFilter::make(),
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()
@@ -152,7 +152,7 @@ class BusKirResource extends Resource
                 ]),
             ])
             ->paginated([25, 50, 100, 'all']);
-            }
+    }
 
     public static function getRelations(): array
     {
