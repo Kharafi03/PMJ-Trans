@@ -16,7 +16,7 @@
                 <div class="row">
                     <!-- HEADER -->
                     <div class="col-md-12 col-lg-6 mb-3 d-flex flex-column justify-content-center">
-                        <h5 style="font-size: 44px; font-weight: 700; color: #1E9781;">Cek <span style="color: #FD9C07;">Pesanan</span></h5>
+                        <h5 style="font-size: 44px; font-weight: 700; color: #1E9781;">Cek <span style="color: #FD9C07;">Pemesanan</span></h5>
                         <p style="font-size: 16px; font-weight: 500; color: #666666B5;">Cek status pemesanan dengan mengisikan kode booking dan nomor whatsapp yang digunakan saat menyewa bus</p>
                         <img src="{{asset('img/cek-img.png')}}" class="img-fluid" alt="images" style="padding: 0px 50px 0px 50px;">
                     </div>
@@ -26,7 +26,7 @@
                             <form id="formStatusPemesanan" action="{{ route('post.cek.status') }}" method="POST">
                                 @csrf
                                 <div class="form-header text-center mb-5">
-                                    <h5 style="font-size: 30px; font-weight: 700; color: #1E9781;">Cek <span style="color: #FD9C07;">Pesanan</span></h5>
+                                    <h5 style="font-size: 30px; font-weight: 700; color: #1E9781;">Cek <span style="color: #FD9C07;">Pemesanan</span></h5>
                                 </div>
                                 <div class="kolom-input d-flex align-items-center justify-content-center flex-column text-left" style="height: 100%;">
                                     <div class="mb-3">

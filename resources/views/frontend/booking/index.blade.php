@@ -19,7 +19,7 @@
     <!-- TITLE -->
     <section id="pemesanan">
         <div class="container mt-5 mb-5">
-            <h5 style="font-size: 44px; font-weight: 700; color: #1E9781;">PEMESANAN</h5>
+            <h5 style="font-size: 44px; font-weight: 700; color: #1E9781;">FORMULIR <span style="color: #FD9C07;">PEMESANAN</span></h5>
             <p style="font-size: 18px; font-weight: 600; color: #666666B5;">Pilih jadwal, destinasi, serta tipe kendaraan yang sesuai dengan kebutuhan Anda. Rasakan pengalaman perjalanan yang nyaman bersama layanan PMJ Trans</p> 
             <div class="info">
                 <p class="info-title"><i class="fa-solid fa-circle-exclamation"></i> Informasi Pemesanan</p>
@@ -54,10 +54,9 @@
                                         <label for="destination_point" class="form-label">Tujuan Akhir<span
                                                 class="text-danger">*</span></label>
                                         <div class="input-group">
+                                            <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-tujuan.png') }}" alt="icon"></span>
                                             <input type="text" class="form-control tujuan-input @error('destination_point') is-invalid @enderror"
                                             placeholder="Masukkan nama dan kota tujuan (contoh: Malioboro, Yogyakarta)" name="tujuan[]" id="destination_point" required>
-                                            <span class="input-group-text" id="icon"><i
-                                                    class="fa-solid fa-location-dot"></i></span>
                                             @error('destination_point')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -71,11 +70,9 @@
                                 <label for="destination_point" class="form-label">Tujuan Akhir<span
                                         class="text-danger">*</span></label>
                                 <div class="input-group">
+                                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-tujuan.png') }}" alt="icon"></span>
                                     <input type="text" class="detail-pemesanan form-control" id="destination_point"
-                                        name="destination_point" placeholder="Masukkan tujuan perjalanan" required
-                                        autofocus>
-                                    <span class="input-group-text" id="icon"><i
-                                            class="fa-solid fa-location-dot"></i></span>
+                                        name="destination_point" placeholder="Masukkan tujuan perjalanan" required>
                                 </div>
                             </div> --}}
                             <!-- Tombol untuk Menambah Field -->
@@ -86,10 +83,9 @@
                                     <label for="capacity" class="form-label">Jumlah Penumpang<span
                                             class="text-danger">*</span></label>
                                     <div class="input-group">
+                                        <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-penumpang.png') }}" alt="icon"></span>
                                         <input type="number" class="detail-pemesanan form-control @error('capacity') is-invalid @enderror" id="capacity"
                                             name="capacity" placeholder="Masukkan jumlah penumpang" min="1" required>
-                                        <span class="input-group-text" id="icon"><i
-                                                class="fa-solid fa-person"></i></span>
                                         @error('capacity')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -116,11 +112,10 @@
                                 <label for="date_start" class="form-label">Tanggal Mulai<span
                                         class="text-danger">*</span></label>
                                 <div class="input-group">
+                                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-kalender1.png') }}" alt="icon"></span>
                                     <input type="datetime-local" class="detail-pemesanan form-control @error('date_start') is-invalid @enderror" id="date_start"
                                         name="date_start" min="{{ \Carbon\Carbon::tomorrow()->format('Y-m-d\TH:i') }}"
                                         required>
-                                    <span class="input-group-text" id="icon"><i
-                                            class="fa-solid fa-calendar"></i></span>
                                     @error('date_start')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -154,10 +149,10 @@
                                 <label for="name" class="form-label">Nama Lengkap<span
                                         class="text-danger">*</span></label>
                                 <div class="input-group">
+                                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-user.png') }}" alt="icon"></span>
                                     <input type="text" class="detail-pemesanan form-control @error('name') is-invalid @enderror" id="name"
                                         name="name" placeholder="Masukkan nama lengkap" required
                                         @if (Auth::check()) value="{{ Auth::user()->name }}" readonly @endif>
-                                    <span class="input-group-text" id="icon"><i class="fa-solid fa-user"></i></span>
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -169,12 +164,11 @@
                                 <label for="number_phone" class="form-label">Nomor WhatsApp<span
                                         class="text-danger">*</span></label>
                                 <div class="input-group">
+                                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-wa.png') }}" alt="icon"></span>
                                     <input type="number" class="detail-pemesanan form-control @error('number_phone') is-invalid @enderror" id="number_phone"
                                         name="number_phone"
                                         placeholder="Masukkan nomor whatsapp" required
                                         @if (Auth::check()) value="{{ Auth::user()->number_phone }}" readonly @endif>
-                                    <span class="input-group-text" id="icon"><i
-                                            class="fa-solid fa-phone"></i></span>
                                     @error('number_phone')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -185,11 +179,10 @@
                             <div class="mb-4">
                                 <label for="email" class="form-label">Email</label>
                                 <div class="input-group">
+                                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-email.png') }}" alt="icon"></span>
                                     <input type="email" class="detail-pemesanan form-control @error('email') is-invalid @enderror" id="email"
                                         name="email" placeholder="Masukkan alamat email"
                                         @if (Auth::check() && Auth::user()->email) value="{{ Auth::user()->email }}" readonly @endif>
-                                    <span class="input-group-text" id="icon"><i
-                                            class="fa-solid fa-envelope"></i></span>
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -259,8 +252,8 @@
             <div class="mb-4">
                 <label for="tujuan-${fieldCount}" class="form-label">Tujuan ${fieldCount}<span class="text-danger">*</span></label>
                 <div class="input-group">
+                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-tujuan.png') }}" alt="icon"></span>
                     <input type="text" class="form-control tujuan-input" placeholder="Tujuan ${fieldCount}" name="tujuan[]" id="tujuan-${fieldCount}" required>
-                    <span class="input-group-text" id="icon"><i class="fa-solid fa-location-dot"></i></span>
                 </div>
             </div>
             <button type="button" class="btn-hapusTujuan btn btn-danger mb-4" onclick="removeField(${fieldCount})">Hapus</button>
@@ -330,8 +323,8 @@
                 if (!document.getElementById('legrest')) {
                     const legRestInput = `
             <div class="input-group">
+                <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-legrest.png') }}" alt="icon"></span>
                 <input type="text" class="form-control" id="description" name="description" placeholder="Masukkan detail leg rest">
-                <span class="input-group-text" id="icon"><i class="fa-solid fa-couch"></i></span>
             </div>
             `;
                     legRestsContainer.innerHTML = legRestInput; // Menambahkan input leg rest

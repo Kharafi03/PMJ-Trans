@@ -17,10 +17,10 @@
                 <img src="../asset/img/image1.png" alt="Bus Image" class="bus-image">
                 </div> -->
                 <div class="col-md-12 col-lg-6 d-flex flex-column justify-content-center align-items-center">
-                    <img id="mainBusImage" src="/img/pmj02-2.jpg" alt="Bus Image" class="bus-image img-fluid">
+                    <img id="mainBusImage" src="/img/pmj02-1.jpg" alt="Bus Image" class="bus-image img-fluid">
                     <div class="row mt-3 mb-3">
                         <div class="col-12 thumbnail-images">
-                        <img src="/img/pmj02-2.jpg" alt="Thumbnail 1" class="thumbnail" onclick="changeImage(this)">
+                        <img src="/img/pmj02-1.jpg" alt="Thumbnail 1" class="thumbnail" onclick="changeImage(this)">
                         <img src="/img/pmj02-3.jpg" alt="Thumbnail 2" class="thumbnail" onclick="changeImage(this)">
                         <img src="/img/pmj02-4.jpg" alt="Thumbnail 3" class="thumbnail" onclick="changeImage(this)">
                         <img src="/img/pmj02-5.jpg" alt="Thumbnail 4" class="thumbnail" onclick="changeImage(this)">
@@ -29,7 +29,7 @@
                 </div>
                 <div class="col-md-12 col-lg-6 mt-3">
                     <div class="d-flex justify-content-between">
-                        <p class="bus-title">PMJ 05</p>
+                        <p class="bus-title">PMJ 02</p>
                         <div class="bus-star">
                             <i class="fa-solid fa-star"></i> 4.7
                         </div>  

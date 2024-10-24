@@ -40,7 +40,7 @@
                       <img src="img/pmj02-1.jpg" alt="Bus 1" class="img-fluid">
                       <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <p class="package-card-title">PMJ 01</p>
+                            <p class="package-card-title">PMJ 02</p>
                             <div class="package-icon">
                                 <i class="fa-solid fa-star"></i> 4.8
                             </div>  
@@ -65,7 +65,7 @@
                           </div>
                         </div>
                         <div class="detail-package d-flex justify-content-end">
-                          <button type="button" class="btn-detail">Detail</button>
+                          <button type="button" class="btn-detail"><a href="{{ route('bus-detail')}}" style="text-decoration:none; color: white;">Detail</a></button>
                         </div>
                       </div>   
                     </div>
@@ -76,7 +76,7 @@
                       <img src="img/pmj03-1.jpg" alt="Bus 2" class="img-fluid">
                       <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <p class="package-card-title">PMJ 02</p>
+                            <p class="package-card-title">PMJ 03</p>
                             <div class="package-icon">
                                 <i class="fa-solid fa-star"></i> 4.8
                             </div>
@@ -112,7 +112,7 @@
                       <img src="img/pmj02-1.jpg" alt="Bus 3" class="img-fluid">
                       <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <p class="package-card-title">PMJ 03</p>
+                            <p class="package-card-title">PMJ 02</p>
                             <div class="package-icon">
                                 <i class="fa-solid fa-star"></i> 4.8
                             </div>  
@@ -148,7 +148,7 @@
                       <img src="img/pmj03-1.jpg" alt="Bus 4" class="img-fluid">
                       <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <p class="package-card-title">PMJ 04</p>
+                            <p class="package-card-title">PMJ 03</p>
                             <div class="package-icon">
                                 <i class="fa-solid fa-star"></i> 4.7
                             </div>  
@@ -184,7 +184,7 @@
                       <img src="img/pmj02-1.jpg" alt="Bus 5" class="img-fluid">
                       <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <p class="package-card-title">PMJ 05</p>
+                            <p class="package-card-title">PMJ 02</p>
                             <div class="package-icon">
                                 <i class="fa-solid fa-star"></i> 4.9
                             </div>
