@@ -18,7 +18,7 @@ class FaqResource extends Resource
 
     protected static ?string $navigationGroup = 'Manajemen Sistem';
 
-    protected static ?int $navigationSort = 23;
+    protected static ?int $navigationSort = 3;
 
     protected static ?string $pluralModelLabel = "FAQ";
 
