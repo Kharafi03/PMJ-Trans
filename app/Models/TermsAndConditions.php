@@ -13,6 +13,7 @@ class TermsAndConditions extends Model
     protected $table = 'terms_and_conditions';
 
     protected $fillable = [
+        'heading',
         'description',
     ];
 }

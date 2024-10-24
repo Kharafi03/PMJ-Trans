@@ -8,6 +8,7 @@ use App\Models\TermsAndConditions;
 use Filament\Forms;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -32,6 +33,9 @@ class TermsAndConditionsResource extends Resource
             ->schema([
                 Group::make()
                     ->schema([
+                        TextInput::make('heading')
+                            ->label('Heading')
+                            ->placeholder('Masukkan Heading'),
                         Textarea::make('description')
                             ->label('Deskripsi')
                             ->rows(5)
@@ -47,9 +51,14 @@ class TermsAndConditionsResource extends Resource
                 TextColumn::make('id')
                     ->label('No')
                     ->sortable(),
+                TextColumn::make('heading')
+                    ->label('Heading')
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('description')
                     ->label('Syarat dan Ketentuan')
                     ->limit(100)
+                    ->searchable()
                     ->tooltip(function ($record) {
                         return $record->description;
                     })
