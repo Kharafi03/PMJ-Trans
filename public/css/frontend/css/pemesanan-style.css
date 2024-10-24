@@ -49,10 +49,11 @@
     border-radius: 30px;
     margin-bottom: 50px;
 }
+
 input[type="text"], input[type="date"], input[type="number"], input[type="email"],input[type="datetime-local"]{
     height: 50px;
     border-radius: 15px;
-    border-right: none;
+    border: 1px solid #666666;
 }
 label{
     font-weight: 500;
@@ -61,12 +62,13 @@ label{
     border-right: none;
 }
 #icon{
-    border-radius: 0px 15px 15px 0px;
+    border-radius: 15px 0px 0px 15px;
     background-color: white;
-    border-left: none;
+    border: 1px solid #666666;
 }
 textarea{
     border-radius: 15px !important;
+    border: 1px solid #666666 !important;
 }
 i{
     font-size: 21px;
