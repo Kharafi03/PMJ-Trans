@@ -27,8 +27,6 @@ class TermsAndConditionsResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
-    protected static ?string $pluralModelLabel = "Syarat & Ketentuan";
-
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
 
     public static function form(Form $form): Form

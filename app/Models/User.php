@@ -83,6 +83,16 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         return $this->avatar_url ? Storage::url("$this->avatar_url") : null;
     }
 
+    public function driver()
+    {
+        return $this->hasMany(TripBus::class, 'id_driver');
+    }
+
+    public function codriver()
+    {
+        return $this->hasMany(TripBus::class, 'id_codriver');
+    }
+
     // public function permissions(): BelongsTo
     // {
     //     return $this->belongsTo(Permission::class, 'id_role');

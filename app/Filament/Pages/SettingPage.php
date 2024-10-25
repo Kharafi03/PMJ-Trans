@@ -16,24 +16,26 @@ class SettingPage extends Page implements HasForms
 {
 
     use HasPageShield;
-    
+
     protected static string $view = 'filament.pages.setting-page';
 
     protected static ?string $navigationLabel = "Setting";
 
+    protected static ?string $pluralModelLabel = "Pengaturan Sistem";
+
     protected static ?string $navigationIcon = 'heroicon-c-cog-8-tooth';
 
     protected static ?string $navigationGroup = 'Manajemen Sistem';
-    
+
     protected static ?int $navigationSort = 1;
 
     protected static ?string $slug = 'setting';
 
     public ?array $data = [];
 
-    public function mount() :void 
+    public function mount(): void
     {
-       
+
         $setting = Setting::find(1);
         // dd($setting);
         $this->form->fill($setting->attributesToArray());
@@ -45,13 +47,39 @@ class SettingPage extends Page implements HasForms
             ->schema([
                 Forms\Components\Grid::make(2) // Menggunakan dua kolom
                     ->schema([
+                        Forms\Components\Section::make('Deskripsi dan Konten')
+                            ->schema([
+                                Forms\Components\FileUpload::make('logo')
+                                    ->required()
+                                    ->label('Logo')
+                                    ->directory('logos') // Menyimpan file di folder 'logos'
+                                    ->image() // Hanya menerima file gambar
+                                    ->maxSize(2 * 1024) // Maksimum ukuran file 2MB
+                                    ->imagePreviewHeight('250')
+                                    ->helperText('Unggah logo (maksimal ukuran file: 2MB)'),
+
+                                Forms\Components\Textarea::make('description')
+                                    ->required()
+                                    ->columnSpanFull()
+                                    ->label('Deskripsi'),
+
+                                Forms\Components\Textarea::make('footer')
+                                    ->required()
+                                    ->columnSpanFull()
+                                    ->label('Footer'),
+                                Forms\Components\Textarea::make('about_us')
+                                    ->required()
+                                    ->columnSpanFull()
+                                    ->label('Tentang Kami'),
+                            ])
+                            ->columnSpan(1),
                         // Kolom Pertama: Informasi Umum
                         Forms\Components\Section::make('Informasi Umum')
                             ->schema([
                                 Forms\Components\TextInput::make('name')
                                     ->required()
                                     ->maxLength(255)
-                                    ->label('Nama'),
+                                    ->label('Nama Perusahaan'),
                                 Forms\Components\TextInput::make('email')
                                     ->email()
                                     ->required()
@@ -61,55 +89,41 @@ class SettingPage extends Page implements HasForms
                                     ->required()
                                     ->maxLength(255)
                                     ->label('Kontak'),
-                                Forms\Components\TimePicker::make('open_hours')
+                                Forms\Components\TextInput::make('open_hours')
                                     ->required()
                                     ->label('Jam Buka'),
-                                Forms\Components\TextInput::make('sosmed_id')
-                                    ->required()
-                                    ->maxLength(255)
-                                    ->label('Instagram'),
-                                Forms\Components\TextInput::make('sosmed_fb')
-                                    ->label('Facebook')
-                                    ->required()
-                                    ->maxLength(255)
-                                    ->label('Facebook'),
-                            ]),
-                        // Kolom Kedua: Deskripsi dan Konten
-                        Forms\Components\Section::make('Deskripsi dan Konten')
-                            ->schema([
-                                Forms\Components\FileUpload::make('logo')
-                                    ->required()
-                                    ->label('Logo')
-                                    ->directory('logos') // Menyimpan file di folder 'logos'
-                                    ->image() // Hanya menerima file gambar
-                                    ->maxSize(2 * 1024) // Maksimum ukuran file 2MB
-                                    ->helperText('Unggah logo (maksimal ukuran file: 2MB)'),
                                 Forms\Components\Textarea::make('address')
                                     ->required()
                                     ->columnSpanFull()
                                     ->label('Alamat'),
-                                Forms\Components\Textarea::make('description')
+                                Forms\Components\TextInput::make('sosmed_ig')
                                     ->required()
-                                    ->columnSpanFull()
-                                    ->label('Deskripsi'),
+                                    ->maxLength(255)
+                                    ->label('Instagram'),
+                                Forms\Components\TextInput::make('sosmed_fb')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->label('Facebook'),
+                                Forms\Components\TextInput::make('sosmed_yt')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->label('Instagram'),
                                 Forms\Components\Textarea::make('maps')
                                     ->required()
                                     ->columnSpanFull()
                                     ->label('Link Google Maps'),
-                                Forms\Components\Textarea::make('footer')
-                                    ->required()
-                                    ->columnSpanFull()
-                                    ->label('Footer'),
-                                Forms\Components\Textarea::make('about_us')
-                                    ->required()
-                                    ->columnSpanFull()
-                                    ->label('Tentang Kami'),
-                            ]),
-                    ]),
-            ])->statePath('data');
+                            ])
+                            ->columns(2)
+                            ->columnSpan(2),
+
+
+                    ])
+                    ->columns(3),
+            ])
+            ->statePath('data');
     }
 
-    public function getFormActions() :array
+    public function getFormActions(): array
     {
         return [
             Action::make('save')
@@ -118,7 +132,7 @@ class SettingPage extends Page implements HasForms
         ];
     }
 
-    public function save() :void
+    public function save(): void
     {
         $data = $this->form->getState();
         $setting = Setting::find(1);
@@ -131,6 +145,4 @@ class SettingPage extends Page implements HasForms
             ->success()
             ->send();
     }
-
-
 }
