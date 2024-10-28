@@ -19,6 +19,7 @@ class Bus extends Model
 
     protected $fillable = [
         'name',
+        'type',
         'license_plate',
         'production_year',
         'color',

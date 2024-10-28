@@ -15,6 +15,7 @@ class BusSeeder extends Seeder
     {
         Bus::create([
             'name' => 'PMJ-02',
+            'type' => 'Adiputro Voyager JetBus 3+ SHD',
             'license_plate' => 'K 1670 FW',
             'production_year' => '2014',
             'color' => 'Putih Abu-Abu',
@@ -27,6 +28,7 @@ class BusSeeder extends Seeder
 
         Bus::create([
             'name' => 'PMJ-03',
+            'type' => 'Adiputro Voyager JetBus 3+ SHD',
             'license_plate' => 'K 7464 OB',
             'production_year' => '2008',
             'color' => 'Hitam Merah',

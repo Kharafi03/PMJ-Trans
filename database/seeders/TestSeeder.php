@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Booking;
+use App\Models\BusKir;
+use App\Models\BusMaintenance;
+use App\Models\BusTax;
 use App\Models\Destination;
 use App\Models\Income;
 use App\Models\Review;
@@ -18,6 +21,7 @@ class TestSeeder extends Seeder
      */
     public function run(): void
     {
+        
         Booking::create([
             'booking_code' => 'PMJ-RASE8280',
             'id_cus' => '5',
@@ -137,6 +141,104 @@ class TestSeeder extends Seeder
             'datetime' => '2024-10-20 12:32:16',
             'latitude' => '082736542',
             'longitude' => '2345678923',
+        ]);
+
+        BusMaintenance::create([
+            'id_bus' => '1',
+            'id_user' => '3',
+            'id_m_maintenance' => '2',
+            'description' => 'Kanvas rem habis, peggantian kanavas rem',
+            'image' => '',
+            'date' => '2024-10-10',
+            'location' => 'Garasi PMJ-Trans',
+            'nominal' => '500000',
+            'image_receipt' => '',
+            'latitude' => '-6.819167',
+            'longitude' => '110.877858',
+        ]);
+
+        BusMaintenance::create([
+            'id_bus' => '1',
+            'id_user' => '3',
+            'id_m_maintenance' => '1',
+            'description' => 'Maintenance Mesin rutin',
+            'image' => '',
+            'date' => '2024-10-9',
+            'location' => 'Garasi PMJ-Trans',
+            'nominal' => '300000',
+            'image_receipt' => '',
+            'latitude' => '-6.819167',
+            'longitude' => '110.877858',
+        ]);
+
+        BusMaintenance::create([
+            'id_bus' => '2',
+            'id_user' => '3',
+            'id_m_maintenance' => '1',
+            'description' => 'Maintenance Mesin rutin',
+            'image' => '',
+            'date' => '2024-10-9',
+            'location' => 'Garasi PMJ-Trans',
+            'nominal' => '300000',
+            'image_receipt' => '',
+            'latitude' => '-6.819167',
+            'longitude' => '110.877858',
+        ]);
+
+        BusMaintenance::create([
+            'id_bus' => '2',
+            'id_user' => '3',
+            'id_m_maintenance' => '3',
+            'description' => 'Pergantian Oli',
+            'image' => '',
+            'date' => '2024-10-11',
+            'location' => 'Garasi PMJ-Trans',
+            'nominal' => '400000',
+            'image_receipt' => '',
+            'latitude' => '-6.819167',
+            'longitude' => '110.877858',
+        ]);
+
+        BusKir::create([
+            'id_bus' => '1',
+            'id_user' => '3',
+            'description' => 'Pengujian Kir bus PMJ 02 di dinas perhubungan',
+            'date_test' => '2024-6-11',
+            'expiration' => '2024-12-11',
+            'nominal' => '100000',
+            'image' => '',
+        ]);
+
+        BusKir::create([
+            'id_bus' => '2',
+            'id_user' => '3',
+            'description' => 'Pengujian Kir bus PMJ 03 di dinas perhubungan',
+            'date_test' => '2024-4-11',
+            'expiration' => '2024-10-11',
+            'nominal' => '100000',
+            'image' => '',
+        ]);
+
+        BusTax::create([
+            'id_bus' => '1',
+            'id_user' => '3',
+            'description' => 'Pajak bus PMJ 02 di Samsat',
+            'date' => '2023-11-11',
+            'expiration' => '2024-11-11',
+            'expiration_number_bus' => '2024-11-11',
+            'nominal' => '100000',
+            'image' => '',
+        ]);
+
+        BusTax::create([
+            'id_bus' => '2',
+            'id_user' => '3',
+            'description' => 'Pajak bus PMJ 03 di Samsat',
+            'date' => '2023-9-20',
+            'expiration' => '2024-9-20',
+            'expiration_number_bus' => '2028-9-20',
+            'nominal' => '100000',
+            'image' => '',
         ]);
     }
 }

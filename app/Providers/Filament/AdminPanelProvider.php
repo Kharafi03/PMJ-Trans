@@ -73,22 +73,25 @@ class AdminPanelProvider extends PanelProvider
                 'profile' => MenuItem::make()
                     ->label(fn() => auth()->user()->name)
                     ->url(fn (): string => EditProfilePage::getUrl())
-                    ->icon('heroicon-o-user-circle') 
+                    ->icon('heroicon-o-user-circle'),
             ])
+           
             ->viteTheme("resources/css/filament/admin/theme.css")
             ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 \Hasnayeen\Themes\ThemesPlugin::make(),
                 FilamentEditProfilePlugin::make()
-                ->setIcon('heroicon-o-user-circle')
+                    ->setNavigationGroup('Manajemen Sistem')
+                    ->setIcon('heroicon-o-user')
+                    ->setSort(4)
                     ->shouldShowAvatarForm(
                         value: true,
                         directory: 'avatars',
                         rules: 'mimes:jpeg,png|max:1024'
                     )
-                    ->shouldShowDeleteAccountForm(false) 
-                    ->shouldShowBrowserSessionsForm(false) 
-                    
+                    ->shouldShowDeleteAccountForm(false)
+                    ->shouldShowBrowserSessionsForm(false)
+                   
             ]);
     }
 }

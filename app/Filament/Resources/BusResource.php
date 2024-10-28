@@ -56,6 +56,10 @@ class BusResource extends Resource
                                             ->maxLength(24)
                                             ->placeholder('Masukan Nama Bus')
                                             ->required(),
+                                        Forms\Components\TextInput::make('type')
+                                            ->label('Jenis Bus')
+                                            ->placeholder('Masukan Jenis Bus')
+                                            ->required(),
                                         Forms\Components\TextInput::make('license_plate')
                                             ->label('Plat Nomor')
                                             ->placeholder('Masukan Plat Nomor')
@@ -305,6 +309,11 @@ class BusResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label('Bus')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('type')
+                    ->label('Jenis')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('images.image')
                     ->label('Gambar Bus')
@@ -316,12 +325,15 @@ class BusResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('production_year')
                     ->label('Tahun Produksi')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('color')
                     ->label('Warna')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('capacity')
                     ->label('Kapasitas')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('ms_buses.name')
                     ->label('Status Bus')
