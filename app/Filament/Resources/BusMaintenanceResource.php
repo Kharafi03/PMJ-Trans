@@ -48,7 +48,7 @@ class BusMaintenanceResource extends Resource
                                 ->options(function () {
                                     return User::whereHas('roles', function ($query) {
                                         $query->where('name', 'driver')
-                                        ->orWhere('name', 'admin');
+                                            ->orWhere('name', 'admin');
                                     })->pluck('name', 'id'); // Mengambil nama dan id user
                                 })
                                 ->required(),
@@ -57,7 +57,7 @@ class BusMaintenanceResource extends Resource
                                 ->label('Jenis Perawatan')
                                 ->relationship('m_maintenances', 'name')
                                 ->required(),
-                            
+
                             Forms\Components\Textarea::make('description')
                                 ->label('Deskripsi')
                                 ->maxLength(255)
@@ -158,17 +158,17 @@ class BusMaintenanceResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('deleted_at')
-                    ->label('Tanggal dihapus')
+                    ->label('Tanggal Dihapus')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Tanggal dibuat')
+                    ->label('Tanggal Dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Tanggal diubah')
+                    ->label('Tanggal Diperbarui')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

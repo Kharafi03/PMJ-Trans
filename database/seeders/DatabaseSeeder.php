@@ -31,6 +31,8 @@ class DatabaseSeeder extends Seeder
         $this->call(BusImageSeeder::class);
         $this->call(TestSeeder::class);
         $this->call(SettingSeeder::class);
+        $this->call(FaqSeeder::class);
+        $this->call(TermsAndConditionsSeeder::class);
         //$this->call(ShieldSeeder::class);
         // $this->call(PermisionsSeeder::class);
     }

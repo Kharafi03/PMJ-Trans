@@ -20,7 +20,7 @@ class BookingController extends Controller
 {
     //
     // Menampilkan formulir pemesanan
-    public function showForm()
+    public function index()
     {
         return view('frontend.booking.index');
     }
@@ -153,28 +153,42 @@ class BookingController extends Controller
             // Gunakan id user yang sudah login
             $user = Auth::user();
         } else {
-
+            // dd($request->all());
             // Pengecekan apakah email atau nomor telepon sudah terdaftar
-            $existingUser = User::where('email', $request->input('email'))
-                ->orWhere('number_phone', $request->input('number_phone'))
-                ->first();
+            $existingUser = User::where(function ($query) use ($request) {
+                // Hanya cek email jika email input tidak null
+                if ($request->filled('email')) {
+                    $query->where('email', $request->input('email'));
+                }
+
+                // Hanya cek nomor telepon jika nomor telepon input tidak null
+                if ($request->filled('number_phone')) {
+                    $query->orWhere('number_phone', $request->input('number_phone'));
+                }
+            })->first();
 
             // Jika pengguna ditemukan berdasarkan email atau nomor telepon
             if ($existingUser) {
                 // Menambahkan error untuk email dan nomor telepon
                 $errors = [];
-                if ($existingUser->email == $request->email) {
+                // Hanya tambahkan error untuk email jika email input tidak null
+                if ($request->filled('email') && $existingUser->email == $request->email) {
                     $errors['email'] = 'Email sudah terdaftar, silakan login terlebih dahulu!';
                 }
-                if ($existingUser->number_phone == $request->number_phone) {
+
+                // Hanya tambahkan error untuk nomor telepon jika nomor telepon input tidak null
+                if ($request->filled('number_phone') && $existingUser->number_phone == $request->number_phone) {
                     $errors['number_phone'] = 'Nomor telepon sudah terdaftar, silakan login terlebih dahulu!';
                 }
 
-                return redirect()->back()->withErrors($errors)->withInput()
-                    ->with([
-                        'message' => 'Email atau nomor telepon sudah terdaftar, silakan login terlebih dahulu!',
-                        'alert-type' => 'error',
-                    ]);
+                // Jika ada error, redirect kembali dengan pesan error
+                if (!empty($errors)) {
+                    return redirect()->back()->withErrors($errors)->withInput()
+                        ->with([
+                            'message' => 'Email atau nomor telepon sudah terdaftar, silakan login terlebih dahulu!',
+                            'alert-type' => 'error',
+                        ]);
+                }
             }
 
             // Simpan data ke tabel users jika belum login

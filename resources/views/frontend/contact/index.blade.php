@@ -2,77 +2,75 @@
 @push('styles')
     <title>Contact</title>
     <link id="pagestyle" href="{{ asset('css/frontend/css/hubungiKami-style.css') }}" rel="stylesheet" />
-
 @endpush
 @section('content')
     <!-- NAVBAR -->
     <x-navbar-customer />
 
-        <!-- Header Start -->
-        <div class="container-fluid header bg-white p-0">
-            <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
-                <div class="col-md-6 p-5 mt-lg-5">
-                    <h1 class="mb-4" style="font-size: 44px; font-weight: 700; color: #1E9781;">Kontak <span style="color: #FD9C07;">Kami</span></h1>
-                    <p class="mb-4" style="font-size: 16px; font-weight: 500; color: #666666B5;">Untuk informasi lebih lanjut, silakan hubungi kami melalui kontak yang tersedia di halaman Kontak Kami.</p>
-                </div>
-                <div class="col-md-6">
-                    <img class="img-fluid" src="img/contact-img.png" style="width: 100%; height: 100%; align-items:center; padding: 30px;" alt="gambar">
-                    <!-- src="{{ asset('frontend/img/carousel/carousel-2.jpg') }}" -->
-                </div>
+    <!-- Header Start -->
+    <div class="container-fluid header bg-white p-0">
+        <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
+            <div class="col-md-6 p-5 mt-lg-5">
+                <h1 class="mb-4" style="font-size: 44px; font-weight: 700; color: #1E9781;">
+                    Kontak 
+                    <span style="color: #FD9C07;">Kami</span>
+                </h1>
+                <p class="mb-4" style="font-size: 16px; font-weight: 500; color: #666666B5;">
+                    Untuk informasi lebih lanjut, silakan hubungi kami melalui kontak yang tersedia di halaman Kontak Kami.
+                </p>
+            </div>
+            <div class="col-md-6">
+                <img class="img-fluid" src="{{ asset('img/contact-img.png') }}" style="width: 100%; height: 100%; align-items:center; padding: 30px;" alt="gambar">
             </div>
         </div>
+    </div>
 
     <!-- CONTACT -->
     <section id="contact">
-        <div class="container">
-            <!-- TITLE -->
-            <!-- <div class="contact-title">
-                <h3>Hubungi Kami</h3>
-                <p>Mempunyai Pertanyaan terkait Trans PMJ? Tim kami siap membantu anda.</p>
-            </div> -->
+        <div class="container mb-5">
             <!-- ICON CARD -->
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-5 mt-3">
-                <div class="col">
-                    <div class="contact-card card h-100 text-center d-flex justify-content-center align-items-center">
-                        <div class="icon">
-                            <i class="fa-solid fa-phone"></i>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-12 d-flex p-3 mx-auto">
+                    <div class="card contact-card flex-fill text-center border">
+                        <div class="icon p-3">
+                            <i class="fa-brands fa-whatsapp"></i>
                         </div>
-                        <div class="card-body flex-column align-items-end">
+                        <div class="card-body flex-column">
                             <h5 class="card-title">Nomor WhatsApp</h5>
-                            <p class="card-text">0812-2562-5255</p>
+                            <p class="card-text">{{ $setting->contact ? $setting->contact : '#' }}</p>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="contact-card card h-100 text-center d-flex justify-content-center align-items-center">
-                        <div class="icon">
+                <div class="col-lg-3 col-md-6 col-12 d-flex p-3 mx-auto">
+                    <div class="card contact-card flex-fill text-center border">
+                        <div class="icon p-3">
                             <i class="fa-solid fa-envelope"></i>
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">Email</h5>
-                            <p class="card-text">buspmjtrans@gmail.com</p>
+                            <p class="card-text">{{ $setting->email ? $setting->email : '#' }}</p>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="contact-card card h-100 text-center d-flex justify-content-center align-items-center">
-                        <div class="icon">
+                <div class="col-lg-3 col-md-6 col-12 d-flex p-3 mx-auto">
+                    <div class="card contact-card flex-fill text-center border">
+                        <div class="icon p-3">
                             <i class="fa-solid fa-location-dot"></i>
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">Lokasi</h5>
-                            <p class="card-text">Jl. Lingkar Timur, Ngembal Rejo, Kecamatan Jati, Kabupaten Kudus</p>
+                            <p class="card-text">{{ $setting->address ? $setting->address : '#' }}</p>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="contact-card card h-100 text-center d-flex justify-content-center align-items-center">
-                        <div class="icon">
+                <div class="col-lg-3 col-md-6 col-12 d-flex p-3 mx-auto">
+                    <div class="card contact-card flex-fill text-center border">
+                        <div class="icon p-3">
                             <i class="fa-solid fa-clock"></i>
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">Jam Buka</h5>
-                            <p class="card-text">Setiap hari jam 07.00 - 17.00 WIB</p>
+                            <p class="card-text">{{ $setting->open_hours ? $setting->open_hours : '#' }}</p>
                         </div>
                     </div>
                 </div>
@@ -82,68 +80,84 @@
 
     <!-- FORM -->
     <section id="contact-form">
-        <div class="container mb-5">
-            <div class="row ">
-                <div class="col-md-6 mb-3">
-                    <form id="formHubungiKami">
+        <div class="container mt-5 mb-5">
+            @include('frontend.assets.alert')
+            <div class="row mt-5">
+                <div class="col-lg-6 mb-3">
+                    <form id="formHubungiKami" method="POST" action="{{ route('contact.store') }}">
+                        @csrf
                         <div class="form-header">
                             <p>Kontak Kami</p>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 mt-3">
-                                <label for="namaLengkap" class="form-label">Nama Lengkap<span
-                                        class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="namaLengkap"
-                                    placeholder="Masukkan nama lengkap" required>
-                                <small class="text-danger" id="error-nama" style="display: none;">Lengkapi data nama lengkap
-                                    anda.</small>
+                            <div class="col-md-6 mb-4">
+                                <label for="namaLengkap" class="form-label">Nama Lengkap<span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="namaLengkap" name="namaLengkap" placeholder="Masukkan nama lengkap" required>
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
-                            <div class="col-md-6 mt-3">
-                                <label for="kategori" class="form-label">Kategori<span
-                                        class="text-danger">*</span></label>
-                                <select class="form-select" id="kategori" required>
-                                    <option selected>Pilih Kategori</option>
-                                    <option value="pertanyaan">Pertanyaan</option>
-                                    <option value="komplain">Komplain</option>
+                            <div class="col-md-6 mb-4">
+                                <label for="kategori" class="form-label">Kategori<span class="text-danger">*</span></label>
+                                <select class="form-select @error('kategori') is-invalid @enderror" id="kategori" name="kategori" required>
+                                    <option value="">Pilih Kategori</option>
+                                    <option value="Pertanyaan">Pertanyaan</option>
+                                    <option value="Komplain">Komplain</option>
                                 </select>
-                                <small class="text-danger" id="error-kategori" style="display: none;">Pilih kategori yang
-                                    anda inginkan.</small>
+                                @error('kategori')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
-                            <div class="col-md-6 mt-3">
-                                <label for="noTelp" class="form-label">Nomor WhatsApp<span
-                                        class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="noTelp"
-                                    placeholder="Masukkan nomor whatsapp" required>
-                                <small class="text-danger" id="error-notelp" style="display: none;">Lengkapi data nomor
-                                    telepon anda.</small>
+                            <div class="col-md-6 mb-4">
+                                <label for="noTelp" class="form-label">Nomor WhatsApp<span class="text-danger">*</span></label>
+                                <input type="tel" class="form-control @error('noTelp') is-invalid @enderror" id="noTelp" name="noTelp" placeholder="Masukkan nomor whatsapp" required>
+                                @error('noTelp')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
-                            <div class="col-md-6 mt-3">
+                            <div class="col-md-6 mb-4">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="Masukkan alamat email">
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Masukkan alamat email" name="email">
                             </div>
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="row">
                             <div class="mt-3">
-                                <label for="pesan" class="form-label">Pesan<span
-                                        class="text-danger">*</span></label>
-                                <textarea class="form-control" id="pesan" rows="3" placeholder="Tuliskan Pesan yang ingin disampaikan..." required></textarea>
-                                <small class="text-danger" id="error-pesan" style="display: none;">Lengkapi pesan yang ingin
-                                    anda kirim.</small>
+                                <label for="pesan" class="form-label">Pesan<span class="text-danger">*</span></label>
+                                <textarea class="form-control @error('pesan') is-invalid @enderror" id="pesan" rows="3" placeholder="Tuliskan Pesan yang ingin disampaikan..." required name="pesan"></textarea>
+                                @error('pesan')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="mt-3">
                                 <p class="text-danger">*Wajib Diisi.</p>
                             </div>
                         </div>
                         <div class="mt-3">
-                            <button type="button" class="btn-kirim" onclick="submitHubungiKami()">KIRIM PESAN</button>
+                            <button type="submit" class="btn-kirim">Kirim Pesan</button>
                         </div>
                     </form>
                 </div>
-                <div class="col-md-6 d-flex justify-content-end mb-3">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12978.348270618128!2d110.8778704!3d-6.8190866!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e70c5cdd4042793%3A0x22dfa84ed6ce52de!2sGarasi%20Bus%20PMJ%20Trans!5e1!3m2!1sid!2sid!4v1724347397670!5m2!1sid!2sid"
-                        width="450" height="530" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="col-lg-6 mb-3 d-flex justify-content-center">
+                    <iframe 
+                        src="{{ $setting->maps ? $setting->maps : 'about:blank' }}" 
+                        allowfullscreen 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                 </div>
             </div>
         </div>
@@ -152,62 +166,4 @@
     <!-- FOOTER -->
     <x-footer-customer />
 
-    <!-- SCRIPT -->
-    <script>
-        //SCRIPT ALERT
-        function submitHubungiKami() {
-            // Ambil nilai dari setiap field
-            var namaLengkap = document.getElementById('namaLengkap').value;
-            var kategori = document.getElementById('kategori').value;
-            var noTelp = document.getElementById('noTelp').value;
-            var pesan = document.getElementById('pesan').value;
-
-            // Flag validasi
-            var isValid = true;
-
-            // Reset error messages
-            document.getElementById('error-nama').style.display = 'none';
-            document.getElementById('error-kategori').style.display = 'none';
-            document.getElementById('error-notelp').style.display = 'none';
-            document.getElementById('error-pesan').style.display = 'none';
-
-            if (namaLengkap === "") {
-                document.getElementById('error-nama').style.display = 'block';
-                isValid = false;
-            }
-            if (kategori === "Pilih Kategori") {
-                document.getElementById('error-kategori').style.display = 'block';
-                isValid = false;
-            }
-            if (noTelp === "") {
-                document.getElementById('error-notelp').style.display = 'block';
-                isValid = false;
-            }
-            if (pesan === "") {
-                document.getElementById('error-pesan').style.display = 'block';
-                isValid = false;
-            }
-
-
-            // Jika semua field valid, tampilkan SweetAlert sukses
-            if (isValid) {
-                swal({
-                    title: "Berhasil!",
-                    text: "Pesan berhasil dikirim",
-                    icon: "success",
-                    button: true
-                }).then(() => {
-                    document.getElementById('formHubungiKami').reset(); // Reset form
-                    // window.location.href = "kodeBooking.html";
-                });
-            } else {
-                swal({
-                    title: "Error!",
-                    text: "Semua data harus diisi.",
-                    icon: "error",
-                    button: true
-                });
-            }
-        }
-    </script>
 @endsection

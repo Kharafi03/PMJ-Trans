@@ -20,7 +20,7 @@ class UserResource extends Resource
     protected static ?string $navigationGroup = 'User Management';
 
     protected static ?string $recordTitleAttribute = 'number_phone';
-    
+
     public static function getGloballySearchableAttributes(): array
     {
         return ['name', 'email', 'number_phone'];
@@ -127,20 +127,20 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')
-                ->label('Nomor')
-                ->sortable(),
+                    ->label('Nomor')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('name')
-                ->label('Nama')
-                ->searchable()
-                ->sortable(),
+                    ->label('Nama')
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('number_phone')
-                ->label('No. Hp')
-                ->searchable()
-                ->sortable(),
+                    ->label('No. Hp')
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('email')
-                ->label('Email')
-                ->searchable()
-                ->sortable(),
+                    ->label('Email')
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\BadgeColumn::make('roles.name')
                     ->label('Peran')
                     ->searchable()
@@ -153,44 +153,45 @@ class UserResource extends Resource
                     ])
                     ->formatStateUsing(fn($state) => ucfirst($state)),
                 Tables\Columns\TextColumn::make('msUsers.name')
-                ->label('Status')
-                ->searchable()
-                ->sortable(),
+                    ->label('Status')
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('deleted_at')
-                ->label('Tanggal dihapus')
-                ->dateTime()->sortable()
-                ->toggleable(isToggledHiddenByDefault: true),
+                    ->label('Tanggal Dihapus')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
-                ->label('Tanggal dibuat')
-                ->dateTime()
-                ->sortable()
-                ->toggleable(isToggledHiddenByDefault: true),
+                    ->label('Tanggal Dibuat')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                ->label('Tanggal diubah')
-                ->dateTime()
-                ->sortable()
-                ->toggleable(isToggledHiddenByDefault: true),
+                    ->label('Tanggal Diperbarui')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('id_role')
-                ->label('Peran')
-                ->relationship('roles', 'name'),
+                    ->label('Peran')
+                    ->relationship('roles', 'name'),
                 Tables\Filters\SelectFilter::make('id_ms')
-                ->label('Status')
-                ->relationship('msUsers', 'name'),
+                    ->label('Status')
+                    ->relationship('msUsers', 'name'),
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\ForceDeleteAction::make(),
                 Tables\Actions\ViewAction::make()
-                ->label('Lihat')
-                ->modalHeading('Lihat User'),
+                    ->label('Lihat')
+                    ->modalHeading('Lihat User'),
                 Tables\Actions\EditAction::make()
-                ->label('Edit')
-                ->modalHeading('Edit User')
-                ->modalButton('Simpan Perubahan'),
+                    ->label('Edit')
+                    ->modalHeading('Edit User')
+                    ->modalButton('Simpan Perubahan'),
                 Tables\Actions\DeleteAction::make()
-                ->label('Hapus'),
+                    ->label('Hapus'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

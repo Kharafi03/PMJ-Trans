@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateTermsAndConditions extends CreateRecord
 {
     protected static string $resource = TermsAndConditionsResource::class;
+
+    public function getTitle(): string
+    {
+        return 'Tambah Syarat dan Ketentuan';
+    }
 }

@@ -217,7 +217,8 @@ class TripBusResource extends Resource
                                             ->afterStateHydrated(function (Get $get, Set $set, $record) {
                                                 if ($record && $record->id) {
                                                     self::updateTotal($get, $set, $record->id);
-                                                }                                            })
+                                                }
+                                            })
                                             ->numeric(),
                                         TextInput::make('total_spend_bbm')
                                             ->label('Total Pengeluaran BBM')
@@ -225,7 +226,8 @@ class TripBusResource extends Resource
                                             ->afterStateHydrated(function (Get $get, Set $set, $record) {
                                                 if ($record && $record->id) {
                                                     self::updateBBMTotal($get, $set, $record->id);
-                                                }                                            })
+                                                }
+                                            })
                                             ->readOnly()
                                             ->numeric(),
                                     ]),
@@ -281,17 +283,17 @@ class TripBusResource extends Resource
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('deleted_at')
-                    ->label('Tanggal dihapus')
+                    ->label('Tanggal Dihapus')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Tanggal dibuat')
+                    ->label('Tanggal Dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Tanggal diubah')
+                    ->label('Tanggal Diperbarui')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -478,7 +480,7 @@ class TripBusResource extends Resource
                 ]),
             ])
             ->paginated([25, 50, 100, 'all']);
-            }
+    }
     public static function getRelations(): array
     {
         return [

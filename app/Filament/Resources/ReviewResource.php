@@ -29,7 +29,7 @@ class ReviewResource extends Resource
     {
         return static::getModel()::whereNull('deleted_at')->count();
     }
-    
+
     public static function form(Form $form): Form
     {
         return $form
@@ -79,17 +79,17 @@ class ReviewResource extends Resource
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('deleted_at')
-                    ->label('Tanggal dihapus')
+                    ->label('Tanggal Dihapus')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Tanggal dibuat')
+                    ->label('Tanggal Dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Tanggal diubah')
+                    ->label('Tanggal Diperbarui')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

@@ -56,6 +56,10 @@ class BusResource extends Resource
                                             ->maxLength(24)
                                             ->placeholder('Masukan Nama Bus')
                                             ->required(),
+                                        Forms\Components\TextInput::make('type')
+                                            ->label('Jenis Bus')
+                                            ->placeholder('Masukan Jenis Bus')
+                                            ->required(),
                                         Forms\Components\TextInput::make('license_plate')
                                             ->label('Plat Nomor')
                                             ->placeholder('Masukan Plat Nomor')
@@ -305,6 +309,11 @@ class BusResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label('Bus')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('type')
+                    ->label('Jenis')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('images.image')
                     ->label('Gambar Bus')
@@ -316,28 +325,31 @@ class BusResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('production_year')
                     ->label('Tahun Produksi')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('color')
                     ->label('Warna')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('capacity')
                     ->label('Kapasitas')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('ms_buses.name')
                     ->label('Status Bus')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('deleted_at')
-                    ->label('Tanggal dihapus')
+                    ->label('Tanggal Dihapus')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Tanggal dibuat')
+                    ->label('Tanggal Dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Tanggal diubah')
+                    ->label('Tanggal Diperbarui')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -523,27 +535,27 @@ class BusResource extends Resource
                     ->label('Hapus'),
             ])
 
-    //         ->bulkActions([
-    //             Tables\Actions\BulkActionGroup::make([
-    //                 Tables\Actions\DeleteBulkAction::make()
-    //                     ->label('Hapus')
-    //                     ->action(function ($records) {
-    //                         foreach ($records as $record) {
-    //                             $record->delete(); // Menggunakan soft delete
-    //                         }
-    //                     }),
-    //             ]),
-    //         ]);
-    // }
+            //         ->bulkActions([
+            //             Tables\Actions\BulkActionGroup::make([
+            //                 Tables\Actions\DeleteBulkAction::make()
+            //                     ->label('Hapus')
+            //                     ->action(function ($records) {
+            //                         foreach ($records as $record) {
+            //                             $record->delete(); // Menggunakan soft delete
+            //                         }
+            //                     }),
+            //             ]),
+            //         ]);
+            // }
 
-    ->bulkActions([
-        Tables\Actions\BulkActionGroup::make([
-            Tables\Actions\DeleteBulkAction::make(),
-            Tables\Actions\RestoreBulkAction::make(),
-            Tables\Actions\ForceDeleteBulkAction::make(),
-        ]),
-    ])
-    ->paginated([25, 50, 100, 'all']);
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
+                ]),
+            ])
+            ->paginated([25, 50, 100, 'all']);
     }
     public static function getRelations(): array
     {
