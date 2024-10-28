@@ -55,7 +55,7 @@ class StatsOverviewWidget extends BaseWidget
                 ->icon('heroicon-s-user-group')
                 ->color('warning') 
                 ->extraAttributes([
-                    'class' => 'card-stat bg-yellow-100 text-yellow-800 p-6 rounded shadow-lg',
+                    'class' => 'card-stat bg-blue-100 text-blue-800 p-6 rounded shadow-lg',
                     'style' => 'font-size: 1.5em; display: flex; align-items: center;'
                 ]),
             

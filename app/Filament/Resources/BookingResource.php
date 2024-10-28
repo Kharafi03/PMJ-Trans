@@ -53,6 +53,23 @@ class BookingResource extends Resource
 
     protected $refresh = ['table.records' => 10];
 
+    protected static ?string $recordTitleAttribute = 'booking_code';
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['booking_code', 'customer.name'];
+    }
+
+    public static function getGlobalSearchResultDetails(Model $record): array
+    {
+        /** @var Order $record */
+
+        return [
+            'Penyewa' => optional($record->customer)->name,
+            'Tujuan Akhir' => optional($record->destination->last())->name,
+        ];
+    }
+
     public static function getNavigationBadge(): ?string
     {
         $newdraf = static::getModel()::where('id_ms_booking', 1)->count();
@@ -357,8 +374,9 @@ class BookingResource extends Resource
                                                             ->options(function (Get $get, Set $set, $record) {
                                                                 $tripStart = $get('../../date_start');
                                                                 $tripEnd = $get('../../date_end');
+                                                                $idBooking = $get('../../id');
                                                                 //dd($tripStart, $tripEnd);
-                                                                return self::getAvailableBuses($tripStart, $tripEnd);
+                                                                return self::getAvailableBuses($tripStart, $tripEnd, $idBooking);
                                                             })
                                                             ->required()
                                                             ->label('Kode Bus'),
@@ -382,7 +400,9 @@ class BookingResource extends Resource
                                                     ->options(function (Get $get, Set $set, $record) {
                                                         $tripStart = $get('../../date_start');
                                                         $tripEnd = $get('../../date_end');
-                                                        return self::getAvailableDriver($tripStart, $tripEnd);
+                                                        $idBooking = $get('../../id');
+                                                        //dd($idBooking);
+                                                        return self::getAvailableDriver($tripStart, $tripEnd, $idBooking);
                                                     })
                                                     ->required()
                                                     ->label('Driver'),
@@ -392,7 +412,8 @@ class BookingResource extends Resource
                                                     ->options(function (Get $get, Set $set, $record) {
                                                         $tripStart = $get('../../date_start');
                                                         $tripEnd = $get('../../date_end');
-                                                        return self::getAvailableDriver($tripStart, $tripEnd);
+                                                        $idBooking = $get('../../id');
+                                                        return self::getAvailableDriver($tripStart, $tripEnd, $idBooking);
                                                     })
                                                     ->required()
                                                     ->label('Co-Driver'),
@@ -426,79 +447,81 @@ class BookingResource extends Resource
 
     public static function table(Tables\Table $table): Tables\Table
     {
-        return $table->columns([
-            TextColumn::make('id')
-                ->label('No')
-                ->sortable(),
-            BadgeColumn::make('ms_booking.name')
-                ->label('Status')
-                ->searchable()
-                ->sortable()
-                ->colors([
-                    'warning' => 'Draf',
-                    'info' => 'Selesai',
-                    'success' => 'Diterima',
-                    'danger' => 'Ditolak',
-                    'danger' => 'Dibatalkan',
-                ])
-                ->formatStateUsing(function ($state) {
-                    return ucfirst($state);
-                }),
-            TextColumn::make('booking_code')
-                ->label('Kode Booking')
-                ->searchable()
-                ->sortable(),
-            TextColumn::make('customer.name')
-                ->label('Nama Customer')
-                ->searchable()
-                ->sortable(),
-            TextColumn::make('pickup_point')
-                ->label('Titik Jemput')
-                ->searchable()
-                ->limit(25)
-                ->tooltip(function ($record) {
-                    return $record->pickup_point;
-                })
-                ->sortable(),
-            TextColumn::make('destination.name')
-                ->label('Tujuan')
-                ->getStateUsing(fn(Model $record) => optional($record->destination->last())->name)
-                ->searchable()
-                ->limit(25)
-                ->tooltip(function ($record) {
-                    return ($record->destination->last())->name;
-                })
-                ->sortable(),
-            BadgeColumn::make('ms_payment.name')
-                ->label('Pembayaran')
-                ->searchable()
-                ->sortable()
-                ->colors([
-                    'info' => 'Draf',
-                    'success' => 'Lunas',
-                    'warning' => 'DP Dibayarkan',
-                    'danger' => 'DP Belum Dibayar',
-                ])
-                ->formatStateUsing(function ($state) {
-                    return ucfirst($state);
-                }),
-            Tables\Columns\TextColumn::make('deleted_at')
-                ->label('Tanggal Dihapus')
-                ->dateTime()
-                ->sortable()
-                ->toggleable(isToggledHiddenByDefault: true),
-            Tables\Columns\TextColumn::make('created_at')
-                ->label('Tanggal Dibuat')
-                ->dateTime()
-                ->sortable()
-                ->toggleable(isToggledHiddenByDefault: true),
-            Tables\Columns\TextColumn::make('updated_at')
-                ->label('Tanggal Diperbarui')
-                ->dateTime()
-                ->sortable()
-                ->toggleable(isToggledHiddenByDefault: true),
+        return $table
+            ->defaultSort('updated_at', 'desc')
+            ->columns([
+                TextColumn::make('id')
+                    ->label('No')
+                    ->sortable(),
+                BadgeColumn::make('ms_booking.name')
+                    ->label('Status')
+                    ->searchable()
+                    ->sortable()
+                    ->colors([
+                        'warning' => 'Draf',
+                        'info' => 'Selesai',
+                        'success' => 'Diterima',
+                        'danger' => 'Ditolak',
+                        'danger' => 'Dibatalkan',
+                    ])
+                    ->formatStateUsing(function ($state) {
+                        return ucfirst($state);
+                    }),
+                TextColumn::make('booking_code')
+                    ->label('Kode Booking')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('customer.name')
+                    ->label('Nama Customer')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('pickup_point')
+                    ->label('Titik Jemput')
+                    ->searchable()
+                    ->limit(25)
+                    ->tooltip(function ($record) {
+                        return $record->pickup_point;
+                    })
+                    ->sortable(),
+                TextColumn::make('destination.name')
+                    ->label('Tujuan')
+                    ->getStateUsing(fn(Model $record) => optional($record->destination->last())->name)
+                    ->searchable()
+                    ->limit(25)
+                    ->tooltip(function ($record) {
+                        return ($record->destination->last())->name;
+                    })
+                    ->sortable(),
+                BadgeColumn::make('ms_payment.name')
+                    ->label('Pembayaran')
+                    ->searchable()
+                    ->sortable()
+                    ->colors([
+                        'info' => 'Draf',
+                        'success' => 'Lunas',
+                        'warning' => 'DP Dibayarkan',
+                        'danger' => 'DP Belum Dibayar',
+                    ])
+                    ->formatStateUsing(function ($state) {
+                        return ucfirst($state);
+                    }),
+                Tables\Columns\TextColumn::make('deleted_at')
+                    ->label('Tanggal Dihapus')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Tanggal Dibuat')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Tanggal Diperbarui')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
 
-        ])
+            ])
             ->filters([
                 Tables\Filters\SelectFilter::make('id_ms_payment')
                     ->label('Status Pembayaran')
@@ -937,21 +960,24 @@ class BookingResource extends Resource
             ]);
     }
 
-    public static function getAvailableBuses($tripStart, $tripEnd)
+    public static function getAvailableBuses($tripStart, $tripEnd, $idBooking)
     {
         if (!$tripStart || !$tripEnd) {
             return Bus::pluck('name', 'id');
         }
 
-        return Bus::whereDoesntHave('tripbus.booking', function ($query) use ($tripStart, $tripEnd) {
+        return Bus::whereDoesntHave('tripbus.booking', function ($query) use ($tripStart, $tripEnd, $idBooking) {
             $query->where(function ($subQuery) use ($tripStart, $tripEnd) {
                 $subQuery->where('date_start', '<=', $tripEnd)
                     ->where('date_end', '>=', $tripStart);
             });
+            if ($idBooking) {
+                $query->where('id_booking', '!=', $idBooking);
+            }
         })->pluck('name', 'id');
     }
 
-    public static function getAvailableDriver($tripStart, $tripEnd)
+    public static function getAvailableDriver($tripStart, $tripEnd, $idBooking)
     {
         if (!$tripStart || !$tripEnd) {
             return User::whereHas('roles', function ($query) {
@@ -959,20 +985,29 @@ class BookingResource extends Resource
             })->pluck('name', 'id');
         }
 
+
         return User::whereHas('roles', function ($query) {
             $query->where('name', 'driver');
         })
-            ->whereDoesntHave('driver', function ($query) use ($tripStart, $tripEnd) {
+            ->whereDoesntHave('driver', function ($query) use ($tripStart, $tripEnd, $idBooking) {
                 $query->whereHas('booking', function ($subQuery) use ($tripStart, $tripEnd) {
                     $subQuery->where('date_start', '<=', $tripEnd)
                         ->where('date_end', '>=', $tripStart);
                 });
+
+                if ($idBooking) {
+                    $query->where('id_booking', '!=', $idBooking);
+                }
             })
-            ->whereDoesntHave('codriver', function ($query) use ($tripStart, $tripEnd) {
+            ->whereDoesntHave('codriver', function ($query) use ($tripStart, $tripEnd, $idBooking) {
                 $query->whereHas('booking', function ($subQuery) use ($tripStart, $tripEnd) {
                     $subQuery->where('date_start', '<=', $tripEnd)
                         ->where('date_end', '>=', $tripStart);
                 });
+
+                if ($idBooking) {
+                    $query->where('id_booking', '!=', $idBooking);
+                }
             })
             ->pluck('name', 'id');
     }
