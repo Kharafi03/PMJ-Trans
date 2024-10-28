@@ -14,8 +14,10 @@ use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 use Visualbuilder\EmailTemplates\EmailTemplatesPlugin;
 use Filament\Http\Middleware\DisableBladeIconComponents;
+use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -82,6 +84,13 @@ class AdminPanelProvider extends PanelProvider
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 \Hasnayeen\Themes\ThemesPlugin::make(),
                 EmailTemplatesPlugin::make(),
+                FilamentBackgroundsPlugin::make()
+    ->imageProvider(
+        MyImages::make()
+            ->directory('images/swisnl/filament-backgrounds/curated-by-swis')
+          
+    ),
+
                 FilamentEditProfilePlugin::make()
                     ->setNavigationGroup('Manajemen Sistem')
                     ->setIcon('heroicon-o-user')
