@@ -2791,16 +2791,16 @@
         },
         {
             "name": "joaopaulolndev/filament-edit-profile",
-            "version": "v1.0.30",
+            "version": "v1.0.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/joaopaulolndev/filament-edit-profile.git",
-                "reference": "5c72ba9d24cfd43d29d88010d9d48c5503093cae"
+                "reference": "9a76be622859697d05eb8d0d31e8d26e3b8e1c48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joaopaulolndev/filament-edit-profile/zipball/5c72ba9d24cfd43d29d88010d9d48c5503093cae",
-                "reference": "5c72ba9d24cfd43d29d88010d9d48c5503093cae",
+                "url": "https://api.github.com/repos/joaopaulolndev/filament-edit-profile/zipball/9a76be622859697d05eb8d0d31e8d26e3b8e1c48",
+                "reference": "9a76be622859697d05eb8d0d31e8d26e3b8e1c48",
                 "shasum": ""
             },
             "require": {
@@ -2863,7 +2863,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-09-19T11:30:58+00:00"
+            "time": "2024-10-28T16:06:29+00:00"
         },
         {
             "name": "kirschbaum-development/eloquent-power-joins",
@@ -10497,16 +10497,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "11.4.2",
+            "version": "11.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "1863643c3f04ad03dcb9c6996c294784cdda4805"
+                "reference": "e8e8ed1854de5d36c088ec1833beae40d2dedd76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/1863643c3f04ad03dcb9c6996c294784cdda4805",
-                "reference": "1863643c3f04ad03dcb9c6996c294784cdda4805",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e8e8ed1854de5d36c088ec1833beae40d2dedd76",
+                "reference": "e8e8ed1854de5d36c088ec1833beae40d2dedd76",
                 "shasum": ""
             },
             "require": {
@@ -10577,7 +10577,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.4.2"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.4.3"
             },
             "funding": [
                 {
@@ -10593,7 +10593,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-10-19T13:05:19+00:00"
+            "time": "2024-10-28T13:07:50+00:00"
         },
         {
             "name": "sebastian/cli-parser",

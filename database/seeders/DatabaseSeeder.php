@@ -33,6 +33,8 @@ class DatabaseSeeder extends Seeder
         $this->call(SettingSeeder::class);
         $this->call(FaqSeeder::class);
         $this->call(TermsAndConditionsSeeder::class);
+        $this->call(EmailTemplateSeeder::class);
+        $this->call(EmailTemplateThemeSeeder::class);
         //$this->call(ShieldSeeder::class);
         // $this->call(PermisionsSeeder::class);
     }

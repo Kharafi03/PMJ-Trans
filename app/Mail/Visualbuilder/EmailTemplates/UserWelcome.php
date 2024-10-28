@@ -25,6 +25,7 @@ class UserWelcome extends Mailable
     public function __construct($user)
     {
         $this->user = $user;
+        
         $this->sendTo = $user->email;
     }
 }
