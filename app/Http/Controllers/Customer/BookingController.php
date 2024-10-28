@@ -18,7 +18,7 @@ class BookingController extends Controller
 {
     //
     // Menampilkan formulir pemesanan
-    public function showForm()
+    public function index()
     {
         return view('frontend.booking.index');
     }
