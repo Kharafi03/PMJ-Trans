@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 use App\Filament\Resources\BookingResource;
+use Filament\Notifications\Actions\Action;
 
 
 class CreateBooking extends CreateRecord
@@ -30,9 +31,16 @@ class CreateBooking extends CreateRecord
         // Mengirim notifikasi ke semua admin
         foreach ($superAdmins as $admin) {
             Notification::make()
-                ->title('Saved successfully')
+                ->title('Booking dengan kode booking '. $booking->booking_code.' berhasil dibuat')
                 ->success()
+                ->actions([
+                    Action::make('Detail')
+                        ->button()
+                        ->url(route('filament.admin.resources.booking.edit', $booking)),
+                ])
+                
                 ->sendToDatabase($admin);
+                
         }
         return $booking;
     }
