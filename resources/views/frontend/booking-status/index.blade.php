@@ -223,6 +223,18 @@
                                                 <p>Pesanan anda telah selesai</p>
                                             </span>
                                         </div>
+                                    @elseif ($booking->id_ms_booking == 5)
+                                        <!-- <div class="status-alert-dibatalkan d-flex align-items-center">
+                                            <span class="card-icon me-2" style="padding-left: 10px; color: white;"><i class="fa-solid fa-xmark"></i></span>
+                                            <span style=" margin-left: 10px;"><b>Pesanan dibatalkan</b><br><small>Pesanan anda dibatalkan.</small></span>
+                                        </div> -->
+                                        <div class="status-alert-ditolak d-flex align-items-center mb-3">
+                                            <span class="card-icon me-2" style="padding-left: 10px; color: white;"><img src="{{ asset('img/icon/icon-ditolak.png') }}" alt="icon"></span>
+                                            <span style=" margin-left: 10px;">
+                                                <h5>Pesanan Dibatalkan</h5>
+                                                <p>Pesanan anda dibatalkan</p>
+                                            </span>
+                                        </div>
                                     @endif
 
                                     <!-- <div class="mb-3">
@@ -483,9 +495,11 @@
                                         <a href="{{ route('frontend.booking.index') }}" class="btn btn-perbaiki">Pesan ulang</a>
                                     </div>
                                 @elseif ($booking->id_ms_booking == 2)
-                                    <div class="mt-5">
-                                        <button type="submit" class="btn-kirim">Bayar</button>
-                                    </div>
+                                    @if ($booking->id_ms_payment != 4)
+                                        <div class="mt-5">
+                                            <button type="submit" class="btn-kirim">Bayar</button>
+                                        </div>
+                                    @endif
                                 @endif
                                 <!-- <button type="button" class="btn-kirim">Bayar</button> -->
                             </div>

@@ -8,13 +8,17 @@ use App\Models\Mail;
 
 class ContactController extends Controller
 {
+    public function index()
+    {
+        return view('frontend.contact.index');
+    }
     public function store(Request $request)
     {
         // Validasi data yang masuk
         $validatedData = $request->validate([
             'namaLengkap' => 'required|string|max:255',
             'kategori' => 'required|string',
-            'noTelp' => 'nullable|numeric',
+            'noTelp' => 'nullable|numeric|max:15',
             'email' => 'nullable|email|max:255',
             'pesan' => 'required|string',
         ], [

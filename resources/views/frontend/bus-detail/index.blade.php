@@ -11,154 +11,237 @@
     <section id="detailBus">
         <div class="container mt-5 mb-5">
             <h5>Daftar <span style="color: #FD9C07;">Bus PMJ</span></h5>
-            <div class="bus-card">
-              <div class="row">
-                <!-- <div class="col-md-4">
-                <img src="../asset/img/image1.png" alt="Bus Image" class="bus-image">
-                </div> -->
-                <div class="col-md-12 col-lg-6 d-flex flex-column justify-content-center align-items-center">
-                    <img id="mainBusImage" src="/img/pmj02-1.jpg" alt="Bus Image" class="bus-image img-fluid">
-                    <div class="row mt-3 mb-3">
-                        <div class="col-12 thumbnail-images">
-                        <img src="/img/pmj02-1.jpg" alt="Thumbnail 1" class="thumbnail" onclick="changeImage(this)">
-                        <img src="/img/pmj02-3.jpg" alt="Thumbnail 2" class="thumbnail" onclick="changeImage(this)">
-                        <img src="/img/pmj02-4.jpg" alt="Thumbnail 3" class="thumbnail" onclick="changeImage(this)">
-                        <img src="/img/pmj02-5.jpg" alt="Thumbnail 4" class="thumbnail" onclick="changeImage(this)">
+            <div class="bus-card mt-5 mb-5">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div id="carouselExample" class="carousel slide carousel-fade wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="carousel-inner">
+                                @foreach ($bus->images as $index => $busImage)
+                                    <div class="carousel-item image-container {{ $index == 0 ? 'active' : '' }}">
+                                        <img src="{{ asset('storage/' . $busImage->image) }}" class="d-block img-fluid" alt="Bus Image {{ $index + 1 }}">
+                                    </div>
+                                @endforeach
+                            </div>                            
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                                data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                                data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                        <div class="row mt-2 wow slideInLeft" data-wow-delay="0.1s">
+                            <div class="col-12 d-flex justify-content-center">
+                                @foreach ($bus->images as $index => $busImage) <!-- Loop untuk menampilkan gambar -->
+                                    <div class="col-2 thumbnail d-flex justify-content-center align-items-center mx-1">
+                                        <div class="image-container">
+                                            <img src="{{ asset('storage/' . $busImage->image) }}" data-bs-target="#carouselExample"
+                                                data-bs-slide-to="{{ $index }}" alt="Bus Image {{ $index + 1 }}">
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-lg-6 mt-3">
+                        <div class="d-flex justify-content-between">
+                            <p class="bus-title">{{ $bus->name }}</p>
+                            <div class="bus-star">
+                                <i class="fa-solid fa-star"></i> {{ $formatStar }}
+                            </div>
+                        </div>
+                        <p class="bus-type">Jetbus 3+ Voyager Adiputro</p>
+                        <div class="row mt-3 text-center fasilitas">
+                            <div class="col-3 text-icon">
+                                <i class="fa-solid fa-bed"></i>
+                                <p>Bantal & Selimut</p>
+                            </div>
+                            <div class="col-3 text-icon">
+                                <i class="fa-solid fa-tv"></i>
+                                <p>Entertain System</p>
+                            </div>
+                            <div class="col-3 text-icon">
+                                <i class="fa-solid fa-mug-hot"></i>
+                                <p>Dispenser</p>
+                            </div>
+                            <div class="col-3 text-icon">
+                                <i class="fa-solid fa-bolt"></i>
+                                <p>USB Charger</p>
+                            </div>
+                        </div>
+                        <ul class="bus-description">
+                            <li>Dilengkapi dengan AC, toilet, dan seluruh untuk kenyamanan perjalanan.</li>
+                            <li>Kursi recliner nyaman, seatbelt pada setiap kursi.</li>
+                            <li>Tersedia hiburan, port USB, dan audio di setiap kursi.</li>
+                            <li>Harga tiket sekitar Rp 300.000, durasi 3-4 jam.</li>
+                        </ul>
+                        <div class="d-flex justify-content-end align-items-center">
+                            {{-- <button class="btn-back">Kembali</button> --}}
+                            <a href="{{ route('bus') }}" class="btn-back">Kembali</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 col-lg-6 mt-3">
-                    <div class="d-flex justify-content-between">
-                        <p class="bus-title">PMJ 02</p>
-                        <div class="bus-star">
-                            <i class="fa-solid fa-star"></i> 4.7
-                        </div>  
-                    </div>
-                    <p class="bus-type">Jetbus 3+ Voyager Adiputro</p>
-                    <div class="row mt-3 text-center fasilitas">
-                        <div class="col-3 text-icon">
-                        <i class="fa-solid fa-bed"></i>
-                        <p>Bantal & Selimut</p>
-                        </div>
-                        <div class="col-3 text-icon">
-                        <i class="fa-solid fa-tv"></i>
-                        <p>Entertain System</p>
-                        </div>
-                        <div class="col-3 text-icon">
-                        <i class="fa-solid fa-mug-hot"></i>
-                        <p>Dispenser</p>
-                        </div>
-                        <div class="col-3 text-icon">
-                        <i class="fa-solid fa-bolt"></i>
-                        <p>USB Charger</p>
-                        </div>
-                    </div>
-                <ul class="bus-description">
-                    <li>Dilengkapi dengan AC, toilet, dan seluruh untuk kenyamanan perjalanan.</li>
-                    <li>Kursi recliner nyaman, seatbelt pada setiap kursi.</li>
-                    <li>Tersedia hiburan, port USB, dan audio di setiap kursi.</li>
-                    <li>Harga tiket sekitar Rp 300.000, durasi 3-4 jam.</li>
-                </ul>
-                <div class="d-flex justify-content-end align-items-center">
-                    <button class="btn-back">Kembali</button>
-                </div>
-                </div>
-              </div>
             </div>
+
             <div class="testimoni-content mt-5 mb-5">
-            <h5 style="margin-bottom: 50px;">Testimoni</h5>
+                <h5 style="margin-bottom: 50px;">Testimoni</h5>
                 <div class="row">
                     <div class="col-md-3">
                         <div class="filter">
                             <div class="filter-content">
                                 <div class="filter-header">
-                                    <p>Terbaru <i class="fa-solid fa-angle-up"></i></p>
+                                    <p>Filter Berdasarkan</p>
                                 </div>
-                                <form>
-                                    <label>
-                                        <input type="checkbox" name="option1" value="Option 1">
-                                        Terbaru
-                                    </label>
-                                    <br>
-                                    <label>
-                                        <input type="checkbox" name="option2" value="Option 2">
-                                        Rating Tertinggi
-                                    </label>
-                                    <br>
-                                    <label>
-                                        <input type="checkbox" name="option3" value="Option 3">
-                                        Rating Terendah
-                                    </label>
-                                    <br>
+                                <form id="filterForm">
+                                    <div class="form-group">
+                                        <select class="form-select" id="filterSelect">
+                                            <option value="terbaru">Terbaru</option>
+                                            <option value="ratingTertinggi">Rating Tertinggi</option>
+                                            <option value="ratingTerendah">Rating Terendah</option>
+                                        </select>
+                                    </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-9">
-                        <div class="testimoni-container">
-                            <div class="testi">
-                                <p class="tanggal-testi">13 Maret 2024</p>
-                                <div class="rating">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                </div>
-                                <div class="profile-card">
-                                    <img src="img/driver.png" alt="Profile Image">
-                                    <div class="profile-text">
-                                        <h5>Nida Aulia Karima</h5>
+                        <div class="testimoni-container" id="reviewContainer">
+                            @forelse ($reviews->take(5)->sortDesc() as $review)
+                                <div class="testi review-item" data-date="{{ $review->created_at }}" data-rating="{{ $review->rating }}">
+                                    <p class="tanggal-testi">
+                                        {{ \Carbon\Carbon::parse($review->created_at)->translatedFormat('l, d F Y') }}
+                                    </p>
+                                    <div class="rating">
+                                        @for ($i = 0; $i < 5; $i++)
+                                            @if ($i < $review->rating)
+                                                <i class="fa-solid fa-star text-warning"></i>
+                                            @else
+                                                <i class="fa-solid fa-star text-secondary"></i>
+                                            @endif
+                                        @endfor
+                                    </div>
+                                    <div class="profile-card">
+                                        <div class="profile-initial">
+                                            {{ strtoupper(substr($review->booking->customer->name, 0, 1) . substr($review->booking->customer->name, strpos($review->booking->customer->name, ' ') + 1, 1)) }}
+                                        </div>
+                                        <div class="profile-text">
+                                            <h5>{{ $review->booking->customer->name }}</h5>
+                                        </div>
+                                    </div>
+                                    <p class="role">Customer</p>
+                                    <div class="isi-testi">
+                                        <p>{{ $review->feedback }}</p>
                                     </div>
                                 </div>
-                                <p class="role">Customer</p>
-                                <div class="isi-testi">
-                                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non at sed quo ratione? Aliquam quisquam quia consectetur! Voluptas ducimus pariatur sit voluptates? Maxime laudantium nemo quaerat provident ab quis nihil?</p>
-                                </div>
-                            </div>
-                            <div class="testi">
-                                <p class="tanggal-testi">13 Maret 2024</p>
-                                <div class="rating">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                </div>
-                                <div class="profile-card">
-                                    <img src="img/driver.png" alt="Profile Image">
-                                    <div class="profile-text">
-                                        <h5>Nida Aulia Karima</h5>
+                            @empty
+                                <div class="testi">
+                                    <div class="alert alert-danger text-center">
+                                        <h3>Tidak ada ulasan tersedia!</h3>
                                     </div>
                                 </div>
-                                <p class="role">Customer</p>
-                                <div class="isi-testi">
-                                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non at sed quo ratione? Aliquam quisquam quia consectetur! Voluptas ducimus pariatur sit voluptates? Maxime laudantium nemo quaerat provident ab quis nihil?</p>
-                                </div>
-                            </div>
+                            @endforelse
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-  
-  <script>
-    function changeImage(element) {
-      var newImage = element.src;
-      var mainImage = document.getElementById('mainBusImage');
-      
-      // Tambahkan efek fade-out dengan mengubah opacity
-      mainImage.style.opacity = 0;
-
-      // Setelah 500ms (durasi fade-out), ganti gambar dan fade-in
-      setTimeout(function() {
-        mainImage.src = newImage;
-        mainImage.style.opacity = 1;
-      }, 200);
-    }
-  </script>
 
     <!-- FOOTER -->
-     <x-footer-customer/>
+    <x-footer-customer />
+
 @endsection
+@push('styles')
+    <style>
+        .thumbnail {
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .img-fluid {
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .custom-icon {
+            font-size: 1.5rem;
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            overflow: hidden;
+            border-radius: 5px;
+        }
+
+        .image-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .profile-initial {
+            width: 40px;
+            height: 40px;
+            background-color: #1E9781;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 18px;
+        }
+
+        .filter {
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .filter-header p {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .form-select {
+            width: 100%;
+            max-width: 300px;
+        }
+    </style>
+@endpush
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#filterSelect').on('change', function() {
+                const selectedFilter = $(this).val();
+                const $reviews = $('#reviewContainer .review-item');
+
+                let sortedReviews;
+                
+                if (selectedFilter === 'terbaru') {
+                    // Urutkan berdasarkan tanggal terbaru
+                    sortedReviews = $reviews.sort((a, b) => new Date($(b).data('date')) - new Date($(a).data('date')));
+                } else if (selectedFilter === 'ratingTertinggi') {
+                    // Urutkan berdasarkan rating tertinggi
+                    sortedReviews = $reviews.sort((a, b) => $(b).data('rating') - $(a).data('rating'));
+                } else if (selectedFilter === 'ratingTerendah') {
+                    // Urutkan berdasarkan rating terendah
+                    sortedReviews = $reviews.sort((a, b) => $(a).data('rating') - $(b).data('rating'));
+                }
+
+                // Kosongkan kontainer dan tambahkan elemen review yang sudah diurutkan
+                $('#reviewContainer').html(sortedReviews);
+            });
+        });
+
+    </script>
+@endpush

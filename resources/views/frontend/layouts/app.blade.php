@@ -15,13 +15,12 @@
     @yield('content')
 </body>
 
-@stack('scripts')
-
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('js/sweetalert2@11.js') }}"></script>
 <script src="{{ asset('js/fontawesome.js') }}"></script>
 <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
 
+@stack('scripts')
 
 @if (session('message'))
     <script>

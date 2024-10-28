@@ -15,7 +15,7 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         $sourcePath = public_path('img/');
-        $destinationPath = 'public/setting/';
+        $destinationPath = 'public/logos/';
 
         $logos = [
             [
@@ -46,7 +46,7 @@ class SettingSeeder extends Seeder
             }
 
             // Update the photo path to storage path
-            $logo['logo'] = 'setting/' . $logo['logo'];
+            $logo['logo'] = 'logos/' . $logo['logo'];
 
             // Create the team record
             Setting::create($logo);

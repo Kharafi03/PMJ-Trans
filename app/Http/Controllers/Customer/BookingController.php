@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers\Customer;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Booking; // Pastikan Anda membuat model Booking
-use App\Models\Destination;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB; // Tambahkan ini
-
 use App\Models\Bus;
+use App\Models\User;
+use App\Models\Destination;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Filament\Notifications\Notification;
+use Illuminate\Support\Facades\Validator;
+
+use Filament\Notifications\Actions\Action;
+use Illuminate\Support\Facades\DB; // Tambahkan ini
+use App\Models\Booking; // Pastikan Anda membuat model Booking
 
 class BookingController extends Controller
 {
     //
     // Menampilkan formulir pemesanan
-    public function showForm()
+    public function index()
     {
         return view('frontend.booking.index');
     }
@@ -218,6 +220,22 @@ class BookingController extends Controller
             'description' => $request->input('description'),
             'legrest' => $request->input('legrest')
         ]);
+        $superAdmins = User::whereHas('roles', function ($query) {
+            $query->where('name', 'super_admin');
+        })->get();
+        foreach ($superAdmins as $admin) {
+            Notification::make()
+                ->title('Booking dengan kode booking '. $booking->booking_code.' berhasil dibuat')
+                ->success()
+                ->actions([
+                    Action::make('Detail')
+                        ->button()
+                        ->url(route('filament.admin.resources.booking.edit', $booking)),
+                ])
+                
+                ->sendToDatabase($admin);
+                
+        }
 
         // Ambil semua input 'tujuan' sebagai array
         $tujuanArray = $request->input('tujuan'); // Menghasilkan array

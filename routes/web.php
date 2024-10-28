@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\Customer\HomepageController;
 use App\Http\Controllers\Customer\LoginController;
 use App\Http\Controllers\Driver\ScanTripController;
 use App\Http\Controllers\Customer\BookingController;
@@ -13,12 +13,14 @@ use App\Http\Controllers\Driver\StartTripController;
 use App\Http\Controllers\Driver\DetailTripController;
 use App\Http\Controllers\Driver\FinishTripController;
 use App\Http\Controllers\Driver\HistoryTripController;
-use App\Http\Controllers\Driver\InitiateTripController;
 use App\Http\Controllers\Customer\BookingCodeController;
 use App\Http\Controllers\Driver\DashboardTripController;
 use App\Http\Controllers\Customer\BookingCheckController;
 use App\Http\Controllers\Customer\RegistrationController;
 use App\Http\Controllers\Customer\BookingStatusController;
+use App\Http\Controllers\Customer\BusController;
+use App\Http\Controllers\Customer\AboutController;
+use App\Http\Controllers\Customer\TermsConditionsController;
 use App\Http\Controllers\Customer\DetailPaymentController;
 use App\Http\Controllers\Customer\EmailTemplateController;
 use App\Http\Controllers\Customer\ResetPasswordController;
@@ -42,13 +44,6 @@ Route::middleware('guest')->group(function () {
 });
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/booking', [BookingController::class, 'showForm'])->name('frontend.booking.index');
-Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
-
-Route::get('/booking', [BookingController::class, 'showForm'])->name('frontend.booking.index');
-
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
-
 Route::get('/develop-email-template', [EmailTemplateController::class, 'showTicketEmail']);
 
 Route::middleware(['auth'])->group(function () {
@@ -63,49 +58,53 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/send-ticket-email/{booking_code}', [BookingController::class, 'sendTicketEmail'])->name('sendTicketEmail');
 });
 
+// New Routes Homepage Customer
+
+Route::get('/', [HomepageController::class, 'index'])->name('homepage');
+
+Route::get('/bus', [BusController::class, 'index'])->name('bus');
+
+Route::get('/bus/{bus_name}', [BusController::class, 'show'])->name('bus.show');
+
+Route::get('/about', [AboutController::class, 'index'])->name('about');
+
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+Route::get('/terms-conditions', [TermsConditionsController::class, 'index'])->name('terms-conditions');
+
+Route::get('/booking', [BookingController::class, 'index'])->name('booking');
+Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
+
 Route::get('/booking-check', [BookingCheckController::class, 'index'])->name('cek.status');
 Route::post('/booking-check', [BookingCheckController::class, 'status'])->name('post.cek.status');
 
 Route::post('/booking/upload-proof/{id}', [BookingStatusController::class, 'uploadProof'])->name('booking.uploadProof');
 
+// Route::get('/booking-status', function () {
+//     return view('frontend.booking-status.index');
+// })->name('booking-status');
 
-Route::get('/', function () {
-    return view('frontend.homepage');
-})->name('homepage');
+// Route::get('/booking-accepted', function () {
+//     return view('frontend.booking-accepted.index');
+// })->name('booking-accepted');
 
-//Route::get('/', [HomepageController::class, 'index'])->name('homepage');
+// Route::get('/booking-rejected', function () {
+//     return view('frontend.booking-rejected.index');
+// })->name('booking-rejected');
 
-Route::get('/contact', function () {
-    return view('frontend.contact.index');
-})->name('contact');
+// Route::get('/booking-processed', function () {
+//     return view('frontend.booking-processed.index');
+// })->name('booking-processed');
 
-// Route::get('/booking', function () {
-//     return view('frontend.booking.index');
-// })->name('booking');
+// Route::get('/booking-details', function () {
+//     return view('frontend.booking-details.index');
+// })->name('booking-details');
 
-Route::get('/booking-status', function () {
-    return view('frontend.booking-status.index');
-})->name('booking-status');
-
-Route::get('/booking-accepted', function () {
-    return view('frontend.booking-accepted.index');
-})->name('booking-accepted');
-
-Route::get('/booking-rejected', function () {
-    return view('frontend.booking-rejected.index');
-})->name('booking-rejected');
-
-Route::get('/booking-processed', function () {
-    return view('frontend.booking-processed.index');
-})->name('booking-processed');
-
-Route::get('/booking-details', function () {
-    return view('frontend.booking-details.index');
-})->name('booking-details');
-
-Route::get('/faq', function () {
-    return view('frontend.faq.index');
-})->name('faq');
+// Route::get('/faq', function () {
+//     return view('frontend.faq.index');
+// })->name('faq');
 
 // Route::get('/customer-profile', function () {
 //     return view('frontend.customer-profile.index');
@@ -115,41 +114,26 @@ Route::get('/faq', function () {
 //     return view('frontend.booking-history.index');
 // })->name('booking-history');
 
-Route::get('/payment', function () {
-    return view('frontend.payment.index');
-})->name('payment');
+// Route::get('/payment', function () {
+//     return view('frontend.payment.index');
+// })->name('payment');
 
-Route::get('/booking-payment', function () {
-    return view('frontend.booking-payment.index');
-})->name('booking-payment');
+// Route::get('/booking-payment', function () {
+//     return view('frontend.booking-payment.index');
+// })->name('booking-payment');
 
 // Route::get('/booking-code', function () {
 //     return view('frontend.booking-code.index');
 // })->name('booking-code');
 
-Route::get('/bus', function () {
-    return view('frontend.bus.index');
-})->name('bus');
-
-Route::get('/bus-detail', function () {
-    return view('frontend.bus-detail.index');
-})->name('bus-detail');
-
-Route::get('/about', function () {
-    return view('frontend.about.index');
-})->name('about');
 
 // Route::get('/payment-history', function () {
 //     return view('frontend.payment-history.index');
 // })->name('payment-history');
 
-Route::get('/ticket', function () {
-    return view('frontend.ticket.index');
-})->name('ticket');
-
-Route::get('/terms-conditions', function () {
-    return view('frontend.terms-conditions.index');
-})->name('terms-conditions');
+// Route::get('/ticket', function () {
+//     return view('frontend.ticket.index');
+// })->name('ticket');
 
 
 
