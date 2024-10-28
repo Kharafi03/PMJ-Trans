@@ -62,6 +62,7 @@ class ReviewResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('booking.booking_code')
                     ->label('ID Booking')

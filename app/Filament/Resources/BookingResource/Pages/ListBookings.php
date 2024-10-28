@@ -11,10 +11,55 @@ use Maatwebsite\Excel\Facades\Excel;
 use Filament\Tables\Actions\BulkAction;
 use Filament\Resources\Pages\ListRecords;
 use App\Filament\Resources\BookingResource;
+use Carbon\Carbon;
+use Filament\Resources\Components\Tab;
 
 class ListBookings extends ListRecords
 {
     protected static string $resource = BookingResource::class;
+
+    public function getTabs(): array
+    {
+        $currentDate = Carbon::now()->startOfDay();
+
+        return [
+            null => Tab::make(label: 'Semua')
+                ->badge(fn() => Booking::count()),
+            'current' => Tab::make(label: 'Saat Ini')
+                ->badge(fn() => Booking::where('date_start', '<=', $currentDate)
+                    ->where('date_end', '>=', $currentDate)
+                    ->count())
+                ->modifyQueryUsing(function ($query) use ($currentDate) {
+                    return $query->where('date_start', '<=', $currentDate)
+                        ->where('date_end', '>=', $currentDate);
+                }),
+            'new' => Tab::make(label: 'Baru')
+                ->badge(fn() => Booking::where('id_ms_booking', 1)->count())
+                ->modifyQueryUsing(function ($query) {
+                    return $query->where('id_ms_booking', 1);
+                }),
+            // 'accept' => Tab::make(label: 'Diterima')
+            //     ->badge(fn() => Booking::where('id_ms_booking', 2)->count())
+            //     ->modifyQueryUsing(function ($query) {
+            //         return $query->where('id_ms_booking', 2);
+            //     }),
+            // 'reject' => Tab::make(label: 'Ditolak')
+            //     ->badge(fn() => Booking::where('id_ms_booking', 3)->count())
+            //     ->modifyQueryUsing(function ($query) {
+            //         return $query->where('id_ms_booking', 3);
+            //     }),
+            // 'cancel' => Tab::make(label: 'Dibatalkan')
+            //     ->badge(fn() => Booking::where('id_ms_booking', 5)->count())
+            //     ->modifyQueryUsing(function ($query) {
+            //         return $query->where('id_ms_booking', 5);
+            //     }),
+            'done' => Tab::make(label: 'Selesai')
+                ->badge(fn() => Booking::where('id_ms_booking', 4)->count())
+                ->modifyQueryUsing(function ($query) {
+                    return $query->where('id_ms_booking', 4);
+                }),
+        ];
+    }
 
     protected function getHeaderActions(): array
     {
@@ -24,7 +69,7 @@ class ListBookings extends ListRecords
             // Aksi untuk download semua data sebagai PDF
             Actions\Action::make('downloadAllPDF')
                 ->label('PDF')
-                ->icon('heroicon-o-document') 
+                ->icon('heroicon-o-document')
                 ->action(function () {
                     $bookings = Booking::all();
                     $pdf = Pdf::loadView('pdf.bookings', ['bookings' => $bookings]);
@@ -43,8 +88,8 @@ class ListBookings extends ListRecords
                 ->requiresConfirmation()
                 ->color('danger'),
 
-           // Aksi untuk import exvel
-                \EightyNine\ExcelImport\ExcelImportAction::make()
+            // Aksi untuk import exvel
+            \EightyNine\ExcelImport\ExcelImportAction::make()
                 ->color('info')
                 ->label("Import Excel")
                 ->modalDescription(new HtmlString('Download Format Excel <a class="underline text-blue-600" href="/format_booking.xlsx">disini</a>')),
@@ -52,7 +97,7 @@ class ListBookings extends ListRecords
             // Aksi untuk export semua data ke Excel
             Actions\Action::make('exportExcel')
                 ->label('Export Excel')
-                ->icon('heroicon-o-arrow-up-on-square') 
+                ->icon('heroicon-o-arrow-up-on-square')
                 ->action(function () {
                     return Excel::download(new BookingsExport(Booking::all()), 'bookings.xlsx');
                 })
@@ -108,5 +153,4 @@ class ListBookings extends ListRecords
                 ->color('success'),
         ];
     }
-    
 }

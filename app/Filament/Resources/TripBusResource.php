@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\TripBusResource\Pages;
 use App\Filament\Resources\TripBusResource\RelationManagers;
 use App\Models\Booking;
+use App\Models\Bus;
 use App\Models\TripBus;
 use App\Models\TripBusSpend;
 use App\Models\User;
@@ -91,9 +92,20 @@ class TripBusResource extends Resource
                                             })
                                             ->required(),
                                         Select::make('id_bus')
-                                            ->label('Bus')
+                                            ->relationship('bus', 'name')
+                                            ->options(function (Get $get, Set $set, $record) {
+                                                if ($record && $record->booking) {
+                                                    $tripStart = $record->booking->date_start;
+                                                    $tripEnd = $record->booking->date_end;
+                                                    $idBooking = $record->booking->id;
+                                                    return self::getAvailableBuses($tripStart, $tripEnd, $idBooking);
+                                                } else {
+                                                    return Bus::pluck('name', 'id');
+                                                }
+                                                return [];
+                                            })
                                             ->required()
-                                            ->relationship('bus', 'name'),
+                                            ->label('Bus'),
                                         Select::make('id_customer')
                                             ->label('Customer')
                                             ->disabled()
@@ -104,23 +116,41 @@ class TripBusResource extends Resource
                                             })
                                             ->relationship('cus', 'name'),
                                         Select::make('id_driver')
-                                            ->label('Driver')
-                                            ->required()
-                                            ->options(function () {
-                                                return User::whereHas('roles', function ($query) {
-                                                    $query->where('name', 'driver');
-                                                })->pluck('name', 'id');
+                                            ->relationship('driver', 'name')
+                                            ->options(function (Get $get, Set $set, $record) {
+                                                if ($record && $record->booking) {
+                                                    $tripStart = $record->booking->date_start;
+                                                    $tripEnd = $record->booking->date_end;
+                                                    $idBooking = $record->booking->id;
+                                                    return self::getAvailableDriver($tripStart, $tripEnd, $idBooking);
+                                                } else {
+                                                    return User::whereHas('roles', function ($query) {
+                                                        $query->where('name', 'Driver');
+                                                    })->pluck('name', 'id');
+                                                }
+                                                return [];
                                             })
-                                            ->relationship('driver', 'name'),
+                                            ->required()
+                                            ->label('Driver'),
                                         Select::make('id_codriver')
-                                            ->label('Co-Driver')
-                                            ->required()
-                                            ->options(function () {
-                                                return User::whereHas('roles', function ($query) {
-                                                    $query->where('name', 'driver');
-                                                })->pluck('name', 'id');
+                                            ->relationship('codriver', 'name')
+                                            ->reactive()
+                                            ->options(function (Get $get, Set $set, $record) {
+                                                if ($record && $record->booking) {
+                                                    $tripStart = $record->booking->date_start;
+                                                    $tripEnd = $record->booking->date_end;
+                                                    $idBooking = $record->booking->id;
+                                                    //dd($tripStart, $tripEnd, $idBooking);
+                                                    return self::getAvailableDriver($tripStart, $tripEnd, $idBooking);
+                                                } else {
+                                                    return User::whereHas('roles', function ($query) {
+                                                        $query->where('name', 'Driver');
+                                                    })->pluck('name', 'id');
+                                                }
+                                                return [];
                                             })
-                                            ->relationship('codriver', 'name'),
+                                            ->required()
+                                            ->label('Driver'),
                                         Select::make('id_ms_trip')
                                             ->label('Status Trip')
                                             ->required()
@@ -240,6 +270,7 @@ class TripBusResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('updated_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('booking.booking_code')
                     ->numeric()
@@ -265,6 +296,9 @@ class TripBusResource extends Resource
                     ->label('Co-Driver')
                     ->sortable()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('booking.date_start')
+                    ->sortable()
+                    ->label('Tanggal Mulai'),
                 Tables\Columns\TextColumn::make('nominal')
                     ->numeric()
                     ->prefix('Rp. ')
@@ -278,9 +312,17 @@ class TripBusResource extends Resource
                     ->hidden()
                     //->visible(fn($record) => $record->id_ms_trip === 2 || 3)
                     ->sortable(),
-                Tables\Columns\TextColumn::make('ms_trip.name')
+                Tables\Columns\BadgeColumn::make('ms_trip.name')
                     ->label('Status')
                     ->sortable()
+                    ->colors([
+                        'info' => 'Belum Perjalanan',
+                        'warnings' => 'Dalam Perjalanan',
+                        'success' => 'Selesai',
+                    ])
+                    ->formatStateUsing(function ($state) {
+                        return ucfirst($state);
+                    })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->label('Tanggal Dihapus')
@@ -299,6 +341,9 @@ class TripBusResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
+                Tables\Filters\SelectFilter::make('id_ms_trip')
+                    ->label('Status Perjalanan')
+                    ->relationship('ms_trip', 'name'),
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
@@ -523,5 +568,57 @@ class TripBusResource extends Resource
             ->update([
                 'total_spend_bbm' => $bbmtotal,
             ]);
+    }
+
+    public static function getAvailableBuses($tripStart, $tripEnd, $idBooking)
+    {
+        if (!$tripStart || !$tripEnd) {
+            return Bus::pluck('name', 'id');
+        }
+
+        return Bus::whereDoesntHave('tripbus.booking', function ($query) use ($tripStart, $tripEnd, $idBooking) {
+            $query->where(function ($subQuery) use ($tripStart, $tripEnd) {
+                $subQuery->where('date_start', '<=', $tripEnd)
+                    ->where('date_end', '>=', $tripStart);
+            });
+            if ($idBooking) {
+                $query->where('id_booking', '!=', $idBooking);
+            }
+        })->pluck('name', 'id');
+    }
+
+    public static function getAvailableDriver($tripStart, $tripEnd, $idBooking)
+    {
+        if (!$tripStart || !$tripEnd) {
+            return User::whereHas('roles', function ($query) {
+                $query->where('name', 'driver');
+            })->pluck('name', 'id');
+        }
+
+
+        return User::whereHas('roles', function ($query) {
+            $query->where('name', 'driver');
+        })
+            ->whereDoesntHave('driver', function ($query) use ($tripStart, $tripEnd, $idBooking) {
+                $query->whereHas('booking', function ($subQuery) use ($tripStart, $tripEnd) {
+                    $subQuery->where('date_start', '<=', $tripEnd)
+                        ->where('date_end', '>=', $tripStart);
+                });
+
+                if ($idBooking) {
+                    $query->where('id_booking', '!=', $idBooking);
+                }
+            })
+            ->whereDoesntHave('codriver', function ($query) use ($tripStart, $tripEnd, $idBooking) {
+                $query->whereHas('booking', function ($subQuery) use ($tripStart, $tripEnd) {
+                    $subQuery->where('date_start', '<=', $tripEnd)
+                        ->where('date_end', '>=', $tripStart);
+                });
+
+                if ($idBooking) {
+                    $query->where('id_booking', '!=', $idBooking);
+                }
+            })
+            ->pluck('name', 'id');
     }
 }

@@ -34,6 +34,21 @@ class BusResource extends Resource
 
     protected static ?string $slug = 'bus';
 
+    protected static ?string $recordTitleAttribute = 'name';
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'license_plate'];
+    }
+
+    public static function getGlobalSearchResultDetails(Model $record): array
+    {
+        /** @var Order $record */
+
+        return [
+            'No. Plat' => optional($record)->license_plate,
+        ];
+    }
 
     public static function getNavigationBadge(): ?string
     {
