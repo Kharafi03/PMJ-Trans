@@ -22,7 +22,6 @@ return Application::configure(basePath: dirname(__DIR__))
             'checkIfDriver' => CheckIfDriver::class,
             'checkDriverTrip' => CheckDriverTrip::class,
             'verifyScan' => VerifyScan::class,
-            'checkDriverTripToday' => CheckDriverTripToday::class,
         ]);
 
     })

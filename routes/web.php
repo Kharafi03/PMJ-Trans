@@ -44,7 +44,17 @@ Route::middleware('guest')->group(function () {
 });
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/develop-email-template', [EmailTemplateController::class, 'showTicketEmail']);
+Route::get('/develop-tiket-template', [EmailTemplateController::class, 'showTicketEmail']);
+
+Route::get('/develop-dpbelumdibayar-template', [EmailTemplateController::class, 'showDpbelumdibayar']);
+
+Route::get('/develop-dpdibayar-template', [EmailTemplateController::class, 'showDpdibayar']);
+
+Route::get('/develop-lunas-template', [EmailTemplateController::class, 'showLunas']);
+
+Route::get('/develop-dibatalkan-template', [EmailTemplateController::class, 'showDibatalkan']);
+
+Route::get('/develop-ditolak-template', [EmailTemplateController::class, 'showDitolak']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

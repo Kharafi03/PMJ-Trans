@@ -62,7 +62,7 @@
                                             <i class="fa-solid fa-star"></i> 4.8
                                         </div>
                                     </div>
-                                    <p class="small">Jetbus 3+ Voyager Adiputro</p>
+                                    <p class="small">{{ $bus->type ?? '#' }}</p>
                                     <div class="row mt-3 mb-3 text-center">
                                         <div class="col-3 text-icon">
                                             <i class="fa-solid fa-bed"></i>
