@@ -107,7 +107,7 @@ class SettingPage extends Page implements HasForms
                                 Forms\Components\TextInput::make('sosmed_yt')
                                     ->required()
                                     ->maxLength(255)
-                                    ->label('Instagram'),
+                                    ->label('Youtube'),
                                 Forms\Components\Textarea::make('maps')
                                     ->required()
                                     ->columnSpanFull()

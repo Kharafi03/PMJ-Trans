@@ -84,9 +84,6 @@ class BookingResource extends Resource
         return 'warning';
     }
 
-    public $tripStart;
-    public $tripEnd;
-
     public static function form(Form $form): Form
     {
         return $form->schema([
@@ -155,7 +152,7 @@ class BookingResource extends Resource
 
                             DatePicker::make('date_end')
                                 ->required()
-                                ->minDate(now())
+                                ->minDate(fn(Get $get) => $get('date_start'))
                                 ->reactive()
                                 ->label('Tanggal Selesai'),
                         ])->columns(2),
@@ -180,9 +177,25 @@ class BookingResource extends Resource
 
                         Forms\Components\Group::make()->schema([
                             TextInput::make('capacity')
+                                ->label('Jumlah Penumpang')
                                 ->required()
                                 ->numeric()
-                                ->label('Jumlah Penumpang'),
+                                ->reactive()
+                                ->debounce(1500)
+                                ->afterStateUpdated(function (callable $get, callable $set) {
+                                    $fleetAmount = $get('fleet_amount');
+                                    $maxCapacity = $fleetAmount * 50;
+                                    $set('maxCapacity', $maxCapacity);
+                                })
+                                ->rule(function (callable $get, callable $set) {
+                                    $maxCapacity = $get('maxCapacity');
+                                    return "max:$maxCapacity";
+                                })
+                                ->validationAttribute('Jumlah Penumpang')
+                                ->helperText(fn(callable $get) => 'Maksimal penumpang ' . $get('maxCapacity') . ' orang')
+                                ->validationMessages([
+                                    'max' => 'Jumlah penumpang melebihi batas maksimum.',
+                                ]),
 
                             Group::make()
                                 ->schema([
@@ -190,16 +203,25 @@ class BookingResource extends Resource
                                         ->schema([
                                             Select::make('fleet_amount')
                                                 ->required()
-                                                ->options([
-                                                    1 => '1 Bus',
-                                                    2 => '2 Bus',
-                                                    3 => '3 Bus',
-                                                    4 => '4 Bus',
-                                                    5 => '5 Bus',
-                                                ])
+                                                ->options(function (Get $get) {
+                                                    $startDate = $get('date_start');
+                                                    $endDate = $get('date_end');
+                                                    $idBooking = $get('id');
+                                                    $availableBusCount = self::getAvailableBusCount($startDate, $endDate, $idBooking);
+
+                                                    // Cek jika tidak ada bus yang tersedia
+                                                    if ($availableBusCount === 0) {
+                                                        return [0 => "Bus Tidak Tersedia"];
+                                                    }
+
+                                                    // Buat daftar opsi dari 1 hingga jumlah bus yang tersedia
+                                                    return collect(range(1, $availableBusCount))->mapWithKeys(fn($i) => [$i => "$i Bus"]);
+                                                })
                                                 ->reactive()
                                                 ->afterStateUpdated(function (Get $get, Set $set) {
                                                     $fleetAmount = $get('fleet_amount');
+                                                    $maxCapacity = $fleetAmount * 50;
+                                                    $set('maxCapacity', $maxCapacity);
                                                     $set('maxItems', $fleetAmount);
                                                 })
                                                 ->label('Jumlah Bus'),
@@ -208,7 +230,6 @@ class BookingResource extends Resource
                                     Group::make()
                                         ->schema([
                                             Toggle::make('legrest')
-                                                //->inlineLabel()
                                                 ->label('Leg Rest')
                                                 ->reactive()
                                                 ->default(0),
@@ -969,13 +990,37 @@ class BookingResource extends Resource
         return Bus::whereDoesntHave('tripbus.booking', function ($query) use ($tripStart, $tripEnd, $idBooking) {
             $query->where(function ($subQuery) use ($tripStart, $tripEnd) {
                 $subQuery->where('date_start', '<=', $tripEnd)
-                    ->where('date_end', '>=', $tripStart);
+                    ->whereRaw("CAST(CONCAT(date_end, ' 23:59:59') AS DATETIME) >= ?", [$tripStart]);
             });
             if ($idBooking) {
                 $query->where('id_booking', '!=', $idBooking);
             }
         })->pluck('name', 'id');
     }
+
+    public static function getAvailableBusCount($startDate, $endDate, $idBooking): int
+    {
+        if (!$startDate || !$endDate) {
+            return Bus::count();
+        }
+
+        $usedBusCount = Bus::whereHas('tripbus.booking', function ($query) use ($startDate, $endDate, $idBooking) {
+            $query->where(function ($subQuery) use ($startDate, $endDate) {
+                $subQuery->where('date_start', '<=', $endDate)
+                    ->whereRaw("CAST(CONCAT(date_end, ' 23:59:59') AS DATETIME) >= ?", [$startDate]);
+            });
+
+            if ($idBooking) {
+                $query->where('id_booking', '!=', $idBooking);
+            }
+        })->distinct('id')->count();
+
+        $totalBusCount = Bus::count();
+        $availableBusCount = max(0, $totalBusCount - $usedBusCount);
+
+        return $availableBusCount;
+    }
+
 
     public static function getAvailableDriver($tripStart, $tripEnd, $idBooking)
     {
@@ -992,7 +1037,7 @@ class BookingResource extends Resource
             ->whereDoesntHave('driver', function ($query) use ($tripStart, $tripEnd, $idBooking) {
                 $query->whereHas('booking', function ($subQuery) use ($tripStart, $tripEnd) {
                     $subQuery->where('date_start', '<=', $tripEnd)
-                        ->where('date_end', '>=', $tripStart);
+                        ->whereRaw("CAST(CONCAT(date_end, ' 23:59:59') AS DATETIME) >= ?", [$tripStart]);
                 });
 
                 if ($idBooking) {
@@ -1002,7 +1047,7 @@ class BookingResource extends Resource
             ->whereDoesntHave('codriver', function ($query) use ($tripStart, $tripEnd, $idBooking) {
                 $query->whereHas('booking', function ($subQuery) use ($tripStart, $tripEnd) {
                     $subQuery->where('date_start', '<=', $tripEnd)
-                        ->where('date_end', '>=', $tripStart);
+                        ->whereRaw("CAST(CONCAT(date_end, ' 23:59:59') AS DATETIME) >= ?", [$tripStart]);
                 });
 
                 if ($idBooking) {
