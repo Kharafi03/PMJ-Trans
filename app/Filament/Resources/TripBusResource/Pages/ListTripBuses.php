@@ -2,11 +2,12 @@
 
 namespace App\Filament\Resources\TripBusResource\Pages;
 
-use App\Filament\Resources\TripBusResource;
-use App\Models\TripBus;
 use Filament\Actions;
+use App\Models\TripBus;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
+use App\Filament\Resources\TripBusResource;
+use App\Filament\Resources\TripBusResource\Widgets\MyCalendar;
 
 class ListTripBuses extends ListRecords
 {
@@ -18,6 +19,13 @@ class ListTripBuses extends ListRecords
             Actions\CreateAction::make()->label('Tambah Trip'),
         ];
     }
+    protected function getHeaderWidgets(): array
+{
+    return [
+        MyCalendar::class,
+    ];
+}
+
 
     public function getTabs(): array
     {

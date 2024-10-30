@@ -20,7 +20,7 @@ class EditBooking extends EditRecord
 
     protected function afterSave(): void
     {
-        dd('weh');
+       
         // Mengecek jika status pemesanan diubah menjadi 'Dibatalkan'
         if ($this->record->ms_booking === 4) { // Pastikan 4 adalah status 'Dibatalkan'
             dd($this->record->ms_booking);
