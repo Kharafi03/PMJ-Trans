@@ -9,15 +9,10 @@
     <section id="bus">
         <!-- Header Start -->
         <div class="container-fluid header bg-white p-0">
-            <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
-                <div class="col-md-6 p-5 mt-lg-5">
-                    <h1 style="font-size: 44px; font-weight: 700; color: #1E9781;">
-                        Daftar Bus
-                        <span style="color: #FD9C07;">{{ $setting ? $setting->name : '#' }} </span>
-                    </h1>
-                    <p class="mb-4" style="font-size: 16px; font-weight: 500; color: #666666B5;">
-                        Temukan bus ideal Anda dengan pilihan kategori, rentang harga, dan kapasitas penumpang yang telah kami sediakan !
-                    </p>
+            <div class="row g-0 align-items-center flex-md-row">
+                <div class="col-md-6 p-5 mt-lg-5 text-content">
+                    <h1 class="mb-4">Daftar Bus <span>{{ $setting ? $setting->name : '#' }} </span></h1>
+                    <p>Temukan bus ideal Anda dengan pilihan kategori, rentang harga, dan kapasitas penumpang yang telah kami sediakan !</p>
                 </div>
                 <div class="col-md-6">
                     <img class="img-fluid" src="{{ asset('img/listbust-img.png') }}" style="width: 100%; align-items:center; padding: 50px 30px; 0px 30px" alt="gambar">
@@ -26,14 +21,13 @@
         </div>
         <!-- Header End -->
 
-        <div style="margin: 50px 0px 0px 50px;">
-            <h1 style="font-size: 44px; font-weight: 700; color: #1E9781;">
-                Daftar Bus 
-                <span style="color: #FD9C07;">
+        <div style="margin: 50px 0px 0px 50px;" class="text-content">
+            <h1>Bus 
+                <span>
                     {{ $setting ? $setting->name : '#' }}
                 </span>
             </h1>
-            <p class="mb-4" style="font-size: 20px; font-weight: 600; color: #666666B5;">
+            <p class="mb-4">
                 Temukan bus ideal Anda dengan pilihan kategori, rentang harga, dan kapasitas penumpang yang telah kami sediakan!
             </p>
         </div>
@@ -42,7 +36,7 @@
         <div class="container px-5 mt-5 mb-5">
             <!-- CARD BUS -->
             <div class="col-lg-12">
-                <div class="row g-5 d-flex justify-content-center">
+                <div class="row g-3 d-flex justify-content-center">
                     @forelse ($buses as $bus)
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="package-card card h-100">
@@ -71,8 +65,8 @@
                                             <p>Dispenser</p>
                                         </div>
                                         <div class="col-3 text-icon">
-                                            <i class="fa-solid fa-shower"></i>
-                                            <p>Shower</p>
+                                            <i class="fa-solid fa-bolt"></i>
+                                            <p>USB Charger</p>
                                         </div>
                                     </div>
                                     <div class="detail-package d-flex justify-content-end">

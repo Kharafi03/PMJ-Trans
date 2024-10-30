@@ -8,6 +8,58 @@
 
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" media="all">
     {{-- <link rel="stylesheet" href="{{ asset('css/frontend/css/argon-dashboard.css') }}"> --}}
+
+    <!-- FONT -->
+    <style>
+        @font-face {
+            font-family: 'Poppins';
+            src: url('/fonts/Poppins-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Poppins';
+            src: url('/fonts/Poppins-Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Poppins';
+            src: url('/fonts/Poppins-SemiBold.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Poppins';
+            src: url('/fonts/Poppins-Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Plus Jakarta Sans';
+            src: url('/fonts/PlusJakartaSans-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Plus Jakarta Sans';
+            src: url('/fonts/PlusJakartaSans-Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Plus Jakarta Sans';
+            src: url('/fonts/PlusJakartaSans-SemiBold.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Plus Jakarta Sans';
+            src: url('/fonts/PlusJakartaSans-Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+    </style>
     @stack('styles')
 </head>
 

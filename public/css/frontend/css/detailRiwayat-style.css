@@ -1,7 +1,18 @@
-/* TABEL */
-.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
-    background-color: #F9F9FC ;
+body {
+    background-position: 55% 60%;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-image: url("/img/bg-all2.png");
 }
+
+/* TABEL */
+#detailSewa{
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+tbody > tr:nth-child(2n+1) > td,  tbody > tr:nth-child(2n+1) > th {
+    background-color: #F9F9FC !important;
+}
+
 th, td{
     font-size: 14px;
     color: #333843;

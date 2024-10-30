@@ -14,9 +14,7 @@
         <div class="row container-fluid mb-5">
             <div class="col-md-7 flex-column d-flex justify-content-center align-item-center mb-5">
                 <div class="header-text">
-                    <h1 style="color: #1E9781;">Menghubungkan Anda ke Seluruh<br>
-                        <span style="color: #FD9C07;">Destinasi🏝️</span>
-                    </h1>
+                    <h1 style="color: #1E9781;">Menghubungkan Anda ke Seluruh <span style="color: #FD9C07;">Destinasi🏝️</span></h1>
                     <div class="d-flex">
                         <button class="btn-pesan">
                             <a href="{{ route('booking') }}" style="text-decoration: none; color: white;">
@@ -33,19 +31,19 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-5 d-flex justify-content-center align-item-center">
+            <div class="col-md-5 d-flex justify-content-center align-item-center mt-3">
                 <img src="img/header-img.png" alt="header image" class="header-img img-fluid">
             </div>
         </div>
     </section>
     
     <!-- DAFTAR BUS -->
-    <section id="package py-3">
+    <section id="daftarBus py-3">
         <div class="package-container container">
-            <h5 style="font-size: 44px; font-weight: 700; color: #1E9781;">
-                Daftar <span style="color: #FD9C07;">Bus {{ $setting ? $setting->name : '#' }}</span></h5>
-            <p style="font-size: 20px; font-weight: 600; color: #666666B5;">Berikut daftar bus yang tersedia di {{ $setting ? $setting->name : '#' }}.
-            </p>
+            <div class="text-content">
+                <h5>Daftar <span>Bus {{ $setting ? $setting->name : '#' }}</span></h5>
+                <p>Berikut daftar bus yang tersedia di {{ $setting ? $setting->name : '#' }}.</p>
+            </div>
 
             <!-- Swiper -->
             <div class="swiper category-carousel" style="padding: 20px;">
@@ -112,15 +110,11 @@
     <!-- KENAPA -->
     <section id="why">
         <div class="container">
-            <div class="text-container text-center">
-                <p style="font-size: 44px; font-weight: 700; color: #1E9781;">
-                    Kenapa Harus Sewa 
-                    <span style="color: #FD9C07;">di {{ $setting ? $setting->name : '#' }}?</span>
-                </p>
-                <p style="font-size: 20px; font-weight: 600; color: #666666B5;">
-                    Berikut alasan yang kenapa harus sewa di {{ $setting ? $setting->name : '#' }}
-                </p>
+            <div class="text-content text-center">
+                <h5>Kenapa Harus Sewa <span>di {{ $setting ? $setting->name : '#' }}?</span></h5>
+                <p>Berikut alasan yang kenapa harus sewa di {{ $setting ? $setting->name : '#' }}</p>
             </div>
+
             <div class="row mt-5">
                 <div class="col-md-4 mb-3" id="card1">
                     <div class="why-card card h-100 d-flex justify-content-center align-items-center">
@@ -162,35 +156,44 @@
     <!-- CARA PENYEWAAN -->
     <section id="caraPenyewaan">
         <div class="container-fluid cara-container">
-            <div class="cara-title text-center mb-5">
+            <div class="text-content text-center mb-5">
                 <h5>Cara <span>Penyewaan</span></h5>
                 <p>Ikuti langkah dibawah ini untuk melakukan penyewaan BUS di {{ $setting ? $setting->name : '#' }}</p>
             </div>
+
             <div class="row" style="background-image: url('img/bg-cara.png');">
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="cara-content text-center">
-                        <img src="img/cara1.png" class="img-fluid" alt="cara 1">
+                        <div class="mb-3">
+                            <img src="img/cara1.png" class="img-fluid" alt="cara 1">
+                        </div>
                         <h5>Pilih Bus</h5>
                         <p>Pilih bus yang tersedia dari layanan {{ $setting ? $setting->name : '#' }}.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="cara-content text-center">
-                        <img src="img/cara2.png" class="img-fluid" alt="cara 1">
+                        <div class="mb-3">
+                            <img src="img/cara2.png" class="img-fluid" alt="cara 2">
+                        </div>
                         <h5>Pesan Bus</h5>
                         <p>Melalui Admin Atau Website dengan mengisi formulir pemesanan.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="cara-content text-center">
-                        <img src="img/cara3.png" class="img-fluid" alt="cara 1">
+                        <div class="mb-3">
+                            <img src="img/cara3.png" class="img-fluid" alt="cara 3" style="margin-top: 20px;">
+                        </div>
                         <h5>Konfirmasi Admin</h5>
                         <p>Konfirmasi via WhatsApp jika pemesanan melalui admin atau cek pemesanan jika menggunakan website.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="cara-content text-center">
-                        <img src="img/cara4.png" class="img-fluid" alt="cara 1">
+                        <div class="mb-3">
+                            <img src="img/cara4.png" class="img-fluid" alt="cara 4">
+                        </div>
                         <h5>Pembayaran</h5>
                         <p>Unggah bukti pembayaran DP, sisa pembayaran dapat dilakukan saat trip atau di Kantor {{ $setting ? $setting->name : '#' }}.</p>
                     </div>
@@ -225,17 +228,12 @@
     <!-- TESTIMONI -->
     <section id="testimoni" class="py-5">
         <div class="container container-testi">
-            <div class="title text-center mb-5">
-                <p style="font-size: 44px; font-weight: bold; color: #1E9781; margin-bottom: 0;">Testimoni</p>
-                <p class="caption-testimoni">
-                    Begini kata mereka yang sudah merasakan kenyamanan dan layanan terbaik dari {{ $setting ? $setting->name : '#' }}!
-                </p>
-            </div>
-
-            
+            <div class="text-content text-center mb-5">
+                <h5>Testimoni</h5>
+                <p>Begini kata mereka yang sudah merasakan kenyamanan dan layanan terbaik dari {{ $setting ? $setting->name : '#' }}!</p>
+            </div>  
 
             <div id="carouselTestimoni" class="carousel slide" data-bs-ride="carousel">
-
                 <div class="carousel-indicators" style="margin-top: 50px;">
                     @foreach ($reviews->take(3) as $index => $review)
                         <button type="button" data-bs-target="#carouselTestimoni" data-bs-slide-to="{{ $index }}" 
@@ -249,9 +247,8 @@
                 <div class="carousel-inner carousel-inner-testi">
                     @foreach ($reviews->take(3) as $index => $review)
                         <div class="carousel-item {{ $index === 0 ? 'active' : '' }} text-center">
-                            <img src="{{ asset('img/avatar.png') }}" class="testi-img mb-3" alt="Customer"
-                                style="width: 80px; height: 80px; object-fit: cover; border-radius: 50%;">
-                            <h5><b>{{ $review->booking->customer->name }}</b></h5>
+                            <img src="{{ asset('img/avatar.png') }}" class="testi-img mb-3" alt="Customer" style="width: 80px; height: 80px; object-fit: cover; border-radius: 50%;">
+                            <h5>{{ $review->booking->customer->name }}</h5>
                             <p>Customer</p>
                             <div class="stars mb-3">
                                 @for ($i = 0; $i < $review->rating; $i++)
@@ -284,11 +281,11 @@
     <!-- FAQ -->
     <section id="faq">
         <div class="container mt-5">
-            <div class="title-faq">
-                <p>Pertanyaan<span> Umum</span></p>
+            <div class="text-content">
+                <h5>Pertanyaan<span> Umum</span></h5>
+                <p> Berikut beberapa pertanyaan yang sering diajukan tentang layanan sewa bus di {{ $setting ? $setting->name : '#' }}</p>
             </div>
-            <p class="caption-faq"> Berikut beberapa pertanyaan yang sering diajukan tentang layanan sewa bus di {{ $setting ? $setting->name : '#' }}
-            </p>
+    
             <div class="accordion accordion-flush" id="faq">
                 @forelse ($faqs as $faq)
                     <div class="accordion-item">
@@ -323,11 +320,11 @@
     <footer class="footer mt-5">
         <div class="container" style="padding: 50px 0px;">
             <div class="row">
-                <div class="col-md-4 mb-3 d-flex flex-column justify-content-center align-items-center" style="padding-right: 30px;">
-                    <img src="{{ asset($setting->logo ? 'storage/' . $setting->logo : '#') }}" alt="Logo" height="100">
+                <div class="col-lg-4 col-md-6 mb-3 d-flex flex-column justify-content-center align-items-center" style="padding-right: 30px;">
+                    <img src="{{ asset($setting->logo ? 'storage/' . $setting->logo : '#') }}" alt="Logo" height="85px">
                     <p class="caption1">{{ $setting ? $setting->footer : '#' }}</p>
                 </div>
-                <div class="col-md-3 mb-3">
+                <div class="col-lg-3 col-md-6 mb-3">
                     <h6>Hubungi Kami</h6>
                     <ul class="list-unstyled">
                         <li>
@@ -341,12 +338,12 @@
                         </li>
                         <li>
                             <a href="https://api.whatsapp.com/send?phone={{ $setting ? $setting->contact : '#' }}&text=Halo,%20saya%20ingin%20bertanya" target="_blank" style="text-decoration: none;">
-                                {{ $setting ? $setting->contact : '#' }}
+                                +{{ $setting ? $setting->contact : '#' }}
                             </a>
                         </li>
                     </ul>
                 </div>
-                <div class="col-md-2 mb-3" style="padding-left: 20px;">
+                <div class="col-lg-2 col-md-6 mb-3" style="padding-left: 20px;">
                     <h6>Link Cepat</h6>
                     <ul class="list-unstyled">
                         <li><a href="#" style="text-decoration: none;">Beranda</a></li>
@@ -356,21 +353,13 @@
                         <li><a href="{{ route('cek.status') }}" style="text-decoration: none;">Cek Pesanan</a></li>
                     </ul>
                 </div>
-                <div class="col-md-3">
+                <div class="col-lg-3 col-md-6">
                     <h6>Sosial Media</h6>
                     <div class="sosmed-icon">
-                        <a href="{{ $setting->sosmed_ig ?? '#' }}" target="_blank" class="text-light mx-2">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="{{ $setting->sosmed_fb ?? '#' }}" target="_blank" class="text-light mx-2">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="{{ $setting->sosmed_yt ?? '#' }}" target="_blank" class="text-light mx-2">
-                            <i class="fa-brands fa-youtube"></i>
-                        </a>
-                        <a href="https://api.whatsapp.com/send?phone={{ $setting->contact ?? '#' }}&text=Halo,%20saya%20ingin%20bertanya" target="_blank" class="text-light mx-2">
-                            <i class="fa-brands fa-whatsapp"></i>
-                        </a>
+                        <a href="{{ $setting->sosmed_ig ?? '#' }}" target="_blank" class="text-light mx-2"><i class="fab fa-instagram"></i></a>
+                        <a href="{{ $setting->sosmed_fb ?? '#' }}" target="_blank" class="text-light mx-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="{{ $setting->sosmed_yt ?? '#' }}" target="_blank" class="text-light mx-2"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="https://api.whatsapp.com/send?phone={{ $setting->contact ?? '#' }}&text=Halo,%20saya%20ingin%20bertanya" target="_blank" class="text-light mx-2"><i class="fa-brands fa-whatsapp"></i></a>
                     </div>                    
                 </div>
             </div>

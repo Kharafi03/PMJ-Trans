@@ -29,6 +29,20 @@
     margin-bottom: 70px;
 }
 
+#html5-qrcode-button-camera-permission{
+    background-color:#28a745;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+#html5-qrcode-button-camera-stop{
+    background-color:#EE8143;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    margin: 30px;
+}
+
 /* TEXT */
 .title{
     font-size: 24px;
@@ -39,4 +53,3 @@
     font-weight: 400;
     color: #19182580;
 }
-

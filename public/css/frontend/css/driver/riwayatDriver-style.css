@@ -27,6 +27,9 @@
 .accordion-header{
     border-radius: 8px;
     background-color: #F1F2F2;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 .accordion-button h5{
@@ -70,6 +73,9 @@
 .accordion-body {
     background-color: #F1F2F2;
     margin-top: 0px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-top: 20px;
 }
 .info-pmj {
     font-size: 12px;

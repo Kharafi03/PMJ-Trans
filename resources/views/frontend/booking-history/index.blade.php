@@ -9,12 +9,12 @@
 
     <section id="riwayatSewa">
         <div class="container mb-5">
-            <div class="text-content mb-5">
-                <h5 style="font-size: 44px; font-weight: 700; color: #1E9781;">Riwayat <span style="color: #FD9C07;">Sewa</span></h5>
+            <div class="text-content mb-4">
+                <h5 style="font-size: 44px; font-weight: 700; color: #1E9781; 'Plus Jakarta Sans', sans-serif;">Riwayat <span style="color: #FD9C07;">Sewa</span></h5>
             </div>
             <div class="tabel-riwayat justify-content-between align-items-center p-3">
                 <div class="row">
-                    <div class="col-md-8" style="padding: 0px 30px;">
+                    <div class="col-md-8">
                         <p class="title">Detail Riwayat Sewa</p>
                     </div>
                 </div>

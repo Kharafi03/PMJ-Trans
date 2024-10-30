@@ -1,7 +1,7 @@
 /* HEADER + CONTAINER */
-/* #tiket {
-    margin-top: 100px;
-} */
+#tiket {
+    margin-bottom: 50px;
+}
 .tiket-container {
     padding: 30px;
     background-color: white;
@@ -19,6 +19,7 @@
     width: 100%;
     top: 0;           
     z-index: 1000;
+    border-radius: 0px 0px 30px 30px;
 }
 .breadcrumb .breadcrumb-item + .breadcrumb-item::before {
     color: white !important;
@@ -29,6 +30,31 @@
     font-weight: 700;
     text-decoration: none;
 }
+
+/* TEXT CONTENT */
+.text-content{
+    padding: 10px;
+}
+.text-content h1{
+    font-weight: 700;
+    color: #1E9781;
+    font-family: 'Jakarta Sans', sans-serif;
+    margin-bottom: 0;
+  }
+  .text-content span{
+    color: #FD9C07;
+  }
+  .text-content p{
+    font-size: 16px; 
+    font-weight: 400;
+    color: #666666B5;
+    font-family: 'Poppins', sans-serif;
+  }
+  @media (min-width: 1024px) {
+    .text-content h1{
+        font-size: 44px;
+    }
+  }
 
 /* Main Ticket Style */
 .tiket-ruler {
@@ -57,6 +83,7 @@
     padding: 12px 16px 4px;
     background-color: #fe9a07;
     border-radius: 10px 10px 0px 0px;
+    font-family: 'Jakarta Sans', sans-serif;
 }
 hr {
     width: 90%;
@@ -104,12 +131,14 @@ hr {
     padding: 10px;
     border-radius: 5px;
     background-color: #d9d9d94d;
+    font-family: 'Poppins', sans-serif;
 }
 .info-tiket h5,
 .tujuan-tiket h5 {
     /* font-size: 11px; */
     font-weight: 700;
     color: black;
+    font-size: 16px;
 }
 .info-tiket li {
     /* font-size: 11px; */
@@ -124,12 +153,12 @@ hr {
     /* margin: 10px; */
 }
 .tujuan-tiket p {
-    /* font-size: 11px; */
+    font-size: 14px;
     text-align: justify;
+    font-weight: 400;
+    color: #000000;
 }
-/* .tujuan-tiket li { */
-    /* font-size: 11px; */
-/* } */
+
 /* TEXT HEADER */
 .profile-card {
     /* padding: 10px 70px 10px 10px; */
@@ -160,6 +189,12 @@ hr {
 .warning img {
     padding: 5px;
 }
+.warning p{
+    color: #6F6C90;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Jakarta Sans', sans-serif;
+}
 .icon-warning {
     background-color: #1e9781;
     color: white;
@@ -175,25 +210,61 @@ hr {
 }
 
 /* BUTTON */
+.btn-content{
+    display: flex;
+    justify-content: end;
+}
 .btn-download{
     padding: 10px 20px;
     color: white;
-    border: 1px solid #1E9781;
-    background-color: #1E9781;
+    border: 1px solid #17B92F;
+    background-color: #17B92F;
     font-weight: 700;
     margin: 10px 0px;
     border-radius: 10px;
     width: auto;
+    height: 50px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.308) 0px 10px 10px -5px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     &:hover{
         transform: scale(1.05); 
-        background-color: #1E9781;
+        background-color: #17B92F;
         color: white;
     }
 }
-@media (min-width: 375px) and (max-width: 991px) {
+/* @media (min-width: 375px) and (max-width: 991px) {
     .profile-card {
         padding: 10px 10px 10px 10px;
     }
+} */
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .btn-content{
+        justify-content: start;
+    }
+}
+@media (max-width: 767px) {
+    .profile-text h5 {
+        font-size: 16px;
+        font-weight: 500;
+    }
+    
+    .profile-text p {
+        font-size: 12px;
+        font-weight: 500;
+    }
+    .info-tiket h5,
+    .tujuan-tiket h5 {
+        font-size: 14px;
+    }
+    .info-tiket p {
+        font-size: 12px;
+    }
+    .tujuan-tiket p {
+        font-size: 12px;
+    }
+    .btn-content{
+        justify-content: start;
+    }
+
 }

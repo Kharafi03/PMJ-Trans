@@ -58,7 +58,7 @@ input[type="text"]{
 .btn-inputkm{
     height: 48px;
     width: 100%;
-    background-color: #F44C28;
+    background-color: #E42E07;
     color: white;
     font-size: 16px;
     font-weight: 700;
@@ -67,12 +67,12 @@ input[type="text"]{
     border-radius: 15px;
     border: none;
     margin-bottom: 70px;
-    transition: transform 0.3s ease;
-    &:hover{
-        transform: scale(1.02); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    &:hover {
+        transform: scale(1.05);
+        background-color: #FF0505;
     }
 }
-
 
 /* TIKET */
 

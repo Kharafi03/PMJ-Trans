@@ -9,13 +9,10 @@
 
     <!-- Header Start -->
     <div class="container-fluid header bg-white p-0">
-        <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
-            <div class="col-md-6 p-5 mt-lg-5">
-                <h1 class="mb-4" style="font-size: 44px; font-weight: 700; color: #1E9781;">
-                    Tentang 
-                    <span style="color: #FD9C07;">Kami</span>
-                </h1>
-                <p class="mb-4" style="font-size: 16px; font-weight: 500; color: #666666B5;">
+        <div class="row g-0 align-items-center flex-md-row">
+            <div class="col-md-6 p-5 mt-lg-5 text-content">
+                <h1 class="mb-4">Tentang <span>Kami</span></h1>
+                <p>
                     Mari mengenal kami lebih lanjut melalui artikel dibawah ini, yang memberikan gambaran singkat tentang perusahaan.
                 </p>
             </div>
@@ -28,7 +25,7 @@
     <!-- ABOUT -->
     <section id="about" class="py-5">
         <div class="container">
-            <div>
+            <div class="text-content">
                 <?php
                     $companyName = $setting ? $setting->name : '#';
                     if (strpos($companyName, '-') !== false) {
@@ -40,11 +37,8 @@
                         $part2 = '';
                     }
                 ?>
-                <h1 style="font-size: 44px; font-weight: 700; color: #1E9781; margin-bottom: 5px;">
-                    <?= $part1 ?> 
-                    <span style="color: #FD9C07;"><?= $part2 ?></span>
-                </h1>
-                <p class="mb-5" style="font-size: 16px; font-weight: 500; color: #666666B5;">
+                <h1 class="mb-3"><?= $part1 ?> <span><?= $part2 ?></span></h1>
+                <p class="mb-4">
                     Mari mengenal kami lebih lanjut melalui artikel dibawah ini, yang memberikan gambaran singkat tentang perusahaan.
                 </p>
             </div>
@@ -59,7 +53,7 @@
                         </p>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-lg-6 col-md-3 mb-4">
+                        <div class="col-lg-6 col-md-6 mb-4">
                             <div class="about-card card text-center">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $countBus ? $countBus : '#' }}</h5>
@@ -67,7 +61,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-3 mb-4">
+                        <div class="col-lg-6 col-md-6 mb-4">
                             <div class="about-card card text-center">
                                 <div class="card-body">
                                     <h5 class="card-title">450</h5>
@@ -75,7 +69,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-3 mb-4">
+                        <div class="col-lg-6 col-md-6 mb-4">
                             <div class="about-card card text-center">
                                 <div class="card-body">
                                     <h5 class="card-title">50</h5>
@@ -83,7 +77,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-3 mb-4">
+                        <div class="col-lg-6 col-md-6 mb-4">
                             <div class="about-card card text-center">
                                 <div class="card-body">
                                     <h5 class="card-title">100</h5>
