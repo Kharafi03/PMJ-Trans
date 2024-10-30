@@ -33,7 +33,12 @@ return new class extends Migration
             $table->decimal('payment_remaining', 12, 2)->nullable();
             $table->decimal('total_booking_spend',12 , 2)->nullable();
             $table->decimal('profit',12 , 2)->nullable();
-            $table->boolean('ticket_sent')->nullable()->default(false);  // Kolom untuk menandai email tiket
+            $table->boolean('email_tiket')->nullable()->default(false);  // Kolom untuk menandai email tiket
+            $table->boolean('email_dp_belum_dibayar')->nullable()->default(false);  // Kolom untuk menandai email invoice
+            $table->boolean('email_dp_dibayarkan')->nullable()->default(false);  // Kolom untuk menandai email invoice
+            $table->boolean('email_lunas')->nullable()->default(false);  // Kolom untuk menandai email invoice
+            $table->boolean('email_dibatalkan')->nullable()->default(false);  // Kolom untuk menandai email invoice
+            $table->boolean('email_ditolak')->nullable()->default(false);  // Kolom untuk menandai email invoice
             $table->softDeletes();
             $table->timestamps();
         });

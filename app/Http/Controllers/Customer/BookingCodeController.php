@@ -18,7 +18,6 @@ class BookingCodeController extends Controller
     {
         // Ambil data booking berdasarkan booking_code
         $booking = Booking::where('booking_code', $booking_code)->first();
-        $destinations = Destination::where('id_booking', $booking->id)->get();
 
         if ($booking->id_cus !== Auth::id()) {
             return redirect()->back()->with([
@@ -31,8 +30,10 @@ class BookingCodeController extends Controller
             return redirect()->route('home')->with('error', 'Booking tidak ditemukan.'); // Redirect jika tidak ada booking
         }
 
-        // Cek apakah booking ditemukan dan customer memiliki email dan ticket_sent = false
-        // if ($booking && !$booking->ticket_sent && $booking->customer->email != null) {
+        $destinations = Destination::where('id_booking', $booking->id)->get();
+
+        // // Cek apakah booking ditemukan dan customer memiliki email dan ticket_sent = false
+        // if ($booking && !$booking->email_tiket && $booking->customer->email != null) {
         //     // Kirim email e-ticket kepada customer
         //     $setting = Setting::all();
         //     // dd($setting);
@@ -41,8 +42,8 @@ class BookingCodeController extends Controller
         //             ->subject('E-Ticket PMJ Trans - ' . $booking->booking_code);
         //     });
 
-        //     // Update kolom ticket_sent menjadi true
-        //     $booking->ticket_sent = true;
+        //     // Update kolom email_tiket menjadi true
+        //     $booking->email_tiket = true;
         //     $booking->save();
         // }
 
