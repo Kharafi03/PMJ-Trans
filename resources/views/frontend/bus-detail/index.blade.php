@@ -54,7 +54,7 @@
                                 <i class="fa-solid fa-star"></i> {{ $formatStar }}
                             </div>
                         </div>
-                        <p class="bus-type">Jetbus 3+ Voyager Adiputro</p>
+                        <p class="bus-type">{{ $bus->type ?? '#' }}</p>
                         <div class="row mt-3 text-center fasilitas">
                             <div class="col-3 text-icon">
                                 <i class="fa-solid fa-bed"></i>

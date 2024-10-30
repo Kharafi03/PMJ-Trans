@@ -46,11 +46,10 @@
                                         <p class="package-card-title">{{ $bus->name ?? '#' }}</p>
                                         <div class="package-icon">
                                             <i class="fa-solid fa-star"></i> 
-                                            {{-- tampilkan disini --}}
                                             {{ collect($busesWithRatings)->firstWhere('bus.id', $bus->id)['average_rating'] ?? '0.0' }} 
                                         </div>
                                     </div>
-                                    <p class="small">Jetbus 3+ Voyager Adiputro</p>
+                                    <p class="small">{{ $bus->type ?? '#' }}</p>
                                     <div class="row mt-3 mb-3 text-center fasilitas-package">
                                         <div class="col-3 text-icon">
                                             <i class="fa-solid fa-bed"></i>

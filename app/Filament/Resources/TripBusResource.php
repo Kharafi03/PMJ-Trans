@@ -2,29 +2,30 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\TripBusResource\Pages;
-use App\Filament\Resources\TripBusResource\RelationManagers;
-use App\Models\Booking;
 use App\Models\Bus;
-use App\Models\TripBus;
-use App\Models\TripBusSpend;
-use App\Models\User;
 use Filament\Forms;
-use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\Group;
-use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
+use App\Models\User;
+use Filament\Tables;
+use App\Models\Booking;
+use App\Models\TripBus;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
-use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\TripBusSpend;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Textarea;
 use Illuminate\Database\Eloquent\Model;
+use Filament\Forms\Components\TextInput;
+use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\DateTimePicker;
+use App\Filament\Resources\TripBusResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\TripBusResource\RelationManagers;
+use App\Filament\Resources\TripBusResource\Widgets\MyCalendar;
 
 class TripBusResource extends Resource
 {
@@ -530,6 +531,12 @@ class TripBusResource extends Resource
     {
         return [
             //
+        ];
+    }
+    public static function getWidgets(): array
+    {
+        return [
+            MyCalendar::class,
         ];
     }
 
