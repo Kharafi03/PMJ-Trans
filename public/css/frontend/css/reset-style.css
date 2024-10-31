@@ -10,6 +10,7 @@ html, body {
     display: flex;
     align-items: center; 
     height: 100vh; /* Set full viewport height */
+    font-family: 'Jakarta Sans', sans-serif;
 }
 
 .row {
@@ -44,22 +45,23 @@ html, body {
 /* TITLE */
 .header h5 {
     font-size: 35px;
-    font-weight: 600;
+    font-weight: 700;
+    color: #1E9781;
+    margin-bottom: 5px;
+}
+.header span{
+    color: #FD9C07;
 }
 .header p {
     color: black;
     font-size: 16px;
 }
-.header a {
-    font-weight: 700;
-    color: #1E9781;
-}
 
 /* INPUT FORM */
 input[type="tel"],
 input[type="password"],
-input[type="text"] {
-    height: 70px;
+input[type="text"]{
+    height: 7cm;
 }
 .lupa-sandi a {
     text-decoration: underline;
@@ -90,6 +92,10 @@ a {
     font-size: 16px;
     font-weight: 700;
     color: #4180CC;
+}
+
+label{
+    font-weight: 500;
 }
 
 /* INPUT AKTIF */
@@ -131,11 +137,12 @@ img {
     padding: auto;
     font-size: 20px;
     font-weight: 700;
-    border: 2px solid #1e9781;
+    border: none;
     border-radius: 6px;
+    transition: transform 0.3s ease;
     &:hover {
-        background-color: white;
-        color: #1e9781;
+        transform: scale(1.05);
+        background-color: #00BB83;
     }
 }
 

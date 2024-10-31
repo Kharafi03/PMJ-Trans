@@ -31,16 +31,19 @@
 
 /* FORM */
 #icon, #toggle-password, #toggle-passwordBaru, #toggle-konfirmasiPassword{
-    border-right: none;
+    border-right: none !important;
     background-color: white;
     height: 48px;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
+    border: 1px solid #C9C9C9;
+    color: #666666;
 }
 input[type="text"], input[type="number"], input[type="password"], .form-select{
-    border-left: none;
+    border-left: none !important;
     height: 48px;
     border-radius: 15px;
+    border: 1px solid #C9C9C9;
 }
 .custom-file{
     border: 1px solid #E4E4E4;
@@ -54,22 +57,30 @@ input[type="text"], input[type="number"], input[type="password"], .form-select{
     background-color: white;
 }
 
+#iconpw{
+    color: #666666;
+    background-color: white !important;
+    border-radius: 0px 15px 15px 0px !important;
+    border: 1px solid #C9C9C9;
+}
+
 /* BUTTON */
 .btn-ubahPassword{
     height: 48px;
     width: 100%;
-    background-color: #F44C28;
+    background-color: #E42E07;;
     color: white;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 700;
     padding: 10px;
     text-align: center;
     border-radius: 15px;
-    transition: transform 0.3s ease;
     border: none;
     margin-bottom: 50px;
-    &:hover{
-        transform: scale(1.02); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    &:hover {
+        transform: scale(1.05);
+        background-color: #FF0505;
     }
 }
 
@@ -100,11 +111,17 @@ input[type="text"], input[type="number"], input[type="password"], .form-select{
     height: 50px;
     width: 100%;
     color: white;
-    background-color: #0D894F;
+    background-color: #17B92F;
     border: none;
     border-radius: 15px;
     color: white;
     text-align: center;
     padding: 5px;
+    font-size: 17px;
+    font-weight: 700;
+    transition: transform 0.3s ease;
+    &:hover {
+        transform: scale(1.05);
+    }
 }
 

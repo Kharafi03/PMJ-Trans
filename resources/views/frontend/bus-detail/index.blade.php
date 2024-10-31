@@ -10,7 +10,7 @@
     <!-- CONTENT -->
     <section id="detailBus">
         <div class="container mt-5 mb-5">
-            <h5>Daftar <span style="color: #FD9C07;">Bus PMJ</span></h5>
+            <h5>Detail <span style="color: #FD9C07;">Bus</span></h5>
             <div class="bus-card mt-5 mb-5">
                 <div class="row">
                     <div class="col-lg-6">

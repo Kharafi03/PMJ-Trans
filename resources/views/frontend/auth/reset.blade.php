@@ -13,7 +13,7 @@
                 <!-- FORM -->
                 <div class="form-container">
                     <div class="header mb-2">
-                        <h5>Reset Password</h5>
+                        <h5>Reset <span>Password</span></h5>
                         <p>Ingin mengatur ulang kata sandi? Isi formulir di bawah ini dan klik tombol kirim untuk
                             melanjutkan.</p>
                     </div>

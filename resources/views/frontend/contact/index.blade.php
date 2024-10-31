@@ -9,13 +9,10 @@
 
     <!-- Header Start -->
     <div class="container-fluid header bg-white p-0">
-        <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
-            <div class="col-md-6 p-5 mt-lg-5">
-                <h1 class="mb-4" style="font-size: 44px; font-weight: 700; color: #1E9781;">
-                    Kontak 
-                    <span style="color: #FD9C07;">Kami</span>
-                </h1>
-                <p class="mb-4" style="font-size: 16px; font-weight: 500; color: #666666B5;">
+        <div class="row g-0 align-items-center flex-md-row">
+            <div class="col-md-6 p-5 mt-lg-5 text-content">
+                <h1 class="mb-4">Kontak <span>Kami</span></h1>
+                <p class="mb-4">
                     Untuk informasi lebih lanjut, silakan hubungi kami melalui kontak yang tersedia di halaman Kontak Kami.
                 </p>
             </div>
@@ -146,8 +143,8 @@
                                 <p class="text-danger">*Wajib Diisi.</p>
                             </div>
                         </div>
-                        <div class="mt-3">
-                            <button type="submit" class="btn-kirim">Kirim Pesan</button>
+                        <div>
+                            <button type="submit" class="btn-kirim">Kirim</button>
                         </div>
                     </form>
                 </div>

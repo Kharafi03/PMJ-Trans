@@ -12,6 +12,31 @@ body {
 
 #bus{
     margin-top: 75px;
+    padding: 10px;
+    margin-bottom: 50px;
+}
+
+/* TEXT CONTENT */
+.text-content h1{
+    font-weight: 700;
+    color: #1E9781;
+    font-family: 'Jakarta Sans', sans-serif;
+    margin-bottom: 0;
+}
+.text-content span{
+    color: #FD9C07;
+}
+.text-content p{
+    font-size: 16px; 
+    font-weight: 400;
+    color: #666666B5;
+    font-family: 'Poppins', sans-serif;
+}
+
+@media (min-width: 1024px) {
+    .text-content h1{
+        font-size: 44px;
+    }
 }
 
 .property-content {
@@ -26,7 +51,6 @@ body {
     position: relative;
     width: 100%;
     padding-top: 56.25%;
-    /* 16:9 aspect ratio (9 / 16 = 0.5625 * 100 = 56.25) */
     overflow: hidden;
 }
 
@@ -37,7 +61,6 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Ensures the image covers the container */
 }
 
 
@@ -80,61 +103,69 @@ body {
 }
 
 
-/* CARD BUS */
 /* PACKAGE-DAFTAR BUS PMJ */
 
-.text-icon p{
-  font-size: 10px;
-  text-align: center;
+.text-icon p {
+    font-size: 9px;
 }
-.text-icon i{
-  font-size: 12px;
+.text-icon i {
+    font-size: 18px;
 }
 
 .package-card {
     position: relative;
-    margin: 0 5px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    margin: 0 10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     border: none;
     border-radius: 20px;
-    padding: 10px;
-    z-index: 2; /* Memastikan setiap kartu berada di atas banner */
+    padding: 5px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 400;
 }
-.package-card img{
-  border-radius: 10px;
+.package-card img {
+    border-radius: 10px;
+    margin: 10px;
 }
-.package-card-title{
-  font-size: 21px;
-  /* font-weight: bold; */
+.package-card-title {
+    font-size: 21px;
+    color: black !important;
 }
-.package-icon{
-  font-size: 20px;
+.package-icon {
+    font-size: 21px;
 }
-.package-icon i{
+.package-icon i {
     color: #FEC400;
 }
-.fasilitas-package i{
-  font-size: 16px;
-}
-.fasilitas-package p {
-  font-size: 10px;
-}
-.package-card ul{
-    font-size: 14px;
-}
-.btn-detail{
+.btn-detail {
     padding: 10px;
     width: 110px;
     border: none;
     border-radius: 10px;
-    background-color: #1E9781;
+    background-color: #1e9781;
     color: white;
     text-align: center;
     font-size: 16px;
     font-weight: 700;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.308) 0px 10px 10px -5px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+        rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    &:hover{
-        transform: scale(1.05); 
+    &:hover {
+        transform: scale(1.05);
+        background-color: #00BB83;
     }
-  }
+}
+
+@media (max-width: 767.98px) {
+    .text-icon p {
+        font-size: 7px;
+    }
+    .text-icon i {
+        font-size: 14px;
+    }
+}
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .text-icon p {
+        font-size: 8px;
+    }
+}

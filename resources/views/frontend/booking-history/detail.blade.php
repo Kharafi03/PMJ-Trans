@@ -19,7 +19,7 @@
                         <h5 style="font-size: 44px; font-weight: 700; color: #1E9781;">Detail <span style="color: #FD9C07;">Booking</span></h5>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-responsive table-bordered table-hover table-striped align-middle">
+                        <table class="table table-responsive table-bordered table-hover align-middle">
                             <tbody>
                                 <tr>
                                     <th scope="row">Booking Kode</th>
@@ -154,7 +154,7 @@
                             </h3> -->
                             <div>
                                 <h1 style="font-size: 44px; font-weight: 700; color: #1E9781; margin-bottom: 5px;">Detail <span style="color: #FD9C07;">Ulasan</span></h1>
-                                <p style="font-size: 20px; font-weight: 500; color: black;">Terima kasih telah menggunakan sewa bus kami! Sampai jumpa di pemesanan selanjutnya!</p>
+                                <p style="font-size: 20px; font-weight: 400; color: black;font-family: 'Poppins', sans-serif;">Terima kasih telah menggunakan sewa bus kami! Sampai jumpa di pemesanan selanjutnya!</p>
                             </div>
                             <div class="col-md-12">
                                 <!-- <div class="d-flex align-items-center mb-3" data-bs-toggle="collapse" href="#feedbackForm"
@@ -164,18 +164,18 @@
                                 </div> -->
                                 <div class="d-flex align-items-center mb-3" data-bs-toggle="collapse" href="#feedbackForm" aria-expanded="false">
                                     <div style="border-top: 1px solid #000; flex-grow: 1;"></div>
-                                    <span class="btn btn-lihat mx-3">Lihat Ulasan&nbsp;<i class="fas fa-chevron-down"></i></span>
+                                    <span class="btn btn-lihat mx-3">Lihat Ulasan &nbsp;&nbsp;<i class="fas fa-chevron-down"></i></span>
                                 </div>
                                 <div id="feedbackForm" class="collapse">
                                     @if ($feedbacks->isNotEmpty())
                                         @foreach ($feedbacks as $feedback)
                                             <div id="feedbackForm" class="collapse">
-                                                <h3 class="mt-4 mb-3">Ulasan Anda</h3>
-                                                <div class="mb-3">
+                                                <h3 class="mt-4 mb-3" style="font-family: 'Poppins', sans-serif;">Ulasan Anda</h3>
+                                                <div class="mb-3" style="font-family: 'Poppins', sans-serif;">
                                                     <textarea class="form-control bg-light" id="feedback" name="feedback" rows="3" required disabled>{{ $feedback->feedback }}</textarea>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="rating">Rating</label>
+                                                    <label for="rating" style="font-family: 'Poppins', sans-serif;">Rating</label>
                                                     <div class="rating-stars">
                                                         @for ($i = 1; $i <= 5; $i++)
                                                             @if ($i <= $feedback->rating)
