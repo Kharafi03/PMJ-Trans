@@ -144,6 +144,7 @@ class TestSeeder extends Seeder
         ]);
 
         BusMaintenance::create([
+            'maintenance_code' => 'MTC-RASE828a',
             'id_bus' => '1',
             'id_user' => '3',
             'id_m_maintenance' => '2',
@@ -153,11 +154,13 @@ class TestSeeder extends Seeder
             'location' => 'Garasi PMJ-Trans',
             'nominal' => '500000',
             'image_receipt' => '',
+            'id_m_method_payment' => 1,
             'latitude' => '-6.819167',
             'longitude' => '110.877858',
         ]);
 
         BusMaintenance::create([
+            'maintenance_code' => 'MTC-RASE828b',
             'id_bus' => '1',
             'id_user' => '3',
             'id_m_maintenance' => '1',
@@ -167,11 +170,13 @@ class TestSeeder extends Seeder
             'location' => 'Garasi PMJ-Trans',
             'nominal' => '300000',
             'image_receipt' => '',
+            'id_m_method_payment' => 1,
             'latitude' => '-6.819167',
             'longitude' => '110.877858',
         ]);
 
         BusMaintenance::create([
+            'maintenance_code' => 'MTC-RASE828c',
             'id_bus' => '2',
             'id_user' => '3',
             'id_m_maintenance' => '1',
@@ -181,11 +186,13 @@ class TestSeeder extends Seeder
             'location' => 'Garasi PMJ-Trans',
             'nominal' => '300000',
             'image_receipt' => '',
+            'id_m_method_payment' => 1,
             'latitude' => '-6.819167',
             'longitude' => '110.877858',
         ]);
 
         BusMaintenance::create([
+            'maintenance_code' => 'MTC-RASE828d',
             'id_bus' => '2',
             'id_user' => '3',
             'id_m_maintenance' => '3',
@@ -195,11 +202,13 @@ class TestSeeder extends Seeder
             'location' => 'Garasi PMJ-Trans',
             'nominal' => '400000',
             'image_receipt' => '',
+            'id_m_method_payment' => 1,
             'latitude' => '-6.819167',
             'longitude' => '110.877858',
         ]);
 
         BusKir::create([
+            'kir_code' => 'KIR-RASE828a',
             'id_bus' => '1',
             'id_user' => '3',
             'description' => 'Pengujian Kir bus PMJ 02 di dinas perhubungan',
@@ -207,9 +216,11 @@ class TestSeeder extends Seeder
             'expiration' => '2024-12-11',
             'nominal' => '100000',
             'image' => '',
+            'id_m_method_payment' => 1,
         ]);
 
         BusKir::create([
+            'kir_code' => 'KIR-RASE828b',
             'id_bus' => '2',
             'id_user' => '3',
             'description' => 'Pengujian Kir bus PMJ 03 di dinas perhubungan',
@@ -217,9 +228,11 @@ class TestSeeder extends Seeder
             'expiration' => '2024-10-11',
             'nominal' => '100000',
             'image' => '',
+            'id_m_method_payment' => 1,
         ]);
 
         BusTax::create([
+            'tax_code' => 'TAX-RASE828a',
             'id_bus' => '1',
             'id_user' => '3',
             'description' => 'Pajak bus PMJ 02 di Samsat',
@@ -228,9 +241,11 @@ class TestSeeder extends Seeder
             'expiration_number_bus' => '2024-11-11',
             'nominal' => '100000',
             'image' => '',
+            'id_m_method_payment' => 1,
         ]);
 
         BusTax::create([
+            'tax_code' => 'TAX-RASE828b',
             'id_bus' => '2',
             'id_user' => '3',
             'description' => 'Pajak bus PMJ 03 di Samsat',
@@ -239,6 +254,7 @@ class TestSeeder extends Seeder
             'expiration_number_bus' => '2028-9-20',
             'nominal' => '100000',
             'image' => '',
+            'id_m_method_payment' => 1,
         ]);
     }
 }

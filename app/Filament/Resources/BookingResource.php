@@ -97,6 +97,10 @@ class BookingResource extends Resource
                                 ->default(fn() => 'PMJ-' . strtoupper(Str::random(4)) . rand(1000, 9999))
                                 ->required()
                                 ->readOnly()
+                                ->afterStateHydrated(function (Get $get, Set $set) {
+                                    self::updateTripSpendTotal($get, $set, $get('id'));
+                                    self::updateBookingSpendTotal($get, $set, $get('id'));
+                                })
                                 ->label('Kode Booking'),
                             Select::make('id_cus')
                                 ->relationship('customer', 'name')
@@ -146,7 +150,7 @@ class BookingResource extends Resource
                         Forms\Components\Group::make()->schema([
                             DateTimePicker::make('date_start')
                                 ->required()
-                                ->minDate(now())
+                                ->minDate(fn (Get $get) => ($get('id_ms_booking') === 2 &&  $get('id')) || $get('id_ms_booking') === 4 ? null : now())
                                 ->reactive()
                                 ->label('Tanggal Mulai'),
 
@@ -187,15 +191,15 @@ class BookingResource extends Resource
                                     $maxCapacity = $fleetAmount * 50;
                                     $set('maxCapacity', $maxCapacity);
                                 })
-                                ->rule(function (callable $get, callable $set) {
-                                    $maxCapacity = $get('maxCapacity');
-                                    return "max:$maxCapacity";
-                                })
-                                ->validationAttribute('Jumlah Penumpang')
-                                ->helperText(fn(callable $get) => 'Maksimal penumpang ' . $get('maxCapacity') . ' orang')
-                                ->validationMessages([
-                                    'max' => 'Jumlah penumpang melebihi batas maksimum.',
-                                ]),
+                                // ->rule(function (callable $get, callable $set) {
+                                //     $maxCapacity = $get('maxCapacity');
+                                //     return "max:$maxCapacity";
+                                // })
+                                // ->validationAttribute('Jumlah Penumpang')
+                                ->helperText(fn(callable $get) => 'Maksimal penumpang ' . $get('maxCapacity') . ' orang'),
+                            // ->validationMessages([
+                            //     'max' => 'Jumlah penumpang melebihi batas maksimum.',
+                            // ]),
 
                             Group::make()
                                 ->schema([
@@ -208,13 +212,9 @@ class BookingResource extends Resource
                                                     $endDate = $get('date_end');
                                                     $idBooking = $get('id');
                                                     $availableBusCount = self::getAvailableBusCount($startDate, $endDate, $idBooking);
-
-                                                    // Cek jika tidak ada bus yang tersedia
                                                     if ($availableBusCount === 0) {
                                                         return [0 => "Bus Tidak Tersedia"];
                                                     }
-
-                                                    // Buat daftar opsi dari 1 hingga jumlah bus yang tersedia
                                                     return collect(range(1, $availableBusCount))->mapWithKeys(fn($i) => [$i => "$i Bus"]);
                                                 })
                                                 ->reactive()
@@ -231,7 +231,6 @@ class BookingResource extends Resource
                                         ->schema([
                                             Toggle::make('legrest')
                                                 ->label('Leg Rest')
-                                                ->reactive()
                                                 ->default(0),
                                         ])
                                         ->columnSpan(1)
@@ -339,7 +338,7 @@ class BookingResource extends Resource
                             ->visible(fn(Get $get) => $get('id_ms_booking') == 4)
                             ->reactive()
                             ->schema([
-                                TextInput::make('total_spend')
+                                TextInput::make('total_booking_spend')
                                     ->numeric()
                                     ->readOnly()
                                     ->prefix('Rp.')
@@ -365,8 +364,8 @@ class BookingResource extends Resource
                                     ->relationship('ms_booking', 'name')
                                     ->default(2)
                                     ->afterStateUpdated(function (Get $get, Set $set) {
-                                        self::updateStatusPayment($get, $set);
                                         self::updateReceivedRemaining($get, $set);
+                                        self::updateStatusPayment($get, $set);
                                     })
                                     ->required(),
                                 Select::make('id_ms_payment')
@@ -575,11 +574,6 @@ class BookingResource extends Resource
                                 Forms\Components\TextInput::make('booking_code')
                                     ->label('Kode Booking')
                                     ->default(fn($record) => $record->booking_code)
-                                    // ->afterStateHydrated(function (callable $set, $state, $record) {
-                                    //     if ($record && $record->booking) {
-                                    //         $set('destination_point', $record->destination->last()->name);
-                                    //     }
-                                    // })
                                     ->disabled(),
                                 Forms\Components\Select::make('id_cus')
                                     ->label('Customer')

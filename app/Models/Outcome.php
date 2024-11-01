@@ -18,8 +18,8 @@ class Outcome extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'id_booking',
         'id_m_outcome',
+        'code_outcome',
         'id_m_method_payment',
         'description',
         'nominal',
@@ -40,8 +40,8 @@ class Outcome extends Model
         return $this->belongsTo(MMethodPayment::class, 'id_m_method_payment');
     }
 
-    public function booking(): BelongsTo
-    {
-        return $this->belongsTo(Booking::class, 'id_booking');
-    }
+    // public function booking(): BelongsTo
+    // {
+    //     return $this->belongsTo(Booking::class, 'id_booking');
+    // }
 }

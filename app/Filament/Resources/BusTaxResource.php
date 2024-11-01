@@ -30,11 +30,15 @@ class BusTaxResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            // Menambahkan judul di card
             ->schema([
                 Forms\Components\Card::make()
                     ->heading('Data Utama')
                     ->schema([
+                        Forms\Components\TextInput::make('tax_code')
+                            ->default(fn() => 'TAX-' . strtoupper(substr(str_shuffle(bin2hex(random_bytes(4)) . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 8)))
+                            ->required()
+                            ->readOnly()
+                            ->label('Kode Tax'),
                         Forms\Components\Select::make('id_bus')
                             ->label('Bus')
                             ->required()
@@ -46,15 +50,14 @@ class BusTaxResource extends Resource
                             ->relationship('users', 'name')
                             ->options(function () {
                                 return User::whereHas('roles', function ($query) {
-                                    $query->where('name', 'driver')
-                                        ->orWhere('name', 'admin');
+                                    $query->where('name', '!=', 'panel_user');
                                 })->pluck('name', 'id'); // Mengambil nama dan id user
                             })
                             ->placeholder('Masukkan ID User'),
                         Forms\Components\Textarea::make('description')
                             ->label('Deskripsi')
                             ->maxLength(255)
-                            ->columnSpan(2)
+                            ->columnSpan(3)
                             ->placeholder('Deskripsi singkat pajak'),
                         Forms\Components\DatePicker::make('date')
                             ->label('Tanggal Pajak')
@@ -71,8 +74,17 @@ class BusTaxResource extends Resource
                             ->required()
                             ->prefix('Rp')
                             ->placeholder('Masukkan biaya pajak'),
+                        Forms\Components\Select::make('id_m_method_payment')
+                            ->label('Metode Pembayaran')
+                            ->relationship('m_method_payment', 'name')
+                            ->required(),
                     ])
-                    ->columns(2), // Mengatur tampilan card menjadi dua kolom untuk lebih rapi
+                    ->columns([
+                        'default' => 1,
+                        'md' => 2,
+                        'lg' => 3,
+                        'xl' => 3,
+                    ]),
 
                 Forms\Components\Card::make()
                     ->heading('Unggah Gambar Pajak')
@@ -97,6 +109,10 @@ class BusTaxResource extends Resource
         return $table
             ->defaultSort('created_at', 'desc')
             ->columns([
+                Tables\Columns\TextColumn::make('tax_code')
+                    ->label('Kode')
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('buses.name')
                     ->numeric()
                     ->label('Bus')
@@ -184,7 +200,7 @@ class BusTaxResource extends Resource
         return [
             'index' => Pages\ListBusTaxes::route('/'),
             'create' => Pages\CreateBusTax::route('/create'),
-            //'edit' => Pages\EditBusTax::route('/{record}/edit'),
+            'edit' => Pages\EditBusTax::route('/{record}/edit'),
         ];
     }
 }

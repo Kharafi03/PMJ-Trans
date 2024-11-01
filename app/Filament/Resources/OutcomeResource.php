@@ -51,10 +51,9 @@ class OutcomeResource extends Resource
                             ->required()
                             ->relationship('m_outcome', 'name'),
 
-                        Forms\Components\Select::make('id_booking')
-                            ->label('Kode Booking')
-                            ->required()
-                            ->relationship('booking', 'booking_code'),
+                        Forms\Components\TextInput::make('code_outcome')
+                            ->label('Kode Sumber Pengeluaran')
+                            ->required(),
 
                         Forms\Components\Select::make('id_m_method_payment')
                             ->label('Metode Pembayaran')
@@ -118,10 +117,17 @@ class OutcomeResource extends Resource
                     ->label('Selesai')
                     ->boolean()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('booking.booking_code')
-                    ->label('Kode Booking')
+                Tables\Columns\TextColumn::make('code_outcome')
+                    ->label('Code Pengeluaran')
                     ->sortable()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('description')
+                    ->label('Deskripsi')
+                    ->searchable()
+                    ->limit(25)
+                    ->tooltip(function ($record) {
+                        return $record->description;
+                    }),
                 BadgeColumn::make('m_method_payment.name')
                     ->label('Metode')
                     ->sortable()
