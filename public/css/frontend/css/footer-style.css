@@ -4,4 +4,8 @@
     padding: 15px 0px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     position: relative;
+    color: #00000094;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
 }

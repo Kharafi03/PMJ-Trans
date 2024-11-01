@@ -71,7 +71,7 @@
                     
                         <!-- FORM -->
                         <div class="form-container">
-                            <div class="header mb-2">
+                            <div class="header mb-3">
                                 <h5>Registrasi</h5>
                                 <p>Jika Anda sudah memiliki akun, silakan <a href="{{ route('login') }}">Login di sini.</a></p>
                             </div>
@@ -96,9 +96,9 @@
                                             <span class="input-group-text" id="toggle-password"><i class="fas fa-eye"></i></span>
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-end align-items-center mb-4">
+                                    <div class="d-flex justify-content-end align-items-center mb-5">
                                         <div class="lupa-sandi">
-                                            <a href="#">Lupa kata sandi?</a>
+                                            <a href="{{ route('password.reset') }}">Lupa kata sandi?</a>
                                         </div>
                                     </div>
                                     <div class="mb-2">

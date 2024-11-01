@@ -16,8 +16,10 @@
                 <div class="row">
                     <!-- HEADER -->
                     <div class="col-md-12 col-lg-6 mb-3 d-flex flex-column justify-content-center">
-                        <h5 style="font-size: 44px; font-weight: 700; color: #1E9781;">Cek <span style="color: #FD9C07;">Pemesanan</span></h5>
-                        <p style="font-size: 16px; font-weight: 500; color: #666666B5;">Cek status pemesanan dengan mengisikan kode booking dan nomor whatsapp yang digunakan saat menyewa bus</p>
+                        <div class="text-content">
+                            <h1 class="mb-4">Cek <span>Pemesanan</span></h1>
+                            <p>Cek status pemesanan dengan mengisikan kode booking dan nomor whatsapp yang digunakan saat menyewa bus</p>
+                        </div>
                         <img src="{{asset('img/cek-img.png')}}" class="img-fluid" alt="images" style="padding: 0px 50px 0px 50px;">
                     </div>
                     <!-- FORM -->
@@ -25,11 +27,11 @@
                         <div class="form-content">
                             <form id="formStatusPemesanan" action="{{ route('post.cek.status') }}" method="POST">
                                 @csrf
-                                <div class="form-header text-center mb-5">
-                                    <h5 style="font-size: 30px; font-weight: 700; color: #1E9781;">Cek <span style="color: #FD9C07;">Pemesanan</span></h5>
+                                <div class="form-header text-center mb-4">
+                                    <h5 style="font-size: 30px; font-weight: 700; color: #1E9781; font-family: 'Jakarta Sans', sans-serif;">Cek <span style="color: #FD9C07;">Pemesanan</span></h5>
                                 </div>
                                 <div class="kolom-input d-flex align-items-center justify-content-center flex-column text-left" style="height: 100%;">
-                                    <div class="mb-3">
+                                    <div class="mb-4">
                                         <label for="booking_code" class="form-label">Kode Booking<span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-tiket.png') }}" alt="icon-tiket"></span>

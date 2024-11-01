@@ -1,5 +1,6 @@
 #about{
-    margin: 50px 0px;
+    margin: 20px 0px 50px 0px;
+    padding: 10px;
 }
 body {
     background-image: url('/img/bg-page.png');
@@ -7,21 +8,60 @@ body {
     background-repeat: no-repeat;
     background-size: cover; 
 }
+
+/* TEXT CONTENT */
+.text-content h1{
+    font-weight: 700;
+    color: #1E9781;
+    font-family: 'Jakarta Sans', sans-serif;
+    margin-bottom: 0;
+}
+.text-content span{
+    color: #FD9C07;
+}
+.text-content p{
+    font-size: 16px; 
+    font-weight: 400;
+    color: #666666B5;
+    font-family: 'Poppins', sans-serif;
+}
+@media (min-width: 1024px) {
+    .text-content h1{
+        font-size: 44px;
+    }
+}
   
 .header{
     margin-top: 75px;
 }
-.caption, .card-text{
+.caption{
     color: #A8A8A8;
     font-size: 18px;
-}
-.caption{
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    line-height: 30px;
     text-align: justify;
 }
+.card-text{
+    color: #A8A8A8;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: 'Jakarta Sans', sans-serif;
+    line-height: 30px;
+    text-align: center;
+}
+
+@media (max-width: 767.98px) {
+    .caption{
+        font-size: 16px;
+    }
+}
+
 .card-title{
     color: #4ABDAC;
     font-weight: 700;
-    font-size: 25px;
+    font-size: 30px;
+    font-family: 'Jakarta Sans', sans-serif;
 }
 .about-card{
     border-radius: 30px;

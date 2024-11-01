@@ -1,10 +1,29 @@
 #syaratKetentuan{
     margin-top: 120px;
-    margin-bottom: 80px;
+    margin-bottom: 50px;
+    padding: 10px;
 }
 
-.text-content{
-    margin-bottom: 60px;
+/* TEXT CONTENT */
+.text-content h1{
+  font-weight: 700;
+  color: #1E9781;
+  font-family: 'Jakarta Sans', sans-serif;
+  margin-bottom: 0;
+}
+.text-content span{
+  color: #FD9C07;
+}
+.text-content p{
+  font-size: 16px; 
+  font-weight: 400;
+  color: #666666B5;
+  font-family: 'Poppins', sans-serif;
+}
+@media (min-width: 1024px) {
+  .text-content h1{
+      font-size: 44px;
+  }
 }
 
 /* CONTENT */
@@ -20,11 +39,12 @@
 }
 .accordion{
     border: none;
+    font-family: 'Poppins', sans-serif;
   }
   .accordion-button{
     background-color: #F8F8F8;
     color: #1E9781;
-    font-weight: bold;
+    font-weight: 500;
     font-size: 20px; 
     border-radius: 20px 20px 0px 0px !important;
     height: 80px;
@@ -39,9 +59,11 @@
     background: none;
   }
   .accordion-body{
-  border-radius: 0px 0px 20px 20px;
-  background-color: #1E9781;
-  color: white;
+    border-radius: 0px 0px 20px 20px;
+    background-color: #1E9781;
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
   }
   .accordion-button::after {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%231E9781' class='bi bi-chevron-right' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M6.854 11.854a.5.5 0 0 1-.708-.708L9.293 8 6.146 4.854a.5.5 0 1 1 .708-.708l3.5 3.5a.5.5 0 0 1 0 .708l-3.5 3.5z'/%3E%3C/svg%3E");

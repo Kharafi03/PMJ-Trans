@@ -12,8 +12,8 @@
         <section id="syaratKetentuan">
             <div class="container mb-5">
                 <div class="text-content">
-                    <h1 style="font-size: 44px; font-weight: 700; color: #1E9781; margin-bottom:10px;">Syarat <span style="color: #FD9C07;">& Ketentuan</span></h1>
-                    <p style="font-size: 16px; font-weight: 500; color: #666666B5; margin-top:0px;">Mari mengenal kami lebih lanjut melalui artikel dibawah ini, yang memberikan gambaran singkat mengenai Syarat dan Ketentuan di {{ $setting ? $setting->name : '#' }}.</p>
+                    <h1 class="mb-2">Syarat <span>& Ketentuan</span></h1>
+                    <p class="mb-5" >Mari mengenal kami lebih lanjut melalui artikel dibawah ini, yang memberikan gambaran singkat mengenai Syarat dan Ketentuan di {{ $setting ? $setting->name : '#' }}.</p>
                 </div>
                 <div class="accordion accordion-flush" id="sk">
                     @forelse ($terms as $term)

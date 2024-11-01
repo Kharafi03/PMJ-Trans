@@ -1,11 +1,12 @@
 body {
-    background-position: center;
+    background-position: 55% 50%;
     background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url("/img/bg-page.png");
+    background-size: auto;
+    background-image: url("/img/bg-all2.png");
 }
 #detailBus {
-    margin-top: 130px;
+    margin-top: 100px;
+    margin-bottom: 50px;
 }
 .bus-card {
     background: #fff;
@@ -18,11 +19,13 @@ h5 {
     font-size: 44px;
     font-weight: 700;
     color: #1e9781;
+    font-family: 'Jakarta Sans', sans-serif;
 }
 .bus-title {
     font-size: 30px;
     font-weight: 400;
     color: black;
+    font-family: 'Jakarta Sans', sans-serif;
 }
 .bus-star {
     font-size: 30px;
@@ -37,10 +40,12 @@ h5 {
     font-weight: 400;
     color: #666;
     text-align: left;
+    font-family: 'Poppins', sans-serif;
 }
 .text-icon p {
     font-size: 11px;
     color: #666;
+    font-family: 'Jakarta Sans', sans-serif;
 }
 .text-icon i {
     font-size: 20px;
@@ -67,6 +72,7 @@ h5 {
 .bus-description {
     font-size: 15px;
     color: #666;
+    font-family: 'Poppins', sans-serif;
 }
 .btn-back {
     padding: 10px;
@@ -79,13 +85,17 @@ h5 {
     text-align: center;
     font-size: 16px;
     font-weight: 700;
+    font-family: 'Jakarta Sans', sans-serif;
+    text-decoration: none;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
-        rgba(0, 0, 0, 0.308) 0px 10px 10px -5px;
+        rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     &:hover {
         transform: scale(1.05);
+        background-color: #00BB83;
     }
 }
+
 
 @media (min-width: 310px) and (max-width: 991px) {
     .fasilitas {
@@ -105,6 +115,9 @@ h5 {
     border-radius: 10px;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.filter{
+    background: none !important;
 }
 .filter-header {
     border-radius: 10px 10px 0px 0px;
@@ -126,6 +139,9 @@ input[type="checkbox"] {
 }
 
 /* TESTIMONI */
+.testimoni-content{
+    font-family: 'Poppins', sans-serif;
+}
 .testimoni-container {
     background-color: white;
     border-radius: 10px;
@@ -160,10 +176,12 @@ input[type="checkbox"] {
 }
 
 .rating i {
-    color: #e7b66b;
+    color: #FEC400 !important;
+    padding-right: 5px;
 }
 .isi-testi {
     color: #0d0c22;
     text-align: justify;
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 400;
 }

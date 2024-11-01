@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Ticket PMJ Trans</title>
+
+    <script src="{{ asset('js/fontawesome.js') }}"></script>
+
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -19,6 +22,7 @@
             margin: 30px auto;
             background-color: #ffffff;
             padding: 25px;
+            width: 100%;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             border-top: 5px solid #1E9781;
@@ -30,21 +34,24 @@
             background: linear-gradient(to right, #1E9781, #27b19b);
             color: white;
             border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0px 50px;
         }
 
-        .email-header img {
-            width: 120px;
+        /* .email-header img {
             margin-bottom: 10px;
-        }
+        } */
 
         .email-header h2 {
             font-size: 24px;
-            margin: 0;
+            margin: 0px 0px 0px 20px;
             font-weight: 600;
         }
 
         .email-body {
-            margin-top: 20px;
+            margin: 20px 80px 50px 80px;
         }
 
         .email-body h1 {
@@ -52,6 +59,7 @@
             color: #333;
             font-weight: 700;
             margin-bottom: 10px;
+            margin-top: 50px;
         }
 
         .email-body p {
@@ -59,46 +67,52 @@
             color: #6F6C90;
             line-height: 1.6;
             margin-bottom: 20px;
+            
         }
 
         .ticket-info {
             background-color: #f9f9f9;
             padding: 20px;
-            border: 1px solid #e0e0e0;
+            border: none;
             border-radius: 8px;
             margin-bottom: 25px;
+            margin-top: 50px;
         }
 
-        .ticket-info h3 {
-            font-size: 20px;
-            color: #1E9781;
+        .ticket-info h5 {
+            font-size: 24px;
             font-weight: 600;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #1E9781;
+            border-bottom: 2px solid #666666;
             padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 20px;
         }
 
-        .ticket-info p {
-            font-size: 16px;
-            margin: 10px 0;
+        .ticket-info td p{
+            font-size: 14px;
             color: #51545e;
+            padding: 0;
+            margin: 3px 0;
+            margin-left: 10px;
         }
 
-        .ticket-info p strong {
+        .ticket-info strong {
             color: #333;
+            font-size: 14px;
         }
 
         .btn {
             display: inline-block;
-            padding: 15px 30px;
+            padding: 15px 20px;
             background-color: #1E9781;
             color: white !important;
             text-decoration: none;
-            font-size: 18px;
+            font-size: 14px;
             border-radius: 8px;
             font-weight: 600;
-            margin-top: 20px;
+            margin-top: 10px;
             transition: background-color 0.3s ease;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
         }
 
         .btn:hover {
@@ -107,15 +121,35 @@
 
         .email-footer {
             text-align: center;
-            font-size: 14px;
-            color: #999;
-            margin-top: 30px;
-            padding-top: 15px;
-            border-top: 1px solid #e0e0e0;
+            color: white;
+            margin: 5px 50px;
+            padding: 15px;
+            /* border-top: 1px solid #e0e0e0; */
+            background-color:#1E9781;
         }
-
+        .email-footer h5{
+            font-size: 18px;
+            font-weight: 700;
+            margin: 10px 0px;
+        }
         .email-footer p {
-            margin: 5px 0;
+            margin: 10px 30px;
+            font-size: 15px;
+        }
+        .sosmed{
+            margin: 20px 0px;
+        }
+        .sosmed a{
+            text-decoration: none;
+            color: white;
+        }
+        .sosmed i{
+            border: none;
+            border-radius: 50%;
+            background-color: #FE9A07;
+            margin: 0px 8px;
+            font-size: 20px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
         }
 
         /* Media Queries for Responsive Design */
@@ -158,6 +192,7 @@
     <div class="email-container">
         <!-- Header -->
         <div class="email-header">
+            <img src="{{ asset('img/logo.png')}}" width="80px" height="40px" alt="logo">
             <h2>E-Ticket PMJ-Trans</h2>
         </div>
 
@@ -168,8 +203,8 @@
 
             <!-- Ticket Info -->
             <div class="ticket-info">
-                <h3>Detail Tiket</h3>
-                <p><strong>Nama Pemesan:</strong> {{ $booking->customer->name ?? 'John Doe' }}</p>
+                <h5 style="color: #1E9781;">Detail <span style="color: #FD9C07;">Tiket</span></h5>
+                <!-- <p><strong>Nama Pemesan:</strong> {{ $booking->customer->name ?? 'John Doe' }}</p>
                 <p><strong>Kode Booking:</strong> {{ $booking->booking_code ?? 'PMJ-TC1U5787' }}</p>
                 <p><strong>Tanggal Berangkat:</strong>
                     {{ \Carbon\Carbon::parse($booking->date_start)->translatedFormat('l, d F Y') }}</p>
@@ -182,7 +217,46 @@
                             <br>{{ $dest->name }}
                         @endif
                     @endforeach
-                </p>
+                </p> -->
+                <table>
+                    <tr>
+                        <td><strong>Nama Pemesan</strong></td>
+                        <td><strong> : </strong></td>
+                        <td><p>{{ $booking->customer->name ?? 'John Doe' }}</p></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kode Booking</strong></td>
+                        <td><strong> : </strong></td>
+                        <td><p>{{ $booking->booking_code ?? 'PMJ-TC1U5787' }}</p></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tanggal Berangkat</strong></td>
+                        <td><strong> : </strong></td>
+                        <td><p>{{ \Carbon\Carbon::parse($booking->date_start)->translatedFormat('l, d F Y') }}</p></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Titik Jemput</strong></td>
+                        <td><strong> : </strong></td>
+                        <td><p>{{ $booking->pickup_point ?? 'Tidak tersedia' }}</p></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-top: 5px;"><strong>Tujuan</strong></td>
+                        <td colspan="2" style="padding-top: 5px;"><strong> : </strong></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <p>
+                                @foreach ($destinations as $dest)
+                                    @if ($loop->count > 1)
+                                        {{ $loop->iteration }}. {{ $dest->name }}<br>
+                                    @else
+                                        <br>{{ $dest->name }}
+                                    @endif
+                                @endforeach
+                            </p>
+                        </td>
+                    </tr>
+                </table>
             </div>
 
             <a href="{{ route('booking.code', $booking->booking_code) }}" class="btn">Lihat Tiket Anda</a>
@@ -190,16 +264,25 @@
 
         <!-- Footer -->
         <div class="email-footer">
-            <p>&copy; {{ date('Y') }} PMJ Trans</p>
+            <h5>Temukan Kami</h5>
+            <div class="sosmed">
+                <a href="{{ $setting->first()->sosmed_fb }}"><i class="fa-brands fa-facebook-f" style="padding: 10px 13px;"></i></a>
+                <a href="{{ $setting->first()->sosmed_ig }}"><i class="fa-brands fa-instagram" style="padding: 13px"></i></a>
+                <a href="{{ $setting->first()->sosmed_yt }}"><i class="fa-brands fa-youtube" style="padding: 10px 8px;"></i></a>
+            </div>
+            <!-- <p>&copy; {{ date('Y') }} PMJ Trans</p> -->
             <p>{{ $setting->first()->address }}</p>
-            <div class="social-links">
+            <!-- <div class="social-links">
                 <a href="{{ $setting->first()->sosmed_ig }}">Instagram</a> |
                 <a href="{{ $setting->first()->sosmed_fb }}">Facebook</a> |
                 <a href="{{ $setting->first()->sosmed_yt }}">Youtube</a>
-            </div>
+            </div> -->
+            <p style="font-size: 12px; padding-top: 10px;">0812-2562-5255</p>
+        </div>
+        <div class="email-footer">
+            <h5>Terima Kasih</h5>
         </div>
     </div>
 
 </body>
-
 </html>

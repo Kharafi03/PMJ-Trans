@@ -71,7 +71,7 @@
                         <!-- FORM -->
                         <div class="form-container">
                             <div class="header mb-4">
-                                <h5>Login</h5>
+                                <h5>Log in</h5>
                                 <p>Gunakan nomor telepon yang aktif dan dapat dihubungi.</p>
                             </div>
 
@@ -98,7 +98,7 @@
                                             <a href="{{ route('password.reset') }}">Lupa kata sandi?</a>
                                         </div>
                                     </div>
-                                    <div class="mb-4">
+                                    <div class="mb-3">
                                         <button type="submit" class="btn-login">Log In</button>
                                     </div>
                                     <div class="link-registrasi">
