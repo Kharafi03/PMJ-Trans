@@ -27,6 +27,8 @@ class TermsAndConditionsResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
+    protected static ?string $slug = 'syarat-dan-ketentuan';
+
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
 
     public static function form(Form $form): Form
@@ -102,19 +104,31 @@ class TermsAndConditionsResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ForceDeleteAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->label('Lihat')
+                    ->modalHeading('Lihat Reminder'),
+                Tables\Actions\EditAction::make()
+                    ->label('Edit')
+                    ->modalHeading('Edit Reminder')
+                    ->modalButton('Simpan Perubahan'),
+                Tables\Actions\DeleteAction::make()
+                    ->label('Hapus'),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->paginated([25, 50, 100, 'all']);
     }
+
 
     public static function getRelations(): array
     {

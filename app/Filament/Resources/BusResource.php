@@ -370,10 +370,10 @@ class BusResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
                 Tables\Filters\SelectFilter::make('ms_buses_id')
                     ->label('Status Bus')
                     ->relationship('ms_buses', 'name'),
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()

@@ -175,10 +175,10 @@ class BusMaintenanceResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
                 Tables\Filters\SelectFilter::make('id_m_maintenance')
                     ->label('Jenis Perawatan')
                     ->relationship('m_maintenances', 'name'),
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()
