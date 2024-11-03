@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('bus_taxes', function (Blueprint $table) {
             $table->id();
+            $table->string('tax_code')->nullable();
             $table->foreignId('id_bus')->constrained('buses')->cascadeOnDelete();
             $table->foreignId('id_user')->constrained('users')->cascadeOnDelete();
             $table->string('description', 255) ->nullable();
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->date('expiration_number_bus') ->nullable();
             $table->decimal('nominal', 12,2) ->nullable();
             $table->longText('image') ->nullable();
+            $table->foreignId('id_m_method_payment')->constrained('m_method_payments')->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });

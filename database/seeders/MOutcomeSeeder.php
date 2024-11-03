@@ -19,6 +19,10 @@ class MOutcomeSeeder extends Seeder
         ]);
 
         MOutcome::create([
+            'name' => 'Perjalanan',
+        ]);
+
+        MOutcome::create([
             'name' => 'Operasional',
         ]);
     }

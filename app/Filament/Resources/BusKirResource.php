@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\BusKirResource\Pages;
 use App\Models\BusKir;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\DatePicker;
@@ -11,6 +12,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Group;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -35,6 +37,12 @@ class BusKirResource extends Resource
                 Card::make()
                     ->heading('Data KIR')
                     ->schema([
+                        TextInput::make('kir_code')
+                            ->default(fn() => 'KIR-' . strtoupper(substr(str_shuffle(bin2hex(random_bytes(4)) . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 8)))
+                            ->required()
+                            ->readOnly()
+                            ->label('Kode KIR'),
+
                         Select::make('id_bus')
                             ->label('Bus')
                             ->relationship('buses', 'name')
@@ -43,26 +51,40 @@ class BusKirResource extends Resource
                         Select::make('id_user')
                             ->label('Pelaksana')
                             ->relationship('users', 'name')
+                            ->options(function () {
+                                return User::whereHas('roles', function ($query) {
+                                    $query->where('name', '!=', 'panel_user');
+                                })->pluck('name', 'id'); // Mengambil nama dan id user
+                            })
                             ->required(),
 
-                        Textarea::make('description')
-                            ->label('Deskripsi')
-                            ->columnSpan(2)
-                            ->maxLength(255),
+                        Group::make()
+                            ->schema([
+                                DatePicker::make('date_test')
+                                    ->label('Tanggal Uji KIR')
+                                    ->required(),
 
-                        DatePicker::make('date_test')
-                            ->label('Tanggal Uji KIR')
-                            ->required(),
-
-                        DatePicker::make('expiration')
-                            ->label('Kadaluarsa KIR')
-                            ->required(),
+                                DatePicker::make('expiration')
+                                    ->label('Kadaluarsa KIR')
+                                    ->required(),
+                            ])
+                            ->columns(2),
 
                         TextInput::make('nominal')
                             ->label('Biaya')
                             ->numeric()
                             ->required()
                             ->prefix('Rp. '),
+
+                        Select::make('id_m_method_payment')
+                            ->label('Metode Pembayaran')
+                            ->relationship('m_method_payment', 'name')
+                            ->required(),
+
+                        Textarea::make('description')
+                            ->label('Deskripsi')
+                            ->columnSpan(2)
+                            ->maxLength(255),
                     ])
                     ->columns(2),
 
@@ -88,6 +110,10 @@ class BusKirResource extends Resource
         return $table
             ->defaultSort('created_at', 'desc')
             ->columns([
+                Tables\Columns\TextColumn::make('kir_code')
+                    ->label('Kode')
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('buses.name')
                     ->label('Bus')
                     ->sortable()
@@ -167,7 +193,7 @@ class BusKirResource extends Resource
         return [
             'index' => Pages\ListBusKirs::route('/'),
             'create' => Pages\CreateBusKir::route('/create'),
-            // 'edit' => Pages\EditBusKir::route('/{record}/edit'),
+            'edit' => Pages\EditBusKir::route('/{record}/edit'),
         ];
     }
 }

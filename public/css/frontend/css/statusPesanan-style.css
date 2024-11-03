@@ -6,7 +6,8 @@ body {
     background-size: cover; 
 }
 #statusPesanan{
-    margin-top: 70px;
+    margin: 50px 0px;
+    font-family: 'Jakarta Sans', sans-serif;
 }
 
 /* BREADCRUMB */
@@ -18,6 +19,7 @@ body {
     width: 100%;
     top: 0;           
     z-index: 1000;
+    border-radius: 0px 0px 30px 30px;
 }
 .breadcrumb .breadcrumb-item + .breadcrumb-item::before {
     color: white !important;
@@ -29,6 +31,7 @@ body {
     text-decoration: none;
 }
 
+/* FORM */
 form{
     border: 4px solid #EFF0F6;
     border-radius: 34px;
@@ -38,10 +41,15 @@ form{
 .input-group{
     height: 50px;
 }
-input[type="text"], input[type="number"], input[type="email"], input[type="datetime-local"], input[type="file"], #pickup_point, #alamat{
-    background-color: #E5E5E5;
+input[type="text"], input[type="number"], input[type="email"], input[type="datetime-local"], input[type="file"]{
+    background-color: #EDEDED;
     border-radius: 15px;
-    border: 1px solid #666666;
+    border: 1px solid #99A2A5;
+}
+textarea{
+    background-color: #EDEDED;
+    border-radius: 0px 15px 15px 0px !important;
+    border: 1px solid #99A2A5 !important;
 }
 input[type="file"]{
     padding: 12px;
@@ -49,14 +57,39 @@ input[type="file"]{
     height: 50px;
     width: 100%;
 }
+input[type="file"]:focus, .input-group:focus-within{
+    outline: 1px solid #1E9781 !important;
+    box-shadow: none;
+     z-index: 3;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    border:none !important;
+    border-radius: 15px;
+}
+
+input[readonly], textarea:read-only, #icon{
+    background-color: #EDEDED !important;
+}
 #icon{
-    background-color: #E5E5E5;
+    background-color: #EDEDED;
     border-radius: 15px 0px 0px 15px;
-    border: 1px solid #666666;
+    border: 1px solid #99A2A5;
 }
 label{
     font-weight: 500;
 }
+
+.form-switch .form-check-input:focus {
+    border-color: rgba(0, 0, 0, 0.25);
+    outline: 0;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+}
+.form-switch .form-check-input:checked {
+    background-color: #17B92F;
+    border-color: #17B92F;
+    border: none;
+}
+
 /* STATUS PEMESANAN */
 .status-alert-ditolak{
     background-color: #F62F05;
@@ -125,12 +158,12 @@ label{
     text-align: center;
     font-size: 16px;
     font-weight: 700;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.308) 0px 10px 10px -5px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+    rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    &:hover{
-        background-color: #1E9781;
-        color: white;
-        transform: scale(1.05); 
+    &:hover {
+        transform: scale(1.05);
+        background-color: #00BB83;
     }
 }
 .btn-kirim{
@@ -173,9 +206,9 @@ label{
 .btn-bayarSekarang{
     height: 40px;
     width: 100%;
-    border: 1px solid #1E9781;
+    border: 1px solid #17B92F;
     border-radius: 10px;
-    background-color: #1E9781;
+    background-color: #17B92F;
     color: white;
     font-size: 16px;
     font-weight: bold;
@@ -203,4 +236,14 @@ label{
 .btn-bayarNanti a{
     text-decoration: none;
     color: white;
+}
+
+
+@media (max-width: 767px) {
+    .status-alert-ditolak, .status-alert-diterima, .status-alert-diproses{
+        height: 100px;
+    }
+    form{
+        padding: 5px;
+    }
 }

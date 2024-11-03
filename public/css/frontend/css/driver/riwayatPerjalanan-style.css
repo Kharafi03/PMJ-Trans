@@ -27,6 +27,9 @@
 .accordion-header{
     border-radius: 8px;
     background-color: #F1F2F2;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 .accordion-button h5{
@@ -66,11 +69,17 @@
 .accordion-button:not(.collapsed) {
     background-color: #F44C28;
     color: white;
+    border: none;
+    border-radius: 10px 10px 0px 0px !important;
 }
 .accordion-body {
     background-color: #F1F2F2;
     margin-top: 0px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-top: 20px;
 }
+
 .info-pmj {
     font-size: 12px;
     color: #bcd;
@@ -111,21 +120,21 @@ table td {
 }
 .total{
     padding: 5px;
-    background-color: #FFB21D;
+    background-color: #666666;
     color: white;
     border-radius: 20px;
     text-align: center;
 }
 .tgl{
     padding: 5px;
-    background-color: #E50A3E;
+    background-color:#E20D3E;
     color: white;
     border-radius: 20px;
     text-align: center;
 }
 .status{
     padding: 5px;
-    background-color: #0FA958;
+    background-color: #0FAA56;
     color: white;
     border-radius: 20px;
     text-align: center;

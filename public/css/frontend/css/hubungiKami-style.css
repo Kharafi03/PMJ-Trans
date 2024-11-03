@@ -20,11 +20,47 @@ body {
     color: #a8a8a8;
 }
 
+/* TEXT CONTENT */
+.text-content h1{
+    font-weight: 700;
+    color: #1E9781;
+    font-family: 'Jakarta Sans', sans-serif;
+    margin-bottom: 0;
+}
+.text-content span{
+    color: #FD9C07;
+}
+.text-content p{
+    font-size: 16px; 
+    font-weight: 400;
+    color: #666666B5;
+    font-family: 'Poppins', sans-serif;
+}
+@media (min-width: 1024px) {
+    .text-content h1{
+        font-size: 44px;
+    }
+}
+
 /* Card Content */
+#contact, #contact-form{
+    font-family: 'Jakarta Sans', sans-serif;
+}
+
+#contact-form{
+    margin-bottom: 50px;
+}
 .contact-card {
     padding: 10px;
-    border-radius: 30px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 30px !important;
+    border: 1px solid #A8A8A8 !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.contact-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: #1E978140 0px 7px 29px 0px;
+    border: 1px solid #1E9781 !important;
 }
 .contact-card i {
     font-size: 50px;
@@ -47,7 +83,7 @@ body {
     border-radius: 20px;
     background-color: #1e9781;
     color: white;
-    font-weight: bold;
+    font-weight: 700;
     font-size: 40px;
     text-align: center;
     position: relative;
@@ -57,38 +93,42 @@ body {
 }
 form {
     background-color: white;
-    border-radius: 10px;
+    border-radius: 20px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     padding: 25px;
+    margin: 0px 10px;
 }
 
 .form-label {
     font-weight: 500;
+    font-size: 16px;
 }
 input,
 select {
     height: 59px;
     border-radius: 10px !important;
-    border: none;
+    border: 1px solid #A8A8A8 !important;
 }
 textarea {
     border-radius: 10px !important;
-    border: none;
+    border: 1px solid #A8A8A8 !important;
 }
 /* Button */
 .btn-kirim {
-    width: 160px;
-    height: 50px;
-    padding: 5px;
-    margin-top: 30px;
+    padding: 10px 30px;
+    margin-top: 20px;
+    font-weight: 700;
     text-align: center;
     color: white;
     border: 1px solid #1e9781;
     background-color: #1e9781;
-    border-radius: 5px;
-    transition: transform 0.3s ease;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+        rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     &:hover {
         transform: scale(1.05);
+        background-color: #00BB83;
     }
 }
 
@@ -105,25 +145,31 @@ iframe {
     width: 90%;
     height: 100%;
     min-height: 300px;
-    border-radius: 10px;
+    border-radius: 20px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 /* ANIMASI */
-.contact-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-.contact-card:hover {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: #89ebdc 0px 2px 8px 0px;
-    border: 1px solid #89ebdc;
-}
 .contact-card .icon {
     font-size: 40px;
     transition: color 0.3s ease;
 }
 .contact-card:hover .icon {
     color: #1e9781;
+}
+
+@media (max-width: 767px) {
+    #contact{
+        padding: 0px 10px;
+    }
+    .form-header {
+        padding: 8px;
+        width: 250px;
+        height: 60px;
+        border-radius: 20px;
+        background-color: #1e9781;
+        color: white;
+        font-weight: 700;
+        font-size: 30px;
+    }
 }

@@ -88,10 +88,10 @@ class Booking extends Model
         return $this->hasMany(Income::class, 'id_booking');
     }
 
-    public function outcomes()
-    {
-        return $this->hasMany(Outcome::class, 'id_booking');
-    }
+    // public function outcomes()
+    // {
+    //     return $this->hasMany(Outcome::class, 'id_booking');
+    // }
 
     public function ms_income(): BelongsTo
     {

@@ -18,16 +18,14 @@
     <!-- CONTENT -->
     <section id="tiket" class="py-5 mt-5">
         <div class="container">
-            <div class="text-content mb-5">
+            <div class="text-content">
                 <div class="row">
-                    <div class="col-xl-6">
-                        <h5 style="font-size: 44px; font-weight: 700; color: #1E9781;">E-Ticket</h5>
-                        <p style="font-size: 16px; font-weight: 500; color: #6F6C90;">Berikut Detail Pembayaran selama
-                            menyewa bus
-                            PMJ Trans.</p>
+                    <div class="col-xl-6 text-content">
+                        <h1 class="mb-3">E-Ticket <span>{{ $setting ? $setting->name : '#' }} </span></h1>
+                        <p>Berikut Detail Pembayaran selama menyewa bus PMJ Trans.</p>
                     </div>
-                    <div class="col-xl-6 d-flex justify-content-end align-items-center">
-                        <button id="download" class="btn btn-download">Download PDF</button>
+                    <div class="col-xl-6 btn-content">
+                        <button id="download" class="btn-download">Download PDF</button>
                     </div>
                 </div>
             </div>
@@ -42,8 +40,7 @@
                                 <div class="ticketTitle mb-2">
                                     <div class="row mb-3">
                                         <div class="col-3">
-                                            <img src="{{ asset('img/logo.png') }}" alt="icon" width="50px"
-                                                height="40px">
+                                            <img src="{{ asset('img/logo.png') }}" alt="icon" width="50px" height="40px">
                                         </div>
                                         <div class="col-9">
                                             <p class="text-end" style="padding-top: 5px;">
@@ -119,14 +116,12 @@
                     <div class="col-xl-7">
                         <div class="text-container mt-5">
                             <div class="text-content mb-5">
-                                <h5 style="font-size: 30px; font-weight: 700; color: #1E9781;">Petunjuk <span
-                                        style="color: #FD9C07;">E-Ticket</span></h5>
-                                <p style="font-size: 16px; font-weight: 500; color: #6F6C90;">Berikut Detail Pembayaran
-                                    selama menyewa bus PMJ Trans.</p>
+                                <h1 class="mb-3" style="font-size: 30px;">Petunjuk <span>E-Ticket</span></h1>
+                                <p style="color: #6F6C90;" >Berikut Detail Pembayaran selama menyewa bus PMJ Trans.</p>
                             </div>
                             <div class="row warning mb-3 align-items-center">
                                 <div class="col-4 col-lg-2 col-md-3 d-flex justify-content-center">
-                                    <span class="icon-warning" style="display: inline-block; vertical-align: middle;">
+                                    <span class="icon-warning" style="display: inline-block; vertical-align: start;">
                                         <img src="{{ asset('img/ticket.png') }}">
                                     </span>
                                 </div>
@@ -137,7 +132,7 @@
 
                             <div class="row warning mb-3">
                                 <div class="col-4 col-lg-2 col-md-3 d-flex justify-content-center">
-                                    <span class="icon-warning" style="display: inline-block; vertical-align: middle;">
+                                    <span class="icon-warning" style="display: inline-block; vertical-align: start;">
                                         <img src="{{ asset('img/clock.png') }}">
                                     </span>
                                 </div>
@@ -148,7 +143,7 @@
                             </div>
                             <div class="row warning mb-3">
                                 <div class="col-4 col-lg-2 col-md-3 d-flex justify-content-center">
-                                    <span class="icon-warning" style="display: inline-block; vertical-align: middle;">
+                                    <span class="icon-warning" style="display: inline-block; vertical-align: start;">
                                         <img src="{{ asset('img/warning.png') }}">
                                     </span>
                                 </div>

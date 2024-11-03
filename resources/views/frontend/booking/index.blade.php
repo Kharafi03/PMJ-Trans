@@ -19,9 +19,11 @@
     <!-- TITLE -->
     <section id="pemesanan">
         <div class="container mt-5 mb-5">
-            <h5 style="font-size: 44px; font-weight: 700; color: #1E9781;">FORMULIR <span style="color: #FD9C07;">PEMESANAN</span></h5>
-            <p style="font-size: 18px; font-weight: 600; color: #666666B5;">Pilih jadwal, destinasi, serta tipe kendaraan yang sesuai dengan kebutuhan Anda. Rasakan pengalaman perjalanan yang nyaman bersama layanan PMJ Trans</p> 
-            <div class="info">
+            <div class="text-content">
+                <h1 class="mb-3">FORMULIR <span>PEMESANAN</span></h1>
+                <p>Pilih jadwal, destinasi, serta tipe kendaraan yang sesuai dengan kebutuhan Anda. Rasakan pengalaman perjalanan yang nyaman bersama layanan PMJ Trans</p> 
+            </div>
+            <div class="info mt-3">
                 <p class="info-title"><i class="fa-solid fa-circle-exclamation"></i> Informasi Pemesanan</p>
                 <ul>
                     <li>Simbol <span style="font-weight: 700; color: #F44C28;">( * )</span> menandakan forumilir wajib diiisi</li>
@@ -34,7 +36,7 @@
         </div>
 
 
-    <!-- FORM -->
+        <!-- FORM -->
         <div class="container">
             @include('frontend.assets.alert')
             <form id="formPemesanan" action="{{ route('booking.store') }} " method="POST">
@@ -42,8 +44,8 @@
                 <div class="row form-container">
                     <div class="col-lg-7" style="padding: 40px;">
                         <div class="text-content">
-                            <h5 style="font-size: 30px; font-weight: 700; color: #1E9781;">Detail <span style="color: #FD9C07;">Pemesanan</span></h5>
-                            <p style="font-size: 16px; font-weight: 500; color: #666666B5;">Silahkan isi formulir detail pemesanan di bawah ini untuk melakukan pemesanan</p>
+                            <h5 style="font-size: 30px; font-weight: 700; color: #1E9781; font-family: 'Jakarta Sans', sans-serif;">Detail <span style="color: #FD9C07;">Pemesanan</span></h5>
+                            <p style="font-size: 16px; font-weight: 400; color: #666666B5;font-family: 'Poppins', sans-serif;">Silahkan isi formulir detail pemesanan di bawah ini untuk melakukan pemesanan</p>
                         </div>
                         <div class="row">
                             <!-- Kontainer Field Tujuan Tambahan -->
@@ -124,15 +126,17 @@
                                 </div>
                             </div>
                             <div class="mb-2">
-                                <label for="pickup_point" class="form-label @error('pickup_point') is-invalid @enderror">Titik Jemput<span
-                                        class="text-danger">*</span></label>
-                                    <textarea class="form-control" placeholder="Masukkan alamat lengkap" id="pickup_point" name="pickup_point"
-                                        style="height: 100px;" required></textarea>
-                                    @error('pickup_point')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                <label for="pickup_point" class="form-label @error('pickup_point') is-invalid @enderror">Titik Jemput<span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-tujuan.png') }}" alt="icon"></span>
+                                        <textarea class="form-control" placeholder="Masukkan alamat lengkap" id="pickup_point" name="pickup_point"
+                                            style="height: 100px;" required></textarea>
+                                        @error('pickup_point')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
                             </div>
                             <div>
                                 <p class="text-danger" style="font-size:14px;">Contoh : Jalan Mangga Besar III No. 17, RT 06 RW 07, Kelurahan Bedali, Kecamatan Lawang, Kab. Malang, Jawa Timur, 60256</p>
@@ -141,8 +145,8 @@
                     </div>
                     <div class="col-lg-5" style="padding: 40px;">
                         <div class="text-content">
-                            <h5 style="font-size: 30px; font-weight: 700; color: #1E9781;">Detail <span style="color: #FD9C07;">Kontak</span></h5>
-                            <p style="font-size: 16px; font-weight: 500; color: #666666B5;">Silahkan lengkapi formulir detail kontak di bawah ini untuk melakukan pemesanan</p>
+                            <h5 style="font-size: 30px; font-weight: 700; color: #1E9781; font-family: 'Jakarta Sans', sans-serif;">Detail <span style="color: #FD9C07;">Kontak</span></h5>
+                            <p style="font-size: 16px; font-weight: 400; color: #666666B5; font-family: 'Poppins', sans-serif;">Silahkan lengkapi formulir detail kontak di bawah ini untuk melakukan pemesanan</p>
                         </div>
                         <div class="row">
                             <div class="mb-4">
@@ -192,7 +196,8 @@
                             </div>
                             <div class="mb-4">
                                 <label for="address" class="form-label">Alamat<span class="text-danger">*</span></label>
-                                <div>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-tujuan.png') }}" alt="icon"></span>
                                     <textarea class="form-control @error('address') is-invalid @enderror" placeholder="Alamat Lengkap" id="address" name="address" style="height: 100px"
                                         @if (Auth::check()) readonly @endif>{{ Auth::check() ? Auth::user()->address : '' }}</textarea>
                                     @error('address')

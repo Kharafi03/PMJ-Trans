@@ -1,6 +1,15 @@
+body {
+    background-position: 55% 60%;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-image: url("/img/bg-all2.png");
+}
+
 /* TITLE */
 #riwayatSewa{
     margin-top: 120px;
+    margin-bottom: 50px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 .title p{
     font-size: 18px;
@@ -20,18 +29,18 @@ table{
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 thead{
-    background-color: #CBCBCD40;
-    color: #333843;
+    background-color: #A8A8A8;
+    color: black;
     text-align: center;
 }
 #data-table thead th {
     background-color: #A8A8A840; /* Warna latar belakang */
 }
-td{
+/* td{
     height: 70px;
     text-overflow: ellipsis;
     padding: 20px;
-}
+} */
 table.table-fit {
     width: auto !important;
     table-layout: auto !important;
@@ -43,6 +52,29 @@ table.table-fit {
     width: auto !important;
 }
 
+.dt-length label, .dt-search label, .dt-info{
+    font-size: 16px;
+    font-weight: 500;
+    color: #333843;
+}
+
+.dt-paging-button a{
+    background-color: #1E978117 !important;
+    border: none;
+    border-radius: 6px;
+    padding: 3px 5px;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    color:#1E9781 !important;
+    font-size: 14px;
+}
+.dt-paging-button a.active{
+    background-color: #1E9781 !important;
+    color: white !important;
+    padding-top: 5px;
+}
 
 /* INPUT => date & filters */
 input[type='text'], input[type='date']{
@@ -270,4 +302,10 @@ textarea{
 .rating-stars i{
     font-size: 30px;
     margin: 5px 5px 30px 0px;
+}
+
+.title{
+    color: #333843;
+    font-size: 18px;
+    font-weight: 500;
 }

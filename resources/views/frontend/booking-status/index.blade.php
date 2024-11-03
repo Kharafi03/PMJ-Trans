@@ -24,7 +24,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="d-flex justify-content-end">
-                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><img
+                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" style="background: none !important; border: none;"><img
                             src="img/close.png"></button>
                 </div>
                 <div class="modal-body">
@@ -58,7 +58,7 @@
                         <div class="mb-3">
                             <label for="noRek" class="form-label">Nomor Rekening</label>
                             <div class="input-group mb-3">
-                                <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-bank.png') }}" alt="icon"></span>
+                                <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-bank2.png') }}" alt="icon"></span>
                                 <input type="text" class="form-control" id="noRek" placeholder="1234567890" readonly>
                             </div>
                         </div>
@@ -87,8 +87,8 @@
         <div class="container mt-5 mb-5">
             <!-- CARD -->
             <div class="mb-3">
-                <div class="form-header mb-5">
-                    <h5 style="font-size: 44px; font-weight: 700; color: #1E9781;">Status <span style="color: #FD9C07;">Pemesanan</span></h5>
+                <div class="form-header mb-3">
+                    <h5 style="font-size: 44px; font-weight: 700; color: #1E9781; padding: 10px;">Status <span style="color: #FD9C07;">Pemesanan</span></h5>
                 </div>
                 <!-- FORM -->
                 <form action="{{ route('booking.uploadProof', $booking->id) }}" method="POST" enctype="multipart/form-data" id="formUploadDP">
@@ -96,8 +96,8 @@
                     <div class="row">
                         <!-- <div class="col-md-12 col-lg-6 mb-3 order-md-2 order-lg-1"> -->
                         <div class="col-lg-7"  style="padding: 40px;">
-                            <div class="text-content">
-                                <h5 style="font-size: 30px; font-weight: 700; color: #1E9781;">Detail <span style="color: #FD9C07;">Pemesanan</span></h5>
+                            <div class="text-content mb-4">
+                                <h5 style="font-size: 30px; font-weight: 700; color: #1E9781; ">Detail <span style="color: #FD9C07;">Pemesanan</span></h5>
                             </div>
                             <!-- <form action="{{ route('booking.uploadProof', $booking->id) }}" method="POST" enctype="multipart/form-data" id="formUploadDP">
                                 @csrf -->
@@ -364,9 +364,10 @@
                                             <input type="datetime-local" class="detail-pemesanan form-control" id="date_start" name="date_start" value="{{ $booking->date_start }}" readonly>
                                         </div>
                                     </div>
-                                    <div class="mb-2">
+                                    <div class="mb-3">
                                         <label for="pickup_point" class="form-label">Titik Jemput<span class="text-danger">*</span></label>
-                                        <div>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-tujuan.png') }}" alt="icon"></span>
                                             <textarea class="form-control" placeholder="Masukkan alamat lengkap" id="pickup_point" name="pickup_point" readonly>{{ $booking->pickup_point }}</textarea>
                                         </div>
                                     </div>
@@ -450,8 +451,8 @@
                                 style="padding: 0px 50px 0px 50px;">
                         </div> -->
                         <div class="col-lg-5" style="padding: 40px;">
-                            <div class="text-content">
-                                <h5 style="font-size: 30px; font-weight: 700; color: #1E9781;">Detail <span style="color: #FD9C07;">Kontak</span></h5>
+                            <div class="text-content mb-4">
+                                <h5 style="font-size: 30px; font-weight: 700; color: #1E9781; ">Detail <span style="color: #FD9C07;">Kontak</span></h5>
                             </div>
                             <div class="row">
                             <div class="mb-3">
@@ -480,7 +481,8 @@
 
                             <div class="mb-3">
                                 <label for="alamat" class="form-label">Alamat</label>
-                                <div class="input-group mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-tujuan.png') }}" alt="icon"></span>
                                     <textarea class="form-control" id="alamat" readonly>{{ $booking->customer->address }}</textarea>
                                 </div>
                             </div>
