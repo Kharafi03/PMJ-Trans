@@ -51,8 +51,10 @@ class OutcomeResource extends Resource
                             ->required()
                             ->relationship('m_outcome', 'name'),
 
-                        Forms\Components\TextInput::make('code_outcome')
+                        Forms\Components\TextInput::make('outcome_code')
                             ->label('Kode Sumber Pengeluaran')
+                            ->default(fn() => 'OUT-' . strtoupper(substr(str_shuffle(bin2hex(random_bytes(4)) . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 8)))
+                            ->readOnly()
                             ->required(),
 
                         Forms\Components\Select::make('id_m_method_payment')
@@ -117,7 +119,7 @@ class OutcomeResource extends Resource
                     ->label('Selesai')
                     ->boolean()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('code_outcome')
+                Tables\Columns\TextColumn::make('outcome_code')
                     ->label('Code Pengeluaran')
                     ->sortable()
                     ->searchable(),
@@ -183,7 +185,15 @@ class OutcomeResource extends Resource
                 Tables\Actions\EditAction::make()
                     ->label('Edit')
                     ->modalHeading('Edit Pengeluaran')
-                    ->modalButton('Simpan Perubahan'),
+                    ->modalButton('Simpan Perubahan')
+                    ->visible(function ($record) {
+                        $outcome_code = $record->outcome_code;
+                        $type_outcome = substr($outcome_code, 0, 3);
+                        if ($type_outcome == 'OUT') {
+                            return true;
+                        }
+                        return false;
+                    }),
                 Tables\Actions\DeleteAction::make()
                     ->label('Hapus')
             ])
@@ -210,7 +220,7 @@ class OutcomeResource extends Resource
         return [
             'index' => Pages\ListOutcomes::route('/'),
             'create' => Pages\CreateOutcome::route('/create'),
-            // 'edit' => Pages\EditOutcome::route('/{record}/edit'),
+            'edit' => Pages\EditOutcome::route('/{record}/edit'),
         ];
     }
 }

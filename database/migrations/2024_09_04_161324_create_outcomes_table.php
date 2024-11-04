@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('outcomes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_m_outcome')->constrained('m_outcomes')->cascadeOnDelete();
-            $table->string('code_outcome')->nullable();
+            $table->string('outcome_code')->nullable();
             $table->foreignId('id_m_method_payment')->constrained('m_method_payments')->cascadeOnDelete();
             $table->string('description')->nullable();
             $table->decimal('nominal', 12, 2)->nullable();

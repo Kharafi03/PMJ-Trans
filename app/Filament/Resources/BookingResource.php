@@ -150,7 +150,7 @@ class BookingResource extends Resource
                         Forms\Components\Group::make()->schema([
                             DateTimePicker::make('date_start')
                                 ->required()
-                                ->minDate(fn (Get $get) => ($get('id_ms_booking') === 2 &&  $get('id')) || $get('id_ms_booking') === 4 ? null : now())
+                                ->minDate(fn(Get $get) => ($get('id_ms_booking') === 2 &&  $get('id')) || $get('id_ms_booking') === 4 ? null : now())
                                 ->reactive()
                                 ->label('Tanggal Mulai'),
 
@@ -781,7 +781,7 @@ class BookingResource extends Resource
                     ->icon('heroicon-s-receipt-refund')
                     ->action(function ($record, $data) {
                         Outcome::create([
-                            'id_booking' => $record->id,
+                            'outcome_code' => $record->booking_code,
                             'id_m_outcome' => 1,
                             'check' => 1,
                             'image_receipt' => $data['image_receipt'],
@@ -867,7 +867,10 @@ class BookingResource extends Resource
                     ->icon('heroicon-o-phone')
                     ->label('Hubungi'),
                 Tables\Actions\DeleteAction::make()
-                //->label(''),
+                    ->action(function ($record) {
+                        Outcome::where('outcome_code', $record->maintenance_code)->delete();
+                        Booking::where('id', $record->id)->delete();
+                    })
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -1029,7 +1032,7 @@ class BookingResource extends Resource
                 $query->where('name', 'driver');
             })->pluck('name', 'id');
         }
-        
+
         $tripEndTime = \Carbon\Carbon::parse($tripEnd)->endOfDay();
 
         return User::whereHas('roles', function ($query) {

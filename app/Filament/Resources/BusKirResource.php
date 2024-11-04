@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\BusKirResource\Pages;
 use App\Models\BusKir;
+use App\Models\Outcome;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
@@ -169,6 +170,10 @@ class BusKirResource extends Resource
                     ->modalButton('Simpan Perubahan'),
                 Tables\Actions\DeleteAction::make()
                     ->label('Hapus')
+                    ->action(function ($record) {
+                        Outcome::where('outcome_code', $record->maintenance_code)->delete();
+                        BusKir::where('id', $record->id)->delete();
+                    })
             ])
 
             ->bulkActions([

@@ -22,7 +22,7 @@ class CreateBusTax extends CreateRecord
         $nameBus = Bus::where('id', $this->record->id_bus)->value('name');
         $nameUser = User::where('id', $this->record->id_user)->value('name');
         Outcome::updateOrCreate(
-            ['code_outcome' => $this->record->tax_code],
+            ['outcome_code' => $this->record->tax_code],
             [
                 'id_m_outcome' => 3,
                 'check' => 1,

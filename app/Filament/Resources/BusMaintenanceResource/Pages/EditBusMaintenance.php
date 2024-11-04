@@ -27,7 +27,7 @@ class EditBusMaintenance extends EditRecord
         $nameMaintenance = MMaintenance::where('id', $this->record->id_m_maintenance)->value('name');
         //dd($nameBus, $nameUser, $nameMaintenance);
         Outcome::updateOrCreate(
-            ['code_outcome' => $this->record->maintenance_code],
+            ['outcome_code' => $this->record->maintenance_code],
             [
                 'id_m_outcome' => 3,
                 'check' => 1,

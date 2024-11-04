@@ -28,7 +28,7 @@ class EditBooking extends EditRecord
             $bookingspendtot = $this->record->total_booking_spend;
 
             Outcome::updateOrCreate(
-                ['code_outcome' => $booking_code],
+                ['outcome_code' => $booking_code],
                 [
                     'id_m_outcome' => 2,
                     'check' => 1,

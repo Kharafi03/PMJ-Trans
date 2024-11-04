@@ -19,7 +19,7 @@ class Outcome extends Model
 
     protected $fillable = [
         'id_m_outcome',
-        'code_outcome',
+        'outcome_code',
         'id_m_method_payment',
         'description',
         'nominal',
