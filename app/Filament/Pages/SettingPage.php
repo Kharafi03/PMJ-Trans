@@ -20,8 +20,6 @@ class SettingPage extends Page implements HasForms
 
     protected static string $view = 'filament.pages.setting-page';
 
-    protected static ?string $navigationLabel = "Setting";
-
     protected static ?string $pluralModelLabel = "Pengaturan Sistem";
 
     protected static ?string $navigationIcon = 'heroicon-c-cog-8-tooth';
