@@ -7,7 +7,6 @@ use App\Models\User;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Illuminate\Support\Str;
 use App\Models\BusMaintenance;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
@@ -15,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\BusMaintenanceResource\Pages;
+use App\Models\Outcome;
 
 class BusMaintenanceResource extends Resource
 {
@@ -205,6 +205,11 @@ class BusMaintenanceResource extends Resource
                     ->modalButton('Simpan Perubahan'),
                 Tables\Actions\DeleteAction::make()
                     ->label('Hapus')
+                    ->action(function ($record) {
+                        //$maintenance_code = $record->maintenance_code
+                        Outcome::where('outcome_code', $record->maintenance_code)->delete();
+                        BusMaintenance::where('id', $record->id)->delete();
+                    })
             ])
 
             ->bulkActions([

@@ -150,7 +150,7 @@ class BookingResource extends Resource
                         Forms\Components\Group::make()->schema([
                             DateTimePicker::make('date_start')
                                 ->required()
-                                ->minDate(fn (Get $get) => ($get('id_ms_booking') === 2 &&  $get('id')) || $get('id_ms_booking') === 4 ? null : now())
+                                ->minDate(fn(Get $get) => ($get('id_ms_booking') === 2 &&  $get('id')) || $get('id_ms_booking') === 4 ? null : now())
                                 ->reactive()
                                 ->label('Tanggal Mulai'),
 
@@ -781,7 +781,7 @@ class BookingResource extends Resource
                     ->icon('heroicon-s-receipt-refund')
                     ->action(function ($record, $data) {
                         Outcome::create([
-                            'id_booking' => $record->id,
+                            'outcome_code' => $record->booking_code,
                             'id_m_outcome' => 1,
                             'check' => 1,
                             'image_receipt' => $data['image_receipt'],
@@ -867,7 +867,10 @@ class BookingResource extends Resource
                     ->icon('heroicon-o-phone')
                     ->label('Hubungi'),
                 Tables\Actions\DeleteAction::make()
-                //->label(''),
+                    ->action(function ($record) {
+                        Outcome::where('outcome_code', $record->maintenance_code)->delete();
+                        Booking::where('id', $record->id)->delete();
+                    })
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -981,10 +984,13 @@ class BookingResource extends Resource
             return Bus::pluck('name', 'id');
         }
 
-        return Bus::whereDoesntHave('tripbus.booking', function ($query) use ($tripStart, $tripEnd, $idBooking) {
-            $query->where(function ($subQuery) use ($tripStart, $tripEnd) {
-                $subQuery->where('date_start', '<=', $tripEnd)
-                    ->whereRaw("CAST(CONCAT(date_end, ' 23:59:59') AS DATETIME) >= ?", [$tripStart]);
+        $tripEndTime = \Carbon\Carbon::parse($tripEnd)->endOfDay();
+
+        return Bus::whereDoesntHave('tripbus.booking', function ($query) use ($tripStart, $tripEndTime, $idBooking) {
+            $query->where(function ($subQuery) use ($tripStart, $tripEndTime) {
+                $subQuery->where('date_start', '<=', $tripEndTime)
+                    ->whereRaw("CAST(CONCAT(date_end, ' 23:59:59') AS DATETIME) >= ?", [$tripStart])
+                    ->where('id_ms_booking', 2);
             });
             if ($idBooking) {
                 $query->where('id_booking', '!=', $idBooking);
@@ -998,10 +1004,13 @@ class BookingResource extends Resource
             return Bus::count();
         }
 
-        $usedBusCount = Bus::whereHas('tripbus.booking', function ($query) use ($startDate, $endDate, $idBooking) {
-            $query->where(function ($subQuery) use ($startDate, $endDate) {
-                $subQuery->where('date_start', '<=', $endDate)
-                    ->whereRaw("CAST(CONCAT(date_end, ' 23:59:59') AS DATETIME) >= ?", [$startDate]);
+        $tripEndTime = \Carbon\Carbon::parse($endDate)->endOfDay();
+
+        $usedBusCount = Bus::whereHas('tripbus.booking', function ($query) use ($startDate, $tripEndTime, $idBooking) {
+            $query->where(function ($subQuery) use ($startDate, $tripEndTime) {
+                $subQuery->where('date_start', '<=', $tripEndTime)
+                    ->whereRaw("CAST(CONCAT(date_end, ' 23:59:59') AS DATETIME) >= ?", [$startDate])
+                    ->where('id_ms_booking', 2);
             });
 
             if ($idBooking) {
@@ -1024,24 +1033,27 @@ class BookingResource extends Resource
             })->pluck('name', 'id');
         }
 
+        $tripEndTime = \Carbon\Carbon::parse($tripEnd)->endOfDay();
 
         return User::whereHas('roles', function ($query) {
             $query->where('name', 'driver');
         })
-            ->whereDoesntHave('driver', function ($query) use ($tripStart, $tripEnd, $idBooking) {
-                $query->whereHas('booking', function ($subQuery) use ($tripStart, $tripEnd) {
-                    $subQuery->where('date_start', '<=', $tripEnd)
-                        ->whereRaw("CAST(CONCAT(date_end, ' 23:59:59') AS DATETIME) >= ?", [$tripStart]);
+            ->whereDoesntHave('driver', function ($query) use ($tripStart, $tripEndTime, $idBooking) {
+                $query->whereHas('booking', function ($subQuery) use ($tripStart, $tripEndTime) {
+                    $subQuery->where('date_start', '<=', $tripEndTime)
+                        ->whereRaw("CAST(CONCAT(date_end, ' 23:59:59') AS DATETIME) >= ?", [$tripStart])
+                        ->where('id_ms_booking', 2);
                 });
 
                 if ($idBooking) {
                     $query->where('id_booking', '!=', $idBooking);
                 }
             })
-            ->whereDoesntHave('codriver', function ($query) use ($tripStart, $tripEnd, $idBooking) {
-                $query->whereHas('booking', function ($subQuery) use ($tripStart, $tripEnd) {
-                    $subQuery->where('date_start', '<=', $tripEnd)
-                        ->whereRaw("CAST(CONCAT(date_end, ' 23:59:59') AS DATETIME) >= ?", [$tripStart]);
+            ->whereDoesntHave('codriver', function ($query) use ($tripStart, $tripEndTime, $idBooking) {
+                $query->whereHas('booking', function ($subQuery) use ($tripStart, $tripEndTime) {
+                    $subQuery->where('date_start', '<=', $tripEndTime)
+                        ->whereRaw("CAST(CONCAT(date_end, ' 23:59:59') AS DATETIME) >= ?", [$tripStart])
+                        ->where('id_ms_booking', 2);
                 });
 
                 if ($idBooking) {

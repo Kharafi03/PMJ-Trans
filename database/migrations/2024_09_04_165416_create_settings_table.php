@@ -18,9 +18,11 @@ return new class extends Migration
             $table->longText('address');
             $table->string('email');
             $table->string('contact');
+            $table->string('bank_account');
             $table->string('open_hours');
             $table->longText('description');
-            $table->longText('maps');
+            $table->longText('link_maps');
+            $table->longText('embed_maps');
             $table->string('sosmed_ig');
             $table->string('sosmed_fb');
             $table->string('sosmed_yt');

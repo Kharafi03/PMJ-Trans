@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BusTaxResource\Pages;
 use App\Filament\Resources\BusTaxResource\RelationManagers;
 use App\Models\BusTax;
+use App\Models\Outcome;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -177,6 +178,10 @@ class BusTaxResource extends Resource
                     ->modalWidth('5xl'),
                 Tables\Actions\DeleteAction::make()
                     ->label('Hapus')
+                    ->action(function ($record) {
+                        Outcome::where('outcome_code', $record->maintenance_code)->delete();
+                        BusTax::where('id', $record->id)->delete();
+                    })
             ])
 
             ->bulkActions([

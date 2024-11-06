@@ -25,5 +25,9 @@ class MOutcomeSeeder extends Seeder
         MOutcome::create([
             'name' => 'Operasional',
         ]);
+
+        MOutcome::create([
+            'name' => 'Lainnya',
+        ]);
     }
 }
