@@ -196,6 +196,14 @@ class OutcomeResource extends Resource
                     }),
                 Tables\Actions\DeleteAction::make()
                     ->label('Hapus')
+                    ->visible(function ($record) {
+                        $outcome_code = $record->outcome_code;
+                        $type_outcome = substr($outcome_code, 0, 3);
+                        if ($type_outcome == 'OUT') {
+                            return true;
+                        }
+                        return false;
+                    }),
             ])
 
             ->bulkActions([

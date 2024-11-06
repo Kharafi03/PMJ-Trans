@@ -171,7 +171,7 @@ class BusKirResource extends Resource
                 Tables\Actions\DeleteAction::make()
                     ->label('Hapus')
                     ->action(function ($record) {
-                        Outcome::where('outcome_code', $record->maintenance_code)->delete();
+                        Outcome::where('outcome_code', $record->kir_code)->delete();
                         BusKir::where('id', $record->id)->delete();
                     })
             ])
