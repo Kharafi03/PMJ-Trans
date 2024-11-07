@@ -55,7 +55,15 @@ class RegistrationController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'number_phone' => ['required', 'string', 'max:15', 'unique:users,number_phone'],
-            'password' => ['required', 'string', 'min:8'],
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'regex:/[a-z]/',        // At least one lowercase letter
+                'regex:/[A-Z]/',        // At least one uppercase letter
+                'regex:/[0-9]/',        // At least one digit
+                'regex:/[!@#$%^&*(),.?":{}|<>]/' // At least one special character
+            ],
         ], [
             'name.required' => 'Nama wajib diisi!',
             'name.max' => 'Nama tidak boleh lebih dari 255 karakter!',
@@ -64,7 +72,8 @@ class RegistrationController extends Controller
             'number_phone.unique' => 'Nomor WhatsApp ini sudah terdaftar, silakan gunakan nomor lain!',
             'password.required' => 'Kata sandi wajib diisi!',
             'password.min' => 'Kata sandi harus minimal 8 karakter!',
-        ]);
+            'password.regex' => 'Kata sandi harus mengandung setidaknya satu huruf kecil, satu huruf besar, satu angka, dan satu simbol!',
+        ]);        
     }
 
 

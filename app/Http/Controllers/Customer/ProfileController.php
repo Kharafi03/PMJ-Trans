@@ -12,10 +12,13 @@ use Illuminate\Support\Facades\Hash;
 class ProfileController extends Controller
 {
     // Menampilkan form profil
+
     public function edit()
     {
         $user = Auth::user(); // Mengambil data user yang sedang login
-        return view('frontend.customer-profile.index', compact('user'));
+        $showAlertPassword = Hash::check('12345678', $user->password);
+
+        return view('frontend.customer-profile.index', compact('user', 'showAlertPassword'));
     }
 
     // Memperbarui data profil
@@ -42,13 +45,12 @@ class ProfileController extends Controller
         ], [
             'name.required' => 'Nama harus diisi!',
             'email.email' => 'Email tidak valid!',
-            'number_phone.required' => 'Nomor telepon harus diisi!',
-            'address.required' => 'Alamat harus diisi!',
-            'number_phone.max' => 'Nomor telepon maksimal 20 karakter!',
             'email.max' => 'Email maksimal 255 karakter!',
-            'number_phone.unique' => 'Nomor telepon sudah terdaftar!',
             'email.unique' => 'Email sudah terdaftar!',
-            'email.email' => 'Email tidak valid!',
+            'number_phone.required' => 'Nomor telepon harus diisi!',
+            'number_phone.unique' => 'Nomor telepon sudah terdaftar!',
+            'number_phone.max' => 'Nomor telepon maksimal 20 karakter!',
+            'address.required' => 'Alamat harus diisi!',
         ]);
 
         if ($validator->fails()) {
@@ -60,8 +62,7 @@ class ProfileController extends Controller
             ]);
         }
 
-        // Ambil pengguna yang sedang login
-        $user = Auth::user();
+        /** @var \App\Models\User $user **/
 
         // Perbarui data pengguna
         $user->update([
@@ -81,18 +82,27 @@ class ProfileController extends Controller
 
     public function updatePassword(Request $request)
     {
-        // Validasi input dengan pesan kustom
         $validator = Validator::make($request->all(), [
             'password_lama' => 'required',
-            'password_baru' => 'required|min:8',
+            'password_baru' => [
+                'required',
+                'min:8',
+                'regex:/[a-z]/',        // At least one lowercase letter
+                'regex:/[A-Z]/',        // At least one uppercase letter
+                'regex:/[0-9]/',        // At least one digit
+                'regex:/[!@#$%^&*(),.?":{}|<>]/' // At least one special character
+            ],
             'konfirmasi_password' => 'required|same:password_baru',
         ], [
             'password_lama.required' => 'Password lama harus diisi!',
             'password_baru.required' => 'Password baru harus diisi!',
             'password_baru.min' => 'Password baru minimal harus memiliki 8 karakter!',
+            'password_baru.regex' => 'Password baru harus mengandung setidaknya satu huruf kecil, satu huruf besar, satu angka, dan satu simbol!',
             'konfirmasi_password.required' => 'Konfirmasi password harus diisi!',
             'konfirmasi_password.same' => 'Konfirmasi password harus sama dengan password baru!',
-        ]);
+        ]);        
+
+        /** @var \App\Models\User $user **/
 
         // Ambil pengguna yang sedang login
         $user = Auth::user();
@@ -115,8 +125,6 @@ class ProfileController extends Controller
                     'alert-type' => 'error'
                 ]);
         }
-
-
 
         // Perbarui password pengguna
         $user->update([

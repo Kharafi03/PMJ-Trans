@@ -7,46 +7,76 @@ use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Destination;
 use App\Models\Setting;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class BookingCodeController extends Controller
 {
-    //
     public function show($booking_code)
     {
-        // Ambil data booking berdasarkan booking_code
         $booking = Booking::where('booking_code', $booking_code)->first();
 
-        if ($booking->id_cus !== Auth::id()) {
+        if (!$booking || $booking->id_cus !== Auth::id()) {
             return redirect()->back()->with([
                 'message' => 'Booking tidak ditemukan!',
                 'alert-type' => 'error'
             ]);
         }
 
-        if (!$booking) {
-            return redirect()->route('home')->with('error', 'Booking tidak ditemukan.'); // Redirect jika tidak ada booking
-        }
+        $user = $booking->customer;
+
+        $showPasswordModal = Hash::check('12345678', $user->password);
 
         $destinations = Destination::where('id_booking', $booking->id)->get();
 
-        // // Cek apakah booking ditemukan dan customer memiliki email dan ticket_sent = false
-        // if ($booking && !$booking->email_tiket && $booking->customer->email != null) {
-        //     // Kirim email e-ticket kepada customer
-        //     $setting = Setting::all();
-        //     // dd($setting);
-        //     Mail::send('vendor.mail.ticket-email', compact('booking', 'destinations', 'setting'), function ($message) use ($booking) {
-        //         $message->to($booking->customer->email, $booking->customer->name)
-        //             ->subject('E-Ticket PMJ Trans - ' . $booking->booking_code);
-        //     });
+        // Cek apakah booking ditemukan dan customer memiliki email dan ticket_sent = false
+        if ($booking && !$booking->email_tiket && $booking->customer->email != null) {
+            // Kirim email e-ticket kepada customer
+            $setting = Setting::all();
+            // dd($setting);
+            Mail::send('vendor.mail.ticket-email', compact('booking', 'destinations', 'setting'), function ($message) use ($booking) {
+                $message->to($booking->customer->email, $booking->customer->name)
+                    ->subject('E-Ticket PMJ Trans - ' . $booking->booking_code);
+            });
 
-        //     // Update kolom email_tiket menjadi true
-        //     $booking->email_tiket = true;
-        //     $booking->save();
-        // }
+            // Update kolom email_tiket menjadi true
+            $booking->email_tiket = true;
+            $booking->save();
+        }
 
-        return view('frontend.booking-code.index', compact('booking', 'destinations'));
+        return view('frontend.booking-code.index', compact('booking', 'destinations', 'showPasswordModal'));
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'new_password' => [
+                'required',
+                'confirmed',
+                'min:8',
+                'regex:/[a-z]/',        // At least one lowercase letter
+                'regex:/[A-Z]/',        // At least one uppercase letter
+                'regex:/[0-9]/',        // At least one digit
+                'regex:/[@$!%*?&]/',    // At least one symbol
+            ],
+        ], [
+            'new_password.required' => 'Password baru harus diisi!',
+            'new_password.confirmed' => 'Konfirmasi password harus sama dengan password baru!',
+            'new_password.min' => 'Password baru minimal harus 8 karakter!',
+            'new_password.regex' => 'Password harus mengandung setidaknya satu huruf kecil, satu huruf besar, satu angka, dan satu simbol!',
+        ]);
+
+        /** @var \App\Models\User $user **/
+
+        $user = Auth::user();
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return redirect()->back()->with([
+            'message' => 'Password Berhasil Diperbarui!',
+            'alert-type' => 'success',
+            'passwordUpdated' => true
+        ]);
     }
 }
