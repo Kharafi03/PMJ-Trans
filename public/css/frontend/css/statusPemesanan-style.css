@@ -7,25 +7,21 @@
 
 /* TEXT CONTENT */
 .text-content h1{
+    font-size: 44px;
     font-weight: 700;
     color: #1E9781;
-    font-family: 'Jakarta Sans', sans-serif;
-    margin-bottom: 0;
-  }
-  .text-content span{
-    color: #FD9C07;
-  }
-  .text-content p{
-    font-size: 16px; 
-    font-weight: 400;
-    color: #666666B5;
     font-family: 'Poppins', sans-serif;
-  }
-  @media (min-width: 1024px) {
-    .text-content h1{
-        font-size: 44px;
-    }
-  }
+    margin-bottom: 0;
+}
+.text-content span{
+    color: #FD9C07;
+}
+.text-content p{
+    font-size: 18px; 
+    font-weight: 400;
+    color: #000000AD;
+    font-family: 'Poppins', sans-serif;
+}
 
 body {
     height: 100vh;
@@ -51,26 +47,41 @@ form{
 }
 @media (min-width: 1024px) {
     .input-group{
-        width: 440px;
+        width: 100%;
     }
 }
 #icon{
     background-color: white;
     border-radius: 10px 0px 0px 10px;
     border: 1px solid #99A2A5;
+    color: #666666;
+    font-size: 20px;
 }
 input[type="text"]{
     border-radius: 0px 10px 10px 0px;
     border: 1px solid #99A2A5;
 }
-input[type="text"]:focus, .input-group:focus-within{
-    outline: 1px solid #1E9781 !important;
-    box-shadow: none;
-     z-index: 3;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    border:none !important;
+
+/* FORM FOCUS */
+.input-group:focus-within {
+    border: 1px solid #1E9781; 
     border-radius: 10px;
+}
+
+.input-group:focus-within .input-group-text,
+.input-group:focus-within .form-control {
+    border: none !important; 
+    box-shadow: none;
+}
+
+.input-group:focus-within .form-control {
+    border-left: 1px solid #1E9781 !important;
+    border-radius: 0 10px 10px 0; 
+}
+
+select:focus {
+    box-shadow: none !important;
+    border: none !important;
 }
 
 
@@ -82,14 +93,14 @@ input[type="text"]:focus, .input-group:focus-within{
     height: 50px;
     width: 111px;
     padding: 10px;
-    border: 1px solid #1E9781;
+    border: none;
     border-radius: 10px;
     background-color: #1E9781;
     color: white;
     font-size: 16px;
     font-weight: 700;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
-        rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+    box-shadow: #4475F236 0px 15px 25px, rgba(86, 167, 221, 0.397) 0px 5px 10px;
+    font-family: 'Poppins', sans-serif;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     &:hover {
         transform: scale(1.05);

@@ -35,7 +35,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogo(fn () => view('logo'))
             ->favicon(asset('favicon.ico'))
             ->darkMode(false)
-            ->spa() //agar realtime
+            ->spa() 
             ->profile()
             ->maxContentWidth('full')
             ->sidebarWidth('18rem')
@@ -83,9 +83,9 @@ class AdminPanelProvider extends PanelProvider
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 \Hasnayeen\Themes\ThemesPlugin::make(),
                 FilamentBackgroundsPlugin::make()
-    ->imageProvider(
-        MyImages::make()
-            ->directory('images/swisnl/filament-backgrounds/curated-by-swis')
+                ->imageProvider(
+                  MyImages::make()
+                 ->directory('images/swisnl/filament-backgrounds/curated-by-swis')
           
     ),
 

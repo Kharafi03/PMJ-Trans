@@ -6,48 +6,9 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    margin: 0 auto; 
 }
 
-/* TEXT HEADER */
-.profile-card {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    max-width: 400px;
-}
-.profile-text {
-    display: flex;
-    flex-direction: column;
-    padding-left: 10px;
-}
-
-.profile-text h5 {
-    margin: 0px;
-}
-
-.profile-text p {
-    margin: 0px;
-    color: #777;
-}
-
-.text-content{
-    color:#000000A1;
-    font-size: 16px;
-    font-weight: 500;
-}
-
-.title h5{
-    font-size: 17px;
-    font-weight: 700;
-    color: #1E9781;
-    margin-top: 0;
-}
-.title p{
-    font-size: 15px;
-    font-weight: 500;
-    color: #000000A1;
-    margin-bottom: 0;
-}
 
 /* BANNER */
 .banner{
@@ -114,20 +75,24 @@
 
 /* BUTTON KIRIM */
 .btn-mulai{
+    text-decoration: none;
     height: 48px;
     width: 100%;
-    background-color: #F44C28;
+    background-color: #FF9149;
     color: white;
     font-size: 16px;
     font-weight: 700;
     padding: 10px;
     text-align: center;
-    border-radius: 8px;
-    margin: 10px 0px;
     border: none;
-    transition: transform 0.3s ease;
-    &:hover{
-        transform: scale(1.02); 
+    border-radius: 15px;
+    display: inline-block;
+    margin-bottom: 20px;
+    box-shadow: #4475F236 0px 15px 25px, rgba(86, 167, 221, 0.397) 0px 5px 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    &:hover {
+        transform: scale(1.05);
+        background-color: #F9741D;
     }
 }
 
@@ -189,7 +154,22 @@
     margin: 12px 5px;
 }
 
+.navigation ul {
+    display: flex;
+    width: 100%;
+    padding-left: 20px !important;
+}
 
+@media (min-width: 768px) {
+    .dashboard-container {
+        max-width: 100%;
+        width: 375px;
+    }
+    
+    .content {
+        padding-bottom: 50px; /* Maintain mobile padding */
+    }
+}
 
 
 

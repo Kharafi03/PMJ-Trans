@@ -1,38 +1,17 @@
 /* CONTAINER LAYOUT*/
-/* .dashboard-container{
-    max-width: 375px;
-    position: relative;
-}
-.content{
-    padding-bottom: 50px;
-} */
-/* NAVBAR BOTTOM */
-/* .navbar-bottom{
-    background-color: #1E9781;
-    border-radius: 50px;
-}
-li{
-    margin: 0px 30px;
-} */
-
-.nav-content{
-    padding: 30px 0px 20px 0px !important;
-    background-color: white !important;
-}
-
 .navigation {
-    position: fixed; /* Fixed position for the navbar */
-    bottom: 0; /* Stick it to the bottom */
-    left: 50%; /* Center it */
-    transform: translateX(-50%); /* Adjust for half its width */
-    width: 375px; /* Fixed width for the navbar */
+    position: fixed; 
+    bottom: 0; 
+    left: 50%;
+    transform: translateX(-50%); 
+    width: 375px;
     height: 70px;
     background-color: #1E9781;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 5px 5px 35px 35px;
-    z-index: 1; /* Keep it above other elements */
+    z-index: 1; 
     padding: 35px 0px;
     border-bottom: 10px solid white;
     border-top: 10px solid white;
@@ -42,6 +21,7 @@ li{
 .navigation ul {
     display: flex;
     width: 100%;
+    padding-right: 20px;
 }
 
 .navigation ul li {
@@ -66,10 +46,10 @@ li{
 .navigation ul li a .icon {
     position: relative;
     display: block;
-    line-height: 75px;
-    font-size: 1.5em;
+    line-height: 80px;
+    font-size: 22px;
     text-align: center;
-    color: #000;
+    color: white;
     transition: .5s;
 }
 
@@ -91,8 +71,9 @@ li{
 .navigation ul li.active a .text {
     opacity: 1;
     transform: translateY(10px);
-    padding-top: 25px;
+    padding-top: 20px;
     color: white;
+    font-family: 'Poppins', sans-serif !important;
 }
 
 .indicator {
@@ -152,3 +133,4 @@ li{
 .navigation ul li:nth-child(5).active~.indicator {
     transform: translateX(calc(70px * 4));
 }
+

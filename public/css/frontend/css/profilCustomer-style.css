@@ -1,3 +1,34 @@
+.info{
+    padding: 10px;
+    border: 1px solid #4180CC;
+    border-radius: 6px;
+    border-left: 4px solid #4180CC;
+    background-color: #F5F7F9;
+    font-family: 'Poppins', sans-serif;
+}
+.info i{
+    color: #4180CC;
+}
+.info p{
+    font-size: 18px;
+    font-weight: 700;
+    color: #252A31;
+}
+.info li{
+    font-size: 16px;
+    color: #252A31;
+    font-weight: 400;
+}
+.info a{
+    font-weight: 700;
+    color: #4180CC;
+    font-weight: 700;
+    text-decoration: none;
+    &:hover{
+        color: #6799d6;
+    }
+}
+
 /* CONTAINER PROFIL & FORM */
 #profil{
     margin-top: 120px;
@@ -28,7 +59,7 @@
     border-radius: 8px;
     background-color: #F9F9FC;
 }
-i{
+.photo{
     font-size: 200px;
     color: #4D5464;
 }
@@ -52,22 +83,32 @@ input[type="text"], input[type="email"], input[type="number"], input[type="passw
     background-color: #EDEDED;
 }
 
-#icon, #pw-icon{
+#icon{
     height: 48px;
     border: 1px solid #99A2A5;
     border-radius: 10px 0px 0px 10px;
     background-color: #EDEDED;
+    color: #666666;
+    font-size: 20px !important;
 }
 
 #pw-icon{
-    color: #8E8E8E;
+    color: #666666;
     font-size: 20px;
+    height: 48px;
+    border: 1px solid #99A2A5;
+    border-radius: 0px 10px 10px 0px;
+    background-color: #EDEDED;
+
 }
 
 textarea{
     border: 1px solid #99A2A5 !important;
     border-radius: 0px 10px 10px 0px !important;
     background-color: #EDEDED!important;
+}
+.card{
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 .card-body{
@@ -104,13 +145,14 @@ textarea{
     border: none;
     border-radius: 10px;
     text-align: center;
-    font-size: 16px;
+    font-size: 14px;
     height: 50px;
     font-weight: 700;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+    box-shadow: #4475F236 0px 15px 25px, rgba(86, 167, 221, 0.397) 0px 5px 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     font-family: 'Poppins', sans-serif;
       &:hover{
           transform: scale(1.05); 
+          background-color: #00BB83;
       }
   }

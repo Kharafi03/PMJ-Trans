@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('bus_maintenances', function (Blueprint $table) {
             $table->id();
+            $table->string('maintenance_code')->nullable();
             $table->foreignId('id_bus')->constrained('buses')->cascadeOnDelete();
             $table->foreignId('id_user')->constrained('users')->cascadeOnDelete();
             $table->foreignId('id_m_maintenance')->constrained('m_maintenances')->cascadeOnDelete();
@@ -20,7 +21,8 @@ return new class extends Migration
             $table->longText('image')->nullable(); // Gambar terkait maintenance
             $table->dateTime('date'); // Tanggal maintenance
             $table->string('location')->nullable(); // Lokasi maintenance
-            $table->decimal('nominal', 12, 2)->nullable(); // Biaya maintenance
+            $table->decimal('nominal', 12, 2)->nullable();
+            $table->foreignId('id_m_method_payment')->constrained('m_method_payments')->cascadeOnDelete();
             $table->longText('image_receipt')->nullable(); // Gambar tanda terima
             $table->string('latitude')->nullable(); // Latitude
             $table->string('longitude')->nullable(); // Longitude

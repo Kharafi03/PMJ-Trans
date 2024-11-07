@@ -1,14 +1,43 @@
 @if ($errors->any())
-    <div class="alert alert-danger alert-dismissible fade show shadow-sm border-0 p-3" role="alert">
+    @push('styles')
+        <style>
+            .alert{
+                border: 1px solid #CA383A;
+                border-radius: 8px;
+            }
+            strong, strong i{
+                color: #CA383A;
+                font-size: 14px;
+            }
+            strong i{
+                padding-right: 10px;
+            }
+            .alert hr {
+                border: none;
+                margin: 0; 
+            }
+            .btn-close{
+                font-size: 10px !important;
+            }
+            p{
+                color: #181818;
+                font-size: 12px;
+                font-weight: 400;
+                margin-left: 18px;
+                padding-top: 5px;
+            }
+        </style>
+    @endpush
+    <div class="alert alert-dismissible show p-3" role="alert">
         <div class="d-flex align-items-center">
-            <strong class="me-auto">Terjadi Kesalahan:</strong>
+            <strong><i class="fa-solid fa-triangle-exclamation"></i> Terjadi Kesalahan:</strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <hr>
-        <ul class="mb-0 ps-3">
+        <p class="mb-0 ps-3 text-start">
             @foreach ($errors->all() as $error)
-                <li class="text-start">{{ $error }}</li>
+                {{ $error }}
             @endforeach
-        </ul>
+        </p>
     </div>
 @endif

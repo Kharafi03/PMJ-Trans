@@ -9,10 +9,10 @@
 
     <section id="riwayatSewa">
         <div class="container mb-5">
-            <div class="text-content mb-4">
+            <div class="text-content mb-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">
                 <h5 style="font-size: 44px; font-weight: 700; color: #1E9781; 'Plus Jakarta Sans', sans-serif;">Riwayat <span style="color: #FD9C07;">Sewa</span></h5>
             </div>
-            <div class="tabel-riwayat justify-content-between align-items-center p-3">
+            <div class="tabel-riwayat justify-content-between align-items-center p-3 wow animate__animated animate__fadeInUp" data-wow-delay="0.7s">
                 <div class="row">
                     <div class="col-md-8">
                         <p class="title">Detail Riwayat Sewa</p>
@@ -33,6 +33,7 @@
                                 <th scope="col">Biaya</th>
                                 <th scope="col">Minimum DP</th>
                                 <th scope="col">Status Pembayaran</th>
+                                <th scope="col">E-Ticket</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
@@ -97,6 +98,9 @@
                                         @endif
                                     </td>
                                     <td>{{ $booking->ms_payment->name }}</td>
+                                    <td>
+                                        <a href="{{ route('booking.code', ['booking_code' => $booking->booking_code]) }}" class="btn-tiket me-2 text-center align-items-center">E-Ticket</a>
+                                    </td>
                                     <td>
                                         <div class="d-flex justify-content-center align-items-center text-center">
                                             <a href="{{ route('history.show', ['booking_code' => $booking->booking_code]) }}"
@@ -204,6 +208,9 @@
                     });
                 });
             });
+        </script>
+        <script>
+            new WOW().init();
         </script>
     @endpush
 @endsection

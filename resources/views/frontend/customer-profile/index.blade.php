@@ -10,14 +10,29 @@
     <!-- CUSTOMER PROFIL -->
     <section id="profil">
         <div class="container">
+            {{--@if($showAlertPassword)
+                <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert" style="padding: 1.25rem; border-radius: 0.5rem;">
+                    <div style="flex-grow: 1;">
+                        <strong>Perhatian!</strong> Anda masih menggunakan kata sandi sementara '12345678'. Demi keamanan, segera perbarui kata sandi akun Anda!
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif--}}
             @include('frontend.assets.alert')
             <div class="row justify-content-center g-4 mb-5" style="margin-bottom: 50px;">
-                <div>
-                    <h1 style="font-size: 44px; font-weight: 700; color: #1E9781;">Ubah <span
-                            style="color: #FD9C07;">Profil</span></h1>
+                <div class="wow animate__animated animate__fadeInUp">
+                    <h1 style="font-size: 44px; font-weight: 700; color: #1E9781; font-family: 'Poppins', sans-serif;">Ubah <span style="color: #FD9C07;">Profil</span></h1>
+                </div>
+                <div class="info mt-3 wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">
+                    <p class="info-title"><i class="fa-solid fa-circle-exclamation"></i> Informasi Ubah Kata Sandi</p>
+                    <ul>
+                        <li>Harap segera mengganti kata sandi Anda, karena saat ini menggunakan kata sandi sementara: '12345678'. Ubah ke kata sandi yang mudah Anda ingat, dan jika perlu, catatlah agar tidak lupa.</li>
+                        <li>Pastikan kata sandi baru mengandung kombinasi huruf, angka, dan simbol untuk meningkatkan keamanan. Contoh : <span style="font-weight: 700; color: #4180CC; font-weight: 700;">Contohpassword13!</span></li>
+                        <li>Jika Anda mengalami kesulitan dalam mengganti kata sandi, hubungi <a href="{{ route('contact') }}">Kontak Kami</a>  untuk bantuan lebih lanjut.</li>
+                    </ul>
                 </div>
                 <div class="col-xl-8">
-                    <div class="card border-0 shadow">
+                    <div class="card border-0 shadow wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">
                         <div class="card-header  text-white ">
                             Pengaturan Profil
                         </div>
@@ -27,8 +42,7 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-xl-5 d-flex flex-column mb-3">
-                                        <p>Foto Profil</p>
-                                        <div>
+                                        <div style="margin-top: 30px;">
                                             <div class="profil-image card h-100 w-100">
                                                 <div class="text-center">
                                                     <img src="{{ asset('img/avatar.png') }}" class="img-fluid"
@@ -41,7 +55,7 @@
                                         <div class="mb-3">
                                             <label for="name" class="form-label ">Nama</label><span class="text-danger text-lg">*</span>
                                             <div class="input-group">
-                                            <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-user.png') }}" alt="icon"></span>
+                                                <span class="input-group-text" id="icon"><i class="fa-solid fa-user"></i></span>
                                                 <input type="text" id="name" name="name" class="form-control  @error('name') is-invalid @enderror" value="{{ $user->name }}" required>
                                                 <!-- <span class="input-group-text">
                                                     <i class="fa-solid fa-user text-success text-lg"
@@ -58,7 +72,7 @@
                                         <div class="mb-3">
                                             <label for="email" class="form-label ">Email</label>
                                             <div class="input-group">
-                                                <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-email.png') }}" alt="icon"></span>
+                                                <span class="input-group-text" id="icon"><i class="fa-solid fa-envelope"></i></span>
                                                 <input type="email" id="email" name="email" class="form-control  @error('email') is-invalid @enderror" value="{{ $user->email }}" required>
                                                 <!-- <span class="input-group-text">
                                                     <i class="fa-solid fa-envelope text-success text-lg"
@@ -90,7 +104,8 @@
                                         <div class="mb-3">
                                             <label for="address" class="form-label ">Alamat</label> <span class="text-danger text-lg">*</span>
                                             <div class="input-group">
-                                                <span class="input-group-text" style="background-color: #EDEDED !important; border: 1px solid #99A2A5 !important; border-radius: 10px 0px 0px 10px !important;"><img src="{{ asset('img/icon/icon-tujuan.png') }}" alt="icon"></span>
+                                                <span class="input-group-text" style="background-color: #EDEDED !important; border: 1px solid #99A2A5 !important; border-radius: 10px 0px 0px 10px !important; color: #666666; font-size: 20px !important;"><i class="fa-solid fa-location-dot"> 
+                                                </i></span>
                                                 <textarea id="address" name="address" class="form-control  @error('address') is-invalid @enderror" rows="4" placeholder="Masukkan Alamat Anda" required>{{ $user->address ?? '' }}</textarea>
                                                 <!-- <span class="input-group-text">
                                                     <i class="fa-solid fa-location-dot text-success text-lg"
@@ -115,7 +130,7 @@
                 </div>
                 <!-- Update Password -->
                 <div class="col-xl-4" style="margin-bottom: 50px;">
-                    <div class="card border-0 shadow">
+                    <div class="card border-0 shadow wow animate__animated animate__fadeInUp" data-wow-delay="0.9s">
                         <div class="card-header  text-white ">
                             Ubah Password
                         </div>
@@ -127,14 +142,14 @@
                                         class="form-label ">Password Sekarang</label>
                                     <span class="text-danger text-lg">*</span>
                                     <div class="input-group">
-                                        <span class="input-group-text" id="pw-icon" onclick="togglePassword(this)"
-                                            style="cursor: pointer;">
-                                            <i class="fas fa-eye-slash" style="font-size: 1rem"></i>
-                                        </span>
                                         <input type="password" id="password_lama" name="password_lama"
                                             class="form-control @error('password_lama') is-invalid @enderror"
                                             placeholder="Masukan Password Sekarang" required
                                             autocomplete="current-password">
+                                        <span class="input-group-text" id="pw-icon" onclick="togglePassword(this)"
+                                            style="cursor: pointer;">
+                                            <i class="fas fa-eye-slash" style="font-size: 1rem"></i>
+                                        </span>
                                         @error('password_lama')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -147,14 +162,14 @@
                                         class="form-label ">Password Baru</label>
                                     <span class="text-danger text-lg">*</span>
                                     <div class="input-group">
-                                        <span class="input-group-text" id="pw-icon" onclick="togglePassword(this)"
-                                            style="cursor: pointer;">
-                                            <i class="fas fa-eye-slash" style="font-size: 1rem"></i>
-                                        </span>
                                         <input type="password" id="password_baru" name="password_baru"
                                             class="form-control @error('password_baru') is-invalid @enderror"
                                             placeholder="Masukan Password Baru" required
                                             autocomplete="new-password">
+                                        <span class="input-group-text" id="pw-icon" onclick="togglePassword(this)"
+                                            style="cursor: pointer;">
+                                            <i class="fas fa-eye-slash" style="font-size: 1rem"></i>
+                                        </span>
                                         @error('password_baru')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -167,14 +182,14 @@
                                         class="form-label ">Konfirmasi Password</label>
                                     <span class="text-danger text-lg">*</span>
                                     <div class="input-group">
-                                        <span class="input-group-text" id="pw-icon" onclick="togglePassword(this)"
-                                            style="cursor: pointer;">
-                                            <i class="fas fa-eye-slash" style="font-size: 1rem"></i>
-                                        </span>
                                         <input type="password" id="konfirmasi_password" name="konfirmasi_password"
                                             class="form-control @error('konfirmasi_password') is-invalid @enderror"
                                             placeholder="Konfirmasi Password" required
                                             autocomplete="new-password">
+                                        <span class="input-group-text" id="pw-icon" onclick="togglePassword(this)"
+                                            style="cursor: pointer;">
+                                            <i class="fas fa-eye-slash" style="font-size: 1rem"></i>
+                                        </span>
                                         @error('konfirmasi_password')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -240,6 +255,9 @@
                     });
                 });
             });
+        </script>
+        <script>
+            new WOW().init();
         </script>
     @endpush
 @endsection

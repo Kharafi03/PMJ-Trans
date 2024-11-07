@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 @push('styles')
-    <title>QR Qode</title>
+    <title>Scan Trip</title>
     <link id="pagestyle" href="{{ asset('css/frontend/css/driver/QRCode-style.css') }}" rel="stylesheet">
 @endpush
 @section('content')
@@ -8,14 +8,23 @@
     <section id="qrCode">
         <div class="dashboard-container container p-3">
             <!-- HEADER -->
-            <x-header-driver />
+            <!-- <x-header-driver /> -->
 
-            <div class="text-content text-center mb-4">
-                <h5 style="font-size: 25px; font-weight: 700; color: #1E9781;">SCAN QR CODE <span style="color: #FD9C07;">DRIVER</span></h5>
-                <p class="caption">Silahkan Scan QR-Code diatas untuk memulai trip</p>
+            <div class="text-content text-start mb-4">
+                <!-- <h5 style="font-size: 25px; font-weight: 700; color: #1E9781;">Scan QR Code <span style="color: #FD9C07;">Driver</span></h5>
+                <p class="caption">Silahkan Scan QR-Code diatas untuk memulai trip</p> -->
+                <div class="row">
+                    <div class="col-2" style="margin-right: -20px;">
+                        <a href="{{ route('dashboard-driver') }}"><i class="fa-solid fa-chevron-left"></i></a>
+                    </div>
+                    <div class="col-10">
+                        <h5 style="font-size: 20px; font-weight: 700; color: #1E9781;">Scan QR Code <span style="color: #FD9C07;">Driver</span></h5>
+                        <p class="caption">Silahkan Scan QR-Code diatas untuk memulai trip</p>
+                    </div>
+                </div>
             </div>
             <!-- CAMERA -->
-            <div class="d-flex justify-content-center align-items-center mb-3">
+            <div class="d-flex justify-content-center align-items-center mb-3 p-3">
                 <div id="reader"></div>
             </div>
 

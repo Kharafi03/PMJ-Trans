@@ -5,9 +5,15 @@
     background-image: url('/img/bg4.png');
     background-repeat: no-repeat;
     background-attachment: scroll;
+    margin: 0 auto; 
+    font-family: 'Poppins', sans-serif;
 }
 .content{
     padding-bottom: 50px;
+}
+
+#profilDriver{
+    margin-bottom: 20px;
 }
 
 /* TEXT CONTENT */
@@ -38,6 +44,7 @@
     border-bottom-left-radius: 15px;
     border: 1px solid #C9C9C9;
     color: #666666;
+    font-size: 20px;
 }
 input[type="text"], input[type="number"], input[type="password"], .form-select{
     border-left: none !important;
@@ -64,23 +71,49 @@ input[type="text"], input[type="number"], input[type="password"], .form-select{
     border: 1px solid #C9C9C9;
 }
 
+label{
+    font-size: 16px;
+    color:#292D32;
+    font-weight: 400;
+}
+
+/* FOCUS */
+.input-group:focus-within {
+    border: 1px solid #1E9781;
+    border-radius: 15px;
+}
+
+.input-group:focus-within .input-group-text,
+.input-group:focus-within .form-control {
+    border-top: none !important;
+    border-bottom: none !important;
+    border-left: none !important;
+    border-right: 1px solid #1E9781 !important; /* Menjaga border kanan berwarna hijau */
+    box-shadow: none;
+}
+
+
+
 /* BUTTON */
 .btn-ubahPassword{
+    text-decoration: none;
     height: 48px;
     width: 100%;
-    background-color: #E42E07;;
+    background-color: #FF9149;
     color: white;
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 700;
     padding: 10px;
     text-align: center;
-    border-radius: 15px;
     border: none;
-    margin-bottom: 50px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-bottom: 20px;
+    box-shadow: #4475F236 0px 15px 25px, rgba(86, 167, 221, 0.397) 0px 5px 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     &:hover {
         transform: scale(1.05);
-        background-color: #FF0505;
+        background-color: #F9741D;
     }
 }
 
@@ -122,6 +155,17 @@ input[type="text"], input[type="number"], input[type="password"], .form-select{
     transition: transform 0.3s ease;
     &:hover {
         transform: scale(1.05);
+    }
+}
+
+@media (min-width: 768px) {
+    .dashboard-container {
+        max-width: 100%;
+        width: 375px;
+    }
+    
+    .content {
+        padding-bottom: 50px; /* Maintain mobile padding */
     }
 }
 

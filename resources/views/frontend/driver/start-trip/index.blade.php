@@ -8,17 +8,29 @@
     <section id="dashboardKm">
         <!-- HEADER -->
         <div class="dashboard-container container p-3">
-            <x-header-driver />
-            <!-- BUS IMAGE -->
+            <!-- <x-header-driver /> -->
+
+            <div class="text-content text-start mb-4">
+                <div class="row">
+                    <div class="col-2" style="margin-right: -20px;">
+                        <a href="#"><i class="fa-solid fa-chevron-left"></i></a>
+                    </div>
+                    <div class="col-10">
+                        <h5 style="font-size: 20px; font-weight: 700; color: #1E9781">Kilometer <span style="color: #FD9C07;">Awal</span></h5>
+                        <p class="caption">Silahkan Masukkan Data</p>
+                    </div>
+                </div>
+            </div>
+           
 
             <!-- FORM INPUT -->
             <div class="form-km mb-4">
                 <form action="{{ route('km-start', $trip->id) }}" method="POST">
                     @csrf <!-- Tambahkan token CSRF -->
                     <div class="mb-3">
-                        <label for="km_start" class="form-label">Kilometer Awal</label>
+                        <label for="km_start" class="form-label">Kilometer Awal<span class="text-danger">*</span></label>
                         <div class="input-group">
-                            <span class="input-group-text" id="icon"><i class="fa-regular fa-file"></i></span>
+                            <span class="input-group-text" id="icon"><i class="fa-solid fa-road-bridge"></i></span>
                             <input type="text" class="form-control" id="km_start" name="km_start"
                                 placeholder="Masukkan Kilometer Awal" required>
                         </div>

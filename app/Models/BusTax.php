@@ -19,6 +19,7 @@ class BusTax extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
+        'tax_code',
         'id_bus',
         'id_user',
         'description',
@@ -27,6 +28,7 @@ class BusTax extends Model
         'expiration_number_bus',
         'nominal',
         'image',
+        'id_m_method_payment',
     ];
 
     public function buses():BelongsTo
@@ -37,5 +39,10 @@ class BusTax extends Model
     public function users():BelongsTo
     {
         return $this->belongsTo(User::class, 'id_user');
+    }
+
+    public function m_method_payment(): BelongsTo
+    {
+        return $this->belongsTo(MMethodPayment::class, 'id_m_method_payment');
     }
 }

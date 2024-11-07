@@ -3,31 +3,34 @@
     max-width: 375px;
     position: relative;
     background-color: white;
+    margin: 0 auto; 
+    font-family: 'Poppins', sans-serif;
 }
 #dashboardKm{
-    margin: 70px 0px;
+    margin-bottom: 100px;
 }
 
-/* TEXT HEADER */
-.profile-card {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    max-width: 400px;
+.text-content a{
+    text-decoration: none;
+    padding-top: 5px;
 }
-.profile-text {
-    display: flex;
-    flex-direction: column;
-    padding-left: 10px;
+.caption{
+    font-size: 14px;
+    font-weight: 400;
+    color: #666666;
 }
-
-.profile-text h5 {
-    margin: 0px;
+.text-content i{
+    font-size: 16px;
+    padding: 5px 8px;
+    color: white;
+    border: 1px solid #1E9781;
+    border-radius: 50%;
+    background-color: #1E9781;
+    transition: transform 0.3s ease;
 }
-
-.profile-text p {
-    margin: 0px;
-    color: #777;
+.text-content i:hover{
+    transform: scale(1.05);
+    background-color: #00BB83;
 }
 
 /* FORM */
@@ -39,6 +42,8 @@
     border-right: none;
     background-color: white;
     height: 48px;
+    color: #666666;
+    font-size: 20px;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
     border-top: 1px solid #666666;
@@ -53,24 +58,32 @@ input[type="text"]{
     border-right: 1px solid #666666;
     border-bottom: 1px solid #666666;
 }
+label{
+    font-size: 16px;
+    font-weight: 400;
+    color: #292D32;
+}
 
 /* BUTTON KIRIM */
 .btn-inputkm{
+    text-decoration: none;
     height: 48px;
     width: 100%;
-    background-color: #E42E07;
+    background-color: #FF9149;
     color: white;
     font-size: 16px;
     font-weight: 700;
     padding: 10px;
     text-align: center;
-    border-radius: 15px;
     border: none;
-    margin-bottom: 70px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-top: 10px;
+    box-shadow: #4475F236 0px 15px 25px, rgba(86, 167, 221, 0.397) 0px 5px 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     &:hover {
         transform: scale(1.05);
-        background-color: #FF0505;
+        background-color: #F9741D;
     }
 }
 
@@ -148,9 +161,10 @@ input[type="text"]{
     text-align: center;
 }
 .jam-tiket h5{
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
-    color: #8C8E98;
+    color: #191D31;
+    padding-top: 5px;
 }
 .info-tiket li{
     font-size: 11px;
@@ -168,4 +182,32 @@ input[type="text"]{
     text-align: center;
     color: #A7AEC1;
     padding: 20px 0px;
+}
+
+/* FORM FOCUS */
+.input-group:focus-within {
+    border: 1px solid #1E9781;
+    border-radius: 15px; 
+}
+
+.input-group:focus-within .input-group-text,
+.input-group:focus-within .form-control {
+    border: none !important; 
+    box-shadow: none;
+}
+
+select:focus{
+    box-shadow: none !important;
+    border: none !important;
+}
+
+@media (min-width: 768px) {
+    .dashboard-container {
+        max-width: 100%;
+        width: 375px;
+    }
+    
+    .content {
+        padding-bottom: 50px; /* Maintain mobile padding */
+    }
 }

@@ -46,29 +46,6 @@ class TripBusResource extends Resource
         return static::getModel()::whereNull('deleted_at')->count();
     }
 
-    // protected function mounted(): void
-    // {
-    //     $this->calculateTotalSpends();
-    // }
-
-    // protected function calculateTotalSpends(): void
-    // {
-    //     $tripBus = $this->getRecord();
-
-    //     $listspend = $tripBus->tripbusspend;
-
-    //     $totalSpend = $listspend->sum('nominal');
-    //     $totalSpendBBM = $listspend->where('id_m_spend', 1)->sum('nominal');
-
-    //     // Set nilai ke form jika kamu menggunakan form
-    //     $this->fillForm([
-    //         'total_spend' => $totalSpend,
-    //         'total_spend_bbm' => $totalSpendBBM,
-    //     ]);
-    // }
-
-
-
     public static function form(Form $form): Form
     {
         return $form
@@ -208,12 +185,8 @@ class TripBusResource extends Resource
                                                     ->columnSpanFull(),
                                             ]),
                                     ])
-                                // ->afterStateUpdated(function (Get $get, Set $set) {
-                                //     self::updateTotal($get, $set);
-                                //     self::updateBBMTotal($get, $set);
-                                // })
-
                             ])->columnSpan(2),
+                            
                         Forms\Components\Card::make()
                             ->schema([
                                 Forms\Components\Section::make()
@@ -536,7 +509,7 @@ class TripBusResource extends Resource
     public static function getWidgets(): array
     {
         return [
-            MyCalendar::class,
+           // MyCalendar::class,
         ];
     }
 

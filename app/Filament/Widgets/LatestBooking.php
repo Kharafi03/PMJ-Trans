@@ -39,9 +39,14 @@ class LatestBooking extends BaseWidget
                     ->label('Titik Jemput')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('destination_point')
+                Tables\Columns\TextColumn::make('destination.name')
                     ->label('Tujuan')
+                    ->getStateUsing(fn(Booking $record) => optional($record->destination->last())->name)
                     ->searchable()
+                    ->limit(25)
+                    ->tooltip(function (Booking $record) {
+                        return ($record->destination->last())->name;
+                    })
                     ->sortable(),
                 Tables\Columns\TextColumn::make('ms_payment.name')
                     ->label('Status Pembayaran')

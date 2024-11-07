@@ -13,54 +13,86 @@ class OutcomeChart extends BarChartWidget
 
     protected static ?string $heading = 'Total Pengeluaran';
     protected static string $color = 'danger';
-    protected static ?string $icon = 'heroicon-o-cash'; // Ikon untuk pengeluaran
+    protected static ?string $icon = 'heroicon-o-cash';
     protected static ?string $iconColor = 'danger';
     protected static ?string $iconBackgroundColor = 'danger';
-    protected static ?string $label = 'Monthly Outcome';
 
-    public ?string $filter = 'today'; // Default filter
+    public ?string $filter = 'daily'; 
 
-    //Mengatur pilihan filter untuk periode waktu.
+    
     protected function getFilters(): ?array
     {
         return [
-            'today' => 'Today',
-            'week' => 'Last Week',
-            'month' => 'Last Month',
-            'year' => 'This Year',
+            'daily' => 'Harian',
+            'monthly' => 'Bulanan',
+            'yearly' => 'Tahunan',
         ];
     }
 
-
-    // Mengambil data pengeluaran berdasarkan filter periode waktu yang dipilih.
-  
+   
     protected function getData(): array
     {
-        // Mengambil tanggal awal berdasarkan filter yang dipilih
-        $startDate = match ($this->filter) {
-            'today' => Carbon::today(),
-            'week' => Carbon::now()->subWeek(),
-            'month' => Carbon::now()->subMonth(),
-            'year' => Carbon::now()->subYear(),
-            default => Carbon::now()->subMonths(12),
-        };
+        switch ($this->filter) {
+            case 'daily':
+                $startDate = Carbon::today();
+                $outcomeData = Outcome::selectRaw('DATE_FORMAT(datetime, "%Y-%m-%d") as day, SUM(nominal) as total')
+                    ->where('datetime', '>=', $startDate)
+                    ->groupBy('day')
+                    ->orderBy('day')
+                    ->get()
+                    ->pluck('total', 'day')
+                    ->toArray();
 
-        // Mengambil data pengeluaran per bulan dari rentang waktu yang dipilih
-        $outcomePerMonth = Outcome::selectRaw('DATE_FORMAT(datetime, "%Y-%m") as month, SUM(nominal) as total')
-            ->where('datetime', '>=', $startDate)
-            ->groupBy('month')
-            ->orderBy('month')
-            ->get()
-            ->pluck('total', 'month')
-            ->toArray();
+                $labels = [];
+                $data = [];
+                for ($i = 6; $i >= 0; $i--) {
+                    $day = Carbon::now()->subDays($i)->format('Y-m-d');
+                    $labels[] = Carbon::now()->subDays($i)->format('d M');
+                    $data[] = $outcomeData[$day] ?? 0;
+                }
+                break;
 
-        // Membuat array 12 bulan terakhir untuk label dan data
-        $months = [];
-        $data = [];
-        for ($i = 11; $i >= 0; $i--) {
-            $month = Carbon::now()->subMonths($i)->format('Y-m'); // Format bulan (contoh: 2023-09)
-            $months[] = Carbon::now()->subMonths($i)->format('M Y'); // Format untuk label (contoh: Sep 2023)
-            $data[] = $outcomePerMonth[$month] ?? 0; // Mengambil jumlah pengeluaran atau 0 jika tidak ada
+            case 'monthly':
+                $startDate = Carbon::now()->subYear();
+                $outcomeData = Outcome::selectRaw('DATE_FORMAT(datetime, "%Y-%m") as month, SUM(nominal) as total')
+                    ->where('datetime', '>=', $startDate)
+                    ->groupBy('month')
+                    ->orderBy('month')
+                    ->get()
+                    ->pluck('total', 'month')
+                    ->toArray();
+
+                $labels = [];
+                $data = [];
+                for ($i = 11; $i >= 0; $i--) {
+                    $month = Carbon::now()->subMonths($i)->format('Y-m');
+                    $labels[] = Carbon::now()->subMonths($i)->format('M Y');
+                    $data[] = $outcomeData[$month] ?? 0;
+                }
+                break;
+
+            case 'yearly':
+                $startDate = Carbon::now()->subYears(5);
+                $outcomeData = Outcome::selectRaw('DATE_FORMAT(datetime, "%Y") as year, SUM(nominal) as total')
+                    ->where('datetime', '>=', $startDate)
+                    ->groupBy('year')
+                    ->orderBy('year')
+                    ->get()
+                    ->pluck('total', 'year')
+                    ->toArray();
+
+                $labels = [];
+                $data = [];
+                for ($i = 5; $i >= 0; $i--) {
+                    $year = Carbon::now()->subYears($i)->format('Y');
+                    $labels[] = $year;
+                    $data[] = $outcomeData[$year] ?? 0;
+                }
+                break;
+
+            default:
+                $labels = [];
+                $data = [];
         }
 
         return [
@@ -72,14 +104,13 @@ class OutcomeChart extends BarChartWidget
                     'borderWidth' => 0,
                 ],
             ],
-            'labels' => $months,
+            'labels' => $labels,
         ];
     }
 
-
-    // Tipe grafik yang digunakan.
+    
     protected function getType(): string
     {
-        return 'bar'; 
+        return 'bar';
     }
 }
