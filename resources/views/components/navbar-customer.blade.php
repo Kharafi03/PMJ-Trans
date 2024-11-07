@@ -2,7 +2,7 @@
     <link id="pagestyle" href="{{ asset('css/frontend/css/navbarCustomer-style.css') }}" rel="stylesheet" />
 @endpush
 <div>
-    <nav id="navbar" class="navbar navbar-expand-lg fixed-top">
+    <nav id="navbar" class="navbar navbar-expand-lg fixed-top wow animate__animated animate__fadeInDown">
         <div class="container-fluid  justify-content-start">
             <a class="navbar-brand" href="{{ route('homepage') }}">
                 <img src="{{ asset($setting->logo ? 'storage/' . $setting->logo : 'img/logo.png') }}" height="45" style="margin-left: 20px;">
@@ -29,6 +29,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('terms-conditions') }}">Syarat & Ketentuan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('booking') }}">Pemesanan</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('cek.status') }}">Cek Pemesanan</a>
@@ -82,4 +85,7 @@
             item.classList.add('active');
         }
     });
+</script>
+<script>
+    new WOW().init();
 </script>

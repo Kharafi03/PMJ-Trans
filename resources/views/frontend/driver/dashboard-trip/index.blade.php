@@ -8,7 +8,8 @@
     <section id="inputData">
         <div class="dashboard-container container p-3">
             <!-- HEADER -->
-            <x-header-driver />
+            <!-- <x-header-driver /> -->
+
             <!-- TEXT CONTENT -->
             <div class="text-content text-center mb-4">
                 <h5 style="font-size: 25px; font-weight: 700; color: #1E9781;">DATA <span
@@ -18,50 +19,46 @@
             </div>
             <!-- BUTTON -->
             <div class="p-3 mb-4">
-                <div class="mb-3">
+                <div class="mb-4">
                     <a href="{{ route('spend-trip') }}">
                         <button class="btn-pengeluaran">
                             <div class="btn-container">
-                                <div class="icon">
-                                    <!-- <i class="fa-solid fa-dollar-sign"></i> -->
-                                    <img src="{{ asset('img/icon-pengeluaran.png') }}">
+                                <div class="icon-btn">
+                                    <i class="fa-solid fa-money-check-dollar"></i>
+                                    <!-- <img src="{{ asset('img/icon-pengeluaran.png') }}"> -->
                                 </div>
-                                <div class="text">
+                                <div class="text d-flex align-items-center">
                                     <h6>Pengeluaran Saat Trip</h6>
-                                    <p>Masukan data saat trip dimulai</p>
                                 </div>
                             </div>
                         </button>
                     </a>
-
                 </div>
-                <div class="mb-3">
+                <div class="mb-4">
                     <a href="{{ route('history-spend-trip') }}">
                         <button class="btn-riwayatTrip">
                             <div class="btn-container">
-                                <div class="icon">
-                                    <!-- <i class="fa-solid fa-clock"></i> -->
-                                    <img src="{{ asset('img/icon-riwayat.png') }}">
+                                <div class="icon-btn">
+                                    <i class="fa-regular fa-folder-open" style="padding-left: 5px;"></i>
+                                    <!-- <img src="{{ asset('img/icon-riwayat.png') }}"> -->
                                 </div>
-                                <div class="text">
-                                    <h6>Riwayat Trip</h6>
-                                    <p>Riwayat Trip saat On Trip</p>
+                                <div class="text d-flex align-items-center">
+                                    <h6>Riwayat On Trip</h6>
                                 </div>
                             </div>
                         </button>
                     </a>
                 </div>
-                <div class="mb-3">
+                <div class="mb-4">
                     <a href="{{ route('finish-trip') }}">
                         <button class="btn-end">
                             <div class="btn-container">
-                                <div class="icon">
-                                    <!-- <i class="fa-solid fa-flag"></i> -->
-                                    <img src="{{ asset('img/icon-endtrip.png') }}">
+                                <div class="icon-btn">
+                                    <i class="fa-solid fa-circle"></i>
+                                    <!-- <img src="{{ asset('img/icon-endtrip.png') }}"> -->
                                 </div>
-                                <div class="text">
+                                <div class="text d-flex align-items-center">
                                     <h6>Akhiri Trip</h6>
-                                    <p>Masukan data saat trip selesai</p>
                                 </div>
                             </div>
                         </button>

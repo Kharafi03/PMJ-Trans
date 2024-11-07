@@ -10,77 +10,30 @@
     <!-- Header Start -->
     <div class="container-fluid header bg-white p-0">
         <div class="row g-0 align-items-center flex-md-row">
-            <div class="col-md-6 p-5 mt-lg-5 text-content">
-                <h1 class="mb-4">Kontak <span>Kami</span></h1>
+            <div class="col-md-6 p-5 mt-lg-5 text-content wow animate__animated animate__fadeInLeft">
+                <h1 class="mb-3">Kontak <span>Kami</span></h1>
                 <p class="mb-4">
-                    Untuk informasi lebih lanjut, silakan hubungi kami melalui kontak yang tersedia di halaman Kontak Kami.
+                Untuk informasi lebih lanjut, silakan hubungi kami melalui detail yang tercantum di halaman Kontak Kami
                 </p>
             </div>
-            <div class="col-md-6">
-                <img class="img-fluid" src="{{ asset('img/contact-img.png') }}" style="width: 100%; height: 100%; align-items:center; padding: 30px;" alt="gambar">
+            <div class="col-md-6 d-flex justify-content-center align-items-center wow animate__animated animate__fadeInRight">
+                <img class="img-fluid" src="{{ asset('img/contact-img.png') }}" style="width: 90%; height: 90%; padding: 30px;" alt="gambar">
             </div>
         </div>
     </div>
 
-    <!-- CONTACT -->
-    <section id="contact">
-        <div class="container mb-5">
-            <!-- ICON CARD -->
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-12 d-flex p-3 mx-auto">
-                    <div class="card contact-card flex-fill text-center border">
-                        <div class="icon p-3">
-                            <i class="fa-brands fa-whatsapp"></i>
-                        </div>
-                        <div class="card-body flex-column">
-                            <h5 class="card-title">Nomor WhatsApp</h5>
-                            <p class="card-text">{{ $setting->contact ? $setting->contact : '#' }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-12 d-flex p-3 mx-auto">
-                    <div class="card contact-card flex-fill text-center border">
-                        <div class="icon p-3">
-                            <i class="fa-solid fa-envelope"></i>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Email</h5>
-                            <p class="card-text">{{ $setting->email ? $setting->email : '#' }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-12 d-flex p-3 mx-auto">
-                    <div class="card contact-card flex-fill text-center border">
-                        <div class="icon p-3">
-                            <i class="fa-solid fa-location-dot"></i>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Lokasi</h5>
-                            <p class="card-text">{{ $setting->address ? $setting->address : '#' }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-12 d-flex p-3 mx-auto">
-                    <div class="card contact-card flex-fill text-center border">
-                        <div class="icon p-3">
-                            <i class="fa-solid fa-clock"></i>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Jam Buka</h5>
-                            <p class="card-text">{{ $setting->open_hours ? $setting->open_hours : '#' }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- FORM -->
     <section id="contact-form">
+        <div class="p-5 text-content wow animate__animated animate__fadeInLeft">
+            <h1 class="mb-3">Form Kontak <span>Kami</span></h1>
+            <p class="mb-4">
+                Mohon lengkapi formulir di bawah ini untuk memudahkan kami dalam menghubungkan Anda dengan tim PMJ Trans.
+            </p>
+        </div>
         <div class="container mt-5 mb-5">
             @include('frontend.assets.alert')
             <div class="row mt-5">
-                <div class="col-lg-6 mb-3">
+                <div class="col-lg-6 mb-3 wow animate__animated animate__fadeInLeft" data-wow-delay="0.5s">
                     <form id="formHubungiKami" method="POST" action="{{ route('contact.store') }}">
                         @csrf
                         <div class="form-header">
@@ -148,7 +101,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-lg-6 mb-3 d-flex justify-content-center">
+                <div class="col-lg-6 mb-3 d-flex justify-content-center wow animate__animated animate__fadeInRight" data-wow-delay="0.5s">
                     <iframe 
                         src="{{ $setting->maps ? $setting->maps : 'about:blank' }}" 
                         allowfullscreen 

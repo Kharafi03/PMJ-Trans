@@ -1,9 +1,6 @@
 @extends('frontend.layouts.app')
 @push('styles')
-    <title>Booking Processed</title>
-    <!-- <link id="pagestyle" href="{{ asset('css/frontend/css/pemesananDiproses-style.css') }}" rel="stylesheet" />
-    <link id="pagestyle" href="{{ asset('css/frontend/css/pemesananDiterima-style.css') }}" rel="stylesheet" />
-    <link id="pagestyle" href="{{ asset('css/frontend/css/pemesananDitolak-style.css') }}" rel="stylesheet" /> -->
+    <title>Booking Status</title>
     <link id="pagestyle" href="{{ asset('css/frontend/css/statusPesanan-style.css') }}" rel="stylesheet" />
 @endpush
 @section('content')
@@ -11,7 +8,7 @@
     <x-navbar-customer />
 
     <!-- Bread Crumbs -->
-    <nav aria-label="breadcrumb" style="margin-top: 100px;">
+    <nav aria-label="breadcrumb" style="margin-top: 100px;" class="wow animate__animated animate__fadeIn" data-wow-delay="0.6s">
         <ol class="breadcrumb d-flex justify-content-center align-items-center">
             <li class="breadcrumb-item"><a href="{{route('homepage')}}">Beranda</a></li>
             <li class="breadcrumb-item"><a href="{{route('cek.status')}}">Cek Pemesanan</a></li>
@@ -32,44 +29,39 @@
                         <img class="img-fluid" src="img/accepted-img.png">
                     </div>
                     <h5>Pemesanan Anda Diterima.</h5>
-                    <form>
+                    <form id="formModal">
                         <div class="mb-3">
                             <label for="kodeBooking" class="form-label">Kode Booking</label>
                             <div class="input-group mb-3">
-                                <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-tiket.png') }}" alt="icon"></span>
+                                <span class="input-group-text" id="icon"><i class="fa-solid fa-ticket-simple"></i></span>
                                 <input type="text" class="form-control" id="kodeBooking" value="{{ $booking->booking_code }}" readonly>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="nominal" class="form-label">Nominal Pembayaran</label>
                             <div class="input-group mb-3">
-                                <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-nominal.png') }}" alt="icon"></span>
+                                <span class="input-group-text" id="icon"><i class="fa-solid fa-money-bill-wave"></i>
+                                </span>
                                 <input type="text" class="form-control" id="nominal" value="Rp. {{ number_format($booking->trip_nominal, 0, ',', '.') }}" readonly>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="minDp" class="form-label">Minimum DP</label>
                             <div class="input-group mb-3">
-                                <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-dp.png') }}" alt="icon"></span>
+                                <span class="input-group-text" id="icon"><i class="fa-solid fa-sack-dollar"></i></span>
                                 <input type="text" class="form-control" id="minDp" value="Rp. {{ number_format($booking->minimum_dp, 0, ',', '.') }}" readonly>
                             </div>
                         </div>
                         <!-- TAMABAHAN -->
-                        <div class="mb-3">
+                        <div class="mb-5">
                             <label for="noRek" class="form-label">Nomor Rekening</label>
                             <div class="input-group mb-3">
-                                <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-bank2.png') }}" alt="icon"></span>
+                                <span class="input-group-text" id="icon"><i class="fa-solid fa-landmark"></i></span>
                                 <input type="text" class="form-control" id="noRek" placeholder="1234567890" readonly>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <p class="text-modal">Tekan "Bayar Sekarang" untuk unggah bukti transfer, atau pilih "Bayar Nanti" jika menunda.</p>
-                        </div>
-                        <div class="mb-3">
-                            <div class="row d-flex justify-content-between align-items-center">
-                                <div class="col-md-6">
-                                    <button type="button" class="btn-bayarNanti" data-bs-dismiss="modal"><a href="{{ route('history.index') }}">Bayar Nanti</a></button>
-                                </div>
+                            <div class="row d-flex justify-content-end align-items-center">
                                 <div class="col-md-6">
                                     <button type="button" class="btn-bayarSekarang" data-bs-dismiss="modal">Bayar Sekarang</button>
                                 </div>
@@ -87,11 +79,11 @@
         <div class="container mt-5 mb-5">
             <!-- CARD -->
             <div class="mb-3">
-                <div class="form-header mb-3">
+                <div class="form-header mb-3 wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">
                     <h5 style="font-size: 44px; font-weight: 700; color: #1E9781; padding: 10px;">Status <span style="color: #FD9C07;">Pemesanan</span></h5>
                 </div>
                 <!-- FORM -->
-                <form action="{{ route('booking.uploadProof', $booking->id) }}" method="POST" enctype="multipart/form-data" id="formUploadDP">
+                <form action="{{ route('booking.uploadProof', $booking->id) }}" method="POST" enctype="multipart/form-data" id="formUploadDP" class="wow animate__animated animate__fadeInUp" data-wow-delay="0.7s">
                 @csrf
                     <div class="row">
                         <!-- <div class="col-md-12 col-lg-6 mb-3 order-md-2 order-lg-1"> -->
@@ -105,7 +97,7 @@
                                     <div class="mb-3">
                                         <label for="kodeBooking" class="form-label">Kode Booking</label>
                                         <div class="input-group mb-3">
-                                            <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-tiket.png') }}" alt="icon"></span>
+                                            <span class="input-group-text" id="icon"><i class="fa-solid fa-ticket-simple"></i></span>
                                             <input type="text" id="kodeBooking" class="form-control" value="{{ $booking->booking_code }}" readonly>
                                         </div>
                                     </div>
@@ -118,7 +110,7 @@
                                         <div class="status-alert-diproses d-flex align-items-center mb-3">
                                             <span class="card-icon me-2" style="padding-left: 10px; color: white;"><img src="{{ asset('img/icon/icon-proses.png') }}" alt="icon"></span>
                                             <span style=" margin-left: 10px;">
-                                                <h5>Pesanan diproses </h5>
+                                                <h5>PESANAN ANDA SEDANG DIPROSES</h5>
                                                 <p>Admin sedang memproses pesanan anda, silakan cek status pemesanan secara berkala.</p>
                                             </span>
                                         </div>
@@ -129,10 +121,10 @@
                                                 <span style=" margin-left: 10px;"><b>Pembayaran Lunas</b><br><small> Pemesanan anda telah lunas</small></span>
                                             </div> -->
                                             <div class="status-alert-diterima d-flex align-items-center mb-3">
-                                                <span class="card-icon me-2" style="padding-left: 10px;"><img src="{{ asset('img/icon/icon-lunas.png') }}" alt="icon"></span>
+                                                <span class="card-icon me-2" style="padding-left: 10px;color: white;font-size:25px;"><i class="fa-solid fa-credit-card"></i></span>
                                                 <span style=" margin-left: 10px;">
-                                                    <h5>Pembayaran Lunas</h5>
-                                                    <p>Pemesanan anda telah lunas</p>
+                                                    <h5>PEMBAYARAN LUNAS</h5>
+                                                    <p>Pembayaran Anda lunas. Terima kasih atas kepercayaan Anda.</p>
                                                 </span>
                                             </div>
                                         @else
@@ -151,9 +143,9 @@
                                                 </span>
                                             </div> -->
                                             <div class="status-alert-diterima d-flex align-items-center mb-3">
-                                                <span class="card-icon me-2" style="padding-left: 10px;"><img src="{{ asset('img/icon/icon-kalender2.png') }}" alt="icon"></span>
+                                            <span class="card-icon me-2" style="padding-left: 10px;font-size: 25px; color: white;"><i class="fa-regular fa-file-lines"></i></span>
                                                 <span style=" margin-left: 10px;">
-                                                    <h5>Pesanan diterima admin</h5>
+                                                    <h5>PESANAN ANDA DITERIMA</h5>
                                                     <p>
                                                         Admin telah menerima pesanan anda, silahkan lanjutkan ke upload bukti 
                                                         @if ($booking->id_ms_payment == 2)
@@ -184,17 +176,27 @@
                                                 <!-- nominal -->
                                             <!-- </div> -->
                                             <div class="rekening d-flex align-items-center mb-3">
-                                                <span class="card-icon me-2" style="padding-left: 10px;"><img src="{{ asset('img/icon/icon-bank.png') }}" alt="icon"></span>
+                                                <span class="card-icon me-2" style="padding-left: 10px;color: white; font-size: 25px;"><i class="fa-solid fa-landmark"></i></span>
                                                 <span style=" margin-left: 10px;">
-                                                    <h5>Kirim Nomor Rekening 9876543212345</h5>
-                                                    <p>Sejumlah
+                                                    <!-- <h5>Kirim Nomor Rekening 9876543212345</h5> -->
+                                                     <h5>KIRIM KE NOMOR REKENING</h5>
+                                                    <!-- <p>Transfer Uang Sejumlah
                                                     @if ($booking->id_ms_payment == 2)
                                                         Rp
-                                                        {{ number_format($booking->payment_received === null ? $booking->minimum_dp : $booking->payment_received, 0, ',', '.') }}
+                                                        {{ number_format($booking->minimum_dp, 0, ',', '.') }}
                                                         untuk menyelesaikan DP
                                                     @elseif ($booking->id_ms_payment == 3)
                                                         Rp {{ number_format($booking->payment_remaining, 0, ',', '.') }} untuk
                                                         menyelesaikan pelunasan
+                                                    @endif</p> -->
+                                                    <p>Transfer Uang Sejumlah
+                                                    @if ($booking->id_ms_payment == 2)
+                                                        Rp
+                                                        {{ number_format($booking->minimum_dp, 0, ',', '.') }}
+                                                        untuk menyelesaikan DP, Ke Nomor Rekening <b>BRI : 221 3454 876</b>
+                                                    @elseif ($booking->id_ms_payment == 3)
+                                                        Rp {{ number_format($booking->payment_remaining, 0, ',', '.') }} untuk
+                                                        menyelesaikan pelunasan, , Ke Nomor Rekening <b>BRI : 221 3454 876</b>
                                                     @endif</p>
                                                 </span>
                                             </div>
@@ -207,7 +209,7 @@
                                         <div class="status-alert-ditolak d-flex align-items-center mb-3">
                                             <span class="card-icon me-2" style="padding-bottom: 5px; padding-left: 5px;"><img src="{{ asset('img/icon/icon-ditolak.png') }}" alt="icon"></span>
                                             <span style=" margin-left: 10px;">
-                                                <h5>Pesanan ditolak admin</h5>
+                                                <h5>PESANAN ANDA DITOLAK</h5>
                                                 <p>Admin menolak pesanan anda, pastikan data yang dimasukan benar.</p>
                                             </span>
                                         </div>
@@ -219,8 +221,8 @@
                                         <div class="status-alert-diterima d-flex align-items-center mb-3">
                                             <span class="card-icon me-2" style="padding-left: 10px;"><img src="{{ asset('img/icon/icon-lunas.png') }}" alt="icon"></span>
                                             <span style=" margin-left: 10px;">
-                                                <h5>Pesanan Selesai</h5>
-                                                <p>Pesanan anda telah selesai</p>
+                                                <h5>PEMESANAN SELESAI</h5>
+                                                <p>Pesanan anda telah selesai.  Terima kasih atas kepercayaan Anda.</p>
                                             </span>
                                         </div>
                                     @elseif ($booking->id_ms_booking == 5)
@@ -228,11 +230,11 @@
                                             <span class="card-icon me-2" style="padding-left: 10px; color: white;"><i class="fa-solid fa-xmark"></i></span>
                                             <span style=" margin-left: 10px;"><b>Pesanan dibatalkan</b><br><small>Pesanan anda dibatalkan.</small></span>
                                         </div> -->
-                                        <div class="status-alert-ditolak d-flex align-items-center mb-3">
+                                        <div class="status-alert-dibatalkan d-flex align-items-center mb-3">
                                             <span class="card-icon me-2" style="padding-left: 10px; color: white;"><img src="{{ asset('img/icon/icon-ditolak.png') }}" alt="icon"></span>
                                             <span style=" margin-left: 10px;">
-                                                <h5>Pesanan Dibatalkan</h5>
-                                                <p>Pesanan anda dibatalkan</p>
+                                                <h5>PESANAN ANDA DIBATALKAN</h5>
+                                                <p>Admin membatalkan pesanan anda, berdasarkan persetujuan anda.</p>
                                             </span>
                                         </div>
                                     @endif
@@ -295,10 +297,17 @@
                                                     <input type="file" class="custom-file-input" id="proof_of_payment_dp" name="proof_of_payment_dp" required>
                                                 </div> -->
                                                 <div class="input-group">
-                                                    <span class="input-group-text" id="icon" style="background-color: white;"><img src="{{ asset('img/icon/icon-upload.png') }}" alt="icon"></span>
+                                                    <span class="input-group-text" id="icon" style="background-color: white !important;"><i class="fa-solid fa-arrow-up-from-bracket"></i></span>
                                                     <input type="file" class="form-control" id="proof_of_payment_dp" name="proof_of_payment_dp" required>
                                                 </div>
                                                 <small class="text-danger" id="error-file" style="display: none;padding-top: 10px;">Unggah foto bukti DP.</small>
+                                            </div>
+                                            <div>
+                                                <ul>
+                                                    <li style="font-size:14px; color:#4180CC; font-weight: 700;">
+                                                        Masukan bukti transfer berupa gambar dalam format JPG, PNG atau JPEG. Maksimal ukuran file 2 MB.
+                                                    </li>
+                                                </ul>
                                             </div>
                                             <!-- <div class="mt-5">
                                                 <button type="submit" class="btn-kirimdp">Kirim</button>
@@ -332,7 +341,7 @@
                                                 @endif
                                                 <span class="text-danger">*</span></label>
                                             <div class="input-group">
-                                                <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-tujuan.png') }}" alt="icon"></span>
+                                                <span class="input-group-text" id="icon"><i class="fa-solid fa-location-dot"></i></span>
                                                 <input type="text" class="detail-pemesanan form-control" id="destination_point" name="destination_point" placeholder="Masukkan tujuan perjalanan" value="{{ $destination->name }}" readonly>
                                             </div>
                                         </div>
@@ -343,7 +352,7 @@
                                             <div class="col-md-9">
                                                 <label for="capacity" class="form-label">Jumlah Penumpang<span class="text-danger">*</span></label>
                                                 <div class="input-group">
-                                                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-penumpang.png') }}" alt="icon"></span>
+                                                    <span class="input-group-text" id="icon"><i class="fa-solid fa-user-group"></i></span>
                                                     <input type="number" class="detail-pemesanan form-control" id="capacity" name="capacity" value="{{ $booking->capacity }}" placeholder="Masukkan jumlah penumpang" min="1" readonly>
                                                 </div>
                                             </div>
@@ -360,19 +369,23 @@
                                     <div class="mb-3">
                                         <label for="date_start" class="form-label">Tanggal Mulai<span class="text-danger">*</span></label>
                                         <div class="input-group">
-                                            <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-kalender1.png') }}" alt="icon"></span>
+                                            <span class="input-group-text" id="icon"><i class="fa-solid fa-calendar-days"></i></span>
                                             <input type="datetime-local" class="detail-pemesanan form-control" id="date_start" name="date_start" value="{{ $booking->date_start }}" readonly>
                                         </div>
                                     </div>
-                                    <div class="mb-3">
+                                    <div class="mb-4">
                                         <label for="pickup_point" class="form-label">Titik Jemput<span class="text-danger">*</span></label>
                                         <div class="input-group">
-                                            <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-tujuan.png') }}" alt="icon"></span>
+                                            <span class="input-group-text" id="icon"><i class="fa-solid fa-location-dot"></i></span>
                                             <textarea class="form-control" placeholder="Masukkan alamat lengkap" id="pickup_point" name="pickup_point" readonly>{{ $booking->pickup_point }}</textarea>
                                         </div>
                                     </div>
                                     <div>
-                                        <p class="text-danger" style="font-size:14px;">Contoh : Jalan Mangga Besar III No. 17, RT 06 RW 07, Kelurahan Bedali, Kecamatan Lawang, Kab. Malang, Jawa Timur, 60256</p>
+                                        <ul>
+                                            <li style="font-size:14px; color:#4180CC; font-weight: 700;">
+                                            Contoh : Jalan Mangga Besar III No. 17, RT 06 RW 07, Kelurahan Bedali, Kecamatan Lawang, Kab. Malang, Jawa Timur, 60256
+                                            </li>
+                                        </ul>
                                     </div>
 
                                     <!-- BUTTON -->
@@ -458,7 +471,7 @@
                             <div class="mb-3">
                                 <label for="namaLengkap" class="form-label">Nama Lengkap</label>
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-user.png') }}" alt="icon"></span>
+                                    <span class="input-group-text" id="icon"><i class="fa-solid fa-user"></i></span>
                                     <input type="text" id="namaLengkap" class="form-control" value="{{ $booking->customer->name }}" readonly>
                                 </div>
                             </div>
@@ -466,7 +479,7 @@
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-email.png') }}" alt="icon"></span>
+                                    <span class="input-group-text" id="icon"><i class="fa-solid fa-envelope"></i></span>
                                     <input type="email" id="email" class="form-control" value="{{ $booking->customer->email }}" readonly>
                                 </div>
                             </div>
@@ -482,7 +495,7 @@
                             <div class="mb-3">
                                 <label for="alamat" class="form-label">Alamat</label>
                                 <div class="input-group">
-                                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-tujuan.png') }}" alt="icon"></span>
+                                    <span class="input-group-text" id="icon"><i class="fa-solid fa-location-dot"></i></span>
                                     <textarea class="form-control" id="alamat" readonly>{{ $booking->customer->address }}</textarea>
                                 </div>
                             </div>
@@ -494,7 +507,7 @@
                                     </div>
                                 @elseif ($booking->id_ms_booking == 3)
                                     <div class="mt-5">
-                                        <a href="{{ route('frontend.booking.index') }}" class="btn btn-perbaiki">Pesan ulang</a>
+                                        <a href="{{ route('booking') }}" class="btn btn-perbaiki">Pesan ulang</a>
                                     </div>
                                 @elseif ($booking->id_ms_booking == 2)
                                     @if ($booking->id_ms_payment != 4)
@@ -525,4 +538,7 @@
             </script>
         @endif
     @endif
+    <script>
+        new WOW().init();
+    </script>
 @endsection

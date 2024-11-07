@@ -7,17 +7,16 @@
     <section id="riwayatTrip">
 
         <!-- HEADER -->
-        <div class="notrip-container container p-3">
-            <x-header-driver />
+        <div class="riwayat-container container p-4">
+            <!-- <x-header-driver /> -->
 
             <!-- TEXT CONTENT -->
-            <div class="text-content mb-3">
-                <!-- <p>Riwayat On Trip Hari Ini ! </p> -->
-                <!-- <p>Riwayat Trip {{ auth()->user()->name }}</p> -->
-                <div class="text-content text-center mb-4">
-                <h5 style="font-size: 25px; font-weight: 700; color: #1E9781;">RIWAYAT TRIP <span style="color: #FD9C07;">DRIVER</span></h5>
+            
+            <div class="text-content text-center mb-4">
+                <h5 style="font-size: 25px; font-weight: 700; color: #1E9781;">RIWAYAT <span style="color: #FD9C07;">TRIP</span></h5>
+                <p class="caption">Berikut semua riwayat dari perjalanan anda</p>
             </div>
-            </div>
+
 
             <!-- RIWAYAT BUS -->
             <div class="riwayat-content accordion accordion-flush" id="item">
@@ -42,7 +41,7 @@
                             <div class="accordion-body">
                                 <div class="detail-trip">
                                     <div class="tabel-detail d-flex align-items-center">
-                                        <table class="table table-borderless">
+                                        <table class="table table-borderless" width="100%">
                                             <tbody>
                                                 <tr>
                                                     <td class="keterangan">Status</td>
@@ -57,6 +56,22 @@
                                                     <td>
                                                         <div class="tgl">
                                                             {{ \Carbon\Carbon::parse($trip->booking->date_start)->translatedFormat('d F Y') }}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="keterangan ">Total Pengeluaran</td>
+                                                    <td>
+                                                        <div class="total">
+                                                            Rp {{ number_format($trip->total_spend, 0, ',', '.') }}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="keterangan ">Sisa Uang Jalan</td>
+                                                    <td>
+                                                        <div class="saldo">
+                                                            Rp {{ number_format($trip->nominal, 0, ',', '.') }}
                                                         </div>
                                                     </td>
                                                 </tr>

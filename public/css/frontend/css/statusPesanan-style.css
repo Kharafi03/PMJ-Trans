@@ -7,8 +7,9 @@ body {
 }
 #statusPesanan{
     margin: 50px 0px;
-    font-family: 'Jakarta Sans', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
+
 
 /* BREADCRUMB */
 .breadcrumb{
@@ -20,22 +21,41 @@ body {
     top: 0;           
     z-index: 1000;
     border-radius: 0px 0px 30px 30px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
 }
 .breadcrumb .breadcrumb-item + .breadcrumb-item::before {
     color: white !important;
 }
-.breadcrumb li, .breadcrumb a{
+.breadcrumb a{
     color: white !important;
-    font-size: 16px;
-    font-weight: 700;
     text-decoration: none;
 }
+.breadcrumb .active{
+    color: #DADADA !important;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
 
 /* FORM */
-form{
+#formStatusPemesanan{
     border: 4px solid #EFF0F6;
     border-radius: 34px;
     padding: 20px;
+    background-color: white;
+}
+#formModal{
+    border: none !important;
+    border-radius: 34px;
+    padding: 20px;
+    background-color: white;
+}
+form{
+    border: 4px solid #EFF0F6;
+    border-radius: 34px;
     background-color: white;
 }
 .input-group{
@@ -74,6 +94,8 @@ input[readonly], textarea:read-only, #icon{
     background-color: #EDEDED;
     border-radius: 15px 0px 0px 15px;
     border: 1px solid #99A2A5;
+    color: #666666;
+    font-size: 20px;
 }
 label{
     font-weight: 500;
@@ -96,39 +118,49 @@ label{
     border-radius: 15px;
     border: 1px solid #FE9A07;
     color: white;
-    height: 65px;
-    padding:  6px;
+    height: 80px;
+
+}
+.status-alert-ditolak{
+    background-color: #D92904;
+    border-radius: 15px;
+    border: 1px solid #FE9A07;
+    color: white;
+    height: 80px;
+
 }
 .status-alert-diproses{
     background-color: #FFB800;
     border-radius: 15px;
     border: 1px solid #FE9A07;
     color: white;
-    height: 65px;
-    padding: 6px;
+    height: 80px;
+
 }
 .status-alert-diterima{
     background-color: #17B92F;
     border-radius: 15px;
     border: 1px solid #E4E4E4;
     color: white;
-    height: 65px;
-    padding: 6px;
+    height: 80px;
+ 
 }
 .rekening{
     background-color: #4180CC;
     border-radius: 15px;
     border: 1px solid #E4E4E4;
     color: white;
-    height: 65px;
-    padding: 6px;
+    height: 80px;
+ 
 }
 .status-alert-diproses p, .status-alert-ditolak p, .status-alert-diterima p, .rekening p{
     font-size: 13px;
-    line-height: 15px;
+    line-height: 18px;
+    padding-right: 5px;
 }
 .status-alert-diproses h5, .status-alert-ditolak h5, .status-alert-diterima h5, .rekening h5{
-    padding-top: 11px;
+    margin-top: 12px;
+    padding-bottom: 5px;
     font-size: 15px;
     font-weight: 700;
     margin-bottom: 0px;
@@ -158,8 +190,8 @@ label{
     text-align: center;
     font-size: 16px;
     font-weight: 700;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
-    rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+    box-shadow: #4475F236 0px 15px 25px, rgba(86, 167, 221, 0.397) 0px 5px 10px;
+    font-family: 'Poppins', sans-serif;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     &:hover {
         transform: scale(1.05);
@@ -212,38 +244,25 @@ label{
     color: white;
     font-size: 16px;
     font-weight: bold;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.308) 0px 10px 10px -5px;
+    box-shadow: #4475F236 0px 15px 25px, rgba(86, 167, 221, 0.397) 0px 5px 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     &:hover{
         transform: scale(1.05); 
     }
-}
-.btn-bayarNanti{
-    height: 40px;
-    width: 100%;
-    background-color: #F23108;
-    border: 1px solid #F23108;
-    border-radius: 10px;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.308) 0px 10px 10px -5px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    &:hover{
-        transform: scale(1.05); 
-    }
-}
-.btn-bayarNanti a{
-    text-decoration: none;
-    color: white;
 }
 
 
 @media (max-width: 767px) {
-    .status-alert-ditolak, .status-alert-diterima, .status-alert-diproses{
-        height: 100px;
+    .status-alert-ditolak, .status-alert-diterima, .status-alert-diproses, .rekening{
+        height: 110px;
     }
-    form{
+    .rekening{
+        padding-top: 7px;
+    }
+    #formStatusPemesanan{
         padding: 5px;
+    }
+    .modal-body{
+        padding: 20px 10px;
     }
 }

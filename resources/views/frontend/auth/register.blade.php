@@ -67,13 +67,12 @@
     <section id="register">
             <div class="row">
                 <!-- KIRI -->
-                <div class="col-lg-6 col-md-12 order-md-last order-lg-first d-flex flex-column justify-content-center align-items-center">
+                <div class="col-lg-6 col-md-12 order-md-last order-lg-first d-flex flex-column justify-content-center align-items-center wow animate__animated animate__fadeInLeft">
                     
                         <!-- FORM -->
                         <div class="form-container">
                             <div class="header mb-3">
                                 <h5>Registrasi</h5>
-                                <p>Jika Anda sudah memiliki akun, silakan <a href="{{ route('login') }}">Login di sini.</a></p>
                             </div>
 
                             @include('frontend.assets.alert')
@@ -89,27 +88,30 @@
                                         <label for="name" class="form-label">Nama Lengkap<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama lengkap anda" required>
                                     </div>
-                                    <div class="mb-2">
+                                    <div class="mb-3">
                                         <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password" required>
                                             <span class="input-group-text" id="toggle-password"><i class="fas fa-eye"></i></span>
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-end align-items-center mb-5">
-                                        <div class="lupa-sandi">
-                                            <a href="{{ route('password.reset') }}">Lupa kata sandi?</a>
-                                        </div>
+                                    <div class="mb-5">
+                                        <label for="address" class="form-label">Alamat<span class="text-danger">*</span></label>
+                                        <textarea class="form-control" placeholder="Masukkan alamat Lengkap" id="address" name="address" required></textarea>
                                     </div>
-                                    <div class="mb-2">
+
+                                    <div class="mb-3">
                                         <button type="submit" class="btn-register">Register</button>
                                     </div>
                                 </form>
+                                <div class="link-login">
+                                    <p>Jika Anda sudah memiliki akun, silakan<a href="{{ route('login') }}"> Log in di sini.</a></p>
+                                </div>
                             </div>
                         </div>
                     
                 </div>
-                <div class="col-lg-6 col-md-12 d-flex align-items-center justify-content-center col-img">
+                <div class="col-lg-6 col-md-12 d-flex align-items-center justify-content-center col-img wow animate__animated animate__fadeInRight">
                     <img src="img/register-img.png" class="img-fluid" width="70%">
                 </div>
             </div>
@@ -130,5 +132,8 @@
             this.querySelector('i').classList.toggle('fa-eye');
             this.querySelector('i').classList.toggle('fa-eye-slash');
         });
+    </script>
+    <script>
+        new WOW().init();
     </script>
 @endsection

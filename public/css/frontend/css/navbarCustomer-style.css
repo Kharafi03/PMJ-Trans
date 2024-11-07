@@ -1,18 +1,12 @@
 /* NAVBAR */
 .navbar {
-    /* transition: background-color 0.3s ease; */
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     background-color: white;
     padding: 15px;
 }
-/* #navbarNav{
-    margin-left: 100px;
-} */
-/* .navbar-nav{
-    justify-content: end;
-} */
+
 .nav-link{
-    margin: 0px 20px;
+    margin: 0px 10px;
     color: black;
     font-weight: 600;
     text-align: left;
@@ -22,6 +16,7 @@
         color: #1E9781 !important;
     }
 }
+
 .dropdown-item{
     color: black;
     font-weight: 600;
@@ -61,11 +56,6 @@
     border: 1px solid #1E9781;
     color: white;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    /* &:hover{
-        background: none;
-        border: 1px solid #1E9781;
-        color: #1E9781;
-    } */
     transition: transform 0.3s ease;
     &:hover {
         transform: scale(1.05);

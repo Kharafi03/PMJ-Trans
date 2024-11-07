@@ -24,6 +24,30 @@ class HomepageController extends Controller
         ->with('images')
         ->get();
 
-        return view('frontend.homepage', compact('faqs', 'tacs', 'buses', 'reviews'));
+        // Array untuk menyimpan bus dan rating
+        $busesWithRatings = [];
+
+        foreach ($buses as $bus) {
+            // Ambil review terkait dengan bus ini melalui booking dan tripbus
+            $reviews = Review::whereHas('booking.tripbus', function ($query) use ($bus) {
+                $query->where('id_bus', $bus->id);
+            })
+            ->get();
+
+            // Hitung total rating jika ada review
+            $totalStar = $reviews->isNotEmpty() ? $reviews->sum('rating') : 0;
+            $averageStar = $reviews->isNotEmpty() ? $totalStar / $reviews->count() : 0;
+
+            // Format rata-rata rating
+            $formatStar = number_format($averageStar, 1);
+
+            // Tambahkan bus dan rata-ratanya ke dalam array
+            $busesWithRatings[] = [
+                'bus' => $bus,
+                'average_rating' => $formatStar,
+            ];
+        }
+
+        return view('frontend.homepage', compact('faqs', 'tacs', 'buses', 'reviews', 'busesWithRatings'));
     }
 }

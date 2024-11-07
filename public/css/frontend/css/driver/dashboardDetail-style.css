@@ -6,24 +6,64 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    margin: 0 auto; 
+    font-family: 'Poppins', sans-serif;
 }
 
-#dashboardDetail{
-    margin-top: 70px;
+.text-content a{
+    text-decoration: none;
+    padding-top: 5px;
+}
+.caption{
+    font-size: 12px;
+    font-weight: 400;
+    color: #666666;
+}
+.text-content i{
+    font-size: 16px;
+    padding: 5px 8px;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    background-color: #1E9781;
+    transition: transform 0.3s ease;
+    margin-top: 0;
+}
+.text-content i:hover{
+    transform: scale(1.05);
+    background-color: #00BB83;
+}
+
+
+.header{
+    padding: 5px;
+}
+.header p{
+    font-size: 13px;
+    font-weight: 400;
+    color: white;
+}
+.riwayat-image img{
+    border-radius: 10px;
+}
+
+.header h5{
+    margin-bottom: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+}
+
+.ms-auto{
+    text-align: right;
 }
 
 /* TABEL */
 table{
-    border-radius: 20px;
-    background-color: transparent; /* Mengubah dari #F1F2F2 menjadi transparent */
-
+    border-radius: 20px 20px 8px 8px;
+    background-color: #F1F3F2 !important;
     overflow: hidden;
-}
-thead{
-    background-color: #4180CC;
-    border-radius: 20px;
-    overflow: hidden;
-    vertical-align: middle;
+    padding: 10px;
 }
 th h5{
     padding-left: 10px;
@@ -36,16 +76,40 @@ th p{
 }
 table td {
     padding: 10px 15px !important; 
-    text-align: right;
+    text-align: justify;
+    font-size: 13px;
+    background-color: white !important;
 }
+
+table tbody {
+    background-color:  #F1F3F2;
+    padding: 0px 7px; 
+    display: block; 
+    border-radius: 8px; 
+    margin: 10px 0; 
+}
+
+
 .keterangan{
-    text-align: left;
+    text-align: left !important;
     padding-left: 10px;
+    width: 50%;
 }
 .tgl{
     padding: 5px;
-    background-color: #E50A3E;
+    background-color: #E42E07;
     color: white;
     border-radius: 20px;
     text-align: center;
+}
+
+@media (min-width: 768px) {
+    .dashboard-container {
+        max-width: 100%;
+        width: 375px;
+    }
+    
+    .content {
+        padding-bottom: 50px; /* Maintain mobile padding */
+    }
 }

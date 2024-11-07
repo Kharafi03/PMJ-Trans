@@ -2,25 +2,37 @@
 .profile-card {
     display: flex;
     align-items: center;
-    padding: 10px;
-    max-width: 400px;
+    justify-content: center; 
+    padding: 15px;
+    max-width: 375px;
     width: 100%;
-    position: fixed; /* Membuat elemen menjadi sticky */
-    top: 0; /* Menentukan posisi sticky dari atas halaman */
-    z-index: 100; /* Memberikan lapisan di atas elemen lainnya */
-    background-color: white; /* Tambahkan background untuk memastikan kontennya tetap terlihat */
+    position: fixed; 
+    top: 0; 
+    left: 50%;
+    transform: translateX(-50%); 
+    z-index: 100;
+    background-color: #1E9781;
+    margin: 0;
 }
+
 .profile-text {
     display: flex;
     flex-direction: column;
-    padding-left: 10px;
+    padding-right: 10px;
+    text-align: right;
+    margin-left: 50px;
 }
 
 .profile-text h5 {
     margin: 0px;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
 }
 
 .profile-text p {
     margin: 0px;
-    color: #777;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
 }

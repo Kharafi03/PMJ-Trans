@@ -3,15 +3,15 @@
 /* section */
 html, body {
     margin: 0;
-    overflow: hidden;
+    overflow: auto;
     height: 100%; /* Ensure body takes full height */
 }
 
 #login {
     display: flex;
-    align-items: center; 
+    align-items: stretch; /* Pastikan kolom mengambil tinggi penuh */
     height: 100vh; /* Set full viewport height */
-    font-family: 'Jakarta Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 .row {
@@ -23,7 +23,7 @@ html, body {
 .container {
     height: 100%;
     display: flex; /* Use flexbox to manage the layout */
-    flex-direction: column; /* Stack items vertically */
+    flex-direction: row; /* Stack items horizontally */
 }
 
 .col-img {
@@ -31,11 +31,11 @@ html, body {
     background-repeat: no-repeat;
     background-position: center;
     background-image: url("/img/bg2.png");
-    height: 100%;
+    flex: 1; /* Pastikan ini untuk mengambil sisa ruang */
 }
 
 .form-container {
-    padding: auto; 
+    padding: 20px; /* Ganti padding auto dengan nilai yang sesuai */
     max-width: 60%;
     margin: auto; 
     flex-grow: 1; 
@@ -43,6 +43,7 @@ html, body {
     flex-direction: column;
     justify-content: center; 
 }
+
 /* TITLE */
 .header h5 {
     font-size: 35px;
@@ -64,11 +65,7 @@ input[type="password"],
 input[type="text"] {
     height: 70px;
 }
-.lupa-sandi a {
-    text-decoration: underline;
-    font-size: 14px;
-    color: #4180cc;
-}
+
 label{
     font-weight: 500;
 }
@@ -91,7 +88,11 @@ a {
 .lupa-sandi a{
     font-size: 16px;
     font-weight: 700;
+    text-decoration: none;
     color: #4180CC;
+    &:hover{
+        color: #6799d6;
+    }
 }
 .link-registrasi p{
     text-align: center;
@@ -125,13 +126,8 @@ input[type="text"]:focus,
 input[type="password"]:focus,
 input[type="tel"]:focus {
     outline: none !important;
-    outline-width: 0 !important;
     box-shadow: none;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    border-top: 1px solid #ced4da;
-    border-left: 1px solid #ced4da;
-    border-right: 1px solid #ced4da;
+    border: 1px solid #ced4da; /* Atur border untuk input aktif */
 }
 img {
     border-radius: 20px;
@@ -144,16 +140,16 @@ img {
     background-color: #1e9781;
     color: white;
     text-align: center;
-    padding: auto;
     font-size: 20px;
     font-weight: 700;
     border: none;
     border-radius: 6px;
     transition: transform 0.3s ease;
-    &:hover {
-        transform: scale(1.05);
-        background-color: #00BB83;
-    }
+}
+
+.btn-login:hover {
+    transform: scale(1.05);
+    background-color: #00BB83;
 }
 
 /* RESPONSIF GAMBAR */
@@ -161,15 +157,10 @@ img {
     /* Media query for mobile devices */
     .col-img {
         order: -1; 
-        height: 50%;
+        height: auto; /* Biarkan tinggi menyesuaikan untuk layar kecil */
     }
     .navbar-brand img {
         padding: 0px 45%;
-    }
-    html, body {
-        height: 100%;
-        margin: 0;
-        overflow: auto;
     }
     .form-container{
         padding: 20px;
@@ -179,12 +170,7 @@ img {
 
 @media (min-width: 768px) and (max-width: 1024px){
     .col-img { 
-        height: 70%;
-    }
-    html, body {
-        height: 100%;
-        margin: 0;
-        overflow: auto;
+        height: auto; /* Biarkan tinggi menyesuaikan untuk tablet */
     }
     .form-container{
         padding: 50px 200px;

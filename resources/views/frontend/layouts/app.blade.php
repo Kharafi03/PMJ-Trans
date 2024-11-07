@@ -9,8 +9,20 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" media="all">
     {{-- <link rel="stylesheet" href="{{ asset('css/frontend/css/argon-dashboard.css') }}"> --}}
 
+
+    <!-- Tambahkan Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Tambahkan WOW.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+
     <!-- FONT -->
     <style>
+         @font-face {
+            font-family: 'Poppins';
+            src: url('/fonts/Poppins-ExtraLight.woff2') format('woff2');
+            font-weight: 300;
+            font-style: normal;
+        }
         @font-face {
             font-family: 'Poppins';
             src: url('/fonts/Poppins-Regular.woff2') format('woff2');

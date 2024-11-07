@@ -9,8 +9,57 @@
     <script src="{{ asset('js/fontawesome.js') }}"></script>
 
     <style>
+        @font-face {
+            font-family: 'Poppins';
+            src: url('/fonts/Poppins-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Poppins';
+            src: url('/fonts/Poppins-Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Poppins';
+            src: url('/fonts/Poppins-SemiBold.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Poppins';
+            src: url('/fonts/Poppins-Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Plus Jakarta Sans';
+            src: url('/fonts/PlusJakartaSans-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Plus Jakarta Sans';
+            src: url('/fonts/PlusJakartaSans-Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Plus Jakarta Sans';
+            src: url('/fonts/PlusJakartaSans-SemiBold.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Plus Jakarta Sans';
+            src: url('/fonts/PlusJakartaSans-Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #f4f7f9;
             color: #51545e;
             margin: 0;
@@ -31,7 +80,7 @@
         .email-header {
             text-align: center;
             padding: 20px 0;
-            background: linear-gradient(to right, #1E9781, #27b19b);
+            background-color: #1E9781;
             color: white;
             border-radius: 8px 8px 0 0;
             display: flex;
@@ -67,13 +116,30 @@
             color: #6F6C90;
             line-height: 1.6;
             margin-bottom: 20px;
-            
         }
 
+        table{
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+            border-radius: 5px;
+            background-color: white;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            margin: 0px 10px
+        }
+        tr:nth-child(even) {
+            background-color: #F9F9FC;
+        }
+
+        table td{
+            padding: 10px;
+            font-size: 14px;
+            font-weight: 500;
+        }
         .ticket-info {
-            background-color: #f9f9f9;
+            background-color: #E4E4E454;
             padding: 20px;
-            border: none;
+            /* border: 1px solid #A8A8A8; */
             border-radius: 8px;
             margin-bottom: 25px;
             margin-top: 50px;
@@ -90,7 +156,7 @@
 
         .ticket-info td p{
             font-size: 14px;
-            color: #51545e;
+            color: #667085;
             padding: 0;
             margin: 3px 0;
             margin-left: 10px;
@@ -135,6 +201,8 @@
         .email-footer p {
             margin: 10px 30px;
             font-size: 15px;
+            font-weight: 400;
+
         }
         .sosmed{
             margin: 20px 0px;
@@ -192,59 +260,43 @@
     <div class="email-container">
         <!-- Header -->
         <div class="email-header">
-            <img src="{{ asset('img/logo.png')}}" width="80px" height="40px" alt="logo">
+            <!-- <img src="{{ asset('img/logo.png')}}" width="80px" height="40px" alt="logo"> -->
             <h2>E-Ticket PMJ-Trans</h2>
         </div>
 
         <!-- Body -->
         <div class="email-body">
             <h1>Terima kasih telah memilih PMJ Trans!</h1>
-            <p>Kami sangat menghargai kepercayaan Anda. Berikut ini adalah detail tiket pesanan Anda:</p>
+            <p style="font-family: 'Poppins', sans-serif;">Kami sangat menghargai kepercayaan Anda. Berikut ini adalah detail tiket pesanan Anda:</p>
 
             <!-- Ticket Info -->
             <div class="ticket-info">
                 <h5 style="color: #1E9781;">Detail <span style="color: #FD9C07;">Tiket</span></h5>
-                <!-- <p><strong>Nama Pemesan:</strong> {{ $booking->customer->name ?? 'John Doe' }}</p>
-                <p><strong>Kode Booking:</strong> {{ $booking->booking_code ?? 'PMJ-TC1U5787' }}</p>
-                <p><strong>Tanggal Berangkat:</strong>
-                    {{ \Carbon\Carbon::parse($booking->date_start)->translatedFormat('l, d F Y') }}</p>
-                <p><strong>Titik Jemput:</strong> {{ $booking->pickup_point ?? 'Tidak tersedia' }}</p>
-                <p><strong>Tujuan:</strong>
-                    @foreach ($destinations as $dest)
-                        @if ($loop->count > 1)
-                            <br>{{ $loop->iteration }}. {{ $dest->name }}
-                        @else
-                            <br>{{ $dest->name }}
-                        @endif
-                    @endforeach
-                </p> -->
                 <table>
-                    <tr>
-                        <td><strong>Nama Pemesan</strong></td>
-                        <td><strong> : </strong></td>
+                    <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
+                        <td>Nama Pemesan</td>
+                        <td> : </td>
                         <td><p>{{ $booking->customer->name ?? 'John Doe' }}</p></td>
                     </tr>
-                    <tr>
-                        <td><strong>Kode Booking</strong></td>
-                        <td><strong> : </strong></td>
+                    <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
+                        <td>Kode Booking</td>
+                        <td> : </td>
                         <td><p>{{ $booking->booking_code ?? 'PMJ-TC1U5787' }}</p></td>
                     </tr>
-                    <tr>
-                        <td><strong>Tanggal Berangkat</strong></td>
-                        <td><strong> : </strong></td>
+                    <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
+                        <td>Tanggal Berangkat</td>
+                        <td> : </td>
                         <td><p>{{ \Carbon\Carbon::parse($booking->date_start)->translatedFormat('l, d F Y') }}</p></td>
                     </tr>
-                    <tr>
-                        <td><strong>Titik Jemput</strong></td>
-                        <td><strong> : </strong></td>
+                    <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
+                        <td>Titik Jemput</td>
+                        <td> : </td>
                         <td><p>{{ $booking->pickup_point ?? 'Tidak tersedia' }}</p></td>
                     </tr>
                     <tr>
-                        <td style="padding-top: 5px;"><strong>Tujuan</strong></td>
-                        <td colspan="2" style="padding-top: 5px;"><strong> : </strong></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">
+                        <td style="padding-top: 5px;">Tujuan</td>
+                        <td style="padding-top: 5px;"> : </td>
+                        <td>
                             <p>
                                 @foreach ($destinations as $dest)
                                     @if ($loop->count > 1)
@@ -264,12 +316,12 @@
 
         <!-- Footer -->
         <div class="email-footer">
-            <h5>Temukan Kami</h5>
+            <!-- <h5>Temukan Kami</h5>
             <div class="sosmed">
                 <a href="{{ $setting->first()->sosmed_fb }}"><i class="fa-brands fa-facebook-f" style="padding: 10px 13px;"></i></a>
                 <a href="{{ $setting->first()->sosmed_ig }}"><i class="fa-brands fa-instagram" style="padding: 13px"></i></a>
                 <a href="{{ $setting->first()->sosmed_yt }}"><i class="fa-brands fa-youtube" style="padding: 10px 8px;"></i></a>
-            </div>
+            </div> -->
             <!-- <p>&copy; {{ date('Y') }} PMJ Trans</p> -->
             <p>{{ $setting->first()->address }}</p>
             <!-- <div class="social-links">

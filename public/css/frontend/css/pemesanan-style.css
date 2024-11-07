@@ -35,22 +35,29 @@
     top: 0;           
     z-index: 1000;
     border-radius: 0px 0px 30px 30px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
 }
 .breadcrumb .breadcrumb-item + .breadcrumb-item::before {
     color: white !important;
 }
-.breadcrumb li, .breadcrumb a{
+.breadcrumb a{
     color: white !important;
+    text-decoration: none;
+}
+.breadcrumb .active{
+    color: #DADADA !important;
     font-size: 16px;
     font-weight: 700;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 /* TEXT CONTENT */
 .text-content h1{
     font-weight: 700;
     color: #1E9781;
-    font-family: 'Jakarta Sans', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     margin-bottom: 0;
   }
   .text-content span{
@@ -59,7 +66,7 @@
   .text-content p{
     font-size: 16px; 
     font-weight: 400;
-    color: #666666B5;
+    color: #000000AD;
     font-family: 'Poppins', sans-serif;
   }
   @media (min-width: 1024px) {
@@ -75,7 +82,7 @@
     border: 10px solid #EFF0F6;
     border-radius: 30px;
     margin-bottom: 50px;
-    font-family: 'Jakarta Sans', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 input[type="text"], input[type="date"], input[type="number"], input[type="email"],input[type="datetime-local"]{
@@ -85,6 +92,7 @@ input[type="text"], input[type="date"], input[type="number"], input[type="email"
 }
 label{
     font-weight: 500;
+    color: #000000AD;
 }
 .form-select{
     border-right: none;
@@ -93,6 +101,8 @@ label{
     border-radius: 15px 0px 0px 15px;
     background-color: white;
     border: 1px solid #99A2A5;
+    color: #666666;
+    font-size: 20px;
 }
 textarea{
     border-radius: 0px 15px 15px 0px !important;
@@ -135,8 +145,7 @@ input[type="date"] {
     margin: 10px 0px;
     border-radius: 10px;
     width: 120px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
-        rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+    box-shadow: #4475F236 0px 15px 25px, rgba(86, 167, 221, 0.397) 0px 5px 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     &:hover {
         transform: scale(1.05);
@@ -207,14 +216,25 @@ button:disabled, button[disabled]{
     box-shadow: none !important;
 }
 
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="number"]:focus, input[type="email"]:focus, input[type="datetime-local"]:focus, textarea:focus, select:focus, .input-group:focus-within{
-    outline: 1px solid #1E9781 !important;
-    box-shadow: none;
-     z-index: 3;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    border:none !important;
+
+/* FORM FOCUS */
+.input-group:focus-within {
+    border: 1px solid #1E9781; 
     border-radius: 15px;
+}
+
+.input-group:focus-within .input-group-text,
+.input-group:focus-within .form-control {
+    border: none !important; 
+    box-shadow: none;
+}
+
+.input-group:focus-within .form-control {
+    border-left: 1px solid #1E9781 !important;
+    border-radius: 0 15px 15px 0; 
+}
+
+select:focus {
+    box-shadow: none !important;
+    border: none !important;
 }

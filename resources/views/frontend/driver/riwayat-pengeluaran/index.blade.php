@@ -8,29 +8,43 @@
 
         <!-- HEADER -->
         <div class="notrip-container container p-3">
-            <x-header-driver />
+            <!-- <x-header-driver /> -->
 
             <!-- TEXT CONTENT -->
-            <div class="text-content mb-3">
+            <!-- <div class="text-content mb-3"> -->
                 <!-- <p>Riwayat On Trip Hari Ini ! </p> -->
-                <p>Riwayat On Trip {{ auth()->user()->name }} Hari Ini !</p>
+                <!-- <p>Riwayat On Trip {{ auth()->user()->name }} Hari Ini !</p>
+            </div> -->
+
+            <div class="text-content text-start mb-4">
+                <!-- <h5 style="font-size: 25px; font-weight: 700; color: #1E9781;">Scan QR Code <span style="color: #FD9C07;">Driver</span></h5>
+                <p class="caption">Silahkan Scan QR-Code diatas untuk memulai trip</p> -->
+                <div class="row">
+                    <div class="col-2" style="margin-right: -20px;">
+                        <a href="{{ route('dashboard-trip') }}"><i class="fa-solid fa-chevron-left"></i></a>
+                    </div>
+                    <div class="col-10">
+                        <h5 style="font-size: 20px; font-weight: 700; color: #1E9781;">Riwayat <span style="color: #FD9C07;">On Trip</span></h5>
+                        <p class="caption">Riwayat Trip sedang berlangsung</p>
+                    </div>
+                </div>
             </div>
 
             <!-- RIWAYAT BUS -->
             <div class="accordion accordion-flush" id="item">
                 <div class="accordion-item">
                     <div class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#item2" aria-expanded="false">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#item2" aria-expanded="false">
+                            <div class="riwayat-image">
+                                <img src="{{ asset('storage/' . $trip->bus->images->first()->image) }}" class="img-fluid" width="60" height="60">
+                            </div>
                             <div class="kode">
                                 <h5>{{ $trip->bus->name }}</h5>
                                 <p>{{ $trip->booking->booking_code }}</p>
                             </div>
                             <span class="ms-auto">
-                                <!-- <p>{{ \Carbon\Carbon::parse($trip->booking->date_start)->translatedFormat('d F \p\u\k\u\l H.i') }}</p> -->
-                                <div class="riwayat-image">
-                                    <img src="{{ asset('storage/' . $trip->bus->images->first()->image) }}" class="img-fluid" width="60" height="60">
-                                </div>
+                                <p class="mb-0">{{ \Carbon\Carbon::parse($trip->booking->date_start)->translatedFormat('d F Y') }}</p>
+                                <p class="mb-0">Pukul {{ \Carbon\Carbon::parse($trip->booking->date_start)->translatedFormat('H.i') }}</p>
                             </span>
                         </button>
                     </div>

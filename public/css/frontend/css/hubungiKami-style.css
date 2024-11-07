@@ -20,20 +20,22 @@ body {
     color: #a8a8a8;
 }
 
+
 /* TEXT CONTENT */
 .text-content h1{
+    font-size: 44px;
     font-weight: 700;
     color: #1E9781;
-    font-family: 'Jakarta Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin-bottom: 0;
 }
 .text-content span{
     color: #FD9C07;
 }
 .text-content p{
-    font-size: 16px; 
+    font-size: 18px; 
     font-weight: 400;
-    color: #666666B5;
+    color: #000000AD;
     font-family: 'Poppins', sans-serif;
 }
 @media (min-width: 1024px) {
@@ -44,7 +46,7 @@ body {
 
 /* Card Content */
 #contact, #contact-form{
-    font-family: 'Jakarta Sans', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 #contact-form{
@@ -122,9 +124,10 @@ textarea {
     color: white;
     border: 1px solid #1e9781;
     background-color: #1e9781;
+    font-family: 'Poppins', sans-serif;
     border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
-        rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+    box-shadow: #4475F236 0px 15px 25px, rgba(86, 167, 221, 0.397) 0px 5px 10px;
+    font-family: 'Poppins', sans-serif;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     &:hover {
         transform: scale(1.05);
@@ -150,13 +153,13 @@ iframe {
 }
 
 /* ANIMASI */
-.contact-card .icon {
+/* .contact-card .icon {
     font-size: 40px;
     transition: color 0.3s ease;
 }
 .contact-card:hover .icon {
     color: #1e9781;
-}
+} */
 
 @media (max-width: 767px) {
     #contact{
