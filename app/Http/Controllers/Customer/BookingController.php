@@ -33,16 +33,51 @@ class BookingController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'email|max:255|nullable',
             'number_phone' => 'required|string|max:20',
-            'address' => 'required|string',
-            // 'destination_point' => 'required|string',
+            'address' => 'required|string|max:255',
             'capacity' => 'required|integer',
             'date_start' => 'required|date',
-            'pickup_point' => 'required|string',
-            'tujuan' => 'array|nullable', // Mengubah validasi tujuan agar menjadi array
-            'tujuan.*' => 'string|nullable', // Setiap tujuan harus berupa string atau nullable
-            'legrest' => 'boolean|required',  // Validasi legrest sebagai boolean
-            'description' => 'string|nullable',  // Deskripsi bersifat opsional
-        ]);
+            'pickup_point' => 'required|string|max:255',
+            'tujuan' => 'array|nullable|max:255',
+            'tujuan.*' => 'string|nullable|max:255',
+            'legrest' => 'boolean|required',
+            'description' => 'string|nullable|max:255',
+        ], [
+            'name.required' => 'Nama wajib diisi.',
+            'name.string' => 'Nama harus berupa teks.',
+            'name.max' => 'Nama maksimal 255 karakter.',
+            
+            'email.email' => 'Format email tidak valid.',
+            'email.max' => 'Email maksimal 255 karakter.',
+            
+            'number_phone.required' => 'Nomor telepon wajib diisi.',
+            'number_phone.string' => 'Nomor telepon harus berupa teks.',
+            'number_phone.max' => 'Nomor telepon maksimal 20 karakter.',
+            
+            'address.required' => 'Alamat wajib diisi.',
+            'address.string' => 'Alamat harus berupa teks.',
+            'address.max' => 'Alamat maksimal 255 karakter.',
+            
+            'capacity.required' => 'Kapasitas wajib diisi.',
+            'capacity.integer' => 'Kapasitas harus berupa angka.',
+            
+            'date_start.required' => 'Tanggal mulai wajib diisi.',
+            'date_start.date' => 'Tanggal mulai harus berupa tanggal yang valid.',
+            
+            'pickup_point.required' => 'Titik penjemputan wajib diisi.',
+            'pickup_point.string' => 'Titik penjemputan harus berupa teks.',
+            'pickup_point.max' => 'Titik penjemputan maksimal 255 karakter.',
+            
+            'tujuan.array' => 'Tujuan harus berupa array.',
+            'tujuan.max' => 'Setiap tujuan maksimal 255 karakter.',
+            'tujuan.*.string' => 'Setiap tujuan harus berupa teks.',
+            'tujuan.*.max' => 'Setiap tujuan maksimal 255 karakter.',
+            
+            'legrest.boolean' => 'Legrest harus berupa nilai benar atau salah.',
+            'legrest.required' => 'Legrest wajib diisi.',
+            
+            'description.string' => 'Deskripsi harus berupa teks.',
+            'description.max' => 'Deskripsi maksimal 255 karakter.',
+        ]);        
 
         // dd($request->all());
 

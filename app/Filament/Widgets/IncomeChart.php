@@ -13,46 +13,82 @@ class IncomeChart extends BarChartWidget
 
     protected static ?string $heading = 'Total Pendapatan'; 
     protected static string $color = 'info'; 
-    public ?string $filter = 'today'; // Default 
+    public ?string $filter = 'daily'; 
 
     protected function getFilters(): ?array
     {
-        // Pilihan filter untuk tampilan data berdasarkan rentang waktu
+        
         return [
-            'today' => 'Today',
-            'week' => 'Last week',
-            'month' => 'Last month',
-            'year' => 'This year',
+            'daily' => 'Harian',
+            'monthly' => 'Bulanan',
+            'yearly' => 'Tahunan',
         ];
     }
 
     protected function getData(): array
     {
-        // Mengambil tanggal berdasarkan filter yang dipilih
-        $startDate = match ($this->filter) {
-            'today' => Carbon::today(),
-            'week' => Carbon::now()->subWeek(),
-            'month' => Carbon::now()->subMonth(),
-            'year' => Carbon::now()->subYear(),
-            default => Carbon::now()->subMonths(12),
-        };
+        
+        switch ($this->filter) {
+            case 'daily':
+                $startDate = Carbon::today();
+                $incomeData = Income::selectRaw('DATE_FORMAT(datetime, "%Y-%m-%d") as day, SUM(nominal) as total')
+                    ->where('datetime', '>=', $startDate)
+                    ->groupBy('day')
+                    ->orderBy('day')
+                    ->get()
+                    ->pluck('total', 'day')
+                    ->toArray();
 
-        // Mengambil data pendapatan per bulan dari rentang waktu yang dipilih
-        $incomePerMonth = Income::selectRaw('DATE_FORMAT(datetime, "%Y-%m") as month, SUM(nominal) as total')
-            ->where('datetime', '>=', $startDate)
-            ->groupBy('month')
-            ->orderBy('month')
-            ->get()
-            ->pluck('total', 'month')
-            ->toArray();
+                $labels = [];
+                $data = [];
+                for ($i = 6; $i >= 0; $i--) {
+                    $day = Carbon::now()->subDays($i)->format('Y-m-d');
+                    $labels[] = Carbon::now()->subDays($i)->format('d M');
+                    $data[] = $incomeData[$day] ?? 0;
+                }
+                break;
 
-        // Array untuk 12 bulan terakhir atau sesuai filter
-        $months = [];
-        $data = [];
-        for ($i = 11; $i >= 0; $i--) {
-            $month = Carbon::now()->subMonths($i)->format('Y-m');
-            $months[] = Carbon::now()->subMonths($i)->format('M Y');
-            $data[] = $incomePerMonth[$month] ?? 0;
+            case 'monthly':
+                $startDate = Carbon::now()->subYear();
+                $incomeData = Income::selectRaw('DATE_FORMAT(datetime, "%Y-%m") as month, SUM(nominal) as total')
+                    ->where('datetime', '>=', $startDate)
+                    ->groupBy('month')
+                    ->orderBy('month')
+                    ->get()
+                    ->pluck('total', 'month')
+                    ->toArray();
+
+                $labels = [];
+                $data = [];
+                for ($i = 11; $i >= 0; $i--) {
+                    $month = Carbon::now()->subMonths($i)->format('Y-m');
+                    $labels[] = Carbon::now()->subMonths($i)->format('M Y');
+                    $data[] = $incomeData[$month] ?? 0;
+                }
+                break;
+
+            case 'yearly':
+                $startDate = Carbon::now()->subYears(5);
+                $incomeData = Income::selectRaw('DATE_FORMAT(datetime, "%Y") as year, SUM(nominal) as total')
+                    ->where('datetime', '>=', $startDate)
+                    ->groupBy('year')
+                    ->orderBy('year')
+                    ->get()
+                    ->pluck('total', 'year')
+                    ->toArray();
+
+                $labels = [];
+                $data = [];
+                for ($i = 5; $i >= 0; $i--) {
+                    $year = Carbon::now()->subYears($i)->format('Y');
+                    $labels[] = $year;
+                    $data[] = $incomeData[$year] ?? 0;
+                }
+                break;
+
+            default:
+                $labels = [];
+                $data = [];
         }
 
         return [
@@ -64,13 +100,12 @@ class IncomeChart extends BarChartWidget
                     'borderWidth' => 0,
                 ],
             ],
-            'labels' => $months,
+            'labels' => $labels,
         ];
     }
 
     protected function getType(): string
     {
-        
         return 'bar';
     }
 }

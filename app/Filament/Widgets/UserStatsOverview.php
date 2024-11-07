@@ -36,7 +36,7 @@ class UserStatsOverview extends BaseWidget
                 ->color('info')
                 ->icon('heroicon-m-user')
                 ->extraAttributes([
-                    'class' => 'card-stat bg-blue-100 text-blue-800 p-6 rounded shadow-lg',
+                    'class' => 'card-stat  text-blue-800 p-6 rounded shadow-lg',
                     'style' => 'font-size: 1.5em; display: flex; align-items: center;'
                 ]),
 
@@ -45,7 +45,7 @@ class UserStatsOverview extends BaseWidget
                 ->color('warning')
                 ->icon('heroicon-s-user-group')
                 ->extraAttributes([
-                    'class' => 'card-stat bg-yellow-100 text-yellow-800 p-6 rounded shadow-lg',
+                    'class' => 'card-stat  text-yellow-800 p-6 rounded shadow-lg',
                     'style' => 'font-size: 1.5em; display: flex; align-items: center;'
                 ]),
 
@@ -54,7 +54,7 @@ class UserStatsOverview extends BaseWidget
                 ->color('green')
                 ->icon('heroicon-s-cog')
                 ->extraAttributes([
-                    'class' => 'card-stat bg-green-100 text-yellow-800 p-6 rounded shadow-lg',
+                    'class' => 'card-stat  text-yellow-800 p-6 rounded shadow-lg',
                     'style' => 'font-size: 1.5em; display: flex; align-items: center;'
                 ]),
 
@@ -63,7 +63,7 @@ class UserStatsOverview extends BaseWidget
                 ->color('danger')
                 ->icon('heroicon-s-star')
                 ->extraAttributes([
-                    'class' => 'card-stat bg-danger-100 text-yellow-800 p-6 rounded shadow-lg',
+                    'class' => 'card-stat  text-yellow-800 p-6 rounded shadow-lg',
                     'style' => 'font-size: 1.5em; display: flex; align-items: center;'
                 ]),
         ];

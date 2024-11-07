@@ -11,6 +11,7 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
 use Filament\Forms\Components\Actions\Action;
 use BezhanSalleh\FilamentShield\Traits\HasPageShield;
+use Filament\Forms\Components\Card;
 
 class SettingPage extends Page implements HasForms
 {
@@ -18,8 +19,6 @@ class SettingPage extends Page implements HasForms
     use HasPageShield;
 
     protected static string $view = 'filament.pages.setting-page';
-
-    protected static ?string $navigationLabel = "Setting";
 
     protected static ?string $pluralModelLabel = "Pengaturan Sistem";
 
@@ -89,6 +88,10 @@ class SettingPage extends Page implements HasForms
                                     ->required()
                                     ->maxLength(255)
                                     ->label('Kontak'),
+                                Forms\Components\TextInput::make('bank_account')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->label('Rekening Bank'),
                                 Forms\Components\TextInput::make('open_hours')
                                     ->required()
                                     ->label('Jam Buka'),
@@ -96,29 +99,44 @@ class SettingPage extends Page implements HasForms
                                     ->required()
                                     ->columnSpanFull()
                                     ->label('Alamat'),
-                                Forms\Components\TextInput::make('sosmed_ig')
+                                Card::make()
+                                    ->heading('Sosial Media')
+                                    ->columns(3)
+                                    ->columnSpan(2)
+                                    ->schema([
+                                        Forms\Components\TextInput::make('sosmed_ig')
+                                        ->required()
+                                        ->maxLength(255)
+                                        ->label('Instagram'),
+                                    Forms\Components\TextInput::make('sosmed_fb')
+                                        ->required()
+                                        ->maxLength(255)
+                                        ->label('Facebook'),
+                                    Forms\Components\TextInput::make('sosmed_yt')
+                                        ->required()
+                                        ->maxLength(255)
+                                        ->label('Youtube'),
+                                    ]),
+                                Forms\Components\Textarea::make('link_maps')
                                     ->required()
-                                    ->maxLength(255)
-                                    ->label('Instagram'),
-                                Forms\Components\TextInput::make('sosmed_fb')
-                                    ->required()
-                                    ->maxLength(255)
-                                    ->label('Facebook'),
-                                Forms\Components\TextInput::make('sosmed_yt')
-                                    ->required()
-                                    ->maxLength(255)
-                                    ->label('Instagram'),
-                                Forms\Components\Textarea::make('maps')
-                                    ->required()
+                                    ->rows(1)
                                     ->columnSpanFull()
                                     ->label('Link Google Maps'),
+                                Forms\Components\Textarea::make('embed_maps')
+                                    ->required()
+                                    ->rows(3)
+                                    ->columnSpanFull()
+                                    ->label('Embed Google Maps'),
                             ])
-                            ->columns(2)
+                            ->columns([
+                                'default' => 1,
+                                'md' => 1,
+                                'lg' => 2,
+                                'xl' => 2,
+                            ])
                             ->columnSpan(2),
-
-
                     ])
-                    ->columns(3),
+                    ->columns(3)
             ])
             ->statePath('data');
     }

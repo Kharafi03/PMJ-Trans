@@ -2,19 +2,19 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\BusMaintenanceResource\Pages;
-use App\Filament\Resources\BusMaintenanceResource\RelationManagers;
-use App\Models\BusMaintenance;
-use App\Models\User;
 use Filament\Forms;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use App\Models\User;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use App\Models\BusMaintenance;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Select;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Database\Eloquent\Model;
+use App\Filament\Resources\BusMaintenanceResource\Pages;
+use App\Models\Outcome;
 
 class BusMaintenanceResource extends Resource
 {
@@ -37,6 +37,12 @@ class BusMaintenanceResource extends Resource
                     ->heading('Data Utama')
                     ->schema([
                         Forms\Components\Group::make()->schema([
+                            Forms\Components\TextInput::make('maintenance_code')
+                                ->default(fn() => 'MTC-' . strtoupper(substr(str_shuffle(bin2hex(random_bytes(4)) . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 8)))
+                                ->required()
+                                ->readOnly()
+                                ->label('Kode Perawatan'),
+
                             Select::make('id_bus')
                                 ->label('Bus')
                                 ->relationship('buses', 'name')
@@ -47,8 +53,7 @@ class BusMaintenanceResource extends Resource
                                 ->relationship('users', 'name')
                                 ->options(function () {
                                     return User::whereHas('roles', function ($query) {
-                                        $query->where('name', 'driver')
-                                            ->orWhere('name', 'admin');
+                                        $query->where('name', '!=', 'panel_user');
                                     })->pluck('name', 'id'); // Mengambil nama dan id user
                                 })
                                 ->required(),
@@ -61,12 +66,12 @@ class BusMaintenanceResource extends Resource
                             Forms\Components\Textarea::make('description')
                                 ->label('Deskripsi')
                                 ->maxLength(255)
+                                ->rows(1)
+                                ->columnSpan(2)
                                 ->nullable(),
-                        ])->columns(2),
+                        ])->columns(3),
                     ])
                     ->columns(1),
-
-                // Card untuk Data Perawatan
                 Forms\Components\Card::make()
                     ->heading('Data Perawatan')
                     ->schema([
@@ -91,26 +96,33 @@ class BusMaintenanceResource extends Resource
                         ])->columns(2),
                     ])
                     ->columns(1),
-
-                // Card untuk Data Pembayaran
                 Forms\Components\Card::make()
                     ->heading('Data Pembayaran')
                     ->schema([
                         Forms\Components\TextInput::make('nominal')
                             ->label('Biaya')
                             ->numeric()
-                            ->prefix('Rp')
-                            ->nullable(),
+                            ->required()
+                            ->prefix('Rp'),
+
+                        Select::make('id_m_method_payment')
+                            ->label('Metode Pembayaran')
+                            ->relationship('m_method_payment', 'name')
+                            ->required(),
 
                         Forms\Components\FileUpload::make('image_receipt')
                             ->label('Unggah Bukti Pembayaran')
                             ->disk('public')
                             ->directory('maintenance_receipts')
                             ->image()
+                            ->required()
+                            ->columnSpanFull()
                             ->helperText('Unggah gambar dalam format JPG atau PNG, maksimal ukuran 2MB.')
                             ->visibility('public')
-                            ->maxSize(2048)
-                            ->nullable(),
+                            // ->afterStateUpdated(function (Get $get, Set $set) {
+                            //     self::addOutcome($get, $set);
+                            // })
+                            ->maxSize(2048),
 
                         // Forms\Components\TextInput::make('latitude')
                         //     ->label('Latitude')
@@ -122,17 +134,20 @@ class BusMaintenanceResource extends Resource
                         //     ->numeric()
                         //     ->nullable(),
                     ])
-                    ->columns(1),
+                    ->columns(2),
+
             ]);
     }
-
 
     public static function table(Table $table): Table
     {
         return $table
             ->defaultSort('created_at', 'desc')
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('maintenance_code')
+                    ->label('Kode')
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('buses.name')
                     ->label('Bus')
                     ->searchable()
@@ -175,10 +190,10 @@ class BusMaintenanceResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
                 Tables\Filters\SelectFilter::make('id_m_maintenance')
                     ->label('Jenis Perawatan')
                     ->relationship('m_maintenances', 'name'),
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()
@@ -190,6 +205,11 @@ class BusMaintenanceResource extends Resource
                     ->modalButton('Simpan Perubahan'),
                 Tables\Actions\DeleteAction::make()
                     ->label('Hapus')
+                    ->action(function ($record) {
+                        //$maintenance_code = $record->maintenance_code
+                        Outcome::where('outcome_code', $record->maintenance_code)->delete();
+                        BusMaintenance::where('id', $record->id)->delete();
+                    })
             ])
 
             ->bulkActions([
@@ -211,7 +231,28 @@ class BusMaintenanceResource extends Resource
         return [
             'index' => Pages\ListBusMaintenances::route('/'),
             'create' => Pages\CreateBusMaintenance::route('/create'),
-            // 'edit' => Pages\EditBusMaintenance::route('/{record}/edit'),
+            'edit' => Pages\EditBusMaintenance::route('/{record}/edit'),
         ];
     }
+
+    // public static function addOutcome(Get $get, Set $set)
+    // {
+    //     $nameBus = Bus::where('id', $get('id_bus'))->value('name');
+    //     $nameUser = User::where('id', $get('id_user'))->value('name');
+    //     $nameMaintenance = MMaintenance::where('id', $get('id_m_maintenance'))->value('name');
+
+    //     Outcome::updateOrCreate(
+    //         ['code_outcome' => $get('maintenance_code')],
+    //         [
+    //             'id_m_outcome' => 3,
+    //             'check' => 1,
+    //             'code_outcome' => $get('maintenance_code'),
+    //             'image_receipt' => $get('image_receipt'),
+    //             'nominal' => $get('nominal'),
+    //             'id_m_method_payment' => $get('id_m_method_payment'),
+    //             'description' => $nameMaintenance . ' Bus ' . $nameBus . ' oleh ' . $nameUser . ' Dengan deskripsi : ' . $get('description'),
+    //             'datetime' => now(),
+    //         ]
+    //     );
+    // }
 }

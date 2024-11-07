@@ -23,19 +23,23 @@ class EditBooking extends EditRecord
 
     protected function afterSave(): void
     {
+        if ($this->record->ms_booking->id == 4) {
+            $booking_code = $this->record->booking_code;
+            $bookingspendtot = $this->record->total_booking_spend;
 
-        // // Mengecek jika status pemesanan diubah menjadi 'Dibatalkan'
-        // if ($this->record->ms_booking === 4) { // Pastikan 4 adalah status 'Dibatalkan'
-        //     dd($this->record->ms_booking);
-        //     Outcome::create([
-        //         'id_m_outcome' => 1, // Sesuaikan dengan tipe pengeluaran yang relevan
-        //         'id_booking' => $this->record->id, // Hubungkan dengan id booking
-        //         'id_m_method_payment' => 1, // Sesuaikan dengan metode pembayaran yang relevan
-        //         'description' => 'Pengeluaran akibat pembatalan booking ' . $this->record->booking_code,
-        //         'nominal' => $this->record->nominal_perjalanan, // Nominal dari booking
-        //         'datetime' => now(),
-        //     ]);
-        // }
+            Outcome::updateOrCreate(
+                ['outcome_code' => $booking_code],
+                [
+                    'id_m_outcome' => 2,
+                    'check' => 1,
+                    'image_receipt' => '',
+                    'nominal' => $bookingspendtot,
+                    'id_m_method_payment' => 1,
+                    'description' => 'Pengeluaran Selama Trip Booking : ' . $booking_code,
+                    'datetime' => now(),
+                ]
+            );
+        }
 
         // Jika status pembayaran adalah 'DP belum dibayar' dan email DP belum dibayar belum dikirim
         if ($this->record->ms_payment->id == 2 && !$this->record->email_dp_belum_dibayar) {

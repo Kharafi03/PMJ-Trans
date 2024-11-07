@@ -88,12 +88,6 @@ class ListBookings extends ListRecords
                 ->requiresConfirmation()
                 ->color('danger'),
 
-            // Aksi untuk import exvel
-            \EightyNine\ExcelImport\ExcelImportAction::make()
-                ->color('info')
-                ->label("Import Excel")
-                ->modalDescription(new HtmlString('Download Format Excel <a class="underline text-blue-600" href="/format_booking.xlsx">disini</a>')),
-
             // Aksi untuk export semua data ke Excel
             Actions\Action::make('exportExcel')
                 ->label('Export Excel')

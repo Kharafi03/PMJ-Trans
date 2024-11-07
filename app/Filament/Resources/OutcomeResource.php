@@ -51,10 +51,11 @@ class OutcomeResource extends Resource
                             ->required()
                             ->relationship('m_outcome', 'name'),
 
-                        Forms\Components\Select::make('id_booking')
-                            ->label('Kode Booking')
-                            ->required()
-                            ->relationship('booking', 'booking_code'),
+                        Forms\Components\TextInput::make('outcome_code')
+                            ->label('Kode Sumber Pengeluaran')
+                            ->default(fn() => 'OUT-' . strtoupper(substr(str_shuffle(bin2hex(random_bytes(4)) . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 8)))
+                            ->readOnly()
+                            ->required(),
 
                         Forms\Components\Select::make('id_m_method_payment')
                             ->label('Metode Pembayaran')
@@ -118,10 +119,17 @@ class OutcomeResource extends Resource
                     ->label('Selesai')
                     ->boolean()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('booking.booking_code')
-                    ->label('Kode Booking')
+                Tables\Columns\TextColumn::make('outcome_code')
+                    ->label('Code Pengeluaran')
                     ->sortable()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('description')
+                    ->label('Deskripsi')
+                    ->searchable()
+                    ->limit(25)
+                    ->tooltip(function ($record) {
+                        return $record->description;
+                    }),
                 BadgeColumn::make('m_method_payment.name')
                     ->label('Metode')
                     ->sortable()
@@ -177,9 +185,25 @@ class OutcomeResource extends Resource
                 Tables\Actions\EditAction::make()
                     ->label('Edit')
                     ->modalHeading('Edit Pengeluaran')
-                    ->modalButton('Simpan Perubahan'),
+                    ->modalButton('Simpan Perubahan')
+                    ->visible(function ($record) {
+                        $outcome_code = $record->outcome_code;
+                        $type_outcome = substr($outcome_code, 0, 3);
+                        if ($type_outcome == 'OUT') {
+                            return true;
+                        }
+                        return false;
+                    }),
                 Tables\Actions\DeleteAction::make()
                     ->label('Hapus')
+                    ->visible(function ($record) {
+                        $outcome_code = $record->outcome_code;
+                        $type_outcome = substr($outcome_code, 0, 3);
+                        if ($type_outcome == 'OUT') {
+                            return true;
+                        }
+                        return false;
+                    }),
             ])
 
             ->bulkActions([
@@ -204,7 +228,7 @@ class OutcomeResource extends Resource
         return [
             'index' => Pages\ListOutcomes::route('/'),
             'create' => Pages\CreateOutcome::route('/create'),
-            // 'edit' => Pages\EditOutcome::route('/{record}/edit'),
+            'edit' => Pages\EditOutcome::route('/{record}/edit'),
         ];
     }
 }

@@ -18,7 +18,7 @@ class ContactController extends Controller
         $validatedData = $request->validate([
             'namaLengkap' => 'required|string|max:255',
             'kategori' => 'required|string',
-            'noTelp' => 'nullable|numeric|max:15',
+            'noTelp' => 'nullable|numeric',
             'email' => 'nullable|email|max:255',
             'pesan' => 'required|string',
         ], [
