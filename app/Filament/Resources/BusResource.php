@@ -584,7 +584,7 @@ class BusResource extends Resource
         return [
             'index' => Pages\ListBuses::route('/'),
             'create' => Pages\CreateBus::route('/create'),
-            // 'edit' => Pages\EditBus::route('/{record}/edit'),
+             'edit' => Pages\EditBus::route('/{record}/edit'),
         ];
     }
 }

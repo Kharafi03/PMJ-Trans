@@ -110,10 +110,10 @@ class TermsAndConditionsResource extends Resource
                 Tables\Actions\ForceDeleteAction::make(),
                 Tables\Actions\ViewAction::make()
                     ->label('Lihat')
-                    ->modalHeading('Lihat Reminder'),
+                    ->modalHeading('Lihat Syarat & Ketentuan '),
                 Tables\Actions\EditAction::make()
                     ->label('Edit')
-                    ->modalHeading('Edit Reminder')
+                    ->modalHeading('Edit Syarat & Ketentuan')
                     ->modalButton('Simpan Perubahan'),
                 Tables\Actions\DeleteAction::make()
                     ->label('Hapus'),

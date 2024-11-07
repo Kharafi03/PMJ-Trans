@@ -23,7 +23,9 @@ class BusTaxResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
-    protected static ?int $navigationSort = 17;
+    protected static ?string $navigationGroup = 'Manajemen Bus';
+
+    protected static ?int $navigationSort = -3;
 
     protected static ?string $slug = 'pajak';
 

@@ -24,7 +24,9 @@ class BusMaintenanceResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-wrench-screwdriver';
 
-    protected static ?int $navigationSort = 7;
+    protected static ?string $navigationGroup = 'Manajemen Bus';
+
+    protected static ?int $navigationSort = -1;
 
     protected static ?string $slug = 'perawatan';
 

@@ -212,12 +212,6 @@ class MailResource extends Resource
                     ->color('info'),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('category')
-                    ->options([
-                        'Pertanyaan' => 'Pertanyaan',
-                        'Komplain' => 'Komplain',
-                    ])
-                    ->label('Kategori'),
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->bulkActions([

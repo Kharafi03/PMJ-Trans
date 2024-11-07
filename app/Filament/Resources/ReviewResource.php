@@ -102,13 +102,7 @@ class ReviewResource extends Resource
                 Tables\Actions\ForceDeleteAction::make(),
                 Tables\Actions\ViewAction::make()
                     ->label('Lihat')
-                    ->modalHeading('Lihat Reminder'),
-                Tables\Actions\EditAction::make()
-                    ->label('Edit')
-                    ->modalHeading('Edit Reminder')
-                    ->modalButton('Simpan Perubahan'),
-                Tables\Actions\DeleteAction::make()
-                    ->label('Hapus'),
+                    ->modalHeading('Lihat Ulasan'),
 
             ])
             ->bulkActions([
