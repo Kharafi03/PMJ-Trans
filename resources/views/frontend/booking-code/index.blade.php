@@ -15,69 +15,71 @@
         </ol>
     </nav>
 
-    <!-- MODAL -->
-    <!-- <div class="modal fade" id="modalTiket" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="d-flex justify-content-end">
-                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" style="background: none !important; border: none;padding-top: 15px;"><img src="{{ asset('img/close.png') }}"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="d-flex justify-content-center mb-3">
-                        <img class="img-fluid" src="{{ asset(('img/update-pw-img.png')) }}">
+    @if($showPasswordModal)
+        <!-- MODAL -->
+        <div class="modal fade" id="modalTiket" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" style="background: none !important; border: none;padding-top: 15px;"><img src="{{ asset('img/close.png') }}"></button>
                     </div>
-                    <div class="info mt-3">
-                        <p class="info-title"><i class="fa-solid fa-circle-exclamation"></i> Informasi Ubah Kata Sandi</p>
-                        <ul>
-                            <li>Segera ganti kata sandi Anda karena saat ini menggunakan kata sandi sementara: '12345678'. Pilih kata sandi yang mudah diingat dan, jika perlu, catat agar tidak lupa. Gunakan kombinasi huruf, angka, dan simbol, misalnya: <span style="font-weight: 700; color: #4180CC; font-weight: 700;">Contohpassword13@.</span></li>
-                        </ul>
+                    <div class="modal-body">
+                        <div class="d-flex justify-content-center mb-3">
+                            <img class="img-fluid" src="{{ asset(('img/update-pw-img.png')) }}">
+                        </div>
+                        <div class="info mt-3">
+                            <p class="info-title"><i class="fa-solid fa-circle-exclamation"></i> Informasi Ubah Kata Sandi</p>
+                            <ul>
+                                <li>Segera ganti kata sandi Anda karena saat ini menggunakan kata sandi sementara: '12345678'. Pilih kata sandi yang mudah diingat dan, jika perlu, catat agar tidak lupa. Gunakan kombinasi huruf, angka, dan simbol, misalnya: <span style="font-weight: 700; color: #4180CC; font-weight: 700;">Contohpassword13!</span></li>
+                            </ul>
+                        </div>
+                        <form action="{{ route('booking-code.updatePassword') }}" method="POST" class="mt-4">
+                            @csrf
+                            <div class="mb-4">
+                                <label for="new_password" class="form-label ">Password Baru</label>
+                                <div class="input-group">
+                                    <input type="password" id="new_password" name="new_password" class="form-control @error('new_password') is-invalid @enderror" placeholder="Masukan Password Baru" required autocomplete="new-password">
+                                    <span class="input-group-text" id="pw-icon" onclick="togglePassword(this)" style="cursor: pointer;">
+                                        <i class="fas fa-eye-slash" style="font-size: 1rem"></i>
+                                    </span>
+                                    @error('new_password')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="konfirmasi_password"class="form-label ">Konfirmasi Password</label>
+                                <div class="input-group">
+                                    <input type="password" id="konfirmasi_password" name="konfirmasi_password" class="form-control @error('konfirmasi_password') is-invalid @enderror" placeholder="Konfirmasi Password" required autocomplete="new-password">
+                                    <span class="input-group-text" id="pw-icon" onclick="togglePassword(this)" style="cursor: pointer;">
+                                        <i class="fas fa-eye-slash" style="font-size: 1rem"></i>
+                                    </span>
+                                    @error('konfirmasi_password')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end mt-5">
+                                <button type="submit" class="btn-password">Perbarui Password</button>
+                            </div>                                
+                        </form>
                     </div>
-                            <form action="{{ route('profile.updatePassword') }}" method="POST" class="mt-4"> -->
-                                <!-- @csrf -->
-                                <!-- <div class="mb-4">
-                                    <label for="password_baru" class="form-label ">Password Baru</label>
-                                    <div class="input-group">
-                                        <input type="password" id="password_baru" name="password_baru" class="form-control @error('password_baru') is-invalid @enderror" placeholder="Masukan Password Baru" required autocomplete="new-password">
-                                        <span class="input-group-text" id="pw-icon" onclick="togglePassword(this)" style="cursor: pointer;">
-                                            <i class="fas fa-eye-slash" style="font-size: 1rem"></i>
-                                        </span> -->
-                                        <!-- @error('password_baru')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror -->
-                                    <!-- </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="konfirmasi_password"class="form-label ">Konfirmasi Password</label>
-                                    <div class="input-group">
-                                        <input type="password" id="konfirmasi_password" name="konfirmasi_password" class="form-control @error('konfirmasi_password') is-invalid @enderror" placeholder="Konfirmasi Password" required autocomplete="new-password">
-                                        <span class="input-group-text" id="pw-icon" onclick="togglePassword(this)" style="cursor: pointer;">
-                                            <i class="fas fa-eye-slash" style="font-size: 1rem"></i>
-                                        </span> -->
-                                        <!-- @error('konfirmasi_password')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror -->
-                                    <!-- </div>
-                                </div>
-                                <div class="d-flex justify-content-end mt-5">
-                                    <button type="submit" class="btn-password">Perbarui Password</button>
-                                </div>                                
-                            </form>
                 </div>
             </div>
         </div>
-    </div> -->
+    @endif
 
     <!-- CONTENT -->
     <section id="tiket" class="py-5 mt-5">
         <div class="container">
         
             <!-- MODAL -->
-            {{--@if($showPasswordModal)
-                <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert" style="padding: 1.25rem; border-radius: 0.5rem;">
+            @if($showPasswordModal)
+                <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center wow animate__animated animate__fadeInUp" data-wow-delay="0.7s" role="alert" style="padding: 1.25rem; border-radius: 0.5rem;">
                     <div style="flex-grow: 1;">
                         <strong>Perhatian!</strong> Anda masih menggunakan kata sandi sementara '12345678'. Demi keamanan, segera perbarui kata sandi akun Anda!
                     </div>
@@ -88,13 +90,13 @@
                 </div>
             @endif
             @if(session('passwordUpdated'))
-                <div class="alert alert-{{ session('alert-type') }} alert-dismissible fade show d-flex align-items-center" role="alert" style="padding: 1.25rem; border-radius: 0.5rem;">
+                <div class="alert alert-{{ session('alert-type') }} alert-dismissible fade show d-flex align-items-center  wow animate__animated animate__fadeInUp" data-wow-delay="0.7s" role="alert" style="padding: 1.25rem; border-radius: 0.5rem;">
                     <div style="flex-grow: 1;">
                         <strong>{{ session('alert-type') == 'success' ? 'Berhasil!' : 'Gagal!' }}</strong> {{ session('message') }}
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-            @endif --}}
+            @endif
             <div class="text-content wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">
                 <div class="row">
                     <div class="col-xl-6 text-content">

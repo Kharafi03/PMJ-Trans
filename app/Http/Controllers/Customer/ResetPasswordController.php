@@ -25,7 +25,7 @@ class ResetPasswordController extends Controller
             'number_phone.required' => 'Nomor WhatsApp harus diisi',
             'name.required' => 'Nama harus diisi',
             'password.required' => 'Password harus diisi',
-            'password.min' => 'Password minimal 8 karakter',
+            'password.min' => 'Harap mengisikan password minimal 8 karakter',
             'number_phone.numeric' => 'Nomor WhatsApp harus berupa angka'
         ]);
 

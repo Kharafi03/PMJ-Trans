@@ -9,6 +9,7 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" media="all">
     {{-- <link rel="stylesheet" href="{{ asset('css/frontend/css/argon-dashboard.css') }}"> --}}
 
+    {{-- <link rel="stylesheet" href="{{ asset('css/animate.min.css') }}"> --}}
 
     <!-- Tambahkan Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -17,54 +18,62 @@
 
     <!-- FONT -->
     <style>
-         @font-face {
+        @font-face {
             font-family: 'Poppins';
             src: url('/fonts/Poppins-ExtraLight.woff2') format('woff2');
             font-weight: 300;
             font-style: normal;
         }
+
         @font-face {
             font-family: 'Poppins';
             src: url('/fonts/Poppins-Regular.woff2') format('woff2');
             font-weight: 400;
             font-style: normal;
         }
+
         @font-face {
             font-family: 'Poppins';
             src: url('/fonts/Poppins-Medium.woff2') format('woff2');
             font-weight: 500;
             font-style: normal;
         }
+
         @font-face {
             font-family: 'Poppins';
             src: url('/fonts/Poppins-SemiBold.woff2') format('woff2');
             font-weight: 600;
             font-style: normal;
         }
+
         @font-face {
             font-family: 'Poppins';
             src: url('/fonts/Poppins-Bold.woff2') format('woff2');
             font-weight: 700;
             font-style: normal;
         }
+
         @font-face {
             font-family: 'Plus Jakarta Sans';
             src: url('/fonts/PlusJakartaSans-Regular.woff2') format('woff2');
             font-weight: 400;
             font-style: normal;
         }
+
         @font-face {
             font-family: 'Plus Jakarta Sans';
             src: url('/fonts/PlusJakartaSans-Medium.woff2') format('woff2');
             font-weight: 500;
             font-style: normal;
         }
+
         @font-face {
             font-family: 'Plus Jakarta Sans';
             src: url('/fonts/PlusJakartaSans-SemiBold.woff2') format('woff2');
             font-weight: 600;
             font-style: normal;
         }
+
         @font-face {
             font-family: 'Plus Jakarta Sans';
             src: url('/fonts/PlusJakartaSans-Bold.woff2') format('woff2');
@@ -83,6 +92,7 @@
 <script src="{{ asset('js/sweetalert2@11.js') }}"></script>
 <script src="{{ asset('js/fontawesome.js') }}"></script>
 <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
+{{-- <script src="{{ asset('js/wow.min.js') }}"></script> --}}
 
 @stack('scripts')
 
@@ -99,11 +109,28 @@
                             : '')) }}',
                 text: '{{ session('message') }}',
                 icon: '{{ session('alert-type') }}',
-                timer: 1500,
-                showConfirmButton: false
+                showConfirmButton: true,
+                confirmButtonText: 'OK',
+                customClass: {
+                    confirmButton: 'custom-ok-button' // Tambahkan class khusus
+                }
             });
         });
     </script>
+    <style>
+        .custom-ok-button {
+            background-color: #1E9781;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .custom-ok-button:hover {
+            background-color: #1E9781;
+        }
+    </style>
 @endif
 
 </html>

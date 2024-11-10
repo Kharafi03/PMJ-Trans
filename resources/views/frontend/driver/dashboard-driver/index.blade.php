@@ -64,8 +64,8 @@
                                                         <h5>{{ $trip->bus->name }}</h5>
                                                     </div>
                                                     <div class="banner-tujuan d-flex justify-content-between">
-                                                        <p>{{ Str::limit($trip->booking->pickup_point, 20, '...') }}</p>
-                                                        <p>{{ Str::limit($trip->booking->destination->last()->name, 20, '...') }}</p>
+                                                        <p>{{ Str::limit($trip->booking->pickup_point, 10, '...') }}</p>
+                                                        <p>{{ Str::limit($trip->booking->destination->last()->name, 10, '...') }}</p>
                                                     </div>
                                                     <div class="banner-btn">
                                                         <a href="{{ url('/driver/detail-trip/' . $trip->booking->booking_code) }}" class="btn-detail">Detail</a>

@@ -100,16 +100,16 @@ class StartTripController extends Controller
         $codriver->save();
 
         // Update id_ms_bus pada bus yang terkait
-        $bus = $trip->bus; // Ambil objek bus melalui relasi
-        if ($bus) {
-            $bus->ms_buses_id = 3; // Mengubah ms_buses_id menjadi Tersewa
-            $bus->save();
-        } else {
-            return redirect()->back()->with([
-                'message' => 'Bus tidak ditemukan!',
-                'alert-type' => 'error'
-            ]);
-        }
+        // $bus = $trip->bus; // Ambil objek bus melalui relasi
+        // if ($bus) {
+        //     $bus->ms_buses_id = 3; // Mengubah ms_buses_id menjadi Tersewa
+        //     $bus->save();
+        // } else {
+        //     return redirect()->back()->with([
+        //         'message' => 'Bus tidak ditemukan!',
+        //         'alert-type' => 'error'
+        //     ]);
+        // }
 
         // Redirect kembali dengan pesan sukses
         return redirect()->route('dashboard-trip')

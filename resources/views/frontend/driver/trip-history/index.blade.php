@@ -125,7 +125,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <td class="keterangan">Nama Pengeluaran</td>
-                                                        <td>{{ $spend->spend_name }}</td>
+                                                        <td>{{ $spend->mspend->name }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="keterangan ">Deskripsi</td>

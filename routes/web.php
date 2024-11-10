@@ -66,6 +66,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/history/payment/{booking}', [DetailPaymentController::class, 'show'])->name('payment-history');
     Route::get('/booking-code/{booking_code}', [BookingCodeController::class, 'show'])->name('booking.code');
     Route::post('/send-ticket-email/{booking_code}', [BookingController::class, 'sendTicketEmail'])->name('sendTicketEmail');
+    Route::post('/booking-code/update-password', [BookingCodeController::class, 'updatePassword'])->name('booking-code.updatePassword');
 });
 
 // New Routes Homepage Customer

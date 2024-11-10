@@ -10,27 +10,21 @@
     <!-- CUSTOMER PROFIL -->
     <section id="profil">
         <div class="container">
-            {{--@if($showAlertPassword)
-                <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert" style="padding: 1.25rem; border-radius: 0.5rem;">
-                    <div style="flex-grow: 1;">
-                        <strong>Perhatian!</strong> Anda masih menggunakan kata sandi sementara '12345678'. Demi keamanan, segera perbarui kata sandi akun Anda!
-                    </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif--}}
             @include('frontend.assets.alert')
             <div class="row justify-content-center g-4 mb-5" style="margin-bottom: 50px;">
                 <div class="wow animate__animated animate__fadeInUp">
                     <h1 style="font-size: 44px; font-weight: 700; color: #1E9781; font-family: 'Poppins', sans-serif;">Ubah <span style="color: #FD9C07;">Profil</span></h1>
                 </div>
-                <div class="info mt-3 wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">
-                    <p class="info-title"><i class="fa-solid fa-circle-exclamation"></i> Informasi Ubah Kata Sandi</p>
-                    <ul>
-                        <li>Harap segera mengganti kata sandi Anda, karena saat ini menggunakan kata sandi sementara: '12345678'. Ubah ke kata sandi yang mudah Anda ingat, dan jika perlu, catatlah agar tidak lupa.</li>
-                        <li>Pastikan kata sandi baru mengandung kombinasi huruf, angka, dan simbol untuk meningkatkan keamanan. Contoh : <span style="font-weight: 700; color: #4180CC; font-weight: 700;">Contohpassword13!</span></li>
-                        <li>Jika Anda mengalami kesulitan dalam mengganti kata sandi, hubungi <a href="{{ route('contact') }}">Kontak Kami</a>  untuk bantuan lebih lanjut.</li>
-                    </ul>
-                </div>
+                @if($showAlertPassword)
+                    <div class="info mt-3 wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">
+                        <p class="info-title"><i class="fa-solid fa-circle-exclamation"></i> Informasi Ubah Kata Sandi</p>
+                        <ul>
+                            <li>Harap segera mengganti kata sandi Anda, karena saat ini menggunakan kata sandi sementara: '12345678'. Ubah ke kata sandi yang mudah Anda ingat, dan jika perlu, catatlah agar tidak lupa.</li>
+                            <li>Pastikan kata sandi baru mengandung kombinasi huruf, angka, dan simbol untuk meningkatkan keamanan. Contoh : <span style="font-weight: 700; color: #4180CC; font-weight: 700;">Contohpassword13!</span></li>
+                            <li>Jika Anda mengalami kesulitan dalam mengganti kata sandi, hubungi <a href="{{ route('contact') }}">Kontak Kami</a>  untuk bantuan lebih lanjut.</li>
+                        </ul>
+                    </div>
+                @endif
                 <div class="col-xl-8">
                     <div class="card border-0 shadow wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">
                         <div class="card-header  text-white ">
