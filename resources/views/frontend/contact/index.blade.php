@@ -103,7 +103,7 @@
                 </div>
                 <div class="col-lg-6 mb-3 d-flex justify-content-center wow animate__animated animate__fadeInRight" data-wow-delay="0.5s">
                     <iframe 
-                        src="{{ $setting->maps ? $setting->maps : 'about:blank' }}" 
+                        src="{{ $setting->embed_maps ? $setting->embed_maps : 'about:blank' }}" 
                         allowfullscreen 
                         loading="lazy" 
                         referrerpolicy="no-referrer-when-downgrade">
