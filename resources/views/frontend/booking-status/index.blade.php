@@ -179,7 +179,7 @@
                                                 <span class="card-icon me-2" style="padding-left: 10px;color: white; font-size: 25px;"><i class="fa-solid fa-landmark"></i></span>
                                                 <span style=" margin-left: 10px;">
                                                     <!-- <h5>Kirim Nomor Rekening 9876543212345</h5> -->
-                                                     <h5>KIRIM KE NOMOR REKENING</h5>
+                                                    <h5>KIRIM KE NOMOR REKENING {{ $setting->bank_account ? $setting->bank_account : '#' }}</h5>
                                                     <!-- <p>Transfer Uang Sejumlah
                                                     @if ($booking->id_ms_payment == 2)
                                                         Rp
@@ -193,10 +193,10 @@
                                                     @if ($booking->id_ms_payment == 2)
                                                         Rp
                                                         {{ number_format($booking->minimum_dp, 0, ',', '.') }}
-                                                        untuk menyelesaikan DP, Ke Nomor Rekening <b>BRI : 221 3454 876</b>
+                                                        untuk menyelesaikan DP, Ke Nomor Rekening <b>{{ $setting->bank_account ? $setting->bank_account : '#' }}</b>
                                                     @elseif ($booking->id_ms_payment == 3)
                                                         Rp {{ number_format($booking->payment_remaining, 0, ',', '.') }} untuk
-                                                        menyelesaikan pelunasan, , Ke Nomor Rekening <b>BRI : 221 3454 876</b>
+                                                        menyelesaikan pelunasan, , Ke Nomor Rekening <b>{{ $setting->bank_account ? $setting->bank_account : '#' }}</b>
                                                     @endif</p>
                                                 </span>
                                             </div>

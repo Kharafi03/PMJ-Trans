@@ -340,7 +340,7 @@
                         <h6>Hubungi Kami</h6>
                         <ul class="list-unstyled">
                             <li>
-                                <a href="https://g.co/kgs/VGfUFPB" target="_blank" style="text-decoration: none;">
+                                <a href="{{ $setting ? $setting->link_maps : '#' }}" target="_blank" style="text-decoration: none;">
                                     {{ $setting ? $setting->address : '#' }}
                                 </a>
                             </li>

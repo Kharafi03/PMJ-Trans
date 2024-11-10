@@ -53,18 +53,19 @@ class BookingCodeController extends Controller
         $request->validate([
             'new_password' => [
                 'required',
-                'confirmed',
                 'min:8',
                 'regex:/[a-z]/',        // At least one lowercase letter
                 'regex:/[A-Z]/',        // At least one uppercase letter
                 'regex:/[0-9]/',        // At least one digit
                 'regex:/[@$!%*?&]/',    // At least one symbol
             ],
+            'konfirmasi_password' => 'required|same:new_password'
         ], [
             'new_password.required' => 'Password baru harus diisi!',
-            'new_password.confirmed' => 'Konfirmasi password harus sama dengan password baru!',
-            'new_password.min' => 'Password baru minimal harus 8 karakter!',
+            'new_password.min' => 'Harap mengisikan password minimal 8 karakter!',
             'new_password.regex' => 'Password harus mengandung setidaknya satu huruf kecil, satu huruf besar, satu angka, dan satu simbol!',
+            'konfirmasi_password.required' => 'Konfirmasi password harus diisi!',
+            'konfirmasi_password.same' => 'Konfirmasi password harus sama dengan password baru!',
         ]);
 
         /** @var \App\Models\User $user **/

@@ -29,14 +29,14 @@ class HomepageController extends Controller
 
         foreach ($buses as $bus) {
             // Ambil review terkait dengan bus ini melalui booking dan tripbus
-            $reviews = Review::whereHas('booking.tripbus', function ($query) use ($bus) {
+            $review = Review::whereHas('booking.tripbus', function ($query) use ($bus) {
                 $query->where('id_bus', $bus->id);
             })
             ->get();
 
             // Hitung total rating jika ada review
-            $totalStar = $reviews->isNotEmpty() ? $reviews->sum('rating') : 0;
-            $averageStar = $reviews->isNotEmpty() ? $totalStar / $reviews->count() : 0;
+            $totalStar = $review->isNotEmpty() ? $review->sum('rating') : 0;
+            $averageStar = $review->isNotEmpty() ? $totalStar / $review->count() : 0;
 
             // Format rata-rata rating
             $formatStar = number_format($averageStar, 1);
