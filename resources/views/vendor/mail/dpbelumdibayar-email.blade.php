@@ -455,7 +455,7 @@
             margin-top: 20px;
             margin-bottom: 30px;
             transition: background-color 0.3s ease;
-            box-shadow: #1E978126 0px 25px 20px -20px;
+            box-shadow: #4475F236 0px 15px 25px, rgba(86, 167, 221, 0.397) 0px 5px 10px;
         }
 
         .info{
@@ -572,28 +572,30 @@
             <div class="info-content">
                 <h3>Detail Pembayaran</h3>
                 <div class="pembayaran-info">
-                    <table>
-                        <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
-                            <td>Nominal Pembayaran</td>
-                            <td>:</td>
-                            <td>Rp {{ number_format($booking->trip_nominal, 0, ',', '.') }}</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
-                            <td>Minimum DP yang harus dibayarkan</td>
-                            <td>:</td>
-                            <td>Rp {{ number_format($booking->minimum_dp, 0, ',', '.') }}</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
-                            <td>Total Pembayaran yang diterima</td>
-                            <td>:</td>
-                            <td>Rp {{ number_format($booking->payment_received, 0, ',', '.') }}</td>
-                        </tr>
-                        <tr>
-                            <td>Total sisa yang harus dibayarkan</td>
-                            <td>:</td>
-                            <td>Rp {{ number_format($booking->payment_remaining, 0, ',', '.') }}</td>
-                        </tr>
-                    </table>
+                    <center>
+                        <table>
+                            <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
+                                <td>Nominal Pembayaran</td>
+                                <td>:</td>
+                                <td>Rp {{ number_format($booking->trip_nominal, 0, ',', '.') }}</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
+                                <td>Minimum DP yang harus dibayarkan</td>
+                                <td>:</td>
+                                <td>Rp {{ number_format($booking->minimum_dp, 0, ',', '.') }}</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
+                                <td>Total Pembayaran yang diterima</td>
+                                <td>:</td>
+                                <td>Rp {{ number_format($booking->payment_received, 0, ',', '.') }}</td>
+                            </tr>
+                            <tr>
+                                <td>Total sisa yang harus dibayarkan</td>
+                                <td>:</td>
+                                <td>Rp {{ number_format($booking->payment_remaining, 0, ',', '.') }}</td>
+                            </tr>
+                        </table>
+                    </center>
                 </div>
                 <div class="instruksi">
                     <p>Instruksi Pembayaran :</p>
@@ -613,43 +615,45 @@
             </div>
             <div class="ticket-info">
                 <h5 style="color: #1E9781;">Detail <span style="color: #FD9C07;">Tiket</span></h5>
-                <table>
-                    <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
-                        <td>Nama Pemesan</td>
-                        <td> : </td>
-                        <td><p>{{ $booking->customer->name ?? 'John Doe' }}</p></td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
-                        <td>Kode Booking</td>
-                        <td> : </td>
-                        <td><p>{{ $booking->booking_code ?? 'PMJ-TC1U5787' }}</p></td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
-                        <td>Tanggal Berangkat</td>
-                        <td> : </td>
-                        <td><p>{{ \Carbon\Carbon::parse($booking->date_start)->translatedFormat('l, d F Y') }}</p></td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
-                        <td>Titik Jemput</td>
-                        <td> : </td>
-                        <td><p>{{ $booking->pickup_point ?? 'Tidak tersedia' }}</p></td>
-                    </tr>
-                    <tr>
-                        <td style="padding-top: 5px;">Tujuan</td>
-                        <td style="padding-top: 5px;"> : </td>
-                        <td>
-                            <p>
-                                @foreach ($destinations as $dest)
-                                    @if ($loop->count > 1)
-                                        {{ $loop->iteration }}. {{ $dest->name }}<br>
-                                    @else
-                                        <br>{{ $dest->name }}
-                                    @endif
-                                @endforeach
-                            </p>
-                        </td>
-                    </tr>
-                </table>
+                <center>
+                    <table>
+                        <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
+                            <td>Nama Pemesan</td>
+                            <td> : </td>
+                            <td><p>{{ $booking->customer->name ?? 'John Doe' }}</p></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
+                            <td>Kode Booking</td>
+                            <td> : </td>
+                            <td><p>{{ $booking->booking_code ?? 'PMJ-TC1U5787' }}</p></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
+                            <td>Tanggal Berangkat</td>
+                            <td> : </td>
+                            <td><p>{{ \Carbon\Carbon::parse($booking->date_start)->translatedFormat('l, d F Y') }}</p></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
+                            <td>Titik Jemput</td>
+                            <td> : </td>
+                            <td><p>{{ $booking->pickup_point ?? 'Tidak tersedia' }}</p></td>
+                        </tr>
+                        <tr>
+                            <td style="padding-top: 5px;">Tujuan</td>
+                            <td style="padding-top: 5px;"> : </td>
+                            <td>
+                                <p>
+                                    @foreach ($destinations as $dest)
+                                        @if ($loop->count > 1)
+                                            {{ $loop->iteration }}. {{ $dest->name }}<br>
+                                        @else
+                                            <br>{{ $dest->name }}
+                                        @endif
+                                    @endforeach
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </center>
             </div>
         </div>
 

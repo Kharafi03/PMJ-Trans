@@ -287,41 +287,43 @@
             <div class="info-content">
                 <h3>Detail Pemesanan</h3>
                 <div class="ticket-info">
-                    <table>
-                        <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
-                            <td>Nama Pemesan</td>
-                            <td>:</td>
-                            <td>{{ $booking->customer->name ?? 'John Doe' }}</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
-                            <td>Kode Booking</td>
-                            <td>:</td>
-                            <td>{{ $booking->booking_code ?? 'PMJ-TC1U5787' }}</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
-                            <td>Tanggal Berangkat</td>
-                            <td>:</td>
-                            <td>{{ \Carbon\Carbon::parse($booking->date_start)->translatedFormat('l, d F Y') }}</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
-                            <td>Titik Jemput</td>
-                            <td>:</td>
-                            <td>{{ $booking->pickup_point ?? 'Tidak tersedia' }}</td>
-                        </tr>
-                        <tr>
-                            <td>Tujuan</td>
-                            <td>:</td>
-                            <td>
-                                @foreach ($destinations as $dest)
-                                    @if ($loop->count > 1)
-                                        {{ $loop->iteration }}. {{ $dest->name }}<br>
-                                    @else
-                                        <br>{{ $dest->name }}
-                                    @endif
-                                @endforeach
-                            </td>
-                        </tr>
-                    </table>
+                    <center>
+                        <table>
+                            <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
+                                <td>Nama Pemesan</td>
+                                <td>:</td>
+                                <td>{{ $booking->customer->name ?? 'John Doe' }}</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
+                                <td>Kode Booking</td>
+                                <td>:</td>
+                                <td>{{ $booking->booking_code ?? 'PMJ-TC1U5787' }}</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
+                                <td>Tanggal Berangkat</td>
+                                <td>:</td>
+                                <td>{{ \Carbon\Carbon::parse($booking->date_start)->translatedFormat('l, d F Y') }}</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
+                                <td>Titik Jemput</td>
+                                <td>:</td>
+                                <td>{{ $booking->pickup_point ?? 'Tidak tersedia' }}</td>
+                            </tr>
+                            <tr>
+                                <td>Tujuan</td>
+                                <td>:</td>
+                                <td>
+                                    @foreach ($destinations as $dest)
+                                        @if ($loop->count > 1)
+                                            {{ $loop->iteration }}. {{ $dest->name }}<br>
+                                        @else
+                                            <br>{{ $dest->name }}
+                                        @endif
+                                    @endforeach
+                                </td>
+                            </tr>
+                        </table>
+                    </center>
                 </div>
             </div>
         </div>
