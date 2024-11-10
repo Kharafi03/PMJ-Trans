@@ -47,30 +47,30 @@ class BookingController extends Controller
             'name.max' => 'Nama maksimal 255 karakter.',
             
             'email.email' => 'Format email tidak valid.',
-            'email.max' => 'Email maksimal 255 karakter.',
+            'email.max' => 'Harap mengisikan email maksimal 255 karakter.',
             
             'number_phone.required' => 'Nomor telepon wajib diisi.',
             'number_phone.string' => 'Nomor telepon harus berupa teks.',
-            'number_phone.max' => 'Nomor telepon maksimal 20 karakter.',
+            'number_phone.max' => 'Harap mengisikan nomor telepon maksimal 20 karakter.',
             
             'address.required' => 'Alamat wajib diisi.',
             'address.string' => 'Alamat harus berupa teks.',
-            'address.max' => 'Alamat maksimal 255 karakter.',
+            'address.max' => 'Harap mengisikan alamat maksimal 255 karakter.',
             
             'capacity.required' => 'Kapasitas wajib diisi.',
             'capacity.integer' => 'Kapasitas harus berupa angka.',
             
             'date_start.required' => 'Tanggal mulai wajib diisi.',
-            'date_start.date' => 'Tanggal mulai harus berupa tanggal yang valid.',
+            'date_start.date' => 'Tanggal mulai harus berupa tanggal yang valid. dan jika hari ini, jamnya tidak boleh sama dengan waktu sekarang. maksimal 6 jam sebelum keberangkatan',
             
             'pickup_point.required' => 'Titik penjemputan wajib diisi.',
             'pickup_point.string' => 'Titik penjemputan harus berupa teks.',
             'pickup_point.max' => 'Titik penjemputan maksimal 255 karakter.',
             
             'tujuan.array' => 'Tujuan harus berupa array.',
-            'tujuan.max' => 'Setiap tujuan maksimal 255 karakter.',
+            'tujuan.max' => 'Harap mengisikan tujuan maksimal 255 karakter.',
             'tujuan.*.string' => 'Setiap tujuan harus berupa teks.',
-            'tujuan.*.max' => 'Setiap tujuan maksimal 255 karakter.',
+            'tujuan.*.max' => 'Harap mengisikan setiap tujuan maksimal 255 karakter.',
             
             'legrest.boolean' => 'Legrest harus berupa nilai benar atau salah.',
             'legrest.required' => 'Legrest wajib diisi.',

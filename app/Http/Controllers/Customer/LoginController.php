@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,35 +22,42 @@ class LoginController extends Controller
             'password' => 'required|string',
         ]);
 
-        // Cek kredensial pengguna
+        // Cek apakah nomor telepon terdaftar
+        $user = User::where('number_phone', $request->number_phone)->first();
+
+        if (!$user) {
+            // Jika nomor telepon tidak terdaftar, tampilkan error pada field number_phone
+            return back()->withErrors([
+                'number_phone' => 'Nomor telepon tidak terdaftar!',
+            ])->onlyInput('number_phone');
+        }
+
+        // Cek kredensial dengan nomor telepon dan password
         $credentials = [
             'number_phone' => $request->number_phone,
             'password' => $request->password,
         ];
 
         if (Auth::attempt($credentials, $request->remember)) {
-
             // Jika login berhasil, cek role pengguna
-            $user = Auth::user();
-            
             $role = $user->roles->first(); // Ambil role pertama dari koleksi roles
-            
+
             if ($role && $role->name === 'Driver') {
                 return redirect('/driver/dashboard')
                     ->with('message', 'Login Berhasil! Anda di arahkan ke dashboard driver.')
                     ->with('alert-type', 'success');
             }
 
-            // Jika login berhasil, arahkan ke halaman yang sesuai
+            // Jika bukan role Driver, arahkan ke halaman utama
             return redirect()->intended(route('homepage'))
                 ->with('message', 'Login Berhasil!')
                 ->with('alert-type', 'success');
         }
 
-        // Jika login gagal, kembalikan ke halaman login dengan pesan error
+        // Jika password salah, tampilkan error pada field password
         return back()->withErrors([
-            'number_phone' => 'Nomor telepon atau password salah.',
-        ])->onlyInput('number_phone');
+            'password' => 'Password salah.',
+        ])->onlyInput('password');
     }
 
     public function logout(Request $request)

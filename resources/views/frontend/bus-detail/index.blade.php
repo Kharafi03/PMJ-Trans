@@ -10,11 +10,11 @@
     <!-- CONTENT -->
     <section id="detailBus">
         <div class="container mt-5 mb-5">
-            <h5>Detail <span style="color: #FD9C07;">Bus</span></h5>
-            <div class="bus-card mt-5 mb-5">
+            <h5 class="wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">Detail <span style="color: #FD9C07;">Bus</span></h5>
+            <div class="bus-card mt-5 mb-5 wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">
                 <div class="row">
                     <div class="col-lg-6">
-                        <div id="carouselExample" class="carousel slide carousel-fade wow fadeInUp" data-wow-delay="0.1s">
+                        <div id="carouselExample" class="carousel slide carousel-fade wow animate__fadeInLeft">
                             <div class="carousel-inner">
                                 @foreach ($bus->images as $index => $busImage)
                                     <div class="carousel-item image-container {{ $index == 0 ? 'active' : '' }}">
@@ -74,10 +74,9 @@
                             </div>
                         </div>
                         <ul class="bus-description">
-                            <li>Dilengkapi dengan AC, toilet, dan seluruh untuk kenyamanan perjalanan.</li>
-                            <li>Kursi recliner nyaman, seatbelt pada setiap kursi.</li>
-                            <li>Tersedia hiburan, port USB, dan audio di setiap kursi.</li>
-                            <li>Harga tiket sekitar Rp 300.000, durasi 3-4 jam.</li>
+                            <li>Dilengkapi dengan AC, bantal, dan selimut untuk kenyamanan perjalanan.</li>
+                            <li>Berbagai entertain system, seperti youtube android tv, subwoofer audio, wireless mic, dan karaoke.</li>
+                            <li>Tempat duduk nyaman dengan seat 2-2.</li>
                         </ul>
                         <div class="d-flex justify-content-end align-items-center">
                             {{-- <button class="btn-back">Kembali</button> --}}
@@ -88,17 +87,18 @@
             </div>
 
             <div class="testimoni-content mt-5 mb-5">
-                <h5 style="margin-bottom: 50px;">Testimoni</h5>
+                <h5 style="margin-bottom: 50px;" class="wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">Testimoni</h5>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-lg-3 col-md-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.7s">
                         <div class="filter">
                             <div class="filter-content">
                                 <div class="filter-header">
-                                    <p>Filter Berdasarkan</p>
+                                    <p>Filter Rating</p>
                                 </div>
                                 <form id="filterForm">
                                     <div class="form-group">
                                         <select class="form-select" id="filterSelect">
+                                            <option value="#" selected>Pilih Berdasarkan</option>
                                             <option value="terbaru">Terbaru</option>
                                             <option value="ratingTertinggi">Rating Tertinggi</option>
                                             <option value="ratingTerendah">Rating Terendah</option>
@@ -108,7 +108,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-lg-9 col-md-8 wow animate__animated animate__fadeInUp" data-wow-delay="0.9s">
                         <div class="testimoni-container" id="reviewContainer">
                             @forelse ($reviews->take(5)->sortDesc() as $review)
                                 <div class="testi review-item" data-date="{{ $review->created_at }}" data-rating="{{ $review->rating }}">
@@ -153,6 +153,13 @@
 
     <!-- FOOTER -->
     <x-footer-customer />
+
+    <!-- SELECT -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("filterSelect").selectedIndex = 0;
+        });
+    </script>
 
 @endsection
 @push('styles')
@@ -243,5 +250,8 @@
             });
         });
 
+    </script>
+    <script>
+        new WOW().init();
     </script>
 @endpush

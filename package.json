@@ -15,5 +15,10 @@
         "postcss-nesting": "^13.0.0",
         "tailwindcss": "^3.4.10",
         "vite": "^5.4.3"
+    },
+    "dependencies": {
+        "animate.css": "^4.1.1",
+        "wow.js": "^1.2.2",
+        "wowjs": "^1.1.3"
     }
 }

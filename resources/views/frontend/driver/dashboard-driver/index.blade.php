@@ -25,7 +25,7 @@
             )
                 <div class="title mb-3">
                     <p>Wahh.. Hari ini belum ada trip!</p>
-                    <h5 style="color: #ff0000">Tidak ada booking untuk hari ini</h5>
+                    <!-- <h5 style="color: #ff0000">Tidak ada booking untuk hari ini</h5> -->
                 </div>
             @else
                 <div class="title mb-3">
@@ -64,8 +64,8 @@
                                                         <h5>{{ $trip->bus->name }}</h5>
                                                     </div>
                                                     <div class="banner-tujuan d-flex justify-content-between">
-                                                        <p>{{ Str::limit($trip->booking->pickup_point, 20, '...') }}</p>
-                                                        <p>{{ Str::limit($trip->booking->destination->last()->name, 20, '...') }}</p>
+                                                        <p>{{ Str::limit($trip->booking->pickup_point, 10, '...') }}</p>
+                                                        <p>{{ Str::limit($trip->booking->destination->last()->name, 10, '...') }}</p>
                                                     </div>
                                                     <div class="banner-btn">
                                                         <a href="{{ url('/driver/detail-trip/' . $trip->booking->booking_code) }}" class="btn-detail">Detail</a>
@@ -98,9 +98,9 @@
             @endif
 
             <!-- RIWAYAT TRIP -->
-            <div class="mb-5">
+            <div class="mb-5 riwayat-trip">
                 <div class="riwayat-title d-flex justify-content-between align-items-center mt-3 mb-3">
-                    <p class="mb-0">Riwayat Trip</p>
+                    <p class="mb-3">Riwayat Trip</p>
                     <i class="fa-solid fa-chevron-right"></i>
                 </div>
 

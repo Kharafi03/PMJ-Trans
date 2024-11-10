@@ -5,9 +5,24 @@ body {
     background-image: url("/img/bg-all2.png");
 }
 
+/* TEXT CONTENT */
+.text-content h5{
+    font-size: 44px;
+    font-weight: 700;
+    color: #1E9781;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 0;
+  }
+  .text-content span{
+    color: #FD9C07;
+  }
+
 /* TABEL */
 #detailSewa{
     font-family: 'Plus Jakarta Sans', sans-serif;
+}
+table{
+    font-family: 'Poppins', sans-serif !important;
 }
 tbody > tr:nth-child(2n+1) > td,  tbody > tr:nth-child(2n+1) > th {
     background-color: #F9F9FC !important;
@@ -37,14 +52,17 @@ th, td{
 .selesai, .lunas{
     background-color: #1E9781;
 }
-.ditolak, .dibatalkan{
+.ditolak{
     background-color: #F44C28;
+}
+.dibatalkan{
+    background-color: #D92904;
 }
 /* ULASAN */
 #feedbackForm h3, #feedbackForm label{
     font-size: 20px;
     font-weight: 500;
-    color: black;
+    color: #000000AD;
 }
 
 /* RATING ULASAN */
@@ -74,6 +92,8 @@ th, td{
     background-color: #4180CC !important;
     color: white !important;
     text-align: center;
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 400 !important;
 }
 .btn-lihat i{
     color: white;
@@ -102,6 +122,7 @@ th, td{
     color: white;
     border: none;
     border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
 }
 .status-diterima, .status-belumBayar, .status-sudahBayar{
     width: 100%;
@@ -112,6 +133,7 @@ th, td{
     color: white;
     background-color: #4180CC;
     border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
 }
 .status-ditolak, .status-dibatalkan{
     width: 100%;
@@ -124,6 +146,7 @@ th, td{
     color: white;
     border: none;
     border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
 }
 .status-selesai, .status-lunas{
     width: 100%;
@@ -136,6 +159,7 @@ th, td{
     color: white;
     border: none;
     border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
 }
 
 

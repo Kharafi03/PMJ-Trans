@@ -8,7 +8,7 @@
         <div class="row">
             <!-- KIRI -->
             <div
-                class="col-lg-6 col-md-12 order-md-last order-lg-first  d-flex flex-column justify-content-center align-items-center">
+                class="col-lg-6 col-md-12 order-md-last order-lg-first  d-flex flex-column justify-content-center align-items-center wow animate__animated animate__fadeInLeft">
 
                 <!-- FORM -->
                 <div class="form-container">
@@ -64,8 +64,8 @@
                 </div>
 
             </div>
-            <div class="col-lg-6 col-md-12 d-flex align-items-center justify-content-center col-img">
-                <img src="img/reset-img.png" class="img-fluid" width="80%" height="auto">
+            <div class="col-lg-6 col-md-12 d-flex align-items-center justify-content-center col-img wow animate__animated animate__fadeInRight">
+                <img src="img/reset-pw-cust.png" class="img-fluid" width="70%" height="auto">
             </div>
         </div>
     </section>
@@ -85,5 +85,8 @@
             this.querySelector('i').classList.toggle('fa-eye');
             this.querySelector('i').classList.toggle('fa-eye-slash');
         });
+    </script>
+    <script>
+        new WOW().init();
     </script>
 @endsection
