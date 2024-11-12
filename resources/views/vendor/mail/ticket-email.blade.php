@@ -425,18 +425,15 @@
             border-radius: 8px 8px 0 0;
             display: flex;
             margin-bottom: 0 !important;
-            padding: 20px 0px;
+            padding: 40px 0px;
         }
 
-        .email-header img{
-            margin: 0;
-            padding: 0;
-        }
         .email-header h2 {
             font-size: 24px;
             margin: auto;
-            font-weight: 600;
+            font-weight: 700;
             padding: auto;
+            font-family: 'Poppins', sans-serif !important;
         }
 
         .email-body {
@@ -495,6 +492,7 @@
             padding: 15px;
             font-size: 14px;
             font-weight: 500;
+            color: #667085 !important;
         }
 
 
@@ -575,6 +573,44 @@
             background-color: #E4E4E4;
         }
 
+         /* Media Query untuk Mobile */
+         @media screen and (max-width: 480px) {
+            .email-container {
+                width: 100%;
+                padding: 10px;
+            }
+
+            .email-header {
+                font-size: 18px;
+            }
+
+            .info-pesanan {
+                font-size: 12px;
+            }
+
+            .email-body h1 {
+                font-size: 16px;
+            }
+
+            .btn {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+
+            table td {
+                font-size: 12px;
+                padding: 8px;
+            }
+
+            .info-content h3 {
+                font-size: 16px;
+            }
+
+            .instruksi p {
+                font-size: 12px;
+            }
+        }
+
         @media screen and (max-width: 600px) {
             .email-container {
                 width: 100%;
@@ -635,7 +671,7 @@
 
         <div class="email-body">
             <h1>Terima kasih telah memilih PMJ Trans!</h1>
-            <p style="font-family: 'Poppins', sans-serif;">Kami sangat menghargai kepercayaan Anda. Berikut ini adalah detail tiket pesanan Anda:</p>
+            <p style="font-family: 'Poppins', sans-serif; color: #666666 !important;">Kami sangat menghargai kepercayaan Anda. Berikut ini adalah detail tiket pesanan Anda:</p>
 
             <div class="ticket-info">
                 <h5 style="color: #1E9781;">Detail <span style="color: #FD9C07;">Tiket</span></h5>

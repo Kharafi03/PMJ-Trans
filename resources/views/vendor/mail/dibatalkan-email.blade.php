@@ -86,17 +86,15 @@
             border-radius: 8px 8px 0 0;
             display: flex;
             margin-bottom: 0 !important;
+            padding: 40px 0px;
         }
 
-        .email-header img{
-            margin: 0;
-            padding: 0;
-        }
         .email-header h2 {
             font-size: 24px;
             margin: auto;
-            font-weight: 600;
+            font-weight: 700;
             padding: auto;
+            font-family: 'Poppins', sans-serif !important;
         }
 
         .email-body {
@@ -123,9 +121,10 @@
         .email-body h1 {
             font-size: 18px;
             color: #313234;
-            font-weight: 700;
+            font-weight: 400;
             margin-bottom: 10px;
             padding-top: 0px;
+            font-family: 'Poppins', sans-serif !important;
         }
 
         strong{
@@ -143,8 +142,9 @@
             border-radius: 5px;
             background-color: white;
             border-collapse: collapse;
-            margin-bottom: 25px;
+            /* margin-bottom: 25px; */
             box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            margin: 0 auto 25px auto;
         }
 
         tr:nth-child(even) {
@@ -155,6 +155,7 @@
             padding: 15px;
             font-size: 14px;
             font-weight: 500;
+            color: #667085 !important;
         }
 
         .info-content{
@@ -170,11 +171,6 @@
             font-weight: 700;
             font-size: 22px;
             margin-bottom: 20px;
-        }
-        .ticket-info {
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         .ticket-info h3 {
@@ -213,6 +209,44 @@
             padding: 10px;
             background-color: #E4E4E4;
         }
+
+         /* Media Query untuk Mobile */
+         @media screen and (max-width: 480px) {
+            .email-container {
+                width: 100%;
+                padding: 10px;
+            }
+
+            .email-header {
+                font-size: 18px;
+            }
+
+            .info-pesanan {
+                font-size: 12px;
+            }
+
+            .email-body h1 {
+                font-size: 16px;
+            }
+
+            .btn {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+
+            table td {
+                font-size: 12px;
+                padding: 8px;
+            }
+
+            .info-content h3 {
+                font-size: 16px;
+            }
+
+            .instruksi p {
+                font-size: 12px;
+            }
+         }
 
         @media screen and (max-width: 600px) {
             .email-container {
@@ -258,32 +292,17 @@
 
     <div class="email-container">
         <div class="email-header">
-            <h2>Pemesanan Dibatalkan</h2>
-            <img src="{{ asset('/img/template-email-img.png') }}">
+            <h2>PEMESANAN DIBATALKAN</h2>
         </div>
 
         <div class="email-body">
-            <h1>Terimakasih telah memilih PMJ Trans! </h1>
+            <h1>Halo, <b>Nida Aulia Karima</b></h1>
             <p class="info-pesanan">Pemesanan Anda Dibatalkan!</p>
-            <p style="font-family: 'Poppins', sans-serif;">Kami informasikan kepada Anda, bahwa pemesanan dengan kode booking 
+            <p style="font-family: 'Poppins', sans-serif;color: #666666 !important;">Kami informasikan kepada Anda, bahwa pemesanan dengan kode booking 
                 <strong>{{ $booking->booking_code ?? '#' }} telah dibatalkan!</strong></p>
 
-            <p style="font-family: 'Poppins', sans-serif;">Berikut ini adalah detail pemesanan anda :</p>
-            
-                <!-- <h3>Detail Pemesanan</h3>
-                <p><strong>Nama Pemesan:</strong> {{ $booking->customer->name ?? 'John Doe' }}</p>
-                <p><strong>Kode Booking:</strong> {{ $booking->booking_code ?? 'PMJ-TC1U5787' }}</p>
-                <p><strong>Tanggal Berangkat:</strong>
-                    {{ \Carbon\Carbon::parse($booking->date_start)->translatedFormat('l, d F Y') }}</p>
-                <p><strong>Titik Jemput:</strong> {{ $booking->pickup_point ?? 'Tidak tersedia' }}</p>
-                <p><strong>Tujuan:</strong></p>
-                @if ($booking->destination->isNotEmpty())
-                    @foreach ($booking->destination as $destination)
-                        <p>{{ $loop->iteration }}. {{ $destination->name }}</p>
-                    @endforeach
-                @else
-                    <p>Tidak tersedia</p>
-                @endif -->
+            <p style="font-family: 'Poppins', sans-serif;color: #666666 !important;">Berikut ini adalah detail pemesanan anda :</p>
+
             <div class="info-content">
                 <h3>Detail Pemesanan</h3>
                 <div class="ticket-info">

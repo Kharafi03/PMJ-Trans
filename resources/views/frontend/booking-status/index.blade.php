@@ -108,7 +108,7 @@
                                             <span style=" margin-left: 10px;"><b>Pesanan diproses </b><br><small>Admin sedang memproses pesanan anda, silakan cek status pemesanan secara berkala.</small></span>
                                         </div> -->
                                         <div class="status-alert-diproses d-flex align-items-center mb-3">
-                                            <span class="card-icon me-2" style="padding-left: 10px; color: white;"><img src="{{ asset('img/icon/icon-proses.png') }}" alt="icon"></span>
+                                            <span class="card-icon me-2" style="padding-left: 10px; color: white; font-size: 20px;"><i class="fa-solid fa-arrows-rotate"></i></span>
                                             <span style=" margin-left: 10px;">
                                                 <h5>PESANAN ANDA SEDANG DIPROSES</h5>
                                                 <p>Admin sedang memproses pesanan anda, silakan cek status pemesanan secara berkala.</p>
