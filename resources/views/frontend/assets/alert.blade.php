@@ -21,7 +21,7 @@
             }
             p{
                 color: #181818;
-                font-size: 12px;
+                font-size: 14px;
                 font-weight: 400;
                 margin-left: 18px;
                 padding-top: 5px;

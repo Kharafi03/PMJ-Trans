@@ -91,56 +91,96 @@
                             <div class="text-content mb-4">
                                 <h5 style="font-size: 30px; font-weight: 700; color: #1E9781; ">Detail <span style="color: #FD9C07;">Pemesanan</span></h5>
                             </div>
-                            <div class="pemesanan-diproses">
-                                <div class="mb-3">
-                                    <label for="kodeBooking" class="form-label">Kode Booking</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="icon"><i class="fa-solid fa-ticket-simple"></i></span>
-                                        <input type="text" id="kodeBooking" class="form-control" value="{{ $booking->booking_code }}" readonly>
+                            <!-- <form action="{{ route('booking.uploadProof', $booking->id) }}" method="POST" enctype="multipart/form-data" id="formUploadDP">
+                                @csrf -->
+                                <div class="pemesanan-diproses">
+                                    <div class="mb-3">
+                                        <label for="kodeBooking" class="form-label">Kode Booking</label>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="icon"><i class="fa-solid fa-ticket-simple"></i></span>
+                                            <input type="text" id="kodeBooking" class="form-control" value="{{ $booking->booking_code }}" readonly>
+                                        </div>
                                     </div>
-                                </div>
-                                @if ($booking->id_ms_booking == 1)
-                                    <div class="status-alert-diproses d-flex align-items-center mb-3">
-                                        <span class="card-icon me-2" style="padding-left: 10px; color: white;"><img src="{{ asset('img/icon/icon-proses.png') }}" alt="icon"></span>
-                                        <span style=" margin-left: 10px;">
-                                            <h5>PESANAN ANDA SEDANG DIPROSES</h5>
-                                            <p>Admin sedang memproses pesanan anda, silakan cek status pemesanan secara berkala.</p>
-                                        </span>
-                                    </div>
-                                @elseif ($booking->id_ms_booking == 2)
-                                    @if ($booking->id_ms_payment == 4)
-                                        <div class="status-alert-diterima d-flex align-items-center mb-3">
-                                            <span class="card-icon me-2" style="padding-left: 10px;color: white;font-size:25px;"><i class="fa-solid fa-credit-card"></i></span>
+
+                                    @if ($booking->id_ms_booking == 1)
+                                        <!-- <div class="status-alert-diproses d-flex align-items-center">
+                                            <span class="card-icon me-2" style="padding-left: 10px; color: white;"><i class="fa-solid fa-calendar"></i></span>
+                                            <span style=" margin-left: 10px;"><b>Pesanan diproses </b><br><small>Admin sedang memproses pesanan anda, silakan cek status pemesanan secara berkala.</small></span>
+                                        </div> -->
+                                        <div class="status-alert-diproses d-flex align-items-center mb-3">
+                                            <span class="card-icon me-2" style="padding-left: 10px; color: white; font-size: 20px;"><i class="fa-solid fa-arrows-rotate"></i></span>
                                             <span style=" margin-left: 10px;">
-                                                <h5>PEMBAYARAN LUNAS</h5>
-                                                <p>Pembayaran Anda lunas. Terima kasih atas kepercayaan Anda.</p>
+                                                <h5>PESANAN ANDA SEDANG DIPROSES</h5>
+                                                <p>Admin sedang memproses pesanan anda, silakan cek status pemesanan secara berkala.</p>
                                             </span>
                                         </div>
-                                    @else
-                                        <div class="status-alert-diterima d-flex align-items-center mb-3">
-                                            <span class="card-icon me-2" style="padding-left: 10px;font-size: 25px; color: white;">
-                                                <i class="fa-regular fa-file-lines"></i>
-                                            </span>
-                                            <span style=" margin-left: 10px;">
-                                                <h5>PESANAN ANDA DITERIMA</h5>
-                                                <p>
-                                                    Admin telah menerima pesanan anda, silahkan lanjutkan ke upload bukti 
+                                    @elseif ($booking->id_ms_booking == 2)
+                                        @if ($booking->id_ms_payment == 4)
+                                            <!-- <div class="status-alert-diterima d-flex align-items-center">
+                                                <span class="card-icon me-2" style="padding-left: 10px;"><i class="fa-solid fa-check" style="color: white;"></i></span>
+                                                <span style=" margin-left: 10px;"><b>Pembayaran Lunas</b><br><small> Pemesanan anda telah lunas</small></span>
+                                            </div> -->
+                                            <div class="status-alert-diterima d-flex align-items-center mb-3">
+                                                <span class="card-icon me-2" style="padding-left: 10px;color: white;font-size:25px;"><i class="fa-solid fa-credit-card"></i></span>
+                                                <span style=" margin-left: 10px;">
+                                                    <h5>PEMBAYARAN LUNAS</h5>
+                                                    <p>Pembayaran Anda lunas. Terima kasih atas kepercayaan Anda.</p>
+                                                </span>
+                                            </div>
+                                        @else
+                                            <!-- <div class="status-alert-diterima d-flex align-items-center">
+                                                <span class="card-icon me-2" style="padding-left: 10px;"><i class="fa-solid fa-calendar" style="color: white;"></i></span>
+                                                <span style="margin-left: 10px;">
+                                                    <b>Pesanan diterima admin</b><br>
+                                                    <small>Admin telah menerima pesanan anda, silahkan lanjutkan ke upload bukti
+                                                        @if ($booking->id_ms_payment == 2)
+                                                            DP
+                                                        @else
+                                                            Pelunasan
+                                                        @endif
+                                                        Pemesanan.
+                                                    </small>
+                                                </span>
+                                            </div> -->
+                                            <div class="status-alert-diterima d-flex align-items-center mb-3">
+                                            <span class="card-icon me-2" style="padding-left: 10px;font-size: 25px; color: white;"><i class="fa-regular fa-file-lines"></i></span>
+                                                <span style=" margin-left: 10px;">
+                                                    <h5>PESANAN ANDA DITERIMA</h5>
+                                                    <p>
+                                                        Admin telah menerima pesanan anda, silahkan lanjutkan ke upload bukti 
+                                                        @if ($booking->id_ms_payment == 2)
+                                                            DP
+                                                        @else
+                                                            Pelunasan
+                                                        @endif
+                                                        Pemesanan.
+                                                    </p>
+                                                </span>
+                                            </div>
+                                            <!-- <div class="rekening d-flex align-items-center">
+                                                <span class="card-icon me-2" style="padding-left: 10px;"><i
+                                                        class="fa-solid fa-building-columns" style="color: white;"></i></span>
+                                                <span style=" margin-left: 10px;">
+                                                    <b>Kirim Nomor Rekening</b>
+                                                    9876543212345
+                                                    <br>Sejumlah
                                                     @if ($booking->id_ms_payment == 2)
-                                                        DP
-                                                    @else
-                                                        Pelunasan
+                                                        Rp
+                                                        {{ number_format($booking->payment_received === null ? $booking->minimum_dp : $booking->payment_received, 0, ',', '.') }}
+                                                        untuk menyelesaikan DP
+                                                    @elseif ($booking->id_ms_payment == 3)
+                                                        Rp {{ number_format($booking->payment_remaining, 0, ',', '.') }} untuk
+                                                        menyelesaikan pelunasan
                                                     @endif
-                                                    Pemesanan.
-                                                </p>
-                                            </span>
-                                        </div>
-                                        <div class="rekening d-flex align-items-center mb-3">
-                                            <span class="card-icon me-2" style="padding-left: 10px;color: white; font-size: 25px;">
-                                                <i class="fa-solid fa-landmark"></i>
-                                            </span>
-                                            <span style=" margin-left: 10px;">
-                                                <h5>KIRIM KE NOMOR REKENING {{ $setting->bank_account ? $setting->bank_account : '#' }}</h5>
-                                                <p>
+                                                </span> -->
+                                                <!-- nominal -->
+                                            <!-- </div> -->
+                                            <div class="rekening d-flex align-items-center mb-3">
+                                                <span class="card-icon me-2" style="padding-left: 10px;color: white; font-size: 25px;"><i class="fa-solid fa-landmark"></i></span>
+                                                <span style=" margin-left: 10px;">
+                                                    <!-- <h5>Kirim Nomor Rekening 9876543212345</h5> -->
+                                                    <h5>KIRIM KE NOMOR REKENING {{ $setting->bank_account ? $setting->bank_account : '#' }}</h5>
+                                                    <!-- <p>Transfer Uang Sejumlah
                                                     @if ($booking->id_ms_payment == 2)
                                                         Rp
                                                         {{ number_format($booking->minimum_dp, 0, ',', '.') }}
