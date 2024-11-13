@@ -1,106 +1,112 @@
 /* STYLE FORM */
 body {
-    background-image: url('/img/bg-page.png');
-    background-position: 0 100%; 
+    background-image: url("/img/bg-page.png");
+    background-position: 0 100%;
     background-repeat: no-repeat;
-    background-size: cover; 
+    background-size: cover;
 }
-#statusPesanan{
+#statusPesanan {
     margin: 50px 0px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: "Plus Jakarta Sans", sans-serif;
 }
-
 
 /* BREADCRUMB */
-.breadcrumb{
+.breadcrumb {
     margin-top: 85px;
     padding: 20px;
-    background-color: #1E9781;
-    position: fixed; 
+    background-color: #1e9781;
+    position: fixed;
     width: 100%;
-    top: 0;           
+    top: 0;
     z-index: 1000;
     border-radius: 0px 0px 30px 30px;
     font-size: 16px;
     font-weight: 700;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 .breadcrumb .breadcrumb-item + .breadcrumb-item::before {
     color: white !important;
 }
-.breadcrumb a{
+.breadcrumb a {
     color: white !important;
     text-decoration: none;
 }
-.breadcrumb .active{
-    color: #DADADA !important;
+.breadcrumb .active {
+    color: #dadada !important;
     font-size: 16px;
     font-weight: 700;
     text-decoration: underline;
 }
 
-
 /* FORM */
-#formStatusPemesanan{
-    border: 4px solid #EFF0F6;
+#formStatusPemesanan {
+    border: 4px solid #eff0f6;
     border-radius: 34px;
     padding: 20px;
     background-color: white;
 }
-#formModal{
+#formModal {
     border: none !important;
     border-radius: 34px;
     padding: 20px;
     background-color: white;
 }
-form{
-    border: 4px solid #EFF0F6;
+form {
+    border: 4px solid #eff0f6;
     border-radius: 34px;
     background-color: white;
 }
-.input-group{
-    height: 50px;
+.input-group {
+    min-height: 50px;
 }
-input[type="text"], input[type="number"], input[type="email"], input[type="datetime-local"], input[type="file"]{
-    background-color: #EDEDED;
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="datetime-local"],
+input[type="file"] {
+    background-color: #ededed;
     border-radius: 15px;
-    border: 1px solid #99A2A5;
+    border: 1px solid #99a2a5;
     padding-left: 5px;
 }
-textarea{
-    background-color: #EDEDED;
+textarea {
+    background-color: #ededed;
     border-radius: 0px 15px 15px 0px !important;
-    border: 1px solid #99A2A5 !important;
+    border: 1px solid #99a2a5 !important;
     padding-left: 5px;
 }
-input[type="file"]{
+input[type="file"] {
     padding: 12px;
     background-color: white;
     height: 50px;
     width: 100%;
 }
-input[type="file"]:focus, .input-group:focus-within{
-    outline: 1px solid #1E9781 !important;
+input[type="file"]:focus,
+.input-group:focus-within {
+    outline: 1px solid #1e9781 !important;
     box-shadow: none;
-     z-index: 3;
+    z-index: 3;
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
-    border:none !important;
+    border: none !important;
     border-radius: 15px;
 }
 
-input[readonly], textarea:read-only, #icon{
-    background-color: #EDEDED !important;
+input[readonly],
+textarea:read-only,
+#icon {
+    background-color: #ededed !important;
 }
-#icon{
-    background-color: #EDEDED;
+#icon {
+    justify-content: center;
+    background-color: #ededed;
     border-radius: 15px 0px 0px 15px;
-    border: 1px solid #99A2A5;
-    color: #A8A8A8;
+    border: 1px solid #99a2a5;
+    color: #a8a8a8;
     font-size: 20px;
     width: 50px;
 }
-label{
+label {
     font-weight: 500;
 }
 
@@ -110,58 +116,68 @@ label{
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
 }
 .form-switch .form-check-input:checked {
-    background-color: #17B92F;
-    border-color: #17B92F;
+    background-color: #17b92f;
+    border-color: #17b92f;
     border: none;
 }
 
+/* ICON */
+
+.card-icon {
+    color: white;
+    justify-content: center;
+    min-width: 35px;
+    font-size: 35px;
+}
+
 /* STATUS PEMESANAN */
-.status-alert-ditolak{
-    background-color: #F62F05;
+.status-alert-ditolak {
+    background-color: #f62f05;
     border-radius: 15px;
-    border: 1px solid #FE9A07;
+    border: 1px solid #fe9a07;
     color: white;
     height: 80px;
-
 }
-.status-alert-ditolak{
-    background-color: #D92904;
+.status-alert-dibatalkan {
+    background-color: #d92904;
     border-radius: 15px;
-    border: 1px solid #FE9A07;
+    border: 1px solid #fe9a07;
     color: white;
     height: 80px;
-
 }
-.status-alert-diproses{
-    background-color: #FFB800;
+.status-alert-diproses {
+    background-color: #ffb800;
     border-radius: 15px;
-    border: 1px solid #FE9A07;
+    border: 1px solid #fe9a07;
     color: white;
     height: 80px;
-
 }
-.status-alert-diterima{
-    background-color: #17B92F;
+.status-alert-diterima {
+    background-color: #17b92f;
     border-radius: 15px;
-    border: 1px solid #E4E4E4;
+    border: 1px solid #e4e4e4;
     color: white;
     height: 80px;
- 
 }
-.rekening{
-    background-color: #4180CC;
+.rekening {
+    background-color: #4180cc;
     border-radius: 15px;
-    border: 1px solid #E4E4E4;
+    border: 1px solid #e4e4e4;
     color: white;
     height: 80px;
- 
 }
-.status-alert-diproses p, .status-alert-ditolak p, .status-alert-diterima p, .rekening p{
+.status-alert-diproses p,
+.status-alert-ditolak p,
+.status-alert-diterima p,
+.rekening p {
     font-size: 13px;
     line-height: 18px;
     padding-right: 5px;
 }
-.status-alert-diproses h5, .status-alert-ditolak h5, .status-alert-diterima h5, .rekening h5{
+.status-alert-diproses h5,
+.status-alert-ditolak h5,
+.status-alert-diterima h5,
+.rekening h5 {
     margin-top: 12px;
     padding-bottom: 5px;
     font-size: 15px;
@@ -170,102 +186,107 @@ label{
 }
 
 /* BUTTON */
-.btn-tambahTujuan{
+.btn-tambahTujuan {
     padding: 5px;
     color: white;
-    border: 1px solid #4180CC;
-    background-color: #4180CC;
+    border: 1px solid #4180cc;
+    background-color: #4180cc;
     margin-left: 10px;
     border-radius: 10px;
     width: 130px;
     font-size: 14px;
 }
-.btn-tambahTujuan i{
+.btn-tambahTujuan i {
     font-size: 14px;
 }
-.btn-perbaiki, .btn-hubungi, .btn-kirim{
+.btn-perbaiki,
+.btn-hubungi,
+.btn-kirim {
     padding: 10px;
     width: auto;
     border: none;
     border-radius: 10px;
-    background-color: #1E9781;
+    background-color: #1e9781;
     color: white;
     text-align: center;
     font-size: 16px;
     font-weight: 700;
-    box-shadow: #4475F236 0px 15px 25px, rgba(86, 167, 221, 0.397) 0px 5px 10px;
-    font-family: 'Poppins', sans-serif;
+    box-shadow: #4475f236 0px 15px 25px, rgba(86, 167, 221, 0.397) 0px 5px 10px;
+    font-family: "Poppins", sans-serif;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     &:hover {
         transform: scale(1.05);
-        background-color: #00BB83;
+        background-color: #00bb83;
     }
 }
-.btn-kirim{
+.btn-kirim {
     width: 155px !important;
 }
 
 /* MODAL */
-.modal-content{
+.modal-content {
     border: none;
 }
-.modal-body{
+.modal-body {
     padding: 20px 50px;
 }
-.modal-body input{
+.modal-body input {
     border-radius: 4px;
 }
-.modal-body #icon{
+.modal-body #icon {
     border-radius: 4px 0 0 4px;
 }
-.modal-body p{
+.modal-body p {
     font-size: 16px;
     text-align: justify;
 }
-.modal-body h5{
+.modal-body h5 {
     text-align: center;
-    color:#0D894F;
+    color: #0d894f;
     font-size: 24px;
     font-weight: 600;
 }
-.modal input[type="text"], .modal #icon{
-    background-color: #FAFAFA;
-    border: 1px solid #E4E4E4;
+.modal input[type="text"],
+.modal #icon {
+    background-color: #fafafa;
+    border: 1px solid #e4e4e4;
 }
-.text-modal{
+.text-modal {
     font-size: 14px;
     font-weight: 600;
-    color: #F44C28;
+    color: #f44c28;
     margin-bottom: 30px;
 }
-.btn-bayarSekarang{
+.btn-bayarSekarang {
     height: 40px;
     width: 100%;
-    border: 1px solid #17B92F;
+    border: 1px solid #17b92f;
     border-radius: 10px;
-    background-color: #17B92F;
+    background-color: #17b92f;
     color: white;
     font-size: 16px;
     font-weight: bold;
-    box-shadow: #4475F236 0px 15px 25px, rgba(86, 167, 221, 0.397) 0px 5px 10px;
+    box-shadow: #4475f236 0px 15px 25px, rgba(86, 167, 221, 0.397) 0px 5px 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    &:hover{
-        transform: scale(1.05); 
+    &:hover {
+        transform: scale(1.05);
     }
 }
 
-
 @media (max-width: 767px) {
-    .status-alert-ditolak, .status-alert-diterima, .status-alert-diproses, .rekening{
+    .status-alert-ditolak,
+    .status-alert-diterima,
+    .status-alert-diproses,
+    .rekening {
         height: 110px;
     }
-    .rekening{
+    .rekening {
         padding-top: 7px;
     }
-    #formStatusPemesanan{
+    #formStatusPemesanan {
         padding: 5px;
     }
-    .modal-body{
+    .modal-body {
         padding: 20px 10px;
     }
 }

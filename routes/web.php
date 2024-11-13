@@ -91,7 +91,8 @@ Route::post('/booking', [BookingController::class, 'store'])->name('booking.stor
 Route::get('/booking-check', [BookingCheckController::class, 'index'])->name('cek.status');
 Route::post('/booking-check', [BookingCheckController::class, 'status'])->name('post.cek.status');
 
-Route::post('/booking/upload-proof/{id}', [BookingStatusController::class, 'uploadProof'])->name('booking.uploadProof');
+Route::get('/booking-status/{encryptedId}', [BookingStatusController::class, 'show'])->name('booking.status');
+Route::post('/booking-status/{encryptedId}/upload-proof', [BookingStatusController::class, 'uploadProof'])->name('booking.uploadProof');
 
 // Route::get('/booking-status', function () {
 //     return view('frontend.booking-status.index');
