@@ -7,10 +7,11 @@
 
 /* BACKGROUND IMAGE */
 body {
-  background-position: 55% 50%;
+  background-position: center;
+  margin: 0;
   background-repeat: no-repeat;
-  background-size: auto !important;
-  background-image: url("/img/bg-all2.png");
+  background-size: auto;
+  background-image: url("/img/bgPage.png");
 }
 
 /* TEXT CONTENT */

@@ -203,7 +203,7 @@
                                             </div>
                                         @endif
                                     @elseif ($booking->id_ms_booking == 3)
-                                        <!-- <div class="status-alert-ditolak d-flex align-items-center">
+                                         <div class="status-alert-ditolak d-flex align-items-center">
                                             <span class="card-icon me-2" style="padding-left: 10px; color: white;"><i class="fa-solid fa-triangle-exclamation"></i></span>
                                             <span style=" margin-left: 10px;"><b>Pesanan ditolak admin</b><br><small>Admin menolak pesanan anda, pastikan data yang dimasukan benar.</small></span>
                                         </div> -->

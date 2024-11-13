@@ -96,7 +96,7 @@
     overflow-x: auto;
     scroll-behavior: smooth;
     white-space: nowrap;
-    padding-bottom: 10px;
+    /* padding-bottom: 10px; */
 }
 
 .card-content {
@@ -105,10 +105,13 @@
     margin-right: 16px;
     flex: 0 0 auto;
 }
-.card-content-wrapper {
+
+
+
+/* .card-content-wrapper {
     scrollbar-width: 2px;
     scrollbar-color: #1e9781 #f1f1f1;
-}
+} */
 
 /* BUTTON LIHAT */
 .banner-btn {
@@ -219,7 +222,7 @@
 
 .carousel-indicators {
     position: absolute;
-    bottom: -20px; /* Adjust as needed */
+    bottom: 0px; /* Adjust as needed */
     transform: translateX(-50%); /* Center the indicators */
     display: flex;
     left: 35%;
@@ -441,7 +444,7 @@ html {
 .riwayat-title i {
     font-size: 18px;
 }
-.riwayat-title a {
+ a {
     text-decoration: none;
     color: black;
 }
