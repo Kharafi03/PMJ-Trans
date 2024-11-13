@@ -64,6 +64,7 @@ class RegistrationController extends Controller
                 'regex:/[0-9]/',        // At least one digit
                 'regex:/[!@#$%^&*(),.?":{}|<>]/' // At least one special character
             ],
+            'address' => ['required', 'string', 'max:255'],
         ], [
             'name.required' => 'Nama wajib diisi!',
             'name.max' => 'Harap mengisikan Nama maksimal 255 karakter!',
@@ -73,6 +74,8 @@ class RegistrationController extends Controller
             'password.required' => 'Password wajib diisi!',
             'password.min' => 'Harap mengisikan password minimal 8 karakter',
             'password.regex' => 'Password harus mengandung setidaknya satu huruf kecil, satu huruf besar, satu angka, dan satu simbol!',
+            'address.required' => 'Alamat wajib diisi!',
+            'address.max' => 'Harap mengisikan Alamat maksimal 255 karakter!',
         ]);        
     }
 
@@ -90,6 +93,7 @@ class RegistrationController extends Controller
             'number_phone' => $data['number_phone'],
             'password' => Hash::make($data['password']),
             'id_ms' => 1,
+            'address' => $data['address'],
         ]);
     }
 }
