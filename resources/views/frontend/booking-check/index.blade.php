@@ -33,7 +33,7 @@
                                 <div class="kolom-input text-left" style="height: 100%;">
                                     <div class="mb-4">
                                         <label for="booking_code" class="form-label">Kode Booking<span class="text-danger">*</span></label>
-                                        <div class="input-group">
+                                        <div class="input-group d-flex justify-content-center">
                                             <span class="input-group-text" id="icon"><i class="fa-solid fa-ticket-simple"></i></span>
                                             <input type="text" id="booking_code" class="form-control" name="booking_code" placeholder="Masukkan kode booking" required>
                                         </div>
@@ -41,8 +41,8 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="number_phone" class="form-label">Nomor WhatsApp<span class="text-danger">*</span></label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-wa.png') }}" alt="icon-tiket"></span>
+                                        <div class="input-group d-flex justify-content-center">
+                                            <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-wa.png') }}" alt="icon-wa" style="width:20px; height:20px; padding-left: 3px;"></span>
                                             <input type="text" id="number_phone" class="form-control" name="number_phone" placeholder="Masukkan nomor whatsapp aktif" required>
                                         </div>
                                         <small class="text-danger" id="error-notelp" style="display: none;">Masukkan nomor whatsapp aktif anda.</small>

@@ -16,7 +16,7 @@
                 </div>
             @endif
             <div class="row justify-content-center py-3">
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <div class="text-content mb-5 wow animate__animated animate__fadeInUp">
                         <h5>Detail <span style="color: #FD9C07;">Booking</span></h5>
                     </div>
@@ -198,14 +198,14 @@
                         @endif
                     </div>
                 </div>
-                <div class="col-md-6 mt-2">
+                <div class="col-md-7 mt-2" style="padding: 0px 10px;">
                     <div class="row wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">
-                        <div class="col-lg-7 col-md-12">
+                        <div class="col-lg-6 col-md-12">
                             <div class="text-content">
                                 <h5 style="font-size: 30px;">Detail <span style="color: #FD9C07;">Pemesanan</span></h5>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-12">
+                        <div class="col-lg-6 col-md-12">
                             @if ($booking->ms_booking->id == 1)
                                 <!-- <p class="mb-4">Silahkan menunggu admin mengkonfirmasi</p> -->
                                 <p class="status-draf">Status Pemesanan : Diproses</p>
@@ -266,12 +266,12 @@
                         </div>
                     </div>
                     <div class="row mb-3 wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">
-                        <div class="col-lg-7 col-md-12">
+                        <div class="col-lg-6 col-md-12">
                             <div class="text-content">
                                 <h5 style="font-size: 30px;">Detail <span style="color: #FD9C07;">Pembayaran</span></h5>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-12">
+                        <div class="col-lg-6 col-md-12">
                         @if ($booking->ms_payment->id == 1)
                                 <!-- <h4 class="mb-4">Status Pembayaran:
                                     <span class="badge bg-warning">

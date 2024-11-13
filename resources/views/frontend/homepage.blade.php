@@ -175,7 +175,7 @@
                     <div class="col-lg-3 col-md-6 mb-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.7s">
                         <div class="cara-content text-center">
                             <div class="mb-3">
-                                <img src="img/cara1.png" class="img-fluid" alt="cara 1" style="padding-top: 20px;">
+                                <img src="img/cara1.png" class="img-fluid" alt="cara 1" style="padding-top: 20px; height: 185px !important;">
                             </div>
                             <h5>Pesan Bus</h5>
                             <p>Melalui Website pada tombol “Pesan Sekarang”  Atau Admin pada tombol “Hubungi Admin”.</p>
@@ -184,16 +184,16 @@
                     <div class="col-lg-3 col-md-6 mb-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.9s">
                         <div class="cara-content text-center">
                             <div class="mb-3">
-                                <img src="img/cara2.png" class="img-fluid" alt="cara 2" style=" height:170px; width: 340px; padding-top: 30px;">
+                                <img src="img/cara2.png" class="img-fluid" alt="cara 2" style=" height:170px; padding-top: 20px;">
                             </div>
-                            <h5 style="padding-top: 10px;">Lengkapi Form Pemesanan</h5>
+                            <h5>Lengkapi Form Pemesanan</h5>
                             <p>Lengkapi Formulir Pemesanan yang telah disedikan.</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 mb-4 wow animate__animated animate__fadeInUp" data-wow-delay="1s">
                         <div class="cara-content text-center">
                             <div class="mb-3">
-                                <img src="img/cara3.png" class="img-fluid" alt="cara 3" style="margin-top: 20px;">
+                                <img src="img/cara3.png" class="img-fluid" alt="cara 3" style="margin-top: 20px; height:170px; ">
                             </div>
                             <h5>Konfirmasi Admin</h5>
                             <p>Cek pemesanan jika melalui website, atau konfirmasi via WhatsApp jika pemesanan dilakukan oleh admin.</p>
@@ -202,7 +202,7 @@
                     <div class="col-lg-3 col-md-6 mb-4 wow animate__animated animate__fadeInUp" data-wow-delay="1.3s">
                         <div class="cara-content text-center">
                             <div class="mb-3">
-                                <img src="img/cara4.png" class="img-fluid" alt="cara 4" style="padding-top: 30px;">
+                                <img src="img/cara4.png" class="img-fluid" alt="cara 4" style="padding-top: 30px; height:185px; ">
                             </div>
                             <h5>Pembayaran</h5>
                             <p>Unggah bukti pembayaran DP, sisa pembayaran dapat dilakukan saat trip atau di Kantor {{ $setting ? $setting->name : '#' }}.</p>
@@ -244,7 +244,7 @@
                 <p>Begini kata mereka yang sudah merasakan kenyamanan dan layanan terbaik dari {{ $setting ? $setting->name : '#' }}!</p>
             </div>  
 
-            <div id="carouselTestimoni" class="carousel slide wow animate__animated animate__fadeInUp" data-wow-delay="0.6s" data-bs-ride="carousel">
+            <div id="carouselTestimoni" class="carousel slide wow animate__animated animate__fadeInUp" data-wow-delay="0.6s" data-bs-ride="carousel" data-bs-interval="3000">
                 <div class="carousel-indicators" style="margin-top: 50px;">
                     @foreach ($reviews->take(3) as $index => $review)
                         <button type="button" data-bs-target="#carouselTestimoni" data-bs-slide-to="{{ $index }}" 

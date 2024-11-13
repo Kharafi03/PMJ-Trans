@@ -54,8 +54,9 @@ form{
     background-color: white;
     border-radius: 10px 0px 0px 10px;
     border: 1px solid #99A2A5;
-    color: #666666;
+    color: #A8A8A8;
     font-size: 20px;
+    width: 50px;
 }
 input[type="text"]{
     border-radius: 0px 10px 10px 0px;

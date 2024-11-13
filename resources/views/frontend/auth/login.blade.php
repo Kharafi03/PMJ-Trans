@@ -92,7 +92,7 @@
                                         <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Masukkan Password" required>
-                                            <span class="input-group-text" id="toggle-password">
+                                            <span class="input-group-text @error('password') text-danger border-danger @enderror" id="toggle-password">
                                                 <i class="fas fa-eye"></i>
                                             </span>
                                             @error('password')

@@ -86,7 +86,7 @@
                                     <label for="capacity" class="form-label">Jumlah Penumpang<span
                                             class="text-danger">*</span></label>
                                     <div class="input-group">
-                                        <span class="input-group-text" id="icon"><i class="fa-solid fa-user-group"></i></span>
+                                        <span class="input-group-text" id="icon"><i class="fa-solid fa-user-group" style="padding-left: 0px;"></i></span>
                                         <input type="number" class="detail-pemesanan form-control @error('capacity') is-invalid @enderror" id="capacity"
                                             name="capacity" placeholder="Masukkan jumlah penumpang" min="1" required>
                                         @error('capacity')
@@ -174,7 +174,7 @@
                                 <label for="number_phone" class="form-label">Nomor WhatsApp<span
                                         class="text-danger">*</span></label>
                                 <div class="input-group">
-                                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-wa.png') }}" alt="icon"></span>
+                                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-wa.png') }}" alt="icon" style="width:20px; height:20px; padding-left: 3px;"></span>
                                     <input type="number" class="detail-pemesanan form-control @error('number_phone') is-invalid @enderror" id="number_phone"
                                         name="number_phone"
                                         placeholder="Masukkan nomor whatsapp" required

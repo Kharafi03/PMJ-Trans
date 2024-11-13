@@ -4,6 +4,7 @@
             .alert{
                 border: 1px solid #CA383A;
                 border-radius: 8px;
+                background-color: #F9D2CA;
             }
             strong, strong i{
                 color: #CA383A;

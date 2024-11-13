@@ -92,27 +92,37 @@
                                         <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password" required>
-                                            <span class="input-group-text" id="toggle-password"><i class="fas fa-eye"></i></span>
+                                            <span class="input-group-text @error('password') text-danger border-danger @enderror" id="toggle-password"><i class="fas fa-eye"></i></span>
                                         </div>
                                     </div>
-                                    <div class="mb-5">
+                                    <div class="mb-2">
                                         <label for="address" class="form-label">Alamat<span class="text-danger">*</span></label>
                                         <textarea class="form-control" placeholder="Masukkan alamat Lengkap" id="address" name="address" required></textarea>
                                     </div>
-
+                                    <div class="mb-4">
+                                        <ul>
+                                            <li style="font-size:14px; color:#4180CC; font-weight: 600;">
+                                                Masukan alamat anda dengan benar
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="mb-5">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" placeholder="Masukkan alamat email" id="email" name="email">
+                                    </div>
                                     <div class="mb-3">
                                         <button type="submit" class="btn-register">Register</button>
                                     </div>
+                                    <div class="link-login">
+                                        <p>Jika Anda sudah memiliki akun, silakan<a href="{{ route('login') }}"> Log in di sini.</a></p>
+                                    </div>
                                 </form>
-                                <div class="link-login">
-                                    <p>Jika Anda sudah memiliki akun, silakan<a href="{{ route('login') }}"> Log in di sini.</a></p>
-                                </div>
                             </div>
                         </div>
                     
                 </div>
                 <div class="col-lg-6 col-md-12 d-flex align-items-center justify-content-center col-img wow animate__animated animate__fadeInRight">
-                    <img src="img/register-img.png" class="img-fluid" width="70%">
+                    <img src="img/register-img.png" class="img-fluid">
                 </div>
             </div>
         </section>

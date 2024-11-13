@@ -218,14 +218,18 @@ a{
     width: 85px;
     border: none;
     border-radius: 5px;
-    background-color: #4180CC80;
-    color: #4180CC;
+    /* background-color: #4180CC80;
+    color: #4180CC; */
+    background-color: #4180CC;
+    color: white;
     font-size: 14px;
     font-weight: 600;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     &:hover{
-        background-color: #4180CC80;
-        color: #4180CC;
+        /* background-color: #4180CC80;
+        color: #4180CC; */
+        background-color: #4180CC;
+        color: white;
         transform: scale(1.05); 
     }
 }
@@ -235,14 +239,18 @@ a{
     width: 85px;
     border: none;
     border-radius: 5px;
-    background-color: #C4E4DE;
-    color: #1E9781;
+    /* background-color: #C4E4DE;
+    color: #1E9781; */
+    background-color: #1E9781;
+    color: white;
     font-size: 14px;
     font-weight: 600;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     &:hover{
-        background-color: #C4E4DE;
-        color: #1E9781;
+        /* background-color: #C4E4DE;
+        color: #1E9781; */
+        background-color: #1E9781;
+        color: white;
         transform: scale(1.05); 
     }
 }
@@ -251,8 +259,10 @@ a{
     width: 90px;
     border: none;
     border-radius: 5px;
+    /* background-color: #D2D2D2;
+    color: #666666; */
     background-color: #D2D2D2;
-    color: #666666;
+    color: white;
     font-size: 14px;
     font-weight: 600;
     transition: none;
@@ -283,14 +293,18 @@ a{
     width: 85px;
     border: none;
     border-radius: 5px;
-    background-color: #CA383A94;
-    color: #CA383A;
+    /* background-color: #CA383A94;
+    color: #CA383A; */
+    background-color: #CA383A;
+    color: white;
     font-size: 13px;
     font-weight: 600;
     transition: transform 0.3s ease;
     &:hover{
-        background-color: #CA383A94;
-        color: #CA383A;
+        /* background-color: #CA383A94;
+        color: #CA383A; */
+        background-color: #CA383A;
+        color: white;
         transform: scale(1.05) !important; 
     }
 }

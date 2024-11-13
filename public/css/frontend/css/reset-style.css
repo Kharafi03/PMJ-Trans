@@ -4,13 +4,13 @@
 html, body {
     margin: 0;
     overflow: auto;
-    height: 100%; /* Ensure body takes full height */
+    height: 100%; 
 }
 
 #reset {
     display: flex;
-    align-items: stretch; /* Pastikan kolom mengambil tinggi penuh */
-    height: 100vh; /* Set full viewport height */
+    align-items: stretch;
+    height: 100vh;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -128,10 +128,17 @@ input[type="tel"]:focus,
 textarea:focus {
     outline: none !important;
     box-shadow: none;
-    border: 1px solid #ced4da; /* Atur border untuk input aktif */
+    border: 1px solid #ced4da; 
 }
 img {
     border-radius: 20px;
+}
+
+/* EROR */
+.input-group-text.text-danger {
+    color: #dc3545; 
+    border-color: #dc3545; 
+    border-radius: 0px 6px 6px 0px !important;
 }
 
 /* BUTTON */
@@ -173,10 +180,25 @@ img {
 
 @media (min-width: 768px) and (max-width: 1024px){
     .col-img { 
-        height: auto; /* Biarkan tinggi menyesuaikan untuk tablet */
+        height: auto; 
     }
     .form-container{
         padding: 50px 200px;
         max-width: 100%;
     }
+}
+
+/* AUTO FILL */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 30px white inset !important; 
+    -webkit-text-fill-color: #000 !important; 
+    transition: background-color 5000s ease-in-out 0s; 
 }

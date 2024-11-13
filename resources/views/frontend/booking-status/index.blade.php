@@ -110,7 +110,7 @@
                                         <div class="status-alert-diproses d-flex align-items-center mb-3">
                                             <span class="card-icon me-2" style="padding-left: 10px; color: white; font-size: 20px;"><i class="fa-solid fa-arrows-rotate"></i></span>
                                             <span style=" margin-left: 10px;">
-                                                <h5>PESANAN ANDA SEDANG DIPROSES</h5>
+                                                <h5>Pesanan Anda Sedang DIPROSES</h5>
                                                 <p>Admin sedang memproses pesanan anda, silakan cek status pemesanan secara berkala.</p>
                                             </span>
                                         </div>
@@ -123,7 +123,7 @@
                                             <div class="status-alert-diterima d-flex align-items-center mb-3">
                                                 <span class="card-icon me-2" style="padding-left: 10px;color: white;font-size:25px;"><i class="fa-solid fa-credit-card"></i></span>
                                                 <span style=" margin-left: 10px;">
-                                                    <h5>PEMBAYARAN LUNAS</h5>
+                                                    <h5>Pembayaran LUNAS</h5>
                                                     <p>Pembayaran Anda lunas. Terima kasih atas kepercayaan Anda.</p>
                                                 </span>
                                             </div>
@@ -145,7 +145,7 @@
                                             <div class="status-alert-diterima d-flex align-items-center mb-3">
                                             <span class="card-icon me-2" style="padding-left: 10px;font-size: 25px; color: white;"><i class="fa-regular fa-file-lines"></i></span>
                                                 <span style=" margin-left: 10px;">
-                                                    <h5>PESANAN ANDA DITERIMA</h5>
+                                                    <h5>Pesanan Anda DITERIMA</h5>
                                                     <p>
                                                         Admin telah menerima pesanan anda, silahkan lanjutkan ke upload bukti 
                                                         @if ($booking->id_ms_payment == 2)
@@ -179,7 +179,7 @@
                                                 <span class="card-icon me-2" style="padding-left: 10px;color: white; font-size: 25px;"><i class="fa-solid fa-landmark"></i></span>
                                                 <span style=" margin-left: 10px;">
                                                     <!-- <h5>Kirim Nomor Rekening 9876543212345</h5> -->
-                                                    <h5>KIRIM KE NOMOR REKENING {{ $setting->bank_account ? $setting->bank_account : '#' }}</h5>
+                                                    <h5>Kirim ke Nomor Rekening BRI: {{ $setting->bank_account ? $setting->bank_account : '#' }}</h5>
                                                     <!-- <p>Transfer Uang Sejumlah
                                                     @if ($booking->id_ms_payment == 2)
                                                         Rp
@@ -209,7 +209,7 @@
                                         <div class="status-alert-ditolak d-flex align-items-center mb-3">
                                             <span class="card-icon me-2" style="padding-bottom: 5px; padding-left: 5px;"><img src="{{ asset('img/icon/icon-ditolak.png') }}" alt="icon"></span>
                                             <span style=" margin-left: 10px;">
-                                                <h5>PESANAN ANDA DITOLAK</h5>
+                                                <h5>Pesanan Anda DITOLAK</h5>
                                                 <p>Admin menolak pesanan anda, pastikan data yang dimasukan benar.</p>
                                             </span>
                                         </div>
@@ -221,7 +221,7 @@
                                         <div class="status-alert-diterima d-flex align-items-center mb-3">
                                             <span class="card-icon me-2" style="padding-left: 10px;"><img src="{{ asset('img/icon/icon-lunas.png') }}" alt="icon"></span>
                                             <span style=" margin-left: 10px;">
-                                                <h5>PEMESANAN SELESAI</h5>
+                                                <h5>Pesanan SELESAI</h5>
                                                 <p>Pesanan anda telah selesai.  Terima kasih atas kepercayaan Anda.</p>
                                             </span>
                                         </div>
@@ -233,7 +233,7 @@
                                         <div class="status-alert-dibatalkan d-flex align-items-center mb-3">
                                             <span class="card-icon me-2" style="padding-left: 10px; color: white;"><img src="{{ asset('img/icon/icon-ditolak.png') }}" alt="icon"></span>
                                             <span style=" margin-left: 10px;">
-                                                <h5>PESANAN ANDA DIBATALKAN</h5>
+                                                <h5>Pesanan Anda DIBATALKAN</h5>
                                                 <p>Admin membatalkan pesanan anda, berdasarkan persetujuan anda.</p>
                                             </span>
                                         </div>
