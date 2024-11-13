@@ -47,11 +47,11 @@ class SpendTripController extends Controller
             'description' => 'required|string',
             'nominal' => 'required|numeric',
             'kilometer' => 'required|numeric',
-            'image_receipt' => 'required|image|mimes:jpeg,png,jpg|max:2048', // Maksimal 2MB
+            'image_receipt' => 'required|image|mimes:jpeg,png,jpg|max:10000',
         ], [
             'image_receipt.image' => 'File harus berupa gambar.',
             'image_receipt.mimes' => 'File harus berupa jpeg, png, atau jpg.',
-            'image_receipt.max' => 'File tidak boleh lebih dari 2MB.',
+            'image_receipt.max' => 'File tidak boleh lebih dari 10MB.',
             'image_receipt.required' => 'Bukti pembayaran harus diunggah.',
             'nominal.required' => 'Nominal harus diisi.',
             'nominal.numeric' => 'Nominal harus berupa angka.',

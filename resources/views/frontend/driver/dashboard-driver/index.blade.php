@@ -105,7 +105,7 @@
                 </div>
 
                 <div class="riwayat-content accordion accordion-flush mb-5" style="padding-bottom: 60px;" id="item">
-                    @foreach ($historyTrips->sortByDesc('created_at')->take(3) as $index => $historyTrip)
+                    @foreach ($historyTrips->sortByDesc('updated_at')->take(3) as $index => $historyTrip)
                         <div class="accordion-item">
                             <div class="accordion-header">
                                 <button class="accordion-button collapsed d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#item{{ $historyTrip->id }}" aria-expanded="false">
@@ -154,7 +154,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td class="keterangan ">Email</td>
-                                                        <td>{{ $historyTrip->booking->customer->email }}</td>
+                                                        <td>{{ Str::limit($historyTrip->booking->customer->email, 15, '...') }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="keterangan ">Titik Jemput</td>

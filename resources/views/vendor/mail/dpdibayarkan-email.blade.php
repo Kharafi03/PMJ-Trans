@@ -12,29 +12,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
     <style>
-
         .poppins-regular {
-        font-family: "Poppins", serif;
-        font-weight: 400;
-        font-style: normal;
+            font-family: "Poppins", serif;
+            font-weight: 400;
+            font-style: normal;
         }
 
         .poppins-medium {
-        font-family: "Poppins", serif;
-        font-weight: 500;
-        font-style: normal;
+            font-family: "Poppins", serif;
+            font-weight: 500;
+            font-style: normal;
         }
 
         .poppins-semibold {
-        font-family: "Poppins", serif;
-        font-weight: 600;
-        font-style: normal;
+            font-family: "Poppins", serif;
+            font-weight: 600;
+            font-style: normal;
         }
 
         .poppins-bold {
-        font-family: "Poppins", serif;
-        font-weight: 700;
-        font-style: normal;
+            font-family: "Poppins", serif;
+            font-weight: 700;
+            font-style: normal;
         }
 
         body {
@@ -46,7 +45,7 @@
             overflow-x: hidden;
             width: 100%;
             box-sizing: border-box;
-            
+
         }
 
         .email-container {
@@ -90,7 +89,7 @@
 
         }
 
-        .info-pesanan{
+        .info-pesanan {
             padding: 10px;
             background-color: #19DC60;
             border-radius: 5px;
@@ -110,7 +109,7 @@
             font-family: 'Poppins', sans-serif !important;
         }
 
-        strong{
+        strong {
             color: #F44C28;
         }
 
@@ -121,7 +120,7 @@
             margin-bottom: 20px;
         }
 
-        table{
+        table {
             border-radius: 5px !important;
             background-color: white;
             border-collapse: collapse;
@@ -133,21 +132,22 @@
             background-color: #F9F9FC;
         }
 
-        table td{
+        table td {
             padding: 15px;
             font-size: 14px;
             font-weight: 500;
             color: #667085 !important;
         }
 
-        .info-content{
+        .info-content {
             padding: 20px;
             background-color: #1E978126;
             border: 1px solid #1E9781;
             border-radius: 5px;
 
         }
-        .info-content h3{
+
+        .info-content h3 {
             text-align: center;
             color: #1E9781;
             font-weight: 700;
@@ -188,7 +188,7 @@
             margin-bottom: 20px;
         }
 
-        .ticket-info td p{
+        .ticket-info td p {
             font-size: 14px;
             color: #51545e;
             padding: 0;
@@ -201,7 +201,7 @@
             font-size: 14px;
         }
 
-        .instruksi{
+        .instruksi {
             padding: 0px 20px;
             color: #666666 !important;
         }
@@ -249,7 +249,7 @@
         }
 
         /* Media Query untuk Mobile */
-         @media screen and (max-width: 480px) {
+        @media screen and (max-width: 480px) {
             .email-container {
                 width: 100%;
                 padding: 10px;
@@ -284,7 +284,7 @@
             .instruksi p {
                 font-size: 12px;
             }
-         }
+        }
 
         @media screen and (max-width: 600px) {
             .email-container {
@@ -326,28 +326,31 @@
             .email-footer {
                 font-size: 12px;
             }
-            .info-pesanan{
+
+            .info-pesanan {
                 font-size: 14px;
                 width: 70%;
             }
         }
     </style>
 </head>
-
 <body>
-
     <div class="email-container">
         <div class="email-header">
             <h2>PEMBAYARAN DP DITERIMA</h2>
         </div>
-
         <div class="email-body">
-            <h1>Halo, <b>Nida Aulia Karima</b></h1>
+            <h1>Halo, <b>{{ $booking->customer->name ?? '#' }}</b></h1>
             <p class="info-pesanan">Pembayaran DP Anda diterima!</p>
-                <p style="font-family: 'Poppins', sans-serif;color: #666666 !important;">Silahkan <strong>membayar pelunasan </strong>sebesar
-                    <strong>Rp. {{ number_format($booking->payment_remaining, 0, ',', '.') }}</strong> untuk melanjutkan pemesanan</p>
-
-            <p style="font-family: 'Poppins', sans-serif;color: #666666 !important;">Berikut ini adalah detail pemesanan anda : </p>
+            <p style="font-family: 'Poppins', sans-serif;color: #666666 !important;">
+                Silahkan 
+                <strong>membayar pelunasan </strong>sebesar
+                <strong>Rp. {{ number_format($booking->payment_remaining, 0, ',', '.') }}</strong> 
+                untuk melanjutkan pemesanan
+            </p>
+            <p style="font-family: 'Poppins', sans-serif;color: #666666 !important;">
+                Berikut ini adalah detail pemesanananda : 
+            </p>
             <div class="info-content">
                 <h3>Detail Pembayaran</h3>
                 <div class="pembayaran-info">
@@ -368,7 +371,7 @@
                                 <td>:</td>
                                 <td>Rp {{ number_format($booking->payment_received, 0, ',', '.') }}</td>
                             </tr>
-                            <tr>
+                            <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
                                 <td>Total sisa yang harus dibayarkan</td>
                                 <td>:</td>
                                 <td>Rp {{ number_format($booking->payment_remaining, 0, ',', '.') }}</td>
@@ -382,7 +385,6 @@
                     <div style="margin-left:18px;margin-top: 0px;">
                         Silakan cek status pemesanan Anda terlebih dahulu dengan memasukkan Nomor WhatsApp dan Kode Booking.
                     </div>
-                    
                     <p style="margin-bottom: 5px;">2.&nbsp; Upload Bukti Pembayaran:</p>
                     <div style="margin-left:18px; margin-top: 0px;">
                         Setelah status pemesanan Anda terverifikasi, Anda diarahkan untuk mengunggah bukti pembayaran. Klik tombol di bawah ini untuk melanjutkan.
@@ -399,43 +401,52 @@
                         <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
                             <td>Nama Pemesan</td>
                             <td> : </td>
-                            <td><p>{{ $booking->customer->name ?? 'John Doe' }}</p></td>
+                            <td>
+                                <p>{{ $booking->customer->name ?? '#' }}</p>
+                            </td>
                         </tr>
                         <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
                             <td>Kode Booking</td>
                             <td> : </td>
-                            <td><p>{{ $booking->booking_code ?? 'PMJ-TC1U5787' }}</p></td>
+                            <td>
+                                <p>{{ $booking->booking_code ?? '#' }}</p>
+                            </td>
                         </tr>
                         <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
                             <td>Tanggal Berangkat</td>
                             <td> : </td>
-                            <td><p>{{ \Carbon\Carbon::parse($booking->date_start)->translatedFormat('l, d F Y') }}</p></td>
+                            <td>
+                                <p>{{ \Carbon\Carbon::parse($booking->date_start)->translatedFormat('l, d F Y') }}</p>
+                            </td>
                         </tr>
                         <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
                             <td>Titik Jemput</td>
                             <td> : </td>
-                            <td><p>{{ $booking->pickup_point ?? 'Tidak tersedia' }}</p></td>
-                        </tr>
-                        <tr>
-                            <td style="padding-top: 5px;">Tujuan</td>
-                            <td style="padding-top: 5px;"> : </td>
                             <td>
-                                <p>
-                                    @foreach ($destinations as $dest)
-                                        @if ($loop->count > 1)
+                                <p>{{ $booking->pickup_point ?? '#' }}</p>
+                            </td>
+                        </tr>
+                        <tr style="color: #667085;">
+                            <td>Tujuan</td>
+                            <td> : </td>
+                            <td>
+                                @foreach ($destinations as $dest)
+                                    @if ($loop->count > 1)
+                                        <p style="line-height: 1.5;">
                                             {{ $loop->iteration }}. {{ $dest->name }}<br>
-                                        @else
-                                            <br>{{ $dest->name }}
-                                        @endif
-                                    @endforeach
-                                </p>
+                                        </p>
+                                    @else
+                                        <p>
+                                            {{ $dest->name }}
+                                        </p>
+                                    @endif
+                                @endforeach
                             </td>
                         </tr>
                     </table>
                 </center>
             </div>
         </div>
-
         <div class="email-footer">
             <p>&copy; {{ date('Y') }} PMJ Trans</p>
             <p>{{ $setting->first()->address }}</p>
@@ -446,8 +457,5 @@
             <a href="{{ $setting->first()->sosmed_yt }}">Youtube</a>
         </div>
     </div>
-
 </body>
-
 </html>
-
