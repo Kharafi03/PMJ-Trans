@@ -30,7 +30,7 @@
                         <div class="info mt-3">
                             <p class="info-title"><i class="fa-solid fa-circle-exclamation"></i> Informasi Ubah Kata Sandi</p>
                             <ul>
-                                <li>Segera ganti kata sandi Anda karena saat ini menggunakan kata sandi sementara: '12345678'. Pilih kata sandi yang mudah diingat dan, jika perlu, catat agar tidak lupa. Gunakan kombinasi huruf, angka, dan simbol, misalnya: <span style="font-weight: 700; color: #4180CC; font-weight: 700;">Contohpassword13!</span></li>
+                                <li>Segera ganti kata sandi Anda karena saat ini menggunakan kata sandi sementara: '12345678'. Gunakan kombinasi huruf, angka, dan simbol, misalnya: <span style="font-weight: 700; color: #4180CC; font-weight: 700;">Contohpassword13!</span></li>
                             </ul>
                         </div>
                         <form action="{{ route('booking-code.updatePassword') }}" method="POST" class="mt-4">

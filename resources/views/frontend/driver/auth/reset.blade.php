@@ -8,7 +8,7 @@
         <div class="dashboard-container">
             <div class="reset-password">
                 <div class="d-flex align-items-center justify-content-center mt-3">
-                    <img src="{{ asset('img/reset-password-driver.png') }}" class="img-fluid">
+                    <img src="{{ asset('img/reset-password-driver.png') }}" class="img-fluid" width="90%" height="auto">
                 </div>
                 <div class="form-reset">
                     <div class="text-content mb-5">
