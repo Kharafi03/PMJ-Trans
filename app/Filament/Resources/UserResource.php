@@ -134,9 +134,10 @@ class UserResource extends Resource
     public static function table(Tables\Table $table): Tables\Table
     {
         return $table
+            ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('id')
-                    ->label('Nomor')
+                    ->label('No')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama')

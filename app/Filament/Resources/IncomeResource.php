@@ -93,7 +93,7 @@ class IncomeResource extends Resource
                             ->relationship('ms_income', 'name')
                             ->required(),
                         Forms\Components\DateTimePicker::make('datetime')
-                            ->label('Tanggal dan Waktu'),
+                            ->label('Tanggal Pendapatan'),
 
                         // Forms\Components\TextInput::make('payment_received')
                         //     ->numeric()
@@ -169,7 +169,7 @@ class IncomeResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('datetime')
-                    ->label('Tanggal & Waktu')
+                    ->label('Tanggal Pendapatan')
                     ->dateTime()
                     ->sortable(),
 

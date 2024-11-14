@@ -321,19 +321,23 @@ class BusResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('created_at', 'desc')
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('id')
+                    ->label('No')
+                    ->sortable(),
+                Tables\Columns\ImageColumn::make('images.image')
                     ->label('Bus')
+                    ->getStateUsing(fn(Model $record) => optional($record->images->first())->image) // Ambil gambar pertama
+                    ->size(50) // Ukuran gambar thumbnail
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Kode Bus')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
                     ->label('Jenis')
                     ->sortable()
-                    ->searchable(),
-                Tables\Columns\ImageColumn::make('images.image')
-                    ->label('Gambar Bus')
-                    ->getStateUsing(fn(Model $record) => optional($record->images->first())->image) // Ambil gambar pertama
-                    ->size(50) // Ukuran gambar thumbnail
                     ->searchable(),
                 Tables\Columns\TextColumn::make('license_plate')
                     ->label('Plat Nomor')

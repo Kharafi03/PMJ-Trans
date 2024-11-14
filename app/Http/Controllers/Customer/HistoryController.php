@@ -49,6 +49,7 @@ class HistoryController extends Controller
             'id_booking' => $request->input('id_booking'),
             'feedback' => $request->input('feedback'),
             'rating' => $request->input('rating'),
+            'created_at' => now(),
         ]);
 
         return redirect()->back()->with([

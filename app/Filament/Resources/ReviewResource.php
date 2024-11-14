@@ -64,8 +64,11 @@ class ReviewResource extends Resource
         return $table
             ->defaultSort('created_at', 'desc')
             ->columns([
+                Tables\Columns\TextColumn::make('id')
+                    ->label('No')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('booking.booking_code')
-                    ->label('ID Booking')
+                    ->label('Kode Booking')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('feedback')
                     ->label('Ulasan')

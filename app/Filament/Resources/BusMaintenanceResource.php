@@ -146,8 +146,11 @@ class BusMaintenanceResource extends Resource
         return $table
             ->defaultSort('created_at', 'desc')
             ->columns([
+                Tables\Columns\TextColumn::make('id')
+                    ->label('No')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('maintenance_code')
-                    ->label('Kode')
+                    ->label('Kode Perawatan')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('buses.name')

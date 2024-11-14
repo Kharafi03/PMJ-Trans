@@ -141,6 +141,10 @@ class MailResource extends Resource
         return $table
             ->defaultSort('created_at', 'desc')
             ->columns([
+                Tables\Columns\TextColumn::make('id')
+                    ->label('No')
+                    ->sortable(),
+                    
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama')
                     ->searchable(),
@@ -173,6 +177,7 @@ class MailResource extends Resource
                     })
                     ->searchable(),
 
+                // Kolom yang disembunyikan secara default
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->label('Tanggal Dihapus')
                     ->dateTime()
@@ -192,7 +197,7 @@ class MailResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make()
                     ->label('Edit')
-                    ->color('secondary'),
+                    ->color('warning'),
 
                 Tables\Actions\Action::make('hubungi')
                     ->label('Hubungi')

@@ -492,7 +492,7 @@ class BookingResource extends Resource
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('customer.name')
-                    ->label('Nama Customer')
+                    ->label('Nama')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('pickup_point')
@@ -560,6 +560,7 @@ class BookingResource extends Resource
                     ->modalHeading('Lihat Booking'),
                 Tables\Actions\EditAction::make()
                     //->label('')
+                    ->label('Edit')
                     ->modalHeading('Edit Booking')
                     ->modalWidth('7xl')
                     ->color('warning')

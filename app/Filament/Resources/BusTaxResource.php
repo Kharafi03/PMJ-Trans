@@ -38,10 +38,10 @@ class BusTaxResource extends Resource
                     ->heading('Data Utama')
                     ->schema([
                         Forms\Components\TextInput::make('tax_code')
+                            ->label('Kode Pajak')
                             ->default(fn() => 'TAX-' . strtoupper(substr(str_shuffle(bin2hex(random_bytes(4)) . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 8)))
                             ->required()
-                            ->readOnly()
-                            ->label('Kode Tax'),
+                            ->readOnly(),
                         Forms\Components\Select::make('id_bus')
                             ->label('Bus')
                             ->required()
@@ -112,8 +112,11 @@ class BusTaxResource extends Resource
         return $table
             ->defaultSort('created_at', 'desc')
             ->columns([
+                Tables\Columns\TextColumn::make('id')
+                    ->label('No')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('tax_code')
-                    ->label('Kode')
+                    ->label('Kode Pajak')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('buses.name')
