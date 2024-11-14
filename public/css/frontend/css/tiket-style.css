@@ -60,13 +60,14 @@ label{
 .modal input[type="password"], .modal #pw-icon{
     background-color: #FAFAFA;
     border: 1px solid #E4E4E4;
+    border-radius: 5px;
     height: 50px;
 }
 #pw-icon{
     color: #A8A8A8;
 }
 
-.btn-password{
+.btn-password, .btn-ubahPw{
     padding: 10px;
     width: auto;
     border: none;
@@ -82,8 +83,43 @@ label{
     &:hover {
         transform: scale(1.05);
         background-color: #00BB83;
+        border: none;
     }
 }
+
+/* FOCUS */
+.input-group {
+    border: 1px solid transparent; 
+    border-radius: 5px; 
+    overflow: hidden;
+    transition: border-color 0.3s ease; 
+}
+
+.input-group:focus-within {
+    border-color: #1E9781; 
+    box-shadow: none;
+}
+
+.input-group .form-control {
+    border: none; 
+    border-radius: 0; 
+    box-shadow: none;
+}
+
+.input-group .input-group-text {
+    border: none; 
+    background-color: #f8f9fa; 
+    border-radius: 0; 
+}
+
+.input-group:focus-within .form-control {
+    border-right: 1px solid #1E9781 !important;
+}
+
+.input-group:focus-within .input-group-text {
+    border-left: 1px solid #1E9781 !important; 
+}
+
 
 /* BREADCRUMB */
 .breadcrumb{
@@ -315,11 +351,6 @@ hr {
         color: white;
     }
 }
-/* @media (min-width: 375px) and (max-width: 991px) {
-    .profile-card {
-        padding: 10px 10px 10px 10px;
-    }
-} */
 
 @media (min-width: 768px) and (max-width: 991px) {
     .btn-content{

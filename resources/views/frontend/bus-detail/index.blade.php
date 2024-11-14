@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         <p class="bus-type">{{ $bus->type ?? '#' }}</p>
-                        <div class="row mt-3 text-center fasilitas">
+                        <div class="row mt-4 text-center fasilitas mb-3">
                             <div class="col-3 text-icon">
                                 <i class="fa-solid fa-bed"></i>
                                 <p>Bantal & Selimut</p>
@@ -89,7 +89,7 @@
             <div class="testimoni-content mt-5 mb-5">
                 <h5 style="margin-bottom: 50px;" class="wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">Testimoni</h5>
                 <div class="row">
-                    <div class="col-lg-3 col-md-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.7s">
+                    <div class="col-lg-3 col-md-4 wow animate__animated animate__fadeInUp mb-4" data-wow-delay="0.7s">
                         <div class="filter">
                             <div class="filter-content">
                                 <div class="filter-header">
@@ -139,8 +139,8 @@
                                 </div>
                             @empty
                                 <div class="testi">
-                                    <div class="alert alert-danger text-center">
-                                        <h3>Tidak ada ulasan tersedia!</h3>
+                                    <div class="alert text-center">
+                                        <h3><i class="fa-solid fa-triangle-exclamation"></i>Tidak ada ulasan tersedia!</h3>
                                     </div>
                                 </div>
                             @endforelse

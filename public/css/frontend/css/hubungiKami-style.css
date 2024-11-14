@@ -175,4 +175,7 @@ iframe {
         font-weight: 700;
         font-size: 30px;
     }
+    .text-content h1{
+        font-size: 40px;
+    }
 }

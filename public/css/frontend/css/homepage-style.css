@@ -159,6 +159,19 @@ body {
         background-position: 47% 100%;
     }
 }
+@media (max-width: 767.98px) {
+    body{
+        background-image: url("/img/bg-mobile.png");
+        background-position: 28% 100%;
+        background-repeat: no-repeat;
+        background-size: cover !important;
+        margin: 0;
+        width: 100%;
+    }
+    .text-content h1{
+        font-size: 40px;
+    }
+}
 
 
 /* PACKAGE-DAFTAR BUS PMJ */
@@ -289,7 +302,7 @@ body {
         opacity: 50%;
     }
     .text-icon p {
-        font-size: 8px;
+        font-size: 7px;
     }
     .text-icon i {
         font-size: 14px;
@@ -619,6 +632,10 @@ body {
     .testi-control-next:hover i {
         color: #fd9c07;
     }
+    .carousel-inner-testi {
+        min-height: 600px;
+    }
+
 }
 @media (min-width: 768px) and (max-width: 991.98px) {
     #testimoni {

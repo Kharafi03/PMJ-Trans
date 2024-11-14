@@ -153,4 +153,8 @@ label{
     form{
         padding: 35px;
     }
+    .text-content h1{
+        font-size: 40px;
+    }
 }
+

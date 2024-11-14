@@ -148,6 +148,22 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
+                                                        <td class="keterangan ">Total Pengeluaran</td>
+                                                        <td>
+                                                            <div class="total">
+                                                                Rp {{ number_format($trip->total_spend, 0, ',', '.') }}
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="keterangan ">Sisa Uang Jalan</td>
+                                                        <td>
+                                                            <div class="saldo">
+                                                                Rp {{ number_format($trip->nominal, 0, ',', '.') }}
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
                                                         <td class="keterangan ">Customer</td>
                                                         <td>{{ $historyTrip->booking->customer->name }}</td>
                                                     </tr>

@@ -10,6 +10,9 @@ body {
 }
 
 /* TEXT CONTENT */
+.text-content-about{
+    padding-left: 50px;
+}
 .text-content h1{
     font-size: 44px;
     font-weight: 700;
@@ -55,6 +58,12 @@ body {
 @media (max-width: 767.98px) {
     .caption{
         font-size: 16px;
+    }
+    .text-content-about{
+        padding-left: 20px;
+    }
+    .text-content h1{
+        font-size: 40px;
     }
 }
 

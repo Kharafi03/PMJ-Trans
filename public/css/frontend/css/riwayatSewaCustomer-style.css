@@ -62,7 +62,15 @@ table.table-fit {
     font-weight: 500;
     color: #333843;
 }
-
+/* CSS untuk mobile view */
+@media (max-width: 768px) {
+    .dt-length, .dt-search {
+        display: block;
+        width: 100%; 
+        margin-bottom: 10px;
+        margin-left: 0;
+    }
+}
 .dt-paging-button a{
     background-color: #1E978117 !important;
     border: none;
@@ -221,7 +229,7 @@ a{
     border-radius: 5px;
     /* background-color: #4180CC80;
     color: #4180CC; */
-    background-color: #4180CC;
+    background-color: #006FF4;
     color: white;
     font-size: 14px;
     font-weight: 600;
@@ -229,7 +237,7 @@ a{
     &:hover{
         /* background-color: #4180CC80;
         color: #4180CC; */
-        background-color: #4180CC;
+        background-color: #006FF4;
         color: white;
         transform: scale(1.05); 
     }
@@ -242,34 +250,33 @@ a{
     border-radius: 5px;
     /* background-color: #C4E4DE;
     color: #1E9781; */
-    background-color: #1E9781;
+    background-color: #24F11D;
     color: white;
     font-size: 14px;
     font-weight: 600;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease;
     &:hover{
         /* background-color: #C4E4DE;
         color: #1E9781; */
-        background-color: #1E9781;
+        background-color: #24F11D;
         color: white;
         transform: scale(1.05); 
     }
 }
 .btn-ulasan:disabled{
     padding: 5px;
-    width: 90px;
+    width: 100px;
     border: none;
     border-radius: 5px;
     /* background-color: #D2D2D2;
     color: #666666; */
-    background-color: #D2D2D2;
+    background-color: #666666;
     color: white;
     font-size: 14px;
     font-weight: 600;
     transition: none;
     &:hover{
-        background-color: #D2D2D2;
-        color: #666666;
+        background-color: #666666;
         transform: none; 
     }
 }
@@ -289,26 +296,27 @@ a{
         transform: scale(1.05); 
     }
 }
-.btn-tiket{
+.btn-tiket {
     padding: 5px;
     width: 85px;
     border: none;
     border-radius: 5px;
-    /* background-color: #CA383A94;
-    color: #CA383A; */
-    background-color: #CA383A;
+    background-color: #FE9708;
     color: white;
     font-size: 13px;
     font-weight: 600;
     transition: transform 0.3s ease;
-    &:hover{
-        /* background-color: #CA383A94;
-        color: #CA383A; */
-        background-color: #CA383A;
-        color: white;
+    display: inline-block;
+    text-align: center; 
+    &:hover {
+        background-color: #FE9708 !important;
+        color: white !important;
         transform: scale(1.05) !important; 
     }
+    
 }
+
+
 
 /* MODAL */
 .modal{

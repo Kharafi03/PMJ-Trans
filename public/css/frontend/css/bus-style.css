@@ -43,6 +43,11 @@ body {
         font-size: 44px;
     }
 }
+@media (max-width: 767.98px) {
+    .text-content h1{
+        font-size: 40px;
+    }
+}
 
 .property-content {
     flex-grow: 1;

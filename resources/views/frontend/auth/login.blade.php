@@ -107,8 +107,8 @@
                                             <a href="{{ route('password.reset') }}">Lupa password?</a>
                                         </div>
                                     </div>
-                                    <div class="mb-4">
-                                        <button type="submit" class="btn-login">Log In</button>
+                                    <div class="mb-3">
+                                        <button type="submit" class="btn-login">Log in</button>
                                     </div>
                                     <div class="link-registrasi">
                                         <p>Belum punya akun?<a href="{{ route('register') }}"> Registrasi di sini.</a></p>
@@ -119,7 +119,9 @@
                     
                 </div>
                 <div class="col-lg-6 col-md-12 d-flex align-items-center justify-content-center col-img wow animate__animated animate__fadeInRight">
-                    <img src="img/login-img.png" class="img-fluid" width="70%" height="auto">
+                    <div class="background d-flex align-items-center justify-content-center">
+                        <img src="img/login-img.png" class="img-fluid">
+                    </div>
                 </div>
             </div>
         </section>

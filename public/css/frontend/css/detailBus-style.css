@@ -120,6 +120,12 @@ span{
     }
 }
 
+@media (max-width: 767.98px) {
+    .bus-type {
+        font-size: 16px;
+    }
+}
+
 /* FILTER */
 .filter-content {
     border-radius: 10px;
@@ -191,4 +197,14 @@ form {
     text-align: justify;
     font-size: 14px;
     font-weight: 400;
+}
+
+.alert{
+    border: 1px solid #CA383A;
+    border-radius: 8px;
+    background-color: #F9D2CA;
+    color: #CA383A;
+}
+.alert i{
+    margin-right: 10px;
 }

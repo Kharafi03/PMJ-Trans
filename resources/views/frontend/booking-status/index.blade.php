@@ -2,6 +2,32 @@
 @push('styles')
     <title>Booking Status</title>
     <link id="pagestyle" href="{{ asset('css/frontend/css/statusPesanan-style.css') }}" rel="stylesheet" />
+
+    @if ($booking->id_ms_booking == 5 || $booking->id_ms_booking == 3 )
+    @push("styles")
+    <style>
+        body {
+            background-image: url("/img/bg-page.png");
+            background-position: 0 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+    @endpush
+    
+    @else
+    @push("styles")
+    <style>
+        body {
+        background-image: url("/img/bg-page2.png");
+        background-position: 0 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        }
+    </style>
+    @endpush
+@endif
+
 @endpush
 @section('content')
     <!-- NAVBAR -->
@@ -22,12 +48,12 @@
             <div class="modal-content">
                 <div class="d-flex justify-content-end">
                     <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" style="background: none !important; border: none;">
-                        <img src="{{ asset('img/close.png') }}">
+                        <i class="fa-solid fa-square-xmark" style="color: #EC2B2B; font-size: 40px;"></i>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="d-flex justify-content-center mb-3">
-                        <img class="img-fluid" src="{{ asset('img/accepted-img.png') }}">
+                        <img class="img-fluid" src="{{ asset('img/accepted-img.png') }}" width="100px" height="auto">
                     </div>
                     <h5>Pemesanan Anda Diterima.</h5>
                     <form id="formModal">
@@ -117,11 +143,11 @@
                                 {{-- Jika Status Pemesanan Masih Draf --}}
                                 @if ($booking->id_ms_booking == 1)
                                     <div class="status-alert-diproses d-flex align-items-center mb-3">
-                                        <span class="card-icon mx-3">
-                                            <i class="fa-solid fa-arrows-rotate "></i>
+                                        <span class="card-icon  mx-2">
+                                            <i class="fa-solid fa-arrows-rotate " style="font-size: 25px; padding: 7px; margin-bottom: 12px;"></i>
                                         </span>
                                         <span>
-                                            <h5>PESANAN ANDA SEDANG DIPROSES</h5>
+                                            <h5>Pesanan Anda Sedang DIPROSES</h5>
                                             <p>Admin sedang memproses pesanan anda, silakan cek status pemesanan secara berkala.</p>
                                         </span>
                                     </div>
@@ -130,22 +156,22 @@
                                     {{-- Jika Pembayaran Lunas --}}
                                     @if ($booking->id_ms_payment == 4)
                                         <div class="status-alert-diterima d-flex align-items-center mb-3">
-                                            <span class="card-icon mx-3">
-                                                <i class="fa-solid fa-credit-card"></i>
+                                            <span class="card-icon  mx-2">
+                                                <i class="fa-solid fa-credit-card" style="font-size: 25px; padding: 10px; margin-bottom: 12px;"></i>
                                             </span>
                                             <span>
-                                                <h5>PEMBAYARAN LUNAS</h5>
+                                                <h5>Pembayaran LUNAS</h5>
                                                 <p>Pembayaran Anda lunas. Terima kasih atas kepercayaan Anda.</p>
                                             </span>
                                         </div>
                                     {{-- Jika Pembayaran DP atau Pelunasan belum dibayar --}}
                                     @else
                                         <div class="status-alert-diterima d-flex align-items-center mb-3">
-                                            <span class="card-icon mx-3">
-                                                <i class="fa-solid fa-file-lines"></i>
+                                            <span class="card-icon  mx-2">
+                                                <i class="fa-solid fa-file-lines" style="font-size: 25px; padding: 10px; margin-bottom: 12px;"></i>
                                             </span>
                                             <span>
-                                                <h5>PESANAN ANDA DITERIMA</h5>
+                                                <h5>Pesanan Anda DITERIMA</h5>
                                                 <p>Admin telah menerima pesanan anda, silahkan lanjutkan ke upload bukti
                                                     @if ($booking->id_ms_payment == 2)
                                                         DP
@@ -157,18 +183,18 @@
                                             </span>
                                         </div>
                                         <div class="rekening d-flex align-items-center mb-3">
-                                            <span class="card-icon mx-3"> 
-                                                <i class="fa-solid fa-landmark"></i>
+                                            <span class="card-icon  mx-2"> 
+                                                <i class="fa-solid fa-landmark" style="font-size: 25px; padding: 7px; margin-bottom: 12px;"></i>
                                             </span>
                                             <span>
-                                                <h5>KIRIM KE NOMOR REKENING {{ $setting->bank_account ? $setting->bank_account : '#' }}</h5>
-                                                <p>Uang Sejumlah
+                                                <h5>Kirim ke Nomor Rekening BRI: {{ $setting->bank_account ? $setting->bank_account : '#' }}</h5>
+                                                <p>Transfer Uang Sejumlah
                                                     @if ($booking->id_ms_payment == 2)
                                                         <b>Rp {{ number_format($booking->minimum_dp, 0, ',', '.') }}</b>
                                                         untuk menyelesaikan DP
                                                     @elseif ($booking->id_ms_payment == 3)
                                                         <b>Rp {{ number_format($booking->payment_remaining, 0, ',', '.') }}</b>
-                                                        untuk menyelesaikan pelunasan
+                                                        untuk menyelesaikan Pelunasan
                                                     @endif
                                                 </p>
                                             </span>
@@ -177,32 +203,32 @@
                                 {{-- Jika Status Pemesanan Ditolak --}}
                                 @elseif ($booking->id_ms_booking == 3)
                                     <div class="status-alert-ditolak d-flex align-items-center mb-3">
-                                        <span class="card-icon mx-3">
-                                            <i class="fa-solid fa-circle-xmark"></i>
+                                        <span class="card-icon  mx-2">
+                                            <i class="fa-solid fa-circle-xmark" style="font-size: 30px; padding: 3px; margin-bottom: 12px;"></i>
                                         </span>
                                         <span>
-                                            <h5>PESANAN ANDA DITOLAK</h5>
+                                            <h5>Pesanan Anda DITOLAK</h5>
                                             <p>Admin menolak pesanan anda, pastikan data yang dimasukan benar.</p>
                                         </span>
                                     </div>
                                 {{-- Jika Status Pemesanan Selesai --}}
                                 @elseif ($booking->id_ms_booking == 4)
                                     <div class="status-alert-diterima d-flex align-items-center mb-3">
-                                        <span class="card-icon mx-3">
-                                            <i class="fa-solid fa-circle-check"></i>
+                                        <span class="card-icon  mx-2">
+                                            <i class="fa-solid fa-circle-check" style="font-size: 25px; padding: 7px; margin-bottom: 12px;"></i>
                                         </span>
                                         <span>
-                                            <h5>PEMESANAN SELESAI</h5>
+                                            <h5>Pesanan SELESAI</h5>
                                             <p>Pesanan anda telah selesai.  Terima kasih atas kepercayaan Anda.</p>
                                         </span>
                                     </div>
                                 @elseif ($booking->id_ms_booking == 5)
-                                    <div class="status-alert-ditolak d-flex align-items-center mb-3">
-                                        <span class="card-icon mx-3">
-                                            <i class="fa-solid fa-circle-xmark"></i>
+                                    <div class="status-alert-dibatalkan d-flex align-items-center mb-3">
+                                        <span class="card-icon  mx-2">
+                                            <i class="fa-solid fa-circle-xmark" style="font-size: 25px; padding: 7px; margin-bottom: 12px;"></i>
                                         </span>
                                         <span style="margin-left: 10px;">
-                                            <h5>PESANAN ANDA DIBATALKAN</h5>
+                                            <h5>Pesanan Anda DIBATALKAN</h5>
                                             <p>Admin membatalkan pesanan anda, berdasarkan persetujuan anda.</p>
                                         </span>
                                     </div>
@@ -232,13 +258,13 @@
                                     {{-- Unggah Bukti Pembayaran --}}
                                     {{-- Jika status pembayaran DP Belum Dibayar --}}
                                     @if ($booking->id_ms_payment == 2)
-                                        <div class="mb-4">
+                                        <div class="mb-2">
                                             <label for="proof_of_payment_dp" class="form-label">
                                                 Unggah Bukti DP
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <div class="input-group">
-                                                <span class="input-group-text" id="icon" style="background-color: white !important;">
+                                                <span class="input-group-text icon-file" id="icon" style="background-color: white !important;">
                                                     <i class="fa-solid fa-arrow-up-from-bracket"></i>
                                                 </span>
                                                 <input type="file" class="form-control @error('proof_of_payment_dp') is-invalid @enderror" id="proof_of_payment_dp" name="proof_of_payment_dp" accept="image/*" required>
@@ -384,7 +410,7 @@
                                     <label for="noTelp" class="form-label">Nomor WhatsApp</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="icon">
-                                            <i class="fa-brands fa-whatsapp"></i>
+                                            <img src="{{ asset('img/icon/icon-wa.png') }}" alt="icon-wa" style="width:20px; height:20px; padding-left: 3px;">
                                         </span>
                                         <input type="text" id="noTelp" class="form-control" value="{{ $booking->customer->number_phone }}" readonly>
                                     </div>

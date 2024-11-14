@@ -25,7 +25,7 @@
     <!-- ABOUT -->
     <section id="about">
         <div>
-            <div class="p-5 text-content wow animate__animated animate__fadeInUp" data-wow-delay="0.7s">
+            <div class="text-content wow animate__animated animate__fadeInUp text-content-about" data-wow-delay="0.7s">
                 <?php
                     $companyName = $setting ? $setting->name : '#';
                     if (strpos($companyName, '-') !== false) {

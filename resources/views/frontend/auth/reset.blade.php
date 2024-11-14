@@ -65,7 +65,9 @@
 
             </div>
             <div class="col-lg-6 col-md-12 d-flex align-items-center justify-content-center col-img wow animate__animated animate__fadeInRight">
-                <img src="img/reset-pw-cust.png" class="img-fluid" width="70%" height="auto">
+                <div class="background d-flex align-items-center justify-content-center">
+                    <img src="img/reset-pw-cust.png" class="img-fluid">
+                </div>
             </div>
         </div>
     </section>

@@ -1,10 +1,10 @@
 /* STYLE FORM */
-body {
-    background-image: url("/img/bg-page.png");
+/* body {
+    background-image: url("/img/bg-page2.png");
     background-position: 0 100%;
     background-repeat: no-repeat;
     background-size: cover;
-}
+} */
 #statusPesanan {
     margin: 50px 0px;
     font-family: "Plus Jakarta Sans", sans-serif;
@@ -81,15 +81,24 @@ input[type="file"] {
     height: 50px;
     width: 100%;
 }
-input[type="file"]:focus,
-.input-group:focus-within {
+
+/* FOCUS */
+.input-group:focus-within input[type="file"],
+.input-group:focus-within .icon-file  {
     outline: 1px solid #1e9781 !important;
     box-shadow: none;
     z-index: 3;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
     border: none !important;
     border-radius: 15px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.input-group:focus-within .form-control,
+.input-group:focus-within .input-group-text {
+    outline: none;
+    box-shadow: none;
+    border: none;
 }
 
 input[readonly],
@@ -167,15 +176,18 @@ label {
     height: 80px;
 }
 .status-alert-diproses p,
+.status-alert-dibatalkan p,
 .status-alert-ditolak p,
 .status-alert-diterima p,
 .rekening p {
     font-size: 13px;
     line-height: 18px;
     padding-right: 5px;
+    padding-left: 5px;
 }
 .status-alert-diproses h5,
 .status-alert-ditolak h5,
+.status-alert-dibatalkan h5,
 .status-alert-diterima h5,
 .rekening h5 {
     margin-top: 12px;
@@ -183,6 +195,7 @@ label {
     font-size: 15px;
     font-weight: 700;
     margin-bottom: 0px;
+    padding-left: 5px;
 }
 
 /* BUTTON */
@@ -212,7 +225,7 @@ label {
     font-size: 16px;
     font-weight: 700;
     box-shadow: #4475f236 0px 15px 25px, rgba(86, 167, 221, 0.397) 0px 5px 10px;
-    font-family: "Poppins", sans-serif;
+    font-family: "Poppins", sans-serif !important;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     &:hover {
         transform: scale(1.05);
@@ -258,7 +271,7 @@ label {
     margin-bottom: 30px;
 }
 .btn-bayarSekarang {
-    height: 40px;
+    height: 50px;
     width: 100%;
     border: 1px solid #17b92f;
     border-radius: 10px;
@@ -275,18 +288,23 @@ label {
 
 @media (max-width: 767px) {
     .status-alert-ditolak,
+    .status-alert-dibatalkan,
     .status-alert-diterima,
     .status-alert-diproses,
     .rekening {
-        height: 110px;
+        height: 130px;
+        padding: 10px;
     }
     .rekening {
-        padding-top: 7px;
+        padding: 10px;
     }
     #formStatusPemesanan {
         padding: 5px;
     }
     .modal-body {
         padding: 20px 10px;
+    }
+     h5{
+        font-size: 40px;
     }
 }

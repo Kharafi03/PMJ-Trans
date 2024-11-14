@@ -103,9 +103,11 @@
     display: inline-block;
     width: 100%;
     margin-right: 16px;
+    margin-bottom: 0px;
     flex: 0 0 auto;
+    scroll-snap-align: start;
+    min-width: 300px;
 }
-
 
 
 /* .card-content-wrapper {
@@ -203,14 +205,6 @@
     scroll-behavior: smooth; /* Menambahkan transisi halus saat scroll */
 }
 
-.card-content {
-    flex: 0 0 auto;
-    scroll-snap-align: start;
-    margin-right: 10px;
-    width: 100%; /* Sesuaikan lebar sesuai kebutuhan */
-    min-width: 300px; /* Menentukan lebar minimum untuk setiap item */
-}
-
 .carousel-scroll::-webkit-scrollbar {
     display: none; /* Hide scrollbar for cleaner look */
 }
@@ -248,6 +242,10 @@
     border-radius: 15px;
     border: none;
     margin-top: 10px;
+}
+
+.carousel-item{
+    margin-bottom: 0;
 }
 
 body,
@@ -451,15 +449,25 @@ html {
 .riwayat-content{
     margin: 0px 10px 20px 10px;
 }
-
+.content{
+    padding-bottom: 0px;
+}
 /* Media Queries for Larger Screens (Tablet & Desktop) */
 @media (min-width: 768px) {
     .dashboard-container {
         max-width: 100%;
         width: 375px;
     }
-    
-    .content {
+    .carousel-item {
+        margin-bottom: 0;
+    }
+    .card-content {
         padding-bottom: 50px; /* Maintain mobile padding */
+    }
+}
+
+@media (max-width: 767px) {
+    .carousel-item {
+        margin-bottom: 3rem; /* This applies mb-5 equivalent on mobile */
     }
 }

@@ -204,6 +204,9 @@ button:disabled, button[disabled]{
     .form-container{
         padding: 5px;
     }
+    textarea{
+        font-size: 14px !important;
+    }
 }
 #leg-rests{
     margin-top: 10px;

@@ -29,23 +29,31 @@ html, body {
 .col-img {
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: auto;
     background-image: url("/img/bg2.png");
     flex: 1;
 }
 .col-img img{
-    padding-top: 100px;
+    padding: 20px 0px;
+    width: 80%;
 }
 
 .form-container {
     padding: 20px; 
-    max-width: 60%;
+    max-width: 70%;
     width: 100%;
     margin: auto; 
     flex-grow: 1; 
     display: flex;
     flex-direction: column;
     justify-content: center; 
+}
+
+.background{
+    background-color: #B7E9F640;
+    border: 1px solid #E4E4E4BF;
+    border-radius: 10px;
+    margin: 20px;
 }
 
 /* TITTLE */
@@ -130,9 +138,6 @@ textarea:focus {
     box-shadow: none;
     border: 1px solid #ced4da; 
 }
-img {
-    border-radius: 20px;
-}
 
 /* EROR */
 .input-group-text.text-danger {
@@ -179,12 +184,16 @@ img {
 }
 
 @media (min-width: 768px) and (max-width: 1024px){
-    .col-img { 
+    .col-img img{ 
         height: auto; 
+        width: 70%;
     }
     .form-container{
         padding: 50px 200px;
         max-width: 100%;
+    }
+    .background{
+        margin:30px;
     }
 }
 
