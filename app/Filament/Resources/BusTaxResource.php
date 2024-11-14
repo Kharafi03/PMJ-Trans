@@ -113,7 +113,7 @@ class BusTaxResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('id')
-                    ->label('No')
+                    ->label('ID')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('tax_code')
                     ->label('Kode Pajak')

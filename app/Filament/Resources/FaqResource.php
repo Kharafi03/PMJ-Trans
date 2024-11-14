@@ -58,7 +58,7 @@ class FaqResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-                ->defaultSort('created_at', 'desc')
+                ->defaultSort('id', 'asc')
                 ->columns([
                 Tables\Columns\TextColumn::make('id')
                         ->label('No')
@@ -136,7 +136,8 @@ class FaqResource extends Resource
             ->actions([
                 Tables\Actions\ForceDeleteAction::make(),
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                ->label('Edit'),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

@@ -102,7 +102,7 @@ class OutcomeResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('id')
-                    ->label('No')
+                    ->label('ID')
                     ->sortable()
                     ->searchable(),
                 BadgeColumn::make('m_outcome.name')

@@ -114,7 +114,7 @@ class BusKirResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('id')
-                    ->label('No')
+                    ->label('ID')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('kir_code')
                     ->label('Kode KIR')

@@ -31,7 +31,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'nav.group' => 'User Management',
+    'nav.group' => 'Manajemen User',
     'nav.role.label' => 'Role',
     'nav.role.icon' => 'heroicon-o-shield-check',
     'resource.label.role' => 'Peran',
@@ -63,18 +63,18 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    // 'resource_permission_prefixes_labels' => [
-    //     'view' => 'View',
-    //     'view_any' => 'View Any',
-    //     'create' => 'Create',
-    //     'update' => 'Update',
-    //     'delete' => 'Delete',
-    //     'delete_any' => 'Delete Any',
-    //     'force_delete' => 'Force Delete',
-    //     'force_delete_any' => 'Force Delete Any',
-    //     'restore' => 'Restore',
-    //     'replicate' => 'Replicate',
-    //     'reorder' => 'Reorder',
-    //     'restore_any' => 'Restore Any',
-    // ],
+    'resource_permission_prefixes_labels' => [
+        'view' => 'Lihat',
+        'view_any' => 'Lihat Semua',
+        'create' => 'Buat',
+        'update' => 'Perbarui',
+        'delete' => 'Hapus',
+        'delete_any' => 'Hapus Semua',
+        'force_delete' => 'Hapus Paksa',
+        'force_delete_any' => 'Hapus Paksa Semua',
+        'restore' => 'Pulihkan',
+        'replicate' => 'Duplikasi',
+        'reorder' => 'Susun Ulang',
+        'restore_any' => 'Pulihkan Semua',
+    ],
 ];

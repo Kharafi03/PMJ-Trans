@@ -86,7 +86,7 @@ class TripBusSpendResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('id')
-                    ->label('No')
+                    ->label('ID')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('id_trip_bus')
                     ->label('ID Trip Bus')
