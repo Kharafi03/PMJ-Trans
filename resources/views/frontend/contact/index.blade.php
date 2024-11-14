@@ -25,7 +25,7 @@
     <!-- FORM -->
     <section id="contact-form">
         <div class="p-5 text-content wow animate__animated animate__fadeInLeft">
-            <h1 class="mb-3">Form Kontak <span>Kami</span></h1>
+            <h1 class="mb-3">Formulir Pertanyaan & <span>Komplain</span></h1>
             <p class="mb-4">
                 Mohon lengkapi formulir di bawah ini untuk memudahkan kami dalam menghubungkan Anda dengan tim PMJ Trans.
             </p>

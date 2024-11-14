@@ -20,7 +20,7 @@
 
             <!-- RIWAYAT BUS -->
             <div class="riwayat-content accordion accordion-flush" id="item">
-                @foreach ($trips as $index => $trip)
+                @foreach ($trips->sortByDesc('updated_at') as $index => $trip)
                     <div class="accordion-item">
                         <div class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#item{{ $trip->id }}" aria-expanded="false">
@@ -85,7 +85,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="keterangan ">Email</td>
-                                                    <td>{{ $trip->booking->customer->email }}</td>
+                                                    <td>{{ Str::limit($trip->booking->customer->email, 10, '...') }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="keterangan ">Titik Jemput</td>

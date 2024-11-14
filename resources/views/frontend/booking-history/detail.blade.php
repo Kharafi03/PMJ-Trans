@@ -16,7 +16,7 @@
                 </div>
             @endif
             <div class="row justify-content-center py-3">
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <div class="text-content mb-5 wow animate__animated animate__fadeInUp">
                         <h5>Detail <span style="color: #FD9C07;">Booking</span></h5>
                     </div>
@@ -54,7 +54,18 @@
                                                 selesai
                                             @elseif ($booking->ms_booking->id == 5)
                                                 dibatalkan @endif">
-                                            {{ $booking->ms_booking->name }}
+                                            <!-- {{ $booking->ms_booking->name }} -->
+                                            @if ($booking->ms_booking->id == 1) 
+                                                Diproses
+                                            @elseif ($booking->ms_booking->id == 2)
+                                                Diterima
+                                            @elseif ($booking->ms_booking->id == 3)
+                                                Ditolak
+                                            @elseif ($booking->ms_booking->id == 4)
+                                                Selesai
+                                            @elseif ($booking->ms_booking->id == 5)
+                                                Dibatalkan 
+                                            @endif
                                         </span>
                                         <!-- {{ $booking->ms_booking->name }} -->
                                     </td>
@@ -127,7 +138,16 @@
                                                 sudahBayar
                                             @elseif ($booking->ms_payment->id == 4)
                                                 lunas @endif">
-                                            {{ $booking->ms_payment->name }}
+                                            <!-- {{ $booking->ms_payment->name }} -->
+                                            @if ($booking->ms_payment->id == 1) 
+                                                Diproses
+                                            @elseif ($booking->ms_payment->id == 2)
+                                                DP Belum Dibayar
+                                            @elseif ($booking->ms_payment->id == 3)
+                                                DP Dibayarkan
+                                            @elseif ($booking->ms_payment->id == 4)
+                                                Lunas
+                                            @endif
                                         </span>
                                         <!-- {{ $booking->ms_payment->name }} -->
                                     </td>
@@ -198,14 +218,14 @@
                         @endif
                     </div>
                 </div>
-                <div class="col-md-6 mt-2">
+                <div class="col-md-7 mt-2" style="padding: 0px 10px;">
                     <div class="row wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">
-                        <div class="col-lg-7 col-md-12">
+                        <div class="col-lg-6 col-md-12">
                             <div class="text-content">
                                 <h5 style="font-size: 30px;">Detail <span style="color: #FD9C07;">Pemesanan</span></h5>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-12">
+                        <div class="col-lg-6 col-md-12">
                             @if ($booking->ms_booking->id == 1)
                                 <!-- <p class="mb-4">Silahkan menunggu admin mengkonfirmasi</p> -->
                                 <p class="status-draf">Status Pemesanan : Diproses</p>
@@ -266,40 +286,40 @@
                         </div>
                     </div>
                     <div class="row mb-3 wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">
-                        <div class="col-lg-7 col-md-12">
+                        <div class="col-lg-6 col-md-12">
                             <div class="text-content">
                                 <h5 style="font-size: 30px;">Detail <span style="color: #FD9C07;">Pembayaran</span></h5>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-12">
+                        <div class="col-lg-6 col-md-12">
                         @if ($booking->ms_payment->id == 1)
                                 <!-- <h4 class="mb-4">Status Pembayaran:
                                     <span class="badge bg-warning">
                                         {{ $booking->ms_payment->name }}
                                     </span>
                                 </h4> -->
-                                <p class="status-draf">Status Pembayaran : {{ $booking->ms_payment->name }}</p>
+                                <p class="status-draf">Status Pembayaran : Diproses </p>
                             @elseif ($booking->ms_payment->id == 2)
                                 <!-- <h4 class="mb-4">Status Pembayaran:
                                     <span class="badge bg-success">
                                         {{ $booking->ms_payment->name }}
                                     </span>
                                 </h4> -->
-                                <p class="status-belumBayar">Status Pembayaran : {{ $booking->ms_payment->name }}</p>
+                                <p class="status-belumBayar">Status Pembayaran : DP Belum Dibayar</p>
                             @elseif ($booking->ms_payment->id == 3)
                                 <!-- <h4 class="mb-4">Status Pembayaran: 
                                     <span class="badge bg-info">
                                         {{ $booking->ms_payment->name }}
                                     </span>
                                 </h4> -->
-                                <p class="status-sudahBayar">Status Pembayaran : {{ $booking->ms_payment->name }}</p>
+                                <p class="status-sudahBayar">Status Pembayaran : DP Dibayarkan</p>
                             @elseif ($booking->ms_payment->id == 4)
                                 <!-- <h4 class="mb-4">Status Pembayaran: 
                                     <span class="badge bg-primary">
                                     {{ $booking->ms_payment->name }}
                                     </span>
                                 </h4> -->
-                                <p class="status-selesai">Status Pembayaran : {{ $booking->ms_payment->name }}</p>
+                                <p class="status-selesai">Status Pembayaran : Lunas</p>
                             @endif
                         </div>
                     </div>
@@ -325,7 +345,16 @@
                                                             sudahBayar
                                                         @elseif ($booking->ms_payment->id == 4)
                                                             lunas @endif">
-                                                        Status : {{ $booking->ms_payment->name }}
+                                                        Status : 
+                                                        @if ($booking->ms_payment->id == 1) 
+                                                            Diproses
+                                                        @elseif ($booking->ms_payment->id == 2)
+                                                            DP Belum Dibayar
+                                                        @elseif ($booking->ms_payment->id == 3)
+                                                            DP Dibayarkan
+                                                        @elseif ($booking->ms_payment->id == 4)
+                                                            Lunas 
+                                                        @endif
                                                     </p>
                                                     <img src="{{ asset('storage/' . $income->image_receipt) }}" alt="Bukti Pembayaran" class="img-fluid" style="width: 100%;">
                                                 </div>
@@ -358,7 +387,16 @@
                                                 sudahBayar
                                             @elseif ($booking->ms_payment->id == 4)
                                                 lunas @endif">
-                                            Status : {{ $booking->ms_payment->name }}
+                                            Status : 
+                                            @if ($booking->ms_payment->id == 1) 
+                                                Diproses
+                                            @elseif ($booking->ms_payment->id == 2)
+                                                DP Belum Dibayar
+                                            @elseif ($booking->ms_payment->id == 3)
+                                                DP Dibayarkan
+                                            @elseif ($booking->ms_payment->id == 4)
+                                                Lunas 
+                                            @endif
                                         </p>
                                         <img src="{{ asset('storage/' . $income->image_receipt) }}" alt="Bukti Pembayaran"
                                             class="img-fluid" style="width: 100%;">

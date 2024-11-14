@@ -37,12 +37,12 @@
             {{-- CARD CONTENT --}}
             @if ($trips->count() > 0)
 
-                <div id="bannerCarousel" class="carousel slide" style="padding-bottom: 30px;" data-bs-ride="carousel">
+                <div id="bannerCarousel" class="carousel slide" style="padding-bottom: 10px;" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         @foreach ($trips as $index => $trip)
                         <div class="carousel-item {{ $index == 0 ? 'active' : '' }} p-1">
                             <div class="card-content">
-                                <div class="content mb-2">
+                                <div class="content">
                                     <div class="banner" style="background-image: url('{{ \Carbon\Carbon::parse($trip->booking->date_start)->isToday() ? asset('img/bg-banner1.png') : asset('img/bg-banner2.png') }}');">
                                         <div class="@if (\Carbon\Carbon::parse($trip->booking->date_start)->isToday()) banner-header-sekarang @else banner-header-nanti @endif">
                                             @if (\Carbon\Carbon::parse($trip->booking->date_start)->isToday())
@@ -99,13 +99,16 @@
 
             <!-- RIWAYAT TRIP -->
             <div class="mb-5 riwayat-trip">
-                <div class="riwayat-title d-flex justify-content-between align-items-center mt-3 mb-3">
-                    <p class="mb-3">Riwayat Trip</p>
-                    <i class="fa-solid fa-chevron-right"></i>
-                </div>
+                <a href="{{ route('trip-history') }}">
+                    <div class="riwayat-title d-flex justify-content-between align-items-center mt-3 mb-3">
+                        <p class="mb-3">Riwayat Trip</p>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                </a>
+                
 
                 <div class="riwayat-content accordion accordion-flush mb-5" style="padding-bottom: 60px;" id="item">
-                    @foreach ($historyTrips->sortByDesc('created_at')->take(3) as $index => $historyTrip)
+                    @foreach ($historyTrips->sortByDesc('updated_at')->take(3) as $index => $historyTrip)
                         <div class="accordion-item">
                             <div class="accordion-header">
                                 <button class="accordion-button collapsed d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#item{{ $historyTrip->id }}" aria-expanded="false">
@@ -145,6 +148,22 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
+                                                        <td class="keterangan ">Total Pengeluaran</td>
+                                                        <td>
+                                                            <div class="total">
+                                                                Rp {{ number_format($trip->total_spend, 0, ',', '.') }}
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="keterangan ">Sisa Uang Jalan</td>
+                                                        <td>
+                                                            <div class="saldo">
+                                                                Rp {{ number_format($trip->nominal, 0, ',', '.') }}
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
                                                         <td class="keterangan ">Customer</td>
                                                         <td>{{ $historyTrip->booking->customer->name }}</td>
                                                     </tr>
@@ -154,7 +173,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td class="keterangan ">Email</td>
-                                                        <td>{{ $historyTrip->booking->customer->email }}</td>
+                                                        <td>{{ Str::limit($historyTrip->booking->customer->email, 15, '...') }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="keterangan ">Titik Jemput</td>

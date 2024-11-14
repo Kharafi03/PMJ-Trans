@@ -48,7 +48,7 @@
                                 <div class="input-group">
                                     <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password"
                                         placeholder="Masukkan Password" required>
-                                    <span class="input-group-text" id="toggle-password"><i class="fas fa-eye"></i></span>
+                                    <span class="input-group-text @error('password') text-danger border-danger @enderror" id="toggle-password"><i class="fas fa-eye"></i></span>
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -65,7 +65,9 @@
 
             </div>
             <div class="col-lg-6 col-md-12 d-flex align-items-center justify-content-center col-img wow animate__animated animate__fadeInRight">
-                <img src="img/reset-pw-cust.png" class="img-fluid" width="70%" height="auto">
+                <div class="background d-flex align-items-center justify-content-center">
+                    <img src="img/reset-pw-cust.png" class="img-fluid">
+                </div>
             </div>
         </div>
     </section>

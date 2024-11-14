@@ -86,7 +86,7 @@
                                     <label for="capacity" class="form-label">Jumlah Penumpang<span
                                             class="text-danger">*</span></label>
                                     <div class="input-group">
-                                        <span class="input-group-text" id="icon"><i class="fa-solid fa-user-group"></i></span>
+                                        <span class="input-group-text" id="icon"><i class="fa-solid fa-user-group" style="padding-left: 0px;"></i></span>
                                         <input type="number" class="detail-pemesanan form-control @error('capacity') is-invalid @enderror" id="capacity"
                                             name="capacity" placeholder="Masukkan jumlah penumpang" min="1" required>
                                         @error('capacity')
@@ -174,7 +174,7 @@
                                 <label for="number_phone" class="form-label">Nomor WhatsApp<span
                                         class="text-danger">*</span></label>
                                 <div class="input-group">
-                                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-wa.png') }}" alt="icon"></span>
+                                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-wa.png') }}" alt="icon" style="width:20px; height:20px; padding-left: 3px;"></span>
                                     <input type="number" class="detail-pemesanan form-control @error('number_phone') is-invalid @enderror" id="number_phone"
                                         name="number_phone"
                                         placeholder="Masukkan nomor whatsapp" required
@@ -336,14 +336,14 @@
             <div class="mt-3 mb-2">
                 <label for="description" class="form-label">Detail Leg Rest<span class="text-danger">*</span></label>
                 <div class="input-group">
-                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-legrest.png') }}" alt="icon"></span>
+                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-legrest.png') }}" alt="icon" style="width:20px; height:20px; padding-left: 3px;"></span>
                     <input type="text" class="form-control" id="description" name="description" placeholder="Masukkan detail leg rest" required>
                 </div>
             </div>
             <div>
                 <ul>
                     <li style="font-size:14px; color:#4180CC; font-weight: 700;">
-                        Detail Leg Rest diisi sesuai kebutuhan. Contoh : 5 Legrest saja, untuk 1 unit bis
+                        Detail Leg Rest diisi sesuai kebutuhan. Contoh : 5 Legrest saja, untuk 1 unit bus
                     </li>
                 </ul>
             </div>

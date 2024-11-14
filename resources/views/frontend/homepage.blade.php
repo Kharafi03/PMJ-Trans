@@ -175,7 +175,7 @@
                     <div class="col-lg-3 col-md-6 mb-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.7s">
                         <div class="cara-content text-center">
                             <div class="mb-3">
-                                <img src="img/cara1.png" class="img-fluid" alt="cara 1" style="padding-top: 20px;">
+                                <img src="img/cara1.png" class="img-fluid" alt="cara 1" style="padding-top: 20px; height: 185px !important;">
                             </div>
                             <h5>Pesan Bus</h5>
                             <p>Melalui Website pada tombol “Pesan Sekarang”  Atau Admin pada tombol “Hubungi Admin”.</p>
@@ -184,16 +184,16 @@
                     <div class="col-lg-3 col-md-6 mb-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.9s">
                         <div class="cara-content text-center">
                             <div class="mb-3">
-                                <img src="img/cara2.png" class="img-fluid" alt="cara 2" style=" height:170px; width: 340px; padding-top: 30px;">
+                                <img src="img/cara2.png" class="img-fluid" alt="cara 2" style=" height:170px; padding-top: 20px;">
                             </div>
-                            <h5 style="padding-top: 10px;">Lengkapi Form Pemesanan</h5>
+                            <h5>Lengkapi Form Pemesanan</h5>
                             <p>Lengkapi Formulir Pemesanan yang telah disedikan.</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 mb-4 wow animate__animated animate__fadeInUp" data-wow-delay="1s">
                         <div class="cara-content text-center">
                             <div class="mb-3">
-                                <img src="img/cara3.png" class="img-fluid" alt="cara 3" style="margin-top: 20px;">
+                                <img src="img/cara3.png" class="img-fluid" alt="cara 3" style="margin-top: 20px; height:170px; ">
                             </div>
                             <h5>Konfirmasi Admin</h5>
                             <p>Cek pemesanan jika melalui website, atau konfirmasi via WhatsApp jika pemesanan dilakukan oleh admin.</p>
@@ -202,7 +202,7 @@
                     <div class="col-lg-3 col-md-6 mb-4 wow animate__animated animate__fadeInUp" data-wow-delay="1.3s">
                         <div class="cara-content text-center">
                             <div class="mb-3">
-                                <img src="img/cara4.png" class="img-fluid" alt="cara 4" style="padding-top: 30px;">
+                                <img src="img/cara4.png" class="img-fluid" alt="cara 4" style="padding-top: 30px; height:185px; ">
                             </div>
                             <h5>Pembayaran</h5>
                             <p>Unggah bukti pembayaran DP, sisa pembayaran dapat dilakukan saat trip atau di Kantor {{ $setting ? $setting->name : '#' }}.</p>
@@ -226,9 +226,9 @@
                     </div>
                     <div class="d-flex justify-content-center">
                         <button type="button" class="btn-banner">
-                            <a target="_blank" href="https://api.whatsapp.com/send?phone={{ $setting ? $setting->contact : '#' }}&text=Halo%20PMJ%20Trans%2C%0A%0ASaya%20ingin%20melakukan%20pemesanan%20bus%20dengan%20rincian%20sebagai%20berikut%3A%0A%0ADetail%20Pemesanan%3A%0A-%20Tujuan%20Akhir%3A%20%5BMasukkan%20Nama%20dan%20Kota%20Tujuan%5D%0A-%20Jumlah%20Penumpang%3A%20%5BMasukkan%20Jumlah%20Penumpang%5D%0A-%20Leg%20Rest%3A%20%5BYa%2FTidak%5D%0A-%20Tanggal%20Mulai%3A%20%5BMasukkan%20Tanggal%20Mulai%5D%0A-%20Titik%20Jemput%3A%20%5BMasukkan%20Alamat%20Titik%20Jemput%20Lengkap%5D%0A%0ADetail%20Kontak%3A%0A-%20Nama%3A%20%5BMasukkan%20Nama%20Lengkap%5D%0A-%20Nomor%20WhatsApp%3A%20%5BMasukkan%20Nomor%20WhatsApp%20Aktif%5D%0A-%20Email%3A%20%5BMasukkan%20Alamat%20Email%5D%0A-%20Alamat%3A%20%5BMasukkan%20Alamat%20Lengkap%5D%0A%0AMohon%20informasi%20lebih%20lanjut%20mengenai%20ketersediaan%20dan%20harga%20untuk%20pemesanan%20ini.%0A%0ATerima%20kasih.">
-                                <b>Hubungi Admin</b>
-                            </a>
+                        <a target="_blank" href="https://api.whatsapp.com/send?phone={{ $setting ? $setting->contact : '#' }}&text=Halo%20PMJ%20Trans%2C%0A%0ASaya%20ingin%20mengetahui%20informasi%20lebih%20lanjut%20mengenai%20ketersediaan%20dan%20harga%20untuk%20pemesanan%20ini.%0A%0ADetail%20Pemesanan%3A%0A*%20Tujuan%201%20%3A%20%5BMasukkan%20Nama%20dan%20Kota%20Tujuan%5D%0A*keterangan%20%3A%20bisa%20menambah%20tujuan%20lebih%20dari%201%20tujuan.%0A*%20Tujuan%20Akhir%20%3A%20%5BMasukkan%20Nama%20dan%20Kota%20Tujuan%5D%0A*%20Jumlah%20Penumpang%3A%20%5BMasukkan%20Jumlah%20Penumpang%5D%0A*%20Leg%20Rest%3A%20%5BYa%2FTidak%5D%0A*%20Deskripsi%3A%20%5BSilahkan%20isi%20detail%20jumlah%20legrest%2C%20jika%20memilih%20%22YA%22%20menggunakan%20Legrest%2C%20Jika%20%22TIDAK%22%20menggunakan%20Legrest%2C%20silahkan%20kosongi%5D%0A*%20Tanggal%20Mulai%3A%20%5BMasukkan%20Tanggal%20Mulai%5D%0A*%20Titik%20Jemput%3A%20%5BMasukkan%20Alamat%20Titik%20Jemput%20Lengkap%5D%0A%0ADetail%20Kontak%3A%0A*%20Nama%3A%20%5BMasukkan%20Nama%20Lengkap%5D%0A*%20Nomor%20WhatsApp%3A%20%5BMasukkan%20Nomor%20WhatsApp%20Aktif%5D%0A*%20Email%3A%20%5BMasukkan%20Alamat%20Email%5D%0A*%20Alamat%3A%20%5BMasukkan%20Alamat%20Lengkap%5D%0A%0AMohon%20lengkapi%20Detail%20Pemesanan%20dan%20Detail%20Kontak%2C%20agar%20pesanan%20yang%20anda%20inginkan%20segera%20kami%20proses.%0A%0ATerima%20kasih.">
+                            <b>Hubungi Admin</b>
+                        </a>
                         </button>
                     </div>
                 </div>
@@ -244,7 +244,7 @@
                 <p>Begini kata mereka yang sudah merasakan kenyamanan dan layanan terbaik dari {{ $setting ? $setting->name : '#' }}!</p>
             </div>  
 
-            <div id="carouselTestimoni" class="carousel slide wow animate__animated animate__fadeInUp" data-wow-delay="0.6s" data-bs-ride="carousel">
+            <div id="carouselTestimoni" class="carousel slide wow animate__animated animate__fadeInUp" data-wow-delay="0.6s" data-bs-ride="carousel" data-bs-interval="5000">
                 <div class="carousel-indicators" style="margin-top: 50px;">
                     @foreach ($reviews->take(3) as $index => $review)
                         <button type="button" data-bs-target="#carouselTestimoni" data-bs-slide-to="{{ $index }}" 

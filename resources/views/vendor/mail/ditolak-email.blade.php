@@ -12,42 +12,49 @@
             font-weight: 400;
             font-style: normal;
         }
+
         @font-face {
             font-family: 'Poppins';
             src: url('/fonts/Poppins-Medium.woff2') format('woff2');
             font-weight: 500;
             font-style: normal;
         }
+
         @font-face {
             font-family: 'Poppins';
             src: url('/fonts/Poppins-SemiBold.woff2') format('woff2');
             font-weight: 600;
             font-style: normal;
         }
+
         @font-face {
             font-family: 'Poppins';
             src: url('/fonts/Poppins-Bold.woff2') format('woff2');
             font-weight: 700;
             font-style: normal;
         }
+
         @font-face {
             font-family: 'Plus Jakarta Sans';
             src: url('/fonts/PlusJakartaSans-Regular.woff2') format('woff2');
             font-weight: 400;
             font-style: normal;
         }
+
         @font-face {
             font-family: 'Plus Jakarta Sans';
             src: url('/fonts/PlusJakartaSans-Medium.woff2') format('woff2');
             font-weight: 500;
             font-style: normal;
         }
+
         @font-face {
             font-family: 'Plus Jakarta Sans';
             src: url('/fonts/PlusJakartaSans-SemiBold.woff2') format('woff2');
             font-weight: 600;
             font-style: normal;
         }
+
         @font-face {
             font-family: 'Plus Jakarta Sans';
             src: url('/fonts/PlusJakartaSans-Bold.woff2') format('woff2');
@@ -64,7 +71,7 @@
             overflow-x: hidden;
             width: 100%;
             box-sizing: border-box;
-            
+
         }
 
         .email-container {
@@ -86,17 +93,15 @@
             border-radius: 8px 8px 0 0;
             display: flex;
             margin-bottom: 0 !important;
+            padding: 40px 0px;
         }
 
-        .email-header img{
-            margin: 0;
-            padding: 0;
-        }
         .email-header h2 {
             font-size: 24px;
             margin: auto;
-            font-weight: 600;
+            font-weight: 700;
             padding: auto;
+            font-family: 'Poppins', sans-serif !important;
         }
 
         .email-body {
@@ -109,7 +114,7 @@
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         }
 
-        .info-pesanan{
+        .info-pesanan {
             padding: 10px;
             background-color: #BC4D36;
             border-radius: 5px;
@@ -123,12 +128,13 @@
         .email-body h1 {
             font-size: 18px;
             color: #313234;
-            font-weight: 700;
+            font-weight: 400;
             margin-bottom: 10px;
             padding-top: 0px;
+            font-family: 'Poppins', sans-serif !important;
         }
 
-        strong{
+        strong {
             color: #F44C28;
         }
 
@@ -139,7 +145,7 @@
             margin-bottom: 20px;
         }
 
-        table{
+        table {
             border-radius: 5px;
             background-color: white;
             border-collapse: collapse;
@@ -150,30 +156,27 @@
             background-color: #F9F9FC;
         }
 
-        table td{
+        table td {
             padding: 15px;
             font-size: 14px;
             font-weight: 500;
+            color: #667085 !important;
         }
 
-        .info-content{
+        .info-content {
             padding: 20px;
             background-color: #F44C283D;
             border: 1px solid #F44C28;
             border-radius: 5px;
 
         }
-        .info-content h3{
+
+        .info-content h3 {
             text-align: center;
             color: #F44C28;
             font-weight: 700;
             font-size: 22px;
             margin-bottom: 20px;
-        }
-        .ticket-info {
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         .ticket-info h3 {
@@ -206,12 +209,6 @@
             box-shadow: #4475F236 0px 15px 25px, rgba(86, 167, 221, 0.397) 0px 5px 10px;
         }
 
-        .info{
-            justify-content: center;
-            align-items: center;
-            display: flex;
-        }
-
         .btn:hover {
             background-color: #4475F5;
         }
@@ -236,6 +233,44 @@
             margin-top: 3px;
             padding: 10px;
             background-color: #E4E4E4;
+        }
+
+        /* Media Query untuk Mobile */
+        @media screen and (max-width: 480px) {
+            .email-container {
+                width: 100%;
+                padding: 10px;
+            }
+
+            .email-header {
+                font-size: 18px;
+            }
+
+            .info-pesanan {
+                font-size: 12px;
+            }
+
+            .email-body h1 {
+                font-size: 16px;
+            }
+
+            .btn {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+
+            table td {
+                font-size: 12px;
+                padding: 8px;
+            }
+
+            .info-content h3 {
+                font-size: 16px;
+            }
+
+            .instruksi p {
+                font-size: 12px;
+            }
         }
 
         @media screen and (max-width: 600px) {
@@ -271,7 +306,7 @@
                 font-size: 12px;
             }
 
-            .info-pesanan{
+            .info-pesanan {
                 font-size: 14px;
                 width: 70%;
             }
@@ -283,32 +318,20 @@
 
     <div class="email-container">
         <div class="email-header">
-            <h2>Pemesanan Ditolak</h2>
-            <img src="{{ asset('/img/template-email-img.png') }}">
+            <h2>PEMESANAN DITOLAK</h2>
         </div>
 
         <div class="email-body">
-            <h1>Kami mohon maaf bahwa pemesanan anda saat ini : </h1>
+            <h1>Halo, <b>{{ $booking->customer->name ?? '#' }}</b></h1>
             <p class="info-pesanan">Pemesanan Anda Ditolak!</p>
-            <p style="font-family: 'Poppins', sans-serif;">Kami informasikan kepada Anda, bahwa pemesanan dengan kode booking 
-                <strong>{{ $booking->booking_code ?? '#' }} telah ditolak!</strong></p>
-
-            <p style="font-family: 'Poppins', sans-serif;">Berikut ini adalah detail pemesanan anda :</p>
-            
-                <!-- <h3>Detail Pemesanan</h3>
-                <p><strong>Nama Pemesan:</strong> {{ $booking->customer->name ?? 'John Doe' }}</p>
-                <p><strong>Kode Booking:</strong> {{ $booking->booking_code ?? 'PMJ-TC1U5787' }}</p>
-                <p><strong>Tanggal Berangkat:</strong>
-                    {{ \Carbon\Carbon::parse($booking->date_start)->translatedFormat('l, d F Y') }}</p>
-                <p><strong>Titik Jemput:</strong> {{ $booking->pickup_point ?? 'Tidak tersedia' }}</p>
-                <p><strong>Tujuan:</strong></p>
-                @if ($booking->destination->isNotEmpty())
-                    @foreach ($booking->destination as $destination)
-                        <p>{{ $loop->iteration }}. {{ $destination->name }}</p>
-                    @endforeach
-                @else
-                    <p>Tidak tersedia</p>
-                @endif -->
+            <p style="font-family: 'Poppins', sans-serif; color: #666666 !important;">
+                Dengan berat hati, kami informasikan bahwa pemesanan Anda dengan kode booking
+                <strong>{{ $booking->booking_code ?? '#' }} telah ditolak.</strong> 
+                Jika Anda ingin memesan kembali, pastikan untuk mengisi formulir pemesanan dengan benar.
+            </p>
+            <p style="font-family: 'Poppins', sans-serif; color: #666666 !important;">
+                Berikut ini adalah detail pemesanan anda :
+            </p>
             <div class="info-content">
                 <h3>Detail Pemesanan</h3>
                 <div class="ticket-info">
@@ -317,12 +340,12 @@
                             <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
                                 <td>Nama Pemesan</td>
                                 <td>:</td>
-                                <td>{{ $booking->customer->name ?? 'John Doe' }}</td>
+                                <td>{{ $booking->customer->name ?? '#' }}</td>
                             </tr>
                             <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
                                 <td>Kode Booking</td>
                                 <td>:</td>
-                                <td>{{ $booking->booking_code ?? 'PMJ-TC1U5787' }}</td>
+                                <td>{{ $booking->booking_code ?? '#' }}</td>
                             </tr>
                             <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
                                 <td>Tanggal Berangkat</td>
@@ -332,17 +355,21 @@
                             <tr style="border-bottom: 1px solid #A8A8A8; color: #667085;">
                                 <td>Titik Jemput</td>
                                 <td>:</td>
-                                <td>{{ $booking->pickup_point ?? 'Tidak tersedia' }}</td>
+                                <td>{{ $booking->pickup_point ?? '#' }}</td>
                             </tr>
-                            <tr>
+                            <tr style="color: #667085;">
                                 <td>Tujuan</td>
-                                <td>:</td>
+                                <td> : </td>
                                 <td>
                                     @foreach ($destinations as $dest)
                                         @if ($loop->count > 1)
-                                            {{ $loop->iteration }}. {{ $dest->name }}<br>
+                                            <div style="line-height: 1.5;">
+                                                {{ $loop->iteration }}. {{ $dest->name }}<br>
+                                            </div>
                                         @else
-                                            <br>{{ $dest->name }}
+                                            <div>
+                                                {{ $dest->name }}
+                                            </div>
                                         @endif
                                     @endforeach
                                 </td>
@@ -350,11 +377,14 @@
                         </table>
                     </center>
                 </div>
-                
-                <p align="center">Jika anda ingin memesan ulang kembali, klik tombol di bawah ini : </p>
-                <div class="info">
-                    <a href="https://api.whatsapp.com/send?phone={{ $setting ? $setting->first()->contact : '#' }}&text=Halo,%20saya%20ingin%20bertanya" class="btn">Pesan Ulang</a>
-                </div>
+
+                <p align="center" style="color: #666666 !important;">Jika anda ingin memesan ulang kembali, klik tombol
+                    di bawah ini : </p>
+
+                <center>
+                    <a href="https://api.whatsapp.com/send?phone={{ $setting ? $setting->first()->contact : '#' }}&text=Halo,%20saya%20ingin%20bertanya"
+                        class="btn">Pesan Ulang</a>
+                </center>
             </div>
         </div>
 

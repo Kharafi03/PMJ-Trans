@@ -33,7 +33,7 @@
                     <div class="mb-3">
                         <label for="number_phone" class="form-label">Nomor WhatsApp</label>
                         <div class="input-group">
-                        <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-wa.png') }}" alt="icon"></span>
+                        <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-wa.png') }}" alt="icon-wa" style="width:20px; height:20px; padding-left: 0px;"></span>
                             <input type="text" class="form-control @error('number_phone') is-invalid @enderror" id="number_phone" name="number_phone" value="{{ Auth::user()->number_phone }}" readonly>
                             @error('number_phone')
                                 <span class="invalid-feedback" role="alert">

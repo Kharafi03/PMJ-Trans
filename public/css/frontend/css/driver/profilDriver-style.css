@@ -43,8 +43,9 @@
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
     border: 1px solid #C9C9C9;
-    color: #666666;
+    color: #A8A8A8;
     font-size: 20px;
+
 }
 input[type="text"], input[type="number"], input[type="password"], .form-select{
     border-left: none !important;

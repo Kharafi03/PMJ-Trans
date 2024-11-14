@@ -1,8 +1,9 @@
 body {
-    background-position: 55% 60%;
+    background-position: center;
+    margin: 0;
     background-repeat: no-repeat;
     background-size: auto;
-    background-image: url("/img/bg-all2.png");
+    background-image: url("/img/bgPage.png");
 }
 
 /* TEXT CONTENT */
@@ -44,7 +45,7 @@ th, td{
     font-size: 14px;
 }
 .draf{
-    background-color: #666666;
+    background-color: #FFB800;
 }
 .diterima, .sudahBayar, .belumBayar{
     background-color: #4180CC;
@@ -56,7 +57,7 @@ th, td{
     background-color: #F44C28;
 }
 .dibatalkan{
-    background-color: #D92904;
+    background-color: #BC4D36;
 }
 /* ULASAN */
 #feedbackForm h3, #feedbackForm label{
@@ -118,7 +119,7 @@ th, td{
     font-size: 14px;
     font-weight: 600;
     text-align: center;
-    background-color: #666666;
+    background-color: #FFB800;
     color: white;
     border: none;
     border-radius: 5px;
@@ -142,11 +143,16 @@ th, td{
     font-size: 14px;
     font-weight: 600;
     text-align: center;
-    background-color: #F44C28;
     color: white;
     border: none;
     border-radius: 5px;
     font-family: 'Poppins', sans-serif;
+}
+.status-ditolak{
+    background-color: #F44C28;
+}
+.status-dibatalkan{
+    background-color: #BC4D36;
 }
 .status-selesai, .status-lunas{
     width: 100%;

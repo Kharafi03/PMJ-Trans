@@ -19,7 +19,7 @@
                     <div class="info mt-3 wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">
                         <p class="info-title"><i class="fa-solid fa-circle-exclamation"></i> Informasi Ubah Kata Sandi</p>
                         <ul>
-                            <li>Harap segera mengganti kata sandi Anda, karena saat ini menggunakan kata sandi sementara: '12345678'. Ubah ke kata sandi yang mudah Anda ingat, dan jika perlu, catatlah agar tidak lupa.</li>
+                            <li>Harap segera mengganti kata sandi anda. Karena, saat ini anda menggunakan kata sandi sementara yaitu :  '12345678'. Ubah ke kata sandi yang mudah Anda ingat, dan jika perlu, catatlah agar tidak lupa.</li>
                             <li>Pastikan kata sandi baru mengandung kombinasi huruf, angka, dan simbol untuk meningkatkan keamanan. Contoh : <span style="font-weight: 700; color: #4180CC; font-weight: 700;">Contohpassword13!</span></li>
                             <li>Jika Anda mengalami kesulitan dalam mengganti kata sandi, hubungi <a href="{{ route('contact') }}">Kontak Kami</a>  untuk bantuan lebih lanjut.</li>
                         </ul>
@@ -82,7 +82,7 @@
                                         <div class="mb-3">
                                             <label for="number_phone" class="form-label ">Nomor WhatsApp</label><span class="text-danger text-lg">*</span>
                                             <div class="input-group">
-                                                <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-wa.png') }}" alt="icon"></span>
+                                                <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-wa.png') }}" alt="icon-wa" style="width:20px; height:20px; padding-left: 3px;"></span>
                                                 <input type="number" id="number_phone" name="number_phone" class="form-control  @error('number_phone') is-invalid @enderror" required placeholder="Nomor WhatsApp Aktif" value="{{ $user->number_phone }}">
                                                 <!-- <span class="input-group-text">
                                                     <i class="fa-solid fa-phone text-success text-lg"
@@ -98,7 +98,7 @@
                                         <div class="mb-3">
                                             <label for="address" class="form-label ">Alamat</label> <span class="text-danger text-lg">*</span>
                                             <div class="input-group">
-                                                <span class="input-group-text" style="background-color: #EDEDED !important; border: 1px solid #99A2A5 !important; border-radius: 10px 0px 0px 10px !important; color: #666666; font-size: 20px !important;"><i class="fa-solid fa-location-dot"> 
+                                                <span class="input-group-text" style="padding-left: 15px;height: 120px;" id="icon"><i class="fa-solid fa-location-dot"> 
                                                 </i></span>
                                                 <textarea id="address" name="address" class="form-control  @error('address') is-invalid @enderror" rows="4" placeholder="Masukkan Alamat Anda" required>{{ $user->address ?? '' }}</textarea>
                                                 <!-- <span class="input-group-text">

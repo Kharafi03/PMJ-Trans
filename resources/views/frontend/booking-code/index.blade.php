@@ -21,7 +21,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="d-flex justify-content-end">
-                        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" style="background: none !important; border: none;padding-top: 15px;"><img src="{{ asset('img/close.png') }}"></button>
+                        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" style="background: none !important; border: none;padding-top: 15px;"><i class="fa-solid fa-square-xmark" style="color: #EC2B2B; font-size: 40px;"></i></button>
                     </div>
                     <div class="modal-body">
                         <div class="d-flex justify-content-center mb-3">
@@ -83,7 +83,7 @@
                     <div style="flex-grow: 1;">
                         <strong>Perhatian!</strong> Anda masih menggunakan kata sandi sementara '12345678'. Demi keamanan, segera perbarui kata sandi akun Anda!
                     </div>
-                    <a href="{{ route('profile.edit') }}" class="btn btn-warning me-5" style="font-weight: bold; color: #fff;">
+                    <a href="{{ route('profile.edit') }}" class="btn btn-ubahPw btn-warning me-5" style="font-weight: bold; color: #fff;">
                         Ubah Password
                     </a>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

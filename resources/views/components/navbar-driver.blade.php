@@ -31,7 +31,7 @@
             </li>
             <li class="list">
                 <a href="{{ route('logout') }}"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    onclick="event.preventDefault(); confirmLogout(); document.getElementById('logout-form').submit();">
                     <span class="icon">
                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
                     </span>
@@ -68,5 +68,25 @@
         indicator.style.display = 'block'; // Tampilkan indicator jika ada yang aktif
     } else {
         indicator.style.display = 'none'; // Sembunyikan indicator jika tidak ada yang aktif
+    }
+
+    // validasi logout
+    function confirmLogout() {
+        // Tampilkan popup konfirmasi menggunakan SweetAlert2
+        Swal.fire({
+            title: 'Apakah Anda yakin ingin keluar?',
+            text: "Anda harus login kembali untuk mengakses!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, keluar',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Jika pengguna memilih "Ya, keluar", submit form logout
+                document.getElementById('logout-form').submit();
+            }
+        });
     }
 </script>

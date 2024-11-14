@@ -7,10 +7,11 @@
 
 /* BACKGROUND IMAGE */
 body {
-  background-position: 55% 50%;
+  background-position: center;
+  margin: 0;
   background-repeat: no-repeat;
-  background-size: auto !important;
-  background-image: url("/img/bg-all2.png");
+  background-size: auto;
+  background-image: url("/img/bgPage.png");
 }
 
 /* TEXT CONTENT */
@@ -117,5 +118,16 @@ body {
   .accordion-body{
     font-size: 14px; 
   }
+  .text-content h1{
+    font-size: 40px;
+  }
+  body{
+    background-image: url("/img/bg-mobile.png");
+    background-position: 28% 100%;
+    background-repeat: no-repeat;
+    background-size: cover !important;
+    margin: 0;
+    width: 100%;
+}
 }
   
