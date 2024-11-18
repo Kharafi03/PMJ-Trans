@@ -9,12 +9,12 @@
 
     <section id="riwayatSewa">
         <div class="container mb-5">
-            <div class="text-content mb-5">
-                <h5 style="font-size: 44px; font-weight: 700; color: #1E9781;">Riwayat <span style="color: #FD9C07;">Sewa</span></h5>
+            <div class="text-content mb-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">
+                <h5 style="font-size: 44px; font-weight: 700; color: #1E9781; 'Plus Jakarta Sans', sans-serif;">Riwayat <span style="color: #FD9C07;">Sewa</span></h5>
             </div>
-            <div class="tabel-riwayat justify-content-between align-items-center p-3">
+            <div class="tabel-riwayat justify-content-between align-items-center p-3 wow animate__animated animate__fadeInUp" data-wow-delay="0.7s">
                 <div class="row">
-                    <div class="col-md-8" style="padding: 0px 30px;">
+                    <div class="col-md-8">
                         <p class="title">Detail Riwayat Sewa</p>
                     </div>
                 </div>
@@ -33,6 +33,7 @@
                                 <th scope="col">Biaya</th>
                                 <th scope="col">Minimum DP</th>
                                 <th scope="col">Status Pembayaran</th>
+                                <th scope="col">E-Ticket</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
@@ -98,17 +99,21 @@
                                     </td>
                                     <td>{{ $booking->ms_payment->name }}</td>
                                     <td>
-                                        <div class="d-flex justify-content-center align-items-center text-center">
+                                        <a href="{{ route('booking.code', ['booking_code' => $booking->booking_code]) }}" class="btn-tiket me-2 text-center align-items-center">E-Ticket</a>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex flex-column justify-content-center align-items-center text-center">
                                             <a href="{{ route('history.show', ['booking_code' => $booking->booking_code]) }}"
-                                                class="btn-detail me-2 text-center align-items-center">Detail</a>
+                                                class="btn-detail me-2 mb-2 text-center align-items-center" style="margin-left:3px;">Detail</a>
                                             @if ($booking->ms_booking->id == 4)
                                                 @if (!$booking->review)
                                                     <button class="btn-ulasan text-center" data-bs-toggle="modal" data-bs-target="#feedbackModal" data-id-booking="{{ $booking->id }}">
                                                         Beri Ulasan
                                                     </button>
+                    
                                                 @else
                                                     <!-- <button class="btn btn-secondary text-center" disabled>Anda sudah memberikan ulasan</button> -->
-                                                    <button class="btn-ulasan text-center" disabled>Lihat Ulasan</button>
+                                                    <button class="btn-ulasan text-center" disabled>Telah Diulas</button>
                                                 @endif
                                             @endif
                                             <div>
@@ -173,36 +178,44 @@
     @include('frontend.assets.datatable')
     @push('scripts')
         <script>
-            var feedbackModal = document.getElementById('feedbackModal');
-            feedbackModal.addEventListener('show.bs.modal', function(event) {
-                var button = event.relatedTarget;
-                var id_booking = button.getAttribute('data-id-booking');
-
-                var modalBookingCode = feedbackModal.querySelector('#id_booking');
-
-                modalBookingCode.value = id_booking;
+            // Menggunakan jQuery untuk menangani modal
+            $('#feedbackModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget);
+                var id_booking = button.data('id-booking');  // Menggunakan jQuery untuk mendapatkan data-id-booking
+        
+                var modalBookingCode = $('#id_booking');  // Menggunakan jQuery untuk memilih elemen input
+        
+                modalBookingCode.val(id_booking);  // Mengatur nilai input
             });
-
-            document.addEventListener("DOMContentLoaded", function() {
-                const stars = document.querySelectorAll(".rating-stars .star");
-                const ratingValue = document.getElementById("rating");
-
-                stars.forEach((star) => {
-                    star.addEventListener("click", function() {
-                        const rating = parseInt(star.getAttribute("data-rating"));
-                        ratingValue.value = rating;
-
-                        stars.forEach((s) => {
-                            s.querySelector("i").classList.remove("text-warning");
-                            s.querySelector("i").classList.add("text-secondary");
-                        });
-
-                        for (let i = 0; i < rating; i++) {
-                            stars[i].querySelector("i").classList.add("text-warning");
-                            stars[i].querySelector("i").classList.remove("text-secondary");
+        
+            $(document).ready(function() {
+                // Menggunakan jQuery untuk memilih elemen rating stars
+                const $stars = $(".rating-stars .star");
+                const $ratingValue = $("#rating");
+        
+                $stars.on('click', function() {
+                    const rating = parseInt($(this).data("rating"));  // Menggunakan jQuery untuk mendapatkan data-rating
+                    $ratingValue.val(rating);  // Mengatur nilai rating
+        
+                    // Mengubah kelas ikon star
+                    $stars.each(function(index) {
+                        const $icon = $(this).find("i");
+                        if (index < rating) {
+                            $icon.removeClass("text-secondary").addClass("text-warning");
+                        } else {
+                            $icon.removeClass("text-warning").addClass("text-secondary");
                         }
                     });
                 });
+            });
+        </script>
+        <script>
+            new WOW().init();
+        </script>
+        <script>
+            $(document).ready(function() {
+                var table = $('#data-table').DataTable();
+                table.order([0, 'desc']).draw();
             });
         </script>
     @endpush

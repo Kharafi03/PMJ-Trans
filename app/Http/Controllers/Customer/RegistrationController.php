@@ -55,16 +55,28 @@ class RegistrationController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'number_phone' => ['required', 'string', 'max:15', 'unique:users,number_phone'],
-            'password' => ['required', 'string', 'min:8'],
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'regex:/[a-z]/',        // At least one lowercase letter
+                'regex:/[A-Z]/',        // At least one uppercase letter
+                'regex:/[0-9]/',        // At least one digit
+                'regex:/[!@#$%^&*(),.?":{}|<>]/' // At least one special character
+            ],
+            'address' => ['required', 'string', 'max:255'],
         ], [
             'name.required' => 'Nama wajib diisi!',
-            'name.max' => 'Nama tidak boleh lebih dari 255 karakter!',
+            'name.max' => 'Harap mengisikan Nama maksimal 255 karakter!',
             'number_phone.required' => 'Nomor WhatsApp wajib diisi!',
             'number_phone.max' => 'Nomor WhatsApp tidak boleh lebih dari 15 digit!',
             'number_phone.unique' => 'Nomor WhatsApp ini sudah terdaftar, silakan gunakan nomor lain!',
-            'password.required' => 'Kata sandi wajib diisi!',
-            'password.min' => 'Kata sandi harus minimal 8 karakter!',
-        ]);
+            'password.required' => 'Password wajib diisi!',
+            'password.min' => 'Harap mengisikan password minimal 8 karakter',
+            'password.regex' => 'Password harus mengandung setidaknya satu huruf kecil, satu huruf besar, satu angka, dan satu simbol!',
+            'address.required' => 'Alamat wajib diisi!',
+            'address.max' => 'Harap mengisikan Alamat maksimal 255 karakter!',
+        ]);        
     }
 
 
@@ -81,6 +93,7 @@ class RegistrationController extends Controller
             'number_phone' => $data['number_phone'],
             'password' => Hash::make($data['password']),
             'id_ms' => 1,
+            'address' => $data['address'],
         ]);
     }
 }

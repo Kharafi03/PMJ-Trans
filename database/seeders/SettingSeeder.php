@@ -15,7 +15,7 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         $sourcePath = public_path('img/');
-        $destinationPath = 'public/setting/';
+        $destinationPath = 'public/logos/';
 
         $logos = [
             [
@@ -23,10 +23,12 @@ class SettingSeeder extends Seeder
             'logo' => 'logo.png',
             'address' => 'Jl. Lingkar Timur, Ngembal Rejo, Kecamatan Jati, Kabupaten Kudus, Jawa Tengah',
             'email' => 'buspmjtrans@gmail.com',
-            'contact' => '0812-2562-5255',
+            'contact' => '6281225625255',
+            'bank_account' => '1234567890',
             'open_hours' => 'Setiap hari jam 07.00 - 17.00 WIB',
             'description' => '',
-            'maps' => 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12978.348270618128!2d110.8778704!3d-6.8190866!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e70c5cdd4042793%3A0x22dfa84ed6ce52de!2sGarasi%20Bus%20PMJ%20Trans!5e1!3m2!1sid!2sid!4v1724347397670!5m2!1sid!2sid',
+            'link_maps' => 'https://maps.app.goo.gl/9KAz7RPE4aAp3nBg7',
+            'embed_maps' => 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12978.348270618128!2d110.8778704!3d-6.8190866!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e70c5cdd4042793%3A0x22dfa84ed6ce52de!2sGarasi%20Bus%20PMJ%20Trans!5e1!3m2!1sid!2sid!4v1724347397670!5m2!1sid!2sid',
             'sosmed_ig' => 'https://www.instagram.com/mahkotagroup.official/',
             'sosmed_fb' => 'https://www.facebook.com/share/t1VWTThuBDxpPnBn/',
             'sosmed_yt' => 'https://www.youtube.com/@buspmjtrans',
@@ -46,7 +48,7 @@ class SettingSeeder extends Seeder
             }
 
             // Update the photo path to storage path
-            $logo['logo'] = 'setting/' . $logo['logo'];
+            $logo['logo'] = 'logos/' . $logo['logo'];
 
             // Create the team record
             Setting::create($logo);

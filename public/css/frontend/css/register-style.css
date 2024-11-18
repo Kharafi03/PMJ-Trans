@@ -3,73 +3,71 @@
 /* section */
 html, body {
     margin: 0;
-    overflow: hidden;
-    height: 100%; /* Ensure body takes full height */
+    overflow: auto;
+    height: 100%; 
 }
 
 #register {
     display: flex;
-    align-items: center; 
-    height: 100vh; /* Set full viewport height */
+    align-items: stretch; 
+    height: 100vh; 
+    font-family: 'Poppins', sans-serif;
 }
 
 .row {
     width: 100%;
-    height: 100%; /* Ensure row takes full height */
+    height: 100%; 
     margin: 0;
 }
 
 .container {
     height: 100%;
-    display: flex; /* Use flexbox to manage the layout */
-    flex-direction: column; /* Stack items vertically */
+    display: flex; 
+    flex-direction: row; 
 }
 
 .col-img {
-    background-size: cover;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
     background-image: url("/img/bg2.png");
-    height: 100%;
+    flex: 1; /* Pastikan ini untuk mengambil sisa ruang */
 }
 
 .form-container {
-    padding: auto; 
-    max-width: 60%;
+    padding: 20px; 
+    max-width: 70%;
+    width: 100%;
     margin: auto; 
     flex-grow: 1; 
     display: flex;
     flex-direction: column;
     justify-content: center; 
 }
+
 /* TITLE */
 .header h5 {
     font-size: 35px;
-    font-weight: 600;
-}
-.header p {
-    color: black;
-    font-size: 16px;
-}
-.header a {
     font-weight: 700;
-    color: #1E9781;
+    color: #FE9A07;
+    margin-top: 40px;
 }
 
 /* INPUT FORM */
 input[type="tel"],
 input[type="password"],
-input[type="text"] {
+input[type="text"],
+input[type="email"],
+textarea {
     height: 70px;
 }
 .lupa-sandi a {
     text-decoration: underline;
-    font-size: 16px;
+    font-size: 14px;
     color: #4180cc;
 }
-.label-ingat {
-    font-size: 16px;
-    color: #8e8e8e;
+label{
+    font-weight: 500;
 }
 i {
     color: #8e8e8e;
@@ -87,10 +85,20 @@ i {
 a {
     cursor: pointer;
 }
-.lupa-sandi a{
+.link-login p{
+    text-align: center;
+    font-size: 15px;
+    font-weight: 400;
+    color: #313957;
+}
+.link-login a{
+    color: #10da70;
+    font-weight: 600;
+}
+.header p{
     font-size: 16px;
     font-weight: 700;
-    color: #4180CC;
+    color: #F44C28;
 }
 
 /* INPUT AKTIF */
@@ -100,26 +108,29 @@ a {
     border-radius: 6px;
 }
 
-#number_phone:focus {
-    border-bottom: 4px solid #54e28d;
+#number_phone:focus,  #address:focus, #name:focus, #email:focus{
+    border-bottom: 4px solid #54e28d !important;
 }
-#name:focus {
-    border-bottom: 4px solid #54e28d;
-}
+
 input[type="text"]:focus,
 input[type="password"]:focus,
-input[type="tel"]:focus {
+input[type="tel"]:focus,
+input[type="email"]:focus,
+textarea:focus {
     outline: none !important;
-    outline-width: 0 !important;
-    box-shadow: none;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    border-top: 1px solid #ced4da;
-    border-left: 1px solid #ced4da;
-    border-right: 1px solid #ced4da;
+    box-shadow: none !important;
+    border: 1px solid #ced4da !important; /* Atur border untuk input aktif */
 }
-img {
-    border-radius: 20px;
+.col-img img {
+    padding: 50px 0px;
+    width: 90%;
+}
+
+.background{
+    background-color: #B7E9F640;
+    border: 1px solid #E4E4E4BF;
+    border-radius: 10px;
+    margin: 50px;
 }
 
 /* BUTTON */
@@ -129,49 +140,68 @@ img {
     background-color: #1e9781;
     color: white;
     text-align: center;
-    padding: auto;
     font-size: 20px;
     font-weight: 700;
-    border: 2px solid #1e9781;
+    border: none;
     border-radius: 6px;
-    &:hover {
-        background-color: white;
-        color: #1e9781;
-    }
+    transition: transform 0.3s ease;
+}
+
+.btn-register:hover {
+    transform: scale(1.05);
+    background-color: #00BB83;
 }
 
 /* RESPONSIF GAMBAR */
 @media (max-width: 767.98px) {
-    /* Media query for mobile devices */
     .col-img {
         order: -1; 
-        height: 50%;
+        background-size: 100% 140%;
     }
     .navbar-brand img {
         padding: 0px 45%;
-    }
-    html, body {
-        height: 100%;
-        margin: 0;
-        overflow: auto;
     }
     .form-container{
         padding: 20px;
         max-width: 100%;
     }
+    .col-img img{ 
+        width: 90%;
+        padding: 0px;
+    }
+    .link-login{
+        padding: 0px 10px;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 1024px){
-    .col-img { 
-        height: 70%;
-    }
-    html, body {
-        height: 100%;
-        margin: 0;
-        overflow: auto;
+    .col-img img{ 
+        width: 67%;
+        padding: 0px;
     }
     .form-container{
         padding: 50px 200px;
         max-width: 100%;
     }
+    .background{
+        margin: 50px 100px;
+    }
+}
+
+
+
+
+/* AUTO FILL */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 30px white inset !important; 
+    -webkit-text-fill-color: #000 !important; 
+    transition: background-color 5000s ease-in-out 0s; 
 }

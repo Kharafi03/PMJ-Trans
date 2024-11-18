@@ -3,6 +3,7 @@
     max-width: 375px;
     position: relative;
     background-color: white;
+    margin: 0 auto; 
 }
 
 /* TEXT HEADER */
@@ -58,4 +59,14 @@
     cursor: not-allowed;
 }
 
+@media (min-width: 768px) {
+    .dashboard-container {
+        max-width: 100%;
+        width: 375px;
+    }
+    
+    .content {
+        padding-bottom: 50px; /* Maintain mobile padding */
+    }
+}
 

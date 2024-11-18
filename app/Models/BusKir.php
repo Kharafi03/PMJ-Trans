@@ -19,6 +19,7 @@ class BusKir extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
+        'kir_code',
         'id_bus',
         'id_user',
         'description',
@@ -26,6 +27,7 @@ class BusKir extends Model
         'expiration',
         'nominal',
         'image',
+        'id_m_method_payment',
     ];
 
     public function buses():BelongsTo
@@ -36,5 +38,10 @@ class BusKir extends Model
     public function users():BelongsTo
     {
         return $this->belongsTo(User::class, 'id_user');
+    }
+
+    public function m_method_payment(): BelongsTo
+    {
+        return $this->belongsTo(MMethodPayment::class, 'id_m_method_payment');
     }
 }

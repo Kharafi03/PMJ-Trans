@@ -8,12 +8,12 @@
         <div class="row">
             <!-- KIRI -->
             <div
-                class="col-lg-6 col-md-12 order-md-last order-lg-first  d-flex flex-column justify-content-center align-items-center">
+                class="col-lg-6 col-md-12 order-md-last order-lg-first  d-flex flex-column justify-content-center align-items-center wow animate__animated animate__fadeInLeft">
 
                 <!-- FORM -->
                 <div class="form-container">
                     <div class="header mb-2">
-                        <h5>Reset Password</h5>
+                        <h5>Reset <span>Password</span></h5>
                         <p>Ingin mengatur ulang kata sandi? Isi formulir di bawah ini dan klik tombol kirim untuk
                             melanjutkan.</p>
                     </div>
@@ -48,7 +48,7 @@
                                 <div class="input-group">
                                     <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password"
                                         placeholder="Masukkan Password" required>
-                                    <span class="input-group-text" id="toggle-password"><i class="fas fa-eye"></i></span>
+                                    <span class="input-group-text @error('password') text-danger border-danger @enderror" id="toggle-password"><i class="fas fa-eye"></i></span>
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -64,8 +64,10 @@
                 </div>
 
             </div>
-            <div class="col-lg-6 col-md-12 d-flex align-items-center justify-content-center col-img">
-                <img src="img/reset-img.png" class="img-fluid" width="80%" height="auto">
+            <div class="col-lg-6 col-md-12 d-flex align-items-center justify-content-center col-img wow animate__animated animate__fadeInRight">
+                <div class="background d-flex align-items-center justify-content-center">
+                    <img src="img/reset-pw-cust.png" class="img-fluid">
+                </div>
             </div>
         </div>
     </section>
@@ -85,5 +87,8 @@
             this.querySelector('i').classList.toggle('fa-eye');
             this.querySelector('i').classList.toggle('fa-eye-slash');
         });
+    </script>
+    <script>
+        new WOW().init();
     </script>
 @endsection

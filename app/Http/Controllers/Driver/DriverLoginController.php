@@ -65,7 +65,7 @@ class DriverLoginController extends Controller
 
         // Jika gagal login, kembalikan ke halaman login dengan error
         return back()->withErrors([
-            'number_phone' => 'Login gagal. Periksa kembali email dan password Anda.',
+            'number_phone' => 'Login gagal. Periksa kembali nomer whatsapp dan password Anda.',
         ]);
     }
 }

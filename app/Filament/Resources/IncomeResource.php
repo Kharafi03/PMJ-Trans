@@ -38,7 +38,7 @@ class IncomeResource extends Resource
 
     public static function getNavigationBadgeColor(): ?string
     {
-            return 'warning';
+        return 'warning';
     }
 
     public static function form(Form $form): Form
@@ -93,7 +93,7 @@ class IncomeResource extends Resource
                             ->relationship('ms_income', 'name')
                             ->required(),
                         Forms\Components\DateTimePicker::make('datetime')
-                            ->label('Tanggal dan Waktu'),
+                            ->label('Tanggal Pendapatan'),
 
                         // Forms\Components\TextInput::make('payment_received')
                         //     ->numeric()
@@ -124,9 +124,10 @@ class IncomeResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('id')
-                    ->label('No')
+                    ->label('ID')
                     ->sortable(),
                 BadgeColumn::make('ms_income.name')
                     ->label('Status')
@@ -168,7 +169,7 @@ class IncomeResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('datetime')
-                    ->label('Tanggal & Waktu')
+                    ->label('Tanggal Pendapatan')
                     ->dateTime()
                     ->sortable(),
 

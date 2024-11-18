@@ -8,25 +8,28 @@
     <x-navbar-customer />
 
     <!-- BREADCRUMBS -->
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb d-flex justify-content-center align-items-center">
-            <li class="breadcrumb-item"><a href="{{route('homepage')}}">Beranda</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Formulir Pemesanan</li>
-        </ol>
-    </nav>
+    <div class="mb-5 wow animate__animated animate__fadeIn" data-wow-delay="0.6s">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb d-flex justify-content-center align-items-center">
+                <li class="breadcrumb-item"><a href="{{route('homepage')}}">Beranda</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Formulir Pemesanan</li>
+            </ol>
+        </nav>
+    </div>
 
     <!-- CONTENT -->
     <!-- TITLE -->
     <section id="pemesanan">
         <div class="container mt-5 mb-5">
-            <h5 style="font-size: 44px; font-weight: 700; color: #1E9781;">FORMULIR <span style="color: #FD9C07;">PEMESANAN</span></h5>
-            <p style="font-size: 18px; font-weight: 600; color: #666666B5;">Pilih jadwal, destinasi, serta tipe kendaraan yang sesuai dengan kebutuhan Anda. Rasakan pengalaman perjalanan yang nyaman bersama layanan PMJ Trans</p> 
-            <div class="info">
+            <div class="text-content wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">
+                <h1 class="mt-3 mb-3">FORMULIR <span>PEMESANAN</span></h1>
+                <p>Pilih jadwal, destinasi, serta tipe kendaraan yang sesuai dengan kebutuhan Anda. Rasakan pengalaman perjalanan yang nyaman bersama layanan PMJ Trans</p> 
+            </div>
+            <div class="info mt-3 wow animate__animated animate__fadeInUp" data-wow-delay="0.7s">
                 <p class="info-title"><i class="fa-solid fa-circle-exclamation"></i> Informasi Pemesanan</p>
                 <ul>
-                    <li>Simbol <span style="font-weight: 700; color: #F44C28;">( * )</span> menandakan forumilir wajib diiisi</li>
-                    <li>Masukan “Tujuan Akhir” terlebih dahulu, jika ingin menambah tujuan, klik botton “ + Tujuan” , kemudian masukan tujuan 1,2, dst.</li>
-                    <li>1 unit bus = 32 penumpang. </li>
+                    <li>Simbol <span style="font-weight: 700; color: #F44C28;">( * )</span> menandakan formulir wajib diiisi</li>
+                    <li>1 unit bus = 50 penumpang, jika menggunakan legrest 1 unit bus = 32 penumpang.</li>
                     <li>Leg Rest adalah sandaran kaki. Kursi ini mampu meningkatkan rasa nyaman para penumpang yang ingin beristirahat selama perjalanan jauh.</li>
                     <li>Masukan “Titik Jemput dengan format :  Nama jalan, No Rumah (opsional), RT/RW, Kelurahan, Kecamatan, dan Kabupaten.</li>
                 </ul>
@@ -34,16 +37,16 @@
         </div>
 
 
-    <!-- FORM -->
-        <div class="container">
+        <!-- FORM -->
+        <div class="container wow animate__animated animate__fadeInUp" data-wow-delay="1.5s">
             @include('frontend.assets.alert')
             <form id="formPemesanan" action="{{ route('booking.store') }} " method="POST">
                 @csrf
                 <div class="row form-container">
                     <div class="col-lg-7" style="padding: 40px;">
                         <div class="text-content">
-                            <h5 style="font-size: 30px; font-weight: 700; color: #1E9781;">Detail <span style="color: #FD9C07;">Pemesanan</span></h5>
-                            <p style="font-size: 16px; font-weight: 500; color: #666666B5;">Silahkan isi formulir detail pemesanan di bawah ini untuk melakukan pemesanan</p>
+                            <h5 style="font-size: 30px; font-weight: 700; color: #1E9781; font-family: 'Jakarta Sans', sans-serif;">Detail <span style="color: #FD9C07;">Pemesanan</span></h5>
+                            <p style="font-size: 16px; font-weight: 400; color: #000000AD;font-family: 'Poppins', sans-serif;">Silahkan isi formulir detail pemesanan di bawah ini untuk melakukan pemesanan</p>
                         </div>
                         <div class="row">
                             <!-- Kontainer Field Tujuan Tambahan -->
@@ -54,7 +57,7 @@
                                         <label for="destination_point" class="form-label">Tujuan Akhir<span
                                                 class="text-danger">*</span></label>
                                         <div class="input-group">
-                                            <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-tujuan.png') }}" alt="icon"></span>
+                                            <span class="input-group-text" id="icon"><i class="fa-solid fa-location-dot"></i></span>
                                             <input type="text" class="form-control tujuan-input @error('destination_point') is-invalid @enderror"
                                             placeholder="Masukkan nama dan kota tujuan (contoh: Malioboro, Yogyakarta)" name="tujuan[]" id="destination_point" required>
                                             @error('destination_point')
@@ -70,7 +73,7 @@
                                 <label for="destination_point" class="form-label">Tujuan Akhir<span
                                         class="text-danger">*</span></label>
                                 <div class="input-group">
-                                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-tujuan.png') }}" alt="icon"></span>
+                                    <span class="input-group-text" id="icon"><i class="fa-solid fa-location-dot"></i></span>
                                     <input type="text" class="detail-pemesanan form-control" id="destination_point"
                                         name="destination_point" placeholder="Masukkan tujuan perjalanan" required>
                                 </div>
@@ -83,7 +86,7 @@
                                     <label for="capacity" class="form-label">Jumlah Penumpang<span
                                             class="text-danger">*</span></label>
                                     <div class="input-group">
-                                        <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-penumpang.png') }}" alt="icon"></span>
+                                        <span class="input-group-text" id="icon"><i class="fa-solid fa-user-group" style="padding-left: 0px;"></i></span>
                                         <input type="number" class="detail-pemesanan form-control @error('capacity') is-invalid @enderror" id="capacity"
                                             name="capacity" placeholder="Masukkan jumlah penumpang" min="1" required>
                                         @error('capacity')
@@ -112,7 +115,7 @@
                                 <label for="date_start" class="form-label">Tanggal Mulai<span
                                         class="text-danger">*</span></label>
                                 <div class="input-group">
-                                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-kalender1.png') }}" alt="icon"></span>
+                                    <span class="input-group-text" id="icon"><i class="fa-solid fa-calendar-days"></i></span>
                                     <input type="datetime-local" class="detail-pemesanan form-control @error('date_start') is-invalid @enderror" id="date_start"
                                         name="date_start" min="{{ \Carbon\Carbon::tomorrow()->format('Y-m-d\TH:i') }}"
                                         required>
@@ -124,32 +127,39 @@
                                 </div>
                             </div>
                             <div class="mb-2">
-                                <label for="pickup_point" class="form-label @error('pickup_point') is-invalid @enderror">Titik Jemput<span
-                                        class="text-danger">*</span></label>
-                                    <textarea class="form-control" placeholder="Masukkan alamat lengkap" id="pickup_point" name="pickup_point"
-                                        style="height: 100px;" required></textarea>
-                                    @error('pickup_point')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                <label for="pickup_point" class="form-label @error('pickup_point') is-invalid @enderror">Titik Jemput<span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="icon"><i class="fa-solid fa-location-dot"></i></span>
+                                        <textarea class="form-control" placeholder="Masukkan alamat lengkap" id="pickup_point" name="pickup_point"
+                                            style="height: 100px;" required></textarea>
+                                        @error('pickup_point')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
                             </div>
                             <div>
-                                <p class="text-danger" style="font-size:14px;">Contoh : Jalan Mangga Besar III No. 17, RT 06 RW 07, Kelurahan Bedali, Kecamatan Lawang, Kab. Malang, Jawa Timur, 60256</p>
+                                <ul>
+                                    <li style="font-size:14px; color:#4180CC; font-weight: 700;">
+                                    Contoh : Jalan Mangga Besar III No. 17, RT 06 RW 07, Kelurahan Bedali, Kecamatan Lawang, Kab. Malang, Jawa Timur, 60256
+                                    </li>
+                                </ul>
+                                <!-- <p style="font-size:14px; color:#4180CC; font-weight: 700;">Contoh : Jalan Mangga Besar III No. 17, RT 06 RW 07, Kelurahan Bedali, Kecamatan Lawang, Kab. Malang, Jawa Timur, 60256</p> -->
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-5" style="padding: 40px;">
                         <div class="text-content">
-                            <h5 style="font-size: 30px; font-weight: 700; color: #1E9781;">Detail <span style="color: #FD9C07;">Kontak</span></h5>
-                            <p style="font-size: 16px; font-weight: 500; color: #666666B5;">Silahkan lengkapi formulir detail kontak di bawah ini untuk melakukan pemesanan</p>
+                            <h5 style="font-size: 30px; font-weight: 700; color: #1E9781; font-family: 'Jakarta Sans', sans-serif;">Detail <span style="color: #FD9C07;">Kontak</span></h5>
+                            <p style="font-size: 16px; font-weight: 400; color: #000000AD; font-family: 'Poppins', sans-serif;">Silahkan lengkapi formulir detail kontak di bawah ini untuk melakukan pemesanan</p>
                         </div>
                         <div class="row">
                             <div class="mb-4">
                                 <label for="name" class="form-label">Nama Lengkap<span
                                         class="text-danger">*</span></label>
                                 <div class="input-group">
-                                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-user.png') }}" alt="icon"></span>
+                                    <span class="input-group-text" id="icon"><i class="fa-solid fa-user"></i></span>
                                     <input type="text" class="detail-pemesanan form-control @error('name') is-invalid @enderror" id="name"
                                         name="name" placeholder="Masukkan nama lengkap" required
                                         @if (Auth::check()) value="{{ Auth::user()->name }}" readonly @endif>
@@ -164,7 +174,7 @@
                                 <label for="number_phone" class="form-label">Nomor WhatsApp<span
                                         class="text-danger">*</span></label>
                                 <div class="input-group">
-                                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-wa.png') }}" alt="icon"></span>
+                                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-wa.png') }}" alt="icon" style="width:20px; height:20px; padding-left: 3px;"></span>
                                     <input type="number" class="detail-pemesanan form-control @error('number_phone') is-invalid @enderror" id="number_phone"
                                         name="number_phone"
                                         placeholder="Masukkan nomor whatsapp" required
@@ -179,7 +189,7 @@
                             <div class="mb-4">
                                 <label for="email" class="form-label">Email</label>
                                 <div class="input-group">
-                                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-email.png') }}" alt="icon"></span>
+                                    <span class="input-group-text" id="icon"><i class="fa-solid fa-envelope"></i></span>
                                     <input type="email" class="detail-pemesanan form-control @error('email') is-invalid @enderror" id="email"
                                         name="email" placeholder="Masukkan alamat email"
                                         @if (Auth::check() && Auth::user()->email) value="{{ Auth::user()->email }}" readonly @endif>
@@ -192,9 +202,10 @@
                             </div>
                             <div class="mb-4">
                                 <label for="address" class="form-label">Alamat<span class="text-danger">*</span></label>
-                                <div>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="icon"><i class="fa-solid fa-location-dot"></i></span>
                                     <textarea class="form-control @error('address') is-invalid @enderror" placeholder="Alamat Lengkap" id="address" name="address" style="height: 100px"
-                                        @if (Auth::check()) readonly @endif>{{ Auth::check() ? Auth::user()->address : '' }}</textarea>
+                                        @if (Auth::check() && Auth::user()->address != null) readonly @endif>{{ Auth::check() ? Auth::user()->address : '' }}</textarea>
                                     @error('address')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -322,9 +333,19 @@
 
                 if (!document.getElementById('legrest')) {
                     const legRestInput = `
-            <div class="input-group">
-                <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-legrest.png') }}" alt="icon"></span>
-                <input type="text" class="form-control" id="description" name="description" placeholder="Masukkan detail leg rest">
+            <div class="mt-3 mb-2">
+                <label for="description" class="form-label">Detail Leg Rest<span class="text-danger">*</span></label>
+                <div class="input-group">
+                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-legrest.png') }}" alt="icon" style="width:20px; height:20px; padding-left: 3px;"></span>
+                    <input type="text" class="form-control" id="description" name="description" placeholder="Masukkan detail leg rest" required>
+                </div>
+            </div>
+            <div>
+                <ul>
+                    <li style="font-size:14px; color:#4180CC; font-weight: 700;">
+                        Detail Leg Rest diisi sesuai kebutuhan. Contoh : 5 Legrest saja, untuk 1 unit bus
+                    </li>
+                </ul>
             </div>
             `;
                     legRestsContainer.innerHTML = legRestInput; // Menambahkan input leg rest
@@ -364,5 +385,8 @@
                 });
             });
         });
+    </script>
+    <script>
+        new WOW().init();
     </script>
 @endsection

@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers\Customer;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Booking; // Pastikan Anda membuat model Booking
-use App\Models\Destination;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB; // Tambahkan ini
-
 use App\Models\Bus;
+use App\Models\User;
+use App\Models\Destination;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Filament\Notifications\Notification;
+use Illuminate\Support\Facades\Validator;
+
+use Filament\Notifications\Actions\Action;
+use Illuminate\Support\Facades\DB; // Tambahkan ini
+use App\Models\Booking; // Pastikan Anda membuat model Booking
 
 class BookingController extends Controller
 {
     //
     // Menampilkan formulir pemesanan
-    public function showForm()
+    public function index()
     {
         return view('frontend.booking.index');
     }
@@ -31,16 +33,51 @@ class BookingController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'email|max:255|nullable',
             'number_phone' => 'required|string|max:20',
-            'address' => 'required|string',
-            // 'destination_point' => 'required|string',
+            'address' => 'required|string|max:255',
             'capacity' => 'required|integer',
             'date_start' => 'required|date',
-            'pickup_point' => 'required|string',
-            'tujuan' => 'array|nullable', // Mengubah validasi tujuan agar menjadi array
-            'tujuan.*' => 'string|nullable', // Setiap tujuan harus berupa string atau nullable
-            'legrest' => 'boolean|required',  // Validasi legrest sebagai boolean
-            'description' => 'string|nullable',  // Deskripsi bersifat opsional
-        ]);
+            'pickup_point' => 'required|string|max:255',
+            'tujuan' => 'array|nullable|max:255',
+            'tujuan.*' => 'string|nullable|max:255',
+            'legrest' => 'boolean|required',
+            'description' => 'string|nullable|max:255',
+        ], [
+            'name.required' => 'Nama wajib diisi.',
+            'name.string' => 'Nama harus berupa teks.',
+            'name.max' => 'Nama maksimal 255 karakter.',
+            
+            'email.email' => 'Format email tidak valid.',
+            'email.max' => 'Harap mengisikan email maksimal 255 karakter.',
+            
+            'number_phone.required' => 'Nomor telepon wajib diisi.',
+            'number_phone.string' => 'Nomor telepon harus berupa teks.',
+            'number_phone.max' => 'Harap mengisikan nomor telepon maksimal 20 karakter.',
+            
+            'address.required' => 'Alamat wajib diisi.',
+            'address.string' => 'Alamat harus berupa teks.',
+            'address.max' => 'Harap mengisikan alamat maksimal 255 karakter.',
+            
+            'capacity.required' => 'Kapasitas wajib diisi.',
+            'capacity.integer' => 'Kapasitas harus berupa angka.',
+            
+            'date_start.required' => 'Tanggal mulai wajib diisi.',
+            'date_start.date' => 'Tanggal mulai harus berupa tanggal yang valid. dan jika hari ini, jamnya tidak boleh sama dengan waktu sekarang. maksimal 6 jam sebelum keberangkatan',
+            
+            'pickup_point.required' => 'Titik penjemputan wajib diisi.',
+            'pickup_point.string' => 'Titik penjemputan harus berupa teks.',
+            'pickup_point.max' => 'Titik penjemputan maksimal 255 karakter.',
+            
+            'tujuan.array' => 'Tujuan harus berupa array.',
+            'tujuan.max' => 'Harap mengisikan tujuan maksimal 255 karakter.',
+            'tujuan.*.string' => 'Setiap tujuan harus berupa teks.',
+            'tujuan.*.max' => 'Harap mengisikan setiap tujuan maksimal 255 karakter.',
+            
+            'legrest.boolean' => 'Legrest harus berupa nilai benar atau salah.',
+            'legrest.required' => 'Legrest wajib diisi.',
+            
+            'description.string' => 'Deskripsi harus berupa teks.',
+            'description.max' => 'Deskripsi maksimal 255 karakter.',
+        ]);        
 
         // dd($request->all());
 
@@ -218,6 +255,22 @@ class BookingController extends Controller
             'description' => $request->input('description'),
             'legrest' => $request->input('legrest')
         ]);
+        $superAdmins = User::whereHas('roles', function ($query) {
+            $query->where('name', 'super_admin');
+        })->get();
+        foreach ($superAdmins as $admin) {
+            Notification::make()
+                ->title('Booking dengan kode booking '. $booking->booking_code.' berhasil dibuat')
+                ->success()
+                ->actions([
+                    Action::make('Detail')
+                        ->button()
+                        ->url(route('filament.admin.resources.booking.edit', $booking)),
+                ])
+                
+                ->sendToDatabase($admin);
+                
+        }
 
         // Ambil semua input 'tujuan' sebagai array
         $tujuanArray = $request->input('tujuan'); // Menghasilkan array

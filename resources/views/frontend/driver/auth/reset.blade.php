@@ -8,7 +8,7 @@
         <div class="dashboard-container">
             <div class="reset-password">
                 <div class="d-flex align-items-center justify-content-center mt-3">
-                    <img src="{{ asset('img/reset-password-driver.png') }}" class="img-fluid">
+                    <img src="{{ asset('img/reset-password-driver.png') }}" class="img-fluid" width="90%" height="auto">
                 </div>
                 <div class="form-reset">
                     <div class="text-content mb-5">
@@ -36,11 +36,11 @@
                                 </span>
                             @enderror
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-5">
                             <label for="password" class="form-label">Password Baru<span class="text-danger">*</span></label>
                             <div class="input-group">
                                 <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Masukkan Password" required>
-                                <span class="input-group-text" id="toggle-password">
+                                <span class="input-group-text @error('password') text-danger border-danger @enderror" id="toggle-password">
                                     <i class="fas fa-eye"></i>
                                 </span>
                                 @error('password')

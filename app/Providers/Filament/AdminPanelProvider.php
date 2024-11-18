@@ -14,12 +14,16 @@ use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 use Filament\Http\Middleware\DisableBladeIconComponents;
+use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
+use Hasnayeen\Themes\ThemesPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -33,7 +37,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogo(fn () => view('logo'))
             ->favicon(asset('favicon.ico'))
             ->darkMode(false)
-            ->spa() //agar realtime
+            ->spa()
             ->profile()
             ->maxContentWidth('full')
             ->sidebarWidth('18rem')
@@ -73,22 +77,47 @@ class AdminPanelProvider extends PanelProvider
                 'profile' => MenuItem::make()
                     ->label(fn() => auth()->user()->name)
                     ->url(fn (): string => EditProfilePage::getUrl())
-                    ->icon('heroicon-o-user-circle') 
+                    ->icon('heroicon-o-user-circle'),
             ])
             ->viteTheme("resources/css/filament/admin/theme.css")
             ->plugins([
-                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
-                \Hasnayeen\Themes\ThemesPlugin::make(),
+                FilamentShieldPlugin::make()
+                    ->gridColumns([
+                        'default' => 1,
+                        'sm' => 2,
+                        'md' => 2,
+                        'lg' => 2,
+                        'xl' => 2,
+                    ])
+                    ->sectionColumnSpan(1)
+                    ->checkboxListColumns([
+                        'default' => 1,
+                        'sm' => 2,
+                        'md' => 2,
+                        'lg' => 2,
+                        'xl' => 2,
+                    ])
+                    ->resourceCheckboxListColumns([
+                        'default' => 1,
+                        'sm' => 2,
+                    ]),
+                ThemesPlugin::make(),
+                FilamentBackgroundsPlugin::make()
+                    ->imageProvider(
+                        MyImages::make()
+                            ->directory('images/swisnl/filament-backgrounds/curated-by-swis')
+                    ),
                 FilamentEditProfilePlugin::make()
-                ->setIcon('heroicon-o-user-circle')
+                    ->setNavigationGroup('Manajemen Sistem')
+                    ->setIcon('heroicon-o-user')
+                    ->setSort(4)
                     ->shouldShowAvatarForm(
                         value: true,
                         directory: 'avatars',
                         rules: 'mimes:jpeg,png|max:1024'
                     )
-                    ->shouldShowDeleteAccountForm(false) 
-                    ->shouldShowBrowserSessionsForm(false) 
-                    
+                    ->shouldShowDeleteAccountForm(false)
+                    ->shouldShowBrowserSessionsForm(false),
             ]);
     }
 }

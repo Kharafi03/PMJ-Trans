@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BookingResource\Pages;
 use App\Models\Booking;
 use App\Models\BookingMail;
+use App\Models\Bus;
 use App\Models\Outcome;
 use App\Models\TripBus;
 use App\Models\TripBusSpend;
@@ -52,6 +53,23 @@ class BookingResource extends Resource
 
     protected $refresh = ['table.records' => 10];
 
+    protected static ?string $recordTitleAttribute = 'booking_code';
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['booking_code', 'customer.name'];
+    }
+
+    public static function getGlobalSearchResultDetails(Model $record): array
+    {
+        /** @var Order $record */
+
+        return [
+            'Penyewa' => optional($record->customer)->name,
+            'Tujuan Akhir' => optional($record->destination->last())->name,
+        ];
+    }
+
     public static function getNavigationBadge(): ?string
     {
         $newdraf = static::getModel()::where('id_ms_booking', 1)->count();
@@ -79,13 +97,17 @@ class BookingResource extends Resource
                                 ->default(fn() => 'PMJ-' . strtoupper(Str::random(4)) . rand(1000, 9999))
                                 ->required()
                                 ->readOnly()
+                                ->afterStateHydrated(function (Get $get, Set $set) {
+                                    self::updateTripSpendTotal($get, $set, $get('id'));
+                                    self::updateBookingSpendTotal($get, $set, $get('id'));
+                                })
                                 ->label('Kode Booking'),
                             Select::make('id_cus')
                                 ->relationship('customer', 'name')
                                 ->options(function () {
                                     return User::whereHas('roles', function ($query) {
                                         $query->where('name', 'panel_user');
-                                    })->pluck('name', 'id'); // Mengambil nama dan id user
+                                    })->pluck('name', 'id');
                                 })
                                 ->searchable()
                                 ->required()
@@ -128,12 +150,14 @@ class BookingResource extends Resource
                         Forms\Components\Group::make()->schema([
                             DateTimePicker::make('date_start')
                                 ->required()
-                                ->minDate(now())
+                                ->minDate(fn(Get $get) => ($get('id_ms_booking') === 2 &&  $get('id')) || $get('id_ms_booking') === 4 ? null : now())
+                                ->reactive()
                                 ->label('Tanggal Mulai'),
 
                             DatePicker::make('date_end')
                                 ->required()
-                                ->minDate(now())
+                                ->minDate(fn(Get $get) => $get('date_start'))
+                                ->reactive()
                                 ->label('Tanggal Selesai'),
                         ])->columns(2),
 
@@ -157,9 +181,25 @@ class BookingResource extends Resource
 
                         Forms\Components\Group::make()->schema([
                             TextInput::make('capacity')
+                                ->label('Jumlah Penumpang')
                                 ->required()
                                 ->numeric()
-                                ->label('Jumlah Penumpang'),
+                                ->reactive()
+                                ->debounce(1500)
+                                ->afterStateUpdated(function (callable $get, callable $set) {
+                                    $fleetAmount = $get('fleet_amount');
+                                    $maxCapacity = $fleetAmount * 50;
+                                    $set('maxCapacity', $maxCapacity);
+                                })
+                                // ->rule(function (callable $get, callable $set) {
+                                //     $maxCapacity = $get('maxCapacity');
+                                //     return "max:$maxCapacity";
+                                // })
+                                // ->validationAttribute('Jumlah Penumpang')
+                                ->helperText(fn(callable $get) => 'Maksimal penumpang ' . $get('maxCapacity') . ' orang'),
+                            // ->validationMessages([
+                            //     'max' => 'Jumlah penumpang melebihi batas maksimum.',
+                            // ]),
 
                             Group::make()
                                 ->schema([
@@ -167,16 +207,21 @@ class BookingResource extends Resource
                                         ->schema([
                                             Select::make('fleet_amount')
                                                 ->required()
-                                                ->options([
-                                                    1 => '1 Bus',
-                                                    2 => '2 Bus',
-                                                    3 => '3 Bus',
-                                                    4 => '4 Bus',
-                                                    5 => '5 Bus',
-                                                ])
+                                                ->options(function (Get $get) {
+                                                    $startDate = $get('date_start');
+                                                    $endDate = $get('date_end');
+                                                    $idBooking = $get('id');
+                                                    $availableBusCount = self::getAvailableBusCount($startDate, $endDate, $idBooking);
+                                                    if ($availableBusCount === 0) {
+                                                        return [0 => "Bus Tidak Tersedia"];
+                                                    }
+                                                    return collect(range(1, $availableBusCount))->mapWithKeys(fn($i) => [$i => "$i Bus"]);
+                                                })
                                                 ->reactive()
                                                 ->afterStateUpdated(function (Get $get, Set $set) {
                                                     $fleetAmount = $get('fleet_amount');
+                                                    $maxCapacity = $fleetAmount * 50;
+                                                    $set('maxCapacity', $maxCapacity);
                                                     $set('maxItems', $fleetAmount);
                                                 })
                                                 ->label('Jumlah Bus'),
@@ -185,10 +230,7 @@ class BookingResource extends Resource
                                     Group::make()
                                         ->schema([
                                             Toggle::make('legrest')
-                                                //->inlineLabel()
                                                 ->label('Leg Rest')
-                                                ->reactive()
-                                                //->afterStateUpdated(fn($record) => $record->legrest)
                                                 ->default(0),
                                         ])
                                         ->columnSpan(1)
@@ -207,10 +249,15 @@ class BookingResource extends Resource
                                 ->required()
                                 ->prefix('Rp')
                                 ->numeric()
+                                ->reactive()
+                                // ->afterStateUpdated(function (Get $get, Set $set) {
+                                //     self::updateReceivedRemaining($get, $set);
+                                // })
                                 ->label('Nominal Perjalanan'),
 
                             TextInput::make('minimum_dp')
                                 ->required()
+                                ->reactive()
                                 ->prefix('Rp')
                                 ->numeric()
                                 ->label('Minimum DP'),
@@ -275,6 +322,9 @@ class BookingResource extends Resource
                                     ->numeric()
                                     ->readOnly()
                                     ->prefix('Rp.')
+                                    ->afterStateHydrated(function (Get $get, Set $set) {
+                                        self::updateReceivedRemaining($get, $set);
+                                    })
                                     ->label('Pembayaran Diterima'),
 
                                 TextInput::make('payment_remaining')
@@ -285,12 +335,10 @@ class BookingResource extends Resource
                             ])
                             ->columns(2),
                         Forms\Components\Group::make()
-                            //->visible(fn($record) => $record->id_ms_booking === 4)
                             ->visible(fn(Get $get) => $get('id_ms_booking') == 4)
-
                             ->reactive()
                             ->schema([
-                                TextInput::make('total_spend')
+                                TextInput::make('total_booking_spend')
                                     ->numeric()
                                     ->readOnly()
                                     ->prefix('Rp.')
@@ -310,18 +358,23 @@ class BookingResource extends Resource
                         Forms\Components\Card::make()
                             ->heading('Status')
                             ->schema([
+                                Select::make('id_ms_booking')
+                                    ->label('Status Pemesanan')
+                                    ->reactive()
+                                    ->relationship('ms_booking', 'name')
+                                    ->default(2)
+                                    ->afterStateUpdated(function (Get $get, Set $set) {
+                                        self::updateReceivedRemaining($get, $set);
+                                        self::updateStatusPayment($get, $set);
+                                    })
+                                    ->required(),
                                 Select::make('id_ms_payment')
                                     ->label('Status Pembayaran')
                                     ->relationship('ms_payment', 'name')
                                     ->default(2)
                                     ->reactive()
                                     ->required(),
-                                Select::make('id_ms_booking')
-                                    ->label('Status Pemesanan')
-                                    ->reactive()
-                                    ->relationship('ms_booking', 'name')
-                                    ->default(2)
-                                    ->required(),
+
                             ])->columnSpan(1),
 
                         Forms\Components\Card::make()
@@ -338,6 +391,13 @@ class BookingResource extends Resource
                                                     ->schema([
                                                         Select::make('id_bus')
                                                             ->relationship('bus', 'name')
+                                                            ->options(function (Get $get, Set $set, $record) {
+                                                                $tripStart = $get('../../date_start');
+                                                                $tripEnd = $get('../../date_end');
+                                                                $idBooking = $get('../../id');
+                                                                //dd($tripStart, $tripEnd);
+                                                                return self::getAvailableBuses($tripStart, $tripEnd, $idBooking);
+                                                            })
                                                             ->required()
                                                             ->label('Kode Bus'),
                                                     ])
@@ -357,20 +417,23 @@ class BookingResource extends Resource
                                             ->schema([
                                                 Select::make('id_driver')
                                                     ->relationship('driver', 'name')
-                                                    ->options(function () {
-                                                        return User::whereHas('roles', function ($query) {
-                                                            $query->where('name', 'driver');
-                                                        })->pluck('name', 'id');
+                                                    ->options(function (Get $get, Set $set, $record) {
+                                                        $tripStart = $get('../../date_start');
+                                                        $tripEnd = $get('../../date_end');
+                                                        $idBooking = $get('../../id');
+                                                        //dd($idBooking);
+                                                        return self::getAvailableDriver($tripStart, $tripEnd, $idBooking);
                                                     })
                                                     ->required()
                                                     ->label('Driver'),
 
                                                 Select::make('id_codriver')
                                                     ->relationship('codriver', 'name')
-                                                    ->options(function () {
-                                                        return User::whereHas('roles', function ($query) {
-                                                            $query->where('name', 'driver');
-                                                        })->pluck('name', 'id');
+                                                    ->options(function (Get $get, Set $set, $record) {
+                                                        $tripStart = $get('../../date_start');
+                                                        $tripEnd = $get('../../date_end');
+                                                        $idBooking = $get('../../id');
+                                                        return self::getAvailableDriver($tripStart, $tripEnd, $idBooking);
                                                     })
                                                     ->required()
                                                     ->label('Co-Driver'),
@@ -404,79 +467,81 @@ class BookingResource extends Resource
 
     public static function table(Tables\Table $table): Tables\Table
     {
-        return $table->columns([
-            TextColumn::make('id')
-                ->label('No')
-                ->sortable(),
-            BadgeColumn::make('ms_booking.name')
-                ->label('Status')
-                ->searchable()
-                ->sortable()
-                ->colors([
-                    'warning' => 'Draf',
-                    'info' => 'Selesai',
-                    'success' => 'Diterima',
-                    'danger' => 'Ditolak',
-                    'danger' => 'Dibatalkan',
-                ])
-                ->formatStateUsing(function ($state) {
-                    return ucfirst($state);
-                }),
-            TextColumn::make('booking_code')
-                ->label('Kode Booking')
-                ->searchable()
-                ->sortable(),
-            TextColumn::make('customer.name')
-                ->label('Nama Customer')
-                ->searchable()
-                ->sortable(),
-            TextColumn::make('pickup_point')
-                ->label('Titik Jemput')
-                ->searchable()
-                ->limit(25)
-                ->tooltip(function ($record) {
-                    return $record->pickup_point;
-                })
-                ->sortable(),
-            TextColumn::make('destination.name')
-                ->label('Tujuan')
-                ->getStateUsing(fn(Model $record) => optional($record->destination->last())->name)
-                ->searchable()
-                ->limit(25)
-                ->tooltip(function ($record) {
-                    return ($record->destination->last())->name;
-                })
-                ->sortable(),
-            BadgeColumn::make('ms_payment.name')
-                ->label('Pembayaran')
-                ->searchable()
-                ->sortable()
-                ->colors([
-                    'info' => 'Draf',
-                    'success' => 'Lunas',
-                    'warning' => 'DP Dibayarkan',
-                    'danger' => 'DP Belum Dibayar',
-                ])
-                ->formatStateUsing(function ($state) {
-                    return ucfirst($state);
-                }),
-            Tables\Columns\TextColumn::make('deleted_at')
-                ->label('Tanggal Dihapus')
-                ->dateTime()
-                ->sortable()
-                ->toggleable(isToggledHiddenByDefault: true),
-            Tables\Columns\TextColumn::make('created_at')
-                ->label('Tanggal Dibuat')
-                ->dateTime()
-                ->sortable()
-                ->toggleable(isToggledHiddenByDefault: true),
-            Tables\Columns\TextColumn::make('updated_at')
-                ->label('Tanggal Diperbarui')
-                ->dateTime()
-                ->sortable()
-                ->toggleable(isToggledHiddenByDefault: true),
+        return $table
+            ->defaultSort('updated_at', 'desc')
+            ->columns([
+                TextColumn::make('id')
+                    ->label('ID')
+                    ->sortable(),
+                BadgeColumn::make('ms_booking.name')
+                    ->label('Status')
+                    ->searchable()
+                    ->sortable()
+                    ->colors([
+                        'warning' => 'Draf',
+                        'info' => 'Selesai',
+                        'success' => 'Diterima',
+                        'danger' => 'Ditolak',
+                        'danger' => 'Dibatalkan',
+                    ])
+                    ->formatStateUsing(function ($state) {
+                        return ucfirst($state);
+                    }),
+                TextColumn::make('booking_code')
+                    ->label('Kode Booking')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('customer.name')
+                    ->label('Nama')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('pickup_point')
+                    ->label('Titik Jemput')
+                    ->searchable()
+                    ->limit(25)
+                    ->tooltip(function ($record) {
+                        return $record->pickup_point;
+                    })
+                    ->sortable(),
+                TextColumn::make('destination.name')
+                    ->label('Tujuan')
+                    ->getStateUsing(fn(Model $record) => optional($record->destination->last())->name)
+                    ->searchable()
+                    ->limit(25)
+                    ->tooltip(function ($record) {
+                        return ($record->destination->last())->name;
+                    })
+                    ->sortable(),
+                BadgeColumn::make('ms_payment.name')
+                    ->label('Pembayaran')
+                    ->searchable()
+                    ->sortable()
+                    ->colors([
+                        'info' => 'Draf',
+                        'success' => 'Lunas',
+                        'warning' => 'DP Dibayarkan',
+                        'danger' => 'DP Belum Dibayar',
+                    ])
+                    ->formatStateUsing(function ($state) {
+                        return ucfirst($state);
+                    }),
+                Tables\Columns\TextColumn::make('deleted_at')
+                    ->label('Tanggal Dihapus')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Tanggal Dibuat')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Tanggal Diperbarui')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
 
-        ])
+            ])
             ->filters([
                 Tables\Filters\SelectFilter::make('id_ms_payment')
                     ->label('Status Pembayaran')
@@ -493,8 +558,9 @@ class BookingResource extends Resource
                     //->label('Lihat')
                     ->modalWidth('7xl')
                     ->modalHeading('Lihat Booking'),
-                EditAction::make()
+                Tables\Actions\EditAction::make()
                     //->label('')
+                    ->label('Edit')
                     ->modalHeading('Edit Booking')
                     ->modalWidth('7xl')
                     ->color('warning')
@@ -509,11 +575,6 @@ class BookingResource extends Resource
                                 Forms\Components\TextInput::make('booking_code')
                                     ->label('Kode Booking')
                                     ->default(fn($record) => $record->booking_code)
-                                    // ->afterStateHydrated(function (callable $set, $state, $record) {
-                                    //     if ($record && $record->booking) {
-                                    //         $set('destination_point', $record->destination->last()->name);
-                                    //     }
-                                    // })
                                     ->disabled(),
                                 Forms\Components\Select::make('id_cus')
                                     ->label('Customer')
@@ -721,7 +782,7 @@ class BookingResource extends Resource
                     ->icon('heroicon-s-receipt-refund')
                     ->action(function ($record, $data) {
                         Outcome::create([
-                            'id_booking' => $record->id,
+                            'outcome_code' => $record->booking_code,
                             'id_m_outcome' => 1,
                             'check' => 1,
                             'image_receipt' => $data['image_receipt'],
@@ -807,7 +868,10 @@ class BookingResource extends Resource
                     ->icon('heroicon-o-phone')
                     ->label('Hubungi'),
                 Tables\Actions\DeleteAction::make()
-                //->label(''),
+                    ->action(function ($record) {
+                        Outcome::where('outcome_code', $record->maintenance_code)->delete();
+                        Booking::where('id', $record->id)->delete();
+                    })
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -839,7 +903,17 @@ class BookingResource extends Resource
         return [
             'index' => Pages\ListBookings::route('/'),
             'create' => Pages\CreateBooking::route('/create'),
+            'edit' => Pages\EditBooking::route('/{record}/edit')
         ];
+    }
+
+    public static function updateStatusPayment(Get $get, Set $set): void
+    {
+        $statusbooking = $get('id_ms_booking');
+
+        if ($statusbooking == 2) {
+            $set('id_ms_payment', 2);
+        }
     }
 
     public static function updateReceivedRemaining(Get $get, Set $set): void
@@ -862,12 +936,14 @@ class BookingResource extends Resource
 
         $set('payment_remaining', number_format($paymentRemaining, 2, '.', ''));
 
-        if ($paymentReceived >= $tripNominal) {
-            $set('id_ms_payment', 4);
-        } else if ($paymentReceived >= $minDp) {
-            $set('id_ms_payment', 3);
-        } else {
-            $set('id_ms_payment', 2);
+        if ($tripNominal > 0) {
+            if ($paymentReceived > $tripNominal - 1) {
+                $set('id_ms_payment', 4);
+            } else if ($paymentReceived >= $minDp) {
+                $set('id_ms_payment', 3);
+            } else {
+                $set('id_ms_payment', 2);
+            }
         }
     }
 
@@ -901,5 +977,90 @@ class BookingResource extends Resource
             ->update([
                 'total_spend' => $spendtotal,
             ]);
+    }
+
+    public static function getAvailableBuses($tripStart, $tripEnd, $idBooking)
+    {
+        if (!$tripStart || !$tripEnd) {
+            return Bus::pluck('name', 'id');
+        }
+
+        $tripEndTime = \Carbon\Carbon::parse($tripEnd)->endOfDay();
+
+        return Bus::whereDoesntHave('tripbus.booking', function ($query) use ($tripStart, $tripEndTime, $idBooking) {
+            $query->where(function ($subQuery) use ($tripStart, $tripEndTime) {
+                $subQuery->where('date_start', '<=', $tripEndTime)
+                    ->whereRaw("CAST(CONCAT(date_end, ' 23:59:59') AS DATETIME) >= ?", [$tripStart])
+                    ->where('id_ms_booking', 2);
+            });
+            if ($idBooking) {
+                $query->where('id_booking', '!=', $idBooking);
+            }
+        })->pluck('name', 'id');
+    }
+
+    public static function getAvailableBusCount($startDate, $endDate, $idBooking): int
+    {
+        if (!$startDate || !$endDate) {
+            return Bus::count();
+        }
+
+        $tripEndTime = \Carbon\Carbon::parse($endDate)->endOfDay();
+
+        $usedBusCount = Bus::whereHas('tripbus.booking', function ($query) use ($startDate, $tripEndTime, $idBooking) {
+            $query->where(function ($subQuery) use ($startDate, $tripEndTime) {
+                $subQuery->where('date_start', '<=', $tripEndTime)
+                    ->whereRaw("CAST(CONCAT(date_end, ' 23:59:59') AS DATETIME) >= ?", [$startDate])
+                    ->where('id_ms_booking', 2);
+            });
+
+            if ($idBooking) {
+                $query->where('id_booking', '!=', $idBooking);
+            }
+        })->distinct('id')->count();
+
+        $totalBusCount = Bus::count();
+        $availableBusCount = max(0, $totalBusCount - $usedBusCount);
+
+        return $availableBusCount;
+    }
+
+
+    public static function getAvailableDriver($tripStart, $tripEnd, $idBooking)
+    {
+        if (!$tripStart || !$tripEnd) {
+            return User::whereHas('roles', function ($query) {
+                $query->where('name', 'driver');
+            })->pluck('name', 'id');
+        }
+
+        $tripEndTime = \Carbon\Carbon::parse($tripEnd)->endOfDay();
+
+        return User::whereHas('roles', function ($query) {
+            $query->where('name', 'driver');
+        })
+            ->whereDoesntHave('driver', function ($query) use ($tripStart, $tripEndTime, $idBooking) {
+                $query->whereHas('booking', function ($subQuery) use ($tripStart, $tripEndTime) {
+                    $subQuery->where('date_start', '<=', $tripEndTime)
+                        ->whereRaw("CAST(CONCAT(date_end, ' 23:59:59') AS DATETIME) >= ?", [$tripStart])
+                        ->where('id_ms_booking', 2);
+                });
+
+                if ($idBooking) {
+                    $query->where('id_booking', '!=', $idBooking);
+                }
+            })
+            ->whereDoesntHave('codriver', function ($query) use ($tripStart, $tripEndTime, $idBooking) {
+                $query->whereHas('booking', function ($subQuery) use ($tripStart, $tripEndTime) {
+                    $subQuery->where('date_start', '<=', $tripEndTime)
+                        ->whereRaw("CAST(CONCAT(date_end, ' 23:59:59') AS DATETIME) >= ?", [$tripStart])
+                        ->where('id_ms_booking', 2);
+                });
+
+                if ($idBooking) {
+                    $query->where('id_booking', '!=', $idBooking);
+                }
+            })
+            ->pluck('name', 'id');
     }
 }

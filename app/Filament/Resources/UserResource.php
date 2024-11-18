@@ -10,6 +10,7 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Widgets\UserStatsOverview;
 use Filament\Tables\Columns\BadgeColumn;
+use Illuminate\Database\Eloquent\Model;
 
 class UserResource extends Resource
 {
@@ -17,13 +18,21 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-user-group';
 
-    protected static ?string $navigationGroup = 'User Management';
+    protected static ?string $navigationGroup = 'Manajemen User';
 
-    protected static ?string $recordTitleAttribute = 'number_phone';
+    protected static ?string $recordTitleAttribute = 'name';
 
     public static function getGloballySearchableAttributes(): array
     {
         return ['name', 'email', 'number_phone'];
+    }
+
+    public static function getGlobalSearchResultDetails(Model $record): array
+    {
+        return [
+            'No.Hp' => optional($record)->number_phone,
+            'Email' => optional($record)->email,
+        ];
     }
 
     protected static ?int $navigationSort = 2;
@@ -125,9 +134,10 @@ class UserResource extends Resource
     public static function table(Tables\Table $table): Tables\Table
     {
         return $table
+            ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('id')
-                    ->label('Nomor')
+                    ->label('No')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama')

@@ -8,7 +8,7 @@
             <li class="list active">
                 <a href="{{ route('dashboard-driver') }}">
                     <span class="icon">
-                        <img src="/img/home-icon.png">
+                        <i class="fa-solid fa-house"></i>
                     </span>
                     <span class="text">Beranda</span>
                 </a>
@@ -16,7 +16,7 @@
             <li class="list">
                 <a href="{{ route('trip-history') }}">
                     <span class="icon">
-                        <img src="/img/history-icon.png">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
                     </span>
                     <span class="text">Riwayat</span>
                 </a>
@@ -24,16 +24,16 @@
             <li class="list">
                 <a href="{{ route('profile-driver') }}">
                     <span class="icon">
-                        <img src="/img/profile-icon.png">
+                        <i class="fa-regular fa-user"></i>
                     </span>
                     <span class="text">Profil</span>
                 </a>
             </li>
             <li class="list">
                 <a href="{{ route('logout') }}"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    onclick="event.preventDefault(); confirmLogout(); document.getElementById('logout-form').submit();">
                     <span class="icon">
-                        <img src="/img/logout-icon.png">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
                     </span>
                     <span class="text">Keluar</span>
                 </a>
@@ -68,5 +68,25 @@
         indicator.style.display = 'block'; // Tampilkan indicator jika ada yang aktif
     } else {
         indicator.style.display = 'none'; // Sembunyikan indicator jika tidak ada yang aktif
+    }
+
+    // validasi logout
+    function confirmLogout() {
+        // Tampilkan popup konfirmasi menggunakan SweetAlert2
+        Swal.fire({
+            title: 'Apakah Anda yakin ingin keluar?',
+            text: "Anda harus login kembali untuk mengakses!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, keluar',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Jika pengguna memilih "Ya, keluar", submit form logout
+                document.getElementById('logout-form').submit();
+            }
+        });
     }
 </script>

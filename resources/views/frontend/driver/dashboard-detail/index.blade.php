@@ -6,21 +6,41 @@
 @section('content')
     <section id="dashboardDetail">
         <div class="dashboard-container container p-3">
-            <x-header-driver />
 
-            <!-- TITLE -->
-            <div class="title mb-3">
-            <h5 style="font-size: 25px; font-weight: 700; color: #1E9781; text-align: center;">Detail <span style="color: #FD9C07;">Trip</span></h5>
+            <div class="text-content text-start mb-4">
+                <div class="row">
+                    <div class="col-2" style="margin-right: -20px;">
+                        <a href="{{ route('dashboard-driver') }}"><i class="fa-solid fa-chevron-left"></i></a>
+                    </div>
+                    <div class="col-10">
+                        <h5 style="font-size: 20px; font-weight: 700; color: #1E9781;">Detail <span style="color: #FD9C07;">Trip</span></h5>
+                        <p class="caption">Berikut adalah detail trip anda.</p>
+                    </div>
+                </div>
             </div>
+
             <!-- CARD -->
             <div class="detail mb-5">
                 <div class="detail-sewa mb-5">
                     <div class="tabel-detail d-flex align-items-center">
                         <table class="table table-borderless">
                             <thead>
-                                <tr>
-                                    <th colspan="2" style="background-color:#F44C28">
-                                        <h5 style="color: white;">{{ $trip->booking->booking_code }}</h5>
+                                <tr style="padding: 10px;">
+                                    <th colspan="2" style="background-color:#E42E07;">
+                                        {{--<h5 style="color: white;">{{ $trip->booking->booking_code }}</h5>--}}
+                                        <div class="header d-flex align-items-center">
+                                            <div class="riwayat-image">
+                                                <img src="{{ asset('storage/' . $trip->bus->images->first()->image) }}" class="img-fluid" width="60" height="60">
+                                            </div>
+                                            <div class="kode">
+                                                <h5>{{ $trip->bus->name }}</h5>
+                                                <p>{{ $trip->booking->booking_code }}</p>
+                                            </div>
+                                            <span class="ms-auto">
+                                                <p class="mb-0">{{ \Carbon\Carbon::parse($trip->booking->date_start)->translatedFormat('d F Y') }}</p>
+                                                <p class="mb-0">Pukul {{ \Carbon\Carbon::parse($trip->booking->date_start)->translatedFormat('H.i') }}</p>
+                                            </span>
+                                        </div>
                                     </th>
                                 </tr>
                             </thead>

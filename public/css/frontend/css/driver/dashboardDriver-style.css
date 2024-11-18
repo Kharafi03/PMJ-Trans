@@ -1,5 +1,7 @@
 #dashboard {
-    margin-top: 70px;
+    margin-top: 80px;
+    margin-bottom: 50px;
+    font-family: 'Poppins', sans-serif !important;
 }
 
 /* CONTAINER LAYOUT*/
@@ -10,28 +12,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-}
-
-/* TEXT HEADER */
-.profile-card {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    max-width: 400px;
-}
-.profile-text {
-    display: flex;
-    flex-direction: column;
-    padding-left: 10px;
-}
-
-.profile-text h5 {
-    margin: 0px;
-}
-
-.profile-text p {
-    margin: 0px;
-    color: #777;
+    margin: 0 auto; 
 }
 
 .text-content {
@@ -41,16 +22,15 @@
 }
 
 .title h5 {
-    font-size: 17px;
+    font-size: 15px !important;
     font-weight: 700;
     color: #1e9781;
-    margin-top: 0;
+    margin-top: 10px !important;
 }
 .title p {
-    font-size: 15px;
+    font-size: 14px !important;
     font-weight: 500;
-    color: #000000a1;
-    margin-bottom: 0;
+    color: #000000A1;
 }
 
 .title h5 {
@@ -116,19 +96,24 @@
     overflow-x: auto;
     scroll-behavior: smooth;
     white-space: nowrap;
-    padding-bottom: 10px;
+    /* padding-bottom: 10px; */
 }
 
 .card-content {
     display: inline-block;
     width: 100%;
     margin-right: 16px;
+    margin-bottom: 0px;
     flex: 0 0 auto;
+    scroll-snap-align: start;
+    min-width: 300px;
 }
-.card-content-wrapper {
+
+
+/* .card-content-wrapper {
     scrollbar-width: 2px;
     scrollbar-color: #1e9781 #f1f1f1;
-}
+} */
 
 /* BUTTON LIHAT */
 .banner-btn {
@@ -155,18 +140,21 @@
     text-decoration: none;
     height: 48px;
     width: 100%;
-    background-color: #f44c28;
+    background-color: #FF9149;
     color: white;
     font-size: 16px;
     font-weight: 700;
     padding: 10px;
     text-align: center;
     border: none;
-    border-radius: 15px;
+    border-radius: 10px;
     display: inline-block;
-    transition: transform 0.3s ease;
+    margin-bottom: 20px;
+    box-shadow: #4475F236 0px 15px 25px, rgba(86, 167, 221, 0.397) 0px 5px 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     &:hover {
-        transform: scale(1.02);
+        transform: scale(1.05);
+        background-color: #F9741D;
     }
 }
 
@@ -174,18 +162,21 @@
     text-decoration: none;
     height: 48px;
     width: 100%;
-    background-color: #f44c28;
+    background-color: #FF9149;
     color: white;
     font-size: 16px;
     font-weight: 700;
     padding: 10px;
     text-align: center;
     border: none;
-    border-radius: 15px;
+    border-radius: 10px;
     display: inline-block;
-    transition: transform 0.3s ease;
+    margin-bottom: 20px;
+    box-shadow: #4475F236 0px 15px 25px, rgba(86, 167, 221, 0.397) 0px 5px 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     &:hover {
-        transform: scale(1.02);
+        transform: scale(1.05);
+        background-color: #F9741D;
     }
 }
 
@@ -214,14 +205,6 @@
     scroll-behavior: smooth; /* Menambahkan transisi halus saat scroll */
 }
 
-.card-content {
-    flex: 0 0 auto;
-    scroll-snap-align: start;
-    margin-right: 10px;
-    width: 100%; /* Sesuaikan lebar sesuai kebutuhan */
-    min-width: 300px; /* Menentukan lebar minimum untuk setiap item */
-}
-
 .carousel-scroll::-webkit-scrollbar {
     display: none; /* Hide scrollbar for cleaner look */
 }
@@ -233,7 +216,7 @@
 
 .carousel-indicators {
     position: absolute;
-    bottom: -20px; /* Adjust as needed */
+    bottom: 0px; /* Adjust as needed */
     transform: translateX(-50%); /* Center the indicators */
     display: flex;
     left: 35%;
@@ -261,6 +244,10 @@
     margin-top: 10px;
 }
 
+.carousel-item{
+    margin-bottom: 0;
+}
+
 body,
 html {
     height: 100%;
@@ -277,6 +264,7 @@ html {
 }
 
 /* DROPDOWN */
+
 .accordion-item {
     margin-bottom: 10px;
     border: 1px solid #4180cc;
@@ -314,6 +302,7 @@ html {
     padding: 10px;
     text-align: left;
     border-radius: 10px 10px 0px 0px !important;
+    
 }
 .accordion-button.collapsed {
     border-radius: 10px !important;
@@ -335,7 +324,7 @@ html {
 }
 .riwayat-image img {
     border-radius: 10px;
-    margin-right: 10px;
+    margin-right: 5px !important;
 }
 .ms-auto p {
     text-align: right;
@@ -363,23 +352,43 @@ th h5 {
     color: white;
 }
 table td {
-    padding: 10px 15px !important;
-    text-align: right;
+    padding: 10px 15px !important; 
+    font-size: 12px;
+    font-weight: 400;
 }
-.keterangan {
-    text-align: left;
+.detail-trip td, .detail-pengeluaran td{
+    text-align: justify;
+}
+
+.keterangan{
+    text-align: left !important;
     padding-left: 10px;
+    width: 40%;
 }
 .tgl {
     padding: 5px;
-    background-color: #e50a3e;
+    background-color: #666666;
+    color: white;
+    border-radius: 20px;
+    text-align: center;
+}
+.saldo{
+    padding: 5px;
+    background-color: #666666;
+    color: white;
+    border-radius: 20px;
+    text-align: center;
+}
+.total{
+    padding: 5px;
+    background-color: #666666;
     color: white;
     border-radius: 20px;
     text-align: center;
 }
 .status {
     padding: 5px;
-    background-color: #0fa958;
+    background-color: #666666;
     color: white;
     border-radius: 20px;
     text-align: center;
@@ -389,7 +398,7 @@ table td {
     border: none;
 }
 .detail-pengeluaran th {
-    background-color: #ffb21d;
+    background-color: #D9D9D9;
     padding: 5px;
     color: white;
 }
@@ -427,9 +436,38 @@ html {
     padding: 0px 5px;
 }
 .riwayat-title p {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
 }
 .riwayat-title i {
-    font-size: 20px;
+    font-size: 18px;
+}
+ a {
+    text-decoration: none;
+    color: black;
+}
+.riwayat-content{
+    margin: 0px 10px 20px 10px;
+}
+.content{
+    padding-bottom: 0px;
+}
+/* Media Queries for Larger Screens (Tablet & Desktop) */
+@media (min-width: 768px) {
+    .dashboard-container {
+        max-width: 100%;
+        width: 375px;
+    }
+    .carousel-item {
+        margin-bottom: 0;
+    }
+    .card-content {
+        padding-bottom: 50px; /* Maintain mobile padding */
+    }
+}
+
+@media (max-width: 767px) {
+    .carousel-item {
+        margin-bottom: 3rem; /* This applies mb-5 equivalent on mobile */
+    }
 }

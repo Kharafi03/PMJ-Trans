@@ -75,12 +75,22 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
 
     public function canAccessPanel(Panel $panel): bool
     {
-        $user = auth()->user()->roles->first()->name === 'super_admin';
+        $user = auth()->user()->roles->first()->name === 'super_admin' || auth()->user()->roles->first()->name === 'Admin';
         return $user;
     }
     public function getFilamentAvatarUrl(): ?string
     {
         return $this->avatar_url ? Storage::url("$this->avatar_url") : null;
+    }
+
+    public function driver()
+    {
+        return $this->hasMany(TripBus::class, 'id_driver');
+    }
+
+    public function codriver()
+    {
+        return $this->hasMany(TripBus::class, 'id_codriver');
     }
 
     // public function permissions(): BelongsTo

@@ -8,13 +8,17 @@
     height: 100%;
     margin: 0 auto;
 }
-
+body{
+    font-family: 'Poppins', sans-serif;
+}
 /* CONTENT */
 .dashboard-container{
     background-image: url('/img/login-driver.png');
-    background-position: auto;
+    background-position: 60% 10%;
     background-size: auto;
     background-repeat: no-repeat;
+    border: none;
+    border-radius: 0px 0px 10px 10px;
 }
 img{
     padding: 20px;
@@ -24,11 +28,12 @@ img{
 .text-content h5{
     font-size: 28px;
     font-weight: 600;
+    color: black;
 }
 .text-content p{
     font-size: 16px;
     font-weight: 300;
-    text-decoration: underline;
+    color: black;
 }
 
 /* FORM */
@@ -47,13 +52,18 @@ input[type="text"], input[type="password"], input[type="tel"]{
     background-color: white;
 }
 label{
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 500;
+    color: #263A43;
 }
-.lupa-sandi{
+.lupa-sandi {
     font-size: 16px;
     font-weight: 700;
-    color:#4180CC;
+    text-decoration: none;
+    color: #4180CC;
+    &:hover{
+        color: #6799d6;
+    }
 }
 
 /* INPUT AKTIF */
@@ -77,6 +87,13 @@ input[type="text"]:focus,input[type="password"]:focus,input[type="tel"]:focus{
     border-right: 1px solid #ced4da;
 }
 
+/* EROR */
+.input-group-text.text-danger {
+    /* color: #dc3545;  */
+    border-color: #dc3545; 
+    border-radius: 0px 6px 6px 0px !important;
+}
+
 /* BUTTON */
 .btn-login{
     height: 70px;
@@ -88,10 +105,26 @@ input[type="text"]:focus,input[type="password"]:focus,input[type="tel"]:focus{
     font-size: 20px;
     font-weight: 700;
     border-radius: 6px;
-    transition: transform 0.3s ease;
     border: none;
-    &:hover{
-        transform: scale(1.02); 
+    transition: transform 0.3s ease;
+    &:hover {
+        transform: scale(1.05);
+        background-color: #00BB83;
     }
     
+}
+
+/* AUTO FILL */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 30px white inset !important; 
+    -webkit-text-fill-color: #000 !important; 
+    transition: background-color 5000s ease-in-out 0s; 
 }

@@ -2,11 +2,14 @@
     <link id="pagestyle" href="{{ asset('css/frontend/css/navbarCustomer-style.css') }}" rel="stylesheet" />
 @endpush
 <div>
-    <nav id="navbar" class="navbar navbar-expand-lg fixed-top">
+    <nav id="navbar" class="navbar navbar-expand-lg fixed-top wow animate__animated animate__fadeInDown">
         <div class="container-fluid  justify-content-start">
-            <a class="navbar-brand" href="#"><img src="{{ asset('img/logo.png') }}" width="60px" height="45px" style="margin-left: 20px;"></a>
+            <a class="navbar-brand" href="{{ route('homepage') }}">
+                <img src="{{ asset($setting->logo ? 'storage/' . $setting->logo : 'img/logo.png') }}" height="45" style="margin-left: 20px;">
+            </a>
             <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="margin-right: 30px;">
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
+                style="margin-right: 30px;">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -28,6 +31,9 @@
                         <a class="nav-link" href="{{ route('terms-conditions') }}">Syarat & Ketentuan</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('booking') }}">Pemesanan</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('cek.status') }}">Cek Pemesanan</a>
                     </li>
                     @auth
@@ -41,11 +47,12 @@
                                 <li><a class="dropdown-item" href="{{ route('history.index') }}">Riwayat Sewa</a></li>
                                 <li>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        onclick="event.preventDefault(); confirmLogout(); document.getElementById('logout-form').submit();">
                                         Keluar
                                     </a>
                                 </li>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
                                     @csrf
                                 </form>
                             </ul>
@@ -78,4 +85,26 @@
             item.classList.add('active');
         }
     });
+    // validasi logout
+    function confirmLogout() {
+        // Tampilkan popup konfirmasi menggunakan SweetAlert2
+        Swal.fire({
+            title: 'Apakah Anda yakin ingin keluar?',
+            text: "Anda harus login kembali untuk mengakses!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, keluar',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Jika pengguna memilih "Ya, keluar", submit form logout
+                document.getElementById('logout-form').submit();
+            }
+        });
+    }
+</script>
+<script>
+    new WOW().init();
 </script>

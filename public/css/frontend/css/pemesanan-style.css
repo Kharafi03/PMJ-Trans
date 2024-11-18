@@ -1,6 +1,7 @@
 /* CONTENT */
 #pemesanan{
-    margin-top: 150px;
+    margin-top: 120px;
+    margin-bottom: 50px;
 }
 .info{
     padding: 10px;
@@ -8,6 +9,7 @@
     border-radius: 6px;
     border-left: 4px solid #4180CC;
     background-color: #F5F7F9;
+    font-family: 'Poppins', sans-serif;
 }
 .info i{
     color: #4180CC;
@@ -20,6 +22,7 @@
 .info li{
     font-size: 16px;
     color: #252A31;
+    font-weight: 400;
 }
 
 /* BREADCRUMB */
@@ -31,16 +34,47 @@
     width: 100%;
     top: 0;           
     z-index: 1000;
+    border-radius: 0px 0px 30px 30px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
 }
 .breadcrumb .breadcrumb-item + .breadcrumb-item::before {
     color: white !important;
 }
-.breadcrumb li, .breadcrumb a{
+.breadcrumb a{
     color: white !important;
-    font-size: 16px;
-    font-weight: 700;
     text-decoration: none;
 }
+.breadcrumb .active{
+    color: #DADADA !important;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+/* TEXT CONTENT */
+.text-content h1{
+    font-weight: 700;
+    color: #1E9781;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    margin-bottom: 0;
+  }
+  .text-content span{
+    color: #FD9C07;
+  }
+  .text-content p{
+    font-size: 16px; 
+    font-weight: 400;
+    color: #000000AD;
+    font-family: 'Poppins', sans-serif;
+  }
+  @media (min-width: 1024px) {
+    .text-content h1{
+        font-size: 44px;
+    }
+  }
+
 
 /* FORM */
 .form-container{
@@ -48,15 +82,18 @@
     border: 10px solid #EFF0F6;
     border-radius: 30px;
     margin-bottom: 50px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 input[type="text"], input[type="date"], input[type="number"], input[type="email"],input[type="datetime-local"]{
     height: 50px;
     border-radius: 15px;
-    border: 1px solid #666666;
+    border: 1px solid #99A2A5;
+    padding-left: 5px;
 }
 label{
     font-weight: 500;
+    color: #000000AD;
 }
 .form-select{
     border-right: none;
@@ -64,14 +101,31 @@ label{
 #icon{
     border-radius: 15px 0px 0px 15px;
     background-color: white;
-    border: 1px solid #666666;
+    border: 1px solid #99A2A5;
+    color: #A8A8A8;
+    font-size: 20px;
+    width: 50px;
+    /* padding-left: 15px; */
 }
 textarea{
-    border-radius: 15px !important;
-    border: 1px solid #666666 !important;
+    border-radius: 0px 15px 15px 0px !important;
+    border: 1px solid #99A2A5 !important;
+    padding-left: 5px;
 }
 i{
-    font-size: 21px;
+    padding-left: 4px;
+}
+
+/* SWITCH */
+.form-switch .form-check-input:focus {
+    border-color: rgba(0, 0, 0, 0.25);
+    outline: 0;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+}
+.form-switch .form-check-input:checked {
+    background-color: #17B92F;
+    border-color: #17B92F;
+    border: none;
 }
 
 /* Untuk Chrome */
@@ -95,10 +149,11 @@ input[type="date"] {
     margin: 10px 0px;
     border-radius: 10px;
     width: 120px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.308) 0px 10px 10px -5px;
+    box-shadow: #4475F236 0px 15px 25px, rgba(86, 167, 221, 0.397) 0px 5px 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    &:hover{
-        transform: scale(1.05); 
+    &:hover {
+        transform: scale(1.05);
+        background-color: #00BB83;
     }
 }
 .btn-tambahTujuan{
@@ -125,6 +180,8 @@ button:disabled, button[disabled]{
     margin-top: -15px;
     font-size: 14px;
     border-radius: 10px;
+    background-color: #F44C28 !important;
+    border: none !important;
 }
 
 /* LEGREST */
@@ -141,7 +198,50 @@ button:disabled, button[disabled]{
     .form-check{
         margin: 10px 0px 0px 5px;
     }
+    input::placeholder {
+        font-size: 14px;
+    }
+    .form-container{
+        padding: 5px;
+    }
+    textarea{
+        font-size: 14px !important;
+    }
 }
 #leg-rests{
     margin-top: 10px;
+}
+
+/* FIELD */
+/* .input-group:focus-within {
+    outline: 1px solid blue !important;
+    border: none;
+    z-index: 3;
+    border-radius: 15px;
+} */
+.input-group .form-control:focus {
+    box-shadow: none !important;
+}
+
+
+/* FORM FOCUS */
+.input-group:focus-within {
+    border: 1px solid #1E9781; 
+    border-radius: 15px;
+}
+
+.input-group:focus-within .input-group-text,
+.input-group:focus-within .form-control {
+    border: none !important; 
+    box-shadow: none;
+}
+
+.input-group:focus-within .form-control {
+    border-left: 1px solid #1E9781 !important;
+    border-radius: 0 15px 15px 0; 
+}
+
+select:focus {
+    box-shadow: none !important;
+    border: none !important;
 }

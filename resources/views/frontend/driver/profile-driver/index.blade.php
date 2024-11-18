@@ -21,7 +21,7 @@
                     <div class="mb-3">
                         <label for="name" class="form-label">Nama Lengkap</label>
                         <div class="input-group">
-                            <span class="input-group-text" id="icon"><img src="{{ asset('img/icon-deskripsi.png') }}"></span>
+                            <span class="input-group-text" id="icon"><i class="fa-solid fa-user"></i></span>
                             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ Auth::user()->name }}" readonly>
                             @error('name')
                                 <span class="invalid-feedback" role="alert">
@@ -31,9 +31,9 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="number_phone" class="form-label">Nomor Telephone</label>
+                        <label for="number_phone" class="form-label">Nomor WhatsApp</label>
                         <div class="input-group">
-                            <span class="input-group-text" id="icon"><img src="{{ asset('img/icon-deskripsi.png') }}"></span>
+                        <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-wa.png') }}" alt="icon-wa" style="width:20px; height:20px; padding-left: 0px;"></span>
                             <input type="text" class="form-control @error('number_phone') is-invalid @enderror" id="number_phone" name="number_phone" value="{{ Auth::user()->number_phone }}" readonly>
                             @error('number_phone')
                                 <span class="invalid-feedback" role="alert">
@@ -45,7 +45,7 @@
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
                         <div class="input-group">
-                            <span class="input-group-text" id="icon"><img src="{{ asset('img/icon-deskripsi.png') }}"></span>
+                            <span class="input-group-text" id="icon"><i class="fa-solid fa-envelope"></i></span>
                             <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ Auth::user()->email }}" readonly>
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -65,7 +65,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="d-flex justify-content-end">
-                            <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><img src="{{ asset('img/close.png') }}"></button>
+                            <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-square-xmark" style="color: #EC2B2B; font-size: 40px;"></i></button>
                         </div>
                         <div class="modal-body">
                             <h5>Ubah Password</h5>
@@ -74,22 +74,22 @@
                                 <div class="mb-3">
                                     <label for="passwordBaru" class="form-label">Password Baru</label>
                                     <div class="input-group">
-                                        <span class="input-group-text" id="toggle-passwordBaru"><img src="{{ asset('img/icon-deskripsi.png') }}"></span>
+                                        <span class="input-group-text" id="toggle-passwordBaru"><i class="fa-regular fa-pen-to-square"></i></span>
                                         <input type="password" class="form-control" id="passwordBaru" name="passwordBaru" placeholder="Masukkan password baru" autocomplete="new-password" required>
-                                        <span class="input-group-text" onclick="togglePassword(this)"
+                                        <span class="input-group-text" id="iconpw" onclick="togglePassword(this)"
                                             style="cursor: pointer;">
-                                            <i class="fas fa-eye-slash text-success" style="font-size: 1rem"></i>
+                                            <i class="fas fa-eye-slash" style="font-size: 1rem"></i>
                                         </span>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="konfirmasiPassword" class="form-label">Konfirmasi Password Baru</label>
                                     <div class="input-group">
-                                        <span class="input-group-text" id="toggle-konfirmasiPassword"><img src="{{ asset('img/icon-deskripsi.png') }}"></span>
+                                        <span class="input-group-text" id="toggle-konfirmasiPassword"><i class="fa-regular fa-pen-to-square"></i></span>
                                         <input type="password" class="form-control" id="konfirmasiPassword" name="konfirmasiPassword" placeholder="Konfirmasi password" autocomplete="new-password" required>
-                                        <span class="input-group-text" onclick="togglePassword(this)"
+                                        <span class="input-group-text" id="iconpw" onclick="togglePassword(this)"
                                             style="cursor: pointer;">
-                                            <i class="fas fa-eye-slash text-success" style="font-size: 1rem"></i>
+                                            <i class="fas fa-eye-slash" style="font-size: 1rem"></i>
                                         </span>
                                     </div>
 

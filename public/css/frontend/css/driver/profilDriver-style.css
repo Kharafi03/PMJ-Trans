@@ -5,9 +5,15 @@
     background-image: url('/img/bg4.png');
     background-repeat: no-repeat;
     background-attachment: scroll;
+    margin: 0 auto; 
+    font-family: 'Poppins', sans-serif;
 }
 .content{
     padding-bottom: 50px;
+}
+
+#profilDriver{
+    margin-bottom: 20px;
 }
 
 /* TEXT CONTENT */
@@ -31,16 +37,21 @@
 
 /* FORM */
 #icon, #toggle-password, #toggle-passwordBaru, #toggle-konfirmasiPassword{
-    border-right: none;
+    border-right: none !important;
     background-color: white;
     height: 48px;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
+    border: 1px solid #C9C9C9;
+    color: #A8A8A8;
+    font-size: 20px;
+
 }
 input[type="text"], input[type="number"], input[type="password"], .form-select{
-    border-left: none;
+    border-left: none !important;
     height: 48px;
     border-radius: 15px;
+    border: 1px solid #C9C9C9;
 }
 .custom-file{
     border: 1px solid #E4E4E4;
@@ -54,22 +65,56 @@ input[type="text"], input[type="number"], input[type="password"], .form-select{
     background-color: white;
 }
 
+#iconpw{
+    color: #666666;
+    background-color: white !important;
+    border-radius: 0px 15px 15px 0px !important;
+    border: 1px solid #C9C9C9;
+}
+
+label{
+    font-size: 16px;
+    color:#292D32;
+    font-weight: 400;
+}
+
+/* FOCUS */
+.input-group:focus-within {
+    border: 1px solid #1E9781;
+    border-radius: 15px;
+}
+
+.input-group:focus-within .input-group-text,
+.input-group:focus-within .form-control {
+    border-top: none !important;
+    border-bottom: none !important;
+    border-left: none !important;
+    border-right: 1px solid #1E9781 !important; /* Menjaga border kanan berwarna hijau */
+    box-shadow: none;
+}
+
+
+
 /* BUTTON */
 .btn-ubahPassword{
+    text-decoration: none;
     height: 48px;
     width: 100%;
-    background-color: #F44C28;
+    background-color: #FF9149;
     color: white;
     font-size: 16px;
     font-weight: 700;
     padding: 10px;
     text-align: center;
-    border-radius: 15px;
-    transition: transform 0.3s ease;
     border: none;
-    margin-bottom: 50px;
-    &:hover{
-        transform: scale(1.02); 
+    border-radius: 10px;
+    display: inline-block;
+    margin-bottom: 20px;
+    box-shadow: #4475F236 0px 15px 25px, rgba(86, 167, 221, 0.397) 0px 5px 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    &:hover {
+        transform: scale(1.05);
+        background-color: #F9741D;
     }
 }
 
@@ -100,11 +145,28 @@ input[type="text"], input[type="number"], input[type="password"], .form-select{
     height: 50px;
     width: 100%;
     color: white;
-    background-color: #0D894F;
+    background-color: #17B92F;
     border: none;
     border-radius: 15px;
     color: white;
     text-align: center;
     padding: 5px;
+    font-size: 17px;
+    font-weight: 700;
+    transition: transform 0.3s ease;
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+@media (min-width: 768px) {
+    .dashboard-container {
+        max-width: 100%;
+        width: 375px;
+    }
+    
+    .content {
+        padding-bottom: 50px; /* Maintain mobile padding */
+    }
 }
 

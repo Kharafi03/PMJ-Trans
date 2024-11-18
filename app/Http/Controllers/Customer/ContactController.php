@@ -8,6 +8,10 @@ use App\Models\Mail;
 
 class ContactController extends Controller
 {
+    public function index()
+    {
+        return view('frontend.contact.index');
+    }
     public function store(Request $request)
     {
         // Validasi data yang masuk
@@ -52,7 +56,8 @@ class ContactController extends Controller
             'email' => $validatedData['email'],
             'category' => $validatedData['kategori'],
             'message' => $validatedData['pesan'],
-            'template_chat' => $generateChat
+            'template_chat' => $generateChat,
+            'created_at' => now(),
         ]);
 
         // Redirect ke halaman sebelumnya dengan pesan sukses

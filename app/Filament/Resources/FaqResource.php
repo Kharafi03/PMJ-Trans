@@ -18,9 +18,11 @@ class FaqResource extends Resource
 
     protected static ?string $navigationGroup = 'Manajemen Sistem';
 
-    protected static ?int $navigationSort = 23;
+    protected static ?int $navigationSort = 3;
 
     protected static ?string $pluralModelLabel = "FAQ";
+
+    protected static ?string $slug = 'faq';
 
     protected static ?string $navigationIcon = 'heroicon-m-question-mark-circle';
 
@@ -56,7 +58,11 @@ class FaqResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([
+                ->defaultSort('id', 'asc')
+                ->columns([
+                Tables\Columns\TextColumn::make('id')
+                        ->label('No')
+                        ->sortable(),
                 Tables\Columns\TextColumn::make('question')
                     ->searchable()
                     ->tooltip(function ($record) {
@@ -130,7 +136,8 @@ class FaqResource extends Resource
             ->actions([
                 Tables\Actions\ForceDeleteAction::make(),
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                ->label('Edit'),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

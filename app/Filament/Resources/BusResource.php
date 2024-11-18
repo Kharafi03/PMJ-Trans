@@ -34,6 +34,21 @@ class BusResource extends Resource
 
     protected static ?string $slug = 'bus';
 
+    protected static ?string $recordTitleAttribute = 'name';
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'license_plate'];
+    }
+
+    public static function getGlobalSearchResultDetails(Model $record): array
+    {
+        /** @var Order $record */
+
+        return [
+            'No. Plat' => optional($record)->license_plate,
+        ];
+    }
 
     public static function getNavigationBadge(): ?string
     {
@@ -55,6 +70,10 @@ class BusResource extends Resource
                                             ->label('Nama Bus')
                                             ->maxLength(24)
                                             ->placeholder('Masukan Nama Bus')
+                                            ->required(),
+                                        Forms\Components\TextInput::make('type')
+                                            ->label('Jenis Bus')
+                                            ->placeholder('Masukan Jenis Bus')
                                             ->required(),
                                         Forms\Components\TextInput::make('license_plate')
                                             ->label('Plat Nomor')
@@ -302,26 +321,38 @@ class BusResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('created_at', 'desc')
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->label('Bus')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('id')
+                    ->label('ID')
+                    ->sortable(),
                 Tables\Columns\ImageColumn::make('images.image')
-                    ->label('Gambar Bus')
+                    ->label('Bus')
                     ->getStateUsing(fn(Model $record) => optional($record->images->first())->image) // Ambil gambar pertama
                     ->size(50) // Ukuran gambar thumbnail
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Kode Bus')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('type')
+                    ->label('Jenis')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('license_plate')
                     ->label('Plat Nomor')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('production_year')
                     ->label('Tahun Produksi')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('color')
                     ->label('Warna')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('capacity')
                     ->label('Kapasitas')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('ms_buses.name')
                     ->label('Status Bus')
@@ -343,10 +374,10 @@ class BusResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
                 Tables\Filters\SelectFilter::make('ms_buses_id')
                     ->label('Status Bus')
                     ->relationship('ms_buses', 'name'),
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()
@@ -557,7 +588,7 @@ class BusResource extends Resource
         return [
             'index' => Pages\ListBuses::route('/'),
             'create' => Pages\CreateBus::route('/create'),
-            // 'edit' => Pages\EditBus::route('/{record}/edit'),
+             'edit' => Pages\EditBus::route('/{record}/edit'),
         ];
     }
 }
