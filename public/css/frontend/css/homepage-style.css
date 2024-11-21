@@ -195,13 +195,7 @@ body {
 
 .swiper-wrapper {
     display: flex;
-    align-items: stretch; /* Membuat semua slide memiliki tinggi yang sama */
-}
-
-.swiper-slide {
-    flex: 0 0 calc(33.333% - 20px); /* 3 slide sejajar untuk desktop */
-    box-sizing: border-box;
-    margin: 10px; /* Spasi antar slide */
+    align-items: stretch; 
 }
 
 .package-card {
@@ -216,6 +210,8 @@ body {
     padding: 5px;
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 400;
+    margin: 0px 5px;
+
 }
 .package-card img {
     border-radius: 10px;
@@ -274,11 +270,11 @@ body {
     color: white;
 }
 .package-control-prev {
-    left: -35px;
+    left: -45px;
     text-align: center;
 }
 .package-control-next {
-    right: -35px;
+    right: -45px;
     text-align: center;
 }
 
@@ -292,7 +288,32 @@ body {
 
 @media (max-width: 767.98px) {
     .swiper-slide {
-        flex: 0 0 100%; /* Satu kartu per baris di layar kecil */
+        flex: 0 0 100%; 
+    }
+    .package-control-prev {
+        left: 0px;
+        text-align: center;
+    }
+    .package-control-next {
+        right: 0px;
+        text-align: center;
+    }
+    .package-control-prev,
+    .package-control-next {
+        width: 50px;
+        height: 50px;
+        border: none;
+        top: 50%;
+        background: none;
+        &:hover {
+            background: none;
+            border: none;
+        }
+    }
+    .package-control-prev:hover i,
+    .package-control-next:hover i {
+        color: #fd9c07;
+        opacity: 50%;
     }
     .text-icon p {
         font-size: 7px;
@@ -308,6 +329,17 @@ body {
     }
     .text-icon p {
         font-size: 9px;
+    }
+    .package-card{
+        margin: 0px 7px;
+    }
+    .package-control-prev {
+        left: -40px;
+        text-align: center;
+    }
+    .package-control-next {
+        right: -40px;
+        text-align: center;
     }
 }
 
