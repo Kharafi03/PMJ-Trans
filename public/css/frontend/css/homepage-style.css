@@ -173,7 +173,6 @@ body {
     }
 }
 
-
 /* PACKAGE-DAFTAR BUS PMJ */
 
 .package-container {
@@ -189,10 +188,27 @@ body {
 .text-icon i {
     font-size: 18px;
 }
+.swiper {
+    width: 100%;
+    height: auto;
+}
+
+.swiper-wrapper {
+    display: flex;
+    align-items: stretch; /* Membuat semua slide memiliki tinggi yang sama */
+}
+
+.swiper-slide {
+    flex: 0 0 calc(33.333% - 20px); /* 3 slide sejajar untuk desktop */
+    box-sizing: border-box;
+    margin: 10px; /* Spasi antar slide */
+}
 
 .package-card {
-    position: relative;
-    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
         rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     border: none;
@@ -227,12 +243,11 @@ body {
     font-size: 16px;
     font-weight: 700;
     font-family: 'Poppins', sans-serif;
-    box-shadow: #4475F236 0px 15px 25px, rgba(86, 167, 221, 0.397) 0px 5px 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    &:hover {
-        transform: scale(1.05);
-        background-color: #00BB83;
-    }
+}
+.btn-detail:hover {
+    transform: scale(1.05);
+    background-color: #00BB83;
 }
 
 .package-control-prev,
@@ -276,30 +291,8 @@ body {
 }
 
 @media (max-width: 767.98px) {
-    .package-control-prev {
-        left: 0px;
-        text-align: center;
-    }
-    .package-control-next {
-        right: 0px;
-        text-align: center;
-    }
-    .package-control-prev,
-    .package-control-next {
-        width: 50px;
-        height: 50px;
-        border: none;
-        top: 50%;
-        background: none;
-        &:hover {
-            background: none;
-            border: none;
-        }
-    }
-    .package-control-prev:hover i,
-    .package-control-next:hover i {
-        color: #fd9c07;
-        opacity: 50%;
+    .swiper-slide {
+        flex: 0 0 100%; /* Satu kartu per baris di layar kecil */
     }
     .text-icon p {
         font-size: 7px;
@@ -308,11 +301,16 @@ body {
         font-size: 14px;
     }
 }
+
 @media (min-width: 768px) and (max-width: 991.98px) {
+    .swiper-slide {
+        flex: 0 0 calc(50% - 20px); /* 2 kartu per baris di layar tablet */
+    }
     .text-icon p {
         font-size: 9px;
     }
 }
+
 
 /* CARA PENYEWAAN */
 .cara-container {

@@ -56,7 +56,7 @@
             </div>
 
             <!-- Swiper -->
-            <div class="swiper category-carousel" style="padding: 20px;">
+            <div class="swiper category-carousel">
                 <div class="swiper-wrapper">
                     <!-- Slide 1 -->
                     @forelse ($buses as $bus)
