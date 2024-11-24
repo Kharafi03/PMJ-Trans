@@ -6,10 +6,7 @@
 @section('content')
     <!-- CONTENT -->
     <section id="dashboardKm">
-        <!-- HEADER -->
         <div class="dashboard-container container p-3">
-            <!-- <x-header-driver /> -->
-
             <div class="text-content text-start mb-4">
                 <div class="row">
                     <div class="col-2" style="margin-right: -20px;">
@@ -83,7 +80,7 @@
                                             </h5>
                                         </div>
                                         <div class="col-2 d-flex justify-content-center align-items-center">
-                                            <img src="{{ asset('img/km-img.png') }}" alt="image km">
+                                            <img src="{{ asset('img/km-img.png') }}" alt="image km" width="100px" height="auto">
                                         </div>
                                         <div class="col-5 d-flex justify-content-center align-items-center">
                                             <h5>{{ \Carbon\Carbon::parse($trip->booking->date_end)->translatedFormat('d F') }}

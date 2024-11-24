@@ -80,13 +80,19 @@
             <!-- MODAL -->
             @if($showPasswordModal)
                 <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center wow animate__animated animate__fadeInUp" data-wow-delay="0.7s" role="alert" style="padding: 1.25rem; border-radius: 0.5rem;">
-                    <div style="flex-grow: 1;">
-                        <strong>Perhatian!</strong> Anda masih menggunakan kata sandi sementara '12345678'. Demi keamanan, segera perbarui kata sandi akun Anda!
-                    </div>
-                    <a href="{{ route('profile.edit') }}" class="btn btn-ubahPw btn-warning me-5" style="font-weight: bold; color: #fff;">
-                        Ubah Password
-                    </a>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <div class="row">
+                        <div class="col-lg-10 col-md-9 mb-3">
+                            <div style="flex-grow: 1;">
+                                <strong>Perhatian!</strong> Anda masih menggunakan kata sandi sementara '12345678'. Demi keamanan, segera perbarui kata sandi akun Anda!
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-3">
+                            <a href="{{ route('profile.edit') }}" class="btn btn-ubahPw btn-warning me-5" style="font-weight: bold; color: #fff;">
+                                Ubah Password
+                            </a>
+                        </div>
+                    </div>
                 </div>
             @endif
             @if(session('passwordUpdated'))
@@ -128,10 +134,10 @@
                                         </div>
                                     </div>
                                     <div class="tiket-card mb-3">
-                                        <div class="profile-card p-3">
+                                        <div class="profile-card p-4">
                                             <div class="row">
                                                 <div class="col-2 d-flex justify-content-center">
-                                                    <img src="{{ asset('img/Ellipse 43.png') }}" alt="Profile Image">
+                                                    <img src="{{ asset('img/avatar-driver.png') }}" alt="Profile Image" height="45px" width="45px">
                                                 </div>
                                                 <div class="col-10 d-flex align-items-center">
                                                     <div class="profile-text">
@@ -198,38 +204,38 @@
                                 <h1 class="mb-3" style="font-size: 30px;">Petunjuk <span>E-Ticket</span></h1>
                                 <p style="color: #000000AD;" >Berikut Detail Pembayaran selama menyewa bus PMJ Trans.</p>
                             </div>
-                            <div class="row warning mb-3 align-items-center">
-                                <div class="col-4 col-lg-2 col-md-3 d-flex justify-content-center align-items-center icon-warning">
+                            <div class="row warning mb-4 d-flex justify-content-center align-items-center">
+                                <div class="col-12 col-lg-2 col-md-3 d-flex justify-content-center align-items-center icon-warning">
                                     <i class="fa-solid fa-ticket-simple"></i>  
                                 </div>
-                                <div class="col-8 col-lg-10 col-md-9 d-flex align-items-center">
+                                <div class="col-12 col-lg-10 col-md-9 d-flex align-items-center">
                                     <p class="mb-0">
                                         Periksa status pemesanan Anda melalui menu <span>Cek Pemesanan</span> di bagian atas halaman atau klik tautan <a href="{{ route('cek.status') }}"><i class="fa-solid fa-link"></i> cek pemesanan</a> ini untuk melihat perkembangan status booking Anda.
                                     </p>
                                 </div>
                             </div>
-                            <div class="row warning mb-3 align-items-center">
-                                <div class="col-4 col-lg-2 col-md-3 d-flex justify-content-center align-items-center icon-warning">
+                            <div class="row warning mb-4 d-flex justify-content-center align-items-center">
+                                <div class="col-12 col-lg-2 col-md-3 d-flex justify-content-center align-items-center icon-warning">
                                     <i class="fa-solid fa-clipboard-check"></i>
                                 </div>
-                                <div class="col-8 col-lg-10 col-md-9 d-flex align-items-center">
+                                <div class="col-12 col-lg-10 col-md-9 d-flex align-items-center">
                                     <p class="mb-0">Tunjukan E-Tiket dan identitas penumpang saat pengambilan bus.</p>
                                 </div>
                             </div>
-                            <div class="row warning mb-3">
-                                <div class="col-4 col-lg-2 col-md-3 d-flex justify-content-center align-items-center icon-warning">
+                            <div class="row warning mb-4 d-flex justify-content-center align-items-center">
+                                <div class="col-12 col-lg-2 col-md-3 d-flex justify-content-center align-items-center icon-warning">
                                     <i class="fa-solid fa-clock"></i>
                                 </div>
-                                <div class="col-8 col-lg-10 col-md-9 d-flex align-items-center">
+                                <div class="col-12 col-lg-10 col-md-9 d-flex align-items-center">
                                     <p class="mb-0">Harap datang tepat waktu, keterlambatan maksimal 40 menit sebelum
                                         keberangkatan.</p>
                                 </div>
                             </div>
-                            <div class="row warning mb-3">
-                                <div class="col-4 col-lg-2 col-md-3 d-flex justify-content-center align-items-center icon-warning">
+                            <div class="row warning mb-4 d-flex justify-content-center align-items-center">
+                                <div class="col-12 col-lg-2 col-md-3 d-flex justify-content-center align-items-center icon-warning">
                                     <i class="fa-solid fa-triangle-exclamation" style="padding-bottom: 7px;"></i>
                                 </div>
-                                <div class="col-8 col-lg-10 col-md-9 d-flex align-items-center">
+                                <div class="col-12 col-lg-10 col-md-9 d-flex align-items-center">
                                     <p class="mb-0">Dilarang membawa senjata atau hal lain yang membahayakan.</p>
                                 </div>
                             </div>

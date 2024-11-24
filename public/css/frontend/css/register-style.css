@@ -108,8 +108,20 @@ a {
     border-radius: 6px;
 }
 
-#number_phone:focus,  #address:focus, #name:focus, #email:focus{
+#number_phone:focus,  #address:focus, #name:focus, #email:focus {
     border-bottom: 4px solid #54e28d !important;
+}
+.input-group .input-group-text.text-danger:focus {
+    border-color: #ced4da !important; 
+    border-bottom: 4px solid #54e28d !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Saat input berada dalam fokus, atur border icon */
+.input-group .form-control.is-invalid:focus + .input-group-text {
+    border-color: #ced4da !important; 
+    box-shadow: none !important;
 }
 
 input[type="text"]:focus,
@@ -119,11 +131,17 @@ input[type="email"]:focus,
 textarea:focus {
     outline: none !important;
     box-shadow: none !important;
-    border: 1px solid #ced4da !important; /* Atur border untuk input aktif */
+    border: 1px solid #ced4da !important; 
 }
 .col-img img {
     padding: 50px 0px;
     width: 90%;
+}
+
+/* EROR */
+.input-group-text.text-danger {
+    border-color: #dc3545; 
+    border-radius: 0px 6px 6px 0px !important;
 }
 
 .background{

@@ -158,6 +158,9 @@ label{
     color: #1E9781;
     margin-bottom: 0;
   }
+  .text-content p{
+    text-align: justify;
+  }
   .text-content span{
     color: #FD9C07;
   }
@@ -304,6 +307,7 @@ hr {
     color: #000000AD;
     font-size: 16px;
     font-weight: 400;
+    text-align: justify;
 }
 .warning a{
     color: #1E9781;
@@ -383,5 +387,17 @@ hr {
     .info p, .info li{
         font-size: 14px;
     }
-
+    .warning{
+        margin-left: 0;
+    }
+    .warning p{
+        font-size: 12px;
+    }
+    .icon-warning{
+        margin-bottom: 15px;
+    }
+    .text-content p{
+        font-size: 14px;
+        margin-top: 15px;
+    }
 }

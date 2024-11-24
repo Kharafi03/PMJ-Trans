@@ -7,8 +7,6 @@
     <!-- CONTENT -->
     <section id="dashboardKm">
         <div class="dashboard-container container p-3">
-            <!-- HEADER -->
-            <!-- <x-header-driver /> -->
 
             <!-- TEXT CONTENT -->
             <div class="text-content text-start mb-4">
@@ -74,12 +72,7 @@
                         <label for="image_receipt" class="form-label">Upload Bukti Pengeluaran <span
                                 class="text-danger">*</span></label>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="image_receipt" name="image_receipt" required
-                                accept="image/*">
-                            <label class="custom-file-label" for="image_receipt">
-                                <i class="fa-solid fa-arrow-up-from-bracket" style="padding-left: 10px; color:#595c5f; border: 1px solid #666666;"></i>
-                                Pilih file
-                            </label>
+                            <input type="file" class="custom-file-input" id="image_receipt" name="image_receipt" required accept="image/*">
                         </div>
                     </div>
                     <!-- PETA LOKASI -->

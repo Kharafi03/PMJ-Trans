@@ -5,18 +5,12 @@
 @endpush
 @section('content')
     <section id="riwayatTrip">
-
-        <!-- HEADER -->
         <div class="riwayat-container container p-4">
-            <!-- <x-header-driver /> -->
-
             <!-- TEXT CONTENT -->
-            
             <div class="text-content text-center mb-4">
                 <h5 style="font-size: 25px; font-weight: 700; color: #1E9781;">RIWAYAT <span style="color: #FD9C07;">TRIP</span></h5>
                 <p class="caption">Berikut semua riwayat dari perjalanan anda</p>
             </div>
-
 
             <!-- RIWAYAT BUS -->
             <div class="riwayat-content accordion accordion-flush" id="item">

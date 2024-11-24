@@ -95,8 +95,6 @@
                                             </span>
                                         @enderror
                                     </div>
-                                    <!-- Placeholder for dynamically added leg rest -->
-                                    <!-- <div id="leg-rests" class="mt-2 mb-2"></div> -->
                                 </div>
                                 <div class="col-md-3 d-flex align-items-center">
                                     <!-- Switch untuk menampilkan/menghilangkan input leg rest -->
@@ -145,7 +143,6 @@
                                     Contoh : Jalan Mangga Besar III No. 17, RT 06 RW 07, Kelurahan Bedali, Kecamatan Lawang, Kab. Malang, Jawa Timur, 60256
                                     </li>
                                 </ul>
-                                <!-- <p style="font-size:14px; color:#4180CC; font-weight: 700;">Contoh : Jalan Mangga Besar III No. 17, RT 06 RW 07, Kelurahan Bedali, Kecamatan Lawang, Kab. Malang, Jawa Timur, 60256</p> -->
                             </div>
                         </div>
                     </div>

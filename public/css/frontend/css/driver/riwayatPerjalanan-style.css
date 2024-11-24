@@ -7,9 +7,9 @@
     font-family: 'Poppins', sans-serif;
 }
 
-/* #riwayatTrip{
-    margin: 70px 0px 80px 0px;
-} */
+#riwayatTrip{
+    margin-bottom: 50px;
+}
 
 .text-content a{
     text-decoration: none;
@@ -36,10 +36,9 @@
 
 /* DROPDOWN */
 .accordion-item{
-    margin-bottom: 10px;
+    margin-bottom: 50px;
     border: 1px solid #4180CC;
     border: 10px;
-
 }
 .accordion-header{
     border-radius: 8px;

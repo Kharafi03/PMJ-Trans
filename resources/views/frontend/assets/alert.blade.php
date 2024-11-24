@@ -20,22 +20,22 @@
             .btn-close{
                 font-size: 10px !important;
             }
-            p{
+            .p-alert{
                 color: #181818;
                 font-size: 14px;
                 font-weight: 400;
-                margin-left: 18px;
+                margin-left: 16px;
                 padding-top: 5px;
             }
         </style>
     @endpush
-    <div class="alert alert-dismissible show p-3" role="alert">
+    <div class="alert alert-dismissible show" role="alert">
         <div class="d-flex align-items-center">
             <strong><i class="fa-solid fa-triangle-exclamation"></i> Terjadi Kesalahan:</strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <hr>
-        <p class="mb-0 ps-3 text-start">
+        <p class="mb-0 ps-3 text-start p-alert">
             @foreach ($errors->all() as $error)
                 {{ $error }}
             @endforeach
