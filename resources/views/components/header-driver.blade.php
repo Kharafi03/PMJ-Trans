@@ -6,5 +6,5 @@
         <h5>Hi, {{ Auth::user()->name }}</h5>
         <p>Berkendaralah dengan hati-hati</p>
     </div>
-    <img src="{{ asset('img/Ellipse 43.png') }}" alt="Profile Image">
+    <img src="{{ asset('img/avatar-driver.png') }}" alt="Profile Image" height="45px" width="45px">
 </div>

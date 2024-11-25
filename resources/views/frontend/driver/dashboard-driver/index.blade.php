@@ -25,7 +25,6 @@
             )
                 <div class="title mb-3">
                     <p>Wahh.. Hari ini belum ada trip!</p>
-                    <!-- <h5 style="color: #ff0000">Tidak ada booking untuk hari ini</h5> -->
                 </div>
             @else
                 <div class="title mb-3">
@@ -151,7 +150,7 @@
                                                         <td class="keterangan ">Total Pengeluaran</td>
                                                         <td>
                                                             <div class="total">
-                                                                Rp {{ number_format($trip->total_spend, 0, ',', '.') }}
+                                                                Rp {{ number_format($historyTrip->total_spend, 0, ',', '.') }}
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -159,7 +158,7 @@
                                                         <td class="keterangan ">Sisa Uang Jalan</td>
                                                         <td>
                                                             <div class="saldo">
-                                                                Rp {{ number_format($trip->nominal, 0, ',', '.') }}
+                                                                Rp {{ number_format($historyTrip->nominal, 0, ',', '.') }}
                                                             </div>
                                                         </td>
                                                     </tr>

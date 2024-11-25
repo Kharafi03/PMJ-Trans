@@ -77,16 +77,21 @@ input[type="text"], input[type="number"], .form-select{
     border-right: 1px solid #666666;
     border-bottom: 1px solid #666666;
 }
+input[type="file"] {
+    padding-right: 20px;
+    box-sizing: border-box; 
+}
 .custom-file{
     border: 1px solid #666666;
+    color: #666666;
     border-radius: 15px;
+    font-size: 15px;
     height: 50px;
-    padding: 10px;
+    padding: 10px !important;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     box-sizing: border-box;
-    background-color: white;
 }
 
 /* BUTTON KIRIM */
@@ -118,6 +123,10 @@ input[type="text"], input[type="number"], .form-select{
     border: 1px solid #1E9781;
     border-radius: 15px; 
 }
+
+/* input::placeholder {
+    font-size: 14px;
+} */
 
 .input-group:focus-within .input-group-text,
 .input-group:focus-within .form-control {

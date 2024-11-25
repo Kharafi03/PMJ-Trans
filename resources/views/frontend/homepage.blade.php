@@ -16,7 +16,6 @@
             <div class="col-md-7 mb-5 wow animate__animated animate__fadeInLeft text-center text-md-start">
                 <div class="header-text">
                     <h1 style="color: #1E9781;">Nikmati Kemudahan Sewa Bus Pariwisata dengan <span style="color: #FD9C07;">PMJ Trans</span></h1>
-                    <!-- <p>Nikmati kemudahan sewa bus pariwisata dengan PMJ Trans!</p> -->
 
                     <div class="icon-cek">
                         <p><i class="fa-solid fa-check"></i> Pesan bus dengan mudah</p>
@@ -56,12 +55,12 @@
             </div>
 
             <!-- Swiper -->
-            <div class="swiper category-carousel" style="padding: 20px;">
+            <div class="swiper category-carousel" style="width: 95%; margin: 0 auto;">
                 <div class="swiper-wrapper">
                     <!-- Slide 1 -->
                     @forelse ($buses as $bus)
                         <div class="swiper-slide wow animate__animated animate__fadeInUp">
-                            <div class="package-card card h-100">
+                            <div class="package-card card h-100 mb-4">
                                 <img src="{{ 'storage/' . $bus->images->first()->image ?? '#' }}" alt="Bus {{ $bus->name ?? '#' }}" class="img-fluid">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between">
@@ -169,10 +168,10 @@
             <h5>Cara <span>Pemesanan</span></h5>
             <p>Ikuti langkah dibawah ini untuk melakukan pemesanan BUS di {{ $setting ? $setting->name : '#' }}</p>
         </div>
-        <div style="background-image: url('img/bg-cara.png');">
-            <div class="container cara-container wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">
+        <div style="background-image: url('img/bg-cara.png');" class="wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">
+            <div class="container cara-container wow animate__animated animate__fadeInUp" data-wow-delay="0.7s">
                 <div class="row">
-                    <div class="col-lg-3 col-md-6 mb-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.7s">
+                    <div class="col-lg-3 col-md-6 mb-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.9s">
                         <div class="cara-content text-center">
                             <div class="mb-3">
                                 <img src="img/cara1.png" class="img-fluid" alt="cara 1" style="padding-top: 20px; height: 185px !important;">
@@ -181,7 +180,7 @@
                             <p>Melalui Website pada tombol “Pesan Sekarang”  Atau Admin pada tombol “Hubungi Admin”.</p>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 mb-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.9s">
+                    <div class="col-lg-3 col-md-6 mb-4 wow animate__animated animate__fadeInUp" data-wow-delay="1s">
                         <div class="cara-content text-center">
                             <div class="mb-3">
                                 <img src="img/cara2.png" class="img-fluid" alt="cara 2" style=" height:170px; padding-top: 20px;">
@@ -190,7 +189,7 @@
                             <p>Lengkapi Formulir Pemesanan yang telah disedikan.</p>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 mb-4 wow animate__animated animate__fadeInUp" data-wow-delay="1s">
+                    <div class="col-lg-3 col-md-6 mb-4 wow animate__animated animate__fadeInUp" data-wow-delay="1.2s">
                         <div class="cara-content text-center">
                             <div class="mb-3">
                                 <img src="img/cara3.png" class="img-fluid" alt="cara 3" style="margin-top: 20px; height:170px; ">
@@ -336,7 +335,7 @@
                         <img src="{{ asset($setting->logo ? 'storage/' . $setting->logo : '#') }}" alt="Logo" height="85px">
                         <p class="caption1">{{ $setting ? $setting->footer : '#' }}</p>
                     </div>
-                    <div class="col-lg-4 col-md-6 mb-3 wow animate__animated animate__fadeInDown" data-wow-delay="0.5s" style="padding-right: 30px !important;">
+                    <div class="col-lg-4 col-md-6 mb-3 wow animate__animated animate__fadeInUp" data-wow-delay="0.7s" style="padding-right: 30px !important;">
                         <h6>Hubungi Kami</h6>
                         <ul class="list-unstyled">
                             <li>
@@ -353,7 +352,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-lg-2 col-md-6 mb-3 wow animate__animated animate__fadeInUp" data-wow-delay="0.5s" style="padding-left: 20px;">
+                    <div class="col-lg-2 col-md-6 mb-3 wow animate__animated animate__fadeInUp" data-wow-delay="0.9s" style="padding-left: 20px;">
                         <h6>Link Cepat</h6>
                         <ul class="list-unstyled">
                             <li><a href="#" style="text-decoration: none;">Beranda</a></li>
@@ -363,13 +362,12 @@
                             <li><a href="{{ route('cek.status') }}" style="text-decoration: none;">Cek Pesanan</a></li>
                         </ul>
                     </div>
-                    <div class="col-lg-2 col-md-6 wow animate__animated animate__fadeInDown" data-wow-delay="0.5s">
+                    <div class="col-lg-2 col-md-6 wow animate__animated animate__fadeInUp" data-wow-delay="1.1s">
                         <h6 class="sosmed">Sosial Media</h6>
                         <div class="sosmed-icon">
                             <a href="{{ $setting->sosmed_ig ?? '#' }}" target="_blank" class="text-light mx-2"><i class="fab fa-instagram"></i></a>
                             <a href="{{ $setting->sosmed_fb ?? '#' }}" target="_blank" class="text-light mx-2"><i class="fab fa-facebook-f"></i></a>
                             <a href="{{ $setting->sosmed_yt ?? '#' }}" target="_blank" class="text-light mx-2"><i class="fa-brands fa-youtube"></i></a>
-                            <!-- <a href="https://api.whatsapp.com/send?phone={{ $setting->contact ?? '#' }}&text=Halo,%20saya%20ingin%20bertanya" target="_blank" class="text-light mx-2"><i class="fa-brands fa-whatsapp"></i></a> -->
                         </div>                    
                     </div>
                 </div>
@@ -381,19 +379,18 @@
     @push('scripts')
         <script src="{{ asset('js/swiper-bundle.min.js') }}"></script>
         <script>
-            // Initialize Swiper
             var swiper = new Swiper('.category-carousel', {
-                slidesPerView: 1, // Default for mobile
+                slidesPerView: 1,
                 spaceBetween: 20,
                 navigation: {
                     nextEl: '.category-carousel-next',
                     prevEl: '.category-carousel-prev',
                 },
                 breakpoints: {
-                    768: { // Tablet
+                    768: { 
                         slidesPerView: 2,
                     },
-                    1250: { // Desktop
+                    1250: {
                         slidesPerView: 3,
                     }
                 }
@@ -403,5 +400,4 @@
             new WOW().init();
         </script>
     @endpush
-    <!-- Include Swiper JS -->
 @endsection

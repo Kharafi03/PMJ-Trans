@@ -8,17 +8,8 @@
 
         <!-- HEADER -->
         <div class="notrip-container container p-3">
-            <!-- <x-header-driver /> -->
-
-            <!-- TEXT CONTENT -->
-            <!-- <div class="text-content mb-3"> -->
-                <!-- <p>Riwayat On Trip Hari Ini ! </p> -->
-                <!-- <p>Riwayat On Trip {{ auth()->user()->name }} Hari Ini !</p>
-            </div> -->
 
             <div class="text-content text-start mb-4">
-                <!-- <h5 style="font-size: 25px; font-weight: 700; color: #1E9781;">Scan QR Code <span style="color: #FD9C07;">Driver</span></h5>
-                <p class="caption">Silahkan Scan QR-Code diatas untuk memulai trip</p> -->
                 <div class="row">
                     <div class="col-2" style="margin-right: -20px;">
                         <a href="{{ route('dashboard-trip') }}"><i class="fa-solid fa-chevron-left"></i></a>
