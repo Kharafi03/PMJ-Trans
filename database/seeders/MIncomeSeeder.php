@@ -22,8 +22,5 @@ class MIncomeSeeder extends Seeder
             'name' => 'Pelunasan',
         ]);
 
-        MIncome::create([
-            'name' => 'Cicilan',
-        ]);
     }
 }
