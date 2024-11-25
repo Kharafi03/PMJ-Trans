@@ -4,6 +4,7 @@ namespace App\Filament\Resources\BookingResource\Pages;
 
 use Filament\Actions;
 use App\Models\Booking;
+use App\Models\Destination;
 use App\Exports\BookingsExport;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\HtmlString;
@@ -72,7 +73,10 @@ class ListBookings extends ListRecords
                 ->icon('heroicon-o-document')
                 ->action(function () {
                     $bookings = Booking::all();
-                    $pdf = Pdf::loadView('pdf.bookings', ['bookings' => $bookings]);
+                    $destinations = $bookings->map(function ($booking) {
+                        return Destination::where('id_booking', $booking->id)->get();
+                    });
+                    $pdf = Pdf::loadView('pdf.bookings', ['bookings' => $bookings, 'destinations' => $destinations]);
 
                     return response()->stream(
                         function () use ($pdf) {
