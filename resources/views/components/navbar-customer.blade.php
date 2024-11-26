@@ -47,7 +47,7 @@
                                 <li><a class="dropdown-item" href="{{ route('history.index') }}">Riwayat Sewa</a></li>
                                 <li>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault(); confirmLogout(); document.getElementById('logout-form').submit();">
+                                        onclick="event.preventDefault(); confirmLogout();">
                                         Keluar
                                     </a>
                                 </li>
