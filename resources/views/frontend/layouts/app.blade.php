@@ -20,7 +20,7 @@
     <style>
         @font-face {
             font-family: 'Poppins';
-            src: url('{{ asset('fonts/fonts/Poppins-ExtraLight.woff2') }}') format('woff2');
+            src: url('{{ asset('fonts/Poppins-ExtraLight.woff2') }}') format('woff2');
             font-weight: 300;
             font-style: normal;
         }

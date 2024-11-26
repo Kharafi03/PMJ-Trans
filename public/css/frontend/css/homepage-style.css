@@ -146,12 +146,12 @@
 
 /* BACKGROUND IMAGE */
 body {
-    background-position: 56% 100%;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover !important;
     margin: 0;
     width: 100%;
-    background-image: url("/img/bg-all2.png");
+    background-image: url("/img/bg-homepage.png");
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
