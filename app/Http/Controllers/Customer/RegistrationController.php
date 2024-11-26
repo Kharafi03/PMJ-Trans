@@ -55,6 +55,7 @@ class RegistrationController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'number_phone' => ['required', 'string', 'max:15', 'unique:users,number_phone'],
+            'email' => ['required', 'email', 'max:255', 'unique:users,email'],
             'password' => [
                 'required',
                 'string',
@@ -71,6 +72,9 @@ class RegistrationController extends Controller
             'number_phone.required' => 'Nomor WhatsApp wajib diisi!',
             'number_phone.max' => 'Nomor WhatsApp tidak boleh lebih dari 15 digit!',
             'number_phone.unique' => 'Nomor WhatsApp ini sudah terdaftar, silakan gunakan nomor lain!',
+            'email.required' => 'Email wajib diisi!',
+            'email.email' => 'Format email tidak valid!',
+            'email.unique' => 'Email ini sudah terdaftar, silakan gunakan email lain!',
             'password.required' => 'Password wajib diisi!',
             'password.min' => 'Harap mengisikan password minimal 8 karakter',
             'password.regex' => 'Password harus mengandung setidaknya satu huruf kecil, satu huruf besar, satu angka, dan satu simbol!',
@@ -91,6 +95,7 @@ class RegistrationController extends Controller
         return User::create([
             'name' => $data['name'],
             'number_phone' => $data['number_phone'],
+            'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'id_ms' => 1,
             'address' => $data['address'],

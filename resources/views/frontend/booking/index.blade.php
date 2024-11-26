@@ -260,7 +260,7 @@
             <div class="mb-4">
                 <label for="tujuan-${fieldCount}" class="form-label">Tujuan ${fieldCount}<span class="text-danger">*</span></label>
                 <div class="input-group">
-                    <span class="input-group-text" id="icon"><img src="{{ asset('img/icon/icon-tujuan.png') }}" alt="icon"></span>
+                    <span class="input-group-text" id="icon"><i class="fa-solid fa-location-dot"></i></span>
                     <input type="text" class="form-control tujuan-input" placeholder="Tujuan ${fieldCount}" name="tujuan[]" id="tujuan-${fieldCount}" required>
                 </div>
             </div>
