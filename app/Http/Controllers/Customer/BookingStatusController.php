@@ -65,7 +65,8 @@ class BookingStatusController extends Controller
                 // Tambahkan field lain yang diperlukan di sini
             ]);
 
-            return redirect()->back()
+            // return redirect()->back()
+            return redirect()->route('cek.status')
                 ->with([
                     'message' => 'Bukti pembayaran DP berhasil diunggah.',
                     'alert-type' => 'success',
@@ -95,7 +96,8 @@ class BookingStatusController extends Controller
                 // Tambahkan field lain yang diperlukan di sini
             ]);
 
-            return redirect()->back()
+            // return redirect()->back()
+            return redirect()->route('cek.status')
                 ->with([
                     'message' => 'Bukti pembayaran pelunasan berhasil diunggah.',
                     'alert-type' => 'success',
