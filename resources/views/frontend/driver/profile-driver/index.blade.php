@@ -65,7 +65,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="d-flex justify-content-end">
-                            <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><img src="{{ asset('img/close.png') }}"></button>
+                            <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-square-xmark" style="color: #EC2B2B; font-size: 40px;"></i></button>
                         </div>
                         <div class="modal-body">
                             <h5>Ubah Password</h5>

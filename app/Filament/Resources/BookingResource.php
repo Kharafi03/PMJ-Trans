@@ -471,7 +471,7 @@ class BookingResource extends Resource
             ->defaultSort('updated_at', 'desc')
             ->columns([
                 TextColumn::make('id')
-                    ->label('No')
+                    ->label('ID')
                     ->sortable(),
                 BadgeColumn::make('ms_booking.name')
                     ->label('Status')

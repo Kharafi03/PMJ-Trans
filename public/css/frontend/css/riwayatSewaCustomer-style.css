@@ -227,8 +227,6 @@ a{
     width: 85px;
     border: none;
     border-radius: 5px;
-    /* background-color: #4180CC80;
-    color: #4180CC; */
     background-color: #006FF4;
     color: white;
     font-size: 14px;
@@ -248,16 +246,12 @@ a{
     width: 85px;
     border: none;
     border-radius: 5px;
-    /* background-color: #C4E4DE;
-    color: #1E9781; */
     background-color: #24F11D;
     color: white;
     font-size: 14px;
     font-weight: 600;
     transition: transform 0.3s ease;
     &:hover{
-        /* background-color: #C4E4DE;
-        color: #1E9781; */
         background-color: #24F11D;
         color: white;
         transform: scale(1.05); 
@@ -268,8 +262,6 @@ a{
     width: 100px;
     border: none;
     border-radius: 5px;
-    /* background-color: #D2D2D2;
-    color: #666666; */
     background-color: #666666;
     color: white;
     font-size: 14px;

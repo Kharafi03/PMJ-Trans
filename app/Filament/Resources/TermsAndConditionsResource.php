@@ -45,16 +45,16 @@ class TermsAndConditionsResource extends Resource
                             ->required()
                             ->label('Deskripsi')
                             ->toolbarButtons([
-                                'bold',
-                                'italic',
-                                'strike',
-                                'link',
-                                'list',
+                                // 'bold',
+                                // 'italic',
+                                // 'strike',
+                                // 'link',
+                                // 'list',
                                 'orderedList',
-                                'bulletList',
-                                // 'codeBlock',
-                                'blockquote',
-                                'heading'
+                                // 'bulletList',
+                                // // 'codeBlock',
+                                // 'blockquote',
+                                // 'heading'
                             ]),
                     ])
                     ->columnSpanFull()
@@ -64,7 +64,7 @@ class TermsAndConditionsResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->defaultSort('created_at', 'desc')
+            ->defaultSort('id', 'asc')
             ->columns([
                 TextColumn::make('id')
                     ->label('No')

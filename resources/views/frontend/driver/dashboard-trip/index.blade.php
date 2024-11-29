@@ -7,8 +7,6 @@
     <!-- CONTENT -->
     <section id="inputData">
         <div class="dashboard-container container p-3">
-            <!-- HEADER -->
-            <!-- <x-header-driver /> -->
 
             <!-- TEXT CONTENT -->
             <div class="text-content text-center mb-4">
@@ -25,7 +23,6 @@
                             <div class="btn-container">
                                 <div class="icon-btn">
                                     <i class="fa-solid fa-money-check-dollar"></i>
-                                    <!-- <img src="{{ asset('img/icon-pengeluaran.png') }}"> -->
                                 </div>
                                 <div class="text d-flex align-items-center">
                                     <h6>Pengeluaran Saat Trip</h6>
@@ -40,7 +37,6 @@
                             <div class="btn-container">
                                 <div class="icon-btn">
                                     <i class="fa-regular fa-folder-open" style="padding-left: 5px;"></i>
-                                    <!-- <img src="{{ asset('img/icon-riwayat.png') }}"> -->
                                 </div>
                                 <div class="text d-flex align-items-center">
                                     <h6>Riwayat On Trip</h6>
@@ -55,7 +51,6 @@
                             <div class="btn-container">
                                 <div class="icon-btn">
                                     <i class="fa-solid fa-circle"></i>
-                                    <!-- <img src="{{ asset('img/icon-endtrip.png') }}"> -->
                                 </div>
                                 <div class="text d-flex align-items-center">
                                     <h6>Akhiri Trip</h6>

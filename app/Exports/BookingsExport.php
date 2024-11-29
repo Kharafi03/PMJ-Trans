@@ -14,7 +14,7 @@ class BookingsExport implements FromQuery, WithHeadings, WithMapping, WithStyles
 {
     public function query()
     {
-        return Booking::with(['customer', 'ms_payment', 'ms_booking']);
+        return Booking::with(['customer', 'ms_payment', 'ms_booking', 'destination']);
     }
 
     public function headings(): array
@@ -27,7 +27,7 @@ class BookingsExport implements FromQuery, WithHeadings, WithMapping, WithStyles
             'Tanggal Mulai',
             'Tanggal Selesai',
             'Titik Jemput',
-            'Jumlah Armada',
+            'Jumlah Bus',
             'Legrest',
             'Deskripsi',
             'Total Biaya Trip',
@@ -46,7 +46,7 @@ class BookingsExport implements FromQuery, WithHeadings, WithMapping, WithStyles
         return [
             $booking->booking_code,
             optional($booking->customer)->name,
-            $booking->destination_point,
+            $booking->destination->pluck('name')->implode(', '), // Gabungkan nama tujuan
             $booking->capacity,
             $booking->date_start ? $booking->date_start->format('Y-m-d') : null,
             $booking->date_end ? $booking->date_end->format('Y-m-d') : null,

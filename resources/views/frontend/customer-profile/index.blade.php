@@ -19,7 +19,7 @@
                     <div class="info mt-3 wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">
                         <p class="info-title"><i class="fa-solid fa-circle-exclamation"></i> Informasi Ubah Kata Sandi</p>
                         <ul>
-                            <li>Harap segera mengganti kata sandi anda. Karena, saat ini anda menggunakan kata sandi sementara yaitu :  '12345678'. Ubah ke kata sandi yang mudah Anda ingat, dan jika perlu, catatlah agar tidak lupa.</li>
+                            <li>Harap segera mengganti kata sandi anda. Karena, saat ini anda menggunakan kata sandi sementara yaitu :  '12345678'</li>
                             <li>Pastikan kata sandi baru mengandung kombinasi huruf, angka, dan simbol untuk meningkatkan keamanan. Contoh : <span style="font-weight: 700; color: #4180CC; font-weight: 700;">Contohpassword13!</span></li>
                             <li>Jika Anda mengalami kesulitan dalam mengganti kata sandi, hubungi <a href="{{ route('contact') }}">Kontak Kami</a>  untuk bantuan lebih lanjut.</li>
                         </ul>

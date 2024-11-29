@@ -9,12 +9,12 @@
     margin: 0 auto;
 }
 body{
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif !important;
 }
 /* CONTENT */
 .dashboard-container{
     background-image: url('/img/login-driver.png');
-    background-position: auto;
+    background-position: 55% 10%;
     background-size: auto;
     background-repeat: no-repeat;
     border: none;

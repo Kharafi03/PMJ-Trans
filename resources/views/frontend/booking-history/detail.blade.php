@@ -333,7 +333,8 @@
                                         <div class="col-lg-6 col-md-12 mb-4 riwayat-content wow animate__animated animate__fadeInUp" data-wow-delay="0.9s">
                                             <div class="content h-100">
                                                 <div class="header text-center d-flex flex-column justify-content-center align-items-center">
-                                                    <p class="bayar-title">DP ke-{{ $dpCount }}</p>
+                                                    {{--<p class="bayar-title">DP ke-{{ $dpCount }}</p>--}}
+                                                    <p class="bayar-title">DP</p>
                                                     <h5>Rp {{ number_format($income->nominal, 0, ',', '.') }}</h5>
                                                     <!-- <p class="status">Status: {{ $income->ms_income->name }}</p> -->
                                                     <p class="

@@ -3,6 +3,7 @@
     max-width: 375px;
     position: relative;
     background-image: url('/img/bg4.png');
+    background-position: 60% 10%;
     background-repeat: no-repeat;
     background-attachment: scroll;
     margin: 0 auto; 

@@ -81,7 +81,7 @@
                                     @csrf
                                     <div class="mb-3">
                                         <label for="number_phone" class="form-label">Nomor WhatsApp<span class="text-danger">*</span></label>
-                                        <input type="tel" class="form-control" id="number_phone" name="number_phone" placeholder="Masukkan nomor whatsapp" required>
+                                        <input type="tel" class="form-control @error('number_phone') is-invalid @enderror" id="number_phone" name="number_phone" placeholder="Masukkan nomor whatsapp" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="name" class="form-label">Nama Lengkap<span class="text-danger">*</span></label>
@@ -90,8 +90,10 @@
                                     <div class="mb-3">
                                         <label for="password" class="form-label">Password<span class="text-danger">*</span></label>
                                         <div class="input-group">
-                                            <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password" required>
-                                            <span class="input-group-text @error('password') text-danger border-danger @enderror" id="toggle-password"><i class="fas fa-eye"></i></span>
+                                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Masukkan Password" required>
+                                            <span class="input-group-text @error('password') text-danger border-danger @enderror" id="toggle-password">
+                                                <i class="fas fa-eye"></i>
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="mb-2">

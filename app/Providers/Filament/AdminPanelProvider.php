@@ -22,6 +22,8 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
+use Hasnayeen\Themes\ThemesPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -35,7 +37,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogo(fn () => view('logo'))
             ->favicon(asset('favicon.ico'))
             ->darkMode(false)
-            ->spa() 
+            ->spa()
             ->profile()
             ->maxContentWidth('full')
             ->sidebarWidth('18rem')
@@ -77,18 +79,34 @@ class AdminPanelProvider extends PanelProvider
                     ->url(fn (): string => EditProfilePage::getUrl())
                     ->icon('heroicon-o-user-circle'),
             ])
-           
             ->viteTheme("resources/css/filament/admin/theme.css")
             ->plugins([
-                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
-                \Hasnayeen\Themes\ThemesPlugin::make(),
+                FilamentShieldPlugin::make()
+                    ->gridColumns([
+                        'default' => 1,
+                        'sm' => 2,
+                        'md' => 2,
+                        'lg' => 2,
+                        'xl' => 2,
+                    ])
+                    ->sectionColumnSpan(1)
+                    ->checkboxListColumns([
+                        'default' => 1,
+                        'sm' => 2,
+                        'md' => 2,
+                        'lg' => 2,
+                        'xl' => 2,
+                    ])
+                    ->resourceCheckboxListColumns([
+                        'default' => 1,
+                        'sm' => 2,
+                    ]),
+                ThemesPlugin::make(),
                 FilamentBackgroundsPlugin::make()
-                ->imageProvider(
-                  MyImages::make()
-                 ->directory('images/swisnl/filament-backgrounds/curated-by-swis')
-          
-    ),
-
+                    ->imageProvider(
+                        MyImages::make()
+                            ->directory('images/swisnl/filament-backgrounds/curated-by-swis')
+                    ),
                 FilamentEditProfilePlugin::make()
                     ->setNavigationGroup('Manajemen Sistem')
                     ->setIcon('heroicon-o-user')
@@ -99,8 +117,7 @@ class AdminPanelProvider extends PanelProvider
                         rules: 'mimes:jpeg,png|max:1024'
                     )
                     ->shouldShowDeleteAccountForm(false)
-                    ->shouldShowBrowserSessionsForm(false)
-                   
+                    ->shouldShowBrowserSessionsForm(false),
             ]);
     }
 }

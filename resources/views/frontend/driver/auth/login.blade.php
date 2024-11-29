@@ -8,7 +8,7 @@
         <div class="dashboard-container">
             <div class="login-driver">
                 <div class="d-flex align-items-center justify-content-center mt-3">
-                    <img src="{{ asset('img/login-driver-img.png') }}" class="img-fluid">
+                    <img src="{{ asset('img/login-driver-img.png') }}" class="img-fluid" width="90%" height="auto">
                 </div>
                 <div class="form-login">
                     <div class="text-content mb-5">
@@ -51,7 +51,7 @@
                             <a class="lupa-sandi" href="{{ route('driver.password.reset') }}">Lupa password?</a>
                         </div>
                         <div class="mb-2">
-                            <button type="submit" class="btn-login">Log In</button>
+                            <button type="submit" class="btn-login">Log in</button>
                         </div>
                     </form>
                 </div>

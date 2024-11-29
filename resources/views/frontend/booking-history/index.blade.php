@@ -102,17 +102,18 @@
                                         <a href="{{ route('booking.code', ['booking_code' => $booking->booking_code]) }}" class="btn-tiket me-2 text-center align-items-center">E-Ticket</a>
                                     </td>
                                     <td>
-                                        <div class="d-flex justify-content-center align-items-center text-center">
+                                        <div class="d-flex flex-column justify-content-center align-items-center text-center">
                                             <a href="{{ route('history.show', ['booking_code' => $booking->booking_code]) }}"
-                                                class="btn-detail me-2 text-center align-items-center">Detail</a>
+                                                class="btn-detail me-2 mb-2 text-center align-items-center" style="margin-left:3px;">Detail</a>
                                             @if ($booking->ms_booking->id == 4)
                                                 @if (!$booking->review)
                                                     <button class="btn-ulasan text-center" data-bs-toggle="modal" data-bs-target="#feedbackModal" data-id-booking="{{ $booking->id }}">
                                                         Beri Ulasan
                                                     </button>
+                    
                                                 @else
                                                     <!-- <button class="btn btn-secondary text-center" disabled>Anda sudah memberikan ulasan</button> -->
-                                                    <button class="btn-ulasan text-center" disabled>Lihat Ulasan</button>
+                                                    <button class="btn-ulasan text-center" disabled>Telah Diulas</button>
                                                 @endif
                                             @endif
                                             <div>

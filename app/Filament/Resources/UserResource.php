@@ -18,7 +18,7 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-user-group';
 
-    protected static ?string $navigationGroup = 'User Management';
+    protected static ?string $navigationGroup = 'Manajemen User';
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -137,7 +137,7 @@ class UserResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('id')
-                    ->label('No')
+                    ->label('ID')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama')
