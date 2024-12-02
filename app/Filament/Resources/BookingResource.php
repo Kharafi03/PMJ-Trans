@@ -253,14 +253,14 @@ class BookingResource extends Resource
                                 // ->afterStateUpdated(function (Get $get, Set $set) {
                                 //     self::updateReceivedRemaining($get, $set);
                                 // })
-                                ->label('Nominal Perjalanan'),
+                                ->label('Nominal Perjalanan')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0),
 
                             TextInput::make('minimum_dp')
                                 ->required()
                                 ->reactive()
                                 ->prefix('Rp')
                                 ->numeric()
-                                ->label('Minimum DP'),
+                                ->label('Minimum DP')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0),
                         ])->columns(2),
 
                         Forms\Components\Repeater::make('payment')
@@ -325,13 +325,13 @@ class BookingResource extends Resource
                                     ->afterStateHydrated(function (Get $get, Set $set) {
                                         self::updateReceivedRemaining($get, $set);
                                     })
-                                    ->label('Pembayaran Diterima'),
+                                    ->label('Pembayaran Diterima')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0),
 
                                 TextInput::make('payment_remaining')
                                     ->numeric()
                                     ->readOnly()
                                     ->prefix('Rp')
-                                    ->label('Sisa Pembayaran'),
+                                    ->label('Sisa Pembayaran')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0),
                             ])
                             ->columns(2),
                         Forms\Components\Group::make()
@@ -481,8 +481,7 @@ class BookingResource extends Resource
                         'warning' => 'Draf',
                         'info' => 'Selesai',
                         'success' => 'Diterima',
-                        'danger' => 'Ditolak',
-                        'danger' => 'Dibatalkan',
+                        'danger' => fn($state) => in_array($state, ['Ditolak', 'Dibatalkan']),
                     ])
                     ->formatStateUsing(function ($state) {
                         return ucfirst($state);
