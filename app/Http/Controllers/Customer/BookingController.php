@@ -200,7 +200,7 @@ class BookingController extends Controller
 
             // Gunakan id user yang sudah login
             if($request->input('address') != null){
-                dd($request->address);
+
                 $address = $request->input('address');
                 $user->address = $address;
                 $user->save();
