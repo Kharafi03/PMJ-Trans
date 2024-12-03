@@ -72,7 +72,7 @@ class BusTaxResource extends Resource
                             ->label('Tanggal Kadaluarsa Nomor Bus')
                             ->required(),
                         Forms\Components\TextInput::make('nominal')
-                            ->label('Biaya')
+                            ->label('Biaya')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0)
                             ->numeric()
                             ->required()
                             ->prefix('Rp')
@@ -145,11 +145,6 @@ class BusTaxResource extends Resource
                 Tables\Columns\TextColumn::make('expiration_number_bus')
                     ->date()
                     ->label('Tgl Exp Nomor Bus')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('nominal')
-                    ->prefix('Rp. ')
-                    ->label('Biaya')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('deleted_at')

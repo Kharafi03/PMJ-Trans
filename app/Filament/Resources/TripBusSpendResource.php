@@ -48,7 +48,7 @@ class TripBusSpendResource extends Resource
                             ->label('Deskripsi')
                             ->maxLength(255),
                         Forms\Components\TextInput::make('nominal')
-                            ->label('Nominal')
+                            ->label('Nominal')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0)
                             ->numeric(),
                         Forms\Components\TextInput::make('kilometer')
                             ->label('Kilometer')
@@ -100,6 +100,7 @@ class TripBusSpendResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('nominal')
                     ->numeric()
+                    ->prefix(' Rp. ')
                     ->label('Nominal')
                     ->searchable()
                     ->sortable(),

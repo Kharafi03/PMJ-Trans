@@ -67,7 +67,7 @@ class OutcomeResource extends Resource
                             ->maxLength(255),
 
                         Forms\Components\TextInput::make('nominal')
-                            ->label('Nominal')
+                            ->label('Nominal')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0)
                             ->prefix('Rp.')
                             ->numeric(),
 

@@ -153,7 +153,7 @@ class TripBusResource extends Resource
                                                     ->required()
                                                     ->numeric(),
                                                 TextInput::make('nominal')
-                                                    ->label('Nominal')
+                                                    ->label('Nominal')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0)
                                                     ->debounce(1500)
                                                     ->prefix('Rp.')
                                                     //->reactive()
@@ -200,7 +200,7 @@ class TripBusResource extends Resource
                                             ->label('KM Akhir')
                                             ->numeric(),
                                         TextInput::make('nominal')
-                                            ->label('Saldo')
+                                            ->label('Saldo')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0)
                                             ->columnSpan(2)
                                             //->formatStateUsing(fn ($state) => number_format($state, 0, ',', '.'))
                                             // ->mask(
@@ -215,7 +215,7 @@ class TripBusResource extends Resource
                                     ->heading('Data Pengeluaran')
                                     ->schema([
                                         TextInput::make('total_spend')
-                                            ->label('Total Pengeluaran')
+                                            ->label('Total Pengeluaran')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0)
                                             ->prefix('Rp.')
                                             ->readOnly()
                                             ->afterStateHydrated(function (Get $get, Set $set, $record) {
@@ -225,7 +225,7 @@ class TripBusResource extends Resource
                                             })
                                             ->numeric(),
                                         TextInput::make('total_spend_bbm')
-                                            ->label('Total Pengeluaran BBM')
+                                            ->label('Total Pengeluaran BBM')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0)
                                             ->prefix('Rp.')
                                             ->afterStateHydrated(function (Get $get, Set $set, $record) {
                                                 if ($record && $record->id) {
@@ -489,7 +489,7 @@ class TripBusResource extends Resource
                     ->modalButton('Simpan')
                     ->icon('heroicon-m-calendar-days')
                     ->modalHeading(fn($record) => 'Manajement Pengeluaran ' .  $record->bus->name)
-                    ->label('Manajement'),
+                    ->label('Manajemen'),
                 Tables\Actions\DeleteAction::make()
                     ->label('Hapus')
             ])
