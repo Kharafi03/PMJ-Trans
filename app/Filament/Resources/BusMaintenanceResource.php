@@ -102,7 +102,7 @@ class BusMaintenanceResource extends Resource
                     ->heading('Data Pembayaran')
                     ->schema([
                         Forms\Components\TextInput::make('nominal')
-                            ->label('Biaya')
+                            ->label('Biaya')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0)
                             ->numeric()
                             ->required()
                             ->prefix('Rp'),
@@ -168,12 +168,7 @@ class BusMaintenanceResource extends Resource
                 // Tables\Columns\ImageColumn::make('image')
                 //     ->label('Gambar Bus')
                 //     ->getStateUsing(fn(Model $record) => optional($record->images)->image)
-                //     ->size(50), 
-                Tables\Columns\TextColumn::make('nominal')
-                    ->label('Biaya')
-                    ->prefix('Rp. ')
-                    ->searchable()
-                    ->sortable(),
+                //     ->size(50),
                 Tables\Columns\TextColumn::make('date')
                     ->label('Tanggal')
                     ->searchable()

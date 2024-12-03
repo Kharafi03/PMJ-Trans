@@ -74,7 +74,7 @@ class BusKirResource extends Resource
                             ->columns(2),
 
                         TextInput::make('nominal')
-                            ->label('Biaya')
+                            ->label('Biaya')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0)
                             ->numeric()
                             ->required()
                             ->prefix('Rp. '),
@@ -141,22 +141,17 @@ class BusKirResource extends Resource
                     ->date()
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('nominal')
-                    ->label('Biaya')
-                    ->prefix('Rp. ')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('deleted_at')
+                TextColumn::make('deleted_at')
                     ->label('Tanggal Dihapus')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->label('Tanggal Dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->label('Tanggal Diperbarui')
                     ->dateTime()
                     ->sortable()

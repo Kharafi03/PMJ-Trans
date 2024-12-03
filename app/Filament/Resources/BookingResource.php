@@ -247,20 +247,18 @@ class BookingResource extends Resource
                         Forms\Components\Group::make()->schema([
                             TextInput::make('trip_nominal')
                                 ->required()
-                                ->prefix('Rp')
+                                //->prefix('Rp')
                                 ->numeric()
                                 ->reactive()
-                                // ->afterStateUpdated(function (Get $get, Set $set) {
-                                //     self::updateReceivedRemaining($get, $set);
-                                // })
-                                ->label('Nominal Perjalanan'),
+                                //->afterStateUpdated(fn ($state, $set) => $set('trip_nominal', number_format($state, 0, ',', '.')))
+                                ->label('Nominal Perjalanan')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0),
 
                             TextInput::make('minimum_dp')
                                 ->required()
                                 ->reactive()
                                 ->prefix('Rp')
                                 ->numeric()
-                                ->label('Minimum DP'),
+                                ->label('Minimum DP')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0),
                         ])->columns(2),
 
                         Forms\Components\Repeater::make('payment')
@@ -325,13 +323,13 @@ class BookingResource extends Resource
                                     ->afterStateHydrated(function (Get $get, Set $set) {
                                         self::updateReceivedRemaining($get, $set);
                                     })
-                                    ->label('Pembayaran Diterima'),
+                                    ->label('Pembayaran Diterima')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0),
 
                                 TextInput::make('payment_remaining')
                                     ->numeric()
                                     ->readOnly()
                                     ->prefix('Rp')
-                                    ->label('Sisa Pembayaran'),
+                                    ->label('Sisa Pembayaran')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0),
                             ])
                             ->columns(2),
                         Forms\Components\Group::make()
@@ -395,7 +393,6 @@ class BookingResource extends Resource
                                                                 $tripStart = $get('../../date_start');
                                                                 $tripEnd = $get('../../date_end');
                                                                 $idBooking = $get('../../id');
-                                                                //dd($tripStart, $tripEnd);
                                                                 return self::getAvailableBuses($tripStart, $tripEnd, $idBooking);
                                                             })
                                                             ->required()
@@ -405,7 +402,6 @@ class BookingResource extends Resource
                                                 Group::make()
                                                     ->schema([
                                                         Toggle::make('legrest')
-                                                            //->inlineLabel()
                                                             ->label('Leg Rest')
                                                             ->default(0),
                                                     ])
@@ -421,7 +417,6 @@ class BookingResource extends Resource
                                                         $tripStart = $get('../../date_start');
                                                         $tripEnd = $get('../../date_end');
                                                         $idBooking = $get('../../id');
-                                                        //dd($idBooking);
                                                         return self::getAvailableDriver($tripStart, $tripEnd, $idBooking);
                                                     })
                                                     ->required()
@@ -433,7 +428,7 @@ class BookingResource extends Resource
                                                         $tripStart = $get('../../date_start');
                                                         $tripEnd = $get('../../date_end');
                                                         $idBooking = $get('../../id');
-                                                        return self::getAvailableDriver($tripStart, $tripEnd, $idBooking);
+                                                        return self::getAvailableCrew($tripStart, $tripEnd, $idBooking);
                                                     })
                                                     ->required()
                                                     ->label('Co-Driver'),
@@ -481,8 +476,7 @@ class BookingResource extends Resource
                         'warning' => 'Draf',
                         'info' => 'Selesai',
                         'success' => 'Diterima',
-                        'danger' => 'Ditolak',
-                        'danger' => 'Dibatalkan',
+                        'danger' => fn($state) => in_array($state, ['Ditolak', 'Dibatalkan']),
                     ])
                     ->formatStateUsing(function ($state) {
                         return ucfirst($state);
@@ -755,7 +749,6 @@ class BookingResource extends Resource
                                                                     ->columnSpanFull(),
                                                             ])
                                                             ->columns(1)
-
                                                     ])
                                                     ->columns(
                                                         [
@@ -882,7 +875,6 @@ class BookingResource extends Resource
             ])
             ->paginated([25, 50, 100, 'all']);
     }
-
 
     public static function getRelations(): array
     {
@@ -1030,14 +1022,56 @@ class BookingResource extends Resource
     {
         if (!$tripStart || !$tripEnd) {
             return User::whereHas('roles', function ($query) {
-                $query->where('name', 'driver');
+                $query->where('name', 'driver')
+                    ->where('id_ms', 1);
             })->pluck('name', 'id');
         }
 
         $tripEndTime = \Carbon\Carbon::parse($tripEnd)->endOfDay();
 
         return User::whereHas('roles', function ($query) {
-            $query->where('name', 'driver');
+            $query->where('name', 'driver')
+                ->where('id_ms', 1);
+        })
+            ->whereDoesntHave('driver', function ($query) use ($tripStart, $tripEndTime, $idBooking) {
+                $query->whereHas('booking', function ($subQuery) use ($tripStart, $tripEndTime) {
+                    $subQuery->where('date_start', '<=', $tripEndTime)
+                        ->whereRaw("CAST(CONCAT(date_end, ' 23:59:59') AS DATETIME) >= ?", [$tripStart])
+                        ->where('id_ms_booking', 2);
+                });
+
+                if ($idBooking) {
+                    $query->where('id_booking', '!=', $idBooking);
+                }
+            })
+            ->whereDoesntHave('codriver', function ($query) use ($tripStart, $tripEndTime, $idBooking) {
+                $query->whereHas('booking', function ($subQuery) use ($tripStart, $tripEndTime) {
+                    $subQuery->where('date_start', '<=', $tripEndTime)
+                        ->whereRaw("CAST(CONCAT(date_end, ' 23:59:59') AS DATETIME) >= ?", [$tripStart])
+                        ->where('id_ms_booking', 2);
+                });
+
+                if ($idBooking) {
+                    $query->where('id_booking', '!=', $idBooking);
+                }
+            })
+            ->pluck('name', 'id');
+    }
+
+    public static function getAvailableCrew($tripStart, $tripEnd, $idBooking)
+    {
+        if (!$tripStart || !$tripEnd) {
+            return User::whereHas('roles', function ($query) {
+                $query->where('name', 'kru')
+                    ->where('id_ms', 1);
+            })->pluck('name', 'id');
+        }
+
+        $tripEndTime = \Carbon\Carbon::parse($tripEnd)->endOfDay();
+
+        return User::whereHas('roles', function ($query) {
+            $query->where('name', 'kru')
+                ->where('id_ms', 1);
         })
             ->whereDoesntHave('driver', function ($query) use ($tripStart, $tripEndTime, $idBooking) {
                 $query->whereHas('booking', function ($subQuery) use ($tripStart, $tripEndTime) {

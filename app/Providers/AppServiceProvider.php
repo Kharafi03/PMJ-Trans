@@ -85,6 +85,8 @@ class AppServiceProvider extends ServiceProvider
                 'email' => 'buspmjtrans@gmail.com',
                 'contact' => '6281225625255',
                 'bank_account' => '1234567890',
+                'contact' => '6281225625255',
+                'bank_account' => '1234567890',
                 'open_hours' => 'Setiap hari jam 07.00 - 17.00 WIB',
                 'description' => '',
                 'link_maps' => 'https://maps.app.goo.gl/9KAz7RPE4aAp3nBg7',

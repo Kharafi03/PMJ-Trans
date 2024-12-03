@@ -85,7 +85,7 @@ class IncomeResource extends Resource
                             ->label('Deskripsi')
                             ->maxLength(255),
                         Forms\Components\TextInput::make('nominal')
-                            ->label('Nominal')
+                            ->label('Nominal')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0)
                             ->prefix('Rp.')
                             ->numeric(),
                         Forms\Components\Select::make('id_ms_income')
@@ -135,7 +135,7 @@ class IncomeResource extends Resource
                     ->sortable()
                     ->colors([
                         'info' => 'Draf',
-                        'warning' => 'Diterima',
+                        'primary' => 'Diterima',
                         'danger' => 'Ditolak',
                     ])
                     ->formatStateUsing(function ($state) {
