@@ -152,14 +152,12 @@ class BookingResource extends Resource
                                 ->required()
                                 ->minDate(fn(Get $get) => ($get('id_ms_booking') === 2 &&  $get('id')) || $get('id_ms_booking') === 4 ? null : now())
                                 ->reactive()
-                                ->withoutSeconds()
                                 ->label('Tanggal Mulai'),
 
                             DateTimePicker::make('date_end')
                                 ->required()
                                 ->minDate(fn(Get $get) => $get('date_start'))
                                 ->default(fn(Get $get) => $get('date_start') ? \Carbon\Carbon::parse($get('date_start'))->endOfDay() : now()->endOfDay())
-                                ->withoutSeconds()
                                 ->reactive()
                                 ->label('Tanggal Selesai'),
                         ])->columns(2),
