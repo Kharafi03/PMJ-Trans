@@ -138,8 +138,7 @@ class BookingResource extends Resource
                                         ->modalSubmitActionLabel('Tambah')
                                         ->modalWidth('lg')
                                         ->mutateFormDataUsing(function (array $data): array {
-                                            // Menambahkan password default secara otomatis
-                                            $data['password'] = bcrypt('12345678'); // Password default yang di-hash
+                                            $data['password'] = bcrypt('12345678');
                                             $data['id_ms'] = '1';
                                             return $data;
                                         });
@@ -189,18 +188,25 @@ class BookingResource extends Resource
                                 ->debounce(1500)
                                 ->afterStateUpdated(function (callable $get, callable $set) {
                                     $fleetAmount = $get('fleet_amount');
-                                    $maxCapacity = $fleetAmount * 50;
+                                    $leg = $get('legrest');
+                                    if ($leg == 1) {
+                                        $maxCapacity = $fleetAmount * 32;
+                                    } else {
+                                        $maxCapacity = $fleetAmount * 50;
+                                    }
                                     $set('maxCapacity', $maxCapacity);
                                 })
-                                // ->rule(function (callable $get, callable $set) {
-                                //     $maxCapacity = $get('maxCapacity');
-                                //     return "max:$maxCapacity";
-                                // })
-                                // ->validationAttribute('Jumlah Penumpang')
+                                ->afterStateHydrated(function (callable $get, callable $set) {
+                                    $fleetAmount = $get('fleet_amount');
+                                    $leg = $get('legrest');
+                                    if ($leg == 1) {
+                                        $maxCapacity = $fleetAmount * 32;
+                                    } else {
+                                        $maxCapacity = $fleetAmount * 50;
+                                    }
+                                    $set('maxCapacity', $maxCapacity);
+                                })
                                 ->helperText(fn(callable $get) => 'Maksimal penumpang ' . $get('maxCapacity') . ' orang'),
-                            // ->validationMessages([
-                            //     'max' => 'Jumlah penumpang melebihi batas maksimum.',
-                            // ]),
 
                             Group::make()
                                 ->schema([
@@ -216,12 +222,18 @@ class BookingResource extends Resource
                                                     if ($availableBusCount === 0) {
                                                         return [0 => "Bus Tidak Tersedia"];
                                                     }
-                                                    return collect(range(1, $availableBusCount))->mapWithKeys(fn($i) => [$i => "$i Bus"]);
+                                                    return collect(range(1, $availableBusCount))
+                                                        ->mapWithKeys(fn($i) => [$i => "$i Bus"]);
                                                 })
                                                 ->reactive()
                                                 ->afterStateUpdated(function (Get $get, Set $set) {
                                                     $fleetAmount = $get('fleet_amount');
-                                                    $maxCapacity = $fleetAmount * 50;
+                                                    $leg = $get('legrest');
+                                                    if ($leg == 1) {
+                                                        $maxCapacity = $fleetAmount * 32;
+                                                    } else {
+                                                        $maxCapacity = $fleetAmount * 50;
+                                                    }
                                                     $set('maxCapacity', $maxCapacity);
                                                     $set('maxItems', $fleetAmount);
                                                 })
@@ -231,7 +243,19 @@ class BookingResource extends Resource
                                     Group::make()
                                         ->schema([
                                             Toggle::make('legrest')
+                                                ->reactive()
                                                 ->label('Leg Rest')
+                                                ->afterStateUpdated(function (Get $get, Set $set) {
+                                                    $fleetAmount = $get('fleet_amount');
+                                                    $leg = $get('legrest');
+                                                    if ($leg == 1) {
+                                                        $maxCapacity = $fleetAmount * 32;
+                                                    } else {
+                                                        $maxCapacity = $fleetAmount * 50;
+                                                    }
+                                                    $set('maxCapacity', $maxCapacity);
+                                                    $set('maxItems', $fleetAmount);
+                                                })
                                                 ->default(0),
                                         ])
                                         ->columnSpan(1)
@@ -248,18 +272,19 @@ class BookingResource extends Resource
                         Forms\Components\Group::make()->schema([
                             TextInput::make('trip_nominal')
                                 ->required()
-                                //->prefix('Rp')
+                                ->prefix('Rp')
                                 ->numeric()
                                 ->reactive()
-                                //->afterStateUpdated(fn ($state, $set) => $set('trip_nominal', number_format($state, 0, ',', '.')))
-                                ->label('Nominal Perjalanan')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0),
+                                ->label('Nominal Perjalanan')
+                                ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0),
 
                             TextInput::make('minimum_dp')
                                 ->required()
                                 ->reactive()
                                 ->prefix('Rp')
                                 ->numeric()
-                                ->label('Minimum DP')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0),
+                                ->label('Minimum DP')
+                                ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0),
                         ])->columns(2),
 
                         Forms\Components\Repeater::make('payment')
@@ -292,6 +317,7 @@ class BookingResource extends Resource
                                             ->reactive()
                                             ->debounce(1500)
                                             ->prefix('Rp.')
+                                            ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0)
                                             ->label('Nominal'),
                                         DateTimePicker::make('datetime')
                                             ->readOnly()
@@ -324,13 +350,15 @@ class BookingResource extends Resource
                                     ->afterStateHydrated(function (Get $get, Set $set) {
                                         self::updateReceivedRemaining($get, $set);
                                     })
-                                    ->label('Pembayaran Diterima')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0),
+                                    ->label('Pembayaran Diterima')
+                                    ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0),
 
                                 TextInput::make('payment_remaining')
                                     ->numeric()
                                     ->readOnly()
                                     ->prefix('Rp')
-                                    ->label('Sisa Pembayaran')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0),
+                                    ->label('Sisa Pembayaran')
+                                    ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0),
                             ])
                             ->columns(2),
                         Forms\Components\Group::make()
@@ -436,8 +464,10 @@ class BookingResource extends Resource
                                             ])
                                             ->columns(2),
                                         TextInput::make('nominal')
+                                            ->numeric()
                                             ->label('Saldo')
                                             ->prefix('Rp.')
+                                            ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0)
                                             ->required(),
                                         Select::make('id_ms_trip')
                                             ->label('Status Trip')
@@ -602,6 +632,7 @@ class BookingResource extends Resource
                                 TextInput::make('trip_nominal')
                                     ->required()
                                     ->prefix('Rp')
+                                    ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0)
                                     ->numeric()
                                     ->label('Nominal Perjalanan'),
 
@@ -609,6 +640,7 @@ class BookingResource extends Resource
                                     ->numeric()
                                     ->readOnly()
                                     ->prefix('Rp.')
+                                    ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0)
                                     ->afterStateHydrated(function (Get $get, Set $set, $record) {
                                         self::updateBookingSpendTotal($get, $set, $record->id);
                                     })
@@ -617,6 +649,7 @@ class BookingResource extends Resource
                                 TextInput::make('profit')
                                     ->numeric()
                                     ->readOnly()
+                                    ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0)
                                     ->prefix('Rp')
                                     ->label('Keuntungan'),
                             ])
@@ -651,10 +684,12 @@ class BookingResource extends Resource
                                         TextInput::make('nominal')
                                             ->label('Saldo')
                                             ->prefix('Rp.')
+                                            ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0)
                                             ->disabled(),
 
                                         TextInput::make('total_spend')
                                             ->label('Total Pengeluaran')
+                                            ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0)
                                             ->afterStateHydrated(function (Get $get, Set $set, $record) {
                                                 self::updateTripSpendTotal($get, $set, $record->id);
                                             })
@@ -695,6 +730,7 @@ class BookingResource extends Resource
 
                                                                 TextInput::make('nominal')
                                                                     ->label('Nominal')
+                                                                    ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0)
                                                                     ->prefix('Rp.')
                                                                     ->disabled(),
 
@@ -795,6 +831,7 @@ class BookingResource extends Resource
                     ->form([
                         TextInput::make('nominal')
                             ->numeric()
+                            ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0)
                             ->prefix('Rp.')
                             ->required()
                             ->label('Nominal Refund'),
@@ -912,9 +949,6 @@ class BookingResource extends Resource
     public static function updateReceivedRemaining(Get $get, Set $set): void
     {
         $paymentReceived = collect($get('payment'))
-            // ->filter(function ($payment) {
-            //     return isset($payment['id_ms_income']) && $payment['id_ms_income'] === 2;
-            // })
             ->where('id_ms_income', 2)
             ->pluck('nominal')
             ->filter()

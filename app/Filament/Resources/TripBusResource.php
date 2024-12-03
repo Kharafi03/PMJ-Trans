@@ -200,7 +200,8 @@ class TripBusResource extends Resource
                                             ->label('KM Akhir')
                                             ->numeric(),
                                         TextInput::make('nominal')
-                                            ->label('Saldo')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0)
+                                            ->label('Saldo')
+                                            ->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0)
                                             ->columnSpan(2)
                                             //->formatStateUsing(fn ($state) => number_format($state, 0, ',', '.'))
                                             // ->mask(
@@ -215,7 +216,8 @@ class TripBusResource extends Resource
                                     ->heading('Data Pengeluaran')
                                     ->schema([
                                         TextInput::make('total_spend')
-                                            ->label('Total Pengeluaran')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0)
+                                            ->label('Total Pengeluaran')
+                                            ->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0)
                                             ->prefix('Rp.')
                                             ->readOnly()
                                             ->afterStateHydrated(function (Get $get, Set $set, $record) {
@@ -225,7 +227,8 @@ class TripBusResource extends Resource
                                             })
                                             ->numeric(),
                                         TextInput::make('total_spend_bbm')
-                                            ->label('Total Pengeluaran BBM')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0)
+                                            ->label('Total Pengeluaran BBM')
+                                            ->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0)
                                             ->prefix('Rp.')
                                             ->afterStateHydrated(function (Get $get, Set $set, $record) {
                                                 if ($record && $record->id) {
@@ -378,6 +381,7 @@ class TripBusResource extends Resource
                                     ->label('Total Pengeluaran')
                                     ->prefix('Rp.')
                                     ->readOnly()
+                                    ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0)
                                     ->afterStateHydrated(function (Get $get, Set $set, $record) {
                                         self::updateTotal($get, $set, $record->id);
                                     })
@@ -387,6 +391,7 @@ class TripBusResource extends Resource
                                     ->label('Total Pengeluaran BBM')
                                     ->prefix('Rp.')
                                     ->readOnly()
+                                    ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0)
                                     ->afterStateHydrated(function (Get $get, Set $set, $record) {
                                         self::updateBBMTotal($get, $set, $record->id);
                                     })
@@ -420,9 +425,7 @@ class TripBusResource extends Resource
                                                         TextInput::make('nominal')
                                                             ->label('Nominal')
                                                             ->prefix('Rp.')
-                                                            // ->afterStateHydrated(function (Get $get, Set $set) {
-                                                            //     self::updateTotal($get, $set);
-                                                            // })
+                                                            ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0)
                                                             ->reactive(),
 
                                                         TextInput::make('kilometer')

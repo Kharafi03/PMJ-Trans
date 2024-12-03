@@ -144,6 +144,7 @@ class BusResource extends Resource
                     ->columnSpan(3),
 
                 Group::make()
+                    ->disabled()
                     ->schema([
                         Forms\Components\Card::make()
                             //->heading('Pajak')
@@ -179,6 +180,7 @@ class BusResource extends Resource
                                                     ->label('Biaya')
                                                     ->numeric()
                                                     ->required()
+                                                    ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0)
                                                     ->prefix('Rp')
                                                     ->placeholder('Masukkan biaya pajak'),
                                                 Forms\Components\Textarea::make('description')
@@ -234,6 +236,7 @@ class BusResource extends Resource
                                                     ->numeric()
                                                     ->required()
                                                     ->prefix('Rp')
+                                                    ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0)
                                                     ->placeholder('Masukkan biaya KIR'),
                                                 Forms\Components\Textarea::make('description')
                                                     ->label('Deskripsi')
@@ -287,6 +290,7 @@ class BusResource extends Resource
                                                     ->label('Biaya Perawatan')
                                                     ->numeric()
                                                     ->required()
+                                                    ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0)
                                                     ->prefix('Rp')
                                                     ->placeholder('Masukkan biaya perawatan'),
                                                 Forms\Components\TextInput::make('location')
@@ -442,6 +446,7 @@ class BusResource extends Resource
                                                             ->columnSpan(2)
                                                             ->visibility('public'),
                                                         Forms\Components\TextInput::make('nominal')
+                                                            ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0)
                                                             ->label('Biaya'),
                                                         Forms\Components\TextInput::make('description')
                                                             ->label('Deskripsi'),
@@ -479,6 +484,7 @@ class BusResource extends Resource
                                                             ->label('Pelaksana')
                                                             ->relationship('users', 'name'),
                                                         Forms\Components\TextInput::make('nominal')
+                                                            ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0)
                                                             ->label('Biaya'),
                                                         Forms\Components\TextInput::make('description')
                                                             ->columnSpan(2)
@@ -520,6 +526,7 @@ class BusResource extends Resource
                                                             ->label('Pelaksana')
                                                             ->relationship('users', 'name'),
                                                         Forms\Components\TextInput::make('nominal')
+                                                            ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0)
                                                             ->label('Biaya'),
                                                         Forms\Components\DatePicker::make('expiration')
                                                             ->label('Kadaluarsa KIR'),
@@ -554,19 +561,6 @@ class BusResource extends Resource
                     ->label('Hapus'),
             ])
 
-            //         ->bulkActions([
-            //             Tables\Actions\BulkActionGroup::make([
-            //                 Tables\Actions\DeleteBulkAction::make()
-            //                     ->label('Hapus')
-            //                     ->action(function ($records) {
-            //                         foreach ($records as $record) {
-            //                             $record->delete(); // Menggunakan soft delete
-            //                         }
-            //                     }),
-            //             ]),
-            //         ]);
-            // }
-
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
@@ -588,7 +582,7 @@ class BusResource extends Resource
         return [
             'index' => Pages\ListBuses::route('/'),
             'create' => Pages\CreateBus::route('/create'),
-             'edit' => Pages\EditBus::route('/{record}/edit'),
+            'edit' => Pages\EditBus::route('/{record}/edit'),
         ];
     }
 }
