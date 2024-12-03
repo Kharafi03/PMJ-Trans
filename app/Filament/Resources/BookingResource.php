@@ -251,7 +251,7 @@ class BookingResource extends Resource
                                 ->numeric()
                                 ->reactive()
                                 //->afterStateUpdated(fn ($state, $set) => $set('trip_nominal', number_format($state, 0, ',', '.')))
-                                ->label('Nominal Perjalanan'),
+                                ->label('Nominal Perjalanan')->currencyMask(thousandSeparator: '.',decimalSeparator: ',',precision: 0),
 
                             TextInput::make('minimum_dp')
                                 ->required()
