@@ -114,7 +114,11 @@ class BookingController extends Controller
         $capacitybooked = $totalBookedCapacity ? $totalBookedCapacity->capacity : 0;
 
         // Hitung total kapasitas semua bus yang tersedia
-        $totalCapacityAvailable = $availableBuses->sum('capacity'); // Total kapasitas semua bus yang ada
+        if($request->input('legrest') == true){
+            $totalCapacityAvailable = ($availableBuses->sum('capacity') / 50) * 32;
+        } else {
+            $totalCapacityAvailable = $availableBuses->sum('capacity'); // Total kapasitas semua bus yang ada
+        }
 
         // Hitung kapasitas tersisa
         $totalRemainingCapacity = $totalCapacityAvailable - $capacitybooked;
@@ -122,15 +126,22 @@ class BookingController extends Controller
         // Hitung bus yang dibutuhkan untuk memenuhi permintaan
         $neededBuses = 0;
         $currentCapacity = 0;
+        
+        // Looping untuk menghitung bus yang dibutuhkan
+        while ($currentCapacity < $totalRequestedCapacity) {
+            foreach ($availableBuses as $bus) {
+                if ($request->input('legrest') == true) {
+                    $currentCapacity += 32; // Kapasitas tetap jika legrest aktif
+                } else {
+                    $currentCapacity += $bus->capacity; // Tambahkan kapasitas bus
+                }
+                $neededBuses++; // Tambahkan jumlah bus yang digunakan
 
-        // Hitung bus yang dibutuhkan untuk memenuhi permintaan
-        foreach ($availableBuses as $bus) {
-            $currentCapacity += $bus->capacity; // Tambah kapasitas dari bus yang tersedia
-            if ($currentCapacity >= $totalRequestedCapacity) {
-                $neededBuses++; // Bus yang dibutuhkan untuk memenuhi permintaan
-                break; // Hentikan loop jika kapasitas sudah cukup
+                // Jika kapasitas mencukupi, hentikan looping
+                if ($currentCapacity >= $totalRequestedCapacity) {
+                    break;
+                }
             }
-            $neededBuses++; // Menghitung jumlah bus yang dibutuhkan
         }
 
         // Hitung jumlah bus yang sudah terpakai berdasarkan kapasitas yang terbooking
@@ -185,8 +196,15 @@ class BookingController extends Controller
 
         // Cek apakah pengguna sudah login
         if (Auth::check()) {
-            // Gunakan id user yang sudah login
             $user = Auth::user();
+
+            // Gunakan id user yang sudah login
+            if($request->input('address') != null){
+                dd($request->address);
+                $address = $request->input('address');
+                $user->address = $address;
+                $user->save();
+            }
         } else {
             // dd($request->all());
             // Pengecekan apakah email atau nomor telepon sudah terdaftar
