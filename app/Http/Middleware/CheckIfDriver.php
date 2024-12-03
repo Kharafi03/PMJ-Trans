@@ -27,7 +27,7 @@ class CheckIfDriver
             $userRole = Auth::user()->roles->first()->name;
             
             // Jika user adalah driver
-            if ($userRole === 'Driver') {
+            if ($userRole === 'Driver' || $userRole === 'Kru') {
                 // Jika user mencoba mengakses /driver/login, arahkan ke dashboard driver
                 if ($request->is('driver/login')) {
                     return redirect()->route('dashboard-driver');

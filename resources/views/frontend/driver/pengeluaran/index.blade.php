@@ -55,7 +55,7 @@
                         <label for="nominal" class="form-label">Nominal<span class="text-danger">*</span></label>
                         <div class="input-group">
                             <span class="input-group-text" id="icon"><i class="fa-solid fa-money-bill-wave"></i></span>
-                            <input type="number" class="form-control" id="nominal" name="nominal"
+                            <input type="text" class="form-control" id="nominal" name="nominal"
                                 placeholder="Nominal yang dikeluarkan" required>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                                 class="text-danger">*</span></label>
                         <div class="input-group">
                             <span class="input-group-text" id="icon"><i class="fa-solid fa-road"></i></span>
-                            <input type="number" class="form-control" id="kilometer" name="kilometer"
+                            <input type="text" class="form-control" id="kilometer" name="kilometer"
                                 placeholder="Kilometer speedometer" required>
                         </div>
                     </div>
@@ -91,83 +91,99 @@
         </div>
     </section>
 
-    <script>
-        function requestLocation() {
-            // Cek apakah geolocation tersedia
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    // Dapatkan latitude dan longitude
-                    const latitude = position.coords.latitude;
-                    const longitude = position.coords.longitude;
+    @push('scripts')
+        <script>
+            function requestLocation() {
+                // Cek apakah geolocation tersedia
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        // Dapatkan latitude dan longitude
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
 
-                    // Isi input tersembunyi
-                    document.getElementById('latitude').value = latitude;
-                    document.getElementById('longitude').value = longitude;
+                        // Isi input tersembunyi menggunakan jQuery
+                        $('#latitude').val(latitude);
+                        $('#longitude').val(longitude);
 
-                    // Update peta dengan lokasi pengguna
-                    const MapURL = "https://maps.google.com/maps?q=" + latitude + "," + longitude + "&z=6&output=embed";
-                    document.getElementById('map').src = MapURL;
+                        // Update peta dengan lokasi pengguna
+                        const MapURL = "https://maps.google.com/maps?q=" + latitude + "," + longitude + "&z=6&output=embed";
+                        $('#map').attr('src', MapURL);
 
-                    alert("Lokasi berhasil diambil: " + latitude + ", " + longitude);
-                }, function(error) {
-                    // Menangani error
-                    switch (error.code) {
-                        case error.PERMISSION_DENIED:
-                            alert("Izin untuk mengakses lokasi ditolak. Silakan izinkan akses lokasi di pengaturan browser Anda.");
-                            break;
-                        case error.POSITION_UNAVAILABLE:
-                            alert("Informasi lokasi tidak tersedia.");
-                            break;
-                        case error.TIMEOUT:
-                            alert("Permintaan untuk mendapatkan lokasi pengguna telah timeout.");
-                            break;
-                        case error.UNKNOWN_ERROR:
-                            alert("Terjadi kesalahan yang tidak diketahui.");
-                            break;
-                    }
-                }, {
-                    enableHighAccuracy: true,
-                    timeout: 1000,
-                    maximumAge: 0
-                });
-            } else {
-                alert('Geolocation tidak didukung oleh browser ini.');
+                        alert("Lokasi berhasil diambil: " + latitude + ", " + longitude);
+                    }, function(error) {
+                        // Menangani error
+                        switch (error.code) {
+                            case error.PERMISSION_DENIED:
+                                alert("Izin untuk mengakses lokasi ditolak. Silakan izinkan akses lokasi di pengaturan browser Anda.");
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                alert("Informasi lokasi tidak tersedia.");
+                                break;
+                            case error.TIMEOUT:
+                                alert("Permintaan untuk mendapatkan lokasi pengguna telah timeout.");
+                                break;
+                            case error.UNKNOWN_ERROR:
+                                alert("Terjadi kesalahan yang tidak diketahui.");
+                                break;
+                        }
+                    }, {
+                        enableHighAccuracy: true,
+                        timeout: 1000,
+                        maximumAge: 0
+                    });
+                } else {
+                    alert('Geolocation tidak didukung oleh browser ini.');
+                }
             }
-        }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // Minta izin akses lokasi saat halaman dimuat
-            requestLocation();
-        });
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const numberInputs = document.querySelectorAll('input[type="number"]');
-
-            numberInputs.forEach(function(input) {
-                // Prevent "-" from being entered
-                input.addEventListener('keypress', function(event) {
-                    if (event.which === 45 || event.key === '-') {
-                        event.preventDefault();
-                    }
+            // Fungsi untuk memformat input dengan pemisah ribuan
+            function formatInput(inputElement) {
+                $(inputElement).on('input', function() {
+                    let inputVal = $(this).val();
+                    
+                    // Hilangkan karakter selain angka
+                    inputVal = inputVal.replace(/[^\d]/g, '');
+                    
+                    // Format dengan pemisah ribuan (setiap 3 digit)
+                    inputVal = inputVal.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                    
+                    // Set kembali nilai input dengan pemisah ribuan
+                    $(this).val(inputVal);
                 });
+            }
 
-                // Remove any negative signs that might have been pasted
-                input.addEventListener('input', function() {
-                    let value = input.value;
-                    if (value.indexOf('-') !== -1) {
-                        input.value = value.replace('-', '');
-                    }
-                });
+            $(document).ready(function () {
+                // Terapkan format untuk kedua input: #nominal dan #kilometer
+                formatInput('#nominal');
+                formatInput('#kilometer');
 
-                // Ensure no negative value remains after input loses focus
-                input.addEventListener('blur', function() {
-                    let value = input.value;
-                    if (value < 0) {
-                        input.value = Math.abs(value); // Convert negative to positive
-                    }
+                // Minta izin akses lokasi saat halaman dimuat
+                requestLocation();
+
+                // Sebelum formulir dikirim, hapus titik untuk mengirim data dalam format angka murni
+                $('#formPengeluaran').on('submit', function(e) {
+
+                    e.preventDefault();
+
+                     // Ambil nilai dari input
+                    let nominal = $('#nominal').val();
+                    let kilometer = $('#kilometer').val();
+                    
+                    // Hapus titik untuk mendapatkan angka murni (juga menghapus koma jika ada)
+                    nominal = nominal.replace(/\./g, ''); // Menghapus titik
+                    kilometer = kilometer.replace(/\./g, ''); // Menghapus titik
+
+                    console.log(nominal);
+                    console.log(kilometer);
+
+                    // Set nilai input nominal dan kilometer yang akan dikirim tanpa titik
+                    $('#nominal').val(nominal);
+                    $('#kilometer').val(kilometer);
+
+                    // Kirim formulir
+                    $(this).unbind('submit').submit();
                 });
             });
-        });
-    </script>
+        </script>
+    @endpush
 @endsection

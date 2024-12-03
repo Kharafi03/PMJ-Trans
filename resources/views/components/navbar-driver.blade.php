@@ -31,7 +31,7 @@
             </li>
             <li class="list">
                 <a href="{{ route('logout') }}"
-                    onclick="event.preventDefault(); confirmLogout(); document.getElementById('logout-form').submit();">
+                    onclick="event.preventDefault(); confirmLogout();">
                     <span class="icon">
                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
                     </span>
