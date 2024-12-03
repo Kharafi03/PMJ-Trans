@@ -17,7 +17,7 @@ class DriverLoginController extends Controller
         // Jika user sudah login
         if (Auth::check()) {
             // Cek jika user yang login memiliki role Driver
-            if (Auth::user()->roles->first()->name === 'Driver') {
+            if (Auth::user()->roles->first()->name === 'Driver' || Auth::user()->roles->first()->name === 'Kru') {
                 // Jika sudah login sebagai Driver, redirect ke dashboard driver
                 return redirect()->route('dashboard-driver');
             }
@@ -47,7 +47,7 @@ class DriverLoginController extends Controller
         // Coba autentikasi user dengan role Driver
         if (Auth::attempt($credentials)) {
             // Pastikan user yang login memiliki role Driver
-            if (Auth::user()->roles->first()->name === 'Driver') {
+            if (Auth::user()->roles->first()->name === 'Driver' || Auth::user()->roles->first()->name === 'Kru') {
                 // Redirect ke dashboard driver jika sukses
                 return redirect()->route('dashboard-driver')
                     ->with([

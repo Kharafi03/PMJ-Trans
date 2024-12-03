@@ -42,7 +42,7 @@ class LoginController extends Controller
             // Jika login berhasil, cek role pengguna
             $role = $user->roles->first(); // Ambil role pertama dari koleksi roles
 
-            if ($role && $role->name === 'Driver') {
+            if (($role && $role->name === 'Driver') || ($role && $role->name === 'Kru')) {
                 return redirect('/driver/dashboard')
                     ->with('message', 'Login Berhasil! Anda di arahkan ke dashboard driver.')
                     ->with('alert-type', 'success');
