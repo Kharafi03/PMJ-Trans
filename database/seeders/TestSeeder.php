@@ -27,7 +27,7 @@ class TestSeeder extends Seeder
             'id_cus' => '5',
             'capacity' => '100',
             'date_start' => '2024-10-25 11:00:00',
-            'date_end' => '2024-10-28',
+            'date_end' => '2024-10-28 23:59:59',
             'pickup_point' => 'Jl. Pandanaran Raya No.37',
             'fleet_amount' => '2',
             'legrest' => '0',

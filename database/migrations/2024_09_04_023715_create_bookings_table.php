@@ -19,7 +19,7 @@ return new class extends Migration
             //$table->time('destination_time')->nullable();
             $table->integer('capacity')->nullable();
             $table->dateTime('date_start')->nullable();
-            $table->date('date_end')->nullable();
+            $table->dateTime('date_end')->nullable();
             $table->string('pickup_point', 255)->nullable();
             //$table->time('pickup_time')->nullable();
             $table->integer('fleet_amount')->nullable();
